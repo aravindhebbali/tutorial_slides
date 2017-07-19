@@ -1,0 +1,215 @@
+---
+title: "Hacking strings with stringr"
+output: 
+  revealjs::revealjs_presentation:
+    transition: slide
+    incremental: true
+    theme: moon
+    highlight: monochrome
+    center: true
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+---
+
+## Introduction
+
+In this module, we will learn to work with string data in R using [stringr](http://stringr.tidyverse.org). Let us begin by installing and loading stringr and a set of other pacakges we will be using.
+ 
+## Installation
+
+```{r install, eval=FALSE}
+library(stringr)
+library(tibble)
+library(magrittr)
+library(purrr)
+library(dplyr)
+```
+
+```{r str1, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+library(stringr)
+library(tibble)
+library(magrittr)
+library(purrr)
+library(dplyr)
+```
+
+## Introduction
+
+As we did in the earlier modules, we will use a case study to explore the various features of the stringr package. You can
+download the data for the case study from [here](https://raw.githubusercontent.com/rsquaredacademy/datasets/master/mock_strings.csv) or directly import the data using the readr package. 
+
+## Case Study
+
+```{r import, eval=FALSE}
+mockstring <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/mock_strings.csv')
+```
+
+```{r show, echo=FALSE, eval=TRUE, message=FALSE}
+mockstring <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/mock_strings.csv')
+mockstring
+```
+
+## Data Dictionary
+
+----
+
+We will do the following in this case study:
+
+- extract domain name from random email ids
+- extract image type from url
+- extract image dimension from url
+- extract extension from domain name
+- extract http protocol from url
+- extract domain name from url
+- extract extension from url
+- extract file type from url
+
+## extract domain name from random email ids
+
+----
+
+```{r str2}
+mockstring$email[1:2] %>% 
+  str_split(pattern = '@') %>%
+  unlist() %>%
+  str_subset(pattern = '\\.') %>%
+  str_split(pattern = '\\.') %>%
+  purrr::map_chr(extract(1))
+```
+
+
+## from image url, extract image type (jpg, png, bmp)
+
+----
+
+```{r str3}
+mockstring$imageurl[1:5] %>%
+  str_split(pattern = '\\.') %>%
+  purrr::map_chr(extract(3)) %>%
+  str_sub(start = 1, end = 3)
+
+mockstring$imageurl[1:5] %>%
+  str_split(pattern = '\\.') %>%
+  purrr::map_chr(extract(3)) %>%
+  str_split(pattern = '/') %>%
+  purrr::map_chr(extract(1))
+```
+
+## from image url, extract dimension
+
+----
+
+```{r str4}
+pattern <- "[:digits:]"
+mockstring$imageurl[1:5] %>%
+  str_locate(pattern = "[0-9]") 
+  
+mockstring$imageurl[1:5] %>%
+  str_sub(start = 23) %>%
+  str_split(pattern = '\\.') %>%
+  purrr::map_chr(extract(1))
+```
+  
+## extract protocol
+
+----
+
+```{r str6}
+mockstring$url[1:5] %>%
+  str_split(pattern = '://') %>%
+  map_chr(extract(1))
+  
+k <- mockstring$url[1:5] %>%
+  str_locate(pattern = '://') %>%
+  data.frame() %>%
+  extract2('start') %>%
+  subtract(1)
+
+mockstring$url[1:5] %>%
+  str_sub(start = 1, end = k)
+```
+
+## extract domain name
+
+----
+
+```{r str7}
+n <- mockstring$url[1:5] %>%
+  str_locate_all(pattern = "/") %>%
+  map_int(extract(3))
+
+mockstring$url[1:5] %>%
+  str_sub(end = n) %>%
+  str_split(pattern = '\\.') %>%
+  map_chr(extract(1)) %>%
+  str_sub(start = k + 4)
+```
+
+## extract extension
+
+----
+
+```{r str8}
+mockstring$url[1:5] %>%
+  str_sub(end = n) %>%
+  str_split(pattern = '\\.') %>%
+  map_chr(extract(2)) %>%
+  str_split(pattern = '/') %>%
+  map_chr(extract(1))
+```
+
+## extract file type
+
+----
+
+only 2 dots in the url
+
+```{r str9}
+mockstring$url[1:3] %>%
+  str_locate_all(pattern = '\\.') %>%
+  map_int(nrow) %>%
+  is_greater_than(2) %>%
+  sum()
+```
+
+----  
+
+only 1 question mark in the url
+
+```{r str10}  
+mockstring$url[1:3] %>%
+  str_locate_all(pattern = "[?]") %>%
+  map_int(nrow) %>%
+  is_greater_than(1) %>%
+  sum()
+```
+
+----
+
+location of second dot and 1 question mark
+
+```{r str11}
+d <- mockstring$url[1:3] %>%
+  str_locate_all(pattern = '\\.') %>%
+  map_int(extract(2)) %>%
+  add(1)
+```
+
+----
+
+```{r str12}
+q <- mockstring$url[1:3] %>%
+  str_locate_all(pattern = "[?]") %>%
+  map_int(extract(1)) %>%
+  subtract(1)
+```
+
+----
+
+```{r str13}
+mockstring$url[1:3] %>% 
+  str_sub(start = d, end = q)
+```
+
+## Summary
