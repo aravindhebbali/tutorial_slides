@@ -1,0 +1,253 @@
+---
+title: "Working with date and time in R"
+output: 
+  revealjs::revealjs_presentation:
+    transition: slide
+    incremental: true
+    theme: moon
+    highlight: monochrome
+    center: true
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+---
+
+## Introduction
+
+ In this module, we will learn to work with date/time data in R using [lubridate]( https://CRAN.R-project.org/package=lubridate), an R package that makes it easy to work with dates and time. Let us begin by installing and loading the lubridate pacakge.
+ 
+## Installation
+
+```{r install, eval=FALSE}
+library(lubridate)
+library(dplyr)
+library(magrittr)
+```
+
+```{r lub1, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+library(lubridate)
+library(dplyr)
+library(magrittr)
+```
+
+## Quick Overview
+
+----
+
+Use `origin` to get the origin for the `Date` and other date/time objects in R.
+
+```{r origin}
+lubridate::origin
+```
+
+----
+
+There are functions to check current date, time, timezone and AM/PM. Let us take a quick look at these:
+
+```{r today}
+now()
+today()
+am(now())  
+pm(now())
+```
+
+## Case Study
+
+We will use a case study to explore the lubridate package. The data set can be downloaded from here or directly imported using the readr package.
+
+```{r import, eval=FALSE}
+transact <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/transact.csv')
+```
+
+```{r show, echo=FALSE, eval=TRUE, message=FALSE}
+transact <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/transact.csv')
+transact
+```
+
+## Data Dictionary
+
+The data set has 3 columns:
+
+- Invoice: invoice date 
+- Due: due date
+- Payment: payment date
+
+All the dates are in the format (yyyy-mm-dd).
+
+----
+
+We will use the functions in the lubridate package to answer a few 
+questions we have about the transact data.
+
+- extract date, month and year from Due
+- compute the number of days to settle invoice
+- compute days over due
+- check if due year is a leap year
+- check when due day in february is 29, whether it is a leap year
+- how many invoices were settled within due date
+- how many invoices are due in each quarter
+- what is the average duration between invoice date and payment date
+
+----
+
+```{r lub2}
+transact %>%
+  mutate(
+    due_day = day(Due),
+    due_month = month(Due),
+    due_year = year(Due)
+  )
+```
+
+----
+
+```{r lub3}
+transact %>%
+  mutate(
+    days_to_pay = Payment - Invoice
+  )
+```
+
+----
+
+```{r lub4}
+transact %>%
+  mutate(
+    delay = Payment - Due
+  )
+```
+
+----
+
+```{r lub5}
+transact %>%
+  mutate(
+    due_year = year(Due),
+    is_leap = leap_year(due_year)
+  )
+```
+
+----
+
+```{r lub6}
+transact %>%
+  mutate(
+    due_day = day(Due),
+    due_month = month(Due),
+    days_due_month = days_in_month(due_month),
+    due_year = year(Due),
+    is_leap = leap_year(due_year)
+  ) %>%
+  select(-(Invoice), -(Payment)) %>%
+  filter(due_month == 2)
+```
+
+----
+
+```{r lub7}
+transact %>%
+  mutate(
+    inv_due_interval = interval(Invoice, Due),
+    due_next = Due + days(1),
+    due_pay_interval = interval(due_next, Payment),
+    overlaps = int_overlaps(inv_due_interval, due_pay_interval)
+  ) %>%
+  select(inv_due_interval, due_next, due_pay_interval, overlaps)
+```
+
+----
+
+````{r lub12}
+# using int_shift
+transact %>%
+  mutate(
+    inv_due_interval = interval(Invoice, Due),
+    due_pay_interval = interval(Due, Payment),  
+    due_pay_next = int_shift(due_pay_interval, by = days(1)),
+    overlaps = int_overlaps(inv_due_interval, due_pay_next)
+  ) %>%
+  select(inv_due_interval, due_pay_next, overlaps)
+```
+
+----
+
+```{r lub13}
+transact %>%
+  mutate(
+    inv_due_interval = interval(Invoice, Due),
+    overlaps = Payment %within% inv_due_interval
+  ) %>%
+  select(Due, Payment, overlaps)
+```
+
+```{r lub8}
+transact %>%
+  mutate(
+    Quarter = quarter(Due)
+  )
+```
+
+----
+
+```{r lub14}
+transact %>%
+  mutate(
+    Quarter = quarter(Due, with_year = TRUE)
+  )
+```
+
+----
+
+```{r lub9}
+transact %<>%
+  mutate(
+    days_to_pay = Payment - Invoice
+  )
+```
+
+----
+
+```{r lub15}
+transact %>%
+  mutate(
+    dseconds = duration(as.numeric(days_to_pay), 'days')
+  )
+```
+
+----
+
+```{r lub10}
+transact %<>%
+  mutate(
+    inv_pay_int = interval(Invoice, Payment)
+  )
+```
+
+----
+
+```{r lub11}
+transact %>%
+  mutate(
+    inv_pay_days = inv_pay_int / ddays()
+  )
+```
+
+----
+
+```{r lub16}
+transact %>%
+  mutate(
+    inv_pay_days = time_length(inv_pay_int, unit = "days")
+  )
+```
+
+----
+
+```{r lub17}
+transact %>%
+  mutate(
+    inv_pay_days = as.period(inv_pay_int)
+  )
+```
+
+## Summary
