@@ -1,0 +1,137 @@
+---
+title: "Data Manipulation with dplyr - Part 2"
+output: 
+  revealjs::revealjs_presentation:
+    transition: slide
+    incremental: true
+    theme: moon
+    highlight: monochrome
+    center: true
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+---
+
+## Introduction
+
+```{r libs, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+library(dplyr)
+```
+
+In a previous module, we learnt about dplyr verbs and used them to compute average order value for an e-commerce website data. In this post, we will learn to combine tables using different `*_join` functions provided in dplyr. Let us assume we have 2 tables **y** and **y**. 
+
+----
+
+The following types of `join` functions provided in dplyr:
+
+- `inner_join()`
+- `left_join()`
+- `right_join()`
+- `semi_join()`
+- `anti_join()`
+- `full_join()`
+
+
+## Case Study
+
+We have two data sets with details of customers and their orders. We will use the above functions to combine the data sets in different ways to glean information about customer orders. Let us import the data from our github repository:
+
+
+```{r dplyr1, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+library(dplyr)
+options(tibble.width = Inf)
+```
+
+----
+
+###### Orders
+
+```{r dplyr25, eval=FALSE}
+order <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/order.csv')
+```
+
+```{r dplyr2, echo=FALSE, eval=TRUE, message=FALSE}
+order <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/order.csv')
+order
+```
+
+----
+
+###### Customers
+
+```{r dplyr26, eval=FALSE}
+customer <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/customer.csv')
+```
+
+```{r dplyr, echo=FALSE, eval=TRUE, message=FALSE}
+customer <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/customer.csv')
+customer
+```
+
+## inner join
+
+`inner_join()` returns all rows from x where there are matching values in y, and all columns from x and y. If there are multiple matches between x and y, all combination of the matches are returned.
+
+----
+
+```{r dplyr3}
+customer %>%
+  inner_join(order)
+```
+
+## left join
+
+`left_join()` returns all rows from x, and all columns from x and y. Rows in x with no match in y will have NA values in the new columns. If there are multiple matches between x and y, all combinations of the matches are returned.
+
+----
+
+```{r dplyr4}
+customer %>%
+  left_join(order)
+```
+
+## right join
+
+`right_join()` returns all rows from y, and all columns from x and y. Rows in y with no match in x will have NA values in the new columns. If there are multiple matches between x and y, all combinations of the matches are returned.
+
+----
+
+```{r dplyr5}
+customer %>%
+  right_join(order)
+```
+
+## semi join
+
+`semi_join()` returns all rows from x where there are matching values in y, keeping just columns from x. A semi join differs from an inner join because an inner join will return one row of x for each matching row of y, where a semi join will never duplicate rows of x.
+
+----
+
+```{r dplyr6}
+customer %>%
+  semi_join(order)
+```
+
+## anti join
+
+`anti_join()` returns all rows from x where there are not matching values in y, keeping just columns from x.
+
+----
+
+```{r dplyr7}
+customer %>%
+  anti_join(order)
+```
+
+## full join
+
+`full_join()` returns all rows and all columns from both x and y. Where there are not matching values, returns NA for the one missing.
+
+----
+
+```{r dplyr8}
+customer %>%
+  full_join(order)
+```
+
+## Summary
