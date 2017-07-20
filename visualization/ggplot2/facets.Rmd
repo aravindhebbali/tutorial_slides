@@ -1,0 +1,152 @@
+---
+title: "ggplot2: Facets"
+output: 
+  revealjs::revealjs_presentation:
+    transition: slide
+    incremental: true
+    theme: moon
+    highlight: monochrome
+    center: true
+    fig_width: 6
+    fig_height: 5
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+---
+
+## Intro
+
+----
+
+In this module, we will learn about faceting i.e. combining plots.
+
+## Installation
+
+```{r show, eval=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+```{r load, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+## Case Study
+
+----
+
+We will continue to use the ecommerce data. You can download it from [here](https://github.com/rsquaredacademy/datasets/blob/master/web.csv) or import directly using the readr package.
+
+----
+
+```{r import2, echo=FALSE, eval=FALSE, results='hide', message=FALSE}
+ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+```
+
+```{r import, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+ecom
+```
+
+----
+
+```{r facet1}
+ggplot(ecom, aes(n_pages, duration)) + 
+  geom_point() +
+  facet_grid(. ~ device)
+```
+
+----
+
+```{r facet2}
+ggplot(ecom, aes(n_pages, duration)) + 
+  geom_point() +
+  facet_grid(device ~ .)
+```
+
+----
+
+```{r facet3}
+ggplot(ecom, aes(n_pages, duration)) + 
+  geom_point() +
+  facet_grid(purchase ~ device)
+```
+
+----
+
+```{r facet4}
+ggplot(ecom, aes(n_pages, duration)) + 
+  geom_point() +
+  facet_grid(device ~ purchase)
+```
+
+----
+
+```{r facet5}
+ggplot(ecom, aes(n_pages, duration, color = factor(device))) +
+  geom_point() + 
+  facet_grid(. ~ device, scales = "free")
+```
+
+----
+
+```{r facet6}
+ggplot(ecom, aes(n_pages, duration)) + 
+  geom_point() + 
+  facet_grid(device ~ purchase, switch = "both") 
+```
+
+----
+
+```{r facet7}
+ggplot(ecom, aes(n_pages, duration)) +
+  geom_point() +
+  facet_wrap(~device)
+```
+
+----
+
+```{r facet8}
+ggplot(ecom, aes(n_pages, duration)) +
+  geom_point() +
+  facet_wrap(~device, nrow = 2)
+```
+
+----
+
+```{r facet9}
+ggplot(ecom, aes(n_pages, duration)) +
+  geom_point() +
+  facet_wrap(~device, nrow = 3)
+```
+
+----
+
+```{r facet10}
+ggplot(ecom, aes(n_pages, duration)) +
+  geom_point() +
+  facet_wrap(~device + purchase)
+```
+
+----
+
+```{r facet11}
+ggplot(ecom, aes(n_pages, duration)) +
+  geom_point() +
+  facet_wrap(c("device", "purchase"))
+```
+
+----
+
+```{r facet12}
+ggplot(ecom, aes(n_pages, duration)) +
+  geom_point() +
+  facet_wrap(~device, scales = "free")
+```
+
+## Summary
+
+## Next Steps..
