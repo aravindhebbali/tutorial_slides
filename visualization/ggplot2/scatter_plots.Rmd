@@ -1,0 +1,234 @@
+---
+title: "ggplot2: Scatter Plots"
+output: 
+  revealjs::revealjs_presentation:
+    transition: slide
+    incremental: true
+    theme: moon
+    highlight: monochrome
+    center: true
+    fig_width: 6
+    fig_height: 5
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+---
+
+## Intro
+
+## Installation
+
+```{r show, eval=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+```{r load, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+## Basic Plot
+
+----
+
+Let us start by building a simple scatter plot. 
+
+----
+
+```{r scat2}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg))
+```
+
+----
+
+Let us add some random variation to the location of each point to handle overplotting. Use the `position` argument and set it to `jitter`.
+
+----
+
+```{r scat22}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg), position = 'jitter')
+```
+
+----
+
+You can use the `geom_jitter()` function to achieve the above result.
+
+```{r scat3}
+ggplot(mtcars) +
+  geom_jitter(aes(disp, mpg))
+```
+
+## Color
+
+----
+
+Now let us modify the color of the points. There are two ways:
+
+- map color to variable using the `aes()` function
+- specify colors separately
+
+----
+
+Map color to variables.
+
+- Categorical Variable
+
+```{r scat4}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, color = factor(cyl)), 
+             position = 'jitter')
+```
+
+----
+
+Continuous Variable
+
+```{r scat5}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, color = hp), 
+             position = 'jitter')
+```
+
+----
+
+Let us specify the color of the points separately. 
+
+```{r scat6}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg), color = 'blue', 
+             position = 'jitter')
+```
+
+----
+
+Use `alpha` argument to specify the transparency of the points.
+
+```{r scat7}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg), color = 'blue', alpha = 0.4, 
+             position = 'jitter')
+```
+
+## Shape
+
+----
+
+Map shape to variable. We can map shape to a categorical variable only.
+
+```{r scat8}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, shape = factor(cyl)),
+             position = 'jitter')
+```
+
+----
+
+Specify value for shape.
+
+```{r scat9}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg), shape = 3,
+             position = 'jitter')
+```
+
+## Size
+
+----
+
+Map size to variable. It is advised to map size to a continuous variable.
+
+```{r scat10}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, size = hp), color = 'blue',
+             position = 'jitter')
+```
+
+----
+
+Specify value for size.
+
+```{r scat11}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg), size = 3,
+             position = 'jitter')
+```
+
+
+## Fit Line
+
+----
+
+You can fit a line using either `geom_abline()` or `geom_smooth()`. Use linear regression.
+
+```{r aes12}
+ggplot(mtcars, aes(disp, mpg)) +
+  geom_point(position = 'jitter') +
+  geom_smooth(method = 'lm', se = FALSE)
+```
+
+----
+
+Add a confidence interval for the fitted values.
+
+```{r aes13}
+ggplot(mtcars, aes(disp, mpg)) +
+  geom_point(position = 'jitter') +
+  geom_smooth(method = 'lm', se = TRUE)
+```
+
+----
+
+Use loess regression
+
+```{r aes14}
+ggplot(mtcars, aes(disp, mpg)) +
+  geom_point(position = 'jitter') +
+  geom_smooth(method = 'loess', se = FALSE)
+```
+
+----
+
+```{r aes15}
+ggplot(mtcars, aes(disp, mpg)) +
+  geom_point(position = 'jitter') +
+  geom_smooth(method = 'loess', se = TRUE)
+```
+
+----
+
+If you use `geom_abline()`, specify the intercept and the slope.
+Let us regress `duration` on `n_pages` and use the output.
+
+----
+
+```{r aes16}
+lm(mpg ~ disp, data = mtcars)
+```
+
+----
+
+```{r aes17}
+ggplot(mtcars, aes(disp, mpg)) +
+  geom_point(position = 'jitter') +
+  geom_abline(slope = 29.59985, intercept = -0.04122)
+```
+
+## Summary
+
+----
+
+In this module, we learnt to:
+
+- build scatter plots
+- map aesthetics to variables
+- modify axis and legend
+- fit regression line
+
+## Next Steps..
+
+In the next module, we will learn to build line charts.
