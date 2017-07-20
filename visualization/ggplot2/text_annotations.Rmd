@@ -1,0 +1,56 @@
+---
+title: "ggplot2: Text Annotations"
+output: 
+  revealjs::revealjs_presentation:
+    transition: slide
+    incremental: true
+    theme: moon
+    highlight: monochrome
+    center: true
+    fig_width: 6
+    fig_height: 5
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+---
+
+## Intro
+
+## Installation
+
+```{r show, eval=FALSE}
+library(ggplot2)
+```
+
+```{r load, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+library(ggplot2)
+```
+
+## Annotate
+
+We will use the `annotate()` function to add custom text to the plots. You can use the `annotate()` function to add rectangles/segments/pointrange as well but our focus will be on adding text. Let us start with a simple scatter plot.
+
+----
+
+```{r ann2}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  annotate('text', x = 200, y = 30, label = 'Sample Text')
+```
+
+----
+
+We can format the text as well.
+
+```{r ann3}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  annotate('text', x = 200, y = 30, label = 'Sample Text',
+           color = 'red', size = 6, fontface = 'bold', angle = 25)
+```
+
+## Summary
+
+## Next Steps..
+
+In the next module, we will learn how to work with guides/legends in ggplot2.
