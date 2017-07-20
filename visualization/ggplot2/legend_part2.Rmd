@@ -1,0 +1,227 @@
+---
+title: "ggplot2: Legends - Part 1"
+output: 
+  revealjs::revealjs_presentation:
+    transition: slide
+    incremental: true
+    theme: moon
+    highlight: monochrome
+    center: true
+    fig_width: 6
+    fig_height: 5
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+---
+
+## Intro
+
+In this module, we will continue to explore different ways to modify/customize the legend of plots.
+
+## Installation
+
+```{r show, eval=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+```{r load, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+## Guides
+
+----
+
+```{r gui2}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, color = factor(cyl))) +
+  scale_color_manual(values = c("red", "blue", "green"),
+                      guide = guide_legend(
+                       title = "Cylinders",
+                       title.hjust = 0.5,
+                       title.position = "top",
+                       label.position = "right",
+                       direction = "horizontal",
+                       label.hjust = 0.5,
+                       nrow = 2,
+                       reverse = TRUE
+                      )
+  )
+```
+
+----
+
+```{r gui3}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, color = factor(cyl))) +
+  scale_color_discrete(guide = guide_legend(
+                        title = "Cylinders",
+                        title.hjust = 0.5,
+                        title.position = "top",
+                        label.position = "right",
+                        direction = "horizontal",
+                        label.hjust = 0.5,
+                        nrow = 2,
+                        reverse = TRUE
+                        )
+  )
+```
+
+----
+
+```{r gui4}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, color = hp)) +
+  scale_color_continuous(guide = guide_colorbar(
+    title = "Horsepower",
+    title.position = "top",
+    title.vjust = 1,
+    label.position = "bottom",
+    label.vjust = 0.8,
+    barwidth = 10,
+    barheight = 3,
+    nbins = 10,
+    raster = FALSE,
+    ticks = TRUE,
+    draw.ulim = TRUE,
+    draw.llim = FALSE,
+    direction = "horizontal",
+    reverse = TRUE
+  ))
+```
+
+----
+
+```{r gui5}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, fill = hp), shape = 22) +
+  scale_fill_continuous(guide = guide_colorbar(
+    title = "Horsepower",
+    title.position = "top",
+    title.vjust = 1,
+    label.position = "bottom",
+    label.vjust = 0.8,
+    barwidth = 10,
+    barheight = 3,
+    nbins = 10,
+    raster = FALSE,
+    ticks = TRUE,
+    draw.ulim = TRUE,
+    draw.llim = FALSE,
+    direction = "horizontal",
+    reverse = TRUE)
+  )
+```
+
+----
+
+```{r gui6}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, fill = hp), shape = 22) +
+  scale_fill_gradient2(guide = guide_colorbar(
+    title = "Horsepower",
+    title.position = "top",
+    title.vjust = 1,
+    label.position = "bottom",
+    label.vjust = 0.8,
+    barwidth = 10,
+    barheight = 3,
+    nbins = 10,
+    raster = FALSE,
+    ticks = TRUE,
+    draw.ulim = TRUE,
+    draw.llim = FALSE,
+    direction = "horizontal",
+    reverse = TRUE)
+  ) 
+```
+
+----
+
+```{r gui7}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, fill = hp), shape = 22) +
+  scale_fill_gradient(low = "white", high = "black", 
+    guide = guide_colorbar(
+      title = "Horsepower",
+      title.position = "top",
+      title.vjust = 1,
+      label.position = "bottom",
+      label.vjust = 0.8,
+      barwidth = 10,
+      barheight = 3,
+      nbins = 10,
+      raster = FALSE,
+      ticks = TRUE,
+      draw.ulim = TRUE,
+      draw.llim = FALSE,
+      direction = "horizontal",
+      reverse = TRUE
+    )
+  ) 
+```
+
+----
+
+```{r gui8}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, fill = hp), shape = 22) +
+  scale_fill_gradientn(colors = terrain.colors(5), 
+    guide = guide_colorbar(
+      title = "Horsepower",
+      title.position = "top",
+      title.vjust = 1,
+      label.position = "bottom",
+      label.vjust = 0.8,
+      barwidth = 10,
+      barheight = 3,
+      nbins = 10,
+      raster = FALSE,
+      ticks = TRUE,
+      draw.ulim = TRUE,
+      draw.llim = FALSE,
+      direction = "horizontal",
+      reverse = TRUE
+    )
+  ) 
+```
+
+----
+
+```{r gui9}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, color = hp, 
+                 size = qsec, 
+                 shape = factor(gear))) + 
+  guides(color = "colorbar",
+         shape = "legend",
+         size = "legend")
+```
+
+----
+
+```{r gui10}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, color = hp, 
+                 size = wt, 
+                 shape = factor(gear))) + 
+  guides(
+    color = guide_colorbar(
+      title = "Horsepower"
+    ),
+    shape = guide_legend(
+      title = "Weight"
+    ),
+    size = guide_legend(
+      title = "Gear"
+    )
+  )
+```
+
+## Summary
+
+## Next Steps..
