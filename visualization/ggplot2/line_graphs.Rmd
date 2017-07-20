@@ -1,0 +1,135 @@
+---
+title: "ggplot2: Line Graphs"
+output: 
+  revealjs::revealjs_presentation:
+    transition: slide
+    incremental: true
+    theme: moon
+    highlight: monochrome
+    center: true
+    fig_width: 6
+    fig_height: 5
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+---
+
+## Intro
+
+## Installation
+
+```{r show, eval=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+```{r load, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+## Basic Line Plot
+
+----
+
+We will use a data set related to GDP growth rate. You can download it from [here](https://github.com/rsquaredacademy/datasets/blob/master/gdp.csv). It contains GDP (Gross Domestic Product) growth data for the BRICS (Brazil, Russia, India, China, South Africa) for the years 2000 to 2005.
+
+## Installation
+
+```{r imports2, eval=FALSE}
+gdp <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/gdp.csv')
+```
+
+```{r import2, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+gdp <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/gdp.csv')
+gdp
+```
+
+----
+
+```{r line1}
+ggplot(gdp, aes(year, india)) +
+  geom_line(color = 'blue')
+```
+
+----
+
+`linetype` can be used to modify the appearance of the line.
+
+```{r line2}
+ggplot(gdp, aes(year, india)) +
+  geom_line(linetype = 2)
+```
+
+----
+
+```{r line3}
+ggplot(gdp, aes(year, india)) +
+  geom_line(linetype = 'dashed')
+```
+
+----
+
+`size` argument is used to specify the width of the line.
+
+```{r line4}
+ggplot(gdp, aes(year, india)) +
+  geom_line(size = 2)
+```
+
+----
+
+Now let us map the aesthetics to the variables. The data used in the above example cannot be used as we need a variable with country names. We will use `gather()` function from the `tidyr` package to reshape the data.
+
+----
+
+```{r line5}
+gdp2 <- gdp %>% 
+  select(year, growth, india, china) %>% 
+  gather(key = country, value = gdp, -year)
+```
+
+----
+
+Now we can map the aethetics to the `country` variable
+
+----
+
+```{r line6}
+ggplot(gdp2, aes(year, gdp, group = country)) +
+  geom_line()
+```
+
+----
+
+Let us begin with `color`.
+
+```{r line7}
+ggplot(gdp2, aes(year, gdp, group = country)) +
+  geom_line(aes(color = country))
+```
+
+----
+
+Map `linetype` to `country`.
+
+```{r line8}
+ggplot(gdp2, aes(year, gdp, group = country)) +
+  geom_line(aes(linetype = country))
+```
+
+----
+
+Map `linewidth` to `country`.
+
+```{r line9}
+ggplot(gdp2, aes(year, gdp, group = country)) +
+  geom_line(aes(size = country))
+```
+
+## Summary
+
+## Next Steps
+
