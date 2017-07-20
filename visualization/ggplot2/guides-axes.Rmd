@@ -1,0 +1,128 @@
+---
+title: "ggplot2: Guides - Axes"
+output: 
+  revealjs::revealjs_presentation:
+    transition: slide
+    incremental: true
+    theme: moon
+    highlight: monochrome
+    center: true
+    fig_width: 6
+    fig_height: 5
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+---
+
+## Intro
+
+## Installation
+
+```{r show, eval=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+```{r load, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+## X Axis - Continuous
+
+----
+
+`scale_x_continuous()`: modify x axis when x is continuous
+
+The first function we will explore is `scale_x_continuous()`. It can be used for:
+
+- axis title
+- axis labels
+- axis limits
+- axis breaks
+- and axis position
+
+Let us create a simple scatter plot and then use `scale_x_continuous()` to modify the X axis.
+
+----
+
+```{r guide2}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg))
+```
+
+----
+
+```{r guide3}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  scale_x_continuous(name = "Displacement",
+                     limits = c(0, 600),
+                     breaks = c(0, 150, 300, 450, 600),
+                     labels = c('0', '150', '300', '450', '600'),
+                     position = 'top')
+```
+
+
+## Y Axis - Continuous
+
+----
+
+`scale_y_continuous()`: modify y axis
+
+Now let us modify the Y axis.
+
+----
+
+```{r guide4}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  scale_y_continuous(name = "Miles Per Gallon",
+                     limits = c(0, 45),
+                     breaks = c(0, 15, 30, 45),
+                     labels = c('0', '15', '30', '45'),
+                     position = 'right')
+```
+
+## X Axis - Discrete
+
+----
+
+Now let us look at plots with discrete X axis.
+
+```{r guide5}
+ggplot(mtcars) +
+  geom_bar(aes(factor(cyl)))
+```
+
+----
+
+Use `scael_x_discrete()` to modify the X axis.
+
+----
+
+```{r guide6}
+ggplot(mtcars) +
+  geom_bar(aes(factor(cyl))) +
+  scale_x_discrete(name = "Number of Cylinders",
+                   labels = c("4" = "Four", "6" = "Six", "8" = "Eight"),
+                   breaks = c("4", "6", "8"),
+                   position = "bottom")
+```
+
+## Summary
+
+----
+
+In this module, we learnt how to modify the axis whether it represents a continuous variable or a discrete variable. 
+
+
+## Next Steps..
+
+----
+
+In the next module, we will learn how to modify the legend when aesthetics are mapped to variables.
+
+
