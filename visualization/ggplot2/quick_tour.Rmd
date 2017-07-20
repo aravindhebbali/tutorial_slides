@@ -1,0 +1,132 @@
+---
+title: "ggplot2: Quick Tour"
+output: 
+  revealjs::revealjs_presentation:
+    transition: slide
+    incremental: true
+    theme: moon
+    highlight: monochrome
+    center: true
+    fig_width: 6
+    fig_height: 5
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+---
+
+## Intro
+
+In this module, we will learn to quickly build a set of plots that are routinely used to explore data.
+
+## Installation
+
+```{r show, eval=FALSE}
+library(ggplot2)
+library(dplyr)
+```
+
+```{r load, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+library(ggplot2)
+library(dplyr)
+```
+
+## Scatter Plot
+
+----
+
+```{r gg2}
+qplot(disp, mpg, data = mtcars)
+```
+
+----
+
+```{r gg3}
+qplot(disp, mpg, data = mtcars, geom = c('point', 'line'))
+```
+
+----
+
+```{r gg4}
+qplot(disp, mpg, data = mtcars, color = factor(cyl))
+```
+
+----
+
+```{r gg5}
+qplot(disp, mpg, data = mtcars, shape = factor(cyl))
+```
+
+----
+
+```{r gg6}
+qplot(disp, mpg, data = mtcars, size = qsec)
+```
+
+----
+
+## Bar Plot
+
+----
+
+```{r gg7}
+qplot(factor(cyl), data = mtcars, geom = c('bar'))
+```
+
+----
+
+```{r gg8}
+qplot(factor(cyl), data = mtcars, geom = c('bar'), fill = factor(am))
+```
+
+----
+
+## Box Plot
+
+----
+
+```{r gg9}
+qplot(factor(cyl), mpg, data = mtcars, geom = c('boxplot'))
+```
+
+----
+
+```{r gg10}
+qplot(factor(1), mpg, data = mtcars, geom = c('boxplot'))
+```
+
+----
+
+```{r gg11}
+qplot(factor(cyl), mpg, data = mtcars, geom = c('boxplot', 'jitter'))
+```
+
+## Line Chart
+
+----
+
+```{r gg12}
+qplot(x = date, y = unemploy, data = economics, geom = c('line'))
+```
+
+----
+
+```{r gg13}
+qplot(x = date, y = unemploy, data = economics, geom = c('line'),
+      color = 'red')
+```
+
+## Histogram
+
+----
+
+```{r gg14}
+qplot(mpg, data = mtcars, bins = 5)
+```
+
+## Summary
+
+In this module, we learnt to quickly create plots using the `qplot()` function. While useful, it has limitations and can be used only to quickly visualize data. 
+
+## Next Steps..
+
+In the next module, we will create the same set of plots but using **geoms**. 
