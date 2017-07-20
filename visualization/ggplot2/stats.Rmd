@@ -1,0 +1,115 @@
+---
+title: "ggplot2: Statistical Plots"
+output: 
+  revealjs::revealjs_presentation:
+    transition: slide
+    incremental: true
+    theme: moon
+    highlight: monochrome
+    center: true
+    fig_width: 6
+    fig_height: 5
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+---
+
+## Intro
+
+In this module, we will explore an alternative method to build plots.
+
+## Installation
+
+```{r show, eval=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+```{r load, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+## Case Study
+
+We will continue to use the ecommerce data. You can download it from [here](https://github.com/rsquaredacademy/datasets/blob/master/web.csv) or import directly using the readr package.
+
+```{r import2, eval=FALSE}
+ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+```
+
+```{r import, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+ecom
+```
+
+## Data Dictionary
+
+
+## Stats
+
+----
+
+So far we have used `geom_*()` functions to build plot. Now we will use a new set of functions `stat_*()` to build the plots. 
+
+## Bar Plots
+
+----
+
+```{r stat2}
+ggplot(ecom) +
+  stat_count(aes(device))
+```
+
+## Box Plots
+
+----
+
+```{r stat3}
+ggplot(ecom) +
+  stat_boxplot(aes(factor(1), n_visit))
+```
+
+## Scatter Plots
+
+----
+
+```{r stat4}
+ggplot(ecom) +
+  stat_identity(aes(n_pages, duration), position = 'jitter')
+```
+
+## Histogram
+
+----
+
+```{r stat5}
+ggplot(ecom) +
+  stat_bin(aes(n_visit), bins = 7, fill = 'blue', alpha = 0.3,
+           color = 'black')
+```
+
+## Plot Unique Values
+
+----
+
+```{r stat6}
+ggplot(ecom) +
+  stat_unique(aes(n_pages, duration), 
+              position = 'jitter')
+```
+
+## Summary
+
+----
+
+In this module, we learnt about the functions underlying the `geom_*()` family of functions. 
+
+## Next Steps..
+
+----
+
+In the next module, we will learn about faceting i.e. combining plots.
+
