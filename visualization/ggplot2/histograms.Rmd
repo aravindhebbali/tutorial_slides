@@ -1,0 +1,106 @@
+---
+title: "ggplot2: Histogram"
+output: 
+  revealjs::revealjs_presentation:
+    transition: slide
+    incremental: true
+    theme: moon
+    highlight: monochrome
+    center: true
+    fig_width: 6
+    fig_height: 5
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+---
+
+## Intro
+
+## Installation
+
+```{r show, eval=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+```{r load, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+
+## Case Study
+
+We will continue to use the ecommerce data. You can download it from [here](https://github.com/rsquaredacademy/datasets/blob/master/web.csv) or import directly using the readr package.
+
+```{r import2, echo=FALSE, eval=FALSE, results='hide', message=FALSE}
+ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+```
+
+```{r import, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+ecom
+```
+
+## Data Dictionary
+
+## Simple Histogram
+
+----
+
+```{r hist2}
+ggplot(ecom) +
+  geom_histogram(aes(n_visit))
+```
+
+----
+
+Let us add some color to the histogram.
+
+```{r hist3}
+ggplot(ecom) +
+  geom_histogram(aes(n_visit), fill = 'blue')
+```
+
+----
+
+The default number of bins is 30. We can specify the number of bins using `bins`.
+
+```{r hist4}
+ggplot(ecom) +
+  geom_histogram(aes(n_visit), bins = 7, fill = 'blue', color = 'black')
+```
+
+----
+
+We can specify the width of the bins using `binwidth`.
+
+```{r hist5}
+ggplot(ecom) +
+  geom_histogram(aes(n_visit), binwidth = 2, fill = 'blue', color = 'black')
+```
+
+----
+
+Line type and size.
+
+```{r hist6}
+ggplot(ecom) +
+  geom_histogram(aes(n_visit), binwidth = 2, 
+                 fill = 'blue', color = 'black', alpha = 0.3,
+                 linetype = 2, size = 1.25)
+```
+
+----
+
+We can also map the color to a variable.
+
+
+```{r hist7}
+ggplot(ecom) +
+  geom_histogram(aes(n_visit, fill = device), bins = 7)
+```
+
+
