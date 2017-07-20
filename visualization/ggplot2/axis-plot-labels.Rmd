@@ -1,0 +1,218 @@
+---
+title: "ggplot2: Axis & Plot Labels"
+output: 
+  revealjs::revealjs_presentation:
+    transition: slide
+    incremental: true
+    theme: moon
+    highlight: monochrome
+    center: true
+    fig_width: 6
+    fig_height: 5
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+---
+
+## Intro
+
+In this module, we will learn to:
+
+- add title and subtitle to the plot
+- modify axis labels
+- modify axis range
+- remove axis
+- format axis
+
+## Installation
+
+```{r show, eval=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+```{r load, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+## Basic Plot
+
+----
+
+Let us start by building a simple scatter plot. 
+
+----
+
+```{r axis2}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg))
+```
+
+## Title & Subtitle
+
+----
+
+You can add a title and subtitle to the plot using the `ggtitle()` function.
+
+----
+
+```{r axis3}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  ggtitle(label = 'Displacement vs Mileage', subtitle = 'disp vs mpg')
+```
+
+## Axis Labels
+
+----
+
+The axis labels can be modified using the `xlab()` and `ylab()` functions.
+
+----
+
+```{r axis4}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  xlab('Displacement') + ylab('Miles Per Gallon')
+```
+
+----
+
+We can add all of the above using the `labs()` function as well.
+
+----
+
+```{r axis5}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  labs(title = 'Displacement vs Mileage',
+    subtitle = 'disp vs mpg', x = 'Displacement',
+    y = 'Miles Per Gallon')
+```
+
+## Axis Range
+
+----
+
+Sometimes you may want to modify the range of the axis. 
+
+Use the `xlim()` function to modify the range of the X axis.
+
+----
+
+```{r axis6}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  xlim(c(0, 600))
+```
+
+----
+
+Use the `ylim()` function to modify the range of the Y axis.
+
+----
+
+```{r axis7}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  ylim(c(0, 40))
+```
+
+----
+
+You can use the `expand_limits()` function as well.
+
+----
+
+```{r axis8}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  expand_limits(x = c(0, 600), y = c(0, 40))
+```
+
+## Remove Axis Labels
+
+----
+
+If you want to remove the axis labels all together, use the `theme()` function.
+
+----
+
+```{r axis9}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  theme(axis.title.x = element_blank(),
+    axis.title.y = element_blank())
+```
+
+----
+
+What we are doing above is to modify the theme of the plot and set the axis labels to blank using
+`element_blank()` function.
+
+
+## Format Title & Axis Labels
+
+----
+
+To format the title or the axis labels, we have to modify the theme of the plot using the `theme()` function.
+We can modify the color, font family, font face, font size and horizontal position. Let us try them one by one.
+
+----
+
+The font family can be any of the valid font family types but it must be supported by OS.
+The font face can be plain, bold, italic, bold.italic
+hjust must be between 0 (extreme left) and 1 (extreme right). 
+
+----
+
+```{r axis10}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  ggtitle('Diaplacement vs Mileage') +
+  theme(plot.title = element_text(color = 'blue',
+                                  family = 'Arial',
+                                  face = 'bold',
+                                  size = 8,
+                                  hjust = 0.3))
+```
+
+## X axis label
+
+----
+
+```{r axis11}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  xlab('Diaplacement') +
+  theme(axis.title.x = element_text(color = 'blue',
+                                  family = 'Arial',
+                                  face = 'bold',
+                                  size = 8,
+                                  hjust = 0.5,
+                                  angle = 15))
+```
+
+
+## Y axis label
+
+----
+
+```{r axis12}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  ylab('Miles Per Gallon') +
+  theme(axis.title.y = element_text(color = 'blue',
+                                  family = 'Arial',
+                                  face = 'italic',
+                                  size = 8,
+                                  vjust = 0.3,
+                                  angle = 90))
+```
+
+## Summary
+
+## Next Steps..
