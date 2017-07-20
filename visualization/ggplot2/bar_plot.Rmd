@@ -1,0 +1,128 @@
+---
+title: "ggplot2: Bar Plots"
+output: 
+  revealjs::revealjs_presentation:
+    transition: slide
+    incremental: true
+    theme: moon
+    highlight: monochrome
+    center: true
+    fig_width: 6
+    fig_height: 5
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+---
+
+## Intro
+
+## Installation
+
+```{r show, eval=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+```{r load, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+
+## Case Study
+
+We will continue to use the ecommerce data. You can download it from [here](https://github.com/rsquaredacademy/datasets/blob/master/web.csv) or import directly using the readr package.
+
+```{r import2, echo=FALSE, eval=FALSE, results='hide', message=FALSE}
+ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+```
+
+```{r import, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+ecom
+```
+
+## Data Dictionary
+
+## Simple Bar Plot
+
+----
+
+```{r bar2}
+ggplot(ecom) +
+  geom_bar(aes(factor(device)))
+```
+
+## Bar Color
+
+----
+
+```{r bar3}
+ggplot(ecom) +
+  geom_bar(aes(factor(device)),
+           fill = c('red', 'blue', 'green'))
+```
+
+## Bar Line Color
+
+----
+
+```{r bar4}
+ggplot(ecom) +
+  geom_bar(aes(factor(device)),
+           color = c('red', 'blue', 'green'))
+```
+
+## Bar Line Type
+
+----
+
+```{r bar5}
+ggplot(ecom) +
+  geom_bar(aes(factor(device)), fill = 'white', 
+           color = 'red', linetype = 2)
+```
+
+## Bar Line Size
+
+----
+
+```{r bar6}
+ggplot(ecom) +
+  geom_bar(aes(factor(device)), fill = 'white', 
+           color = 'red', linetype = 2, size = 2)
+```
+
+## Stacked Bar Plot
+
+----
+
+```{r bar7}
+ggplot(ecom) +
+  geom_bar(aes(device, fill = factor(referrer)))
+```
+
+## Grouped Bar Plot
+
+----
+
+```{r bar8}
+ggplot(ecom) +
+  geom_bar(aes(device, fill = factor(referrer)), position = 'dodge')
+```
+
+## Horizontal Bar Plot
+
+----
+
+```{r bar9}
+ggplot(ecom) +
+  geom_bar(aes(factor(device), fill = factor(referrer))) +
+  coord_flip()
+```
+
+## Summary
+
+## Next Steps
