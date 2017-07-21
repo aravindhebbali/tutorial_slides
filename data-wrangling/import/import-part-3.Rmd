@@ -1,0 +1,133 @@
+---
+title: "Importing Data into R: Part - 3"
+output: 
+  revealjs::revealjs_presentation:
+    transition: slide
+    incremental: true
+    theme: moon
+    highlight: monochrome
+    center: true
+    fig_width: 6
+    fig_height: 5
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+---
+
+## Introdction
+
+## Libraries
+
+```{r importlib1,eval=FALSE}
+library(readr)
+```
+
+```{r importlib2, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+library(readr)
+```
+
+## read files
+
+----
+
+```{r imp1, echo=TRUE, results='markup', message=FALSE}
+readr::read_file('hsb.txt')
+```
+
+## read lines
+
+----
+
+skip first 5 lines and read max 10 lines
+
+```{r imp2, echo=TRUE, results='markup', message=FALSE}
+readr::read_lines('hsb.txt', skip = 5, n_max = 10)
+```
+
+## base
+## scan 
+
+----
+
+allow user to input data from console or read data from a file and store the input as a vector or list.
+
+```{r imp3}
+x <- scan()
+x
+```
+
+----
+
+```{r imp4}
+x <- scan("", what = integer())
+x
+class(x)
+```
+
+----
+
+```{r imp5}
+x <- scan("", what = list(name = "", age = 0))
+x
+```
+
+## readline
+
+----
+
+prompt user for an input and store the same as a character vector
+
+```{r imp6}
+name <- readline(prompt = "What is your name?: ")
+name
+```
+
+## readLines
+
+----
+
+read data from a file
+
+```{r imp7}
+readLines("hsb.txt")
+```
+
+----
+
+```{r imp8}
+readLines("hsb.txt", n = 10)
+```
+
+## read.table
+
+----
+
+read data from a file in table format and create data.frame
+
+```{r imp9}
+read.table('hsb.txt', header = TRUE, sep = ' ')
+```
+
+## load
+
+----
+
+load: reloads saved data sets and workspaces
+
+```{r imp10}
+load('employees.RData')
+```
+
+## source
+
+----
+
+source: reads R code from a script and makes those codes available in the current session
+
+```{r imp11}
+source('addition.R')
+```
+
+## Summary
+
+## Next Steps..
