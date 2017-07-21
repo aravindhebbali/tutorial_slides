@@ -1,0 +1,175 @@
+---
+title: "Exporting Data from R"
+output: 
+  revealjs::revealjs_presentation:
+    transition: slide
+    incremental: true
+    theme: moon
+    highlight: monochrome
+    center: true
+    fig_width: 6
+    fig_height: 5
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+---
+
+## Introdction
+
+## Libraries
+
+```{r importlib1,eval=FALSE}
+library(readr)
+library(haven)
+library(jsonlite)
+library(xml2)
+```
+
+```{r importlib2, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+library(readr)
+library(haven)
+library(jsonlite)
+library(xml2)
+```
+
+## Define Arguments
+
+- x/data: name of the data.frame/tibble
+- path: path where file must be written
+- delim: delimiter to separate values
+- append: whether append data or overwrite file (if there is no file, a new
+ one will be created)
+- col_names: write column names in the first row/top of file
+- compress: compression method
+- na: string used for representing missing values in data
+
+
+## CSV
+
+Format
+
+```{r expo1, eval=FALSE}
+write_csv(x, path, na = "NA", append = FALSE, col_names = !append)
+```
+
+Example
+
+```{r expo2}
+write_csv(x = mtcars, path = "mtcars.csv")
+```
+
+## TSV
+
+Format
+
+```{r expo3, eval=FALSE}
+write_tsv(x, path, na = "NA", append = FALSE, col_names = !append)
+```
+
+Example
+
+```{r expo4}
+write_tsv(x = mtcars, path = "mtcars.tsv")
+```
+
+## Delimited File
+
+Format
+
+```{r expo5, eval=FALSE}
+write_delim(x, path, na = "NA", append = FALSE, col_names = !append)
+```
+
+Example
+
+```{r expo6}
+write_delim(x = mtcars, path = "mtcars.txt")
+```
+
+## Write Lines
+
+Format
+
+```{r expo9, eval=FALSE}
+write_lines(x, path, na = "NA", append = FALSE)
+```
+
+Example
+
+```{r expo10}
+write_lines(x = mtcars, path = "mtcars2.txt")
+```
+
+## SAS
+
+Format
+
+```{r expo11, eval=FALSE}
+write_sas(data, path)
+```
+
+Example
+
+```{r expo12}
+write_sas(data = mtcars, path = "mtcars.sas7bdat")
+```
+
+## SPSS
+
+Format
+
+```{r expo13, eval=FALSE}
+write_sav(data, path)
+```
+
+Example
+
+```{r expo14}
+write_sav(data = mtcars, path = "mtcars.sav")
+```
+
+## STATA
+
+Format
+
+```{r expo15, eval=FALSE}
+write_dta(data, path, version = 14)
+```
+
+Example
+
+```{r expo16}
+write_dta(data = mtcars, path = "mtcars.dta", version = 14)
+```
+
+## JSON
+
+Format
+
+```{r expo17, eval=FALSE}
+write_json(x, path, ...)
+```
+
+Example
+
+```{r expo18}
+write_json(x = mtcars, path = "mtcars")
+```
+
+## RDS
+
+Format
+
+```{r expo23, eval=FALSE}
+write_rds(x, path, compress = c("none", "gz", "bz2", "xz"), ...)
+```
+
+Example
+
+```{r expo24}
+write_rds(x = mtcars, path = "mtcars", compress = "gz")
+```
+
+## Summary
+
+## Next Steps..
