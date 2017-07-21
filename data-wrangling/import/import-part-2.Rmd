@@ -1,0 +1,128 @@
+---
+title: "Importing Data into R: Part - 1"
+output: 
+  revealjs::revealjs_presentation:
+    transition: slide
+    incremental: true
+    theme: moon
+    highlight: monochrome
+    center: true
+    fig_width: 6
+    fig_height: 5
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+---
+
+## Introdction
+
+## Libraries
+
+```{r importlib1,eval=FALSE}
+library(jsonlite)
+library(xml2)
+library(XML)
+library(googlesheets)
+```
+
+```{r importlib2, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+library(jsonlite)
+library(xml2)
+library(XML)
+library(googlesheets)
+```
+
+## read data from a json file
+
+----
+
+```{r imp1}
+jsonlite::fromJSON('mtcars.json')
+```
+
+## read xml data 
+
+----
+
+```{r imp2}
+xm <- xmlParse("sample_xml")
+```
+
+----
+
+```{r imp3}
+class(xm)
+```
+
+----
+
+```{r imp4}
+xmlRoot(xm)
+```
+
+----
+
+```{r imp5}
+c_child <- xmlChildren(xm)
+```
+
+----
+
+```{r imp6}
+c_child[[1]]
+```
+
+----
+
+```{r imp7}
+c_child[[1]][1]
+```
+
+----
+
+```{r imp9}
+sapply(c_child[[1]][1], names)
+```
+
+----
+
+```{r imp10}
+sapply(c_child[[1]][1], xmlValue)
+```
+
+----
+
+```{r imp11}
+getNodeSet(xm, "//book")
+```
+
+----
+
+```{r imp12}
+getNodeSet(xm, "//author")
+```
+
+----
+
+```{r imp13}
+j <- xmlToDataFrame(
+  getNodeSet(xm, "//book")
+)
+j
+```
+
+# read xml data from the web
+# cd <- read_xml("http://www.xmlfiles.com/examples/cd_catalog.xml")
+
+# read html data
+
+----
+
+```{r imp14}
+xml2::read_html("http://had.co.nz")
+```
+
+# Summary
+
+# Next Steps
+
