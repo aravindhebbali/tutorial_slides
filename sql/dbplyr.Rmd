@@ -1,0 +1,100 @@
+---
+title: "dbplyr: Data Wrangling in Database"
+output: 
+  revealjs::revealjs_presentation:
+    transition: slide
+    incremental: true
+    theme: moon
+    highlight: monochrome
+    center: true
+    fig_width: 6
+    fig_height: 5
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+---
+
+## Introduction
+
+## Libraries
+
+```{r litelib,eval=FALSE}
+library(dbplyr)
+library(dplyr)
+library(DBI)
+library(RSQLite)
+```
+
+
+```{r lite1, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+library(dbplyr)
+library(dplyr)
+library(DBI)
+library(RSQLite)
+```
+
+## connect to database
+
+```{r dbply1}
+con <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
+```
+
+## copy local data frame to database
+
+```{r dbply2}
+copy_to(con, mtcars)
+```
+
+## reference copied data frame
+
+```{r dbply3}
+mtcars2 <- tbl(con, "mtcars")
+mtcars2
+```
+
+## query data
+
+----
+
+```{r dbply4}
+mtcars2 %>%
+  select(mpg, cyl, drat)
+```
+
+----
+
+```{r dbply5}
+mtcars2 %>%
+  filter(mpg > 25)
+```
+
+----
+
+```{r dbply6}
+mtcars2 %>%
+  group_by(cyl) %>%
+  summarise(mileage = mean(mpg))
+```
+
+## show query
+
+----
+
+```{r dbply7}
+mileages <- mtcars2 %>%
+  group_by(cyl) %>%
+  summarise(mileage = mean(mpg))
+```
+
+----
+
+```{r dbply8}
+mileages %>% show_query()
+```
+
+## use collect to pull data into a tibble
+
+```{r dbply9}
+data <- mileages %>% collect()
+```
+
