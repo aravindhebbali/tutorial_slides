@@ -1,0 +1,322 @@
+---
+title: "ggplot2: Themes"
+output: 
+  revealjs::revealjs_presentation:
+    transition: slide
+    incremental: true
+    theme: moon
+    highlight: monochrome
+    center: true
+    fig_width: 6
+    fig_height: 5
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+---
+
+## Intro
+
+----
+
+In this module, we will learn to 
+
+- modify theme components
+- use different themes 
+
+----
+
+Use `theme()` to modify the appearance of all non data components of the plot.
+
+
+## Installation
+
+```{r show, eval=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+```{r load, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+## theme
+
+----
+
+modify components of a plot
+
+```{r theme1}
+p <- ggplot(mtcars) +
+  geom_point(aes(disp, mpg))
+```
+
+----
+
+```{r theme2}
+# modify X axis title
+p + theme(axis.title.x = element_text(
+  color = "red", size = 10))
+```
+
+----
+
+```{r theme3}
+# modify X axis text
+p + theme(axis.text.x = element_text(
+  color = "red", size = 10))
+```
+
+----
+
+```{r theme4}
+# modify both axis text
+p + theme(axis.text = element_text(
+  color = "red", size = 10, face = "italic"))
+```
+
+----
+
+```{r theme5}
+# modify axis ticks
+p + theme(
+  axis.ticks = element_line(
+    color = 'blue',
+    size = 1.25,
+    linetype = 2
+  ),
+  axis.ticks.length = unit(1, "cm")
+)
+```
+
+## modify axis line
+
+----
+
+```{r theme6}
+p + theme(
+  axis.line = element_line(
+    color = 'red',
+    size = 1.5, 
+    linetype = 3
+  )
+)
+```
+
+## modify legend
+
+----
+
+```{r theme7}
+p <- ggplot(mtcars) +
+  geom_point(aes(disp, mpg, color = factor(cyl), shape = factor(gear)))
+```
+
+----
+
+```{r theme8}
+p + theme(
+  legend.background = element_rect(
+    fill = 'gray', 
+    linetype = 2, 
+    color = "red"
+  ),
+  legend.margin = margin(4, 8, 4, 8),
+  legend.spacing = unit(1.5, "cm"),
+  legend.key = element_rect(fill = 'red'),
+  legend.key.size = unit(0.4, "cm"),
+  legend.text = element_text(color = 'green', face = 'italic'),
+  legend.title = element_text(color = 'blue', face = 'bold'),
+  legend.title.align = 0.1,
+  legend.position = "top",
+  legend.direction = "horizontal",
+  legend.box = "horizontal",
+  legend.box.background = element_rect(fill = "yellow"),
+  legend.box.spacing = unit(1, "cm"),
+  legend.box.margin = margin(4, 8, 4, 8),
+  legend.box.just = "left"
+)
+```
+
+## modify panel
+
+----
+
+```{r theme9}
+p <- ggplot(mtcars) +
+  geom_point(aes(disp, mpg))
+```
+
+----
+
+```{r theme10}
+p + theme(
+  panel.background = element_rect(fill = 'gray'),
+  panel.border = element_rect(
+    fill = NA, 
+    color = 'red', 
+    linetype = 1,
+    size = 2
+  ),
+  panel.grid = element_line(
+    color = 'blue',
+    linetype = 2,
+    size = 0.5
+  )
+)
+```
+
+----
+
+```{r theme11}
+p <- ggplot(mtcars) +
+  geom_point(aes(disp, mpg))
+```
+
+----
+
+```{r theme12}
+p + theme(
+  panel.grid.major.x = element_line(
+    color = 'blue',
+    linetype = 2,
+    size = 0.5
+  ),
+  panel.grid.minor.y = element_line(
+    color = 'red',
+    linetype = 3, 
+    size = 0.2
+  )
+)
+```
+
+----
+
+## modify plot area
+
+----
+
+```{r theme13}
+p <- ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) + 
+  ggtitle('Theme Modification')
+```
+
+----
+
+```{r theme14}
+p + theme(
+  plot.background = element_rect(
+    color = 'blue',
+    fill = '#4682B4'
+  ),
+  plot.title = element_text(color = 'red'),
+  plot.margin = unit(c(1, 1, 1, 1), "cm")
+)
+```
+
+### modify facets
+
+----
+
+```{r theme15}
+p <- ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) + 
+  facet_grid(~cyl)
+```
+
+----
+
+```{r theme16}
+p + theme(
+  strip.background = element_rect(
+    color = 'red',
+    fill = '#4682B4'
+  ),
+  strip.text = element_text(
+    face = 'italic',
+    size = 8, 
+    color = 'red'
+  )
+)
+```
+
+### Classic Dark on Light
+
+----
+
+```{r theme17}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  theme_bw()
+```
+
+## Default Gray
+
+----
+
+```{r theme18}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  theme_gray()
+```
+
+## Light
+
+----
+
+```{r theme19}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  theme_light()
+```
+
+## Minimal
+
+----
+
+```{r theme20}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  theme_minimal()
+```
+
+## Dark
+
+----
+
+```{r theme21}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  theme_dark()
+```
+
+## Classic
+
+----
+
+```{r theme22}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  theme_classic()
+```
+
+## Void (Empty)
+
+----
+
+```{r theme23}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  theme_void()
+```
+
+
+## Summary
+
+----
+
+In this module, we learnt about the different themes available in ggplot2.
+This brings us to the end of the course **Elegant Data Visualization with ggplot2**.
