@@ -4,20 +4,90 @@ output:
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
+    includes:
+      after_body: footer.html
 ---
 
+<style type="text/css">
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+  }
+
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
+
+## Agenda
+
+<hr>
+
+- What are tibbles?
+- How are tibbles different from data frames?
+- How to create tibbles?
+- How to manipulate tibbles?
+
+
 ## tibbles
+
+<hr>
 
 A modern version of data frames that retain the good aspects (of data frames) while getting rid of the frustrating and annoying parts. 
 
 
 ## What we will learn
+
+<hr>
 
 Learn how tibbles makes certain parts of the data analysis workflow easier by being different from data frames. Specifically, we will learn
 
@@ -28,6 +98,8 @@ Learn how tibbles makes certain parts of the data analysis workflow easier by be
 
 
 ## Creating tibbles
+
+<hr>
 
 In this first section, we will create tibbles using the `tibble()` function.
 
@@ -44,25 +116,42 @@ tibble(x = letters,
 
 ## tibble features
 
+<hr>
+
 - never changes input's types
 - never adjusts variable names
 - never prints all rows
 - never recycles vector of length greater than 1
 
----
+## Feature 1
+
+<hr>
+
+tibble never changes the input's types. 
+
 ```{r tibble3}
 tibble(x = letters,
        y = 1:26,
        z = sample(100, 26))
 ```
 
----
+## Feature 2
+
+<hr>
+
+tibble never adjusts variable names. 
+
 ```{r tibble4}
 names(data.frame(`order value` = 10))
 names(tibble(`order value` = 10))
 ```
 
----
+## Feature 3
+
+<hr>
+
+tibble will only print the first 10 rows.
+
 ```{r tibble5}
 x <- 1:100
 y <- letters[1]
@@ -70,7 +159,12 @@ z <- sample(c(TRUE, FALSE), 100, replace = TRUE)
 tibble(x, y, z)
 ```
 
----
+## Feature 4
+
+<hr>
+
+tibble will never recycle any vector of length greater than 1.
+
 ```{r tibble6, eval=FALSE}
 x <- 1:100
 y <- letters
@@ -80,6 +174,8 @@ Error in overscope_eval_next(overscope, expr) : object 'y' not found
 ```
 
 ## Creating tibbles II
+
+<hr>
 
 In the previous section, we created tibbles using the `tibble()` function by directly inputting data as arguments. In this section, we will convert the following objects to tibble using the `as_tibble()` function:
 
@@ -92,11 +188,15 @@ In the previous section, we created tibbles using the `tibble()` function by dir
 
 ## DataFrames
 
+<hr>
+
 ```{r tibble7}
 as_tibble(iris)
 ```
 
 ## Lists
+
+<hr>
 
 ```{r tibble8}
 l <- list(x = 1:32, y = sample(100, 32), z = replicate(32, letters, simplify = FALSE))
@@ -104,6 +204,8 @@ as_tibble(l)
 ```
 
 ## Matrix
+
+<hr>
 
 ```{r tibble9}
 m <- matrix(sample(1000, 2600, replace = TRUE), ncol = 26)
@@ -113,12 +215,16 @@ as_tibble(m)
 
 ## Table
 
+<hr>
+
 ```{r tibble10}
 k <- table(mtcars$cyl)
 as_tibble(k)
 ```
 
 ## tbl_df
+
+<hr>
 
 ```{r tibble11}
 k <- tbl_df(iris)
@@ -128,6 +234,8 @@ as_tibble(k)
 
 ## atomic vectors
 
+<hr>
+
 We can create tibbles from atomic vectors using the `enframe()` functions. Let us use the web traffic data and create a tibble for the browsers.
 
 ```{r tibble12}
@@ -135,13 +243,18 @@ browsers <- c('chrome', 'safari', 'firefox', 'edge')
 enframe(browsers)
 ```
 
-----
+## atomic vectors
+
+<hr>
+
 ```{r tibble13}
 browsers <- c(chrome = 40, firefox = 20, edge = 30, safari = 10)
 enframe(browsers)
 ```
 
 ## Test objects
+
+<hr>
 
 We can test if an object is a tibble using the `is_tibble()` function.
 
@@ -151,6 +264,8 @@ is_tibble(as_tibble(mtcars))
 ```
 
 ## Tribble
+
+<hr>
 
 Another way to create tibbles is using the `tribble()` function. tribble is short for transposed tibbles. It is customized for data entry in code. Column names start with `~` and values are separated by commas. Below is an example:
 
@@ -165,6 +280,8 @@ tribble(
 
 ## Column Names
 
+<hr>
+
 Names of the columns in tibbles need not be valid R variable names. They can contain unusual characters like a space or a smiley but must be enclosed in ticks. Below is an example:
 
 ```{r tibble16}
@@ -177,12 +294,14 @@ tibble(
 
 ## Compare tibbles
 
+<hr>
+
 We can compare tibbles using the `all_equal()` function from the [dplyr](http://dplyr.tidyverse.org/) package. We need to specify the 
 tibbles being compared. Let us look at an example from the web traffic data. We have the details of browsers used in 2 formats. We will 
 test if they are the same.
 
 
-## Compare browser data.
+Compare browser data
 
 ```{r tibble17} 
 browsers1 <- enframe(c(chrome = 40, firefox = 20, edge = 30, safari = 10))
@@ -191,8 +310,11 @@ browsers2 <- enframe(c(edge = 30, firefox = 20, safari = 10, chrome = 40))
 all_equal(browsers1, browsers2)
 ```
 
+## Compare tibbles
 
-## Compare browser data by ignoring order of rows.
+<hr>
+
+Compare browser data by ignoring order of rows.
 
 The `all_equal()` function ignores the order of the rows while comparing the tibbles. Change this by 
 setting `ignore_row_order` to `TRUE`.
@@ -201,7 +323,11 @@ setting `ignore_row_order` to `TRUE`.
 all_equal(browsers1, browsers2, ignore_row_order = FALSE)
 ```
 
-## Compare browser data by ignoring order of columns
+## Compare tibbles
+
+<hr>
+
+Compare browser data by ignoring order of columns
 
 ```{r tibble19}
 traffic1 <- tibble(
@@ -222,7 +348,9 @@ all_equal(traffic1, traffic2)
 ```
 
 
-## Ignore Column Order
+## Compare tibbles
+
+<hr>
 
 The order of the columns can be compared by setting `ignore_col_order` to `FALSE`.
 
@@ -231,6 +359,8 @@ all_equal(traffic1, traffic2, ignore_col_order = FALSE)
 ```
 
 ## Add Rows
+
+<hr>
 
 Let us go back to the web traffic data. 
 
@@ -244,7 +374,9 @@ We can add data for **Safari** browser to the above tibble using the `add_row()`
 add_row(browsers, name = 'safari', value = 10)
 ```
 
-## Specific Row
+## Add Rows
+
+<hr>
 
 If we want to add the data at a particular row, we can specify the row number using the `.before` argument.
 Let us add the data for **Safari** in the second row instead of the last row.
@@ -255,6 +387,8 @@ add_row(browsers, name = 'safari', value = 10, .before = 2)
 
 ## Add Column
 
+<hr>
+
 Similarly, we can add a new column to the tibble using the `add_col()` function.
 
 ```{r tibble24}
@@ -263,6 +397,8 @@ add_column(browsers, visits = c(4000, 2000, 3000, 1000))
 ```
 
 ## Rownames
+
+<hr>
 
 The [tibble](tibble.tidyverse.org) package provides a set of function to deal with rownames. Remember, `tibble` does
 not have `rownames` unlike `data.frame`. To check whether a data set has rownames, use the `has_rownames()` function.
@@ -273,6 +409,8 @@ has_rownames(mtcars)
 
 ## Remove Rownames
 
+<hr>
+
 To remove rownames from a data set, use the `remove_rownames()` function:
 
 ```{r tibble26}
@@ -281,6 +419,8 @@ remove_rownames(mtcars)
 
 ## Rownames to Column
 
+<hr>
+
 To convert rownames to a column, use the `rownames_to_column()` function:
 
 ```{r tibble27}
@@ -288,6 +428,9 @@ head(rownames_to_column(mtcars))
 ```
 
 ## Column to Rownames
+
+<hr>
+
 To convert the first column in the data set to rownames, use the `column_to_rownames()` function:
 
 ```{r tibble28}
@@ -296,6 +439,8 @@ column_to_rownames(mtcars_tbl)
 ```
 
 ## Miscellaneous
+
+<hr>
 
 Use the `glimpse()` function to get an overview of the data.
 
@@ -312,3 +457,17 @@ has_name(mtcars, 'gears')
 ```
 
 ## Summary
+
+<hr>
+
+## Questions
+
+<hr>
+
+---
+
+### Thank You
+
+For more information please visit our website
+
+www.rsquaredacademy.com
