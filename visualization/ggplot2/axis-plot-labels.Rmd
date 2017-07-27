@@ -4,17 +4,79 @@ output:
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
-    fig_width: 6
-    fig_height: 5
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
+    fig_height: 5
+    fig_width: 6
 ---
 
-## Intro
+<style type="text/css">
+    .reveal p img {
+    align: middle;
+  }
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+    font-size: 25px;
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+  }
+  .reveal p img {
+    align: middle;
+  }
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
+
+## Agenda
+
+<hr>
 
 In this module, we will learn to:
 
@@ -24,7 +86,13 @@ In this module, we will learn to:
 - remove axis
 - format axis
 
+## Intro
+
+<hr>
+
 ## Installation
+
+<hr>
 
 ```{r show, eval=FALSE}
 library(ggplot2)
@@ -40,26 +108,26 @@ library(tidyr)
 
 ## Basic Plot
 
-----
+<hr>
 
 Let us start by building a simple scatter plot. 
 
 ----
 
-```{r axis2}
+```{r axis2, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg))
 ```
 
 ## Title & Subtitle
 
-----
+<hr>
 
 You can add a title and subtitle to the plot using the `ggtitle()` function.
 
 ----
 
-```{r axis3}
+```{r axis3, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg)) +
   ggtitle(label = 'Displacement vs Mileage', subtitle = 'disp vs mpg')
@@ -67,25 +135,27 @@ ggplot(mtcars) +
 
 ## Axis Labels
 
-----
+<hr>
 
 The axis labels can be modified using the `xlab()` and `ylab()` functions.
 
 ----
 
-```{r axis4}
+```{r axis4, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg)) +
   xlab('Displacement') + ylab('Miles Per Gallon')
 ```
 
-----
+## Labs
+
+<hr>
 
 We can add all of the above using the `labs()` function as well.
 
 ----
 
-```{r axis5}
+```{r axis5, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg)) +
   labs(title = 'Displacement vs Mileage',
@@ -95,7 +165,7 @@ ggplot(mtcars) +
 
 ## Axis Range
 
-----
+<hr>
 
 Sometimes you may want to modify the range of the axis. 
 
@@ -103,31 +173,35 @@ Use the `xlim()` function to modify the range of the X axis.
 
 ----
 
-```{r axis6}
+```{r axis6, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg)) +
   xlim(c(0, 600))
 ```
 
-----
+## Axis Range
+
+<hr>
 
 Use the `ylim()` function to modify the range of the Y axis.
 
 ----
 
-```{r axis7}
+```{r axis7, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg)) +
   ylim(c(0, 40))
 ```
 
-----
+## Axis Range
+
+<hr>
 
 You can use the `expand_limits()` function as well.
 
 ----
 
-```{r axis8}
+```{r axis8, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg)) +
   expand_limits(x = c(0, 600), y = c(0, 40))
@@ -135,33 +209,25 @@ ggplot(mtcars) +
 
 ## Remove Axis Labels
 
+<hr>
+
+If you want to remove the axis labels all together, use the `theme()` function. What we are doing above is to modify the theme of the plot and set the axis labels to blank using `element_blank()` function.
+
 ----
 
-If you want to remove the axis labels all together, use the `theme()` function.
-
-----
-
-```{r axis9}
+```{r axis9, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg)) +
   theme(axis.title.x = element_blank(),
     axis.title.y = element_blank())
 ```
 
-----
-
-What we are doing above is to modify the theme of the plot and set the axis labels to blank using
-`element_blank()` function.
-
-
 ## Format Title & Axis Labels
 
-----
+<hr>
 
 To format the title or the axis labels, we have to modify the theme of the plot using the `theme()` function.
 We can modify the color, font family, font face, font size and horizontal position. Let us try them one by one.
-
-----
 
 The font family can be any of the valid font family types but it must be supported by OS.
 The font face can be plain, bold, italic, bold.italic
@@ -169,7 +235,7 @@ hjust must be between 0 (extreme left) and 1 (extreme right).
 
 ----
 
-```{r axis10}
+```{r axis10, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg)) +
   ggtitle('Diaplacement vs Mileage') +
@@ -182,9 +248,9 @@ ggplot(mtcars) +
 
 ## X axis label
 
-----
+<hr>
 
-```{r axis11}
+```{r axis11, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg)) +
   xlab('Diaplacement') +
@@ -199,9 +265,9 @@ ggplot(mtcars) +
 
 ## Y axis label
 
-----
+<hr>
 
-```{r axis12}
+```{r axis12, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg)) +
   ylab('Miles Per Gallon') +
@@ -213,6 +279,10 @@ ggplot(mtcars) +
                                   angle = 90))
 ```
 
-## Summary
+## Questions
 
-## Next Steps..
+<hr>
+
+## Thank You
+
+<hr>
