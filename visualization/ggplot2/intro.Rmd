@@ -4,28 +4,97 @@ output:
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
-    fig_width: 6
-    fig_height: 5
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
+    fig_height: 5
+    fig_width: 6
 ---
 
-## Intro
+<style type="text/css">
+    .reveal p img {
+    align: middle;
+  }
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+  }
+  .reveal p img {
+    align: middle;
+  }
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
+
+## Agenda
+
+<hr>
+
+## Introduction
+
+<hr>
 
 In this module, we will understand the philosophy of Grammar of Graphics,  explore different aspects of ggplot2 and learn to build some of the basic
 plots regularly used for exploring data.
 
 ## ggplot2
 
+<hr>
+
 [ggplot2](http://ggplot2.tidyverse.org/index.html) is an alternative (and awesome) to base R for data visualization. It is based on 
 [The Grammar of Graphics](http://www.springer.com/in/book/9780387245447). In this post, we will understand the philosophy behind **ggplot2** and learn to build some of the most frequently used plots for visualizing data. 
 
 
 ## Installation
+
+<hr>
 
 ```{r cat, eval=FALSE}
 library(ggplot2)
@@ -36,6 +105,8 @@ library(ggplot2)
 ```
 
 ## Grammar of Graphics
+
+<hr>
 
 It is a formal system for building plots. The core idea is that any plot can be uniquely described as a combination of
 
@@ -48,55 +119,47 @@ It is a formal system for building plots. The core idea is that any plot can be 
 - a faceting scheme
 
 
-----
-
-Let us build a bar plot from scratch using the `mtcars` data. We will build the plot incrementally and understand the above components. 
-
 ## Step 1
 
-----
+<hr>
 
+Let us build a bar plot from scratch using the `mtcars` data. We will build the plot incrementally and understand the above components. 
 The first step in any data visualization exercise is to identify the data set. In `ggplot2`, we can specify the data set using  `ggplot()`.
 
+
 ----
 
-```{r gg1}
+<br>
+
+```{r gg1, fig.align='center'}
 ggplot2::ggplot(data = mtcars) 
 ```
 
+## Step 2
 
-----
+<hr>
 
 If you compare with the `barplot()` function from `base`, you can observe that instead of specifying the variable we are using the
 whole data set. And most importantly, the `ggplot()` function does not generate any plots. It just identifies the data that will be used by the other components.
 
-## Step 2
-
-----
 
 Once you have identified the data set, we need to specify how the data must be visualized. We will do this using  `geoms`. It basically indicate the geometric shapes that must be used to display the data. In our case, we are building bar plot and hence we want the data to be displayed as `bars`. 
 
-----
 
 There are several `geoms` and we will explore them one by one. For the time time being, let us use `geom_bar()` and map the `x` axis to a variable using `mapping`. We will use the `cyl` variable from `mtcars`.
 
 ----
-
-```{r gg2}
+```{r gg2, fig.align='center'}
 ggplot2::ggplot(data = mtcars) +
   geom_bar(
     mapping = aes(x = cyl)
   )
 ```
 
-## Summary
+## Questions
 
-In this module, we learnt 
+<hr>
 
-- about grammar of graphics
-- the components of a plot/chart
-- to build a plot step by step 
+## Thank You
 
-## Next Steps..
-
-In the next module, we will learn to quickly build a set of plots/charts that are routinely used in exploring data. 
+<hr>
