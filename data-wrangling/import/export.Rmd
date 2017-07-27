@@ -4,19 +4,94 @@ output:
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
-    fig_width: 6
-    fig_height: 5
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
 ---
 
+<style type="text/css">
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+  }
+  .reveal .sourceCode pre code {
+    padding: 0px;
+    border: 0px;
+  }
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
+
+
+## Agenda
+
+<hr>
+
+Export data from R to
+
+- csv
+- tsv
+- text file
+- JSON
+- SAS
+- STATA
+- SPSS
+- RDS
+
 ## Introdction
 
+<hr>
+
 ## Libraries
+
+<hr>
 
 ```{r importlib1,eval=FALSE}
 library(readr)
@@ -32,7 +107,9 @@ library(jsonlite)
 library(xml2)
 ```
 
-## Define Arguments
+## Commom Arguments
+
+<hr>
 
 - x/data: name of the data.frame/tibble
 - path: path where file must be written
@@ -45,6 +122,8 @@ library(xml2)
 
 
 ## CSV
+
+<hr>
 
 Format
 
@@ -60,6 +139,8 @@ write_csv(x = mtcars, path = "mtcars.csv")
 
 ## TSV
 
+<hr>
+
 Format
 
 ```{r expo3, eval=FALSE}
@@ -73,6 +154,8 @@ write_tsv(x = mtcars, path = "mtcars.tsv")
 ```
 
 ## Delimited File
+
+<hr>
 
 Format
 
@@ -88,6 +171,8 @@ write_delim(x = mtcars, path = "mtcars.txt")
 
 ## Write Lines
 
+<hr>
+
 Format
 
 ```{r expo9, eval=FALSE}
@@ -101,6 +186,8 @@ write_lines(x = mtcars, path = "mtcars2.txt")
 ```
 
 ## SAS
+
+<hr>
 
 Format
 
@@ -116,6 +203,8 @@ write_sas(data = mtcars, path = "mtcars.sas7bdat")
 
 ## SPSS
 
+<hr>
+
 Format
 
 ```{r expo13, eval=FALSE}
@@ -129,6 +218,8 @@ write_sav(data = mtcars, path = "mtcars.sav")
 ```
 
 ## STATA
+
+<hr>
 
 Format
 
@@ -144,6 +235,8 @@ write_dta(data = mtcars, path = "mtcars.dta", version = 14)
 
 ## JSON
 
+<hr>
+
 Format
 
 ```{r expo17, eval=FALSE}
@@ -158,6 +251,8 @@ write_json(x = mtcars, path = "mtcars")
 
 ## RDS
 
+<hr>
+
 Format
 
 ```{r expo23, eval=FALSE}
@@ -170,6 +265,10 @@ Example
 write_rds(x = mtcars, path = "mtcars", compress = "gz")
 ```
 
-## Summary
+## Questions
 
-## Next Steps..
+<hr>
+
+## Thank You
+
+<hr>
