@@ -4,15 +4,79 @@ output:
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
 ---
 
+<style type="text/css">
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+-  }
+
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
+
+## Agenda
+
+<hr>
+
+```{r libs, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+library(dplyr)
+```
+
 ## Introduction
+
+<hr>
 
 When you are dealing with a sequence of multiple operations, R code can get a bit cramped and not so easy on the eyes. The [magrittr](https://CRAN.R-project.org/package=magrittr) package by Stefan Milton Bache provides pipes enabling us to write R code that is readable.
 
@@ -22,6 +86,8 @@ When you are dealing with a sequence of multiple operations, R code can get a bi
 - with magrittr, you program from left to right
 
 ## Pipes
+
+<hr>
 
 R being a functional language, code contains a lot of parentheses. Complex code results in nested functions making them hard to read and maintain.
 If you are using tidyverse packages, magrittr will be automatically loaded. We will look at 3 different types of 
@@ -33,21 +99,60 @@ pipes:
 
 ## %>%
 
+<hr>
+
 ## %<>%
+
+<hr>
 
 ## %$%
 
-## Example 1
+<hr>
 
-Let us look at a few examples:
+## Libraries
 
-```{r install, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+<hr>
+
+```{r importlib1,eval=FALSE}
 library(magrittr)
 ```
 
-```{r import, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+```{r importlib2, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+library(magrittr)
+```
+## Data
+
+<hr>
+
+```{r import, eval=FALSE}
 ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
 ```
+
+
+```{r show, echo=FALSE, eval=TRUE, message=FALSE}
+ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+ecom
+```
+
+## Data Dictionary
+
+<hr>
+
+- id: row id
+- referrer: referrer website/search engine
+- os: operating system
+- browser: browser
+- device: device used to visit the website
+- n_pages: number of pages visited
+- duration: time spent on the website (in seconds)
+- repeat: frequency of visits
+- country: country of origin
+- purchase: whether visitor purchased
+- order_value: order value of visitor (in dollars)
+
+## Use Case 1
+
+<hr>
 
 ```{r mag1}
 head(ecom, 10)
@@ -58,7 +163,9 @@ head(ecom, 10)
 ecom %>% head(10)
 ```
 
-## Example 2
+## Use Case 2
+
+<hr>
 
 ```{r mag3}
 y <- ecom$n_pages
@@ -83,6 +190,8 @@ head(y)
 
 ## Correlation
 
+<hr>
+
 ```{r mag6}
 ecom %>%
   subset(purchase == 'true') %$% 
@@ -90,6 +199,8 @@ ecom %>%
 ```
 
 ## Visualization
+
+<hr>
 
 ```{r mag7}
 ecom %>%
@@ -101,6 +212,8 @@ ecom %>%
 
 ## Regression
 
+<hr>
+
 ```{r mag8}
 ecom %$%
   lm(duration ~ n_pages) %>%
@@ -108,6 +221,8 @@ ecom %$%
 ```
 
 ## String Manipulation
+
+<hr>
 
 ```{r mag9}
 email <- 'jovialcann@anymail.com'
@@ -124,6 +239,13 @@ email %>%
 
 ## Data Extraction
 
+<hr>
+
+- `extract()`
+- `extract2()`
+- `use_series()`
+
+----
 ```{r mag10}
 ecom %>%
   extract('n_pages')
@@ -164,6 +286,18 @@ mt %>%
 
 ## Arithmetic Operations
 
+<hr>
+
+- `add()`
+- `subtract()`
+- `multiply_by()`
+- `multiply_by_matrix()`
+- `divide_by()`
+- `divide_by_int()`
+- `mod()`
+- `raise_to_power()`
+
+----
 ```{r mag15}
 1:10 %>%
   `+`(1)
@@ -201,6 +335,17 @@ mt %>%
 
 ## Logical Operators
 
+<hr>
+
+- `and()`
+- `or()`
+- `equals()`
+- `not()`
+- `is_greater_than()`
+- `is_weakly_greater_than()`
+- `is_less_than()`
+- `is_weakly_less_than()`
+
 ----
 ```{r mag19}
 1:10 %>%
@@ -219,4 +364,10 @@ mt %>%
   is_weakly_greater_than(5)
 ```
 
-## Summary
+## Questions
+
+<hr>
+
+## Thank You
+
+<hr>
