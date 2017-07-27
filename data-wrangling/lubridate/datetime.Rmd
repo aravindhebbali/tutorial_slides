@@ -4,19 +4,81 @@ output:
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
 ---
 
+<style type="text/css">
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+-  }
+
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
+
+## Agenda
+
+<hr>
+
 ## Introduction
+
+<hr>
 
  In this module, we will learn to work with date/time data in R using [lubridate]( https://CRAN.R-project.org/package=lubridate), an R package that makes it easy to work with dates and time. Let us begin by installing and loading the lubridate pacakge.
  
 ## Installation
+
+<hr>
 
 ```{r install, eval=FALSE}
 library(lubridate)
@@ -32,7 +94,7 @@ library(magrittr)
 
 ## Quick Overview
 
-----
+<hr>
 
 Use `origin` to get the origin for the `Date` and other date/time objects in R.
 
@@ -40,7 +102,9 @@ Use `origin` to get the origin for the `Date` and other date/time objects in R.
 lubridate::origin
 ```
 
-----
+## Current Date/Time
+
+<hr>
 
 There are functions to check current date, time, timezone and AM/PM. Let us take a quick look at these:
 
@@ -51,13 +115,25 @@ am(now())
 pm(now())
 ```
 
+## Current Date/Time
+
+<hr>
+
+```{r today2}
+am(now())  
+pm(now())
+```
+
 ## Case Study
+
+<hr>
 
 We will use a case study to explore the lubridate package. The data set can be downloaded from here or directly imported using the readr package.
 
 ```{r import, eval=FALSE}
 transact <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/transact.csv')
 ```
+
 
 ```{r show, echo=FALSE, eval=TRUE, message=FALSE}
 transact <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/transact.csv')
@@ -66,15 +142,17 @@ transact
 
 ## Data Dictionary
 
-The data set has 3 columns:
+<hr>
+
+The data set has 3 columns. All the dates are in the format (yyyy-mm-dd).
 
 - Invoice: invoice date 
 - Due: due date
 - Payment: payment date
 
-All the dates are in the format (yyyy-mm-dd).
+## Case Study
 
-----
+<hr>
 
 We will use the functions in the lubridate package to answer a few 
 questions we have about the transact data.
@@ -88,7 +166,11 @@ questions we have about the transact data.
 - how many invoices are due in each quarter
 - what is the average duration between invoice date and payment date
 
-----
+## Case Study
+
+<hr>
+
+extract date, month and year from Due
 
 ```{r lub2}
 transact %>%
@@ -99,7 +181,11 @@ transact %>%
   )
 ```
 
-----
+## Case Study
+
+<hr>
+
+compute the number of days to settle invoice
 
 ```{r lub3}
 transact %>%
@@ -108,7 +194,11 @@ transact %>%
   )
 ```
 
-----
+## Case Study
+
+<hr>
+
+compute days over due
 
 ```{r lub4}
 transact %>%
@@ -117,7 +207,11 @@ transact %>%
   )
 ```
 
-----
+## Case Study
+
+<hr>
+
+check if due year is a leap year
 
 ```{r lub5}
 transact %>%
@@ -127,7 +221,11 @@ transact %>%
   )
 ```
 
-----
+## Case Study
+
+<hr>
+
+check when due day in february is 29, whether it is a leap year
 
 ```{r lub6}
 transact %>%
@@ -142,7 +240,9 @@ transact %>%
   filter(due_month == 2)
 ```
 
-----
+## Case Study
+
+<hr>
 
 ```{r lub7}
 transact %>%
@@ -155,7 +255,9 @@ transact %>%
   select(inv_due_interval, due_next, due_pay_interval, overlaps)
 ```
 
-----
+## Case Study
+
+<hr>
 
 ````{r lub12}
 # using int_shift
@@ -169,7 +271,9 @@ transact %>%
   select(inv_due_interval, due_pay_next, overlaps)
 ```
 
-----
+## Case Study
+
+<hr>
 
 ```{r lub13}
 transact %>%
@@ -180,6 +284,7 @@ transact %>%
   select(Due, Payment, overlaps)
 ```
 
+----
 ```{r lub8}
 transact %>%
   mutate(
@@ -187,7 +292,9 @@ transact %>%
   )
 ```
 
-----
+## Case Study
+
+<hr>
 
 ```{r lub14}
 transact %>%
@@ -196,7 +303,9 @@ transact %>%
   )
 ```
 
-----
+## Case Study
+
+<hr>
 
 ```{r lub9}
 transact %<>%
@@ -205,7 +314,9 @@ transact %<>%
   )
 ```
 
-----
+## Case Study
+
+<hr>
 
 ```{r lub15}
 transact %>%
@@ -214,7 +325,9 @@ transact %>%
   )
 ```
 
-----
+## Case Study
+
+<hr>
 
 ```{r lub10}
 transact %<>%
@@ -223,7 +336,9 @@ transact %<>%
   )
 ```
 
-----
+## Case Study
+
+<hr>
 
 ```{r lub11}
 transact %>%
@@ -232,7 +347,9 @@ transact %>%
   )
 ```
 
-----
+## Case Study
+
+<hr>
 
 ```{r lub16}
 transact %>%
@@ -241,7 +358,9 @@ transact %>%
   )
 ```
 
-----
+## Case Study
+
+<hr>
 
 ```{r lub17}
 transact %>%
@@ -250,4 +369,10 @@ transact %>%
   )
 ```
 
-## Summary
+## Questions
+
+<hr>
+
+## Thank You
+
+<hr>
