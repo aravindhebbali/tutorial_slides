@@ -4,21 +4,88 @@ output:
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
-    fig_width: 6
-    fig_height: 5
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
 ---
 
+<style type="text/css">
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+-  }
+
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
+
+## Agenda
+
+<hr>
+
 ## Introduction
+
+<hr>
 
 ## Libraries
 
-```{r lite1, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+<hr>
+
+```{r lite1, eval=FALSE}
+library(dbplyr)
+library(dplyr)
+library(DBI)
+library(RSQLite)
+```
+
+```{r liteload, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
 library(dbplyr)
 library(dplyr)
 library(DBI)
@@ -27,110 +94,141 @@ library(RSQLite)
 
 ## Data
 
+<hr>
+
 We will use a database that contains the ecommerce data we have used in the previous modules. You can download the 
 database from [here](https://github.com/rsquaredacademy/dbplyr_tutorial).
 
 
-## connect to database
+## Connect
+
+<hr>
 
 ```{r lite2}
 con <- DBI::dbConnect(RSQLite::SQLite(), 
                       dbname = "J:/gist/dbplyr_tutorial/mydatabase.db")
 ```
 
-## connection summary
+## Connection Summary
+
+<hr>
 
 ```{r lite3}
 summary(con)
 ```
 
+## List Tables
 
-
-## get info about tables in database
-
-
-## list tables in mydatabase.db
+<hr>
 
 ```{r lite6}
 dbListTables(con)
 ```
 
-## list fields in a table
+## List Fields
+
+<hr>
 
 ```{r lite7}
 DBI::dbListFields(con, "ecom")
 ```
 
-## query data
+## Querying Data
 
-## read entire table
+<hr>
+
+## Entire Table
+
+<hr>
 
 ```{r lite8}
 DBI::dbReadTable(con, 'ecom')
 ```
 
-## read a few lines from the table
+## Few Rows
+
+<hr>
 
 ```{r lite9}
 DBI::dbGetQuery(con, "select * from ecom limit 10")
 ```
 
-## read data in batches
+## Read Data in Batches
+
+<hr>
 
 ```{r lite10}
 query <- DBI::dbSendQuery(con, 'select * from ecom')
 result <- DBI::dbFetch(query, n = 30)
 ```
 
-## check if the above operations have been completed
+## Query Status
+
+<hr>
 
 ```{r lite11}
 DBI::dbHasCompleted(query)
 ```
 
-## query 
+## Query 
 
-## query information
+<hr>
+
+## Query Info
+
+<hr>
 
 ```{r lite12}
 DBI::dbGetInfo(query)
 ```
 
-## latest query executed
+## Latest Query
+
+<hr>
 
 ```{r lite13}
 DBI::dbGetStatement(query)
 ```
 
-## number of rows fetched from database
+## Rows Fetched
+
+<hr>
 
 ```{r lite14}
 DBI::dbGetRowCount(query)
 ```
 
-## number of rows affected in the database
+## Rows Affected
+
+<hr>
 
 ```{r lite15}
 DBI::dbGetRowsAffected(query)
 ```
 
-## column info of table in query
+## Column Info
+
+<hr>
 
 ```{r lite16}
 DBI::dbColumnInfo(query)
 ```
 
-## resources
+## Clear Results
 
-## clear all results from previous queries
+<hr>
 
 ```{r lite17}
 DBI::dbClearResult(query)
 ```
 
-## write table to database
+## Write Table
 
-## create table in the database    
+<hr>
+
+## Create Table
+
+<hr>
 
 ```{r lite18} 
 x <- 1:10
@@ -139,20 +237,32 @@ trial <- tibble::tibble(x, y)
 DBI::dbWriteTable(con, "trial", trial)
 ```
 
-## check if table is created in database
+## Create Table
+
+<hr>
+
+check if table is created in database
 
 ```{r lite19}
 DBI::dbListTables(con)
 DBI::dbExistsTable(con, "trial")
 ```
 
-## query sample data from table
+## Create Table
+
+<hr>
+
+query sample data from table
 
 ```{r lite20}
 DBI::dbGetQuery(con, "select * from trial limit 5")
 ```
 
-## overwrite table in the database
+## Overwrite Table
+
+<hr>
+
+overwrite table in the database
 
 ```{r lite21}
 x <- sample(100, 10)
@@ -161,13 +271,21 @@ trial2 <- tibble::tibble(x, y)
 DBI::dbWriteTable(con, "trial", trial2, overwrite = TRUE)
 ```
 
-## query sample data from table to see if it has been overwritten
+## Overwrite Table
+
+<hr>
+
+query sample data from table to see if it has been overwritten
 
 ```{r lite22}
 DBI::dbGetQuery(con, "select * from trial limit 5")
 ```
 
-## append data to the table in the database
+## Append Data
+
+<hr>
+
+append data to the table in the database
 
 ```{r lite23}
 x <- sample(100, 10)
@@ -176,15 +294,21 @@ trial3 <- tibble::tibble(x, y)
 DBI::dbWriteTable(con, "trial", trial3, append = TRUE)
 ```
 
-## query sample data from table to see if new data is appended
+## ## Append Data
+
+<hr>
+
+query sample data from table to see if new data is appended
 
 ```{r lite24}
 DBI::dbReadTable(con, "trial")
 ```
 
-## insert rows into trial table
+## Insert Rows
 
-## dbExecute returns the number of rows affected after the operation
+<hr>
+
+`dbExecute()` returns the number of rows affected after the operation
 
 ```{r lite25}
 DBI::dbExecute(con,
@@ -192,7 +316,11 @@ DBI::dbExecute(con,
 )
 ```
 
-## use dbSendStatement
+## Insert Rows
+
+<hr>
+
+use `dbSendStatement()`
 
 ```{r lite26}
 DBI::dbSendStatement(con,
@@ -200,9 +328,10 @@ DBI::dbSendStatement(con,
 )
 ```
 
-## data types
 
 ## SQLite data type
+
+<hr>
 
 ```{r lite27}
 DBI::dbDataType(RSQLite::SQLite(), "a")
@@ -210,42 +339,72 @@ DBI::dbDataType(RSQLite::SQLite(), 1:5)
 DBI::dbDataType(RSQLite::SQLite(), 1.5)
 ```
 
-## remove table from database
+## Remove Table
+
+<hr>
+
+remove table from database
 
 ```{r lite28}
 DBI::dbRemoveTable(con, "trial")
 ```
 
-## check if table has been removed 
+## Remove Table
+
+<hr> 
+
+check if table has been removed 
 
 ```{r lite29}
 DBI::dbListTables(con)
 ```
 
-## sql queries
+## Generate SQL Query
 
-## create table
+<hr>
+
+## Create Table
+
+<hr>
 
 ```{r lite31}
 DBI::sqlCreateTable(con, "new", c(x = "integer", y = "text"))
 ```
 
-## append table
+## Append Table
 
-## import ecommerce data from github
+<hr>
+
+#### Data
+
+import ecommerce data from github
 
 ```{r lite33, echo=FALSE, message=FALSE, results='hide'}
 ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
 ```
 
-----
+## Append Table
+
+<hr>
 
 ```{r lite32}
 DBI::sqlAppendTable(con, "ecom", head(ecom))
 ```
 
-## close connection to database
+## Close Database Connection
+
+<hr>
+
+close connection to database
 
 ```{r lite30}
 DBI::dbDisconnect(con)
 ```
+
+## Questions
+
+<hr>
+
+## Thank You
+
+<hr>
