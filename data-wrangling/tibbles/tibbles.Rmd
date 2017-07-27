@@ -10,8 +10,6 @@ output:
     reveal_options:
       slideNumber: true
       previewLinks: true
-    includes:
-      after_body: footer.html
 ---
 
 <style type="text/css">
