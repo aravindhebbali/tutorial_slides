@@ -4,19 +4,78 @@ output:
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
 ---
 
-## Introduction
+<style type="text/css">
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+-  }
 
-In the previous module, we learnt how to combine tables using the `*_join()` family of functions in [dplyr](dplyr.tidyverse.org).
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
 
-In this post, we will explore a set of helper functions in order to:
+## Agenda
+
+<hr>
+
+```{r libs, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+library(dplyr)
+```
+
+
+In this module, we will explore a set of helper functions in order to:
 
 - extract unique rows 
 - rename columns
@@ -30,22 +89,28 @@ In this post, we will explore a set of helper functions in order to:
 
 ## Case Study
 
+<hr>
+
 Let us look at a case study (e-commerce data) and see how we can use dplyr helper functions to answer questions we have about and to modify/transform the underlying data set. You can download the data from [here](https://github.com/rsquaredacademy/datasets/blob/master/web.csv) or import it directly using `read_csv()` from the [readr](readr.tidyverse.org) package.
 
-----
+## Data
+
+<hr>
 
 ```{r import, eval=FALSE}
 ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
 ```
+
+
 
 ```{r show, echo=FALSE, eval=TRUE, message=FALSE}
 ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
 ecom
 ```
 
-----
+## Data Dictionary
 
-Data Dictionary
+<hr>
 
 - id: row id
 - referrer: referrer website/search engine
@@ -62,21 +127,25 @@ Data Dictionary
 
 ## Data Sanitization
 
+<hr>
+
 ```{r dplyr1, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
 library(dplyr)
 options(tibble.width = Inf)
 ```
 
-Check the sources of traffic 
+## Traffic Sources
+
+<hr>
 
 ```{r dplyr2}
 ecom %>%
   distinct(referrer)
 ```
 
-----
+## Device Types
 
-Check device types
+<hr>
 
 ```{r dplyr30}
 ecom %>%
@@ -85,6 +154,8 @@ ecom %>%
 
 ## Rename Columns
 
+<hr>
+
 Rename the `duration` column to `time_on_site`.
 
 ```{r dplyr3}
@@ -92,28 +163,38 @@ ecom %>%
   rename(time_on_site = duration)
 ```
 
-
 ## Sampling Data
+
+<hr>
 
 ```{r dplyr4}
 ecom %>%
   sample_n(700)
 ```
 
-----
+## Sampling Data
+
+<hr>
+
 ```{r dplyr5}
 ecom %>%
   group_by(referrer) %>%
   sample_n(100)
 ```
 
-----
+## Sampling Data
+
+<hr>
+
 ```{r dplyr6}
 ecom %>%
   sample_frac(size = 0.7)
 ```
 
-----
+## Sampling Data
+
+<hr>
+
 ```{r dplyr7}
 ecom %>%
   group_by(referrer) %>%
@@ -123,7 +204,7 @@ ecom %>%
 
 ## Extract Columns
 
-----
+<hr>
 
 Extract the `device` column.
 
@@ -132,7 +213,9 @@ ecom %>%
   pull(device)
 ```
 
-----
+## Extract Columns
+
+<hr>
 
 Extract the first column.
 
@@ -141,7 +224,9 @@ ecom %>%
   pull(1)
 ```
 
-----
+## Extract Columns
+
+<hr>
 
 Extract the last column
 
@@ -152,7 +237,7 @@ ecom %>%
 
 ## Slice Rows
 
-----
+<hr>
 
 Extract the first 20 rows.
 
@@ -161,7 +246,9 @@ ecom %>%
   slice(1:20)
 ```
 
-----
+## Slice Rows
+
+<hr>
 
 Extract the last row.
 
@@ -170,9 +257,9 @@ ecom %>%
   slice(n())
 ```
 
-## Count of observations
+## Tally 
 
-----
+<hr>
 
 Total number of observations in the data.
 
@@ -181,7 +268,9 @@ ecom %>%
   tally()
 ```
 
-----
+## Tally
+
+<hr>
 
 Observations of different types of referrers.
 
@@ -191,7 +280,9 @@ ecom %>%
   tally()
 ```
 
-----
+## Tally
+
+<hr>
 
 Observations of referrers and bouncers.
 
@@ -201,7 +292,9 @@ ecom %>%
   tally()
 ```
 
-----
+## Tally
+
+<hr>
 
 Observations of referrers and purchasers.
 
@@ -211,7 +304,9 @@ ecom %>%
   tally()
 ```
 
-----
+## Tally
+
+<hr>
 
 ```{r dplyr25}
 ecom %>%
@@ -220,7 +315,9 @@ ecom %>%
   filter(purchase == 'true')
 ```
 
-----
+## Count
+
+<hr>
 
 Use `count()` instead of `tally()`.
 
@@ -229,7 +326,9 @@ ecom %>%
   count(referrer, purchase)
 ```
 
-----
+## Top Referrers
+
+<hr>
 
 Top 2 referrers that bring orders.
 
@@ -241,7 +340,9 @@ ecom %>%
   top_n(n = 2)
 ```
 
-----
+## Between
+
+<hr>
 
 ```{r dplyr19}
 ecom %>%
@@ -249,7 +350,9 @@ ecom %>%
   between(5, 15) 
 ```
 
-----
+## Case When
+
+<hr>
 
 ```{r dplyr20}
 mtcars %>%
@@ -263,7 +366,9 @@ mtcars %>%
   )
 ```
 
-----
+## Select Observation
+
+<hr>
 
 ```{r dplyr21}
 ecom %>%
@@ -271,7 +376,9 @@ ecom %>%
   nth(1)
 ```
 
-----
+## Select Observation
+
+<hr>
 
 ```{r dplyr22}
 ecom %>%
@@ -279,7 +386,9 @@ ecom %>%
   nth(1000)
 ```
 
-----
+## Select Observation
+
+<hr>
 
 ```{r dplyr23}
 ecom %>%
@@ -287,7 +396,9 @@ ecom %>%
   last()
 ```
 
-----
+## Select Observation
+
+<hr>
 
 ```{r dplyr24}
 ecom %>%
@@ -295,5 +406,10 @@ ecom %>%
   first()
 ```  
 
-## Summary
+## Questions
 
+<hr>
+
+## Thank You
+
+<hr>
