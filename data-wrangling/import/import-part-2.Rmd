@@ -82,19 +82,21 @@ read data from
 
 <hr>
 
-Importing data is the first step in any data analysis workflow. If you cannot import data from differernt sources or file formats, you cannot proceed with data analysis. R allows you to import data from several sources and a variety of file formats. In this module, we will focus on JSON and XML file formats.
+Importing data is the first step in any data analysis workflow. If you cannot import data from differernt sources or file formats, you cannot proceed with data analysis. R allows you to import data from several sources and a variety of file formats. In this module, we will focus on googlesheets, JSON and XML file formats.
 
 ## Libraries
 
 <hr>
 
 ```{r importlib1,eval=FALSE}
+library(googlesheets)
 library(jsonlite)
 library(xml2)
 library(XML)
 ```
 
 ```{r importlib2, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+library(googlesheets)
 library(jsonlite)
 library(xml2)
 library(XML)
