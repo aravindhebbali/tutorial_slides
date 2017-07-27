@@ -4,21 +4,94 @@ output:
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
-    fig_width: 6
-    fig_height: 5
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
+    fig_height: 5
+    fig_width: 6
 ---
+
+<style type="text/css">
+    .reveal p img {
+    align: middle;
+  }
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+  }
+  .reveal p img {
+    align: middle;
+  }
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
+
+## Agenda
+
+<hr>
 
 ## Intro
 
-In this module, we will learn to quickly build a set of plots that are routinely used to explore data.
+<hr>
+
+In this module, we will learn to quickly build a set of plots that are routinely used to explore data:
+
+- Scatter Plot
+- Bar Plot
+- Box Plot
+- Line Chart
+- Histogram
 
 ## Installation
+
+<hr>
 
 ```{r show, eval=FALSE}
 library(ggplot2)
@@ -32,101 +105,113 @@ library(dplyr)
 
 ## Scatter Plot
 
-----
+<hr>
 
-```{r gg2}
+```{r gg2, fig.align='center'}
 qplot(disp, mpg, data = mtcars)
 ```
 
-----
+## Scatter Plot
 
-```{r gg3}
+<hr>
+
+```{r gg3, fig.align='center'}
 qplot(disp, mpg, data = mtcars, geom = c('point', 'line'))
 ```
 
-----
+## Scatter Plot
 
-```{r gg4}
+<hr>
+
+```{r gg4, fig.align='center'}
 qplot(disp, mpg, data = mtcars, color = factor(cyl))
 ```
 
-----
+## Scatter Plot
 
-```{r gg5}
+<hr>
+
+```{r gg5, fig.align='center'}
 qplot(disp, mpg, data = mtcars, shape = factor(cyl))
 ```
 
-----
+## Scatter Plot
 
-```{r gg6}
+<hr>
+
+```{r gg6, fig.align='center'}
 qplot(disp, mpg, data = mtcars, size = qsec)
 ```
 
-----
-
 ## Bar Plot
 
-----
+<hr>
 
-```{r gg7}
+```{r gg7, fig.align='center'}
 qplot(factor(cyl), data = mtcars, geom = c('bar'))
 ```
 
-----
+## Bar Plot
 
-```{r gg8}
+<hr>
+
+```{r gg8, fig.align='center'}
 qplot(factor(cyl), data = mtcars, geom = c('bar'), fill = factor(am))
 ```
 
-----
-
 ## Box Plot
 
-----
+<hr>
 
-```{r gg9}
+```{r gg9, fig.align='center'}
 qplot(factor(cyl), mpg, data = mtcars, geom = c('boxplot'))
 ```
 
-----
+## Box Plot
 
-```{r gg10}
+<hr>
+
+```{r gg10, fig.align='center'}
 qplot(factor(1), mpg, data = mtcars, geom = c('boxplot'))
 ```
 
-----
+## Box Plot
 
-```{r gg11}
+<hr>
+
+```{r gg11, fig.align='center'}
 qplot(factor(cyl), mpg, data = mtcars, geom = c('boxplot', 'jitter'))
 ```
 
 ## Line Chart
 
-----
+<hr>
 
-```{r gg12}
+```{r gg12, fig.align='center'}
 qplot(x = date, y = unemploy, data = economics, geom = c('line'))
 ```
 
-----
+## Line Chart
 
-```{r gg13}
+<hr>
+
+```{r gg13, fig.align='center'}
 qplot(x = date, y = unemploy, data = economics, geom = c('line'),
       color = 'red')
 ```
 
 ## Histogram
 
-----
+<hr>
 
-```{r gg14}
+```{r gg14, fig.align='center'}
 qplot(mpg, data = mtcars, bins = 5)
 ```
 
-## Summary
+## Questions
 
-In this module, we learnt to quickly create plots using the `qplot()` function. While useful, it has limitations and can be used only to quickly visualize data. 
+<hr>
 
-## Next Steps..
+## Thank You
 
-In the next module, we will create the same set of plots but using **geoms**. 
+<hr>
