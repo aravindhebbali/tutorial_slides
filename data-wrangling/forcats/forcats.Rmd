@@ -4,17 +4,81 @@ output:
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
 ---
 
+<style type="text/css">
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+-  }
+
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
+
+## Agenda
+
+<hr>
+
 ## Introduction
 
+<hr>
+
 In this module, we will learn to work with categorical/qualitative data in R using [forcats](http://forcats.tidyverse.org). Let us begin by installing and loading forcats and a set of other pacakges we will be using.
+
+## Libraries
+
+<hr>
 
 ```{r cat, eval=FALSE}
 library(forcats)
@@ -36,9 +100,13 @@ library(ggplot2)
 
 ## Case Study
 
+<hr>
+
 We will use a case study to explore the various features of the forcats package. You can download the data for the case study from [here](https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv) or directly import the data using the readr package. 
 
-----
+## Data
+
+<hr>
 
 ```{r import, eval=FALSE}
 ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
@@ -51,7 +119,11 @@ ecom
 
 ## Data Dictionary
 
-----
+<hr>
+
+## Case Study
+
+<hr>
 
 We will do the following in this case study:
 
@@ -61,14 +133,22 @@ We will do the following in this case study:
 - club traffic from social media websites into a new category
 - group referrers with traffic below a threshold into a single category
  
-----
+## Case Study
+
+<hr>
+
+compute the frequency of different referrers
 
 ```{r cat2}
 ecom %>%
   count(referrer)
 ```
 
-----
+## Case Study
+
+<hr>
+
+plot average number of pages browsed for different referrers
 
 ```{r cat3}
 refer_summary <- ecom %>%
@@ -80,19 +160,28 @@ refer_summary <- ecom %>%
   )
 ```
 
-----
+## Case Study
+
+<hr>
 
 ```{r cat10}
 ggplot(refer_summary, aes(page, referrer)) + geom_point()
 ```
 
-----
+## Case Study
+
+<hr>
+
+plot average number of pages browsed for different referrers
 
 ```{r cat11}
 ggplot(refer_summary, aes(page, fct_reorder(referrer, page))) + geom_point()
 ```
 
-----
+## Case Study
+
+<hr>
+
 
 ```{r cat4}
 ecom %>%
@@ -101,7 +190,10 @@ ecom %>%
   geom_bar()
 ```
 
-----
+## Case Study
+
+<hr>
+
 
 ```{r cat5}
 ecom %>%
@@ -110,20 +202,29 @@ ecom %>%
   geom_bar()
 ```
 
-----
+## Case Study
+
+<hr>
+
 
 ```{r import2, message=FALSE}
 traffic <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web_traffic.csv')
 traffic
 ```
 
-----
+## Case Study
+
+<hr>
+
 
 ```{r cat6}
 traffic$traffics %>% fct_count()
 ```
 
-----
+## Case Study
+
+<hr>
+
 
 ```{r cat7}
 traffic2 <- fct_collapse(traffic$traffics,
@@ -134,40 +235,63 @@ traffic2 <- fct_collapse(traffic$traffics,
 traffic2 %>% fct_count() 
 ```
 
-----
+## Case Study
+
+<hr>
+
 
 ```{r cat8}
 traffic$traffics %>% fct_lump() %>% table()
 ```
 
-----
+## Case Study
+
+<hr>
+
 
 ```{r cat9}
 traffic$traffics %>% fct_lump(n = 3) %>% table()
 ```
 
-----
+## Case Study
+
+<hr>
+
 
 ```{r cat12}
 traffic$traffics %>% fct_lump(prop = 0.1) %>% table()
 ```
 
-----
+## Case Study
+
+<hr>
+
 
 ```{r cat13}
 traffic$traffics %>% fct_lump(prop = 0.15) %>% table()
 ```
 
-----
+## Case Study
+
+<hr>
+
 
 ```{r cat14}
 traffic$traffics %>% fct_lump(n = -3) %>% table()
 ```
 
-----
+## Case Study
+
+<hr>
 
 ```{r cat15}
 traffic$traffics %>% fct_lump(prop = -0.1) %>% table()
 ```
 
-## Summary
+## Questions
+
+<hr>
+
+## Thank You
+
+<hr>
