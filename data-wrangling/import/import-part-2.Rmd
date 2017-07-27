@@ -4,105 +4,198 @@ output:
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
-    fig_width: 6
-    fig_height: 5
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
 ---
 
+<style type="text/css">
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+  }
+  .reveal .sourceCode pre code {
+    padding: 0px;
+    border: 0px;
+  }
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
+
+## Agenda
+
+<hr>
+
+read data from 
+
+- XML
+- JSON
+
 ## Introdction
 
+<hr>
+
+Importing data is the first step in any data analysis workflow. If you cannot import data from differernt sources or file formats, you cannot proceed with data analysis. R allows you to import data from several sources and a variety of file formats. In this module, we will focus on JSON and XML file formats.
+
 ## Libraries
+
+<hr>
 
 ```{r importlib1,eval=FALSE}
 library(jsonlite)
 library(xml2)
 library(XML)
-library(googlesheets)
 ```
 
 ```{r importlib2, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
 library(jsonlite)
 library(xml2)
 library(XML)
-library(googlesheets)
 ```
 
-## read data from a json file
 
-----
+## JSON
+
+<hr>
+
+read data from a json file
 
 ```{r imp1}
 jsonlite::fromJSON('mtcars.json')
 ```
 
-## read xml data 
+## XML
 
-----
+<hr>
+
+read xml data 
 
 ```{r imp2}
 xm <- xmlParse("sample_xml")
 ```
 
-----
+## XML
+
+<hr>
 
 ```{r imp3}
 class(xm)
 ```
 
-----
+## XML
+
+<hr>
 
 ```{r imp4}
 xmlRoot(xm)
 ```
 
-----
+## XML
+
+<hr>
 
 ```{r imp5}
 c_child <- xmlChildren(xm)
 ```
 
-----
+## XML
+
+<hr>
 
 ```{r imp6}
 c_child[[1]]
 ```
 
-----
+## XML
+
+<hr>
 
 ```{r imp7}
 c_child[[1]][1]
 ```
 
-----
+## XML
+
+<hr>
 
 ```{r imp9}
 sapply(c_child[[1]][1], names)
 ```
 
-----
+## XML
+
+<hr>
 
 ```{r imp10}
 sapply(c_child[[1]][1], xmlValue)
 ```
 
-----
+## XML
+
+<hr>
 
 ```{r imp11}
 getNodeSet(xm, "//book")
 ```
 
-----
+## XML
+
+<hr>
 
 ```{r imp12}
 getNodeSet(xm, "//author")
 ```
 
-----
+## XML
+
+<hr>
 
 ```{r imp13}
 j <- xmlToDataFrame(
@@ -111,18 +204,30 @@ j <- xmlToDataFrame(
 j
 ```
 
-# read xml data from the web
-# cd <- read_xml("http://www.xmlfiles.com/examples/cd_catalog.xml")
+## XML
 
-# read html data
+<hr>
 
-----
+read xml data from the web
+
+```{r xmlread, eval=FALSE}
+cd <- read_xml("http://www.xmlfiles.com/examples/cd_catalog.xml")
+```
+
+## HTML
+
+<hr>
+ 
+read html data
 
 ```{r imp14}
 xml2::read_html("http://had.co.nz")
 ```
 
-# Summary
+## Questions
 
-# Next Steps
+<hr>
 
+## Thank You
+
+<hr>
