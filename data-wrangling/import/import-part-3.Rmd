@@ -4,19 +4,91 @@ output:
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
-    fig_width: 6
-    fig_height: 5
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
 ---
 
+<style type="text/css">
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+  }
+  .reveal .sourceCode pre code {
+    padding: 0px;
+    border: 0px;
+  }
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
+
+## Agenda
+
+<hr>
+
+- read data from files
+- read data from files line by line
+- prompt users for input
+- read data from a file in table format and create data.frame
+- load R data sets and workspaces
+- source R scripts
+
 ## Introdction
 
+<hr>
+
+Importing data is the first step in any data analysis workflow. If you cannot import data from differernt sources or file formats, you cannot proceed with data analysis. R allows you to import data from several sources and a variety of file formats. In this module, we will focus on JSON and XML file formats.
+
 ## Libraries
+
+<hr>
 
 ```{r importlib1,eval=FALSE}
 library(readr)
@@ -26,17 +98,17 @@ library(readr)
 library(readr)
 ```
 
-## read files
+## Read Files
 
-----
+<hr>
 
 ```{r imp1, echo=TRUE, results='markup', message=FALSE}
 readr::read_file('hsb.txt')
 ```
 
-## read lines
+## Read Lines
 
-----
+<hr>
 
 skip first 5 lines and read max 10 lines
 
@@ -44,10 +116,9 @@ skip first 5 lines and read max 10 lines
 readr::read_lines('hsb.txt', skip = 5, n_max = 10)
 ```
 
-## base
 ## scan 
 
-----
+<hr>
 
 allow user to input data from console or read data from a file and store the input as a vector or list.
 
@@ -56,7 +127,9 @@ x <- scan()
 x
 ```
 
-----
+## scan 
+
+<hr>
 
 ```{r imp4}
 x <- scan("", what = integer())
@@ -64,7 +137,9 @@ x
 class(x)
 ```
 
-----
+## scan 
+
+<hr>
 
 ```{r imp5}
 x <- scan("", what = list(name = "", age = 0))
@@ -73,7 +148,7 @@ x
 
 ## readline
 
-----
+<hr>
 
 prompt user for an input and store the same as a character vector
 
@@ -84,7 +159,7 @@ name
 
 ## readLines
 
-----
+<hr>
 
 read data from a file
 
@@ -92,7 +167,9 @@ read data from a file
 readLines("hsb.txt")
 ```
 
-----
+## readLines
+
+<hr>
 
 ```{r imp8}
 readLines("hsb.txt", n = 10)
@@ -100,7 +177,7 @@ readLines("hsb.txt", n = 10)
 
 ## read.table
 
-----
+<hr>
 
 read data from a file in table format and create data.frame
 
@@ -110,7 +187,7 @@ read.table('hsb.txt', header = TRUE, sep = ' ')
 
 ## load
 
-----
+<hr>
 
 load: reloads saved data sets and workspaces
 
@@ -120,7 +197,7 @@ load('employees.RData')
 
 ## source
 
-----
+<hr>
 
 source: reads R code from a script and makes those codes available in the current session
 
@@ -128,6 +205,10 @@ source: reads R code from a script and makes those codes available in the curren
 source('addition.R')
 ```
 
-## Summary
+## Questions
 
-## Next Steps..
+<hr>
+
+## Thank You
+
+<hr>
