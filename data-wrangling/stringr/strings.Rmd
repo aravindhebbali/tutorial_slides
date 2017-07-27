@@ -4,19 +4,81 @@ output:
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
 ---
 
+<style type="text/css">
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+-  }
+
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
+
+## Agenda
+
+<hr>
+
 ## Introduction
+
+<hr>
 
 In this module, we will learn to work with string data in R using [stringr](http://stringr.tidyverse.org). Let us begin by installing and loading stringr and a set of other pacakges we will be using.
  
 ## Installation
+
+<hr>
 
 ```{r install, eval=FALSE}
 library(stringr)
@@ -36,14 +98,19 @@ library(dplyr)
 
 ## Introduction
 
+<hr>
+
 As we did in the earlier modules, we will use a case study to explore the various features of the stringr package. You can
 download the data for the case study from [here](https://raw.githubusercontent.com/rsquaredacademy/datasets/master/mock_strings.csv) or directly import the data using the readr package. 
 
 ## Case Study
 
+<hr>
+
 ```{r import, eval=FALSE}
 mockstring <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/mock_strings.csv')
 ```
+
 
 ```{r show, echo=FALSE, eval=TRUE, message=FALSE}
 mockstring <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/mock_strings.csv')
@@ -52,7 +119,11 @@ mockstring
 
 ## Data Dictionary
 
-----
+<hr>
+
+## Case Study
+
+<hr>
 
 We will do the following in this case study:
 
@@ -65,9 +136,11 @@ We will do the following in this case study:
 - extract extension from url
 - extract file type from url
 
-## extract domain name from random email ids
+## Case Study
 
-----
+<hr>
+
+extract domain name from random email ids
 
 ```{r str2}
 mockstring$email[1:2] %>% 
@@ -79,9 +152,11 @@ mockstring$email[1:2] %>%
 ```
 
 
-## from image url, extract image type (jpg, png, bmp)
+## Case Study
 
-----
+<hr>
+
+from image url, extract image type (jpg, png, bmp)
 
 ```{r str3}
 mockstring$imageurl[1:5] %>%
@@ -96,9 +171,11 @@ mockstring$imageurl[1:5] %>%
   purrr::map_chr(extract(1))
 ```
 
-## from image url, extract dimension
+## Case Study
 
-----
+<hr>
+
+from image url, extract dimension
 
 ```{r str4}
 pattern <- "[:digits:]"
@@ -111,9 +188,11 @@ mockstring$imageurl[1:5] %>%
   purrr::map_chr(extract(1))
 ```
   
-## extract protocol
+## Case Study
 
-----
+<hr>
+
+extract protocol
 
 ```{r str6}
 mockstring$url[1:5] %>%
@@ -130,9 +209,11 @@ mockstring$url[1:5] %>%
   str_sub(start = 1, end = k)
 ```
 
-## extract domain name
+## Case Study
 
-----
+<hr> 
+
+extract domain name
 
 ```{r str7}
 n <- mockstring$url[1:5] %>%
@@ -146,9 +227,11 @@ mockstring$url[1:5] %>%
   str_sub(start = k + 4)
 ```
 
-## extract extension
+## Case Study
 
-----
+<hr>
+
+extract extension
 
 ```{r str8}
 mockstring$url[1:5] %>%
@@ -159,7 +242,11 @@ mockstring$url[1:5] %>%
   map_chr(extract(1))
 ```
 
-## extract file type
+## Case Study
+
+<hr>
+
+extract file type
 
 ----
 
@@ -212,4 +299,12 @@ mockstring$url[1:3] %>%
   str_sub(start = d, end = q)
 ```
 
-## Summary
+## Question
+
+<hr>
+
+## Thank You
+
+<hr>
+
+
