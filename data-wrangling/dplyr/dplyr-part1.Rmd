@@ -4,25 +4,94 @@ output:
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
 ---
 
+<style type="text/css">
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+  }
+
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
+
+## Agenda
+
+<hr>
+
+* read data from delimited files
+  - csv
+  - tsv
+  - txt
+
 ## Introduction
+
+<hr>
 
 According to  a [survey](http://visit.crowdflower.com/rs/416-ZBE-142/images/CrowdFlower_DataScienceReport_2016.pdf) by [CrowdFlower](https://www.crowdflower.com/), data scientists spend most of their time cleaning and manipulating data rather than mining or modeling them for insights. As such, it becomes important to have tools that make data manipulation faster and easier. In today's post, we introduce you to [dplyr](http://dplyr.tidyverse.org/), a grammar of data manipulation.
 
 
 ## Why dplyr
 
+<hr>
+
 dplyr helps us solve the most common data manipulation challenges such as filtering rows, selecting columns, sorting data, creating new columns, summarizing data etc. In order to truly appreciate dplyr, we will compare it to the functions in base R.
 
 
 ## Installation
+
+<hr>
 
 You can install a stable version of `dplyr` from CRAN or the latest development version from GitHub.
 
@@ -32,15 +101,13 @@ install.packages('dplyr')
 library(dplyr)
 ```
 
-```{r load, eval = FALSE}
-library(dplyr)
-```
-
 ```{r libs, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
 library(dplyr)
 ```
 
 ## dplyr Verbs
+
+<hr>
 
 dplyr provides a set of verbs that help us solve the most common data manipulation challenges while working with tabular data (dataframes, tibbles):
 
@@ -53,6 +120,8 @@ dplyr provides a set of verbs that help us solve the most common data manipulati
 
 ## Case Study
 
+<hr>
+
 We will explore dummy data that we have created to resemble web logs of a ecommerce company. You can download the data from [here](https://github.com/rsquaredacademy/datasets/blob/master/web.csv) or import it directly using `read_csv()` from the [readr](readr.tidyverse.org) package.
 
 ```{r import, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
@@ -62,6 +131,8 @@ ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datas
 We will use dplyr to answer a few questions we have about the above data.
 
 ## Data Dictionary
+
+<hr>
 
 Below is the description of the data set:
 
@@ -80,11 +151,15 @@ Below is the description of the data set:
 
 ## Average Order Value
 
+<hr>
+
 **What is the average order value by device types?**
 
 Average value of every order placed over a defined period of time. It is determined using sales per order and not sales per customer. Let us look at the steps to calculate AOV from the ecommerce data set.
 
 ## AOV Computation
+
+<hr>
 
 - Step 1: Filter Purchasers
 - Step 2: Select data related to AOV (order value, order items) and device
@@ -94,6 +169,8 @@ Average value of every order placed over a defined period of time. It is determi
 - Step 6: Select device and AOV data
 
 ## AOV by Devices
+
+<hr>
 
 ```{r case}
 ecom %>%
@@ -109,11 +186,13 @@ ecom %>%
 
 ## Step 1: Filter Purchasers
 
+<hr>
+
 In order to compute the AOV, we must first separate the purchasers from non-purchasers. We will do this by filtering the data related to purchasers using the `filter()` function. It allows us to filter rows that meet a specific criteria/condition. The first argument is the name of the data frame and the rest of the arguments are expressions for filtering the data. Let us look at a few examples:
 
 ## Filter 
 
-----
+<hr>
 
 ###### Select all visits from mobile
 
@@ -121,7 +200,9 @@ In order to compute the AOV, we must first separate the purchasers from non-purc
 filter(ecom, device == "mobile")
 ```
 
-----
+## Filter 
+
+<hr>
 
 ###### Select all visits from mobile that converted
 
@@ -129,7 +210,9 @@ filter(ecom, device == "mobile")
 filter(ecom, device == "mobile", purchase == "true")
 ```
 
-----
+## Filter 
+
+<hr>
 
 ###### Select all visits from mobile that visited more than 5 pages
 
@@ -137,7 +220,9 @@ filter(ecom, device == "mobile", purchase == "true")
 filter(ecom, device == "mobile", n_pages > 5)
 ```
 
-----
+## Filter 
+
+<hr>
 
 For our case study, we want all visits that converted.
 
@@ -147,9 +232,13 @@ filter(ecom, purchase == "true")
 
 ## Step 2: Select relevant columns
 
+<hr>
+
 After filtering the data, we need to select relevent variables to compute the AOV. Remember, we do not need all the columns in the data to compute a required metric (in our case, AOV). The `select()` function allows us to select a subset of columns. The first argument is the name of the data frame and the subsequent arguments specify the columns by name or position. Let us look at a few examples:
 
-----
+## Select
+
+<hr>
 
 Select device and purchase columns 
 
@@ -157,7 +246,9 @@ Select device and purchase columns
 select(ecom, device, purchase)
 ```
 
-----
+## Select
+
+<hr>
 
 Select all columns from device to purchase
 
@@ -165,7 +256,9 @@ Select all columns from device to purchase
 select(ecom, device:purchase)
 ```
 
-----
+## Select
+
+<hr>
 
 Select all columns excluding id and country
 
@@ -173,7 +266,9 @@ Select all columns excluding id and country
 select(ecom, -id, -country)
 ```
 
-----
+## Select
+
+<hr>
 
 For our case study, we need to select the columns order value and order items to calculate the AOV. We also need to select the device column as we are computing the AOV for different devices.
 
@@ -181,7 +276,9 @@ For our case study, we need to select the columns order value and order items to
 select(ecom, device, order_value, order_items)
 ```
 
-----
+## Select
+
+<hr>
 
 But we want the above data only for purchasers. We will combine `filter()` and `select()` functions to extract data related to purchasers.
 
@@ -193,10 +290,14 @@ ecom2
 
 ## Step 3: Group data by devices
 
+<hr>
+
 Since we want to compute the AOV for each device, we need to compute the total order value and total order items for each device. To achieve this, we will group the selected variables by device type. Using the `group_by()` function, we will group our case study data by device types.
 The first argument is the name of the data frame and the second argument is the name of the column based on which the data will be split. Let us look at a few examples:
 
-----
+## Group 
+
+<hr>
 
 Group data by referrer type
 
@@ -204,7 +305,9 @@ Group data by referrer type
 group_by(ecom, referrer)
 ```
 
-----
+## Group 
+
+<hr>
 
 In the second line in the above output, you can observe `Groups: referrer [5]`. The data is split into 5 groups as the referrer variable has 5 distinct values. For our case study, we need to group the data by device type.
 
@@ -215,9 +318,13 @@ ecom3
 
 ## Step 4: Compute total order value and order items
 
+<hr>
+
 The next step is to compute the total order value and total order items for each device. We will use them to then compute the average order value. Now we need to reduce the order value and order items data to a single summary. We can achieve this using the `summarise()` function. The first argument is the name of a data frame and the subsequent arguments are functions that can generate a summary. For example, we can use `min`, `max`, `sum`, `mean` etc.
 
-----
+## Summarise
+
+<hr>
 
 For our case study, we need the totals of order value and order items. What function can we use to obtain them? The `sum()` function will generate the sum of the values and hence we will use it inside the `summarise()` function. Remember, we need to provide a name to the summary being generated. 
 
@@ -227,14 +334,17 @@ ecom4 <- summarise(ecom3, total_value = sum(order_value),
 ecom4
 ```
 
-----
+## Summarise
+
+<hr>
 
 There you go, we have the total order value and total order items for each device type. Another way to achieve the above result is to use the `summarise_all()` function. How does that work? It generates the specified summary for all the columns in the data set except for the column based on which the data has been grouped. So we need to ensure that the data frame does not have any irrelevant columns.
 
-----
+## Summarise
+
+<hr>
 
 In our case study, we have split the data based on the device type and we have 2 other columns which are order value and order items. If we use `summarise_all()` function, it will generate the summary for the two columns based on the function specified. To specify the functions, we need to use another argument `funs` and it can take any number of valid functions.
-
 
 ```{r dplyr14}
 ecom4 <- summarise_all(ecom3, funs(sum))
@@ -243,6 +353,8 @@ ecom4
 
 ## Step 5: Compute AOV
 
+<hr>
+
 Now that we have the total order value and total order items for each device category, we can compute the AOV. We will create a new column to store the result. To create a new column, we will use the `mutate()` function. The first argument is the name of the data frame and the subsequent arguments are expressions for creating new columns based out of existing columns.
 
 ```{r dplyr15}
@@ -250,7 +362,9 @@ ecom5 <- mutate(ecom4, aov = order_value / order_items)
 ecom5
 ```
 
-## Step 6: Select the relevant columns
+## Step 6: Select relevant columns
+
+<hr>
 
 The last step is to select the relevant columns. We require the device type and the corresponding aov and hence we can get rid of other columns. Use the `select()` function to extract the relevant columns.
 
@@ -259,7 +373,9 @@ ecom6 <- select(ecom5, device, aov)
 ecom6
 ```
 
-----
+## AOV by Devices
+
+<hr>
 
 Let us combine all the code from the above steps:
 
@@ -273,11 +389,16 @@ ecom6 <- select(ecom5, device, aov)
 ecom6
 ```
 
-----
+## AOV by Devices
+
+<hr>
+
 
 If you observe, at each step we create a new variable(data frame) and then use it as an input in the next step i.e. the output from one function becomes the input for another function. Can we achieve the final outcome i.e. `ecom6` without creating the intermediate data frames (ecom1 - ecom5)? Yes, we can. We will use the `%>%` operator to chain the above steps so that we can avoid creating the intermediate data frames. Let us see how to do that.
 
-----
+## AOV by Devices
+
+<hr>
 
 ```{r dplyr18}
 ecom %>%
@@ -291,15 +412,21 @@ ecom %>%
   select(device, aov)
 ```
 
-----
+## AOV by Devices
+
+<hr>
 
 In the above code, we take the output from each step and use it as an input for the next step using the pipe `%>%` operator. It reduces the intermediate data frames and makes the code readable. Take the `ecom` data frame `->` filter the purchasers `->` select device, order_value and order_items variables `->` group the resulting data frame by device type `->` compute the sum of all the variables in the grouped data frames `->` compute the average order value `->` select device type and aov
 
-----
+## AOV by Devices
 
-It is the same as the steps we wrote at the beginning of this post. Now you realize how powerful dplyr is along with the `%>%` operator. There are other functions in dplyr but we will cover them in another post. You are encouraged to use the above approach to answer the questions we have listed below.
+<hr>
+
+It is the same as the steps we wrote at the beginning of this module. Now you realize how powerful dplyr is along with the `%>%` operator. There are other functions in dplyr but we will cover them in another module. You are encouraged to use the above approach to answer the questions we have listed below.
 
 ## Practice Questions
+
+<hr>
 
 - What is the average number of pages visited by purchasers and non-purchasers?
 
@@ -308,6 +435,10 @@ It is the same as the steps we wrote at the beginning of this post. Now you real
 - What is the average number of pages visited by purchasers and non-purchasers using mobile?
 
 
-## Summary
+## Questions
 
-In this post, we learnt how to use dplyr to address some of the most common data manipulation challenges. In the next post, we will learn how to work with dates and time in R using the [lubridate](https://CRAN.R-project.org/package=lubridate) package.
+<hr>
+
+## Thank You
+
+<hr>
