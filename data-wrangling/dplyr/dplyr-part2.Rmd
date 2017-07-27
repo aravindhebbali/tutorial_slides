@@ -4,23 +4,83 @@ output:
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
 ---
 
+<style type="text/css">
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+  }
+
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
+
+## Agenda
+
+<hr>
+
+- combine tables
+
 ## Introduction
+
+<hr>
 
 ```{r libs, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
 library(dplyr)
 ```
 
 In a previous module, we learnt about dplyr verbs and used them to compute average order value for an e-commerce website data. In this post, we will learn to combine tables using different `*_join` functions provided in dplyr. Let us assume we have 2 tables **y** and **y**. 
-
-----
 
 The following types of `join` functions provided in dplyr:
 
@@ -34,6 +94,8 @@ The following types of `join` functions provided in dplyr:
 
 ## Case Study
 
+<hr>
+
 We have two data sets with details of customers and their orders. We will use the above functions to combine the data sets in different ways to glean information about customer orders. Let us import the data from our github repository:
 
 
@@ -42,7 +104,9 @@ library(dplyr)
 options(tibble.width = Inf)
 ```
 
-----
+## Data
+
+<hr>
 
 ###### Orders
 
@@ -50,18 +114,24 @@ options(tibble.width = Inf)
 order <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/order.csv')
 ```
 
+
+
 ```{r dplyr2, echo=FALSE, eval=TRUE, message=FALSE}
 order <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/order.csv')
 order
 ```
 
-----
+## Data
+
+<hr>
 
 ###### Customers
 
 ```{r dplyr26, eval=FALSE}
 customer <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/customer.csv')
 ```
+
+
 
 ```{r dplyr, echo=FALSE, eval=TRUE, message=FALSE}
 customer <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/customer.csv')
@@ -70,9 +140,13 @@ customer
 
 ## inner join
 
+<hr>
+
 `inner_join()` returns all rows from x where there are matching values in y, and all columns from x and y. If there are multiple matches between x and y, all combination of the matches are returned.
 
-----
+## inner join
+
+<hr>
 
 ```{r dplyr3}
 customer %>%
@@ -81,9 +155,13 @@ customer %>%
 
 ## left join
 
+<hr>
+
 `left_join()` returns all rows from x, and all columns from x and y. Rows in x with no match in y will have NA values in the new columns. If there are multiple matches between x and y, all combinations of the matches are returned.
 
-----
+## left join
+
+<hr>
 
 ```{r dplyr4}
 customer %>%
@@ -92,9 +170,13 @@ customer %>%
 
 ## right join
 
+<hr>
+
 `right_join()` returns all rows from y, and all columns from x and y. Rows in y with no match in x will have NA values in the new columns. If there are multiple matches between x and y, all combinations of the matches are returned.
 
-----
+## right join
+
+<hr>
 
 ```{r dplyr5}
 customer %>%
@@ -103,9 +185,13 @@ customer %>%
 
 ## semi join
 
+<hr>
+
 `semi_join()` returns all rows from x where there are matching values in y, keeping just columns from x. A semi join differs from an inner join because an inner join will return one row of x for each matching row of y, where a semi join will never duplicate rows of x.
 
-----
+## semi join
+
+<hr>
 
 ```{r dplyr6}
 customer %>%
@@ -114,9 +200,13 @@ customer %>%
 
 ## anti join
 
+<hr>
+
 `anti_join()` returns all rows from x where there are not matching values in y, keeping just columns from x.
 
-----
+## anti join
+
+<hr>
 
 ```{r dplyr7}
 customer %>%
@@ -125,13 +215,23 @@ customer %>%
 
 ## full join
 
+<hr>
+
 `full_join()` returns all rows and all columns from both x and y. Where there are not matching values, returns NA for the one missing.
 
-----
+## full join
+
+<hr>
 
 ```{r dplyr8}
 customer %>%
   full_join(order)
 ```
 
-## Summary
+## Questions
+
+<hr>
+
+## Thank You
+
+<hr>
