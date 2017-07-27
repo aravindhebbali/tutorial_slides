@@ -4,106 +4,206 @@ output:
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
-    fig_width: 6
-    fig_height: 5
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
 ---
 
+<style type="text/css">
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+  }
+
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
+
+## Agenda
+
+<hr>
+
+* read data from delimited files
+  - csv
+  - tsv
+  - txt
+
 ## Introdction
+
+<hr>
+
+Importing data is the first step in any data analysis workflow. If you cannot import data from differernt sources or file formats, you cannot proceed with data analysis. R allows you to import data from several sources and a variety of file formats. In this module, we will focus on different file formats.
 
 ## Libraries
 
+<hr>
+
 ```{r importlib1,eval=FALSE}
 library(readr)
-library(readxl)
-library(haven)
-library(jsonlite)
-library(xml2)
-library(foreign)
-library(sas7bdat)
 ```
 
 ```{r importlib2, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
 library(readr)
-library(readxl)
-library(haven)
-library(jsonlite)
-library(xml2)
-library(foreign)
-library(sas7bdat)
 ```
 
 
-# CSV 
+## CSV 
 
-## comma separated values
+<hr>
+
+- `read.csv()`
+- `read_csv()`
+- `read_delim()`
+
+## CSV 
+
+<hr>
+
+- `col_names`
+-  `skip`
+- `n_max`
+- `col_types`
+
+## CSV 
+
+<hr>
+
+using base R
 
 ```{r import1}
 read.csv('hsb2.csv', header = TRUE)
 ```
 
-## using readr
+## CSV 
 
-----
+<hr>
+
+using readr
 
 ```{r import2, echo=TRUE, results='markup', message=FALSE}
 read_csv('hsb2.csv')
 ```
 
-----
+## CSV 
+
+<hr>
+
+using readr
 
 ```{r import3, echo=TRUE, results='markup', message=FALSE}
 read_delim('hsb2.csv', delim = ',')
 ```
 
-## data does not include column names
+## CSV 
 
-----
+<hr>
+
+data does not include column names
 
 ```{r import4, echo=TRUE, results='markup', message=FALSE}
 read_csv('hsb2.csv', col_names = FALSE)
 ```
 
-----
+## CSV 
+
+<hr>
+
+data does not include column names
 
 ```{r import5, echo=TRUE, results='markup', message=FALSE}
 read_delim('hsb2.csv', delim = ',', col_names = FALSE)
 ```
 
-## skip a few lines
+## CSV 
 
-----
+<hr>
+
+skip a few lines
 
 ```{r import6, echo=TRUE, results='markup', message=FALSE}
 read_csv('hsb2.csv', skip = 5)
 ```
 
-----
+## CSV 
+
+<hr>
 
 ```{r import7, echo=TRUE, results='markup', message=FALSE}
 read_delim('hsb2.csv', delim = ',', skip = 5)
 ```
 
-## maximum number of lines to read
+## CSV 
 
-----
+<hr>
+
+maximum number of lines to read
 
 ```{r import8, echo=TRUE, results='markup', message=FALSE}
 read_csv('hsb2.csv', n_max = 50)
 ```
 
-----
+## CSV 
+
+<hr>
+
+maximum number of lines to read
 
 ```{r import9, echo=TRUE, results='markup', message=FALSE}
 read_delim('hsb2.csv', delim = ',', n_max = 50)
 ```
 
-## specify column types
+## CSV 
+
+<hr>
+
+specify column types
 
 ```{r import10, echo=TRUE, results='markup', message=FALSE}
 read_csv('hsb2.csv',
@@ -117,7 +217,11 @@ read_csv('hsb2.csv',
 )
 ```
 
-## read only specific columns
+## CSV 
+
+<hr>
+
+read only specific columns
 
 ```{r import11, echo=TRUE, results='markup', message=FALSE}
 read_csv('hsb2.csv', 
@@ -127,69 +231,115 @@ read_csv('hsb2.csv',
 )
 ```
 
-# parse_* functions
+## Parse Data
+
+<hr>
 
 ```{r import12, eval = FALSE}
 ```
 
-## parse_character()
+## Character
+
+<hr>
+
+`parse_character()`
 
 ```{r import13, eval = FALSE}
 ```
 
-## parse_date()
+## Date
+
+<hr>
+
+`parse_date()`
 
 ```{r import14, eval = FALSE}
 ```
 
-## parse_datetime()
+## Datetime
+
+<hr>
+
+`parse_datetime()`
 
 ```{r import15, eval = FALSE}
 ```
 
-## parse_double()
+## Double
+
+<hr>
+
+`parse_double()`
 
 ```{r import16, eval = FALSE}
 ```
 
-## parse_factor()
+## Factor
+
+<hr>
+
+`parse_factor()`
 
 ```{r import17, eval = FALSE}
 ```
 
-## parse_integer()
+## Integer
+
+<hr>
+
+`parse_integer()`
 
 ```{r import18, eval = FALSE}
 ```
 
-## parse_guess()
+## Guess Data Type
+
+<hr>
+
+`parse_guess()`
 
 ```{r import19, eval = FALSE}
 ```
 
-## spec_csv()
+## Column Types
 
-## semicolon separated values
+<hr>
+
+`spec_csv()`
+
+## Delimited Files
+
+<hr>
+
+semicolon separated values
 
 ```{r import20, echo=TRUE, results='markup', message=FALSE}
 read.csv2('hsb.csv', header = TRUE)
 ```
 
-## using readr
+## Delimited Files
 
-----
+<hr>
+
+using readr
 
 ```{r import21, echo=TRUE, results='markup', message=FALSE}
 read_csv2('hsb.csv')
 ```
 
-----
+## Delimited Files
+
+<hr>
 
 ```{r import22, echo=TRUE, results='markup', message=FALSE}
 read_delim('hsb.csv', delim = ';')
 ```
 
-## data does not include column names
+## Delimited Files
+
+<hr>
+
+data does not include column names
 
 ----
 
@@ -197,41 +347,55 @@ read_delim('hsb.csv', delim = ';')
 read_csv2('hsb.csv', col_names = FALSE)
 ```
 
-----
+## Delimited Files
+
+<hr>
 
 ```{r import24, echo=TRUE, results='markup', message=FALSE}
 read_delim('hsb.csv', delim = ';', col_names = FALSE)
 ```
 
-## skip a few lines
+## Delimited Files
 
-----
+<hr>
+
+skip a few lines
 
 ```{r import25, echo=TRUE, results='markup', message=FALSE}
 read_csv2('hsb.csv', skip = 5)
 ```
 
-----
+## Delimited Files
+
+<hr>
 
 ```{r import26, echo=TRUE, results='markup', message=FALSE}
 read_delim('hsb.csv', delim = ';', skip = 5)
 ```
 
-## maximum number of lines to read
+## Delimited Files
 
-----
+<hr>
+
+maximum number of lines to read
 
 ```{r import27, echo=TRUE, results='markup', message=FALSE}
 read_csv2('hsb.csv', n_max = 50)
 ```
 
-----
+## Delimited Files
+
+<hr>
 
 ```{r import28, echo=TRUE, results='markup', message=FALSE}
 read_delim('hsb.csv', delim = ';', n_max = 50)
 ```
 
-## specify column types
+## Delimited Files
+
+<hr>
+
+specify column types
 
 ```{r import29, echo=TRUE, results='markup', message=FALSE}
 read_csv2('hsb.csv',
@@ -245,7 +409,11 @@ read_csv2('hsb.csv',
 )
 ```
 
-## read only specific columns
+## Delimited Files
+
+<hr>
+
+read only specific columns
 
 ```{r import30, echo=TRUE, results='markup', message=FALSE}
 read_csv2('hsb.csv', 
@@ -255,19 +423,31 @@ read_csv2('hsb.csv',
 )
 ```
 
-## tab separated values
+## Delimited Files
+
+<hr>
+
+tab separated values
 
 ```{r import31}
 read.delim('mtcars.tsv', dec = '.')  
 ```
 
-## use read.delim2 if decimal separator is ,
+## Delimited Files
+
+<hr>
+
+use read.delim2 if decimal separator is ,
 
 ```{r import32}
 read.table('mtcars.tsv', sep = '\t', header = TRUE, dec = '.')
 ```
 
-## using readr
+## Delimited Files
+
+<hr>
+
+using readr
 
 ----
 
@@ -275,55 +455,73 @@ read.table('mtcars.tsv', sep = '\t', header = TRUE, dec = '.')
 read_tsv('mtcars.tsv')
 ```
 
-----
+## Delimited Files
+
+<hr>
 
 ```{r import34, echo=TRUE, results='markup', message=FALSE}
 read_delim('mtcars.tsv', delim = '\t')
 ```
 
-## data does not include column names
+## Delimited Files
 
-----
+<hr>
+
+data does not include column names
 
 ```{r import35, echo=TRUE, results='markup', message=FALSE}
 read_tsv('mtcars.tsv', col_names = FALSE)
 ```
 
-----
+## Delimited Files
+
+<hr>
 
 ```{r import36, echo=TRUE, results='markup', message=FALSE}
 read_delim('mtcars.tsv', delim = '\t', col_names =  FALSE)
 ```
 
-## skip a few lines
+## Delimited Files
 
-----
+<hr>
+
+skip a few lines
 
 ```{r import37, echo=TRUE, results='markup', message=FALSE}
 read_tsv('mtcars.tsv', skip = 5)
 ```
 
-----
+## Delimited Files
+
+<hr>
 
 ```{r import38, echo=TRUE, results='markup', message=FALSE}
 read_delim('mtcars.tsv', delim = '\t', skip = 5)
 ```
 
-## maximum number of lines to read
+## Delimited Files
 
-----
+<hr>
+
+maximum number of lines to read
 
 ```{r import39, echo=TRUE, results='markup', message=FALSE}
 read_tsv('mtcars.tsv', n_max = 10)
 ```
 
-----
+## Delimited Files
+
+<hr>
 
 ```{r import40, echo=TRUE, results='markup', message=FALSE}
 read_delim('mtcars.tsv', delim = '\t', n_max = 10)
 ```
 
-## specify column types
+## Delimited Files
+
+<hr>
+
+specify column types
 
 ```{r import41, echo=TRUE, results='markup', message=FALSE}
 read_tsv('mtcars.tsv',
@@ -337,7 +535,11 @@ read_tsv('mtcars.tsv',
 )
 ```
 
-## read only specific columns
+## Delimited Files
+
+<hr>
+
+read only specific columns
 
 ```{r import42, echo=TRUE, results='markup', message=FALSE}
 read_tsv('mtcars.tsv', 
@@ -348,45 +550,67 @@ read_tsv('mtcars.tsv',
 )
 ```
 
-# space separated values
+## Delimited Files
 
-----
+<hr>
+
+space separated values
 
 ```{r import43}
 read.table('hsb1.csv', header = TRUE, sep = " ")
 ```
 
-----
+## Delimited Files
+
+<hr>
 
 ```{r import44, eval = FALSE}
 read_table('hsb1.csv')  # fails
 ```
 
-----
+## Delimited Files
+
+<hr>
 
 ```{r import45, echo=TRUE, results='markup', message=FALSE}
 read_table2('hsb1.csv')
 ```
 
-## data does not include column names
+## Delimited Files
+
+<hr>
+
+data does not include column names
 
 ```{r import46, echo=TRUE, results='markup', message=FALSE}
 read_table2('hsb1.csv', col_names = FALSE)
 ```
 
-## skip a few lines
+## Delimited Files
+
+<hr>
+
+skip a few lines
 
 ```{r import47, echo=TRUE, results='markup', message=FALSE}
 read_table2('hsb1.csv', skip = 5)
 ```
 
-## maximum number of lines to read
+## Delimited Files
+
+<hr>
+
+maximum number of lines to read
 
 ```{r import48, echo=TRUE, results='markup', message=FALSE}
 read_table2('hsb1.csv', n_max = 10)
 ```
 
-## specify column types
+## Delimited Files
+
+<hr>
+
+specify column types
 
 ```{r import49, echo=TRUE, results='markup', message=FALSE}
 read_table2('hsb1.csv',
@@ -400,7 +624,11 @@ read_table2('hsb1.csv',
 )
 ```
 
-## read only specific columns
+## Delimited Files
+
+<hr>
+
+read only specific columns
 
 ```{r import50, echo=TRUE, results='markup', message=FALSE}
 read_table2('hsb1.csv', 
@@ -410,186 +638,45 @@ read_table2('hsb1.csv',
 )
 ```
 
-# read .txt files
+## Delimited Files
 
-----
+<hr>
+
+read .txt files
 
 ```{r import51, eval = FALSE}
 read_csv('hsb.txt')  # incorrect
 ```
 
-----
+## Delimited Files
+
+<hr>
 
 ```{r import52, eval = FALSE}
 read_delim('hsb.txt', delim = ',')  # incorrect
 ```
 
-----
+## Delimited Files
+
+<hr>
 
 ```{r import53, eval = FALSE}
 read_table('hsb.txt')  # incorrect
 ```
 
-----
+## Delimited Files
+
+<hr>
 
 ```{r import54, echo=TRUE, results='markup', message=FALSE}
 read_table2('hsb.txt')  # correct
 ```
 
-# read excel files
 
-## list sheets in a excel file
+## Questions
 
-```{r import55}
-excel_sheets('sample2.xls')
-```
+<hr>
 
-----
+## Thank You
 
-```{r import56, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample2.xls', sheet = 1)
-```
-
-----
-
-```{r import57, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample2.xls', sheet = 2)
-```
-
-## remember first row is always column name in excel
-## so add 1 to row number while selecting the cell
-
-## read specific cells
-
-----
-
-```{r import58, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample2.xls', sheet = 2,
-                   range = "B3:C7")
-```
-
-----
-
-```{r import59, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample2.xls', sheet = 2,
-                   range = "A3:C5")
-```
-
-## single row
-
-----
-
-```{r import60, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample2.xls', sheet = 2,
-                   range = "A3:C4")
-```
-
-----
-
-```{r import61, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample2.xls', sheet = 2,
-                   range = anchored("A4", dim = c(3, 2)),
-                   col_names = FALSE)
-```
-
-## specify only rows
-
-```{r import62, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample2.xls', sheet = 2,
-                   range = cell_rows(3:6))
-```
-
-## specify only columns
-
-```{r import63, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample2.xls', sheet = 2,
-                   range = cell_cols(2:3))
-```
-
-## single column
-
-```{r import64, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample2.xls', sheet = 2,
-                   range = cell_cols(2))
-```
-
-## use cell_limits to specify one end of the rectangle
-
-## such as top left or top right
-
-----
-
-```{r import65, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample2.xls', sheet = 2,
-                   range = cell_limits(c(1, 2), c(NA, NA)))
-```
-
-----
-
-```{r import66, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample2.xls', sheet = 2,
-                   range = cell_limits(c(3, NA), c(NA, 2)))
-```
-
-# mention other packages that can be used to import the files
-## sas: sas7bdat (last updated in 2014; version 0.5)
-## stata, spss: foreign (maintained; version 0.8)
-
-## stata
-
-----
-
-```{r import67, echo=TRUE, results='markup', message=FALSE}
-haven::read_dta('airline.dta')    # tibble
-```
-
-----
-
-```{r import68, echo=TRUE, results='markup', message=FALSE}
-haven::read_stata('airline.dta')  # tibble
-```
-
-----
-
-```{r import69}
-foreign::read.dta('airline.dta')  # data.frame
-```
-
-## spss
-
-----
-
-```{r import70, echo=TRUE, results='markup', message=FALSE}
-read_sav('employee.sav')   # tibble
-```
-
-----
-
-```{r import71, echo=TRUE, results='markup', message=FALSE}
-read_spss('employee.sav')  # tibble
-```
-
-----
-
-```{r import72}
-foreign::read.spss('employee.sav', use.value.labels = FALSE,
-                   to.data.frame = TRUE)
-```
-
-## stata
-
-----
-
-```{r import73, echo=TRUE, results='markup', message=FALSE}
-read_sas('airline.sas7bdat')
-```
-
-----
-
-```{r import74}
-sas7bdat::read.sas7bdat('airline.sas7bdat')
-```
-
-## Summary
-
-## Next Steps..
+<hr>
