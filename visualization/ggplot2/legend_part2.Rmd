@@ -4,21 +4,89 @@ output:
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
-    fig_width: 6
-    fig_height: 5
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
+    fig_height: 5
+    fig_width: 6
 ---
 
+<style type="text/css">
+    .reveal p img {
+    align: middle;
+  }
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+    font-size: 25px;
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+  }
+  .reveal p img {
+    align: middle;
+  }
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
+
+## Agenda
+
+<hr>
+
 ## Intro
+
+<hr>
 
 In this module, we will continue to explore different ways to modify/customize the legend of plots.
 
 ## Installation
+
+<hr>
 
 ```{r show, eval=FALSE}
 library(ggplot2)
@@ -34,23 +102,17 @@ library(tidyr)
 
 ## Guides
 
+<hr>
+
 ----
 
 ```{r gui2}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, color = factor(cyl))) +
   scale_color_manual(values = c("red", "blue", "green"),
-                      guide = guide_legend(
-                       title = "Cylinders",
-                       title.hjust = 0.5,
-                       title.position = "top",
-                       label.position = "right",
-                       direction = "horizontal",
-                       label.hjust = 0.5,
-                       nrow = 2,
-                       reverse = TRUE
-                      )
-  )
+    guide = guide_legend(title = "Cylinders", title.hjust = 0.5,
+      title.position = "top", label.position = "right", nrow = 2,
+      direction = "horizontal", label.hjust = 0.5, reverse = TRUE))
 ```
 
 ----
@@ -58,17 +120,9 @@ ggplot(mtcars) +
 ```{r gui3}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, color = factor(cyl))) +
-  scale_color_discrete(guide = guide_legend(
-                        title = "Cylinders",
-                        title.hjust = 0.5,
-                        title.position = "top",
-                        label.position = "right",
-                        direction = "horizontal",
-                        label.hjust = 0.5,
-                        nrow = 2,
-                        reverse = TRUE
-                        )
-  )
+  scale_color_discrete(guide = guide_legend( title = "Cylinders",
+    title.hjust = 0.5, title.position = "top", label.position = "right",
+    direction = "horizontal", label.hjust = 0.5, nrow = 2, reverse = TRUE))
 ```
 
 ----
@@ -194,34 +248,26 @@ ggplot(mtcars) +
 
 ```{r gui9}
 ggplot(mtcars) +
-  geom_point(aes(disp, mpg, color = hp, 
-                 size = qsec, 
-                 shape = factor(gear))) + 
-  guides(color = "colorbar",
-         shape = "legend",
-         size = "legend")
+  geom_point(aes(disp, mpg, color = hp, size = qsec,  
+    shape = factor(gear))) + 
+  guides(color = "colorbar", shape = "legend", size = "legend")
 ```
 
 ----
 
 ```{r gui10}
 ggplot(mtcars) +
-  geom_point(aes(disp, mpg, color = hp, 
-                 size = wt, 
-                 shape = factor(gear))) + 
-  guides(
-    color = guide_colorbar(
-      title = "Horsepower"
-    ),
-    shape = guide_legend(
-      title = "Weight"
-    ),
-    size = guide_legend(
-      title = "Gear"
-    )
-  )
+  geom_point(aes(disp, mpg, color = hp, size = wt, 
+    shape = factor(gear))) + 
+  guides(color = guide_colorbar(title = "Horsepower"),
+    shape = guide_legend(title = "Weight"),
+    size = guide_legend(title = "Gear"))
 ```
 
-## Summary
+## Questions
 
-## Next Steps..
+<hr>
+
+## Thank You
+
+<hr>
