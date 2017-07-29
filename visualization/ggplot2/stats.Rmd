@@ -4,21 +4,89 @@ output:
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
-    fig_width: 6
-    fig_height: 5
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
+    fig_height: 5
+    fig_width: 6
 ---
 
+<style type="text/css">
+    .reveal p img {
+    align: middle;
+  }
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+    font-size: 25px;
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+  }
+  .reveal p img {
+    align: middle;
+  }
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
+
+## Agenda
+
+<hr>
+
 ## Intro
+
+<hr>
 
 In this module, we will explore an alternative method to build plots.
 
 ## Installation
+
+<hr>
 
 ```{r show, eval=FALSE}
 library(ggplot2)
@@ -34,7 +102,13 @@ library(tidyr)
 
 ## Case Study
 
+<hr>
+
 We will continue to use the ecommerce data. You can download it from [here](https://github.com/rsquaredacademy/datasets/blob/master/web.csv) or import directly using the readr package.
+
+## Data
+
+<hr>
 
 ```{r import2, eval=FALSE}
 ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
@@ -47,45 +121,47 @@ ecom
 
 ## Data Dictionary
 
+<hr>
+
 
 ## Stats
 
-----
+<hr>
 
 So far we have used `geom_*()` functions to build plot. Now we will use a new set of functions `stat_*()` to build the plots. 
 
 ## Bar Plots
 
-----
+<hr>
 
-```{r stat2}
+```{r stat2, fig.align='center'}
 ggplot(ecom) +
   stat_count(aes(device))
 ```
 
 ## Box Plots
 
-----
+<hr>
 
-```{r stat3}
+```{r stat3, fig.align='center'}
 ggplot(ecom) +
   stat_boxplot(aes(factor(1), n_visit))
 ```
 
 ## Scatter Plots
 
-----
+<hr>
 
-```{r stat4}
+```{r stat4, fig.align='center'}
 ggplot(ecom) +
   stat_identity(aes(n_pages, duration), position = 'jitter')
 ```
 
 ## Histogram
 
-----
+<hr>
 
-```{r stat5}
+```{r stat5, fig.align='center'}
 ggplot(ecom) +
   stat_bin(aes(n_visit), bins = 7, fill = 'blue', alpha = 0.3,
            color = 'black')
@@ -93,23 +169,20 @@ ggplot(ecom) +
 
 ## Plot Unique Values
 
-----
+<hr>
 
-```{r stat6}
+```{r stat6, fig.align='center'}
 ggplot(ecom) +
   stat_unique(aes(n_pages, duration), 
               position = 'jitter')
 ```
 
-## Summary
+## Questions
 
-----
+<hr>
 
 In this module, we learnt about the functions underlying the `geom_*()` family of functions. 
 
-## Next Steps..
+## Thank You
 
-----
-
-In the next module, we will learn about faceting i.e. combining plots.
-
+<hr>
