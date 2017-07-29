@@ -4,21 +4,89 @@ output:
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
-    fig_width: 6
-    fig_height: 5
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
+    fig_height: 5
+    fig_width: 6
 ---
 
+<style type="text/css">
+    .reveal p img {
+    align: middle;
+  }
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+    font-size: 25px;
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+  }
+  .reveal p img {
+    align: middle;
+  }
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
+
+## Agenda
+
+<hr>
+
 ## Intro
+
+<hr>
 
 In this module, we will focus on modifying the legends of plots when the aesthetics are mapped to variables.
 
 ## Installation
+
+<hr>
 
 ```{r show, eval=FALSE}
 library(ggplot2)
@@ -50,22 +118,21 @@ If you have mapped alpha to a continuous variable, use `scale_alpha_continuous()
 
 ----
 
-```{r leg2}
+```{r leg2, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, alpha = hp), color = 'blue')
 ```
 
 ----
 
-```{r leg3}
+```{r leg3, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, alpha = hp), color = 'blue') +
   scale_alpha_continuous("Horsepower",
-                         breaks = c(0, 100, 200, 300, 400),
-                         limits = c(0, 400),
-                         labels = c("Zero", "Hundred", "2 Hundred", 
-                                    "3 Hundred", "4 Hundred"),
-                         range = c(0.4, 0.8))
+    breaks = c(0, 100, 200, 300, 400),
+    limits = c(0, 400), range = c(0.4, 0.8),
+    labels = c("Zero", "Hundred", "2 Hundred", 
+      "3 Hundred", "4 Hundred"))
 ```
 
 ----
@@ -76,20 +143,19 @@ If you have mapped alpha to a discrete variable, use `scale_alpha_discrete()` to
 
 ----
 
-```{r leg4}
+```{r leg4, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, alpha = factor(cyl)), color = 'blue')
 ```
 
 ----
 
-```{r leg5}
+```{r leg5, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, alpha = factor(cyl)), color = 'blue') +
   scale_alpha_discrete(name = "Cylinders",
-                       breaks = c("4", "6", "8"),
-                       labels = c("Four", "Six", "Eight"),
-                       range = c(0.4, 0.8))
+    breaks = c("4", "6", "8"), range = c(0.4, 0.8),
+    labels = c("Four", "Six", "Eight"))
 ```
 
 ----
@@ -100,22 +166,21 @@ If you have mapped color to a discrete variable, use `scale_color_manual()` to m
 
 ----
 
-```{r leg6}
+```{r leg6, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, color = factor(cyl)))
 ```
 
 ----
 
-```{r leg7}
+```{r leg7, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, color = factor(cyl))) +
   scale_color_manual(name = "Cylinders",
-                     values = c("red", "blue", "green"),
-                     labels = c('Four', 'Six', 'Eight'),
-                     limits = c(4, 6, 8),
-                     breaks = c(4, 6, 8),
-                     guide = "legend")
+    values = c("red", "blue", "green"),
+    labels = c('Four', 'Six', 'Eight'),
+    limits = c(4, 6, 8), breaks = c(4, 6, 8),
+    guide = "legend")
 ```
 
 ----
@@ -126,24 +191,24 @@ If you have mapped fill to a discrete variable, use `scale_fill_manual()` to mod
 
 ----
 
-```{r leg8}
+```{r leg8, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, fill = factor(cyl)), shape = 22)
 ```
 
 ----
 
-```{r leg9}
+```{r leg9, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, fill = factor(cyl)), shape = 22) +
   scale_fill_manual(name = "Cylinders",
-                     values = c("red", "blue", "green"),
-                     labels = c('Four', 'Six', 'Eight'),
-                     limits = c(4, 6, 8),
-                     breaks = c(4, 6, 8),
-                     guide = "legend")
+    values = c("red", "blue", "green"),
+    labels = c('Four', 'Six', 'Eight'),
+    limits = c(4, 6, 8), breaks = c(4, 6, 8),
+    guide = "legend")
 ```
 
+----
 
 `scale_shape_manual()`
 
@@ -151,22 +216,20 @@ If you have mapped shape to a discrete variable, use `scale_shape_manual()` to m
 
 ----
 
-```{r leg10}
+```{r leg10, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, shape = factor(cyl)))
 ```
 
 ----
 
-```{r leg11}
+```{r leg11, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, shape = factor(cyl))) +
   scale_shape_manual(name = "Cylinders",
-                    values = c(4, 12, 24),
-                    labels = c('Four', 'Six', 'Eight'),
-                    limits = c(4, 6, 8),
-                    breaks = c(4, 6, 8),
-                    guide = "legend")
+    values = c(4, 12, 24), labels = c('Four', 'Six', 'Eight'),
+    limits = c(4, 6, 8), breaks = c(4, 6, 8),
+    guide = "legend")
 ```
 
 ----
@@ -177,22 +240,21 @@ If you have mapped size to a discrete variable, use `scale_size_manual()` to mod
 
 ----
 
-```{r leg12}
+```{r leg12, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, size = hp))
 ```
 
 ----
 
-```{r leg13}
+```{r leg13, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, size = hp)) +
   scale_size_continuous(name = "Horsepower",
-                        range = c(3, 6),
-                        limits = c(0, 400),
-                        breaks = c(100, 200, 300, 400),
-                        labels = c("Hundred", "2 Hundred",
-                                   "3 Hundred", "4 Hundred"))
+    range = c(3, 6), limits = c(0, 400),
+    breaks = c(100, 200, 300, 400),
+    labels = c("Hundred", "2 Hundred",
+      "3 Hundred", "4 Hundred"))
 ```
 
 ----
@@ -201,52 +263,63 @@ ggplot(mtcars) +
 
 If you have mapped alpha to a discrete variable, use `scale_alpha_manual()` to modify it. Let us create  a simple scatter plot and map alpha to a discrete variable.
 
-```{r leg14}
+----
+
+```{r leg14, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, alpha = factor(cyl)), color = 'blue')
 ```
 
-```{r leg15}
+----
+
+```{r leg15, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, alpha = factor(cyl)), color = 'blue') +
-  scale_alpha_manual(name = "Cylinders",
-                     values = c(0.4, 0.6, 0.8),
-                     labels = c('Four', 'Six', 'Eight'),
-                     limits = c(4, 6, 8),
-                     breaks = c(4, 6, 8),
-                     guide = "legend")
+  scale_alpha_manual(name = "Cylinders", values = c(0.4, 0.6, 0.8),
+    labels = c('Four', 'Six', 'Eight'), limits = c(4, 6, 8),
+    breaks = c(4, 6, 8), guide = "legend")
 ```
+
+----
 
 - `scale_shape()`: maps discrete variable to six shapes
 
 If you have mapped shape to a discrete variable, use `scale_shape()` to modify it. Let us create  a simple scatter plot and map shape to a discrete variable.
 
-```{r leg16}
+----
+
+```{r leg16, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, shape = factor(cyl))) +
   scale_shape()
 ```
 
-```{r leg17}
+----
+
+```{r leg17, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, shape = factor(cyl))) +
-  scale_shape(solid = FALSE,
-              name = 'Cylinders',
-              labels = c('Four', 'Six', 'Eight'),
-              limits = c(4, 6, 8),
-              breaks = c(4, 6, 8))
+  scale_shape(solid = FALSE, name = 'Cylinders',
+    labels = c('Four', 'Six', 'Eight'),
+    limits = c(4, 6, 8), breaks = c(4, 6, 8))
 ```
+
+----
 
 - `scale_size()`: maps discrete variable to six sizes
 
 If you have mapped size to a discrete variable, use `scale_size()` to modify it. Let us create  a simple scatter plot and map size to a discrete variable.
 
-```{r leg18}
+----
+
+```{r leg18, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, size = hp))
 ```
 
-```{r leg19}
+----
+
+```{r leg19, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, size = hp)) +
   scale_size(name = "Horsepower")
@@ -254,41 +327,32 @@ ggplot(mtcars) +
 
 ## Guides
 
-```{r leg20}
+```{r leg20, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, color = factor(cyl))) +
   scale_color_manual(values = c("red", "blue", "green"),
-                      guide = guide_legend(
-                       title = "Cylinders",
-                       title.hjust = 0.5,
-                       title.position = "top",
-                       label.position = "right",
-                       direction = "horizontal",
-                       label.hjust = 0.5,
-                       nrow = 2,
-                       reverse = TRUE
-                      )
+    guide = guide_legend(title = "Cylinders", title.hjust = 0.5, 
+      title.position = "top", label.position = "right", 
+      direction = "horizontal", label.hjust = 0.5, nrow = 2, reverse = TRUE)
   )
 ```
 
-```{r leg21}
+----
+
+```{r leg21, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, color = factor(cyl))) +
-  scale_color_discrete(guide = guide_legend(
-                        title = "Cylinders",
-                        title.hjust = 0.5,
-                        title.position = "top",
-                        label.position = "right",
-                        direction = "horizontal",
-                        label.hjust = 0.5,
-                        nrow = 2,
-                        reverse = TRUE
-                        )
+  scale_color_discrete(
+    guide = guide_legend(title = "Cylinders",
+      title.hjust = 0.5, title.position = "top",
+      label.position = "right", direction = "horizontal",
+      label.hjust = 0.5, nrow = 2, reverse = TRUE)
   )
 ```
 
+----
 
-```{r leg22}
+```{r leg22, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, color = hp)) +
   scale_color_continuous(guide = guide_colorbar(
@@ -309,7 +373,9 @@ ggplot(mtcars) +
   ))
 ```
 
-```{r leg23}
+----
+
+```{r leg23, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, fill = hp), shape = 22) +
   scale_fill_continuous(guide = guide_colorbar(
@@ -330,7 +396,9 @@ ggplot(mtcars) +
   )
 ```
 
-```{r leg24}
+----
+
+```{r leg24, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, fill = hp), shape = 22) +
   scale_fill_gradient2(guide = guide_colorbar(
@@ -351,7 +419,9 @@ ggplot(mtcars) +
   ) 
 ```
 
-```{r leg25}
+----
+
+```{r leg25, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, fill = hp), shape = 22) +
   scale_fill_gradient(low = "white", high = "black", 
@@ -374,31 +444,26 @@ ggplot(mtcars) +
   ) 
 ```
 
-```{r leg26}
+----
+
+```{r leg26, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, fill = hp), shape = 22) +
   scale_fill_gradientn(colors = terrain.colors(5), 
-    guide = guide_colorbar(
-      title = "Horsepower",
-      title.position = "top",
-      title.vjust = 1,
-      label.position = "bottom",
-      label.vjust = 0.8,
-      barwidth = 10,
-      barheight = 3,
-      nbins = 10,
-      raster = FALSE,
-      ticks = TRUE,
-      draw.ulim = TRUE,
-      draw.llim = FALSE,
-      direction = "horizontal",
-      reverse = TRUE
+    guide = guide_colorbar(title = "Horsepower", 
+      title.position = "top", title.vjust = 1, 
+      label.position = "bottom", label.vjust = 0.8, 
+      barwidth = 10, barheight = 3, nbins = 10, 
+      raster = FALSE, ticks = TRUE,
+      draw.ulim = TRUE, draw.llim = FALSE, 
+      direction = "horizontal", reverse = TRUE
     )
   ) 
 ```
 
+----
 
-```{r leg27}
+```{r leg27, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, color = hp, 
                  size = qsec, 
@@ -408,20 +473,21 @@ ggplot(mtcars) +
          size = "legend")
 ```
 
-```{r leg28}
+----
+
+```{r leg28, fig.align='center'}
 ggplot(mtcars) +
-  geom_point(aes(disp, mpg, color = hp, 
-                 size = wt, 
-                 shape = factor(gear))) + 
-  guides(
-    color = guide_colorbar(
-      title = "Horsepower"
-    ),
-    shape = guide_legend(
-      title = "Weight"
-    ),
-    size = guide_legend(
-      title = "Gear"
-    )
+  geom_point(aes(disp, mpg, color = hp, size = wt, shape = factor(gear))) + 
+  guides(color = guide_colorbar(title = "Horsepower"),
+    shape = guide_legend(title = "Weight"),
+    size = guide_legend(title = "Gear")
   )
 ```
+
+## Questions
+
+<hr>
+
+## Thank You
+
+<hr>
