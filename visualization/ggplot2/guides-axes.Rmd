@@ -1,22 +1,89 @@
 ---
-title: "ggplot2: Guides - Axes"
 output: 
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
-    fig_width: 6
-    fig_height: 5
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
+    fig_height: 5
+    fig_width: 6
 ---
+
+<style type="text/css">
+    .reveal p img {
+    align: middle;
+  }
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+    font-size: 25px;
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+  }
+  .reveal p img {
+    align: middle;
+  }
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
+
+## Agenda
+
+<hr>
 
 ## Intro
 
+<hr>
+
 ## Installation
+
+<hr>
 
 ```{r show, eval=FALSE}
 library(ggplot2)
@@ -32,11 +99,12 @@ library(tidyr)
 
 ## X Axis - Continuous
 
-----
+<hr>
 
 `scale_x_continuous()`: modify x axis when x is continuous
 
-The first function we will explore is `scale_x_continuous()`. It can be used for:
+The first function we will explore is `scale_x_continuous()`. Let us create a simple scatter plot and then use `scale_x_continuous()` 
+to modify the X axis.It can be used for:
 
 - axis title
 - axis labels
@@ -44,18 +112,16 @@ The first function we will explore is `scale_x_continuous()`. It can be used for
 - axis breaks
 - and axis position
 
-Let us create a simple scatter plot and then use `scale_x_continuous()` to modify the X axis.
-
 ----
 
-```{r guide2}
+```{r guide2, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg))
 ```
 
 ----
 
-```{r guide3}
+```{r guide3, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg)) +
   scale_x_continuous(name = "Displacement",
@@ -68,7 +134,7 @@ ggplot(mtcars) +
 
 ## Y Axis - Continuous
 
-----
+<hr>
 
 `scale_y_continuous()`: modify y axis
 
@@ -76,7 +142,7 @@ Now let us modify the Y axis.
 
 ----
 
-```{r guide4}
+```{r guide4, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg)) +
   scale_y_continuous(name = "Miles Per Gallon",
@@ -88,11 +154,11 @@ ggplot(mtcars) +
 
 ## X Axis - Discrete
 
-----
+<hr>
 
 Now let us look at plots with discrete X axis.
 
-```{r guide5}
+```{r guide5, fig.align='center'}
 ggplot(mtcars) +
   geom_bar(aes(factor(cyl)))
 ```
@@ -103,7 +169,7 @@ Use `scael_x_discrete()` to modify the X axis.
 
 ----
 
-```{r guide6}
+```{r guide6, fig.align='center'}
 ggplot(mtcars) +
   geom_bar(aes(factor(cyl))) +
   scale_x_discrete(name = "Number of Cylinders",
@@ -112,17 +178,10 @@ ggplot(mtcars) +
                    position = "bottom")
 ```
 
-## Summary
+## Questions
 
-----
+<hr>
 
-In this module, we learnt how to modify the axis whether it represents a continuous variable or a discrete variable. 
+## Thank You
 
-
-## Next Steps..
-
-----
-
-In the next module, we will learn how to modify the legend when aesthetics are mapped to variables.
-
-
+<hr>
