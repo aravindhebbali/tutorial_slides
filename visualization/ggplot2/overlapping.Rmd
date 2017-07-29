@@ -4,21 +4,89 @@ output:
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
-    fig_width: 6
-    fig_height: 5
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
+    fig_height: 5
+    fig_width: 6
 ---
 
+<style type="text/css">
+    .reveal p img {
+    align: middle;
+  }
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+    font-size: 25px;
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+  }
+  .reveal p img {
+    align: middle;
+  }
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
+
+## Agenda
+
+<hr>
+
 ## Intro
+
+<hr>
 
 In this module, we will learn to position the geoms to avoid overlapping.
 
 ## Installation
+
+<hr>
 
 ```{r show, eval=FALSE}
 library(ggplot2)
@@ -34,7 +102,7 @@ library(tidyr)
 
 ## Dodge
 
-----
+<hr>
 
 Preserve the vertical position while adjusting the horizontal position.
 
@@ -42,60 +110,62 @@ Create grouped bar plots.
 
 ----
 
-```{r pos2}
+```{r pos2, fig.align='center'}
 ggplot(data = mtcars, aes(factor(cyl), fill = factor(vs))) +
   geom_bar()
 ```
 
 ----
 
-```{r pos3}
+```{r pos3, fig.align='center'}
 ggplot(data = mtcars, aes(factor(cyl), fill = factor(vs))) +
   geom_bar(position = position_dodge(width = 1))
 ```
 
 ## Jitter
 
-----
+<hr>
 
 Add some noise to data points for better visualization.
 
-```{r pos4}
+----
+
+```{r pos4, fig.align='center'}
 ggplot(data = mtcars, aes(am, vs)) +
   geom_jitter()
 ```
 
 ----
 
-```{r pos5}
+```{r pos5, fig.align='center'}
 ggplot(data = mtcars, aes(factor(am), factor(vs))) +
   geom_jitter()
 ```
 
 ----
 
-```{r pos6}
+```{r pos6, fig.align='center'}
 ggplot(data = mtcars, aes(factor(am), factor(vs))) +
   geom_jitter(position = position_jitter(width = 0.1, height = 0.1))
 ```
 
 ----
 
-```{r pos7}
+```{r pos7, fig.align='center'}
 ggplot(data = mtcars, aes(factor(am), factor(vs))) +
   geom_jitter(position = position_jitter(width = 0.05, height = 0.3))
 ```
 
 ----
 
-```{r pos8}
+```{r pos8, fig.align='center'}
 ggplot(data = mtcars, aes(am, vs)) +
   geom_jitter(position = position_jitter(width = 0.1, height = 0.1))
 ```
 
 ## Nudge
 
-----
+<hr>
 
 Use with geom_text. Useful for adjusting text around points.
 
@@ -110,7 +180,7 @@ df <- data.frame(
 
 ----
 
-```{r pos12}
+```{r pos12, fig.align='center'}
 ggplot(df, aes(x, y)) +
   geom_point() +
   geom_text(aes(label = y),
@@ -119,20 +189,20 @@ ggplot(df, aes(x, y)) +
 
 ## Fill
 
-----
+<hr>
 
 Proportional bar plots.
 
 ----
 
-```{r pos10}
+```{r pos10, fig.align='center'}
 ggplot(data = mtcars, aes(factor(cyl), fill = factor(gear))) +
   geom_bar(position = "fill")
 ```
 
 ## Stack
 
-----
+<hr>
 
 ```{r pos11}
 series <- data.frame(
@@ -146,7 +216,7 @@ series$type2 <- factor(series$type, levels = c('c', 'b', 'd', 'a'))
 
 ----
 
-```{r pos13}
+```{r pos13, fig.align='center'}
 ggplot(series, aes(time, value, group = type)) +
   geom_line(aes(colour = type)) +
   geom_point(aes(colour = type))
@@ -154,12 +224,16 @@ ggplot(series, aes(time, value, group = type)) +
 
 ----
 
-```{r pos14}
+```{r pos14, fig.align='center'}
 ggplot(series, aes(time, value, group = type)) +
   geom_line(aes(colour = type), position = "stack") +
   geom_point(aes(colour = type), position = "stack")
 ```
 
-## Summary
+## Questions
 
-## Next Steps..
+<hr>
+
+## Thank You
+
+<hr>
