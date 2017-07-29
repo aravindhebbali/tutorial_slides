@@ -4,19 +4,92 @@ output:
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
-    fig_width: 6
-    fig_height: 5
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
+    fig_height: 5
+    fig_width: 6
 ---
+
+<style type="text/css">
+    .reveal p img {
+    align: middle;
+  }
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+    font-size: 25px;
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+  }
+  .reveal p img {
+    align: middle;
+  }
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
+
+## Agenda
+
+<hr>
+
+- build scatter plots
+- map aesthetics to variables
+- modify axis and legend
+- fit regression line
 
 ## Intro
 
+<hr>
+
 ## Installation
+
+<hr>
 
 ```{r show, eval=FALSE}
 library(ggplot2)
@@ -32,83 +105,100 @@ library(tidyr)
 
 ## Basic Plot
 
-----
+<hr>
 
 Let us start by building a simple scatter plot. 
 
 ----
 
-```{r scat2}
+```{r scat2, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg))
 ```
 
-----
+## Jitter
+
+<hr>
 
 Let us add some random variation to the location of each point to handle overplotting. Use the `position` argument and set it to `jitter`.
 
 ----
 
-```{r scat22}
+```{r scat22, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg), position = 'jitter')
 ```
 
-----
+## Jitter
+
+<hr>
 
 You can use the `geom_jitter()` function to achieve the above result.
 
-```{r scat3}
+----
+```{r scat3, fig.align='center'}
 ggplot(mtcars) +
   geom_jitter(aes(disp, mpg))
 ```
 
 ## Color
 
-----
+<hr>
 
 Now let us modify the color of the points. There are two ways:
 
 - map color to variable using the `aes()` function
 - specify colors separately
 
-----
+## Color
+
+<hr>
 
 Map color to variables.
 
 - Categorical Variable
 
-```{r scat4}
+----
+```{r scat4, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, color = factor(cyl)), 
              position = 'jitter')
 ```
 
-----
+## Color
+
+<hr>
 
 Continuous Variable
 
-```{r scat5}
+----
+```{r scat5, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, color = hp), 
              position = 'jitter')
 ```
 
-----
+## Color
+
+<hr>
 
 Let us specify the color of the points separately. 
 
-```{r scat6}
+----
+```{r scat6, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg), color = 'blue', 
              position = 'jitter')
 ```
 
-----
+## Alpha
+
+<hr>
 
 Use `alpha` argument to specify the transparency of the points.
 
-```{r scat7}
+----
+```{r scat7, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg), color = 'blue', alpha = 0.4, 
              position = 'jitter')
@@ -116,21 +206,25 @@ ggplot(mtcars) +
 
 ## Shape
 
-----
+<hr>
 
 Map shape to variable. We can map shape to a categorical variable only.
 
-```{r scat8}
+----
+```{r scat8, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, shape = factor(cyl)),
              position = 'jitter')
 ```
 
-----
+## Shape
+
+<hr>
 
 Specify value for shape.
 
-```{r scat9}
+----
+```{r scat9, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg), shape = 3,
              position = 'jitter')
@@ -138,68 +232,72 @@ ggplot(mtcars) +
 
 ## Size
 
-----
+<hr>
 
 Map size to variable. It is advised to map size to a continuous variable.
 
-```{r scat10}
+----
+```{r scat10, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, size = hp), color = 'blue',
              position = 'jitter')
 ```
 
-----
+## Size
+
+<hr>
 
 Specify value for size.
 
-```{r scat11}
+----
+```{r scat11, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg), size = 3,
              position = 'jitter')
 ```
 
-
 ## Fit Line
 
-----
+<hr>
 
 You can fit a line using either `geom_abline()` or `geom_smooth()`. Use linear regression.
 
-```{r aes12}
+----
+```{r aes12, fig.align='center'}
 ggplot(mtcars, aes(disp, mpg)) +
   geom_point(position = 'jitter') +
   geom_smooth(method = 'lm', se = FALSE)
 ```
 
-----
+## Confidence Interval
+
+<hr>
 
 Add a confidence interval for the fitted values.
 
-```{r aes13}
+----
+```{r aes13, fig.align='center'}
 ggplot(mtcars, aes(disp, mpg)) +
   geom_point(position = 'jitter') +
   geom_smooth(method = 'lm', se = TRUE)
 ```
 
-----
+## Loess
+
+<hr>
 
 Use loess regression
 
-```{r aes14}
+----
+```{r aes14, fig.align='center'}
 ggplot(mtcars, aes(disp, mpg)) +
   geom_point(position = 'jitter') +
   geom_smooth(method = 'loess', se = FALSE)
 ```
 
-----
+## Fit Line
 
-```{r aes15}
-ggplot(mtcars, aes(disp, mpg)) +
-  geom_point(position = 'jitter') +
-  geom_smooth(method = 'loess', se = TRUE)
-```
-
-----
+<hr>
 
 If you use `geom_abline()`, specify the intercept and the slope.
 Let us regress `duration` on `n_pages` and use the output.
@@ -212,23 +310,16 @@ lm(mpg ~ disp, data = mtcars)
 
 ----
 
-```{r aes17}
+```{r aes17, fig.align='center'}
 ggplot(mtcars, aes(disp, mpg)) +
   geom_point(position = 'jitter') +
   geom_abline(slope = 29.59985, intercept = -0.04122)
 ```
 
-## Summary
+## Questions
 
-----
+<hr>
 
-In this module, we learnt to:
+## Thank You
 
-- build scatter plots
-- map aesthetics to variables
-- modify axis and legend
-- fit regression line
-
-## Next Steps..
-
-In the next module, we will learn to build line charts.
+<hr>
