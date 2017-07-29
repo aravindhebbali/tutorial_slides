@@ -4,19 +4,87 @@ output:
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
-    fig_width: 6
-    fig_height: 5
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
+    fig_height: 5
+    fig_width: 6
 ---
+
+<style type="text/css">
+    .reveal p img {
+    align: middle;
+  }
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+    font-size: 25px;
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+  }
+  .reveal p img {
+    align: middle;
+  }
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
+
+## Agenda
+
+<hr>
 
 ## Intro
 
+<hr>
+
 ## Installation
+
+<hr>
 
 ```{r show, eval=FALSE}
 library(ggplot2)
@@ -33,7 +101,13 @@ library(tidyr)
 
 ## Case Study
 
+<hr>
+
 We will continue to use the ecommerce data. You can download it from [here](https://github.com/rsquaredacademy/datasets/blob/master/web.csv) or import directly using the readr package.
+
+## Data Dictionary
+
+<hr>
 
 ```{r import2, echo=FALSE, eval=FALSE, results='hide', message=FALSE}
 ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
@@ -46,11 +120,13 @@ ecom
 
 ## Data Dictionary
 
+<hr>
+
 ## Simple Histogram
 
-----
+<hr>
 
-```{r hist2}
+```{r hist2, fig.align='center'}
 ggplot(ecom) +
   geom_histogram(aes(n_visit))
 ```
@@ -59,7 +135,7 @@ ggplot(ecom) +
 
 Let us add some color to the histogram.
 
-```{r hist3}
+```{r hist3, fig.align='center'}
 ggplot(ecom) +
   geom_histogram(aes(n_visit), fill = 'blue')
 ```
@@ -68,7 +144,7 @@ ggplot(ecom) +
 
 The default number of bins is 30. We can specify the number of bins using `bins`.
 
-```{r hist4}
+```{r hist4, fig.align='center'}
 ggplot(ecom) +
   geom_histogram(aes(n_visit), bins = 7, fill = 'blue', color = 'black')
 ```
@@ -77,7 +153,7 @@ ggplot(ecom) +
 
 We can specify the width of the bins using `binwidth`.
 
-```{r hist5}
+```{r hist5, fig.align='center'}
 ggplot(ecom) +
   geom_histogram(aes(n_visit), binwidth = 2, fill = 'blue', color = 'black')
 ```
@@ -86,7 +162,7 @@ ggplot(ecom) +
 
 Line type and size.
 
-```{r hist6}
+```{r hist6, fig.align='center'}
 ggplot(ecom) +
   geom_histogram(aes(n_visit), binwidth = 2, 
                  fill = 'blue', color = 'black', alpha = 0.3,
@@ -98,9 +174,15 @@ ggplot(ecom) +
 We can also map the color to a variable.
 
 
-```{r hist7}
+```{r hist7, fig.align='center'}
 ggplot(ecom) +
   geom_histogram(aes(n_visit, fill = device), bins = 7)
 ```
 
+## Questions
 
+<hr>
+
+## Thank You
+
+<hr>
