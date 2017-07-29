@@ -4,23 +4,89 @@ output:
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
-    fig_width: 6
-    fig_height: 5
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
+    fig_height: 5
+    fig_width: 6
 ---
+
+<style type="text/css">
+    .reveal p img {
+    align: middle;
+  }
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+    font-size: 25px;
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+  }
+  .reveal p img {
+    align: middle;
+  }
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
+
+## Agenda
+
+<hr>
 
 ## Intro
 
-----
+<hr>
 
 In this module, we will learn about faceting i.e. combining plots.
 
 ## Installation
+
+<hr>
 
 ```{r show, eval=FALSE}
 library(ggplot2)
@@ -36,11 +102,13 @@ library(tidyr)
 
 ## Case Study
 
-----
+<hr>
 
 We will continue to use the ecommerce data. You can download it from [here](https://github.com/rsquaredacademy/datasets/blob/master/web.csv) or import directly using the readr package.
 
-----
+## Data
+
+<hr>
 
 ```{r import2, echo=FALSE, eval=FALSE, results='hide', message=FALSE}
 ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
@@ -51,9 +119,13 @@ ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datas
 ecom
 ```
 
+## Data Dictionary
+
+<hr>
+
 ----
 
-```{r facet1}
+```{r facet1, fig.align='center'}
 ggplot(ecom, aes(n_pages, duration)) + 
   geom_point() +
   facet_grid(. ~ device)
@@ -61,7 +133,7 @@ ggplot(ecom, aes(n_pages, duration)) +
 
 ----
 
-```{r facet2}
+```{r facet2, fig.align='center'}
 ggplot(ecom, aes(n_pages, duration)) + 
   geom_point() +
   facet_grid(device ~ .)
@@ -69,7 +141,7 @@ ggplot(ecom, aes(n_pages, duration)) +
 
 ----
 
-```{r facet3}
+```{r facet3, fig.align='center'}
 ggplot(ecom, aes(n_pages, duration)) + 
   geom_point() +
   facet_grid(purchase ~ device)
@@ -77,7 +149,7 @@ ggplot(ecom, aes(n_pages, duration)) +
 
 ----
 
-```{r facet4}
+```{r facet4, fig.align='center'}
 ggplot(ecom, aes(n_pages, duration)) + 
   geom_point() +
   facet_grid(device ~ purchase)
@@ -85,7 +157,7 @@ ggplot(ecom, aes(n_pages, duration)) +
 
 ----
 
-```{r facet5}
+```{r facet5, fig.align='center'}
 ggplot(ecom, aes(n_pages, duration, color = factor(device))) +
   geom_point() + 
   facet_grid(. ~ device, scales = "free")
@@ -93,7 +165,7 @@ ggplot(ecom, aes(n_pages, duration, color = factor(device))) +
 
 ----
 
-```{r facet6}
+```{r facet6, fig.align='center'}
 ggplot(ecom, aes(n_pages, duration)) + 
   geom_point() + 
   facet_grid(device ~ purchase, switch = "both") 
@@ -101,7 +173,7 @@ ggplot(ecom, aes(n_pages, duration)) +
 
 ----
 
-```{r facet7}
+```{r facet7, fig.align='center'}
 ggplot(ecom, aes(n_pages, duration)) +
   geom_point() +
   facet_wrap(~device)
@@ -109,7 +181,7 @@ ggplot(ecom, aes(n_pages, duration)) +
 
 ----
 
-```{r facet8}
+```{r facet8, fig.align='center'}
 ggplot(ecom, aes(n_pages, duration)) +
   geom_point() +
   facet_wrap(~device, nrow = 2)
@@ -117,7 +189,7 @@ ggplot(ecom, aes(n_pages, duration)) +
 
 ----
 
-```{r facet9}
+```{r facet9, fig.align='center'}
 ggplot(ecom, aes(n_pages, duration)) +
   geom_point() +
   facet_wrap(~device, nrow = 3)
@@ -125,7 +197,7 @@ ggplot(ecom, aes(n_pages, duration)) +
 
 ----
 
-```{r facet10}
+```{r facet10, fig.align='center'}
 ggplot(ecom, aes(n_pages, duration)) +
   geom_point() +
   facet_wrap(~device + purchase)
@@ -133,7 +205,7 @@ ggplot(ecom, aes(n_pages, duration)) +
 
 ----
 
-```{r facet11}
+```{r facet11, fig.align='center'}
 ggplot(ecom, aes(n_pages, duration)) +
   geom_point() +
   facet_wrap(c("device", "purchase"))
@@ -141,12 +213,16 @@ ggplot(ecom, aes(n_pages, duration)) +
 
 ----
 
-```{r facet12}
+```{r facet12, fig.align='center'}
 ggplot(ecom, aes(n_pages, duration)) +
   geom_point() +
   facet_wrap(~device, scales = "free")
 ```
 
-## Summary
+## Questions
 
-## Next Steps..
+<hr>
+
+## Thank You
+
+<hr>
