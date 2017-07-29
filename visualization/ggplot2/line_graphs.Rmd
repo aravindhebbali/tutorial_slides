@@ -4,19 +4,87 @@ output:
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
-    fig_width: 6
-    fig_height: 5
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
+    fig_height: 5
+    fig_width: 6
 ---
+
+<style type="text/css">
+    .reveal p img {
+    align: middle;
+  }
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+    font-size: 25px;
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+  }
+  .reveal p img {
+    align: middle;
+  }
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
+
+## Agenda
+
+<hr>
 
 ## Intro
 
+<hr>
+
 ## Installation
+
+<hr>
 
 ```{r show, eval=FALSE}
 library(ggplot2)
@@ -32,11 +100,13 @@ library(tidyr)
 
 ## Basic Line Plot
 
-----
+<hr>
 
 We will use a data set related to GDP growth rate. You can download it from [here](https://github.com/rsquaredacademy/datasets/blob/master/gdp.csv). It contains GDP (Gross Domestic Product) growth data for the BRICS (Brazil, Russia, India, China, South Africa) for the years 2000 to 2005.
 
-## Installation
+## Data
+
+<hr>
 
 ```{r imports2, eval=FALSE}
 gdp <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/gdp.csv')
@@ -47,89 +117,119 @@ gdp <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datase
 gdp
 ```
 
-----
+## Color
 
-```{r line1}
+<hr>
+
+```{r line1, fig.align='center'}
 ggplot(gdp, aes(year, india)) +
   geom_line(color = 'blue')
 ```
 
-----
+## Line Type
+
+<hr>
 
 `linetype` can be used to modify the appearance of the line.
 
-```{r line2}
+----
+
+```{r line2, fig.align='center'}
 ggplot(gdp, aes(year, india)) +
   geom_line(linetype = 2)
 ```
 
 ----
 
-```{r line3}
+```{r line3, fig.align='center'}
 ggplot(gdp, aes(year, india)) +
   geom_line(linetype = 'dashed')
 ```
 
-----
+## Size
+
+<hr>
 
 `size` argument is used to specify the width of the line.
 
-```{r line4}
+----
+
+```{r line4, fig.align='center'}
 ggplot(gdp, aes(year, india)) +
   geom_line(size = 2)
 ```
 
-----
+## Data
+
+<hr>
 
 Now let us map the aesthetics to the variables. The data used in the above example cannot be used as we need a variable with country names. We will use `gather()` function from the `tidyr` package to reshape the data.
 
 ----
 
-```{r line5}
+```{r line5, fig.align='center'}
 gdp2 <- gdp %>% 
   select(year, growth, india, china) %>% 
   gather(key = country, value = gdp, -year)
 ```
 
-----
+## Group
+
+<hr>
 
 Now we can map the aethetics to the `country` variable
 
 ----
 
-```{r line6}
+```{r line6, fig.align='center'}
 ggplot(gdp2, aes(year, gdp, group = country)) +
   geom_line()
 ```
 
-----
+## Color
+
+<hr>
 
 Let us begin with `color`.
 
-```{r line7}
+----
+
+```{r line7, fig.align='center'}
 ggplot(gdp2, aes(year, gdp, group = country)) +
   geom_line(aes(color = country))
 ```
 
-----
+## Line Type
+
+<hr>
 
 Map `linetype` to `country`.
 
-```{r line8}
+----
+
+```{r line8, fig.align='center'}
 ggplot(gdp2, aes(year, gdp, group = country)) +
   geom_line(aes(linetype = country))
 ```
 
-----
+## Line Width
+
+<hr>
 
 Map `linewidth` to `country`.
 
-```{r line9}
+----
+
+```{r line9, fig.align='center'}
 ggplot(gdp2, aes(year, gdp, group = country)) +
   geom_line(aes(size = country))
 ```
 
-## Summary
+## Questions
 
-## Next Steps
+<hr>
+
+## Thank You
+
+<hr>
 
