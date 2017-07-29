@@ -4,31 +4,96 @@ output:
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
-    fig_width: 6
-    fig_height: 5
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
+    fig_height: 5
+    fig_width: 6
 ---
 
-## Intro
+<style type="text/css">
+    .reveal p img {
+    align: middle;
+  }
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+    font-size: 25px;
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+  }
+  .reveal p img {
+    align: middle;
+  }
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
 
-----
+## Agenda
+
+<hr>
 
 In this module, we will learn to 
 
 - modify theme components
 - use different themes 
 
-----
+
+## Intro
+
+<hr>
 
 Use `theme()` to modify the appearance of all non data components of the plot.
 
 
 ## Installation
+
+<hr>
 
 ```{r show, eval=FALSE}
 library(ggplot2)
@@ -42,36 +107,38 @@ library(dplyr)
 library(tidyr)
 ```
 
-## theme
+## Begin
 
 ----
 
 modify components of a plot
 
-```{r theme1}
+```{r theme1, fig.align='center'}
 p <- ggplot(mtcars) +
   geom_point(aes(disp, mpg))
 ```
 
 ----
 
-```{r theme2}
-# modify X axis title
+modify X axis title
+
+```{r theme2, fig.align='center'}
 p + theme(axis.title.x = element_text(
   color = "red", size = 10))
 ```
 
 ----
 
-```{r theme3}
-# modify X axis text
+```{r theme3, fig.align='center'}
 p + theme(axis.text.x = element_text(
   color = "red", size = 10))
 ```
 
 ----
 
-```{r theme4}
+modify X axis text
+
+```{r theme4, fig.align='center'}
 # modify both axis text
 p + theme(axis.text = element_text(
   color = "red", size = 10, face = "italic"))
@@ -79,8 +146,9 @@ p + theme(axis.text = element_text(
 
 ----
 
-```{r theme5}
-# modify axis ticks
+modify axis ticks
+
+```{r theme5, fig.align='center'}
 p + theme(
   axis.ticks = element_line(
     color = 'blue',
@@ -95,7 +163,7 @@ p + theme(
 
 ----
 
-```{r theme6}
+```{r theme6, fig.align='center'}
 p + theme(
   axis.line = element_line(
     color = 'red',
@@ -109,14 +177,14 @@ p + theme(
 
 ----
 
-```{r theme7}
+```{r theme7, fig.align='center'}
 p <- ggplot(mtcars) +
   geom_point(aes(disp, mpg, color = factor(cyl), shape = factor(gear)))
 ```
 
 ----
 
-```{r theme8}
+```{r theme8, fig.align='center'}
 p + theme(
   legend.background = element_rect(
     fill = 'gray', 
@@ -144,14 +212,14 @@ p + theme(
 
 ----
 
-```{r theme9}
+```{r theme9, fig.align='center'}
 p <- ggplot(mtcars) +
   geom_point(aes(disp, mpg))
 ```
 
 ----
 
-```{r theme10}
+```{r theme10, fig.align='center'}
 p + theme(
   panel.background = element_rect(fill = 'gray'),
   panel.border = element_rect(
@@ -170,14 +238,14 @@ p + theme(
 
 ----
 
-```{r theme11}
+```{r theme11, fig.align='center'}
 p <- ggplot(mtcars) +
   geom_point(aes(disp, mpg))
 ```
 
 ----
 
-```{r theme12}
+```{r theme12, fig.align='center'}
 p + theme(
   panel.grid.major.x = element_line(
     color = 'blue',
@@ -198,7 +266,7 @@ p + theme(
 
 ----
 
-```{r theme13}
+```{r theme13, fig.align='center'}
 p <- ggplot(mtcars) +
   geom_point(aes(disp, mpg)) + 
   ggtitle('Theme Modification')
@@ -206,7 +274,7 @@ p <- ggplot(mtcars) +
 
 ----
 
-```{r theme14}
+```{r theme14, fig.align='center'}
 p + theme(
   plot.background = element_rect(
     color = 'blue',
@@ -221,7 +289,7 @@ p + theme(
 
 ----
 
-```{r theme15}
+```{r theme15, fig.align='center'}
 p <- ggplot(mtcars) +
   geom_point(aes(disp, mpg)) + 
   facet_grid(~cyl)
@@ -229,7 +297,7 @@ p <- ggplot(mtcars) +
 
 ----
 
-```{r theme16}
+```{r theme16, fig.align='center'}
 p + theme(
   strip.background = element_rect(
     color = 'red',
@@ -243,11 +311,11 @@ p + theme(
 )
 ```
 
-### Classic Dark on Light
+## Classic Dark on Light
 
-----
+<hr>
 
-```{r theme17}
+```{r theme17, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg)) +
   theme_bw()
@@ -255,9 +323,9 @@ ggplot(mtcars) +
 
 ## Default Gray
 
-----
+<hr>
 
-```{r theme18}
+```{r theme18, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg)) +
   theme_gray()
@@ -265,9 +333,9 @@ ggplot(mtcars) +
 
 ## Light
 
-----
+<hr>
 
-```{r theme19}
+```{r theme19, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg)) +
   theme_light()
@@ -275,9 +343,9 @@ ggplot(mtcars) +
 
 ## Minimal
 
-----
+<hr>
 
-```{r theme20}
+```{r theme20, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg)) +
   theme_minimal()
@@ -285,9 +353,9 @@ ggplot(mtcars) +
 
 ## Dark
 
-----
+<hr>
 
-```{r theme21}
+```{r theme21, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg)) +
   theme_dark()
@@ -295,9 +363,9 @@ ggplot(mtcars) +
 
 ## Classic
 
-----
+<hr>
 
-```{r theme22}
+```{r theme22, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg)) +
   theme_classic()
@@ -305,18 +373,19 @@ ggplot(mtcars) +
 
 ## Void (Empty)
 
-----
+<hr>
 
-```{r theme23}
+```{r theme23, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg)) +
   theme_void()
 ```
 
 
-## Summary
+## Questions
 
-----
+<hr>
 
-In this module, we learnt about the different themes available in ggplot2.
-This brings us to the end of the course **Elegant Data Visualization with ggplot2**.
+## Thank You
+
+<hr>
