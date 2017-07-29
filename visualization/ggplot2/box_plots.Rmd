@@ -4,19 +4,92 @@ output:
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
-    fig_width: 6
-    fig_height: 5
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
+    fig_height: 5
+    fig_width: 6
 ---
+
+<style type="text/css">
+    .reveal p img {
+    align: middle;
+  }
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+    font-size: 25px;
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+  }
+  .reveal p img {
+    align: middle;
+  }
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
+
+## Agenda
+
+<hr>
+
+- build box plots
+- modify outlier color, shape, size etc.
+- modify box color
+- modify box line color, size and line type
 
 ## Intro
 
+<hr>
+
 ## Installation
+
+<hr>
 
 ```{r show, eval=FALSE}
 library(ggplot2)
@@ -33,7 +106,13 @@ library(tidyr)
 
 ## Case Study
 
+<hr>
+
 We will continue to use the ecommerce data. You can download it from [here](https://github.com/rsquaredacademy/datasets/blob/master/web.csv) or import directly using the readr package.
+
+## Data
+
+<hr>
 
 ```{r import2, echo=FALSE, eval=FALSE, results='hide', message=FALSE}
 ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
@@ -46,11 +125,13 @@ ecom
 
 ## Data Dictionary
 
+<hr>
+
 ## Simple Box Plot
 
-----
+<hr>
 
-```{r box2}
+```{r box2, fig.align='center'}
 ggplot(ecom) +
   geom_boxplot(aes(x = factor(1), y = n_visit))
 ```
@@ -61,7 +142,7 @@ Now we need to mention something for X axis and hence we use the number 1. If we
 
 ----
 
-```{r box3}
+```{r box3, fig.align='center'}
 ggplot(ecom) +
   geom_boxplot(aes(x = factor(device), y = n_visit))
 ```
@@ -70,7 +151,7 @@ ggplot(ecom) +
 
 If you want horizontal boxplots, use `coord_flip()`. 
 
-```{r box4}
+```{r box4, fig.align='center'}
 ggplot(ecom) +
   geom_boxplot(aes(x = factor(device), y = n_visit)) +
   coord_flip()
@@ -78,13 +159,13 @@ ggplot(ecom) +
 
 ## Notch
 
-----
+<hr>
 
 Notches are used to compare groups; if the notches of two boxes do not overlap, this suggests that the medians are significantly different.
 
 ----
 
-```{r box5}
+```{r box5, fig.align='center'}
 ggplot(ecom) +
   geom_boxplot(aes(x = factor(device), y = n_visit),
                notch = TRUE) 
@@ -92,11 +173,13 @@ ggplot(ecom) +
 
 ## Jitter
 
-----
+<hr>
 
 Overlay points on boxplots.
 
-```{r box6}
+----
+
+```{r box6, fig.align='center'}
 ggplot(ecom, aes(x = factor(device), y = n_visit)) +
   geom_boxplot() +
   geom_jitter(width = 0.2, color = 'blue')
@@ -104,11 +187,13 @@ ggplot(ecom, aes(x = factor(device), y = n_visit)) +
 
 ## Outliers
 
+<hr>
+
 ### Color
 
-----
+<hr>
 
-```{r box7}
+```{r box7, fig.align='center'}
 ggplot(ecom) +
   geom_boxplot(aes(x = factor(device), y = duration),
                outlier.color = 'red')
@@ -116,19 +201,19 @@ ggplot(ecom) +
 
 ## Shape
 
-----
+<hr>
 
-```{r box8}
+```{r box8, fig.align='center'}
 ggplot(ecom) +
   geom_boxplot(aes(x = factor(device), y = duration),
                outlier.shape = 23)
 ```
 
-----
-
 Let us extend the Y axis and see if the ouliers appear more legible.
 
-```{r box9}
+----
+
+```{r box9, fig.align='center'}
 ggplot(ecom) +
   geom_boxplot(aes(x = factor(device), y = duration),
                outlier.shape = 23) +
@@ -137,22 +222,20 @@ ggplot(ecom) +
 
 ## Size
 
-----
+<hr>
 
-```{r box10}
+```{r box10, fig.align='center'}
 ggplot(ecom) +
   geom_boxplot(aes(x = factor(device), y = duration),
                outlier.size = 3) +
   expand_limits(y = c(0, 1100))
 ```
 
-Increasing the size is not very useful.
-
 ## Alpha
 
-----
+<hr>
 
-```{r box11}
+```{r box11, fig.align='center'}
 ggplot(ecom) +
   geom_boxplot(aes(x = factor(device), y = duration),
                outlier.color = 'blue', outlier.alpha = 0.3) +
@@ -163,20 +246,20 @@ Decreasing the alpha increases the visibility of the outlier points.
 
 ## Box Color
 
-----
+<hr>
 
-```{r box12}
+```{r box12, fig.align='center'}
 ggplot(ecom) +
   geom_boxplot(aes(x = factor(device), y = duration),
                fill = c('blue', 'red', 'green')) +
   expand_limits(y = c(0, 1100))
 ```
 
-----
-
 Map box color to variable.
 
-```{r box13}
+----
+
+```{r box13, fig.align='center'}
 ggplot(ecom) +
   geom_boxplot(aes(x = factor(device), y = duration,
                fill = factor(device))) +
@@ -185,7 +268,7 @@ ggplot(ecom) +
 
 ----
 
-```{r box14}
+```{r box14, fig.align='center'}
 ggplot(ecom) +
   geom_boxplot(aes(x = factor(device), y = duration),
                fill = 'blue', alpha = 0.3) +
@@ -194,9 +277,9 @@ ggplot(ecom) +
 
 ## Line Color
 
-----
+<hr>
 
-```{r box15}
+```{r box15, fig.align='center'}
 ggplot(ecom) +
   geom_boxplot(aes(x = factor(device), y = duration),
                color = c('blue', 'red', 'green')) +
@@ -205,7 +288,7 @@ ggplot(ecom) +
 
 ----
 
-```{r box16}
+```{r box16, fig.align='center'}
 ggplot(ecom) +
   geom_boxplot(aes(x = factor(device), y = duration,
                color = factor(device))) +
@@ -215,9 +298,9 @@ ggplot(ecom) +
 
 ## Line Width
 
-----
+<hr>
 
-```{r box17}
+```{r box17, fig.align='center'}
 ggplot(ecom) +
   geom_boxplot(aes(x = factor(device), y = duration),
                size = 1.5) +
@@ -226,24 +309,19 @@ ggplot(ecom) +
 
 ## Line Type
 
-----
+<hr>
 
-```{r box18}
+```{r box18, fig.align='center'}
 ggplot(ecom) +
   geom_boxplot(aes(x = factor(device), y = duration),
                linetype = 2) +
   expand_limits(y = c(0, 1100))
 ```
 
-## Summary
+## Questions
 
-In this module, we learnt to:
+<hr>
 
-- build box plots
-- modify outlier color, shape, size etc.
-- modify box color
-- modify box line color, size and line type
+## Thank You
 
-## Next Steps
-
-In the next module, we will learn to build histograms.
+<hr>
