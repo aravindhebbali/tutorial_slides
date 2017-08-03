@@ -105,15 +105,15 @@ library(tidyr)
 
 We will continue to use the ecommerce data. You can download it from [here](https://github.com/rsquaredacademy/datasets/blob/master/web.csv) or import directly using the readr package.
 
-## Data Dictionary
+## Data 
 
 <hr>
 
-```{r import2, echo=FALSE, eval=FALSE, results='hide', message=FALSE}
+```{r import2, eval=FALSE}
 ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
 ```
 
-```{r import, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+```{r import, echo=FALSE, eval=TRUE, message=FALSE}
 ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
 ecom
 ```
@@ -122,7 +122,7 @@ ecom
 
 <hr>
 
-## Simple Histogram
+## Histogram
 
 <hr>
 
@@ -131,48 +131,56 @@ ggplot(ecom) +
   geom_histogram(aes(n_visit))
 ```
 
-----
+## Fill
 
-Let us add some color to the histogram.
+<hr>
 
 ```{r hist3, fig.align='center'}
 ggplot(ecom) +
   geom_histogram(aes(n_visit), fill = 'blue')
 ```
 
-----
+## Color
 
-The default number of bins is 30. We can specify the number of bins using `bins`.
+<hr>
+
+```{r hist8, fig.align='center'}
+ggplot(ecom) +
+  geom_histogram(aes(n_visit), fill = 'white', color = 'blue')
+```
+
+
+## Bins
+
+<hr>
 
 ```{r hist4, fig.align='center'}
 ggplot(ecom) +
   geom_histogram(aes(n_visit), bins = 7, fill = 'blue', color = 'black')
 ```
 
-----
+## Bin Width
 
-We can specify the width of the bins using `binwidth`.
+<hr>
 
 ```{r hist5, fig.align='center'}
 ggplot(ecom) +
   geom_histogram(aes(n_visit), binwidth = 2, fill = 'blue', color = 'black')
 ```
 
-----
+## Line Type & Size
 
-Line type and size.
+<hr>
 
 ```{r hist6, fig.align='center'}
 ggplot(ecom) +
-  geom_histogram(aes(n_visit), binwidth = 2, 
-                 fill = 'blue', color = 'black', alpha = 0.3,
-                 linetype = 2, size = 1.25)
+  geom_histogram(aes(n_visit), binwidth = 2, fill = 'blue', 
+    color = 'black', alpha = 0.3, linetype = 2, size = 1.25)
 ```
 
-----
+## Mapping
 
-We can also map the color to a variable.
-
+<hr>
 
 ```{r hist7, fig.align='center'}
 ggplot(ecom) +
