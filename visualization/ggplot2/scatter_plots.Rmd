@@ -107,10 +107,6 @@ library(tidyr)
 
 <hr>
 
-Let us start by building a simple scatter plot. 
-
-----
-
 ```{r scat2, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg))
@@ -119,10 +115,6 @@ ggplot(mtcars) +
 ## Jitter
 
 <hr>
-
-Let us add some random variation to the location of each point to handle overplotting. Use the `position` argument and set it to `jitter`.
-
-----
 
 ```{r scat22, fig.align='center'}
 ggplot(mtcars) +
@@ -133,9 +125,6 @@ ggplot(mtcars) +
 
 <hr>
 
-You can use the `geom_jitter()` function to achieve the above result.
-
-----
 ```{r scat3, fig.align='center'}
 ggplot(mtcars) +
   geom_jitter(aes(disp, mpg))
@@ -154,11 +143,6 @@ Now let us modify the color of the points. There are two ways:
 
 <hr>
 
-Map color to variables.
-
-- Categorical Variable
-
-----
 ```{r scat4, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, color = factor(cyl)), 
@@ -169,9 +153,6 @@ ggplot(mtcars) +
 
 <hr>
 
-Continuous Variable
-
-----
 ```{r scat5, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, color = hp), 
@@ -182,9 +163,6 @@ ggplot(mtcars) +
 
 <hr>
 
-Let us specify the color of the points separately. 
-
-----
 ```{r scat6, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg), color = 'blue', 
@@ -195,9 +173,6 @@ ggplot(mtcars) +
 
 <hr>
 
-Use `alpha` argument to specify the transparency of the points.
-
-----
 ```{r scat7, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg), color = 'blue', alpha = 0.4, 
@@ -208,9 +183,6 @@ ggplot(mtcars) +
 
 <hr>
 
-Map shape to variable. We can map shape to a categorical variable only.
-
-----
 ```{r scat8, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, shape = factor(cyl)),
@@ -221,9 +193,6 @@ ggplot(mtcars) +
 
 <hr>
 
-Specify value for shape.
-
-----
 ```{r scat9, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg), shape = 3,
@@ -234,9 +203,6 @@ ggplot(mtcars) +
 
 <hr>
 
-Map size to variable. It is advised to map size to a continuous variable.
-
-----
 ```{r scat10, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, size = hp), color = 'blue',
@@ -247,9 +213,6 @@ ggplot(mtcars) +
 
 <hr>
 
-Specify value for size.
-
-----
 ```{r scat11, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg), size = 3,
@@ -260,9 +223,6 @@ ggplot(mtcars) +
 
 <hr>
 
-You can fit a line using either `geom_abline()` or `geom_smooth()`. Use linear regression.
-
-----
 ```{r aes12, fig.align='center'}
 ggplot(mtcars, aes(disp, mpg)) +
   geom_point(position = 'jitter') +
@@ -273,9 +233,6 @@ ggplot(mtcars, aes(disp, mpg)) +
 
 <hr>
 
-Add a confidence interval for the fitted values.
-
-----
 ```{r aes13, fig.align='center'}
 ggplot(mtcars, aes(disp, mpg)) +
   geom_point(position = 'jitter') +
@@ -286,9 +243,6 @@ ggplot(mtcars, aes(disp, mpg)) +
 
 <hr>
 
-Use loess regression
-
-----
 ```{r aes14, fig.align='center'}
 ggplot(mtcars, aes(disp, mpg)) +
   geom_point(position = 'jitter') +
@@ -301,8 +255,6 @@ ggplot(mtcars, aes(disp, mpg)) +
 
 If you use `geom_abline()`, specify the intercept and the slope.
 Let us regress `duration` on `n_pages` and use the output.
-
-----
 
 ```{r aes16}
 lm(mpg ~ disp, data = mtcars)
