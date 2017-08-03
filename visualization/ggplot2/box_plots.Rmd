@@ -114,11 +114,11 @@ We will continue to use the ecommerce data. You can download it from [here](http
 
 <hr>
 
-```{r import2, echo=FALSE, eval=FALSE, results='hide', message=FALSE}
+```{r import2, eval=FALSE}
 ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
 ```
 
-```{r import, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+```{r import, echo=FALSE, eval=TRUE, message=FALSE}
 ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
 ecom
 ```
@@ -127,7 +127,7 @@ ecom
 
 <hr>
 
-## Simple Box Plot
+## Univariate Box Plot
 
 <hr>
 
@@ -136,20 +136,18 @@ ggplot(ecom) +
   geom_boxplot(aes(x = factor(1), y = n_visit))
 ```
 
-----
+## Box Plot
 
-Now we need to mention something for X axis and hence we use the number 1. If we do not mention anything, ggplot2 will return an error. You can generally use any categorical variable for the X axis. Below is an example:
-
-----
+<hr>
 
 ```{r box3, fig.align='center'}
 ggplot(ecom) +
   geom_boxplot(aes(x = factor(device), y = n_visit))
 ```
 
-----
+## Horizontal Box Plot
 
-If you want horizontal boxplots, use `coord_flip()`. 
+<hr>   
 
 ```{r box4, fig.align='center'}
 ggplot(ecom) +
@@ -161,10 +159,6 @@ ggplot(ecom) +
 
 <hr>
 
-Notches are used to compare groups; if the notches of two boxes do not overlap, this suggests that the medians are significantly different.
-
-----
-
 ```{r box5, fig.align='center'}
 ggplot(ecom) +
   geom_boxplot(aes(x = factor(device), y = n_visit),
@@ -174,10 +168,6 @@ ggplot(ecom) +
 ## Jitter
 
 <hr>
-
-Overlay points on boxplots.
-
-----
 
 ```{r box6, fig.align='center'}
 ggplot(ecom, aes(x = factor(device), y = n_visit)) +
@@ -189,7 +179,12 @@ ggplot(ecom, aes(x = factor(device), y = n_visit)) +
 
 <hr>
 
-### Color
+- color
+- shape
+- size
+- alpha
+
+## Color
 
 <hr>
 
@@ -215,8 +210,7 @@ Let us extend the Y axis and see if the ouliers appear more legible.
 
 ```{r box9, fig.align='center'}
 ggplot(ecom) +
-  geom_boxplot(aes(x = factor(device), y = duration),
-               outlier.shape = 23) +
+  geom_boxplot(aes(x = factor(device), y = duration), outlier.shape = 23) +
   expand_limits(y = c(0, 1100))
 ```
 
@@ -226,8 +220,7 @@ ggplot(ecom) +
 
 ```{r box10, fig.align='center'}
 ggplot(ecom) +
-  geom_boxplot(aes(x = factor(device), y = duration),
-               outlier.size = 3) +
+  geom_boxplot(aes(x = factor(device), y = duration), outlier.size = 3) +
   expand_limits(y = c(0, 1100))
 ```
 
@@ -243,6 +236,17 @@ ggplot(ecom) +
 ```
 
 Decreasing the alpha increases the visibility of the outlier points.
+
+
+## Box Aesthetics
+
+<hr>
+
+- box color
+- line color
+- line type
+- line width
+
 
 ## Box Color
 
