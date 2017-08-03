@@ -112,23 +112,76 @@ to modify the X axis.It can be used for:
 - axis breaks
 - and axis position
 
-----
+## Basic Plot
+
+<hr>
 
 ```{r guide2, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg))
 ```
 
-----
+## Axis Label
+
+<hr>
 
 ```{r guide3, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg)) +
-  scale_x_continuous(name = "Displacement",
-                     limits = c(0, 600),
-                     breaks = c(0, 150, 300, 450, 600),
-                     labels = c('0', '150', '300', '450', '600'),
-                     position = 'top')
+  scale_x_continuous(name = "Displacement")
+```
+
+## Limits
+
+<hr>
+
+```{r guide4, fig.align='center'}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  scale_x_continuous(limits = c(0, 600))
+```
+
+## Breaks
+
+<hr>
+
+```{r guide5, fig.align='center'}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  scale_x_continuous(breaks = c(0, 150, 300, 450, 600))
+```
+
+## Tick Labels
+
+<hr>
+
+```{r guide6, fig.align='center'}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  scale_x_continuous(breaks = c(0, 150, 300, 450, 600),
+    labels = c('0', '150', '300', '450', '600'))
+```
+
+## Position
+
+<hr>
+
+```{r guide7, fig.align='center'}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  scale_x_continuous(position = 'top')
+```
+
+## X Axis 
+
+<hr>
+
+```{r guide8, fig.align='center'}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  scale_x_continuous(name = "Displacement", limits = c(0, 600),
+                     breaks = c(0, 150, 300, 450, 600), position = 'top',
+                     labels = c('0', '150', '300', '450', '600'))
 ```
 
 
@@ -136,40 +189,71 @@ ggplot(mtcars) +
 
 <hr>
 
-`scale_y_continuous()`: modify y axis
-
-Now let us modify the Y axis.
-
-----
-
-```{r guide4, fig.align='center'}
+```{r guide9, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg)) +
-  scale_y_continuous(name = "Miles Per Gallon",
-                     limits = c(0, 45),
-                     breaks = c(0, 15, 30, 45),
-                     labels = c('0', '15', '30', '45'),
-                     position = 'right')
+  scale_y_continuous(name = "Miles Per Gallon", limits = c(0, 45),
+                     breaks = c(0, 15, 30, 45), position = 'right',
+                     labels = c('0', '15', '30', '45'))
 ```
 
 ## X Axis - Discrete
 
 <hr>
 
-Now let us look at plots with discrete X axis.
 
-```{r guide5, fig.align='center'}
+## Bar Plot
+
+<hr>
+
+```{r guide10, fig.align='center'}
 ggplot(mtcars) +
   geom_bar(aes(factor(cyl)))
 ```
 
-----
+## Axis Label
 
-Use `scael_x_discrete()` to modify the X axis.
+<hr>
 
-----
+```{r guide11, fig.align='center'}
+ggplot(mtcars) +
+  geom_bar(aes(factor(cyl))) +
+  scale_x_discrete(name = "Number of Cylinders")
+```
 
-```{r guide6, fig.align='center'}
+## Tick Labels
+
+<hr>
+
+```{r guide12, fig.align='center'}
+ggplot(mtcars) +
+  geom_bar(aes(factor(cyl))) +
+  scale_x_discrete(labels = c("4" = "Four", "6" = "Six", "8" = "Eight"))
+```
+
+## Breaks
+
+<hr>
+
+```{r guide13, fig.align='center'}
+ggplot(mtcars) +
+  geom_bar(aes(factor(cyl))) +
+  scale_x_discrete(breaks = c("4", "6", "8"))
+```
+
+## Position
+
+<hr>
+
+```{r guide14, fig.align='center'}
+ggplot(mtcars) +
+  geom_bar(aes(factor(cyl))) +
+  scale_x_discrete(position = 'bottom')
+```
+
+## X Axis - Discrete 
+
+```{r guide15, fig.align='center'}
 ggplot(mtcars) +
   geom_bar(aes(factor(cyl))) +
   scale_x_discrete(name = "Number of Cylinders",
