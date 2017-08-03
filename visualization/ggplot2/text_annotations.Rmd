@@ -78,9 +78,6 @@ output:
 
 <hr>
 
-## Intro
-
-<hr>
 
 ## Installation
 
@@ -94,13 +91,20 @@ library(ggplot2)
 library(ggplot2)
 ```
 
-## Annotate
+## Intro
 
 <hr>
 
-We will use the `annotate()` function to add custom text to the plots. You can use the `annotate()` function to add rectangles/segments/pointrange as well but our focus will be on adding text. Let us start with a simple scatter plot.
+We will use the `annotate()` function to add custom text to the plots. You can use the `annotate()` function to add rectangles/segments/pointrange as well but our focus will be on adding and formatting text.
 
-----
+- color
+- size
+- fontface
+- angle
+
+## Annotate
+
+<hr>
 
 ```{r ann2, fig.align='center'}
 ggplot(mtcars) +
@@ -108,13 +112,50 @@ ggplot(mtcars) +
   annotate('text', x = 200, y = 30, label = 'Sample Text')
 ```
 
+## Color
+
+<hr>
+
+```{r ann4, fig.align='center'}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  annotate('text', x = 200, y = 30, label = 'Sample Text', color = 'red')
+```
+
+## Size
+
+<hr>
+
+```{r ann5, fig.align='center'}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  annotate('text', x = 200, y = 30, label = 'Sample Text', size = 6)
+```
+
+## Font
+
+<hr>
+
+```{r ann6, fig.align='center'}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  annotate('text', x = 200, y = 30, label = 'Sample Text', fontface = 'bold')
+```
+
+## Angle
+
+<hr>
+
+```{r ann7, fig.align='center'}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  annotate('text', x = 200, y = 30, label = 'Sample Text', angle = 25)
+```
+
 ## Annotate
 
 <hr>
 
-We can format the text as well.
-
-----
 ```{r ann3, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg)) +
