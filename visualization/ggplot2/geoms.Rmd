@@ -78,6 +78,13 @@ output:
 
 <hr>
 
+- Scatter Plot
+- Bar Plot
+- Box Plot
+- Histogram
+- Line Chart
+- Fit Line
+
 ## Intro
 
 <hr>
@@ -98,12 +105,6 @@ library(ggplot2)
 library(dplyr)
 ```
 
-## Point
-
-<hr>
-
-Let us say we want to visualize the relationship between two continuous variables. For example, as visitors browse more pages on a website, the time spent on the website also increases. We cannot say that more time spent on a website indicates more page visits as some of the visitors might have spent a lot of time on a couple of pages or might have been idle. Using the ecommerce data, we will look at the relationship between number of pages visited and time on site. Now the best way to represent this relationship is a scatter plot i.e. represent the data using points.
-
 ## Case Study
 
 <hr>
@@ -123,6 +124,9 @@ ecom
 
 <hr>
 
+## Scatter Plot
+
+<hr>
 
 ## Point
 
@@ -144,14 +148,6 @@ We can fit a regression line or add horizontal or vertical lines to the plots us
 - `geom_vline()`
 
 
-## Point
-
-<hr>
-
-You can add a vertical line using the `geom_vline()` function. The main argument 
-of this function is `xintercept` which specifies the value on the X axis where
-the line must be drawn. 
-
 ## Vertical Line
 
 <hr>
@@ -166,8 +162,6 @@ ggplot(mtcars, aes(x = wt, y = mpg)) +
 
 <hr>
 
-The `geom_hline()` function can be used to add a horizontal line. 
-
 ```{r geoms4, fig.align='center'}
 ggplot(mtcars, aes(x = wt, y = mpg)) +
   geom_point() +
@@ -178,25 +172,13 @@ ggplot(mtcars, aes(x = wt, y = mpg)) +
 
 <hr>
 
-To fit a regression line to the plot, use the `geom_abline()` function. You 
-need to specify values for the intercept and the slope.
-
 ```{r geoms5, fig.align='center'}
 ggplot(mtcars, aes(x = wt, y = mpg)) +
   geom_point() + 
   geom_abline(intercept = 10, slope = 1)
 ```
 
-## Point
-
-<hr>
-
-Another way to fit a regression line to the plot is `geom_smooth()`. You 
-need to specify the regression type using the `method` argument. You can
-choose to display the confidence intervals for the fitted values by setting
-the `se` argument to `TRUE` or `FALSE`.
-
-## Point
+## Regression Line
 
 <hr>
 
@@ -205,7 +187,7 @@ ggplot(mtcars, aes(x = wt, y = mpg)) +
 	geom_smooth(method = 'lm', se = TRUE)
 ```
 
-## Point
+## Regression Line
 
 <hr>
 
@@ -214,11 +196,10 @@ ggplot(mtcars, aes(x = wt, y = mpg)) +
   geom_smooth(method = 'loess', se = FALSE)
 ```
 
-## Bar
+## Bar Plot
 
 <hr>
 
-Continuing with our ecommerce website, let us say we want to know the distribution of the referrers or the devices. Such information is best displayed using bar plots. Use the `geom_bar()` function to create grouped/stacke bar plots.
 
 ## Bar
 
@@ -233,9 +214,6 @@ ggplot(ecom, aes(x = factor(device))) +
 
 <hr>
 
-Suppose you want to visualize the total revenue from different devices, you
-can map the variable to the Y axis.
-
 ```{r geoms9, fig.align='center'}
 ggplot(ecom, aes(x = factor(device))) +
   geom_bar(aes(weight = order_value))
@@ -244,8 +222,6 @@ ggplot(ecom, aes(x = factor(device))) +
 ## Bar
 
 <hr>
-
-If you want to get a breakdown of the purchasers/non-purchasers for different device types, create a stacked bar plot.
 
 ```{r geoms10, fig.align='center'}
 ggplot(ecom, aes(x = factor(device))) +
@@ -256,9 +232,6 @@ ggplot(ecom, aes(x = factor(device))) +
 
 <hr>
 
-To create horizontal bar plots, use the `coord_flip()` function.
-As the name indicates, it flips the X and Y coordinates.
-
 ```{r geoms11, fig.align='center'}
 ggplot(ecom, aes(x = factor(device))) +
   geom_bar(aes(fill = purchase)) +
@@ -268,9 +241,6 @@ ggplot(ecom, aes(x = factor(device))) +
 ## Bar
 
 <hr>
-
-Sometimes you have data in a tabular format. In such cases, you can
-use the `geom_col()` function.
 
 ```{r geoms12, fig.align='center'}
 device <- c('laptop', 'mobile', 'tablet')
@@ -284,19 +254,21 @@ ggplot(traffic, aes(x = device, y = visits)) +
 
 <hr>
 
-If you want to examine the distribution of a variable or detect outliers, boxplots are very handy. Let us look at the distribution of number of pages visited for different device types using the `geom_boxplot()` function.
+- examine the distribution of a variable  
+- detect outliers, boxplots are very handy
+
+## Boxplot
+
+<hr>
 
 ```{r geoms13, fig.align='center'}
 ggplot(ecom, aes(x = factor(device), y = n_pages)) +
   geom_boxplot()
 ```
 
-## Boxplot
+## Jitter
 
 <hr>
-
-Use the `geom_jitter()` function to overlay the observations on the
-boxplot.
 
 ```{r geoms14, fig.align='center'}
 ggplot(ecom, aes(x = factor(device), y = n_pages)) +
@@ -308,18 +280,18 @@ ggplot(ecom, aes(x = factor(device), y = n_pages)) +
 
 <hr>
 
-Histograms are useful for examing the distribution of a continuous variable. Let us look at the distribution of time spent on the site using the `geom_histogram()` function and examine if it is skewed.
+## Histogram
+
+<hr>
 
 ```{r geoms15, fig.align='center'}
 ggplot(ecom, aes(x = duration)) +
   geom_histogram()
 ```
 
-## Histogram
+## Bins
 
 <hr>
-
-Specify the number of bins using the `bins` argument.
 
 ```{r geoms16, fig.align='center'}
 ggplot(ecom, aes(x = duration)) +
@@ -330,13 +302,42 @@ ggplot(ecom, aes(x = duration)) +
 
 <hr>
 
-Line charts are useful for visualizing trends or changes in metrics over a period time. Use the `geom_line()` function to plot the conversion over several quarters.
+
+## Data
+
+<hr>
+
+```{r imports2, eval=FALSE}
+gdp <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/gdp.csv')
+```
+
+```{r import2, echo=FALSE, eval=TRUE, message=FALSE}
+gdp <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/gdp.csv')
+gdp
+```
+
+## Line Chart
+
+<hr>
+
+```{r geomline1, fig.align='center'}
+ggplot(gdp, aes(year, india)) +
+  geom_line()
+```
+
+
+## Line Color & Type 
+
+<hr>
+
+```{r geomline2, fig.align='center'}
+ggplot(gdp, aes(year, india)) +
+  geom_line(color = 'blue', linetype = 'dashed')
+```
 
 ## Jitter
 
 <hr>
-
-We used the `geom_jitter()` function to overlay observation on the boxplot.
 
 ```{r geoms17, fig.align='center'}
 ggplot(ecom, aes(x = factor(device), y = duration)) +
@@ -347,8 +348,6 @@ ggplot(ecom, aes(x = factor(device), y = duration)) +
 
 <hr>
 
-Change the width and height to get a better overview.
-
 ```{r geoms18, fig.align='center'}
 ggplot(ecom, aes(x = factor(device), y = duration)) +
   geom_jitter(width = 0.25, height = 0.5)
@@ -358,18 +357,18 @@ ggplot(ecom, aes(x = factor(device), y = duration)) +
 
 <hr>
 
-```{r geoms19, fig.align='center'}
-ggplot(mtcars, aes(disp, mpg, label = rownames(mtcars))) +
-  geom_text(check_overlap = TRUE, size = 2)
-```
-
-## Label
-
-<hr>
-
 ```{r geoms20, fig.align='center'}
 ggplot(mtcars, aes(disp, mpg, label = rownames(mtcars))) +
   geom_label()
+```
+
+## Text
+
+<hr>
+
+```{r geoms19, fig.align='center'}
+ggplot(mtcars, aes(disp, mpg, label = rownames(mtcars))) +
+  geom_text(check_overlap = TRUE, size = 2)
 ```
 
 ## Text
