@@ -110,11 +110,11 @@ We will continue to use the ecommerce data. You can download it from [here](http
 
 <hr>
 
-```{r import2, echo=FALSE, eval=FALSE, results='hide', message=FALSE}
+```{r import2, eval=FALSE}
 ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
 ```
 
-```{r import, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+```{r import, echo=FALSE, eval=TRUE, message=FALSE}
 ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
 ecom
 ```
@@ -122,6 +122,15 @@ ecom
 ## Data Dictionary
 
 <hr>
+
+## Facet
+
+<hr>
+
+subplots that each display one subset of the data.
+
+- `facet_grid()`
+- `facet_wrap()`
 
 ----
 
