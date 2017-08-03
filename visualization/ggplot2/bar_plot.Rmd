@@ -111,7 +111,7 @@ We will continue to use the ecommerce data. You can download it from [here](http
 ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
 ```
 
-```{r import, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+```{r import, echo=FALSE, eval=TRUE, message=FALSE}
 ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
 ecom
 ```
