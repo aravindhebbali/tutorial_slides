@@ -1,0 +1,278 @@
+---
+title: "ggplot2: Guide"
+output: 
+  revealjs::revealjs_presentation:
+    transition: slide
+    incremental: true
+    theme: default
+    highlight: haddock
+    center: false
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+    fig_height: 5
+    fig_width: 6
+---
+
+<style type="text/css">
+    .reveal p img {
+    align: middle;
+  }
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+    font-size: 25px;
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+  }
+  .reveal p img {
+    align: middle;
+  }
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
+
+## Agenda
+
+<hr>
+
+Now that we have learnt to build different plots, let us look at different ways to modify the axis. Along the way, we will also explore the below functions:
+
+- `scale_*()` family of functions 
+- `guides()`
+- `guide_legend()` 
+- and `guide_colorbar()`
+
+
+## Intro
+
+<hr>
+
+In this module, we will focus on modifying the legends of plots when the aesthetics are mapped to variables.
+
+## Installation
+
+<hr>
+
+```{r show, eval=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+```{r load, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+## Guides
+
+<hr>
+
+```{r leg20, fig.align='center'}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, color = factor(cyl))) +
+  scale_color_manual(values = c("red", "blue", "green"),
+    guide = guide_legend(title = "Cylinders", title.hjust = 0.5, 
+      title.position = "top", label.position = "right", 
+      direction = "horizontal", label.hjust = 0.5, nrow = 2, reverse = TRUE)
+  )
+```
+
+----
+
+```{r leg21, fig.align='center'}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, color = factor(cyl))) +
+  scale_color_discrete(
+    guide = guide_legend(title = "Cylinders",
+      title.hjust = 0.5, title.position = "top",
+      label.position = "right", direction = "horizontal",
+      label.hjust = 0.5, nrow = 2, reverse = TRUE)
+  )
+```
+
+----
+
+```{r leg22, fig.align='center'}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, color = hp)) +
+  scale_color_continuous(guide = guide_colorbar(
+    title = "Horsepower",
+    title.position = "top",
+    title.vjust = 1,
+    label.position = "bottom",
+    label.vjust = 0.8,
+    barwidth = 10,
+    barheight = 3,
+    nbins = 10,
+    raster = FALSE,
+    ticks = TRUE,
+    draw.ulim = TRUE,
+    draw.llim = FALSE,
+    direction = "horizontal",
+    reverse = TRUE
+  ))
+```
+
+----
+
+```{r leg23, fig.align='center'}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, fill = hp), shape = 22) +
+  scale_fill_continuous(guide = guide_colorbar(
+    title = "Horsepower",
+    title.position = "top",
+    title.vjust = 1,
+    label.position = "bottom",
+    label.vjust = 0.8,
+    barwidth = 10,
+    barheight = 3,
+    nbins = 10,
+    raster = FALSE,
+    ticks = TRUE,
+    draw.ulim = TRUE,
+    draw.llim = FALSE,
+    direction = "horizontal",
+    reverse = TRUE)
+  )
+```
+
+----
+
+```{r leg24, fig.align='center'}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, fill = hp), shape = 22) +
+  scale_fill_gradient2(guide = guide_colorbar(
+    title = "Horsepower",
+    title.position = "top",
+    title.vjust = 1,
+    label.position = "bottom",
+    label.vjust = 0.8,
+    barwidth = 10,
+    barheight = 3,
+    nbins = 10,
+    raster = FALSE,
+    ticks = TRUE,
+    draw.ulim = TRUE,
+    draw.llim = FALSE,
+    direction = "horizontal",
+    reverse = TRUE)
+  ) 
+```
+
+----
+
+```{r leg25, fig.align='center'}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, fill = hp), shape = 22) +
+  scale_fill_gradient(low = "white", high = "black", 
+    guide = guide_colorbar(
+      title = "Horsepower",
+      title.position = "top",
+      title.vjust = 1,
+      label.position = "bottom",
+      label.vjust = 0.8,
+      barwidth = 10,
+      barheight = 3,
+      nbins = 10,
+      raster = FALSE,
+      ticks = TRUE,
+      draw.ulim = TRUE,
+      draw.llim = FALSE,
+      direction = "horizontal",
+      reverse = TRUE
+    )
+  ) 
+```
+
+----
+
+```{r leg26, fig.align='center'}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, fill = hp), shape = 22) +
+  scale_fill_gradientn(colors = terrain.colors(5), 
+    guide = guide_colorbar(title = "Horsepower", 
+      title.position = "top", title.vjust = 1, 
+      label.position = "bottom", label.vjust = 0.8, 
+      barwidth = 10, barheight = 3, nbins = 10, 
+      raster = FALSE, ticks = TRUE,
+      draw.ulim = TRUE, draw.llim = FALSE, 
+      direction = "horizontal", reverse = TRUE
+    )
+  ) 
+```
+
+----
+
+```{r leg27, fig.align='center'}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, color = hp, 
+                 size = qsec, 
+                 shape = factor(gear))) + 
+  guides(color = "colorbar",
+         shape = "legend",
+         size = "legend")
+```
+
+----
+
+```{r leg28, fig.align='center'}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, color = hp, size = wt, shape = factor(gear))) + 
+  guides(color = guide_colorbar(title = "Horsepower"),
+    shape = guide_legend(title = "Weight"),
+    size = guide_legend(title = "Gear")
+  )
+```
+
+## Questions
+
+<hr>
+
+## Thank You
+
+<hr>
