@@ -90,7 +90,7 @@ Now that we have learnt to build different plots, let us look at different ways 
 
 <hr>
 
-In this module, we will focus on modifying the legends of plots when the aesthetics are mapped to variables.
+In this module, we will focus on modifying the legends of plots.
 
 ## Installation
 
@@ -112,9 +112,103 @@ library(tidyr)
 
 <hr>
 
+
+- title
+- title.hjust
+- title.position
+- label.hjust
+- label.position
+- direction
+- nrow
+- reverse
+
+## Title
+
+<hr>
+
+```{r leg1, fig.align='center'}
+ggplot(mtcars) + geom_point(aes(disp, mpg, color = factor(cyl))) +
+  scale_color_manual(values = c("red", "blue", "green"),
+    guide = guide_legend(title = "Cylinders"))
+```
+
+## Title Alignment
+
+<hr>
+
+```{r leg2, fig.align='center'}
+ggplot(mtcars) + geom_point(aes(disp, mpg, color = factor(cyl))) +
+  scale_color_manual(values = c("red", "blue", "green"),
+    guide = guide_legend(title = "Cylinders", title.hjust = 0.5))
+```
+
+## Title Position
+
+<hr>
+
+```{r leg3, fig.align='center'}
+ggplot(mtcars) + geom_point(aes(disp, mpg, color = factor(cyl))) +
+  scale_color_manual(values = c("red", "blue", "green"),
+    guide = guide_legend(title = "Cylinders", title.hjust = 0.5, 
+      title.position = "top"))
+```
+
+## Label Position
+
+<hr>
+
+```{r leg4, fig.align='center'}
+ggplot(mtcars) + geom_point(aes(disp, mpg, color = factor(cyl))) +
+  scale_color_manual(values = c("red", "blue", "green"),
+    guide = guide_legend(label.position = "right"))
+```
+
+## Label Alignment
+
+<hr>
+
+```{r leg5, fig.align='center'}
+ggplot(mtcars) + geom_point(aes(disp, mpg, color = factor(cyl))) +
+  scale_color_manual(values = c("red", "blue", "green"),
+    guide = guide_legend(label.hjust = 0.5))
+```
+
+## Direction
+
+<hr>
+
+```{r leg6, fig.align='center'}
+ggplot(mtcars) + geom_point(aes(disp, mpg, color = factor(cyl))) +
+  scale_color_manual(values = c("red", "blue", "green"),
+    guide = guide_legend(direction = "horizontal"))
+```
+
+## Rows
+
+<hr>
+
+```{r leg7, fig.align='center'}
+ggplot(mtcars) + geom_point(aes(disp, mpg, color = factor(cyl))) +
+  scale_color_manual(values = c("red", "blue", "green"),
+    guide = guide_legend(nrow = 2))
+```
+
+## Reverse
+
+<hr>
+
+```{r leg8, fig.align='center'}
+ggplot(mtcars) + geom_point(aes(disp, mpg, color = factor(cyl))) +
+  scale_color_manual(values = c("red", "blue", "green"),
+    guide = guide_legend(reverse = TRUE))
+```
+
+## Guides
+
+<hr>
+
 ```{r leg20, fig.align='center'}
-ggplot(mtcars) +
-  geom_point(aes(disp, mpg, color = factor(cyl))) +
+ggplot(mtcars) + geom_point(aes(disp, mpg, color = factor(cyl))) +
   scale_color_manual(values = c("red", "blue", "green"),
     guide = guide_legend(title = "Cylinders", title.hjust = 0.5, 
       title.position = "top", label.position = "right", 
@@ -125,142 +219,104 @@ ggplot(mtcars) +
 ----
 
 ```{r leg21, fig.align='center'}
-ggplot(mtcars) +
-  geom_point(aes(disp, mpg, color = factor(cyl))) +
-  scale_color_discrete(
-    guide = guide_legend(title = "Cylinders",
+ggplot(mtcars) + geom_point(aes(disp, mpg, color = factor(cyl))) +
+  scale_color_discrete(guide = guide_legend(title = "Cylinders",
       title.hjust = 0.5, title.position = "top",
       label.position = "right", direction = "horizontal",
       label.hjust = 0.5, nrow = 2, reverse = TRUE)
   )
 ```
 
-----
+## Title Alignment (Vertical)
+
+<hr>
 
 ```{r leg22, fig.align='center'}
-ggplot(mtcars) +
-  geom_point(aes(disp, mpg, color = hp)) +
+ggplot(mtcars) + geom_point(aes(disp, mpg, color = hp)) +
   scale_color_continuous(guide = guide_colorbar(
-    title = "Horsepower",
-    title.position = "top",
-    title.vjust = 1,
-    label.position = "bottom",
-    label.vjust = 0.8,
-    barwidth = 10,
-    barheight = 3,
-    nbins = 10,
-    raster = FALSE,
-    ticks = TRUE,
-    draw.ulim = TRUE,
-    draw.llim = FALSE,
-    direction = "horizontal",
-    reverse = TRUE
-  ))
+    title = "Horsepower", title.position = "top", title.vjust = 1))
 ```
 
-----
+## Labels Alignment (Vertical)
+
+<hr>
 
 ```{r leg23, fig.align='center'}
 ggplot(mtcars) +
-  geom_point(aes(disp, mpg, fill = hp), shape = 22) +
-  scale_fill_continuous(guide = guide_colorbar(
-    title = "Horsepower",
-    title.position = "top",
-    title.vjust = 1,
-    label.position = "bottom",
-    label.vjust = 0.8,
-    barwidth = 10,
-    barheight = 3,
-    nbins = 10,
-    raster = FALSE,
-    ticks = TRUE,
-    draw.ulim = TRUE,
-    draw.llim = FALSE,
-    direction = "horizontal",
-    reverse = TRUE)
-  )
+  geom_point(aes(disp, mpg, color = hp)) +
+  scale_color_continuous(guide = guide_colorbar(
+    label.vjust = 0.8))
 ```
 
-----
+## Bar Width
+
+<hr>
 
 ```{r leg24, fig.align='center'}
 ggplot(mtcars) +
-  geom_point(aes(disp, mpg, fill = hp), shape = 22) +
-  scale_fill_gradient2(guide = guide_colorbar(
-    title = "Horsepower",
-    title.position = "top",
-    title.vjust = 1,
-    label.position = "bottom",
-    label.vjust = 0.8,
-    barwidth = 10,
-    barheight = 3,
-    nbins = 10,
-    raster = FALSE,
-    ticks = TRUE,
-    draw.ulim = TRUE,
-    draw.llim = FALSE,
-    direction = "horizontal",
-    reverse = TRUE)
-  ) 
+  geom_point(aes(disp, mpg, color = hp)) +
+  scale_color_continuous(guide = guide_colorbar(
+    barwidth = 10))
 ```
 
-----
+## Bar Height
+
+<hr>
 
 ```{r leg25, fig.align='center'}
 ggplot(mtcars) +
-  geom_point(aes(disp, mpg, fill = hp), shape = 22) +
-  scale_fill_gradient(low = "white", high = "black", 
-    guide = guide_colorbar(
-      title = "Horsepower",
-      title.position = "top",
-      title.vjust = 1,
-      label.position = "bottom",
-      label.vjust = 0.8,
-      barwidth = 10,
-      barheight = 3,
-      nbins = 10,
-      raster = FALSE,
-      ticks = TRUE,
-      draw.ulim = TRUE,
-      draw.llim = FALSE,
-      direction = "horizontal",
-      reverse = TRUE
-    )
-  ) 
+  geom_point(aes(disp, mpg, color = hp)) +
+  scale_color_continuous(guide = guide_colorbar(
+    barheight = 3))
 ```
 
-----
+## Bins
+
+<hr>
 
 ```{r leg26, fig.align='center'}
 ggplot(mtcars) +
-  geom_point(aes(disp, mpg, fill = hp), shape = 22) +
-  scale_fill_gradientn(colors = terrain.colors(5), 
-    guide = guide_colorbar(title = "Horsepower", 
-      title.position = "top", title.vjust = 1, 
-      label.position = "bottom", label.vjust = 0.8, 
-      barwidth = 10, barheight = 3, nbins = 10, 
-      raster = FALSE, ticks = TRUE,
-      draw.ulim = TRUE, draw.llim = FALSE, 
-      direction = "horizontal", reverse = TRUE
-    )
-  ) 
+  geom_point(aes(disp, mpg, color = hp)) +
+  scale_color_continuous(guide = guide_colorbar(
+    nbin = 4))
 ```
 
-----
+## Ticks
 
-```{r leg27, fig.align='center'}
-ggplot(mtcars) +
-  geom_point(aes(disp, mpg, color = hp, 
-                 size = qsec, 
-                 shape = factor(gear))) + 
-  guides(color = "colorbar",
-         shape = "legend",
-         size = "legend")
-```
-
-----
+<hr>
 
 ```{r leg28, fig.align='center'}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, color = hp)) +
+  scale_color_continuous(guide = guide_colorbar(
+    ticks = FALSE))
+```
+
+## Upper/Lower Limits
+
+<hr>
+
+```{r leg29, fig.align='center'}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, color = hp)) +
+  scale_color_continuous(guide = guide_colorbar(
+    draw.ulim = TRUE, draw.llim = FALSE))
+```
+
+## Guides
+
+<hr>
+
+```{r leg34, fig.align='center'}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, color = hp, 
+    size = qsec, shape = factor(gear))) + 
+  guides(color = "colorbar", shape = "legend", size = "legend")
+```
+
+----
+
+```{r leg35, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, color = hp, size = wt, shape = factor(gear))) + 
   guides(color = guide_colorbar(title = "Horsepower"),
