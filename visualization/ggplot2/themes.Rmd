@@ -107,79 +107,68 @@ library(dplyr)
 library(tidyr)
 ```
 
-## Begin
+## Scatter Plot
 
-----
-
-modify components of a plot
+<hr>
 
 ```{r theme1, fig.align='center'}
 p <- ggplot(mtcars) +
   geom_point(aes(disp, mpg))
 ```
 
-----
+## Axis Title
 
-modify X axis title
+<hr>
 
 ```{r theme2, fig.align='center'}
 p + theme(axis.title.x = element_text(
   color = "red", size = 10))
 ```
 
-----
+## Axis Text
+
+<hr>
 
 ```{r theme3, fig.align='center'}
-p + theme(axis.text.x = element_text(
-  color = "red", size = 10))
+p + theme(axis.text.x = element_text(color = "red", size = 10))
 ```
 
-----
+## Axis Font
 
-modify X axis text
+<hr>
+
 
 ```{r theme4, fig.align='center'}
 # modify both axis text
-p + theme(axis.text = element_text(
-  color = "red", size = 10, face = "italic"))
+p + theme(axis.text = element_text(color = "red", size = 10, face = "italic"))
 ```
 
-----
+## Axis Ticks
 
-modify axis ticks
+<hr>
 
 ```{r theme5, fig.align='center'}
-p + theme(
-  axis.ticks = element_line(
-    color = 'blue',
-    size = 1.25,
-    linetype = 2
-  ),
-  axis.ticks.length = unit(1, "cm")
-)
+p + theme(axis.ticks = element_line(color = 'blue', size = 1.25, linetype = 2), 
+  axis.ticks.length = unit(1, "cm"))
 ```
 
-## modify axis line
+## Axis Line
 
-----
+<hr>
 
 ```{r theme6, fig.align='center'}
 p + theme(
-  axis.line = element_line(
-    color = 'red',
-    size = 1.5, 
-    linetype = 3
-  )
-)
+  axis.line = element_line(color = 'red', size = 1.5, linetype = 3))
 ```
 
-## modify legend
+## Legend
 
-----
+<hr>
 
 ```{r theme7, fig.align='center'}
 p <- ggplot(mtcars) +
   geom_point(aes(disp, mpg, color = factor(cyl), shape = factor(gear)))
+p
 ```
 
 ----
@@ -208,107 +197,144 @@ p + theme(
 )
 ```
 
-## modify panel
+## Panel
 
-----
+<hr>
+
+## Scatter Plot
+
+<hr>
 
 ```{r theme9, fig.align='center'}
 p <- ggplot(mtcars) +
   geom_point(aes(disp, mpg))
+p
 ```
 
-----
+## Panel Background
+
+<hr>
 
 ```{r theme10, fig.align='center'}
-p + theme(
-  panel.background = element_rect(fill = 'gray'),
-  panel.border = element_rect(
-    fill = NA, 
-    color = 'red', 
-    linetype = 1,
-    size = 2
-  ),
-  panel.grid = element_line(
-    color = 'blue',
-    linetype = 2,
-    size = 0.5
-  )
-)
+p + theme(panel.background = element_rect(fill = 'gray'))
 ```
 
-----
+## Panel Border
+
+<hr>
+
+```{r theme24, fig.align='center'}
+p + theme(
+  panel.border = element_rect(fill = NA, color = 'red', linetype = 1, size = 2))
+```
+
+## Panel Grid
+
+<hr>
+
+```{r theme25, fig.align='center'}
+p + theme(panel.grid = element_line(color = 'blue', linetype = 2, size = 0.5))
+```
+
+## Scatter Plot
+
+<hr>
 
 ```{r theme11, fig.align='center'}
 p <- ggplot(mtcars) +
   geom_point(aes(disp, mpg))
+p
 ```
 
-----
+## Panel Grid (Major)
+
+<hr>
 
 ```{r theme12, fig.align='center'}
 p + theme(
-  panel.grid.major.x = element_line(
-    color = 'blue',
-    linetype = 2,
-    size = 0.5
-  ),
-  panel.grid.minor.y = element_line(
-    color = 'red',
-    linetype = 3, 
-    size = 0.2
-  )
-)
+  panel.grid.major.x = element_line(color = 'blue', linetype = 2, size = 0.5))
 ```
 
-----
 
-## modify plot area
+## Panel Grid (Minor)
 
-----
+<hr>
+
+```{r theme26, fig.align='center'}
+p + theme(
+  panel.grid.minor.y = element_line(color = 'red', linetype = 3, size = 0.2))
+```
+
+
+## Plot Area
+
+<hr>
+
+## Scatter Plot
+
+<hr>
 
 ```{r theme13, fig.align='center'}
 p <- ggplot(mtcars) +
   geom_point(aes(disp, mpg)) + 
   ggtitle('Theme Modification')
+p
 ```
 
-----
+## Plot Background
+
+<hr>
 
 ```{r theme14, fig.align='center'}
 p + theme(
-  plot.background = element_rect(
-    color = 'blue',
-    fill = '#4682B4'
-  ),
-  plot.title = element_text(color = 'red'),
-  plot.margin = unit(c(1, 1, 1, 1), "cm")
-)
+  plot.background = element_rect(color = 'blue', fill = '#4682B4'))
 ```
 
-### modify facets
+## Plot Title
 
-----
+<hr>
+
+```{r theme27, fig.align='center'}
+p + theme(plot.title = element_text(color = 'red'))
+```
+
+## Plot Margin
+
+<hr>
+
+```{r theme28, fig.align='center'}
+p + theme(plot.margin = unit(c(1, 1, 1, 1), "cm"))
+```
+
+## Facets
+
+<hr>
+
+## Scatter Plot
+
+<hr>
 
 ```{r theme15, fig.align='center'}
 p <- ggplot(mtcars) +
   geom_point(aes(disp, mpg)) + 
   facet_grid(~cyl)
+p
 ```
 
-----
+## Strip Background
+
+<hr>
 
 ```{r theme16, fig.align='center'}
-p + theme(
-  strip.background = element_rect(
-    color = 'red',
-    fill = '#4682B4'
-  ),
-  strip.text = element_text(
-    face = 'italic',
-    size = 8, 
-    color = 'red'
-  )
-)
+p + theme(strip.background = element_rect(color = 'red', fill = '#4682B4'))
+```
+
+## Strip Text
+
+<hr>
+
+```{r theme29, fig.align='center'}
+p + theme(strip.text = element_text(face = 'italic', size = 8, color = 'red'))
 ```
 
 ## Classic Dark on Light
