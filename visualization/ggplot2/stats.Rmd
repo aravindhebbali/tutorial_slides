@@ -114,7 +114,7 @@ We will continue to use the ecommerce data. You can download it from [here](http
 ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
 ```
 
-```{r import, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+```{r import, echo=FALSE, eval=TRUE, message=FALSE}
 ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
 ecom
 ```
@@ -129,6 +129,12 @@ ecom
 <hr>
 
 So far we have used `geom_*()` functions to build plot. Now we will use a new set of functions `stat_*()` to build the plots. 
+
+- `stat_count()`
+- `stat_boxplot()`
+- `stat_identity()`
+- `stat_bin()`
+- `stat_unique()`
 
 ## Bar Plots
 
@@ -167,7 +173,7 @@ ggplot(ecom) +
            color = 'black')
 ```
 
-## Plot Unique Values
+## Unique Values
 
 <hr>
 
@@ -181,7 +187,6 @@ ggplot(ecom) +
 
 <hr>
 
-In this module, we learnt about the functions underlying the `geom_*()` family of functions. 
 
 ## Thank You
 
