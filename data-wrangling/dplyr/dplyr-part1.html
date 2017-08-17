@@ -506,6 +506,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
     color: #0077aa;
     font-family: 'Helvetica Neue';
   }
+
+  .reveal h1 {
+    font-size: 24px;
+  }
   .reveal ul {
     display: block;
   }
@@ -542,12 +546,6 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="agenda" class="slide level2">
 <h1>Agenda</h1>
 <hr>
-<ul>
-<li class="fragment">read data from delimited files</li>
-<li class="fragment">csv</li>
-<li class="fragment">tsv</li>
-<li class="fragment">txt</li>
-</ul>
 </section>
 <section id="introduction" class="slide level2">
 <h1>Introduction</h1>
@@ -582,8 +580,33 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="case-study" class="slide level2">
 <h1>Case Study</h1>
 <hr>
-<p>We will explore dummy data that we have created to resemble web logs of a ecommerce company. You can download the data from <a href="https://github.com/rsquaredacademy/datasets/blob/master/web.csv">here</a> or import it directly using <code>read_csv()</code> from the <a href="readr.tidyverse.org">readr</a> package.</p>
-<p>We will use dplyr to answer a few questions we have about the above data.</p>
+<p>We will explore dummy data that we have created to resemble web logs of a ecommerce company. You can download the data from <a href="https://github.com/rsquaredacademy/datasets/blob/master/web.csv">here</a> or import it directly using <code>read_csv()</code> from the <a href="readr.tidyverse.org">readr</a> package. We will use dplyr to answer a few questions we have about the above data:</p>
+<ul>
+<li class="fragment">what is the average order value by device types?</li>
+<li class="fragment">what is the average number of pages visited by purchasers and non-purchasers?</li>
+<li class="fragment">what is the average time on site for purchasers vs non-purchasers?</li>
+<li class="fragment">what is the average number of pages visited by purchasers and non-purchasers using mobile?</li>
+</ul>
+</section>
+<section id="data" class="slide level2">
+<h1>Data</h1>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom &lt;-<span class="st"> </span>readr::<span class="kw">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv'</span>)</code></pre></div>
+<pre><code>## # A tibble: 1,000 x 11
+##       id referrer device bouncers n_visit n_pages duration        country
+##    &lt;int&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;          &lt;chr&gt;
+##  1     1   google laptop     true      10       1      693 Czech Republic
+##  2     2    yahoo tablet     true       9       1      459          Yemen
+##  3     3   direct laptop     true       0       1      996         Brazil
+##  4     4     bing tablet    false       3      18      468          China
+##  5     5    yahoo mobile     true       9       1      955         Poland
+##  6     6    yahoo laptop    false       5       5      135   South Africa
+##  7     7    yahoo mobile     true      10       1       75     Bangladesh
+##  8     8   direct mobile     true      10       1      908      Indonesia
+##  9     9     bing mobile    false       3      19      209    Netherlands
+## 10    10   google mobile     true       6       1      208 Czech Republic
+## # ... with 990 more rows, and 3 more variables: purchase &lt;chr&gt;,
+## #   order_items &lt;dbl&gt;, order_value &lt;dbl&gt;</code></pre>
 </section>
 <section id="data-dictionary" class="slide level2">
 <h1>Data Dictionary</h1>
@@ -608,6 +631,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <p><strong>What is the average order value by device types?</strong></p>
 <p>Average value of every order placed over a defined period of time. It is determined using sales per order and not sales per customer. Let us look at the steps to calculate AOV from the ecommerce data set.</p>
+<p><img src="data:image/png;base64,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" alt="alt text" /></p>
 </section>
 <section id="aov-computation" class="slide level2">
 <h1>AOV Computation</h1>
@@ -645,10 +669,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <p>In order to compute the AOV, we must first separate the purchasers from non-purchasers. We will do this by filtering the data related to purchasers using the <code>filter()</code> function. It allows us to filter rows that meet a specific criteria/condition. The first argument is the name of the data frame and the rest of the arguments are expressions for filtering the data. Let us look at a few examples:</p>
 </section>
-<section id="filter" class="slide level2">
-<h1>Filter</h1>
+<section id="select-all-visits-from-mobile" class="slide level2">
+<h1>Select all visits from mobile</h1>
 <hr>
-<h6 id="select-all-visits-from-mobile">Select all visits from mobile</h6>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(ecom, device ==<span class="st"> &quot;mobile&quot;</span>)</code></pre></div>
 <pre><code>## # A tibble: 344 x 11
 ##       id referrer device bouncers n_visit n_pages duration        country
@@ -666,10 +689,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## # ... with 334 more rows, and 3 more variables: purchase &lt;chr&gt;,
 ## #   order_items &lt;dbl&gt;, order_value &lt;dbl&gt;</code></pre>
 </section>
-<section id="filter-1" class="slide level2">
-<h1>Filter</h1>
+<section id="visits-from-mobile-that-converted" class="slide level2">
+<h1>visits from mobile that converted</h1>
 <hr>
-<h6 id="select-all-visits-from-mobile-that-converted">Select all visits from mobile that converted</h6>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(ecom, device ==<span class="st"> &quot;mobile&quot;</span>, purchase ==<span class="st"> &quot;true&quot;</span>)</code></pre></div>
 <pre><code>## # A tibble: 36 x 11
 ##       id referrer device bouncers n_visit n_pages duration        country
@@ -687,10 +709,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## # ... with 26 more rows, and 3 more variables: purchase &lt;chr&gt;,
 ## #   order_items &lt;dbl&gt;, order_value &lt;dbl&gt;</code></pre>
 </section>
-<section id="filter-2" class="slide level2">
-<h1>Filter</h1>
+<section id="from-mobile-visited-5-pages" class="slide level2">
+<h1>from mobile &amp; visited &gt; 5 pages</h1>
 <hr>
-<h6 id="select-all-visits-from-mobile-that-visited-more-than-5-pages">Select all visits from mobile that visited more than 5 pages</h6>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(ecom, device ==<span class="st"> &quot;mobile&quot;</span>, n_pages &gt;<span class="st"> </span><span class="dv">5</span>)</code></pre></div>
 <pre><code>## # A tibble: 139 x 11
 ##       id referrer device bouncers n_visit n_pages duration        country
@@ -708,10 +729,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## # ... with 129 more rows, and 3 more variables: purchase &lt;chr&gt;,
 ## #   order_items &lt;dbl&gt;, order_value &lt;dbl&gt;</code></pre>
 </section>
-<section id="filter-3" class="slide level2">
-<h1>Filter</h1>
+<section id="case-study-visits-that-converted" class="slide level2">
+<h1>Case Study: visits that converted</h1>
 <hr>
-<p>For our case study, we want all visits that converted.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(ecom, purchase ==<span class="st"> &quot;true&quot;</span>)</code></pre></div>
 <pre><code>## # A tibble: 103 x 11
 ##       id referrer device bouncers n_visit n_pages duration        country
@@ -734,10 +754,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <p>After filtering the data, we need to select relevent variables to compute the AOV. Remember, we do not need all the columns in the data to compute a required metric (in our case, AOV). The <code>select()</code> function allows us to select a subset of columns. The first argument is the name of the data frame and the subsequent arguments specify the columns by name or position. Let us look at a few examples:</p>
 </section>
-<section id="select" class="slide level2">
-<h1>Select</h1>
+<section id="select-device-and-purchase-columns" class="slide level2">
+<h1>Select device and purchase columns</h1>
 <hr>
-<p>Select device and purchase columns</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">select</span>(ecom, device, purchase)</code></pre></div>
 <pre><code>## # A tibble: 1,000 x 2
 ##    device purchase
@@ -754,10 +773,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 10 mobile    false
 ## # ... with 990 more rows</code></pre>
 </section>
-<section id="select-1" class="slide level2">
-<h1>Select</h1>
+<section id="all-columns-from-device-to-purchase" class="slide level2">
+<h1>all columns from device to purchase</h1>
 <hr>
-<p>Select all columns from device to purchase</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">select</span>(ecom, device:purchase)</code></pre></div>
 <pre><code>## # A tibble: 1,000 x 7
 ##    device bouncers n_visit n_pages duration        country purchase
@@ -774,10 +792,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 10 mobile     true       6       1      208 Czech Republic    false
 ## # ... with 990 more rows</code></pre>
 </section>
-<section id="select-2" class="slide level2">
-<h1>Select</h1>
+<section id="all-columns-excluding-id-and-country" class="slide level2">
+<h1>all columns excluding id and country</h1>
 <hr>
-<p>Select all columns excluding id and country</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">select</span>(ecom, -id, -country)</code></pre></div>
 <pre><code>## # A tibble: 1,000 x 9
 ##    referrer device bouncers n_visit n_pages duration purchase order_items
@@ -794,8 +811,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 10   google mobile     true       6       1      208    false           0
 ## # ... with 990 more rows, and 1 more variables: order_value &lt;dbl&gt;</code></pre>
 </section>
-<section id="select-3" class="slide level2">
-<h1>Select</h1>
+<section id="case-study-select" class="slide level2">
+<h1>Case Study: Select</h1>
 <hr>
 <p>For our case study, we need to select the columns order value and order items to calculate the AOV. We also need to select the device column as we are computing the AOV for different devices.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">select</span>(ecom, device, order_value, order_items)</code></pre></div>
@@ -814,8 +831,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 10 mobile           0           0
 ## # ... with 990 more rows</code></pre>
 </section>
-<section id="select-4" class="slide level2">
-<h1>Select</h1>
+<section id="case-study-select-1" class="slide level2">
+<h1>Case Study: Select</h1>
 <hr>
 <p>But we want the above data only for purchasers. We will combine <code>filter()</code> and <code>select()</code> functions to extract data related to purchasers.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom1 &lt;-<span class="st"> </span><span class="kw">filter</span>(ecom, purchase ==<span class="st"> &quot;true&quot;</span>)
@@ -841,10 +858,9 @@ ecom2</code></pre></div>
 <hr>
 <p>Since we want to compute the AOV for each device, we need to compute the total order value and total order items for each device. To achieve this, we will group the selected variables by device type. Using the <code>group_by()</code> function, we will group our case study data by device types. The first argument is the name of the data frame and the second argument is the name of the column based on which the data will be split. Let us look at a few examples:</p>
 </section>
-<section id="group" class="slide level2">
-<h1>Group</h1>
+<section id="group-data-by-referrer-type" class="slide level2">
+<h1>Group data by referrer type</h1>
 <hr>
-<p>Group data by referrer type</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">group_by</span>(ecom, referrer)</code></pre></div>
 <pre><code>## # A tibble: 1,000 x 11
 ## # Groups:   referrer [5]
@@ -863,10 +879,10 @@ ecom2</code></pre></div>
 ## # ... with 990 more rows, and 3 more variables: purchase &lt;chr&gt;,
 ## #   order_items &lt;dbl&gt;, order_value &lt;dbl&gt;</code></pre>
 </section>
-<section id="group-1" class="slide level2">
-<h1>Group</h1>
+<section id="case-study-group" class="slide level2">
+<h1>Case Study: Group</h1>
 <hr>
-<p>In the second line in the above output, you can observe <code>Groups: referrer [5]</code>. The data is split into 5 groups as the referrer variable has 5 distinct values. For our case study, we need to group the data by device type.</p>
+<p>In the second line in the previous output, you can observe <code>Groups: referrer [5]</code>. The data is split into 5 groups as the referrer variable has 5 distinct values. For our case study, we need to group the data by device type.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom3 &lt;-<span class="st"> </span><span class="kw">group_by</span>(ecom2, device)
 ecom3</code></pre></div>
 <pre><code>## # A tibble: 103 x 3
@@ -885,8 +901,8 @@ ecom3</code></pre></div>
 ## 10 tablet        1667           6
 ## # ... with 93 more rows</code></pre>
 </section>
-<section id="step-4-compute-total-order-value-and-order-items" class="slide level2">
-<h1>Step 4: Compute total order value and order items</h1>
+<section id="step-4-total-order-value-and-order-items" class="slide level2">
+<h1>Step 4: Total order value and order items</h1>
 <hr>
 <p>The next step is to compute the total order value and total order items for each device. We will use them to then compute the average order value. Now we need to reduce the order value and order items data to a single summary. We can achieve this using the <code>summarise()</code> function. The first argument is the name of a data frame and the subsequent arguments are functions that can generate a summary. For example, we can use <code>min</code>, <code>max</code>, <code>sum</code>, <code>mean</code> etc.</p>
 </section>
@@ -909,8 +925,8 @@ ecom4</code></pre></div>
 <hr>
 <p>There you go, we have the total order value and total order items for each device type. Another way to achieve the above result is to use the <code>summarise_all()</code> function. How does that work? It generates the specified summary for all the columns in the data set except for the column based on which the data has been grouped. So we need to ensure that the data frame does not have any irrelevant columns.</p>
 </section>
-<section id="summarise-2" class="slide level2">
-<h1>Summarise</h1>
+<section id="case-study-summarise" class="slide level2">
+<h1>Case Study: Summarise</h1>
 <hr>
 <p>In our case study, we have split the data based on the device type and we have 2 other columns which are order value and order items. If we use <code>summarise_all()</code> function, it will generate the summary for the two columns based on the function specified. To specify the functions, we need to use another argument <code>funs</code> and it can take any number of valid functions.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom4 &lt;-<span class="st"> </span><span class="kw">summarise_all</span>(ecom3, <span class="kw">funs</span>(sum))
@@ -1004,9 +1020,9 @@ ecom6</code></pre></div>
 <h1>Practice Questions</h1>
 <hr>
 <ul>
-<li class="fragment"><p>What is the average number of pages visited by purchasers and non-purchasers?</p></li>
-<li class="fragment"><p>What is the average time on site for purchasers vs non-purchasers?</p></li>
-<li class="fragment"><p>What is the average number of pages visited by purchasers and non-purchasers using mobile?</p></li>
+<li class="fragment">what is the average number of pages visited by purchasers and non-purchasers?</li>
+<li class="fragment">what is the average time on site for purchasers vs non-purchasers?</li>
+<li class="fragment">what is the average number of pages visited by purchasers and non-purchasers using mobile?</li>
 </ul>
 </section>
 <section id="questions" class="slide level2">

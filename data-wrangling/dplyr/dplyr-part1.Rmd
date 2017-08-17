@@ -33,6 +33,10 @@ output:
     color: #0077aa;
     font-family: 'Helvetica Neue';
   }
+
+  .reveal h1 {
+    font-size: 24px;
+  }
   .reveal ul {
     display: block;
   }
@@ -69,11 +73,6 @@ output:
 ## Agenda
 
 <hr>
-
-* read data from delimited files
-  - csv
-  - tsv
-  - txt
 
 ## Introduction
 
@@ -122,13 +121,28 @@ dplyr provides a set of verbs that help us solve the most common data manipulati
 
 <hr>
 
-We will explore dummy data that we have created to resemble web logs of a ecommerce company. You can download the data from [here](https://github.com/rsquaredacademy/datasets/blob/master/web.csv) or import it directly using `read_csv()` from the [readr](readr.tidyverse.org) package.
+We will explore dummy data that we have created to resemble web logs of a ecommerce company. You can download the data from [here](https://github.com/rsquaredacademy/datasets/blob/master/web.csv) or import it directly using `read_csv()` from the [readr](readr.tidyverse.org) package. We will use dplyr to answer a few questions we have about the above data:
 
-```{r import, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+- what is the average order value by device types?
+- what is the average number of pages visited by purchasers and non-purchasers?
+- what is the average time on site for purchasers vs non-purchasers?
+- what is the average number of pages visited by purchasers and non-purchasers using mobile?
+
+
+## Data
+
+<hr>
+
+```{r import, eval=FALSE}
 ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
 ```
 
-We will use dplyr to answer a few questions we have about the above data.
+
+```{r show, echo=FALSE, eval=TRUE, message=FALSE}
+ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+ecom
+```
+
 
 ## Data Dictionary
 
@@ -156,6 +170,8 @@ Below is the description of the data set:
 **What is the average order value by device types?**
 
 Average value of every order placed over a defined period of time. It is determined using sales per order and not sales per customer. Let us look at the steps to calculate AOV from the ecommerce data set.
+
+![alt text](J:/R/tutorial_slides/data-wrangling/dplyr/aov.png)
 
 ## AOV Computation
 
@@ -190,41 +206,33 @@ ecom %>%
 
 In order to compute the AOV, we must first separate the purchasers from non-purchasers. We will do this by filtering the data related to purchasers using the `filter()` function. It allows us to filter rows that meet a specific criteria/condition. The first argument is the name of the data frame and the rest of the arguments are expressions for filtering the data. Let us look at a few examples:
 
-## Filter 
+## Select all visits from mobile
 
 <hr>
-
-###### Select all visits from mobile
 
 ```{r dplyr2}
 filter(ecom, device == "mobile")
 ```
 
-## Filter 
+## visits from mobile that converted
 
 <hr>
-
-###### Select all visits from mobile that converted
 
 ```{r dplyr3}
 filter(ecom, device == "mobile", purchase == "true")
 ```
 
-## Filter 
+## from mobile & visited > 5 pages 
 
 <hr>
-
-###### Select all visits from mobile that visited more than 5 pages
 
 ```{r dplyr4}
 filter(ecom, device == "mobile", n_pages > 5)
 ```
 
-## Filter 
+## Case Study: visits that converted
 
 <hr>
-
-For our case study, we want all visits that converted.
 
 ```{r dplyr5}
 filter(ecom, purchase == "true")
@@ -236,37 +244,31 @@ filter(ecom, purchase == "true")
 
 After filtering the data, we need to select relevent variables to compute the AOV. Remember, we do not need all the columns in the data to compute a required metric (in our case, AOV). The `select()` function allows us to select a subset of columns. The first argument is the name of the data frame and the subsequent arguments specify the columns by name or position. Let us look at a few examples:
 
-## Select
+## Select device and purchase columns 
 
 <hr>
-
-Select device and purchase columns 
 
 ```{r dplyr6}
 select(ecom, device, purchase)
 ```
 
-## Select
+## all columns from device to purchase
 
-<hr>
-
-Select all columns from device to purchase
+<hr> 
 
 ```{r dplyr7}
 select(ecom, device:purchase)
 ```
 
-## Select
+## all columns excluding id and country
 
 <hr>
-
-Select all columns excluding id and country
 
 ```{r dplyr8}
 select(ecom, -id, -country)
 ```
 
-## Select
+## Case Study: Select
 
 <hr>
 
@@ -276,7 +278,7 @@ For our case study, we need to select the columns order value and order items to
 select(ecom, device, order_value, order_items)
 ```
 
-## Select
+## Case Study: Select
 
 <hr>
 
@@ -292,31 +294,28 @@ ecom2
 
 <hr>
 
-Since we want to compute the AOV for each device, we need to compute the total order value and total order items for each device. To achieve this, we will group the selected variables by device type. Using the `group_by()` function, we will group our case study data by device types.
-The first argument is the name of the data frame and the second argument is the name of the column based on which the data will be split. Let us look at a few examples:
+Since we want to compute the AOV for each device, we need to compute the total order value and total order items for each device. To achieve this, we will group the selected variables by device type. Using the `group_by()` function, we will group our case study data by device types. The first argument is the name of the data frame and the second argument is the name of the column based on which the data will be split. Let us look at a few examples:
 
-## Group 
+## Group data by referrer type 
 
 <hr>
-
-Group data by referrer type
 
 ```{r dplyr11}
 group_by(ecom, referrer)
 ```
 
-## Group 
+## Case Study: Group 
 
 <hr>
 
-In the second line in the above output, you can observe `Groups: referrer [5]`. The data is split into 5 groups as the referrer variable has 5 distinct values. For our case study, we need to group the data by device type.
+In the second line in the previous output, you can observe `Groups: referrer [5]`. The data is split into 5 groups as the referrer variable has 5 distinct values. For our case study, we need to group the data by device type.
 
 ```{r dplyr12}
 ecom3 <- group_by(ecom2, device)
 ecom3
 ```
 
-## Step 4: Compute total order value and order items
+## Step 4: Total order value and order items
 
 <hr>
 
@@ -340,7 +339,7 @@ ecom4
 
 There you go, we have the total order value and total order items for each device type. Another way to achieve the above result is to use the `summarise_all()` function. How does that work? It generates the specified summary for all the columns in the data set except for the column based on which the data has been grouped. So we need to ensure that the data frame does not have any irrelevant columns.
 
-## Summarise
+## Case Study: Summarise
 
 <hr>
 
@@ -428,11 +427,9 @@ It is the same as the steps we wrote at the beginning of this module. Now you re
 
 <hr>
 
-- What is the average number of pages visited by purchasers and non-purchasers?
-
-- What is the average time on site for purchasers vs non-purchasers?
-
-- What is the average number of pages visited by purchasers and non-purchasers using mobile?
+- what is the average number of pages visited by purchasers and non-purchasers?
+- what is the average time on site for purchasers vs non-purchasers?
+- what is the average number of pages visited by purchasers and non-purchasers using mobile?
 
 
 ## Questions
