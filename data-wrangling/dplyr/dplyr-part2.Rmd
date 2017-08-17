@@ -33,6 +33,9 @@ output:
     color: #0077aa;
     font-family: 'Helvetica Neue';
   }
+  .reveal h1 {
+    font-size: 24px;
+  }
   .reveal ul {
     display: block;
   }
@@ -80,9 +83,9 @@ output:
 library(dplyr)
 ```
 
-In a previous module, we learnt about dplyr verbs and used them to compute average order value for an e-commerce website data. In this post, we will learn to combine tables using different `*_join` functions provided in dplyr. Let us assume we have 2 tables **y** and **y**. 
+In a previous module, we learnt about dplyr verbs and used them to compute average order value for an e-commerce website data. In this post, we will learn to combine tables using different `*_join` functions provided in dplyr. Let us assume we have 2 tables **x** and **y**. 
 
-The following types of `join` functions provided in dplyr:
+The following types of `join` functions are provided in dplyr:
 
 - `inner_join()`
 - `left_join()`
@@ -104,34 +107,26 @@ library(dplyr)
 options(tibble.width = Inf)
 ```
 
-## Data
+## Data: Orders
 
 <hr>
-
-###### Orders
 
 ```{r dplyr25, eval=FALSE}
 order <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/order.csv')
 ```
-
-
 
 ```{r dplyr2, echo=FALSE, eval=TRUE, message=FALSE}
 order <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/order.csv')
 order
 ```
 
-## Data
+## Data: Customers
 
 <hr>
-
-###### Customers
 
 ```{r dplyr26, eval=FALSE}
 customer <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/customer.csv')
 ```
-
-
 
 ```{r dplyr, echo=FALSE, eval=TRUE, message=FALSE}
 customer <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/customer.csv')

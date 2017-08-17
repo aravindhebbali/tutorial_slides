@@ -506,6 +506,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
     color: #0077aa;
     font-family: 'Helvetica Neue';
   }
+  .reveal h1 {
+    font-size: 24px;
+  }
   .reveal ul {
     display: block;
   }
@@ -549,8 +552,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="introduction" class="slide level2">
 <h1>Introduction</h1>
 <hr>
-<p>In a previous module, we learnt about dplyr verbs and used them to compute average order value for an e-commerce website data. In this post, we will learn to combine tables using different <code>*_join</code> functions provided in dplyr. Let us assume we have 2 tables <strong>y</strong> and <strong>y</strong>.</p>
-<p>The following types of <code>join</code> functions provided in dplyr:</p>
+<p>In a previous module, we learnt about dplyr verbs and used them to compute average order value for an e-commerce website data. In this post, we will learn to combine tables using different <code>*_join</code> functions provided in dplyr. Let us assume we have 2 tables <strong>x</strong> and <strong>y</strong>.</p>
+<p>The following types of <code>join</code> functions are provided in dplyr:</p>
 <ul>
 <li class="fragment"><code>inner_join()</code></li>
 <li class="fragment"><code>left_join()</code></li>
@@ -565,10 +568,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <p>We have two data sets with details of customers and their orders. We will use the above functions to combine the data sets in different ways to glean information about customer orders. Let us import the data from our github repository:</p>
 </section>
-<section id="data" class="slide level2">
-<h1>Data</h1>
+<section id="data-orders" class="slide level2">
+<h1>Data: Orders</h1>
 <hr>
-<h6 id="orders">Orders</h6>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">order &lt;-<span class="st"> </span>readr::<span class="kw">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rsquaredacademy/datasets/master/order.csv'</span>)</code></pre></div>
 <pre><code>## # A tibble: 300 x 5
 ##       id order_data order_number customer_id  amount
@@ -585,10 +587,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 10   340   5/6/2017       543246         131 1184.39
 ## # ... with 290 more rows</code></pre>
 </section>
-<section id="data-1" class="slide level2">
-<h1>Data</h1>
+<section id="data-customers" class="slide level2">
+<h1>Data: Customers</h1>
 <hr>
-<h6 id="customers">Customers</h6>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">customer &lt;-<span class="st"> </span>readr::<span class="kw">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rsquaredacademy/datasets/master/customer.csv'</span>)</code></pre></div>
 <pre><code>## # A tibble: 91 x 5
 ##       id first_name             last_name       city           phone
