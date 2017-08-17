@@ -73,8 +73,6 @@ output:
 
 <hr>
 
-read data from 
-
 - XML
 - JSON
 
@@ -89,25 +87,30 @@ Importing data is the first step in any data analysis workflow. If you cannot im
 <hr>
 
 ```{r importlib1,eval=FALSE}
-library(googlesheets)
 library(jsonlite)
 library(xml2)
 library(XML)
 ```
 
 ```{r importlib2, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
-library(googlesheets)
 library(jsonlite)
 library(xml2)
 library(XML)
 ```
+
+## Data & Code
+
+<hr>
 
 
 ## JSON
 
 <hr>
 
-read data from a json file
+
+## JSON
+
+<hr>
 
 ```{r imp1}
 jsonlite::fromJSON('mtcars.json')
@@ -117,7 +120,11 @@ jsonlite::fromJSON('mtcars.json')
 
 <hr>
 
-read xml data 
+
+
+## XML
+
+<hr>
 
 ```{r imp2}
 xm <- xmlParse("sample_xml")
@@ -206,21 +213,17 @@ j <- xmlToDataFrame(
 j
 ```
 
-## XML
+## XML (Web)
 
 <hr>
 
-read xml data from the web
-
-```{r xmlread, eval=FALSE}
-cd <- read_xml("http://www.xmlfiles.com/examples/cd_catalog.xml")
+```{r xmlread, eval=TRUE}
+xml2::read_xml("http://www.xmlfiles.com/examples/cd_catalog.xml")
 ```
 
 ## HTML
 
 <hr>
- 
-read html data
 
 ```{r imp14}
 xml2::read_html("http://had.co.nz")
