@@ -82,24 +82,19 @@ output:
 
 A modern version of data frames that retain the good aspects (of data frames) while getting rid of the frustrating and annoying parts. 
 
-
-## What we will learn
-
-<hr>
-
-Learn how tibbles makes certain parts of the data analysis workflow easier by being different from data frames. Specifically, we will learn
-
-- how to create tibbles
-- how to convert other objects to tibbles
-- compare tibbles with data frames
-- to manipulate tibbles
-
-
 ## Creating tibbles
 
 <hr>
 
-In this first section, we will create tibbles using the `tibble()` function.
+tibble can be created using any of the following:
+
+- `tibble()`
+- `as_tibble()`
+- `tribble()`
+
+## Creating tibbles
+
+<hr>
 
 ```{r tibble1, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
 library(tibble)
@@ -121,11 +116,9 @@ tibble(x = letters,
 - never prints all rows
 - never recycles vector of length greater than 1
 
-## Feature 1
+## never changes input's types
 
 <hr>
-
-tibble never changes the input's types. 
 
 ```{r tibble3}
 tibble(x = letters,
@@ -133,22 +126,18 @@ tibble(x = letters,
        z = sample(100, 26))
 ```
 
-## Feature 2
+## never adjusts variable names
 
 <hr>
-
-tibble never adjusts variable names. 
 
 ```{r tibble4}
 names(data.frame(`order value` = 10))
 names(tibble(`order value` = 10))
 ```
 
-## Feature 3
+## never prints all rows
 
 <hr>
-
-tibble will only print the first 10 rows.
 
 ```{r tibble5}
 x <- 1:100
@@ -157,11 +146,9 @@ z <- sample(c(TRUE, FALSE), 100, replace = TRUE)
 tibble(x, y, z)
 ```
 
-## Feature 4
+## never recycle vector of length greater than 1
 
 <hr>
-
-tibble will never recycle any vector of length greater than 1.
 
 ```{r tibble6, eval=FALSE}
 x <- 1:100
@@ -175,7 +162,7 @@ Error in overscope_eval_next(overscope, expr) : object 'y' not found
 
 <hr>
 
-In the previous section, we created tibbles using the `tibble()` function by directly inputting data as arguments. In this section, we will convert the following objects to tibble using the `as_tibble()` function:
+In the previous section, we created tibbles using the `tibble()` function by directly entering data as arguments. In this section, we will convert the following objects to tibble using the `as_tibble()` function:
 
 - data.frame
 - list
@@ -229,12 +216,9 @@ k <- tbl_df(iris)
 as_tibble(k)
 ```
 
-
 ## atomic vectors
 
 <hr>
-
-We can create tibbles from atomic vectors using the `enframe()` functions. Let us use the web traffic data and create a tibble for the browsers.
 
 ```{r tibble12}
 browsers <- c('chrome', 'safari', 'firefox', 'edge')
@@ -265,7 +249,16 @@ is_tibble(as_tibble(mtcars))
 
 <hr>
 
-Another way to create tibbles is using the `tribble()` function. tribble is short for transposed tibbles. It is customized for data entry in code. Column names start with `~` and values are separated by commas. Below is an example:
+Another way to create tibbles is using `tribble()`: 
+
+- it is short for transposed tibbles
+- it is customized for data entry in code 
+- column names start with `~` 
+- and values are separated by commas
+
+## Tribble
+
+<hr>
 
 ```{r tibble15}
 tribble(
@@ -280,7 +273,7 @@ tribble(
 
 <hr>
 
-Names of the columns in tibbles need not be valid R variable names. They can contain unusual characters like a space or a smiley but must be enclosed in ticks. Below is an example:
+Names of the columns in tibbles need not be valid R variable names. They can contain unusual characters like a space or a smiley but must be enclosed in ticks. 
 
 ```{r tibble16}
 tibble(
@@ -298,13 +291,9 @@ We can compare tibbles using the `all_equal()` function from the [dplyr](http://
 tibbles being compared. Let us look at an example from the web traffic data. We have the details of browsers used in 2 formats. We will 
 test if they are the same.
 
-
-Compare browser data
-
 ```{r tibble17} 
 browsers1 <- enframe(c(chrome = 40, firefox = 20, edge = 30, safari = 10))
 browsers2 <- enframe(c(edge = 30, firefox = 20, safari = 10, chrome = 40))
-
 all_equal(browsers1, browsers2)
 ```
 
@@ -312,20 +301,19 @@ all_equal(browsers1, browsers2)
 
 <hr>
 
-Compare browser data by ignoring order of rows.
-
-The `all_equal()` function ignores the order of the rows while comparing the tibbles. Change this by 
-setting `ignore_row_order` to `TRUE`.
+ The `all_equal()` function ignores the order of the rows while comparing the tibbles. Change this by setting 
+`ignore_row_order` to `TRUE`.
 
 ```{r tibble18}
 all_equal(browsers1, browsers2, ignore_row_order = FALSE)
 ```
 
+
 ## Compare tibbles
 
 <hr>
 
-Compare browser data by ignoring order of columns
+The order of the columns are ignored by default.
 
 ```{r tibble19}
 traffic1 <- tibble(
@@ -350,7 +338,7 @@ all_equal(traffic1, traffic2)
 
 <hr>
 
-The order of the columns can be compared by setting `ignore_col_order` to `FALSE`.
+Set `ignore_col_order` to `FALSE` to compare the order of the columns.
 
 ```{r tibble20}
 all_equal(traffic1, traffic2, ignore_col_order = FALSE)
@@ -360,13 +348,12 @@ all_equal(traffic1, traffic2, ignore_col_order = FALSE)
 
 <hr>
 
-Let us go back to the web traffic data. 
+Let us add data related to **Safari** browser to the web traffic data using the `add_row()` function.
 
 ```{r tibble21}
 browsers <- enframe(c(chrome = 40, firefox = 20, edge = 30))
+browsers
 ```
-
-We can add data for **Safari** browser to the above tibble using the `add_row()` function.
 
 ```{r tibble22}
 add_row(browsers, name = 'safari', value = 10)
@@ -377,7 +364,7 @@ add_row(browsers, name = 'safari', value = 10)
 <hr>
 
 If we want to add the data at a particular row, we can specify the row number using the `.before` argument.
-Let us add the data for **Safari** in the second row instead of the last row.
+Let us add the data related to **Safari** browser in the second row instead of the last row.
 
 ```{r tibble23}
 add_row(browsers, name = 'safari', value = 10, .before = 2)
@@ -387,7 +374,7 @@ add_row(browsers, name = 'safari', value = 10, .before = 2)
 
 <hr>
 
-Similarly, we can add a new column to the tibble using the `add_col()` function.
+`add_col()` adds a new column to tibbles.
 
 ```{r tibble24}
 browsers <- enframe(c(chrome = 40, firefox = 20, edge = 30, safari = 10))
@@ -398,7 +385,7 @@ add_column(browsers, visits = c(4000, 2000, 3000, 1000))
 
 <hr>
 
-The [tibble](tibble.tidyverse.org) package provides a set of function to deal with rownames. Remember, `tibble` does
+The [tibble](tibble.tidyverse.org) package provides a set of functions to deal with rownames. Remember, `tibble` does
 not have `rownames` unlike `data.frame`. To check whether a data set has rownames, use the `has_rownames()` function.
 
 ```{r tibble25}
@@ -409,8 +396,6 @@ has_rownames(mtcars)
 
 <hr>
 
-To remove rownames from a data set, use the `remove_rownames()` function:
-
 ```{r tibble26}
 remove_rownames(mtcars)
 ```
@@ -418,8 +403,6 @@ remove_rownames(mtcars)
 ## Rownames to Column
 
 <hr>
-
-To convert rownames to a column, use the `rownames_to_column()` function:
 
 ```{r tibble27}
 head(rownames_to_column(mtcars))
@@ -447,6 +430,9 @@ glimpse(mtcars)
 ```
 
 ## Column Exists
+
+<hr>
+
 The `has_name()` function can be used to check if a tibble has a specific column.
 
 ```{r tibble30}
@@ -454,18 +440,10 @@ has_name(mtcars, 'cyl')
 has_name(mtcars, 'gears')
 ```
 
-## Summary
-
-<hr>
-
 ## Questions
 
 <hr>
 
----
+## Thank You
 
-### Thank You
-
-For more information please visit our website
-
-www.rsquaredacademy.com
+<hr>
