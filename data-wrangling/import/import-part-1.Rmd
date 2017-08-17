@@ -70,7 +70,8 @@ output:
 
 <hr>
 
-* read data from delimited files
+read data from delimited files
+
   - csv
   - tsv
   - txt
@@ -98,236 +99,127 @@ library(readr)
 
 <hr>
 
+`.csv` files can be read using any of the following:
+
 - `read.csv()`
 - `read_csv()`
 - `read_delim()`
 
-## CSV 
+## Options
 
 <hr>
 
+Key arguments to be specified while reading files
+
 - `col_names`
--  `skip`
+- `skip`
 - `n_max`
 - `col_types`
 
-## CSV 
+## Base R
 
 <hr>
-
-using base R
 
 ```{r import1}
 read.csv('hsb2.csv', header = TRUE)
 ```
 
-## CSV 
+## readr
 
 <hr>
-
-using readr
 
 ```{r import2, echo=TRUE, results='markup', message=FALSE}
 read_csv('hsb2.csv')
 ```
 
-## CSV 
+## Delimiter 
 
 <hr>
-
-using readr
 
 ```{r import3, echo=TRUE, results='markup', message=FALSE}
 read_delim('hsb2.csv', delim = ',')
 ```
 
-## CSV 
+## Column Names 
 
 <hr>
-
-data does not include column names
 
 ```{r import4, echo=TRUE, results='markup', message=FALSE}
 read_csv('hsb2.csv', col_names = FALSE)
 ```
 
-## CSV 
+## Skip Lines 
 
 <hr>
-
-data does not include column names
-
-```{r import5, echo=TRUE, results='markup', message=FALSE}
-read_delim('hsb2.csv', delim = ',', col_names = FALSE)
-```
-
-## CSV 
-
-<hr>
-
-skip a few lines
 
 ```{r import6, echo=TRUE, results='markup', message=FALSE}
 read_csv('hsb2.csv', skip = 5)
 ```
 
-## CSV 
+## Maximum Lines 
 
 <hr>
-
-```{r import7, echo=TRUE, results='markup', message=FALSE}
-read_delim('hsb2.csv', delim = ',', skip = 5)
-```
-
-## CSV 
-
-<hr>
-
-maximum number of lines to read
 
 ```{r import8, echo=TRUE, results='markup', message=FALSE}
 read_csv('hsb2.csv', n_max = 50)
 ```
 
-## CSV 
+
+## Column Types 
 
 <hr>
-
-maximum number of lines to read
-
-```{r import9, echo=TRUE, results='markup', message=FALSE}
-read_delim('hsb2.csv', delim = ',', n_max = 50)
-```
-
-## CSV 
-
-<hr>
-
-specify column types
 
 ```{r import10, echo=TRUE, results='markup', message=FALSE}
-read_csv('hsb2.csv',
-  col_types = list(col_integer(), col_factor(levels = c(0, 1)), 
-                   col_factor(levels = c(1, 2, 3, 4)),
-                   col_factor(levels = c(1, 2, 3)), 
-                   col_factor(levels = c(1, 2)), 
-                   col_factor(levels = c(1, 2, 3)),
-                   col_integer(), col_integer(), col_integer(),
-                   col_integer(), col_integer())            
+read_csv('hsb2.csv', col_types = list(col_integer(), col_factor(levels = c(0, 1)), 
+  col_factor(levels = c(1, 2, 3, 4)), col_factor(levels = c(1, 2, 3)), 
+  col_factor(levels = c(1, 2)), col_factor(levels = c(1, 2, 3)),
+  col_integer(), col_integer(), col_integer(), col_integer(), col_integer())            
 )
 ```
 
-## CSV 
+## Read Specific Columns 
 
 <hr>
-
-read only specific columns
 
 ```{r import11, echo=TRUE, results='markup', message=FALSE}
-read_csv('hsb2.csv', 
-  col_types = cols_only(id = col_integer(),
-                        prog = col_factor(levels = c(1, 2, 3)),
-                        read = col_integer())
+read_csv('hsb2.csv', col_types = cols_only(id = col_integer(),
+  prog = col_factor(levels = c(1, 2, 3)), read = col_integer())
 )
-```
-
-## Parse Data
-
-<hr>
-
-```{r import12, eval = FALSE}
-```
-
-## Character
-
-<hr>
-
-`parse_character()`
-
-```{r import13, eval = FALSE}
-```
-
-## Date
-
-<hr>
-
-`parse_date()`
-
-```{r import14, eval = FALSE}
-```
-
-## Datetime
-
-<hr>
-
-`parse_datetime()`
-
-```{r import15, eval = FALSE}
-```
-
-## Double
-
-<hr>
-
-`parse_double()`
-
-```{r import16, eval = FALSE}
-```
-
-## Factor
-
-<hr>
-
-`parse_factor()`
-
-```{r import17, eval = FALSE}
-```
-
-## Integer
-
-<hr>
-
-`parse_integer()`
-
-```{r import18, eval = FALSE}
-```
-
-## Guess Data Type
-
-<hr>
-
-`parse_guess()`
-
-```{r import19, eval = FALSE}
 ```
 
 ## Column Types
 
 <hr>
 
-`spec_csv()`
+```{r import55, echo=TRUE, results='markup', message=FALSE}
+spec_csv('hsb2.csv')
+```
 
-## Delimited Files
+## Semicolon Separated Values
 
 <hr>
 
-semicolon separated values
+- `read.csv2()`
+- `read_csv2()`
+- `read_delim()`
+
+## Base R
+
+<hr>
 
 ```{r import20, echo=TRUE, results='markup', message=FALSE}
 read.csv2('hsb.csv', header = TRUE)
 ```
 
-## Delimited Files
+## readr
 
 <hr>
-
-using readr
 
 ```{r import21, echo=TRUE, results='markup', message=FALSE}
 read_csv2('hsb.csv')
 ```
 
-## Delimited Files
+## readr
 
 <hr>
 
@@ -335,127 +227,79 @@ read_csv2('hsb.csv')
 read_delim('hsb.csv', delim = ';')
 ```
 
-## Delimited Files
+## Options
 
 <hr>
 
-data does not include column names
-
-----
-
 ```{r import23, echo=TRUE, results='markup', message=FALSE}
-read_csv2('hsb.csv', col_names = FALSE)
+read_csv2('hsb.csv', col_names = FALSE, skip = 5, n_max = 50)
 ```
 
-## Delimited Files
+## Options
 
 <hr>
 
 ```{r import24, echo=TRUE, results='markup', message=FALSE}
-read_delim('hsb.csv', delim = ';', col_names = FALSE)
+read_delim('hsb.csv', delim = ';', col_names = FALSE, skip = 5, n_max = 50)
 ```
 
-## Delimited Files
+## Column Types
 
 <hr>
-
-skip a few lines
-
-```{r import25, echo=TRUE, results='markup', message=FALSE}
-read_csv2('hsb.csv', skip = 5)
-```
-
-## Delimited Files
-
-<hr>
-
-```{r import26, echo=TRUE, results='markup', message=FALSE}
-read_delim('hsb.csv', delim = ';', skip = 5)
-```
-
-## Delimited Files
-
-<hr>
-
-maximum number of lines to read
-
-```{r import27, echo=TRUE, results='markup', message=FALSE}
-read_csv2('hsb.csv', n_max = 50)
-```
-
-## Delimited Files
-
-<hr>
-
-```{r import28, echo=TRUE, results='markup', message=FALSE}
-read_delim('hsb.csv', delim = ';', n_max = 50)
-```
-
-## Delimited Files
-
-<hr>
-
-specify column types
 
 ```{r import29, echo=TRUE, results='markup', message=FALSE}
-read_csv2('hsb.csv',
-         col_types = list(col_integer(), col_factor(levels = c(0, 1)), 
-                          col_factor(levels = c(1, 2, 3, 4)),
-                          col_factor(levels = c(1, 2, 3)), 
-                          col_factor(levels = c(1, 2)), 
-                          col_factor(levels = c(1, 2, 3)),
-                          col_integer(), col_integer(), col_integer(),
-                          col_integer(), col_integer())            
+read_csv2('hsb.csv', col_types = list(col_integer(), 
+  col_factor(levels = c(0, 1)), col_factor(levels = c(1, 2, 3, 4)), 
+  col_factor(levels = c(1, 2, 3)), col_factor(levels = c(1, 2)), 
+  col_factor(levels = c(1, 2, 3)), col_integer(), col_integer(), 
+  col_integer(), col_integer(), col_integer())            
 )
 ```
 
-## Delimited Files
+## Read Specific Columns
 
 <hr>
-
-read only specific columns
 
 ```{r import30, echo=TRUE, results='markup', message=FALSE}
-read_csv2('hsb.csv', 
-         col_types = cols_only(id = col_integer(),
-                               prog = col_factor(levels = c(1, 2, 3)),
-                               read = col_integer())
+read_csv2('hsb.csv', col_types = cols_only(id = col_integer(),
+  prog = col_factor(levels = c(1, 2, 3)), read = col_integer())
 )
 ```
 
-## Delimited Files
+## Tab Separated Values
 
 <hr>
 
-tab separated values
+- `read.delim()`
+- `read.table()`
+- `read_tsv()`
+- `read_delim()`
+
+## Base R
+
+<hr>
 
 ```{r import31}
 read.delim('mtcars.tsv', dec = '.')  
 ```
 
-## Delimited Files
+## Base R
 
 <hr>
-
-use read.delim2 if decimal separator is ,
 
 ```{r import32}
 read.table('mtcars.tsv', sep = '\t', header = TRUE, dec = '.')
 ```
 
-## Delimited Files
+## readr
 
 <hr>
-
-using readr
-
-----
 
 ```{r import33, echo=TRUE, results='markup', message=FALSE}
 read_tsv('mtcars.tsv')
 ```
 
-## Delimited Files
+## readr
 
 <hr>
 
@@ -463,112 +307,63 @@ read_tsv('mtcars.tsv')
 read_delim('mtcars.tsv', delim = '\t')
 ```
 
-## Delimited Files
+## Options
 
 <hr>
 
-data does not include column names
-
 ```{r import35, echo=TRUE, results='markup', message=FALSE}
-read_tsv('mtcars.tsv', col_names = FALSE)
+read_tsv('mtcars.tsv', col_names = FALSE, skip = 5, n_max = 50)
 ```
 
-## Delimited Files
+## Options
 
 <hr>
 
 ```{r import36, echo=TRUE, results='markup', message=FALSE}
-read_delim('mtcars.tsv', delim = '\t', col_names =  FALSE)
+read_delim('mtcars.tsv', delim = '\t', col_names =  FALSE, 
+  skip = 5, n_max = 50)
 ```
 
-## Delimited Files
+## Column Types
 
 <hr>
-
-skip a few lines
-
-```{r import37, echo=TRUE, results='markup', message=FALSE}
-read_tsv('mtcars.tsv', skip = 5)
-```
-
-## Delimited Files
-
-<hr>
-
-```{r import38, echo=TRUE, results='markup', message=FALSE}
-read_delim('mtcars.tsv', delim = '\t', skip = 5)
-```
-
-## Delimited Files
-
-<hr>
-
-maximum number of lines to read
-
-```{r import39, echo=TRUE, results='markup', message=FALSE}
-read_tsv('mtcars.tsv', n_max = 10)
-```
-
-## Delimited Files
-
-<hr>
-
-```{r import40, echo=TRUE, results='markup', message=FALSE}
-read_delim('mtcars.tsv', delim = '\t', n_max = 10)
-```
-
-## Delimited Files
-
-<hr>
-
-specify column types
 
 ```{r import41, echo=TRUE, results='markup', message=FALSE}
-read_tsv('mtcars.tsv',
-          col_types = list(col_double(), col_factor(levels = c(4, 6, 8)), 
-                           col_double(), col_double(), col_double(),
-                           col_double(), col_double(),
-                           col_factor(levels = c(0, 1)), 
-                           col_factor(levels = c(0, 1)), 
-                           col_factor(levels = c(3, 4, 5)),
-                           col_factor(levels = c(1, 2, 3, 4, 6, 8)))            
+read_tsv('mtcars.tsv', col_types = list(col_double(), 
+  col_factor(levels = c(4, 6, 8)), col_double(), col_double(), col_double(), 
+  col_double(), col_double(), col_factor(levels = c(0, 1)), 
+  col_factor(levels = c(0, 1)), col_factor(levels = c(3, 4, 5)), 
+  col_factor(levels = c(1, 2, 3, 4, 6, 8)))            
 )
 ```
 
-## Delimited Files
+## Read Specific Columns
 
 <hr>
-
-read only specific columns
 
 ```{r import42, echo=TRUE, results='markup', message=FALSE}
-read_tsv('mtcars.tsv', 
-          col_types = cols_only(mpg = col_double(),
-                                cyl = col_factor(levels = c(4, 6, 8)),
-                                disp = col_double(),
-                                gear = col_factor(levels = c(3, 4, 5)))
+read_tsv('mtcars.tsv', col_types = cols_only(mpg = col_double(),
+  cyl = col_factor(levels = c(4, 6, 8)), disp = col_double(),
+  gear = col_factor(levels = c(3, 4, 5)))
 )
 ```
 
-## Delimited Files
+## Space Separated Values
 
 <hr>
 
-space separated values
+- `read.table()`
+- `read_table2()`
+
+## Base R
+
+<hr>
 
 ```{r import43}
 read.table('hsb1.csv', header = TRUE, sep = " ")
 ```
 
-## Delimited Files
-
-<hr>
-
-```{r import44, eval = FALSE}
-read_table('hsb1.csv')  # fails
-```
-
-## Delimited Files
+## readr
 
 <hr>
 
@@ -576,100 +371,47 @@ read_table('hsb1.csv')  # fails
 read_table2('hsb1.csv')
 ```
 
-## Delimited Files
+## Options
 
 <hr>
-
-data does not include column names
 
 ```{r import46, echo=TRUE, results='markup', message=FALSE}
-read_table2('hsb1.csv', col_names = FALSE)
+read_table2('hsb1.csv', col_names = FALSE, skip = 5, n_max = 50)
 ```
 
-## Delimited Files
+## Column Types
 
 <hr>
-
-skip a few lines
-
-```{r import47, echo=TRUE, results='markup', message=FALSE}
-read_table2('hsb1.csv', skip = 5)
-```
-
-## Delimited Files
-
-<hr>
-
-maximum number of lines to read
-
-```{r import48, echo=TRUE, results='markup', message=FALSE}
-read_table2('hsb1.csv', n_max = 10)
-```
-
-## Delimited Files
-
-<hr>
-
-specify column types
 
 ```{r import49, echo=TRUE, results='markup', message=FALSE}
-read_table2('hsb1.csv',
-          col_types = list(col_integer(), col_factor(levels = c(0, 1)), 
-                           col_factor(levels = c(1, 2, 3, 4)),
-                           col_factor(levels = c(1, 2, 3)), 
-                           col_factor(levels = c(1, 2)), 
-                           col_factor(levels = c(1, 2, 3)),
-                           col_integer(), col_integer(), col_integer(),
-                           col_integer(), col_integer())            
+read_table2('hsb1.csv', col_types = list(col_integer(), 
+  col_factor(levels = c(0, 1)), col_factor(levels = c(1, 2, 3, 4)), 
+  col_factor(levels = c(1, 2, 3)), col_factor(levels = c(1, 2)), 
+  col_factor(levels = c(1, 2, 3)), col_integer(), col_integer(), 
+  col_integer(), col_integer(), col_integer())            
 )
 ```
 
-## Delimited Files
+## Read Specific Columns
 
 <hr>
-
-read only specific columns
 
 ```{r import50, echo=TRUE, results='markup', message=FALSE}
-read_table2('hsb1.csv', 
-          col_types = cols_only(id = col_integer(),
-                                prog = col_factor(levels = c(1, 2, 3)),
-                                read = col_integer())
+read_table2('hsb1.csv', col_types = cols_only(id = col_integer(),
+  prog = col_factor(levels = c(1, 2, 3)), read = col_integer())
 )
 ```
 
-## Delimited Files
+## Text Files
 
 <hr>
 
-read .txt files
-
-```{r import51, eval = FALSE}
-read_csv('hsb.txt')  # incorrect
-```
-
-## Delimited Files
-
-<hr>
-
-```{r import52, eval = FALSE}
-read_delim('hsb.txt', delim = ',')  # incorrect
-```
-
-## Delimited Files
-
-<hr>
-
-```{r import53, eval = FALSE}
-read_table('hsb.txt')  # incorrect
-```
-
-## Delimited Files
+## readr
 
 <hr>
 
 ```{r import54, echo=TRUE, results='markup', message=FALSE}
-read_table2('hsb.txt')  # correct
+read_table2('hsb.txt') 
 ```
 
 
