@@ -33,6 +33,9 @@ output:
     color: #0077aa;
     font-family: 'Helvetica Neue';
   }
+  .reveal h1 {
+    font-size: 24px;
+  }
   .reveal ul {
     display: block;
   }
@@ -74,7 +77,8 @@ output:
 
 <hr>
 
-In this module, we will learn to work with string data in R using [stringr](http://stringr.tidyverse.org). Let us begin by installing and loading stringr and a set of other pacakges we will be using.
+In this module, we will learn to work with string data in R using [stringr](http://stringr.tidyverse.org). As we did in the earlier modules, we will use a case study to explore the various features of the stringr package. You can
+download the data for the case study from [here](https://raw.githubusercontent.com/rsquaredacademy/datasets/master/mock_strings.csv) or directly import the data using the readr package.  Let us begin by installing and loading stringr and a set of other pacakges we will be using.
  
 ## Installation
 
@@ -96,21 +100,13 @@ library(purrr)
 library(dplyr)
 ```
 
-## Introduction
-
-<hr>
-
-As we did in the earlier modules, we will use a case study to explore the various features of the stringr package. You can
-download the data for the case study from [here](https://raw.githubusercontent.com/rsquaredacademy/datasets/master/mock_strings.csv) or directly import the data using the readr package. 
-
-## Case Study
+## Data
 
 <hr>
 
 ```{r import, eval=FALSE}
 mockstring <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/mock_strings.csv')
 ```
-
 
 ```{r show, echo=FALSE, eval=TRUE, message=FALSE}
 mockstring <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/mock_strings.csv')
@@ -125,8 +121,6 @@ mockstring
 
 <hr>
 
-We will do the following in this case study:
-
 - extract domain name from random email ids
 - extract image type from url
 - extract image dimension from url
@@ -136,11 +130,9 @@ We will do the following in this case study:
 - extract extension from url
 - extract file type from url
 
-## Case Study
+## extract domain name from email ids
 
 <hr>
-
-extract domain name from random email ids
 
 ```{r str2}
 mockstring$email[1:2] %>% 
@@ -152,11 +144,9 @@ mockstring$email[1:2] %>%
 ```
 
 
-## Case Study
+## Extract image type from URL
 
 <hr>
-
-from image url, extract image type (jpg, png, bmp)
 
 ```{r str3}
 mockstring$imageurl[1:5] %>%
@@ -171,11 +161,9 @@ mockstring$imageurl[1:5] %>%
   purrr::map_chr(extract(1))
 ```
 
-## Case Study
+## Extract Image Dimesion from URL
 
 <hr>
-
-from image url, extract dimension
 
 ```{r str4}
 pattern <- "[:digits:]"
@@ -188,11 +176,9 @@ mockstring$imageurl[1:5] %>%
   purrr::map_chr(extract(1))
 ```
   
-## Case Study
+## Extract HTTP Protocol from URL
 
 <hr>
-
-extract protocol
 
 ```{r str6}
 mockstring$url[1:5] %>%
@@ -209,11 +195,9 @@ mockstring$url[1:5] %>%
   str_sub(start = 1, end = k)
 ```
 
-## Case Study
+## Extract Domain Name
 
 <hr> 
-
-extract domain name
 
 ```{r str7}
 n <- mockstring$url[1:5] %>%
@@ -227,11 +211,9 @@ mockstring$url[1:5] %>%
   str_sub(start = k + 4)
 ```
 
-## Case Study
+## extract domain extension
 
 <hr>
-
-extract extension
 
 ```{r str8}
 mockstring$url[1:5] %>%
@@ -242,15 +224,27 @@ mockstring$url[1:5] %>%
   map_chr(extract(1))
 ```
 
-## Case Study
+## extract file type
 
 <hr>
 
-extract file type
+```{r str14}
+mockstring$url[1:3]
+```
 
-----
+## Steps
 
-only 2 dots in the url
+<hr>
+
+- check if there are only 2 dots in the URL
+- check if there is only 1 question mark in the URL
+- detect the location of the second dot 
+- detect the location of the first question mark
+- use the locations to specify the index position for extracting file type
+
+## step 1: check if there are only 2 dots in the URL
+
+<hr>
 
 ```{r str9}
 mockstring$url[1:3] %>%
@@ -260,9 +254,9 @@ mockstring$url[1:3] %>%
   sum()
 ```
 
-----  
+## step 2: check if there is only 1 question mark in the URL
 
-only 1 question mark in the url
+<hr>
 
 ```{r str10}  
 mockstring$url[1:3] %>%
@@ -272,27 +266,35 @@ mockstring$url[1:3] %>%
   sum()
 ```
 
-----
+## step 3: detect the location of the second dot
 
-location of second dot and 1 question mark
+<hr>
 
 ```{r str11}
 d <- mockstring$url[1:3] %>%
   str_locate_all(pattern = '\\.') %>%
   map_int(extract(2)) %>%
   add(1)
+
+d  
 ```
 
-----
+## step 4: detect the location of the first question mark
+
+<hr>
 
 ```{r str12}
 q <- mockstring$url[1:3] %>%
   str_locate_all(pattern = "[?]") %>%
   map_int(extract(1)) %>%
   subtract(1)
+
+q
 ```
 
-----
+## step 5: specify the index position for extracting file type
+
+<hr>
 
 ```{r str13}
 mockstring$url[1:3] %>% 
