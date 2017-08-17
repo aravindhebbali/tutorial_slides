@@ -506,6 +506,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
     color: #0077aa;
     font-family: 'Helvetica Neue';
   }
+  .reveal h1 {
+    font-size: 24px;
+  }
   .reveal ul {
     display: block;
   }
@@ -642,21 +645,25 @@ mtcars2</code></pre></div>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mileages &lt;-<span class="st"> </span>mtcars2 %&gt;%
 <span class="st">  </span><span class="kw">group_by</span>(cyl) %&gt;%
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mileage =</span> <span class="kw">mean</span>(mpg))</code></pre></div>
-</section>
-<section id="show-query-1" class="slide level2">
-<h1>show query</h1>
-<hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mileages %&gt;%<span class="st"> </span><span class="kw">show_query</span>()</code></pre></div>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mileage =</span> <span class="kw">mean</span>(mpg))
+
+mileages %&gt;%<span class="st"> </span><span class="kw">show_query</span>()</code></pre></div>
 <pre><code>## &lt;SQL&gt;
 ## SELECT `cyl`, AVG(`mpg`) AS `mileage`
 ## FROM `mtcars`
 ## GROUP BY `cyl`</code></pre>
 </section>
-<section id="collect" class="slide level2">
-<h1>Collect</h1>
+<section id="collect-data" class="slide level2">
+<h1>Collect Data</h1>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span>mileages %&gt;%<span class="st"> </span><span class="kw">collect</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span>mileages %&gt;%<span class="st"> </span><span class="kw">collect</span>()
+data</code></pre></div>
+<pre><code>## # A tibble: 3 x 2
+##     cyl  mileage
+##   &lt;dbl&gt;    &lt;dbl&gt;
+## 1     4 26.66364
+## 2     6 19.74286
+## 3     8 15.10000</code></pre>
 </section>
 <section id="questions" class="slide level2">
 <h1>Questions</h1>

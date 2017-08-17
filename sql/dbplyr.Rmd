@@ -33,6 +33,9 @@ output:
     color: #0077aa;
     font-family: 'Helvetica Neue';
   }
+  .reveal h1 {
+    font-size: 24px;
+  }
   .reveal ul {
     display: block;
   }
@@ -154,22 +157,17 @@ mtcars2 %>%
 mileages <- mtcars2 %>%
   group_by(cyl) %>%
   summarise(mileage = mean(mpg))
-```
 
-## show query
-
-<hr>
-
-```{r dbply8}
 mileages %>% show_query()
 ```
 
-## Collect
+## Collect Data
 
 <hr>
 
 ```{r dbply9}
 data <- mileages %>% collect()
+data
 ```
 
 ## Questions
