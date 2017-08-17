@@ -80,11 +80,9 @@ output:
 - load R data sets and workspaces
 - source R scripts
 
-## Introdction
+## Data & Code
 
 <hr>
-
-Importing data is the first step in any data analysis workflow. If you cannot import data from differernt sources or file formats, you cannot proceed with data analysis. R allows you to import data from several sources and a variety of file formats. In this module, we will focus on JSON and XML file formats.
 
 ## Libraries
 
@@ -98,7 +96,17 @@ library(readr)
 library(readr)
 ```
 
-## Read Files
+## Read Text File
+
+<hr>
+
+- `read_file()`
+- `read_lines()`
+- `readLines()`
+- `read.table()`
+
+
+## Read File
 
 <hr>
 
@@ -110,24 +118,76 @@ readr::read_file('hsb.txt')
 
 <hr>
 
-skip first 5 lines and read max 10 lines
+## read_lines
+
+<hr>
 
 ```{r imp2, echo=TRUE, results='markup', message=FALSE}
-readr::read_lines('hsb.txt', skip = 5, n_max = 10)
+readr::read_lines('hsb.txt')
+```
+
+## Skip Lines
+
+<hr>
+
+```{r imp12, echo=TRUE, results='markup', message=FALSE}
+readr::read_lines('hsb.txt', skip = 5)
+```
+
+## Maximum Lines
+
+<hr>
+
+```{r imp13, echo=TRUE, results='markup', message=FALSE}
+readr::read_lines('hsb.txt', n_max = 10)
+```
+
+## readLines
+
+<hr>
+
+## Read Data from File
+
+<hr>
+
+```{r imp7}
+readLines("hsb.txt")
+```
+
+## Maximum Lines
+
+<hr>
+
+```{r imp8}
+readLines("hsb.txt", n = 10)
+```
+
+## read.table
+
+<hr>
+
+Read data from a file in table format and create data.frame.
+
+```{r imp9}
+read.table('hsb.txt', header = TRUE, sep = ' ')
 ```
 
 ## scan 
 
 <hr>
 
-allow user to input data from console or read data from a file and store the input as a vector or list.
+Allow user to input data from console or read data from a file and store the input as a vector or list.
+
+## Scan
+
+<hr>
 
 ```{r imp3}
 x <- scan()
 x
 ```
 
-## scan 
+## Integer 
 
 <hr>
 
@@ -137,7 +197,7 @@ x
 class(x)
 ```
 
-## scan 
+## List 
 
 <hr>
 
@@ -150,46 +210,18 @@ x
 
 <hr>
 
-prompt user for an input and store the same as a character vector
+Prompt user for an input and store the same as a character vector.
 
 ```{r imp6}
 name <- readline(prompt = "What is your name?: ")
 name
 ```
 
-## readLines
-
-<hr>
-
-read data from a file
-
-```{r imp7}
-readLines("hsb.txt")
-```
-
-## readLines
-
-<hr>
-
-```{r imp8}
-readLines("hsb.txt", n = 10)
-```
-
-## read.table
-
-<hr>
-
-read data from a file in table format and create data.frame
-
-```{r imp9}
-read.table('hsb.txt', header = TRUE, sep = ' ')
-```
-
 ## load
 
 <hr>
 
-load: reloads saved data sets and workspaces
+Reloads saved data sets and workspaces.
 
 ```{r imp10}
 load('employees.RData')
@@ -199,7 +231,7 @@ load('employees.RData')
 
 <hr>
 
-source: reads R code from a script and makes those codes available in the current session
+Reads R code from a script and makes those codes available in the current session.
 
 ```{r imp11}
 source('addition.R')
