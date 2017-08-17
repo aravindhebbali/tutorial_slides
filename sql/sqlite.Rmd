@@ -33,6 +33,9 @@ output:
     color: #0077aa;
     font-family: 'Helvetica Neue';
   }
+  .reveal h1 {
+    font-size: 24px;
+  }
   .reveal ul {
     display: block;
   }
@@ -137,6 +140,10 @@ DBI::dbListFields(con, "ecom")
 
 <hr>
 
+- `dbReadTable()`: read entire table
+- `dbGetQuery()`: read few rows
+- `dbSendQuery()` & `dbFetch()`: read data in batches
+
 ## Entire Table
 
 <hr>
@@ -160,6 +167,7 @@ DBI::dbGetQuery(con, "select * from ecom limit 10")
 ```{r lite10}
 query <- DBI::dbSendQuery(con, 'select * from ecom')
 result <- DBI::dbFetch(query, n = 30)
+result
 ```
 
 ## Query Status
@@ -169,10 +177,6 @@ result <- DBI::dbFetch(query, n = 30)
 ```{r lite11}
 DBI::dbHasCompleted(query)
 ```
-
-## Query 
-
-<hr>
 
 ## Query Info
 
@@ -222,10 +226,6 @@ DBI::dbColumnInfo(query)
 DBI::dbClearResult(query)
 ```
 
-## Write Table
-
-<hr>
-
 ## Create Table
 
 <hr>
@@ -237,32 +237,26 @@ trial <- tibble::tibble(x, y)
 DBI::dbWriteTable(con, "trial", trial)
 ```
 
-## Create Table
+## check if table is created in database
 
 <hr>
-
-check if table is created in database
 
 ```{r lite19}
 DBI::dbListTables(con)
 DBI::dbExistsTable(con, "trial")
 ```
 
-## Create Table
+## query sample data from table
 
 <hr>
-
-query sample data from table
 
 ```{r lite20}
 DBI::dbGetQuery(con, "select * from trial limit 5")
 ```
 
-## Overwrite Table
+## overwrite table in the database
 
 <hr>
-
-overwrite table in the database
 
 ```{r lite21}
 x <- sample(100, 10)
@@ -271,21 +265,17 @@ trial2 <- tibble::tibble(x, y)
 DBI::dbWriteTable(con, "trial", trial2, overwrite = TRUE)
 ```
 
-## Overwrite Table
+## query sample data from table to see if it has been overwritten
 
 <hr>
-
-query sample data from table to see if it has been overwritten
 
 ```{r lite22}
 DBI::dbGetQuery(con, "select * from trial limit 5")
 ```
 
-## Append Data
+## append data to the table in the database
 
 <hr>
-
-append data to the table in the database
 
 ```{r lite23}
 x <- sample(100, 10)
@@ -294,11 +284,9 @@ trial3 <- tibble::tibble(x, y)
 DBI::dbWriteTable(con, "trial", trial3, append = TRUE)
 ```
 
-## ## Append Data
+## query sample data from table to see if new data is appended
 
 <hr>
-
-query sample data from table to see if new data is appended
 
 ```{r lite24}
 DBI::dbReadTable(con, "trial")
@@ -307,8 +295,6 @@ DBI::dbReadTable(con, "trial")
 ## Insert Rows
 
 <hr>
-
-`dbExecute()` returns the number of rows affected after the operation
 
 ```{r lite25}
 DBI::dbExecute(con,
@@ -319,8 +305,6 @@ DBI::dbExecute(con,
 ## Insert Rows
 
 <hr>
-
-use `dbSendStatement()`
 
 ```{r lite26}
 DBI::dbSendStatement(con,
@@ -339,21 +323,17 @@ DBI::dbDataType(RSQLite::SQLite(), 1:5)
 DBI::dbDataType(RSQLite::SQLite(), 1.5)
 ```
 
-## Remove Table
+## remove table from database
 
 <hr>
-
-remove table from database
 
 ```{r lite28}
 DBI::dbRemoveTable(con, "trial")
 ```
 
-## Remove Table
+## check if table has been removed 
 
 <hr> 
-
-check if table has been removed 
 
 ```{r lite29}
 DBI::dbListTables(con)
@@ -363,24 +343,22 @@ DBI::dbListTables(con)
 
 <hr>
 
-## Create Table
-
-<hr>
-
 ```{r lite31}
 DBI::sqlCreateTable(con, "new", c(x = "integer", y = "text"))
 ```
 
-## Append Table
+
+## Data
 
 <hr>
 
-#### Data
-
-import ecommerce data from github
-
-```{r lite33, echo=FALSE, message=FALSE, results='hide'}
+```{r lite34, eval=FALSE}
 ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+```
+
+```{r lite33, echo=FALSE, eval=TRUE, message=FALSE}
+ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+ecom
 ```
 
 ## Append Table
@@ -394,8 +372,6 @@ DBI::sqlAppendTable(con, "ecom", head(ecom))
 ## Close Database Connection
 
 <hr>
-
-close connection to database
 
 ```{r lite30}
 DBI::dbDisconnect(con)
