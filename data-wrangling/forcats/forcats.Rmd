@@ -33,6 +33,9 @@ output:
     color: #0077aa;
     font-family: 'Helvetica Neue';
   }
+  .reveal h1 {
+    font-size: 24px;
+  }
   .reveal ul {
     display: block;
   }
@@ -121,6 +124,19 @@ ecom
 
 <hr>
 
+- id: row id
+- referrer: referrer website/search engine
+- os: operating system
+- browser: browser
+- device: device used to visit the website
+- n_pages: number of pages visited
+- duration: time spent on the website (in seconds)
+- repeat: frequency of visits
+- country: country of origin
+- purchase: whether visitor purchased
+- order_value: order value of visitor (in dollars)
+
+
 ## Case Study
 
 <hr>
@@ -133,22 +149,18 @@ We will do the following in this case study:
 - club traffic from social media websites into a new category
 - group referrers with traffic below a threshold into a single category
  
-## Case Study
+## Tabulate Referrers
 
 <hr>
-
-compute the frequency of different referrers
 
 ```{r cat2}
 ecom %>%
   count(referrer)
 ```
 
-## Case Study
+## Avg. page visits by referrer type
 
 <hr>
-
-plot average number of pages browsed for different referrers
 
 ```{r cat3}
 refer_summary <- ecom %>%
@@ -158,73 +170,72 @@ refer_summary <- ecom %>%
     tos = mean(duration),
     n = n()
   )
+
+refer_summary
 ```
 
-## Case Study
+## Avg. page visits by referrer type
 
 <hr>
 
-```{r cat10}
+```{r cat10, fig.align='center', fig.width=6, fig.height=4}
 ggplot(refer_summary, aes(page, referrer)) + geom_point()
 ```
 
-## Case Study
+## Reorder Referrers
 
 <hr>
 
-plot average number of pages browsed for different referrers
-
-```{r cat11}
+```{r cat11, fig.align='center', fig.width=6, fig.height=4}
 ggplot(refer_summary, aes(page, fct_reorder(referrer, page))) + geom_point()
 ```
 
-## Case Study
+## Plot Referrer Frequency (Descending Order)
 
 <hr>
 
-
-```{r cat4}
+```{r cat4, fig.align='center', fig.width=6, fig.height=4}
 ecom %>%
   mutate(ref = referrer %>% fct_infreq()) %>%
   ggplot(aes(ref)) +
   geom_bar()
 ```
 
-## Case Study
+## Plot Referrer Frequency (Ascending Order)
 
 <hr>
 
-
-```{r cat5}
+```{r cat5, fig.align='center', fig.width=6, fig.height=4}
 ecom %>%
   mutate(ref = referrer %>% fct_infreq() %>% fct_rev()) %>%
   ggplot(aes(ref)) +
   geom_bar()
 ```
 
-## Case Study
+## Case Study 2
 
 <hr>
 
+## Data 
+
+<hr>
 
 ```{r import2, message=FALSE}
 traffic <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web_traffic.csv')
 traffic
 ```
 
-## Case Study
+## Tabulate Referrer
 
 <hr>
-
 
 ```{r cat6}
 traffic$traffics %>% fct_count()
 ```
 
-## Case Study
+## Collapse Referrer Categories
 
 <hr>
-
 
 ```{r cat7}
 traffic2 <- fct_collapse(traffic$traffics,
@@ -235,56 +246,85 @@ traffic2 <- fct_collapse(traffic$traffics,
 traffic2 %>% fct_count() 
 ```
 
-## Case Study
+## Lump Infrequent Referrer Types
 
 <hr>
 
-
 ```{r cat8}
+traffic$traffics %>% fct_count()
+
 traffic$traffics %>% fct_lump() %>% table()
 ```
 
-## Case Study
+## Retain top 3 referrers
 
 <hr>
 
+```{r cat9, echo=FALSE}
+traffic$traffics %>% fct_count() %>% arrange(desc(n))
+```
 
-```{r cat9}
+```{r cat17}
 traffic$traffics %>% fct_lump(n = 3) %>% table()
 ```
 
-## Case Study
+## Lump Referrer Types with less than 10% traffic
 
 <hr>
 
+```{r cat12, echo=FALSE}
+traffic$traffics %>% 
+  fct_count() %>%
+  mutate(
+    percent = round((n / sum(n)) * 100, 2)
+  )
+```
 
-```{r cat12}
+```{r cat16}
 traffic$traffics %>% fct_lump(prop = 0.1) %>% table()
 ```
 
-## Case Study
+## Lump Referrer Types with less than 15% traffic
 
 <hr>
 
+```{r cat13, echo=FALSE}
+traffic$traffics %>% 
+  fct_count() %>%
+  mutate(
+    percent = round((n / sum(n)) * 100, 2)
+  )
+```
 
-```{r cat13}
+```{r cat18}
 traffic$traffics %>% fct_lump(prop = 0.15) %>% table()
 ```
 
-## Case Study
+## Retain 3 Referrer Types with lowest traffic
 
 <hr>
 
+```{r cat14, echo=FALSE}
+traffic$traffics %>% fct_count() %>% arrange(n)
+```
 
-```{r cat14}
+```{r cat19}
 traffic$traffics %>% fct_lump(n = -3) %>% table()
 ```
 
-## Case Study
+## Retain 3 Referrer Types with less than 10% traffic
 
 <hr>
 
-```{r cat15}
+```{r cat15, echo=FALSE}
+traffic$traffics %>% 
+  fct_count() %>%
+  mutate(
+    percent = round((n / sum(n)) * 100, 2)
+  )
+```
+
+```{r cat20}
 traffic$traffics %>% fct_lump(prop = -0.1) %>% table()
 ```
 
