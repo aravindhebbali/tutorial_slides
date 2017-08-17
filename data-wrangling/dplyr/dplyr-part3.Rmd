@@ -33,6 +33,9 @@ output:
     color: #0077aa;
     font-family: 'Helvetica Neue';
   }
+  .reveal h1 {
+    font-size: 24px;
+  }
   .reveal ul {
     display: block;
   }
@@ -156,8 +159,6 @@ ecom %>%
 
 <hr>
 
-Rename the `duration` column to `time_on_site`.
-
 ```{r dplyr3}
 ecom %>%
   rename(time_on_site = duration)
@@ -206,73 +207,64 @@ ecom %>%
 
 <hr>
 
-Extract the `device` column.
+
+## Extract Device Column
+
+<hr>
 
 ```{r dplyr8}
 ecom %>%
   pull(device)
 ```
 
-## Extract Columns
+## Extract First Column
 
 <hr>
-
-Extract the first column.
 
 ```{r dplyr9}
 ecom %>%
   pull(1)
 ```
 
-## Extract Columns
+## Extract Last Column
 
 <hr>
-
-Extract the last column
 
 ```{r dplyr10}
 ecom %>%
   pull(-1)
 ```
 
-## Slice Rows
+## Extract First 20 Rows
 
 <hr>
-
-Extract the first 20 rows.
 
 ```{r dplyr11}
 ecom %>%
   slice(1:20)
 ```
 
-## Slice Rows
+## Extract Last Row
 
 <hr>
-
-Extract the last row.
 
 ```{r dplyr12}
 ecom %>%
   slice(n())
 ```
 
-## Tally 
+## Total Observations in Data
 
 <hr>
-
-Total number of observations in the data.
 
 ```{r dplyr13}
 ecom %>%
   tally()
 ```
 
-## Tally
+## Tabulate Referrers
 
 <hr>
-
-Observations of different types of referrers.
 
 ```{r dplyr14}
 ecom %>%
@@ -280,11 +272,9 @@ ecom %>%
   tally()
 ```
 
-## Tally
+## Tabulate referrers and bouncers
 
 <hr>
-
-Observations of referrers and bouncers.
 
 ```{r dplyr15}
 ecom %>%
@@ -292,11 +282,9 @@ ecom %>%
   tally()
 ```
 
-## Tally
+## Tabulate referrers and purchasers
 
 <hr>
-
-Observations of referrers and purchasers.
 
 ```{r dplyr16}
 ecom %>%
@@ -304,7 +292,7 @@ ecom %>%
   tally()
 ```
 
-## Tally
+## Tabulate Referrers & Converts
 
 <hr>
 
@@ -319,18 +307,14 @@ ecom %>%
 
 <hr>
 
-Use `count()` instead of `tally()`.
-
 ```{r dplyr17}
 ecom %>%
   count(referrer, purchase)
 ```
 
-## Top Referrers
+## Top 2 referrers by orders
 
 <hr>
-
-Top 2 referrers that bring orders.
 
 ```{r dplyr18}
 ecom %>%
@@ -359,14 +343,14 @@ mtcars %>%
   select(mpg, disp, cyl, gear, carb) %>%
   mutate(
     type = case_when(
-      disp > 200 ~ 'dabba',
-      cyl == 8 ~ 'kachda',
-      TRUE ~ 'worst'
+      disp > 200 ~ 'High',
+      cyl == 8 ~ 'Eight',
+      TRUE ~ 'True'
     )
   )
 ```
 
-## Select Observation
+## Select First Observation
 
 <hr>
 
@@ -374,9 +358,13 @@ mtcars %>%
 ecom %>%
   pull(referrer) %>%
   nth(1)
+
+ecom %>%
+  pull(referrer) %>%
+  first()
 ```
 
-## Select Observation
+## Select 1000th Observation
 
 <hr>
 
@@ -386,7 +374,7 @@ ecom %>%
   nth(1000)
 ```
 
-## Select Observation
+## Select Last Observation
 
 <hr>
 
@@ -395,16 +383,6 @@ ecom %>%
   pull(referrer) %>%
   last()
 ```
-
-## Select Observation
-
-<hr>
-
-```{r dplyr24}
-ecom %>%
-  pull(referrer) %>%
-  first()
-```  
 
 ## Questions
 
