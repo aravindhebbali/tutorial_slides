@@ -73,15 +73,13 @@ output:
 
 <hr>
 
-* read data from excel sheets
+read data from 
+
   - xls
   - xlsx
-* read data from 
   - SAS
   - SPSS
   - STATA
-
-
 
 ## Introdction
 
@@ -107,22 +105,36 @@ library(foreign)
 library(sas7bdat)
 ```
 
-## readxl
+## Data
 
 <hr>
 
+## Code
+
+<hr>
 
 ## Excel
 
 <hr>
 
-list sheets in a excel file
+- list sheets in an excel file
+- read data from an excel sheet
+- read specific cells from an excel sheet
+- read a single row
+- read a single column
+- read several rows
+- read several columns
+
+
+## List Sheets
+
+<hr>
 
 ```{r import55}
 excel_sheets('sample2.xls')
 ```
 
-## Excel
+## Read Sheet
 
 <hr>
 
@@ -130,119 +142,101 @@ excel_sheets('sample2.xls')
 readxl::read_excel('sample2.xls', sheet = 1)
 ```
 
-## Excel
+## Read Specific Cells
 
 <hr>
-
-```{r import57, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample2.xls', sheet = 2)
-```
-
-## Excel
-
-<hr>
-
-read specific cells
-
-remember first row is always column name in excel so add 1 to row number while selecting the cell
 
 ```{r import58, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample2.xls', sheet = 2,
-                   range = "B3:C7")
+readxl::read_excel('sample2.xls', sheet = 2, range = "B3:C7")
 ```
 
-## Excel
+Remember first row is always column name in excel so add 1 to row number while selecting the cell.
+
+## Read Specific Cells
 
 <hr>
-
 
 ```{r import59, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample2.xls', sheet = 2,
-                   range = "A3:C5")
+readxl::read_excel('sample2.xls', sheet = 2, range = "A3:C5")
 ```
 
-## Excel
+## Read Specific Cells
 
 <hr>
-
-single row
-
-```{r import60, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample2.xls', sheet = 2,
-                   range = "A3:C4")
-```
-
-## Excel
-
-<hr>
-
 
 ```{r import61, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample2.xls', sheet = 2,
-                   range = anchored("A4", dim = c(3, 2)),
-                   col_names = FALSE)
+readxl::read_excel('sample2.xls', sheet = 2, col_names = FALSE,
+  range = anchored("A4", dim = c(3, 2)))
 ```
 
-## Excel
+## Read Specific Cells
 
 <hr>
-
-specify only rows
-
-```{r import62, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample2.xls', sheet = 2,
-                   range = cell_rows(3:6))
-```
-
-## Excel
-
-<hr>
-
-specify only columns
-
-```{r import63, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample2.xls', sheet = 2,
-                   range = cell_cols(2:3))
-```
-
-## Excel
-
-<hr>
-
-single column
-
-```{r import64, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample2.xls', sheet = 2,
-                   range = cell_cols(2))
-```
-
-## Excel
-
-<hr>
-
-use cell_limits to specify one end of the rectangle such as top left or top right
 
 ```{r import65, echo=TRUE, results='markup', message=FALSE}
 readxl::read_excel('sample2.xls', sheet = 2,
-                   range = cell_limits(c(1, 2), c(NA, NA)))
+  range = cell_limits(c(1, 2), c(NA, NA)))
 ```
 
-## Excel
+Use cell_limits to specify one end of the rectangle such as top left or top right.
+
+## Read Specific Cells
 
 <hr>
 
 ```{r import66, echo=TRUE, results='markup', message=FALSE}
 readxl::read_excel('sample2.xls', sheet = 2,
-                   range = cell_limits(c(3, NA), c(NA, 2)))
+  range = cell_limits(c(3, NA), c(NA, 2)))
 ```
 
-## Statistical Software
+## Read Single Row
+
+<hr>
+
+```{r import60, echo=TRUE, results='markup', message=FALSE}
+readxl::read_excel('sample2.xls', sheet = 2, range = "A3:C4")
+```
+
+## Read Single Column
+
+<hr>
+
+```{r import64, echo=TRUE, results='markup', message=FALSE}
+readxl::read_excel('sample2.xls', sheet = 2, range = cell_cols(2))
+```
+
+
+## Specify Rows
+
+<hr>
+
+```{r import62, echo=TRUE, results='markup', message=FALSE}
+readxl::read_excel('sample2.xls', sheet = 2, range = cell_rows(3:6))
+```
+
+## Specify Columns
+
+<hr>
+
+```{r import63, echo=TRUE, results='markup', message=FALSE}
+readxl::read_excel('sample2.xls', sheet = 2, range = cell_cols(2:3))
+```
+
+
+## Statistical Softwares
 
 <hr>
 
 ## haven
 
 <hr>
+
+- `read_dta()`
+- `read_stata()`
+- `read_sav()`
+- `read_spss()`
+- `read_sas()`
+
 
 ## Other Libraries
 
@@ -258,7 +252,7 @@ other packages that can be used to import the files
 <hr>
 
 ```{r import67, echo=TRUE, results='markup', message=FALSE}
-haven::read_dta('airline.dta')    # tibble
+haven::read_dta('airline.dta')    
 ```
 
 ## stata
@@ -266,7 +260,7 @@ haven::read_dta('airline.dta')    # tibble
 <hr>
 
 ```{r import68, echo=TRUE, results='markup', message=FALSE}
-haven::read_stata('airline.dta')  # tibble
+haven::read_stata('airline.dta')  
 ```
 
 ## stata
@@ -274,7 +268,7 @@ haven::read_stata('airline.dta')  # tibble
 <hr>
 
 ```{r import69}
-foreign::read.dta('airline.dta')  # data.frame
+foreign::read.dta('airline.dta')  
 ```
 
 ## spss
@@ -282,7 +276,7 @@ foreign::read.dta('airline.dta')  # data.frame
 <hr>
 
 ```{r import70, echo=TRUE, results='markup', message=FALSE}
-read_sav('employee.sav')   # tibble
+read_sav('employee.sav')   
 ```
 
 ## spss
@@ -290,7 +284,7 @@ read_sav('employee.sav')   # tibble
 <hr>
 
 ```{r import71, echo=TRUE, results='markup', message=FALSE}
-read_spss('employee.sav')  # tibble
+read_spss('employee.sav')  
 ```
 
 ## spss

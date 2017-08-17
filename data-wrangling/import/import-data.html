@@ -545,11 +545,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="agenda" class="slide level2">
 <h1>Agenda</h1>
 <hr>
+<p>read data from</p>
 <ul>
-<li class="fragment">read data from excel sheets</li>
 <li class="fragment">xls</li>
 <li class="fragment">xlsx</li>
-<li class="fragment">read data from</li>
 <li class="fragment">SAS</li>
 <li class="fragment">SPSS</li>
 <li class="fragment">STATA</li>
@@ -568,19 +567,35 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <span class="kw">library</span>(foreign)
 <span class="kw">library</span>(sas7bdat)</code></pre></div>
 </section>
-<section id="readxl" class="slide level2">
-<h1>readxl</h1>
+<section id="data" class="slide level2">
+<h1>Data</h1>
+<hr>
+</section>
+<section id="code" class="slide level2">
+<h1>Code</h1>
 <hr>
 </section>
 <section id="excel" class="slide level2">
 <h1>Excel</h1>
 <hr>
-<p>list sheets in a excel file</p>
+<ul>
+<li class="fragment">list sheets in an excel file</li>
+<li class="fragment">read data from an excel sheet</li>
+<li class="fragment">read specific cells from an excel sheet</li>
+<li class="fragment">read a single row</li>
+<li class="fragment">read a single column</li>
+<li class="fragment">read several rows</li>
+<li class="fragment">read several columns</li>
+</ul>
+</section>
+<section id="list-sheets" class="slide level2">
+<h1>List Sheets</h1>
+<hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">excel_sheets</span>(<span class="st">'sample2.xls'</span>)</code></pre></div>
 <pre><code>## [1] &quot;Sheet1&quot; &quot;Sheet2&quot; &quot;Sheet3&quot;</code></pre>
 </section>
-<section id="excel-1" class="slide level2">
-<h1>Excel</h1>
+<section id="read-sheet" class="slide level2">
+<h1>Read Sheet</h1>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl::<span class="kw">read_excel</span>(<span class="st">'sample2.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>)</code></pre></div>
 <pre><code>## # A tibble: 135 x 13
@@ -599,32 +614,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## # ... with 125 more rows, and 3 more variables: `Res2_sex-age` &lt;dbl&gt;,
 ## #   `Res3_sex-age-bw` &lt;dbl&gt;, `Res4_sex-age-bw-brnw` &lt;dbl&gt;</code></pre>
 </section>
-<section id="excel-2" class="slide level2">
-<h1>Excel</h1>
+<section id="read-specific-cells" class="slide level2">
+<h1>Read Specific Cells</h1>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl::<span class="kw">read_excel</span>(<span class="st">'sample2.xls'</span>, <span class="dt">sheet =</span> <span class="dv">2</span>)</code></pre></div>
-<pre><code>## # A tibble: 41 x 3
-##    Point        Strain      Res_4
-##    &lt;chr&gt;         &lt;chr&gt;      &lt;chr&gt;
-##  1   0.1        B6D2F1          x
-##  2   0.2        D2B6F1          x
-##  3   0.3 B  (C57BL/6J)    2.61265
-##  4   0.4    D (DBA/2J)  -0.712858
-##  5     1          BxD1   -2.52487
-##  6     2          BxD2  -0.764992
-##  7     5          BxD5  -0.659102
-##  8     6          BxD6    3.94894
-##  9     8          BxD8    1.65269
-## 10     9          BxD9 -0.0555975
-## # ... with 31 more rows</code></pre>
-</section>
-<section id="excel-3" class="slide level2">
-<h1>Excel</h1>
-<hr>
-<p>read specific cells</p>
-<p>remember first row is always column name in excel so add 1 to row number while selecting the cell</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl::<span class="kw">read_excel</span>(<span class="st">'sample2.xls'</span>, <span class="dt">sheet =</span> <span class="dv">2</span>,
-                   <span class="dt">range =</span> <span class="st">&quot;B3:C7&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl::<span class="kw">read_excel</span>(<span class="st">'sample2.xls'</span>, <span class="dt">sheet =</span> <span class="dv">2</span>, <span class="dt">range =</span> <span class="st">&quot;B3:C7&quot;</span>)</code></pre></div>
 <pre><code>## # A tibble: 4 x 2
 ##          D2B6F1          x
 ##           &lt;chr&gt;      &lt;dbl&gt;
@@ -632,35 +625,23 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 2    D (DBA/2J) -0.7128575
 ## 3          BxD1 -2.5248700
 ## 4          BxD2 -0.7649925</code></pre>
+<p>Remember first row is always column name in excel so add 1 to row number while selecting the cell.</p>
 </section>
-<section id="excel-4" class="slide level2">
-<h1>Excel</h1>
+<section id="read-specific-cells-1" class="slide level2">
+<h1>Read Specific Cells</h1>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl::<span class="kw">read_excel</span>(<span class="st">'sample2.xls'</span>, <span class="dt">sheet =</span> <span class="dv">2</span>,
-                   <span class="dt">range =</span> <span class="st">&quot;A3:C5&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl::<span class="kw">read_excel</span>(<span class="st">'sample2.xls'</span>, <span class="dt">sheet =</span> <span class="dv">2</span>, <span class="dt">range =</span> <span class="st">&quot;A3:C5&quot;</span>)</code></pre></div>
 <pre><code>## # A tibble: 2 x 3
 ##   `0.2`        D2B6F1          x
 ##   &lt;dbl&gt;         &lt;chr&gt;      &lt;dbl&gt;
 ## 1   0.3 B  (C57BL/6J)  2.6126475
 ## 2   0.4    D (DBA/2J) -0.7128575</code></pre>
 </section>
-<section id="excel-5" class="slide level2">
-<h1>Excel</h1>
+<section id="read-specific-cells-2" class="slide level2">
+<h1>Read Specific Cells</h1>
 <hr>
-<p>single row</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl::<span class="kw">read_excel</span>(<span class="st">'sample2.xls'</span>, <span class="dt">sheet =</span> <span class="dv">2</span>,
-                   <span class="dt">range =</span> <span class="st">&quot;A3:C4&quot;</span>)</code></pre></div>
-<pre><code>## # A tibble: 1 x 3
-##   `0.2`        D2B6F1        x
-##   &lt;dbl&gt;         &lt;chr&gt;    &lt;dbl&gt;
-## 1   0.3 B  (C57BL/6J) 2.612648</code></pre>
-</section>
-<section id="excel-6" class="slide level2">
-<h1>Excel</h1>
-<hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl::<span class="kw">read_excel</span>(<span class="st">'sample2.xls'</span>, <span class="dt">sheet =</span> <span class="dv">2</span>,
-                   <span class="dt">range =</span> <span class="kw">anchored</span>(<span class="st">&quot;A4&quot;</span>, <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">2</span>)),
-                   <span class="dt">col_names =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl::<span class="kw">read_excel</span>(<span class="st">'sample2.xls'</span>, <span class="dt">sheet =</span> <span class="dv">2</span>, <span class="dt">col_names =</span> <span class="ot">FALSE</span>,
+  <span class="dt">range =</span> <span class="kw">anchored</span>(<span class="st">&quot;A4&quot;</span>, <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">2</span>)))</code></pre></div>
 <pre><code>## # A tibble: 3 x 2
 ##    X__1          X__2
 ##   &lt;dbl&gt;         &lt;chr&gt;
@@ -668,25 +649,11 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 2   0.4    D (DBA/2J)
 ## 3   1.0          BxD1</code></pre>
 </section>
-<section id="excel-7" class="slide level2">
-<h1>Excel</h1>
+<section id="read-specific-cells-3" class="slide level2">
+<h1>Read Specific Cells</h1>
 <hr>
-<p>specify only rows</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl::<span class="kw">read_excel</span>(<span class="st">'sample2.xls'</span>, <span class="dt">sheet =</span> <span class="dv">2</span>,
-                   <span class="dt">range =</span> <span class="kw">cell_rows</span>(<span class="dv">3</span>:<span class="dv">6</span>))</code></pre></div>
-<pre><code>## # A tibble: 3 x 3
-##   `0.2`        D2B6F1          x
-##   &lt;dbl&gt;         &lt;chr&gt;      &lt;dbl&gt;
-## 1   0.3 B  (C57BL/6J)  2.6126475
-## 2   0.4    D (DBA/2J) -0.7128575
-## 3   1.0          BxD1 -2.5248700</code></pre>
-</section>
-<section id="excel-8" class="slide level2">
-<h1>Excel</h1>
-<hr>
-<p>specify only columns</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl::<span class="kw">read_excel</span>(<span class="st">'sample2.xls'</span>, <span class="dt">sheet =</span> <span class="dv">2</span>,
-                   <span class="dt">range =</span> <span class="kw">cell_cols</span>(<span class="dv">2</span>:<span class="dv">3</span>))</code></pre></div>
+  <span class="dt">range =</span> <span class="kw">cell_limits</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="kw">c</span>(<span class="ot">NA</span>, <span class="ot">NA</span>)))</code></pre></div>
 <pre><code>## # A tibble: 41 x 2
 ##           Strain      Res_4
 ##            &lt;chr&gt;      &lt;chr&gt;
@@ -701,54 +668,13 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ##  9          BxD8    1.65269
 ## 10          BxD9 -0.0555975
 ## # ... with 31 more rows</code></pre>
+<p>Use cell_limits to specify one end of the rectangle such as top left or top right.</p>
 </section>
-<section id="excel-9" class="slide level2">
-<h1>Excel</h1>
-<hr>
-<p>single column</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl::<span class="kw">read_excel</span>(<span class="st">'sample2.xls'</span>, <span class="dt">sheet =</span> <span class="dv">2</span>,
-                   <span class="dt">range =</span> <span class="kw">cell_cols</span>(<span class="dv">2</span>))</code></pre></div>
-<pre><code>## # A tibble: 41 x 1
-##           Strain
-##            &lt;chr&gt;
-##  1        B6D2F1
-##  2        D2B6F1
-##  3 B  (C57BL/6J)
-##  4    D (DBA/2J)
-##  5          BxD1
-##  6          BxD2
-##  7          BxD5
-##  8          BxD6
-##  9          BxD8
-## 10          BxD9
-## # ... with 31 more rows</code></pre>
-</section>
-<section id="excel-10" class="slide level2">
-<h1>Excel</h1>
-<hr>
-<p>use cell_limits to specify one end of the rectangle such as top left or top right</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl::<span class="kw">read_excel</span>(<span class="st">'sample2.xls'</span>, <span class="dt">sheet =</span> <span class="dv">2</span>,
-                   <span class="dt">range =</span> <span class="kw">cell_limits</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="kw">c</span>(<span class="ot">NA</span>, <span class="ot">NA</span>)))</code></pre></div>
-<pre><code>## # A tibble: 41 x 2
-##           Strain      Res_4
-##            &lt;chr&gt;      &lt;chr&gt;
-##  1        B6D2F1          x
-##  2        D2B6F1          x
-##  3 B  (C57BL/6J)    2.61265
-##  4    D (DBA/2J)  -0.712858
-##  5          BxD1   -2.52487
-##  6          BxD2  -0.764992
-##  7          BxD5  -0.659102
-##  8          BxD6    3.94894
-##  9          BxD8    1.65269
-## 10          BxD9 -0.0555975
-## # ... with 31 more rows</code></pre>
-</section>
-<section id="excel-11" class="slide level2">
-<h1>Excel</h1>
+<section id="read-specific-cells-4" class="slide level2">
+<h1>Read Specific Cells</h1>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl::<span class="kw">read_excel</span>(<span class="st">'sample2.xls'</span>, <span class="dt">sheet =</span> <span class="dv">2</span>,
-                   <span class="dt">range =</span> <span class="kw">cell_limits</span>(<span class="kw">c</span>(<span class="dv">3</span>, <span class="ot">NA</span>), <span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">2</span>)))</code></pre></div>
+  <span class="dt">range =</span> <span class="kw">cell_limits</span>(<span class="kw">c</span>(<span class="dv">3</span>, <span class="ot">NA</span>), <span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">2</span>)))</code></pre></div>
 <pre><code>## # A tibble: 39 x 2
 ##    `0.2`        D2B6F1
 ##    &lt;chr&gt;         &lt;chr&gt;
@@ -764,13 +690,78 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 10    12         BxD12
 ## # ... with 29 more rows</code></pre>
 </section>
-<section id="statistical-software" class="slide level2">
-<h1>Statistical Software</h1>
+<section id="read-single-row" class="slide level2">
+<h1>Read Single Row</h1>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl::<span class="kw">read_excel</span>(<span class="st">'sample2.xls'</span>, <span class="dt">sheet =</span> <span class="dv">2</span>, <span class="dt">range =</span> <span class="st">&quot;A3:C4&quot;</span>)</code></pre></div>
+<pre><code>## # A tibble: 1 x 3
+##   `0.2`        D2B6F1        x
+##   &lt;dbl&gt;         &lt;chr&gt;    &lt;dbl&gt;
+## 1   0.3 B  (C57BL/6J) 2.612648</code></pre>
+</section>
+<section id="read-single-column" class="slide level2">
+<h1>Read Single Column</h1>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl::<span class="kw">read_excel</span>(<span class="st">'sample2.xls'</span>, <span class="dt">sheet =</span> <span class="dv">2</span>, <span class="dt">range =</span> <span class="kw">cell_cols</span>(<span class="dv">2</span>))</code></pre></div>
+<pre><code>## # A tibble: 41 x 1
+##           Strain
+##            &lt;chr&gt;
+##  1        B6D2F1
+##  2        D2B6F1
+##  3 B  (C57BL/6J)
+##  4    D (DBA/2J)
+##  5          BxD1
+##  6          BxD2
+##  7          BxD5
+##  8          BxD6
+##  9          BxD8
+## 10          BxD9
+## # ... with 31 more rows</code></pre>
+</section>
+<section id="specify-rows" class="slide level2">
+<h1>Specify Rows</h1>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl::<span class="kw">read_excel</span>(<span class="st">'sample2.xls'</span>, <span class="dt">sheet =</span> <span class="dv">2</span>, <span class="dt">range =</span> <span class="kw">cell_rows</span>(<span class="dv">3</span>:<span class="dv">6</span>))</code></pre></div>
+<pre><code>## # A tibble: 3 x 3
+##   `0.2`        D2B6F1          x
+##   &lt;dbl&gt;         &lt;chr&gt;      &lt;dbl&gt;
+## 1   0.3 B  (C57BL/6J)  2.6126475
+## 2   0.4    D (DBA/2J) -0.7128575
+## 3   1.0          BxD1 -2.5248700</code></pre>
+</section>
+<section id="specify-columns" class="slide level2">
+<h1>Specify Columns</h1>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl::<span class="kw">read_excel</span>(<span class="st">'sample2.xls'</span>, <span class="dt">sheet =</span> <span class="dv">2</span>, <span class="dt">range =</span> <span class="kw">cell_cols</span>(<span class="dv">2</span>:<span class="dv">3</span>))</code></pre></div>
+<pre><code>## # A tibble: 41 x 2
+##           Strain      Res_4
+##            &lt;chr&gt;      &lt;chr&gt;
+##  1        B6D2F1          x
+##  2        D2B6F1          x
+##  3 B  (C57BL/6J)    2.61265
+##  4    D (DBA/2J)  -0.712858
+##  5          BxD1   -2.52487
+##  6          BxD2  -0.764992
+##  7          BxD5  -0.659102
+##  8          BxD6    3.94894
+##  9          BxD8    1.65269
+## 10          BxD9 -0.0555975
+## # ... with 31 more rows</code></pre>
+</section>
+<section id="statistical-softwares" class="slide level2">
+<h1>Statistical Softwares</h1>
 <hr>
 </section>
 <section id="haven" class="slide level2">
 <h1>haven</h1>
 <hr>
+<ul>
+<li class="fragment"><code>read_dta()</code></li>
+<li class="fragment"><code>read_stata()</code></li>
+<li class="fragment"><code>read_sav()</code></li>
+<li class="fragment"><code>read_spss()</code></li>
+<li class="fragment"><code>read_sas()</code></li>
+</ul>
 </section>
 <section id="other-libraries" class="slide level2">
 <h1>Other Libraries</h1>
@@ -784,7 +775,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="stata" class="slide level2">
 <h1>stata</h1>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">haven::<span class="kw">read_dta</span>(<span class="st">'airline.dta'</span>)    <span class="co"># tibble</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">haven::<span class="kw">read_dta</span>(<span class="st">'airline.dta'</span>)    </code></pre></div>
 <pre><code>## # A tibble: 32 x 6
 ##     year     y     w      r     l     k
 ##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -803,7 +794,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="stata-1" class="slide level2">
 <h1>stata</h1>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">haven::<span class="kw">read_stata</span>(<span class="st">'airline.dta'</span>)  <span class="co"># tibble</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">haven::<span class="kw">read_stata</span>(<span class="st">'airline.dta'</span>)  </code></pre></div>
 <pre><code>## # A tibble: 32 x 6
 ##     year     y     w      r     l     k
 ##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -822,7 +813,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="stata-2" class="slide level2">
 <h1>stata</h1>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">foreign::<span class="kw">read.dta</span>(<span class="st">'airline.dta'</span>)  <span class="co"># data.frame</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">foreign::<span class="kw">read.dta</span>(<span class="st">'airline.dta'</span>)  </code></pre></div>
 <pre><code>##    year      y     w      r     l     k
 ## 1  1948  1.214 0.243 0.1454 1.415 0.612
 ## 2  1949  1.354 0.260 0.2181 1.384 0.559
@@ -860,7 +851,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="spss" class="slide level2">
 <h1>spss</h1>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_sav</span>(<span class="st">'employee.sav'</span>)   <span class="co"># tibble</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_sav</span>(<span class="st">'employee.sav'</span>)   </code></pre></div>
 <pre><code>## # A tibble: 474 x 9
 ##       id    gender      educ    jobcat    salary  salbegin   jobtime
 ##    &lt;dbl&gt; &lt;chr+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt;
@@ -880,7 +871,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="spss-1" class="slide level2">
 <h1>spss</h1>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_spss</span>(<span class="st">'employee.sav'</span>)  <span class="co"># tibble</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_spss</span>(<span class="st">'employee.sav'</span>)  </code></pre></div>
 <pre><code>## # A tibble: 474 x 9
 ##       id    gender      educ    jobcat    salary  salbegin   jobtime
 ##    &lt;dbl&gt; &lt;chr+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt;
