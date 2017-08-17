@@ -70,6 +70,12 @@ output:
 
 <hr>
 
+- what are pipes?
+- why use pipes?
+- what are the different types of pipes?
+- combining operations with pipes
+- case studies
+
 ```{r libs, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
 library(dplyr)
 ```
@@ -89,25 +95,12 @@ When you are dealing with a sequence of multiple operations, R code can get a bi
 
 <hr>
 
-R being a functional language, code contains a lot of parentheses. Complex code results in nested functions making them hard to read and maintain.
-If you are using tidyverse packages, magrittr will be automatically loaded. We will look at 3 different types of 
+R being a functional language, code contains a lot of parentheses. Complex code results in nested functions making them hard to read and maintain. If you are using tidyverse packages, magrittr will be automatically loaded. We will look at 3 different types of 
 pipes:
 
-- `%>%` : pipe operator - pipe a value forward into an expression or function call
-- `%<>%`: compound assignment pipe operator - result assigned to left hand side object instead of returning it
-- `%$%` : exposition pipe operator - expose names within left hand side objects to right hand side expressions
-
-## %>%
-
-<hr>
-
-## %<>%
-
-<hr>
-
-## %$%
-
-<hr>
+- `%>%` : pipe a value forward into an expression or function call
+- `%<>%`: result assigned to left hand side object instead of returning it 
+- `%$%` : expose names within left hand side objects to right hand side expressions
 
 ## Libraries
 
@@ -158,12 +151,15 @@ ecom
 head(ecom, 10)
 ```
 
-----
+## Using pipe
+
+<hr>
+
 ```{r mag2}
 ecom %>% head(10)
 ```
 
-## Use Case 2
+## Square Root 
 
 <hr>
 
@@ -173,14 +169,24 @@ y <- sqrt(y)
 head(y)
 ```
 
-----
+## Square Root - Using pipe
+
+<hr>
+
 ```{r mag4}
+# select n_pages variable and assign it to y
 y <- ecom %$% n_pages
+head(y)
+
+# compute square root of y and assign it to y 
 y %<>% sqrt()
 head(y)
 ```
 
-----
+## Square Root - Using pipe
+
+<hr>
+
 ```{r mag5}
 y <- ecom %$% 
   n_pages %>% 
@@ -193,6 +199,11 @@ head(y)
 <hr>
 
 ```{r mag6}
+# without pipe
+ecom1 <- subset(ecom, purchase == 'true')
+cor(ecom1$n_pages, ecom1$duration)
+
+# with pipe
 ecom %>%
   subset(purchase == 'true') %$% 
   cor(n_pages, duration)
@@ -202,7 +213,15 @@ ecom %>%
 
 <hr>
 
-```{r mag7}
+```{r mag21, fig.align='center', fig.height=4, fig.width=6}
+barplot(table(subset(ecom, purchase == 'true')$referrer))
+```
+
+## Visualization - Using pipe
+
+<hr>
+
+```{r mag7, fig.align='center', fig.height=4, fig.width=6}
 ecom %>%
   subset(purchase == 'true') %>%
   extract('referrer') %>%
@@ -215,6 +234,14 @@ ecom %>%
 <hr>
 
 ```{r mag8}
+summary(lm(duration ~ n_pages, data = ecom))
+```
+
+## Regression - Using pipe
+
+<hr>
+
+```{r mag22}
 ecom %$%
   lm(duration ~ n_pages) %>%
   summary()
@@ -227,8 +254,10 @@ ecom %$%
 ```{r mag9}
 email <- 'jovialcann@anymail.com'
 
+# without pipe
 toupper(strtrim(strsplit(email, '@')[[1]][1], 6))
 
+# with pipe
 email %>%
   strsplit(split = '@') %>%
   extract2(1) %>%
@@ -245,41 +274,77 @@ email %>%
 - `extract2()`
 - `use_series()`
 
-----
+## Extract Column By Name
+
+<hr>
+
 ```{r mag10}
+head(ecom['n_pages'], 3)
+
 ecom %>%
-  extract('n_pages')
+  extract('n_pages') %>%
+  head(3)
 ```
 
-----
-```{r mag22}
+## Extract Column By Position
+
+<hr>
+
+```{r mag23}
+head(ecom[6], 3)
+
 ecom %>%
-  extract(6)
+  extract(6) %>%
+  head(3)
 ```
 
-----
+## Extract Column (as vector)
+
+<hr>
+
 ```{r mag11}
+head(ecom$n_pages)
+
 ecom %>%
-  use_series('n_pages')
+  use_series('n_pages') %>%
+  head()
 ```
 
-----
+## Extract List Element By Name
+
+<hr>
+
 ```{r mag12}
 mt <- as.list(mtcars)
+
+mt[['mpg']]
+
 mt %>%
   extract2('mpg')
 ```
 
-----
+## Extract List Element By Position
+
+<hr>
+
 ```{r mag13}
 mt <- as.list(mtcars)
+
+mt[[1]]
+
 mt %>%
   extract2(1)
 ```
 
-----
+## Extract List Element (as vector)
+
+<hr>
+
 ```{r mag14}
 mt <- as.list(mtcars)
+
+mt$mpg
+
 mt %>%
   use_series(mpg)
 ```
@@ -297,7 +362,11 @@ mt %>%
 - `mod()`
 - `raise_to_power()`
 
-----
+
+## Addition
+
+<hr>
+
 ```{r mag15}
 1:10 %>%
   `+`(1)
@@ -306,7 +375,10 @@ mt %>%
   add(1)
 ```
 
-----
+## Multiplication
+
+<hr>
+
 ```{r mag16}
 1:10 %>%
   `*`(3)
@@ -315,7 +387,10 @@ mt %>%
   multiply_by(3)
 ```
 
-----
+## Division
+
+<hr>
+
 ```{r mag17}
 1:10 %>%
   `/`(2)
@@ -324,7 +399,10 @@ mt %>%
   divide_by(2)
 ```
 
-----
+## Power
+
+<hr>
+
 ```{r mag18}
 1:10 %>%
   `^`(2)
@@ -346,7 +424,10 @@ mt %>%
 - `is_less_than()`
 - `is_weakly_less_than()`
 
-----
+## Greater Than
+
+<hr>
+
 ```{r mag19}
 1:10 %>%
   `>`(5)
@@ -355,7 +436,10 @@ mt %>%
   is_greater_than(5)
 ```
 
-----
+## Weakly Greater Than
+
+<hr>
+
 ```{r mag20}
 1:10 %>%
   `>=`(5)
