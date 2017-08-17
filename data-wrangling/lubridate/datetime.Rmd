@@ -33,6 +33,9 @@ output:
     color: #0077aa;
     font-family: 'Helvetica Neue';
   }
+  .reveal h1 {
+    font-size: 24px;
+  }
   .reveal ul {
     display: block;
   }
@@ -92,11 +95,9 @@ library(dplyr)
 library(magrittr)
 ```
 
-## Quick Overview
+## Origin
 
 <hr>
-
-Use `origin` to get the origin for the `Date` and other date/time objects in R.
 
 ```{r origin}
 lubridate::origin
@@ -106,8 +107,6 @@ lubridate::origin
 
 <hr>
 
-There are functions to check current date, time, timezone and AM/PM. Let us take a quick look at these:
-
 ```{r today}
 now()
 today()
@@ -115,25 +114,13 @@ am(now())
 pm(now())
 ```
 
-## Current Date/Time
+## Data
 
 <hr>
-
-```{r today2}
-am(now())  
-pm(now())
-```
-
-## Case Study
-
-<hr>
-
-We will use a case study to explore the lubridate package. The data set can be downloaded from here or directly imported using the readr package.
 
 ```{r import, eval=FALSE}
 transact <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/transact.csv')
 ```
-
 
 ```{r show, echo=FALSE, eval=TRUE, message=FALSE}
 transact <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/transact.csv')
@@ -166,11 +153,9 @@ questions we have about the transact data.
 - how many invoices are due in each quarter
 - what is the average duration between invoice date and payment date
 
-## Case Study
+## Extract Date, Month & Year from Due Date
 
 <hr>
-
-extract date, month and year from Due
 
 ```{r lub2}
 transact %>%
@@ -181,11 +166,9 @@ transact %>%
   )
 ```
 
-## Case Study
+## compute days to settle invoice
 
 <hr>
-
-compute the number of days to settle invoice
 
 ```{r lub3}
 transact %>%
@@ -194,11 +177,9 @@ transact %>%
   )
 ```
 
-## Case Study
+## compute days over due
 
 <hr>
-
-compute days over due
 
 ```{r lub4}
 transact %>%
@@ -207,11 +188,9 @@ transact %>%
   )
 ```
 
-## Case Study
+## Is due year a leap year?
 
 <hr>
-
-check if due year is a leap year
 
 ```{r lub5}
 transact %>%
@@ -221,11 +200,9 @@ transact %>%
   )
 ```
 
-## Case Study
+## If due day is February 29, is it a leap year?
 
 <hr>
-
-check when due day in february is 29, whether it is a leap year
 
 ```{r lub6}
 transact %>%
@@ -240,7 +217,7 @@ transact %>%
   filter(due_month == 2)
 ```
 
-## Case Study
+## how many invoices were settled within due date?
 
 <hr>
 
@@ -255,7 +232,7 @@ transact %>%
   select(inv_due_interval, due_next, due_pay_interval, overlaps)
 ```
 
-## Case Study
+## how many invoices were settled within due date?
 
 <hr>
 
@@ -271,7 +248,7 @@ transact %>%
   select(inv_due_interval, due_pay_next, overlaps)
 ```
 
-## Case Study
+## how many invoices were settled within due date?
 
 <hr>
 
