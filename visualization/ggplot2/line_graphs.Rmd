@@ -33,11 +33,14 @@ output:
     border-color: #0077aa;
   }
   .reveal h1, h2, h3, h4, h5, h6 {
-    text-transform: capitalize;
+    text-transform: none;
     text-align: center;
     color: #0077aa;
     font-family: 'Helvetica Neue';
     font-size: 25px;
+  }
+  .reveal h1 {
+    font-size: 24px;
   }
   .reveal ul {
     display: block;
@@ -78,9 +81,20 @@ output:
 
 <hr>
 
+- build 
+    - simple line chart
+    - grouped line chart
+- map aesthetics to variables
+- modify line
+    - color
+    - type
+    - size
+
 ## Intro
 
 <hr>
+
+Line charts are used to examine trend over time.
 
 ## Installation
 
@@ -126,7 +140,7 @@ ggplot(gdp, aes(year, india)) +
   geom_line()
 ```
 
-## Color
+## Line Color
 
 <hr>
 
@@ -139,28 +153,33 @@ ggplot(gdp, aes(year, india)) +
 
 <hr>
 
-- 1
-- 2
-- 3
-- 4
-- 5
+- 0 : blank
+- 1 : solid
+- 2 : dashed
+- 3 : dotted
+- 4 : dotdash
+- 5 : longdash
+- 6 : twodash
 
+## Line Type
 
-----
+<hr>
 
 ```{r line2, fig.align='center'}
 ggplot(gdp, aes(year, india)) +
   geom_line(linetype = 2)
 ```
 
-----
+## Line Type (Dashed)
+
+<hr>
 
 ```{r line3, fig.align='center'}
 ggplot(gdp, aes(year, india)) +
   geom_line(linetype = 'dashed')
 ```
 
-## Size
+## Line Size
 
 <hr>
 
@@ -182,7 +201,7 @@ gdp2 <- gdp %>%
 gdp2
 ```
 
-## Group
+## Grouped Line Chart
 
 <hr>
 
@@ -191,7 +210,7 @@ ggplot(gdp2, aes(year, gdp, group = country)) +
   geom_line()
 ```
 
-## Color
+## Map Color to Country
 
 <hr>
 
@@ -200,7 +219,7 @@ ggplot(gdp2, aes(year, gdp, group = country)) +
   geom_line(aes(color = country))
 ```
 
-## Line Type
+## Map Line Type to Country
 
 <hr>
 
@@ -209,7 +228,7 @@ ggplot(gdp2, aes(year, gdp, group = country)) +
   geom_line(aes(linetype = country))
 ```
 
-## Line Width
+## Map Line Width to Country
 
 <hr>
 
