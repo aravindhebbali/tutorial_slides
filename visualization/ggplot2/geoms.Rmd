@@ -33,11 +33,14 @@ output:
     border-color: #0077aa;
   }
   .reveal h1, h2, h3, h4, h5, h6 {
-    text-transform: capitalize;
+    text-transform: none;
     text-align: center;
     color: #0077aa;
     font-family: 'Helvetica Neue';
     font-size: 25px;
+  }
+  .reveal h1 {
+    font-size: 24px;
   }
   .reveal ul {
     display: block;
@@ -78,20 +81,16 @@ output:
 
 <hr>
 
+Create some of the most routinely used plots to explore data using the `geom_*` functions:
+
 - Scatter Plot
 - Bar Plot
 - Box Plot
 - Histogram
 - Line Chart
-- Fit Line
+- Regression Line
 
-## Intro
-
-<hr>
-
-In this module, we will create some of the most routinely used plots to explore data using the `geom_*` functions. 
-
-## Installation
+## Libraries
 
 <hr>
 
@@ -105,11 +104,9 @@ library(ggplot2)
 library(dplyr)
 ```
 
-## Case Study
+## Data
 
 <hr>
-
-You can download the data from [here](https://github.com/rsquaredacademy/datasets/blob/master/web.csv) or import it directly using `read_csv()` from the [readr](readr.tidyverse.org) package.
 
 ```{r import, eval=FALSE}
 ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
@@ -124,9 +121,28 @@ ecom
 
 <hr>
 
+- id: row id
+- referrer: referrer website/search engine
+- os: operating system
+- browser: browser
+- device: device used to visit the website
+- n_pages: number of pages visited
+- duration: time spent on the website (in seconds)
+- repeat: frequency of visits
+- country: country of origin
+- purchase: whether visitor purchased
+- order_value: order value of visitor (in dollars)
+
+
 ## Scatter Plot
 
 <hr>
+
+A scatter plot displays the relationship between two continuous variables. In ggplot2, we can build a scatter plot using `geom_point()`. Scatterplots can show you visually 
+
+- the strength of the relationship between the variables 
+- the direction of the relationship between the variables 
+- and whether outliers exist
 
 ## Point
 
@@ -137,36 +153,14 @@ ggplot(ecom, aes(x = n_pages, y = duration)) +
   geom_point()
 ```
 
-## Fit Line
+## Regression Line
 
 <hr>
 
-We can fit a regression line or add horizontal or vertical lines to the plots using 
+Fit a regression line or using 
 
 - `geom_abline()`
-- `geom_hline()`
-- `geom_vline()`
-
-
-## Vertical Line
-
-<hr>
-
-```{r geoms3, fig.align='center'}
-ggplot(mtcars, aes(x = wt, y = mpg)) +
-  geom_point() +
-  geom_vline(xintercept = 5) 
-```
-
-## Horizontal Line
-
-<hr>
-
-```{r geoms4, fig.align='center'}
-ggplot(mtcars, aes(x = wt, y = mpg)) +
-  geom_point() +
-  geom_hline(yintercept = 30) 
-```
+- `geom_smooth()`
 
 ## Regression Line
 
@@ -175,7 +169,7 @@ ggplot(mtcars, aes(x = wt, y = mpg)) +
 ```{r geoms5, fig.align='center'}
 ggplot(mtcars, aes(x = wt, y = mpg)) +
   geom_point() + 
-  geom_abline(intercept = 10, slope = 1)
+  geom_abline(intercept = 37.285, slope = -5.344)
 ```
 
 ## Regression Line
@@ -184,7 +178,7 @@ ggplot(mtcars, aes(x = wt, y = mpg)) +
 
 ```{r geoms6, fig.align='center'}
 ggplot(mtcars, aes(x = wt, y = mpg)) +
-	geom_smooth(method = 'lm', se = TRUE)
+  geom_smooth(method = 'lm', se = TRUE)
 ```
 
 ## Regression Line
@@ -196,12 +190,50 @@ ggplot(mtcars, aes(x = wt, y = mpg)) +
   geom_smooth(method = 'loess', se = FALSE)
 ```
 
+## Horizontal/Vertical Lines
+
+<hr>
+
+Add horizontal or vertical lines using
+
+- `geom_hline()`
+- `geom_vline()`
+
+
+## Horizontal Line
+
+<hr>
+
+```{r geoms4, fig.align='center'}
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point() +
+  geom_hline(yintercept = 30) 
+```
+
+## Vertical Line
+
+<hr>
+
+```{r geoms3, fig.align='center'}
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point() +
+  geom_vline(xintercept = 5) 
+```
+
 ## Bar Plot
 
 <hr>
 
+Bar plots present grouped data with rectangular bars. The bars may represent the frequency of the groups or values. Bar plots can be: 
 
-## Bar
+- horizontal 
+- vertical
+- grouped
+- stacked 
+- proportional
+
+
+## Frequency
 
 <hr>
 
@@ -210,7 +242,7 @@ ggplot(ecom, aes(x = factor(device))) +
   geom_bar()
 ```
 
-## Bar
+## Weight
 
 <hr>
 
@@ -219,7 +251,7 @@ ggplot(ecom, aes(x = factor(device))) +
   geom_bar(aes(weight = order_value))
 ```
 
-## Bar
+## Stacked Bar Plot
 
 <hr>
 
@@ -228,7 +260,7 @@ ggplot(ecom, aes(x = factor(device))) +
   geom_bar(aes(fill = purchase))
 ```
 
-## Bar
+## Horizontal Bar Plot
 
 <hr>
 
@@ -238,11 +270,11 @@ ggplot(ecom, aes(x = factor(device))) +
   coord_flip()
 ```
 
-## Bar
+## Columns
 
 <hr>
 
-```{r geoms12, fig.align='center'}
+```{r geoms12, fig.align='center', fig.height=4}
 device <- c('laptop', 'mobile', 'tablet')
 visits <- c(30000, 12000, 5000)
 traffic <- tibble::tibble(device, visits)
@@ -266,7 +298,7 @@ ggplot(ecom, aes(x = factor(device), y = n_pages)) +
   geom_boxplot()
 ```
 
-## Jitter
+## Add Jitter
 
 <hr>
 
@@ -279,6 +311,11 @@ ggplot(ecom, aes(x = factor(device), y = n_pages)) +
 ## Histogram
 
 <hr>
+
+Histograms are used to examine:
+
+- distribution of a continuous variable
+- skewness and kurtosis
 
 ## Histogram
 
@@ -301,6 +338,8 @@ ggplot(ecom, aes(x = duration)) +
 ## Line
 
 <hr>
+
+Line charts are used to examine trends over time.
 
 
 ## Data
@@ -344,7 +383,7 @@ ggplot(ecom, aes(x = factor(device), y = duration)) +
   geom_jitter()
 ```
 
-## Jitter
+## Jitter Width & Height
 
 <hr>
 
