@@ -38,6 +38,9 @@ output:
     color: #0077aa;
     font-family: 'Helvetica Neue';
   }
+  .reveal h1 {
+    font-size: 24px;
+  }
   .reveal ul {
     display: block;
   }
@@ -77,14 +80,12 @@ output:
 
 <hr>
 
+- understand the philosophy of Grammar of Graphics
+- explore different aspects of ggplot2
+- learn to build some of the basic plots regularly used for exploring data
+
+
 ## Introduction
-
-<hr>
-
-In this module, we will understand the philosophy of Grammar of Graphics,  explore different aspects of ggplot2 and learn to build some of the basic
-plots regularly used for exploring data.
-
-## ggplot2
 
 <hr>
 
@@ -108,7 +109,7 @@ library(ggplot2)
 
 <hr>
 
-It is a formal system for building plots. The core idea is that any plot can be uniquely described as a combination of
+Grammar of Graphics is a formal system for building plots. The core idea is that any plot can be uniquely described as a combination of
 
 - a dataset
 - a geom

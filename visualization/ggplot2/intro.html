@@ -509,6 +509,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
     color: #0077aa;
     font-family: 'Helvetica Neue';
   }
+  .reveal h1 {
+    font-size: 24px;
+  }
   .reveal ul {
     display: block;
   }
@@ -547,14 +550,14 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="agenda" class="slide level2">
 <h1>Agenda</h1>
 <hr>
+<ul>
+<li class="fragment">understand the philosophy of Grammar of Graphics</li>
+<li class="fragment">explore different aspects of ggplot2</li>
+<li class="fragment">learn to build some of the basic plots regularly used for exploring data</li>
+</ul>
 </section>
 <section id="introduction" class="slide level2">
 <h1>Introduction</h1>
-<hr>
-<p>In this module, we will understand the philosophy of Grammar of Graphics, explore different aspects of ggplot2 and learn to build some of the basic plots regularly used for exploring data.</p>
-</section>
-<section id="ggplot2" class="slide level2">
-<h1>ggplot2</h1>
 <hr>
 <p><a href="http://ggplot2.tidyverse.org/index.html">ggplot2</a> is an alternative (and awesome) to base R for data visualization. It is based on <a href="http://www.springer.com/in/book/9780387245447">The Grammar of Graphics</a>. In this post, we will understand the philosophy behind <strong>ggplot2</strong> and learn to build some of the most frequently used plots for visualizing data.</p>
 </section>
@@ -566,7 +569,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="grammar-of-graphics" class="slide level2">
 <h1>Grammar of Graphics</h1>
 <hr>
-<p>It is a formal system for building plots. The core idea is that any plot can be uniquely described as a combination of</p>
+<p>Grammar of Graphics is a formal system for building plots. The core idea is that any plot can be uniquely described as a combination of</p>
 <ul>
 <li class="fragment">a dataset</li>
 <li class="fragment">a geom</li>
