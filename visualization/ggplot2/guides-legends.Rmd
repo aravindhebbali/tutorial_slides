@@ -33,11 +33,17 @@ output:
     border-color: #0077aa;
   }
   .reveal h1, h2, h3, h4, h5, h6 {
-    text-transform: capitalize;
+    text-transform: none;
     text-align: center;
     color: #0077aa;
     font-family: 'Helvetica Neue';
     font-size: 25px;
+  }
+  .reveal h1 {
+    font-size: 24px;
+  }
+  .reveal h1 {
+    font-size: 24px;
   }
   .reveal ul {
     display: block;
@@ -78,21 +84,13 @@ output:
 
 <hr>
 
-Now that we have learnt to build different plots, let us look at different ways to modify the axis. Along the way, we will also explore the below functions:
+Learn to modify legend
 
-- `scale_*()` family of functions 
-- `guides()`
-- `guide_legend()` 
-- and `guide_colorbar()`
+- title
+- label
+- bar
 
-
-## Intro
-
-<hr>
-
-In this module, we will focus on modifying the legends of plots.
-
-## Installation
+## Libraries
 
 <hr>
 
@@ -108,21 +106,21 @@ library(dplyr)
 library(tidyr)
 ```
 
-## Guides
+## Title
 
 <hr>
 
+- position
+    - top
+    - bottom
+    - left
+    - right
+- alignment
+    - 0 (left)
+    - 1 (right)
 
-- title
-- title.hjust
-- title.position
-- label.hjust
-- label.position
-- direction
-- nrow
-- reverse
 
-## Title
+## Legend Title
 
 <hr>
 
@@ -152,6 +150,27 @@ ggplot(mtcars) + geom_point(aes(disp, mpg, color = factor(cyl))) +
     guide = guide_legend(title = "Cylinders", title.hjust = 0.5, 
       title.position = "top"))
 ```
+
+
+## Label
+
+<hr>
+
+- position
+    - top
+    - bottom
+    - left 
+    - right
+- alignment 
+    - 0 (left)
+    - 1 (right)
+- direction
+    - horizontal
+    - vertical
+- reverse
+    - TRUE
+    - FALSE
+- rows
 
 ## Label Position
 
@@ -216,17 +235,6 @@ ggplot(mtcars) + geom_point(aes(disp, mpg, color = factor(cyl))) +
   )
 ```
 
-----
-
-```{r leg21, fig.align='center'}
-ggplot(mtcars) + geom_point(aes(disp, mpg, color = factor(cyl))) +
-  scale_color_discrete(guide = guide_legend(title = "Cylinders",
-      title.hjust = 0.5, title.position = "top",
-      label.position = "right", direction = "horizontal",
-      label.hjust = 0.5, nrow = 2, reverse = TRUE)
-  )
-```
-
 ## Title Alignment (Vertical)
 
 <hr>
@@ -248,7 +256,18 @@ ggplot(mtcars) +
     label.vjust = 0.8))
 ```
 
-## Bar Width
+## Legend Bar 
+
+<hr>
+
+- width
+- height
+- bins
+- ticks
+- limits
+
+
+## Legend Bar Width
 
 <hr>
 
@@ -259,7 +278,7 @@ ggplot(mtcars) +
     barwidth = 10))
 ```
 
-## Bar Height
+## Legend Bar Height
 
 <hr>
 
@@ -270,7 +289,7 @@ ggplot(mtcars) +
     barheight = 3))
 ```
 
-## Bins
+## Legend Bar Bins
 
 <hr>
 
@@ -281,7 +300,7 @@ ggplot(mtcars) +
     nbin = 4))
 ```
 
-## Ticks
+## Legend Bar Ticks
 
 <hr>
 
@@ -292,7 +311,7 @@ ggplot(mtcars) +
     ticks = FALSE))
 ```
 
-## Upper/Lower Limits
+## Legend Bar Upper/Lower Limits
 
 <hr>
 
@@ -314,14 +333,15 @@ ggplot(mtcars) +
   guides(color = "colorbar", shape = "legend", size = "legend")
 ```
 
-----
+## Guides: Color, Shape & Size
+
+<hr>
 
 ```{r leg35, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, color = hp, size = wt, shape = factor(gear))) + 
   guides(color = guide_colorbar(title = "Horsepower"),
-    shape = guide_legend(title = "Weight"),
-    size = guide_legend(title = "Gear")
+    shape = guide_legend(title = "Weight"), size = guide_legend(title = "Gear")
   )
 ```
 
