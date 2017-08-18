@@ -33,11 +33,14 @@ output:
     border-color: #0077aa;
   }
   .reveal h1, h2, h3, h4, h5, h6 {
-    text-transform: capitalize;
+    text-transform: none;
     text-align: center;
     color: #0077aa;
     font-family: 'Helvetica Neue';
     font-size: 25px;
+  }
+  .reveal h1 {
+    font-size: 24px;
   }
   .reveal ul {
     display: block;
@@ -78,13 +81,22 @@ output:
 
 <hr>
 
+Explore aesthetics such as 
+
+- color
+- shape
+- size
+- fill
+- alpha
+- width
+
 ## Intro
 
 <hr>
 
 In this module, we will focus on the aesthetics i.e. color, shape, size, alpha, line type, line width etc. We can map these to variables or specify values for them. If we want to map the above to variables, we have to specify them within the `aes()` function. We will look at both methods.
 
-## Installation
+## Libraries
 
 <hr>
 
@@ -100,186 +112,132 @@ library(dplyr)
 library(tidyr)
 ```
 
-## Color
+## Map Color to Variable
 
 <hr>
-
-In ggplot2, when we mention `color` or `colour`, it usually refers to the color of the geoms. The `fill` argument is used to specify the color of the shapes in certain cases. In this first section, we will see how we can specify the color for the different geoms we learnt in the previous post. 
-
-## Point
-
-<hr>
-
-For points, the `color` argument specifies the color of the point for certain shapes and border for others. The `fill` argument is used to specify the background for some shapes and will not work with other shapes. Let us look at an example:
-
-----
 
 ```{r aes2, fig.align='center'}
 ggplot(mtcars, aes(x = disp, y = mpg, color = factor(cyl))) +
   geom_point()
 ```
 
-## Point
+## Map Color to Variable
 
 <hr>
-
-We can map the variable to color in the `geom_point()` function as well since it inherits the data from the `ggplot()` function.
-
-----
 
 ```{r aes3, fig.align='center'}
 ggplot(mtcars, aes(x = disp, y = mpg)) +
   geom_point(aes(color = factor(cyl)))
 ```
 
-## Point
+## Color: Specify Value
 
 <hr>
-
-If you do not want to map a variable to color, you can specify it separately using the `color` argument but in this case it should be outside the `aes()` function.
-
-----
 
 ```{r aes4, fig.align='center'}
 ggplot(mtcars, aes(x = disp, y = mpg)) +
   geom_point(color = 'blue')
 ```
 
-## Point
+## Map Shape to Variable
 
 <hr>
 
-Now we will change the shape of the points to understand the difference between `color` and `fill` arguments. It can be again mapped to variables or values. Let us map shape to variables.
-
-----
 ```{r aes5, fig.align='center'}
 ggplot(mtcars, aes(x = disp, y = mpg, shape = factor(cyl))) +
   geom_point()
 ```
 
-## Point
+## Map Shape to Variable
 
 <hr>
 
-Map shape to variable in the `geom_point()` function.
-
-----
 ```{r aes6, fig.align='center'}
 ggplot(mtcars, aes(x = disp, y = mpg)) +
   geom_point(aes(shape = factor(cyl)))
 ```
 
-## Point
+## Shape: Specify Value
 
 <hr>
 
-Specify value for shape.
-
-----
 ```{r aes7, fig.align='center'}
 ggplot(mtcars, aes(x = disp, y = mpg)) +
   geom_point(shape = 5)
 ```
 
-## Point
+## Shape & Color
 
 <hr>
 
-Use `color` to specify color of the point.
-
-----
 ```{r aes8, fig.align='center'}
 ggplot(mtcars, aes(x = disp, y = mpg)) +
   geom_point(shape = 5, color = 'blue')
 ```
 
-## Point
+## Fill
 
 <hr>
 
-You cannot use `fill` with shape upto 21.
-
-----
 ```{r aes9, fig.align='center'}
 ggplot(mtcars, aes(x = disp, y = mpg)) +
   geom_point(shape = 5, fill = 'blue')
 ```
 
-## Point
+## Fill: Specify Value
 
 <hr>
 
-`fill` will add background color in the below case.
-
-----
 ```{r aes10, fig.align='center'}
 ggplot(mtcars, aes(x = disp, y = mpg)) +
   geom_point(shape = 22, fill = 'blue')
 ```
 
-## Point
+## Geom Border Color
 
 <hr>
 
-`color` will modify the border.
-
-----
 ```{r aes11, fig.align='center'}
 ggplot(mtcars, aes(x = disp, y = mpg)) +
   geom_point(shape = 22, color = 'blue')
 ```
 
-## Point
+## Map Size to Variable (Continuous)
 
 <hr>
-
-Let us map size of points to a variable. It is advised to map size only to continuous variables and not categorical variables.
-
-----
 
 ```{r aes12, fig.align='center'}
 ggplot(mtcars, aes(x = disp, y = mpg, size = disp)) +
   geom_point()
 ```
 
-## Point
+## Specify Size Value
 
 <hr>
-
-If you map size to categorical variables, ggplot2 will throw a warning.
-
-----
-
-Specify value for size.
 
 ```{r aes13, fig.align='center'}
 ggplot(mtcars, aes(x = disp, y = mpg)) +
   geom_point(size = 4)
 ```
 
-## Point
+## Map Alpha to Variable
 
 <hr>
 
-You can also specify the opacity of the color using the `alpha` argument.
-
-----
 ```{r aes14, fig.align='center'}
 ggplot(mtcars, aes(x = disp, y = mpg)) +
   geom_point(aes(alpha = factor(cyl)), color = 'blue')
 ```
 
-## Line
+## Line Color, Type & Width
 
 <hr>
 
-So far we have focussed on `geom_point()` to learn how to map aesthetics to variables. To explore line type and line width, we will use `geom_line()`. In the previous post, we used `geom_line()` to build line charts. Now we will modify the appearance of the line. In the section below, we will specify values for color, line type and width. 
+So far we have focussed on `geom_point()` to learn how to map aesthetics to variables. To explore line type and line width, we will use `geom_line()`. In the previous post, we used `geom_line()` to build line charts. Now we will modify the appearance of the line. In the section below, we will specify values for 
 
-## Line
-
-<hr>
-
-In the next section, we will map the same to variables in the data. We will use a new data set. You can download it from [here](https://github.com/rsquaredacademy/datasets/blob/master/gdp.csv). It contains GDP (Gross Domestic Product) growth data for the BRICS (Brazil, Russia, India, China, South Africa) for the years 2000 to 2005.
+- line color
+- line type 
+- and line width
 
 ## Data
 
@@ -289,12 +247,19 @@ In the next section, we will map the same to variables in the data. We will use 
 gdp <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/gdp.csv')
 ```
 
-```{r import2, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+```{r import2, echo=FALSE, eval=TRUE, message=FALSE}
 gdp <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/gdp.csv')
 gdp
 ```
 
-## Line
+## Data Dictionary
+
+<hr>
+
+It contains GDP (Gross Domestic Product) growth data for the BRICS (Brazil, Russia, India, China, South Africa) for the years 2000 to 2005.
+
+
+## Line Color
 
 <hr>
 
@@ -306,8 +271,6 @@ ggplot(gdp, aes(year, india)) +
 ## Line Type
 
 <hr>
-
-`linetype` can be used to modify the appearance of the line.
 
 ```{r aes16, fig.align='center'}
 ggplot(gdp, aes(year, india)) +
@@ -323,18 +286,16 @@ ggplot(gdp, aes(year, india)) +
   geom_line(linetype = 'dashed')
 ```
 
-## Size
+## Line Width
 
 <hr>
-
-`size` argument is used to specify the width of the line.
 
 ```{r aes18, fig.align='center'}
 ggplot(gdp, aes(year, india)) +
   geom_line(size = 2)
 ```
 
-## Data
+## Map Line Aesthetics to Variable
 
 <hr>
 
@@ -348,46 +309,40 @@ Now let us map the aesthetics to the variables. The data used in the above examp
 gdp2 <- gdp %>% 
   select(year, growth, india, china) %>% 
   gather(key = country, value = gdp, -year)
+
+gdp2
 ```
 
-## Line
+## Grouped Line Chart
 
 <hr>
-
-Now we can map the aethetics to the `country` variable
 
 ```{r aes20, fig.align='center'}
 ggplot(gdp2, aes(year, gdp, group = country)) +
   geom_line()
 ```
 
-## Color
+## Map Line Color to Country
 
 <hr>
-
-Let us begin with `color`.
 
 ```{r aes21, fig.align='center'}
 ggplot(gdp2, aes(year, gdp, group = country)) +
   geom_line(aes(color = country))
 ```
 
-## Line Type
+## Map Line Type to Country
 
 <hr>
-
-Map `linetype` to `country`.
 
 ```{r aes22, fig.align='center'}
 ggplot(gdp2, aes(year, gdp, group = country)) +
   geom_line(aes(linetype = country))
 ```
 
-## Line Width
+## Map Line Width to Country
 
 <hr>
-
-Map `linewidth` to `country`.
 
 ```{r aes23, fig.align='center'}
 ggplot(gdp2, aes(year, gdp, group = country)) +
@@ -398,13 +353,12 @@ ggplot(gdp2, aes(year, gdp, group = country)) +
 
 <hr>
 
-Before we wrap up, let us quickly see how we can map aesthetics to variables for different plots.
+Before we wrap up, let us quickly see how we can map aesthetics to variables for 
 
-## Data
+- bar plots
+- histograms
+- box plots
 
-<hr>
-
-You can download the data from [here](https://github.com/rsquaredacademy/datasets/blob/master/web.csv) or import it directly using `read_csv()` from the [readr](readr.tidyverse.org) package.
 
 ## Data
 
@@ -419,8 +373,23 @@ ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datas
 ecom
 ```
 
+## Data Dictionary
 
-## Bar Plots
+<hr>
+
+- id: row id
+- referrer: referrer website/search engine
+- os: operating system
+- browser: browser
+- device: device used to visit the website
+- n_pages: number of pages visited
+- duration: time spent on the website (in seconds)
+- repeat: frequency of visits
+- country: country of origin
+- purchase: whether visitor purchased
+- order_value: order value of visitor (in dollars)
+
+## Map Bar Color to Purchase
 
 <hr>
 
@@ -429,7 +398,7 @@ ggplot(ecom, aes(device, fill = purchase)) +
   geom_bar()
 ```
 
-## Histograms
+## Map Histogram Color to Purchase
 
 <hr>
 
@@ -438,7 +407,7 @@ ggplot(ecom) +
   geom_histogram(aes(duration, fill = purchase), bins = 10)
 ```
 
-## Box Plots
+## Map Box Plot Color to Purchase
 
 <hr>
 
