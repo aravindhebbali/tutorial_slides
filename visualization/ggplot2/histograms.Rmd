@@ -33,11 +33,14 @@ output:
     border-color: #0077aa;
   }
   .reveal h1, h2, h3, h4, h5, h6 {
-    text-transform: capitalize;
+    text-transform: none;
     text-align: center;
     color: #0077aa;
     font-family: 'Helvetica Neue';
     font-size: 25px;
+  }
+  .reveal h1 {
+    font-size: 24px;
   }
   .reveal ul {
     display: block;
@@ -78,11 +81,22 @@ output:
 
 <hr>
 
+- build histogram
+- specify bins
+- modify 
+    - color
+    - fill
+    - alpha
+    - bin width
+    - line type
+    - line size
+- map aesthetics to variables
+
 ## Intro
 
 <hr>
 
-## Installation
+## Libraries
 
 <hr>
 
@@ -97,13 +111,6 @@ library(ggplot2)
 library(dplyr)
 library(tidyr)
 ```
-
-
-## Case Study
-
-<hr>
-
-We will continue to use the ecommerce data. You can download it from [here](https://github.com/rsquaredacademy/datasets/blob/master/web.csv) or import directly using the readr package.
 
 ## Data 
 
@@ -122,6 +129,19 @@ ecom
 
 <hr>
 
+- id: row id
+- referrer: referrer website/search engine
+- os: operating system
+- browser: browser
+- device: device used to visit the website
+- n_pages: number of pages visited
+- duration: time spent on the website (in seconds)
+- repeat: frequency of visits
+- country: country of origin
+- purchase: whether visitor purchased
+- order_value: order value of visitor (in dollars)
+
+
 ## Histogram
 
 <hr>
@@ -131,13 +151,31 @@ ggplot(ecom) +
   geom_histogram(aes(n_visit))
 ```
 
+## Specify Bins
+
+<hr>
+
+```{r hist4, fig.align='center'}
+ggplot(ecom) +
+  geom_histogram(aes(n_visit), bins = 7)
+```
+
 ## Fill
 
 <hr>
 
 ```{r hist3, fig.align='center'}
 ggplot(ecom) +
-  geom_histogram(aes(n_visit), fill = 'blue')
+  geom_histogram(aes(n_visit), bins = 7, fill = 'blue')
+```
+
+## Alpha
+
+<hr>
+
+```{r hist11, fig.align='center'}
+ggplot(ecom) +
+  geom_histogram(aes(n_visit), bins = 7, fill = 'blue', alpha = 0.3)
 ```
 
 ## Color
@@ -146,18 +184,18 @@ ggplot(ecom) +
 
 ```{r hist8, fig.align='center'}
 ggplot(ecom) +
-  geom_histogram(aes(n_visit), fill = 'white', color = 'blue')
+  geom_histogram(aes(n_visit), bins = 7, fill = 'white', color = 'blue')
 ```
 
-
-## Bins
+## Bins, Color & Fill
 
 <hr>
 
-```{r hist4, fig.align='center'}
+```{r hist9, fig.align='center'}
 ggplot(ecom) +
-  geom_histogram(aes(n_visit), bins = 7, fill = 'blue', color = 'black')
+  geom_histogram(aes(n_visit), bins = 7, fill = 'blue', color = 'white')
 ```
+
 
 ## Bin Width
 
@@ -168,17 +206,27 @@ ggplot(ecom) +
   geom_histogram(aes(n_visit), binwidth = 2, fill = 'blue', color = 'black')
 ```
 
-## Line Type & Size
+## Line Type
 
 <hr>
 
 ```{r hist6, fig.align='center'}
 ggplot(ecom) +
-  geom_histogram(aes(n_visit), binwidth = 2, fill = 'blue', 
-    color = 'black', alpha = 0.3, linetype = 2, size = 1.25)
+  geom_histogram(aes(n_visit), bins = 5, fill = 'white', 
+    color = 'blue', linetype = 3)
 ```
 
-## Mapping
+## Line Size
+
+<hr>
+
+```{r hist10, fig.align='center'}
+ggplot(ecom) +
+  geom_histogram(aes(n_visit), bins = 5, fill = 'white', 
+    color = 'blue', size = 1.25)
+```
+
+## Map Fill to Variable
 
 <hr>
 
