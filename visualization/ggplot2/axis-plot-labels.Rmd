@@ -33,11 +33,14 @@ output:
     border-color: #0077aa;
   }
   .reveal h1, h2, h3, h4, h5, h6 {
-    text-transform: capitalize;
+    text-transform: none;
     text-align: center;
     color: #0077aa;
     font-family: 'Helvetica Neue';
     font-size: 25px;
+  }
+  .reveal h1 {
+    font-size: 24px;
   }
   .reveal ul {
     display: block;
@@ -78,19 +81,13 @@ output:
 
 <hr>
 
-In this module, we will learn to:
-
 - add title and subtitle to the plot
 - modify axis labels
 - modify axis range
 - remove axis
 - format axis
 
-## Intro
-
-<hr>
-
-## Installation
+## Libraries
 
 <hr>
 
@@ -124,12 +121,18 @@ There are two ways to add title to a plot:
 - `ggtitle()`
 - `labs()`
 
+## ggtitle()
+
+<hr>
+
 Let us explore the `ggtitle()` function first. It takes two arguments:
 
 - label: title of the plot
 - subtitle: subtitle of the plot
 
-----
+## Title & Subtitle
+
+<hr>
 
 ```{r axis3, fig.align='center'}
 ggplot(mtcars) +
@@ -147,7 +150,9 @@ You can add labels to the axis using:
 - `ylab()`
 - `labs()`
 
-----
+## Axis Labels
+
+<hr>
 
 ```{r axis4, fig.align='center'}
 ggplot(mtcars) +
@@ -166,7 +171,7 @@ The `labs()` function can be used to add the following to a plot:
 - X axis label
 - Y axis label
 
-----
+## Labs
 
 ```{r axis5, fig.align='center'}
 ggplot(mtcars) +
@@ -182,14 +187,16 @@ ggplot(mtcars) +
 In certain scenarios, you may want to modify the range of the axis. In ggplot2, we can achieve this using:
 
 - `xlim()`
-- `ylim()
+- `ylim()`
 - `expand_limits()`
 
-`xlim()` and `ylim()` take a numeric vector of length 2 as input. The `expand_limits()` function 
-takes two numeric vectors (each of length 2), one for each axis. In all of the above functions, 
-the first element represents the lower limit and the second element represents the upper limit.
+## Axis Range
 
-----
+<hr>
+
+- `xlim()` and `ylim()` take a numeric vector of length 2 as input
+- `expand_limits()` takes two numeric vectors (each of length 2), one for each axis 
+- in all of the above functions, the first element represents the lower limit and the second element represents the upper limit
 
 ## X Axis
 
@@ -201,8 +208,6 @@ ggplot(mtcars) +
   xlim(c(0, 600))
 ```
 
-----
-
 ## Y Axis
 
 <hr>
@@ -213,7 +218,9 @@ ggplot(mtcars) +
   ylim(c(0, 40))
 ```
 
-----
+## Expand Limits
+
+<hr>
 
 ```{r axis8, fig.align='center'}
 ggplot(mtcars) +
@@ -230,7 +237,9 @@ If you want to remove the axis labels all together, use the `theme()` function. 
 - `axis.title.x`
 - `axis.title.y`
 
-----
+## Remove Axis Labels using theme()
+
+<hr>
 
 ```{r axis9, fig.align='center'}
 ggplot(mtcars) +
@@ -284,7 +293,7 @@ The font face can be any of the following:
 - `italic` 
 - `bold.italic`
 
-----
+## Font Face 
 
 ```{r axis12, fig.align='center', message=FALSE, warning=FALSE}
 ggplot(mtcars) +
