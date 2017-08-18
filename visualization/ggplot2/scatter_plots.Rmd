@@ -33,11 +33,14 @@ output:
     border-color: #0077aa;
   }
   .reveal h1, h2, h3, h4, h5, h6 {
-    text-transform: capitalize;
+    text-transform: none;
     text-align: center;
     color: #0077aa;
     font-family: 'Helvetica Neue';
     font-size: 25px;
+  }
+  .reveal h1 {
+    font-size: 24px;
   }
   .reveal ul {
     display: block;
@@ -79,8 +82,12 @@ output:
 <hr>
 
 - build scatter plots
-- map aesthetics to variables
-- modify axis and legend
+- modify point
+    - color
+    - fill
+    - alpha
+    - shape
+    - size
 - fit regression line
 
 ## Intro
@@ -130,16 +137,16 @@ ggplot(mtcars) +
   geom_jitter(aes(disp, mpg))
 ```
 
-## Color
+## Aesthetics
 
 <hr>
 
-Now let us modify the color of the points. There are two ways:
+Now let us modify the aesthetics of the points. There are two ways:
 
-- map color to variable using the `aes()` function
-- specify colors separately
+- map them to variables using the `aes()` function
+- specify values
 
-## Color
+## Map Color to Variable (Categorical)
 
 <hr>
 
@@ -149,7 +156,7 @@ ggplot(mtcars) +
              position = 'jitter')
 ```
 
-## Color
+## Map Color to Variable (Continuous)
 
 <hr>
 
@@ -159,7 +166,7 @@ ggplot(mtcars) +
              position = 'jitter')
 ```
 
-## Color
+## Specify Value for Color
 
 <hr>
 
@@ -169,7 +176,7 @@ ggplot(mtcars) +
              position = 'jitter')
 ```
 
-## Alpha
+## Specify Value for Alpha
 
 <hr>
 
@@ -179,7 +186,7 @@ ggplot(mtcars) +
              position = 'jitter')
 ```
 
-## Shape
+## Map Shape to Variable
 
 <hr>
 
@@ -189,7 +196,7 @@ ggplot(mtcars) +
              position = 'jitter')
 ```
 
-## Shape
+## Specify Value for Shape
 
 <hr>
 
@@ -199,7 +206,7 @@ ggplot(mtcars) +
              position = 'jitter')
 ```
 
-## Size
+## Map Size to Variable
 
 <hr>
 
@@ -209,7 +216,7 @@ ggplot(mtcars) +
              position = 'jitter')
 ```
 
-## Size
+## Specify Value for Size
 
 <hr>
 
@@ -219,7 +226,7 @@ ggplot(mtcars) +
              position = 'jitter')
 ```
 
-## Fit Line
+## Regression Line
 
 <hr>
 
@@ -229,7 +236,7 @@ ggplot(mtcars, aes(disp, mpg)) +
   geom_smooth(method = 'lm', se = FALSE)
 ```
 
-## Confidence Interval
+## Regression Line - Conf. Interval
 
 <hr>
 
@@ -239,7 +246,7 @@ ggplot(mtcars, aes(disp, mpg)) +
   geom_smooth(method = 'lm', se = TRUE)
 ```
 
-## Loess
+## Regression Line - Loess Method
 
 <hr>
 
@@ -249,18 +256,9 @@ ggplot(mtcars, aes(disp, mpg)) +
   geom_smooth(method = 'loess', se = FALSE)
 ```
 
-## Fit Line
+## Fit Line - Intercept & Slope
 
 <hr>
-
-If you use `geom_abline()`, specify the intercept and the slope.
-Let us regress `duration` on `n_pages` and use the output.
-
-```{r aes16}
-lm(mpg ~ disp, data = mtcars)
-```
-
-----
 
 ```{r aes17, fig.align='center'}
 ggplot(mtcars, aes(disp, mpg)) +
