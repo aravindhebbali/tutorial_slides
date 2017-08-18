@@ -33,11 +33,14 @@ output:
     border-color: #0077aa;
   }
   .reveal h1, h2, h3, h4, h5, h6 {
-    text-transform: capitalize;
+    text-transform: none;
     text-align: center;
     color: #0077aa;
     font-family: 'Helvetica Neue';
     font-size: 25px;
+  }
+  .reveal h1 {
+    font-size: 24px;
   }
   .reveal ul {
     display: block;
@@ -78,13 +81,8 @@ output:
 
 <hr>
 
-## Intro
 
-<hr>
-
-In this module, we will learn about faceting i.e. combining plots.
-
-## Installation
+## Libraries
 
 <hr>
 
@@ -99,12 +97,6 @@ library(ggplot2)
 library(dplyr)
 library(tidyr)
 ```
-
-## Case Study
-
-<hr>
-
-We will continue to use the ecommerce data. You can download it from [here](https://github.com/rsquaredacademy/datasets/blob/master/web.csv) or import directly using the readr package.
 
 ## Data
 
@@ -123,16 +115,30 @@ ecom
 
 <hr>
 
-## Facet
+- id: row id
+- referrer: referrer website/search engine
+- os: operating system
+- browser: browser
+- device: device used to visit the website
+- n_pages: number of pages visited
+- duration: time spent on the website (in seconds)
+- repeat: frequency of visits
+- country: country of origin
+- purchase: whether visitor purchased
+- order_value: order value of visitor (in dollars)
+
+## Facet - Intro
 
 <hr>
 
-subplots that each display one subset of the data.
+Generate subplots that each display one subset of the data using
 
 - `facet_grid()`
 - `facet_wrap()`
 
-----
+## Columns
+
+<hr>
 
 ```{r facet1, fig.align='center'}
 ggplot(ecom, aes(n_pages, duration)) + 
@@ -140,7 +146,9 @@ ggplot(ecom, aes(n_pages, duration)) +
   facet_grid(. ~ device)
 ```
 
-----
+## Rows
+
+<hr>
 
 ```{r facet2, fig.align='center'}
 ggplot(ecom, aes(n_pages, duration)) + 
@@ -148,7 +156,9 @@ ggplot(ecom, aes(n_pages, duration)) +
   facet_grid(device ~ .)
 ```
 
-----
+## Rows & Columns
+
+<hr>
 
 ```{r facet3, fig.align='center'}
 ggplot(ecom, aes(n_pages, duration)) + 
@@ -156,7 +166,7 @@ ggplot(ecom, aes(n_pages, duration)) +
   facet_grid(purchase ~ device)
 ```
 
-----
+## Rows & Columns
 
 ```{r facet4, fig.align='center'}
 ggplot(ecom, aes(n_pages, duration)) + 
@@ -164,7 +174,11 @@ ggplot(ecom, aes(n_pages, duration)) +
   facet_grid(device ~ purchase)
 ```
 
-----
+## Scales
+
+<hr>
+
+Different range instead of fixed range.
 
 ```{r facet5, fig.align='center'}
 ggplot(ecom, aes(n_pages, duration, color = factor(device))) +
@@ -172,7 +186,9 @@ ggplot(ecom, aes(n_pages, duration, color = factor(device))) +
   facet_grid(. ~ device, scales = "free")
 ```
 
-----
+## Switch Axis
+
+<hr>
 
 ```{r facet6, fig.align='center'}
 ggplot(ecom, aes(n_pages, duration)) + 
@@ -180,7 +196,9 @@ ggplot(ecom, aes(n_pages, duration)) +
   facet_grid(device ~ purchase, switch = "both") 
 ```
 
-----
+## Wrap
+
+<hr>
 
 ```{r facet7, fig.align='center'}
 ggplot(ecom, aes(n_pages, duration)) +
@@ -188,7 +206,9 @@ ggplot(ecom, aes(n_pages, duration)) +
   facet_wrap(~device)
 ```
 
-----
+## Specify Rows
+
+<hr>
 
 ```{r facet8, fig.align='center'}
 ggplot(ecom, aes(n_pages, duration)) +
@@ -196,7 +216,9 @@ ggplot(ecom, aes(n_pages, duration)) +
   facet_wrap(~device, nrow = 2)
 ```
 
-----
+## Specify Rows
+
+<hr>
 
 ```{r facet9, fig.align='center'}
 ggplot(ecom, aes(n_pages, duration)) +
@@ -204,7 +226,9 @@ ggplot(ecom, aes(n_pages, duration)) +
   facet_wrap(~device, nrow = 3)
 ```
 
-----
+## Rows & Columns
+
+<hr>
 
 ```{r facet10, fig.align='center'}
 ggplot(ecom, aes(n_pages, duration)) +
@@ -212,7 +236,9 @@ ggplot(ecom, aes(n_pages, duration)) +
   facet_wrap(~device + purchase)
 ```
 
-----
+## Rows & Columns
+
+<hr>
 
 ```{r facet11, fig.align='center'}
 ggplot(ecom, aes(n_pages, duration)) +
@@ -220,7 +246,9 @@ ggplot(ecom, aes(n_pages, duration)) +
   facet_wrap(c("device", "purchase"))
 ```
 
-----
+## Scales
+
+<hr>
 
 ```{r facet12, fig.align='center'}
 ggplot(ecom, aes(n_pages, duration)) +
