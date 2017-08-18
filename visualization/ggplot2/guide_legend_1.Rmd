@@ -33,11 +33,14 @@ output:
     border-color: #0077aa;
   }
   .reveal h1, h2, h3, h4, h5, h6 {
-    text-transform: capitalize;
+    text-transform: none;
     text-align: center;
     color: #0077aa;
     font-family: 'Helvetica Neue';
     font-size: 25px;
+  }
+  .reveal h1 {
+    font-size: 24px;
   }
   .reveal ul {
     display: block;
@@ -78,21 +81,37 @@ output:
 
 <hr>
 
-Now that we have learnt to build different plots, let us look at different ways to modify the axis. Along the way, we will also explore the below functions:
+Modify legend when the aesthetics are mapped to variables. Specifically
 
-- `scale_*()` family of functions 
-- `guides()`
-- `guide_legend()` 
-- and `guide_colorbar()`
-
+- title
+- breaks
+- limits
+- range
+- labels
+- values
+- symbol type
 
 ## Intro
 
 <hr>
 
-In this module, we will focus on modifying the legends of plots when the aesthetics are mapped to variables.
+Quite often the aesthetics are mapped to variables ggplot2 automatically creates legends wherever applicable. 
+You may want to modify the appearance of legends. In this module, we will learn to modify the legends when
+the following aesthetics are mapped to categorical/continuous variables
 
-## Installation
+- continuous variables
+    - alpha
+    - size
+
+- discrete variables
+    - alpha
+    - color
+    - fill
+    - shape
+    - size
+
+
+## Libraries
 
 <hr>
 
@@ -108,11 +127,11 @@ library(dplyr)
 library(tidyr)
 ```
 
-## Alpha
+## Continuous Variables
 
 <hr>
 
-If you have mapped alpha to a continuous variable, use `scale_alpha_continuous()` to modify 
+If you have mapped aesthetics to a continuous variable, you can modify the legend
 
 - title
 - breaks
@@ -120,7 +139,82 @@ If you have mapped alpha to a continuous variable, use `scale_alpha_continuous()
 - range
 - and labels
 
-## Scatter Plot
+
+## Map Size to Continuous Variable
+
+<hr>
+
+```{r leg36, fig.align='center'}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, size = hp))
+```
+
+## Legend Title
+
+<hr>
+
+```{r leg37, fig.align='center'}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, size = hp)) +
+  scale_size_continuous(name = "Horsepower")
+```
+
+## Legend Range
+
+<hr>
+
+```{r leg38, fig.align='center'}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, size = hp)) +
+  scale_size_continuous(range = c(3, 6))
+```
+
+## Legend Limits
+
+<hr>
+
+```{r leg39, fig.align='center'}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, size = hp)) +
+  scale_size_continuous(limits = c(0, 400))
+```
+
+## Legend Breaks
+
+<hr>
+
+```{r leg40, fig.align='center'}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, size = hp)) +
+  scale_size_continuous(breaks = c(100, 200, 300, 400))
+```
+
+## Legend Labels
+
+<hr>
+
+```{r leg41, fig.align='center'}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, size = hp)) +
+  scale_size_continuous(breaks = c(100, 200, 300, 400),
+    labels = c("Hundred", "2 Hundred", "3 Hundred", "4 Hundred"))
+```
+
+## Size - Continuous
+
+<hr>
+
+```{r leg42, fig.align='center'}
+ggplot(mtcars) +
+  geom_point(aes(disp, mpg, size = hp)) +
+  scale_size_continuous(name = "Horsepower", range = c(3, 6), 
+    limits = c(0, 400), breaks = c(100, 200, 300, 400),
+    labels = c("Hundred", "2 Hundred", "3 Hundred", "4 Hundred"))
+```
+
+
+
+## Map Alpha to Continuous Variable
 
 <hr>
 
@@ -129,7 +223,7 @@ ggplot(mtcars) +
   geom_point(aes(disp, mpg, alpha = hp), color = 'blue')
 ```
 
-## Title
+## Legend Title
 
 <hr>
 
@@ -139,7 +233,7 @@ ggplot(mtcars) +
   scale_alpha_continuous("Horsepower")
 ```
 
-## Breaks
+## Legend Breaks
 
 <hr>
 
@@ -149,7 +243,7 @@ ggplot(mtcars) +
   scale_alpha_continuous(breaks = c(0, 100, 200, 300, 400))
 ```
 
-## Limits
+## Legend Limits
 
 <hr>
 
@@ -159,7 +253,7 @@ ggplot(mtcars) +
   scale_alpha_continuous(limits = c(0, 400))
 ```
 
-## Range
+## Legend Range
 
 <hr>
 
@@ -169,7 +263,7 @@ ggplot(mtcars) +
   scale_alpha_continuous(range = c(0.4, 0.8))
 ```
 
-## Labels
+## Legend Labels
 
 <hr>
 
@@ -194,91 +288,23 @@ ggplot(mtcars) +
       "3 Hundred", "4 Hundred"))
 ```
 
+
+
+
 ## Alpha Discrete
 
 <hr>
 
-If you have mapped alpha to a discrete variable, use `scale_alpha_discrete()` to modify
+If you have mapped aesthetics to a discrete variable, you can to modify legend:
 
 - title
 - breaks
-- limits 
 - range
-- and labels
-
-## Scatter Plot
-
-<hr>
-
-```{r leg9, fig.align='center'}
-ggplot(mtcars) +
-  geom_point(aes(disp, mpg, alpha = factor(cyl)), color = 'blue')
-```
-
-## Title
-
-<hr>
-
-```{r leg10, fig.align='center'}
-ggplot(mtcars) +
-  geom_point(aes(disp, mpg, alpha = factor(cyl)), color = 'blue') +
-  scale_alpha_discrete(name = "Cylinders")
-```
-
-## Breaks
-
-<hr>
-
-```{r leg11, fig.align='center'}
-ggplot(mtcars) +
-  geom_point(aes(disp, mpg, alpha = factor(cyl)), color = 'blue') +
-  scale_alpha_discrete(breaks = c("4", "6", "8"))
-```
-
-## Range
-
-<hr>
-
-```{r leg12, fig.align='center'}
-ggplot(mtcars) +
-  geom_point(aes(disp, mpg, alpha = factor(cyl)), color = 'blue') +
-  scale_alpha_discrete(range = c(0.4, 0.8))
-```
-
-## Labels
-
-<hr>
-
-```{r leg13, fig.align='center'}
-ggplot(mtcars) +
-  geom_point(aes(disp, mpg, alpha = factor(cyl)), color = 'blue') +
-  scale_alpha_discrete(labels = c("Four", "Six", "Eight"))
-```
-
-## Alpha Discrete
-
-<hr>
-
-```{r leg14, fig.align='center'}
-ggplot(mtcars) +
-  geom_point(aes(disp, mpg, alpha = factor(cyl)), color = 'blue') +
-  scale_alpha_discrete(name = "Cylinders", range = c(0.4, 0.8),
-    breaks = c("4", "6", "8"), labels = c("Four", "Six", "Eight"))
-```
-
-## Color
-
-<hr>
-
-If you have mapped color to a discrete variable, use `scale_color_manual()` to modify 
-
-- title
-- values
-- labels
 - limits
-- breaks
+- labels
+- and values
 
-## Scatter Plot
+## Map Color to Discrete Variable
 
 <hr>
 
@@ -287,7 +313,7 @@ ggplot(mtcars) +
   geom_point(aes(disp, mpg, color = factor(cyl)))
 ```
 
-## Title
+## Legend Title
 
 <hr>
 
@@ -298,7 +324,7 @@ ggplot(mtcars) +
     values = c("red", "blue", "green"))
 ```
 
-## Values
+## Legend Values
 
 <hr>
 
@@ -308,7 +334,7 @@ ggplot(mtcars) +
   scale_color_manual(values = c("red", "blue", "green"))
 ```
 
-## Labels
+## Legend Labels
 
 <hr>
 
@@ -319,7 +345,7 @@ ggplot(mtcars) +
     limits = c(4, 6, 8))
 ```
 
-## Limits
+## Legend Limits
 
 <hr>
 
@@ -330,7 +356,7 @@ ggplot(mtcars) +
     labels = c('Four', 'Six', 'Eight'))
 ```
 
-## Breaks
+## Legend Breaks
 
 <hr>
 
@@ -341,7 +367,7 @@ ggplot(mtcars) +
     breaks = c(4, 6, 8))
 ```
 
-## Color
+## Color - Discrete Variable
 
 <hr>
 
@@ -352,19 +378,7 @@ ggplot(mtcars) +
     labels = c('Four', 'Six', 'Eight'), limits = c(4, 6, 8), breaks = c(4, 6, 8))
 ```
 
-## Fill
-
-<hr>
-
-If you have mapped fill to a discrete variable, use `scale_fill_manual()` to modify 
-
-- title
-- values
-- labels
-- limits
-- breaks
-
-## Scatter Plot
+## Map Fill to Discrete Variable
 
 <hr>
 
@@ -373,7 +387,7 @@ ggplot(mtcars) +
   geom_point(aes(disp, mpg, fill = factor(cyl)), shape = 22)
 ```
 
-## Title
+## Legend Title
 
 <hr>
 
@@ -384,7 +398,7 @@ ggplot(mtcars) +
     values = c("red", "blue", "green"))
 ```
 
-## Values
+## Legend Values
 
 
 <hr>
@@ -395,7 +409,7 @@ ggplot(mtcars) +
   scale_fill_manual(values = c("red", "blue", "green"))
 ```
 
-## Labels
+## Legend Labels
 
 <hr>
 
@@ -406,7 +420,7 @@ ggplot(mtcars) +
     labels = c('Four', 'Six', 'Eight'))
 ```
 
-## Limits
+## Legend Limits
 
 <hr>
 
@@ -417,7 +431,7 @@ ggplot(mtcars) +
     limits = c(4, 6, 8))
 ```
 
-## Breaks
+## Legend Breaks
 
 <hr>
 
@@ -428,7 +442,7 @@ ggplot(mtcars) +
     breaks = c(4, 6, 8))
 ```
 
-## Fill
+## Legend Fill
 
 <hr>
 
@@ -439,19 +453,7 @@ ggplot(mtcars) +
     labels = c('Four', 'Six', 'Eight'), limits = c(4, 6, 8), breaks = c(4, 6, 8))
 ```
 
-## Shape
-
-<hr>
-
-If you have mapped shape to a discrete variable, use `scale_shape_manual()` to modify 
-
-- title
-- values
-- labels
-- limits
-- breaks
-
-## Scatter Plot
+## Map Shape to Discrete Variable
 
 <hr>
 
@@ -460,7 +462,7 @@ ggplot(mtcars) +
   geom_point(aes(disp, mpg, shape = factor(cyl)))
 ```
 
-## Title
+## Legend Title
 
 <hr>
 
@@ -470,7 +472,7 @@ ggplot(mtcars) +
   scale_shape_manual(name = "Cylinders",values = c(4, 12, 24))
 ```
 
-## Values
+## Legend Values
 
 <hr>
 
@@ -480,7 +482,7 @@ ggplot(mtcars) +
   scale_shape_manual(values = c(4, 12, 24))
 ```
 
-## Labels
+## Legend Labels
 
 <hr>
 
@@ -490,7 +492,7 @@ ggplot(mtcars) +
   scale_shape_manual(values = c(4, 12, 24), labels = c('Four', 'Six', 'Eight'))
 ```
 
-## Limits
+## Legend Limits
 
 <hr>
 
@@ -500,7 +502,7 @@ ggplot(mtcars) +
   scale_shape_manual(values = c(4, 12, 24), limits = c(4, 6, 8))
 ```
 
-## Breaks
+## Legend Breaks
 
 <hr>
 
@@ -510,7 +512,7 @@ ggplot(mtcars) +
   scale_shape_manual(values = c(4, 12, 24), breaks = c(4, 6, 8))
 ```
 
-## Shape
+## Shape - Discrete Variable
 
 <hr>
 
@@ -521,186 +523,77 @@ ggplot(mtcars) +
      values = c(4, 12, 24), limits = c(4, 6, 8), breaks = c(4, 6, 8))
 ```
 
-## Size
+## Map Alpha to Discrete Variable
 
 <hr>
 
-If you have mapped size to a discrete variable, use `scale_size_manual()` to modify 
-
-- title
-- range
-- limits
-- breaks
-- labels
-
-## Scatter Plot
-
-<hr>
-
-```{r leg36, fig.align='center'}
-ggplot(mtcars) +
-  geom_point(aes(disp, mpg, size = hp))
-```
-
-## Title
-
-<hr>
-
-```{r leg37, fig.align='center'}
-ggplot(mtcars) +
-  geom_point(aes(disp, mpg, size = hp)) +
-  scale_size_continuous(name = "Horsepower")
-```
-
-## Range
-
-<hr>
-
-```{r leg38, fig.align='center'}
-ggplot(mtcars) +
-  geom_point(aes(disp, mpg, size = hp)) +
-  scale_size_continuous(range = c(3, 6))
-```
-
-## Limits
-
-<hr>
-
-```{r leg39, fig.align='center'}
-ggplot(mtcars) +
-  geom_point(aes(disp, mpg, size = hp)) +
-  scale_size_continuous(limits = c(0, 400))
-```
-
-## Breaks
-
-<hr>
-
-```{r leg40, fig.align='center'}
-ggplot(mtcars) +
-  geom_point(aes(disp, mpg, size = hp)) +
-  scale_size_continuous(breaks = c(100, 200, 300, 400))
-```
-
-## Labels
-
-<hr>
-
-```{r leg41, fig.align='center'}
-ggplot(mtcars) +
-  geom_point(aes(disp, mpg, size = hp)) +
-  scale_size_continuous(breaks = c(100, 200, 300, 400),
-    labels = c("Hundred", "2 Hundred", "3 Hundred", "4 Hundred"))
-```
-
-## Size
-
-<hr>
-
-```{r leg42, fig.align='center'}
-ggplot(mtcars) +
-  geom_point(aes(disp, mpg, size = hp)) +
-  scale_size_continuous(name = "Horsepower", range = c(3, 6), 
-    limits = c(0, 400), breaks = c(100, 200, 300, 400),
-    labels = c("Hundred", "2 Hundred", "3 Hundred", "4 Hundred"))
-```
-
-## Alpha
-
-<hr>
-
-If you have mapped alpha to a discrete variable, use `scale_alpha_manual()` to modify 
-
-- title
-- values
-- labels
-- limits
-- breaks
-
-## Scatter Plot
-
-<hr>
-
-```{r leg43, fig.align='center'}
+```{r leg9, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, alpha = factor(cyl)), color = 'blue')
 ```
 
-## Title
+## Legend Title
 
 <hr>
 
-```{r leg44, fig.align='center'}
+```{r leg10, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, alpha = factor(cyl)), color = 'blue') +
-  scale_alpha_manual(name = "Cylinders", values = c(0.4, 0.6, 0.8))
+  scale_alpha_discrete(name = "Cylinders")
 ```
 
-## Values
+## Legend Breaks
 
 <hr>
 
-```{r leg45, fig.align='center'}
+```{r leg11, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, alpha = factor(cyl)), color = 'blue') +
-  scale_alpha_manual(values = c(0.4, 0.6, 0.8))
+  scale_alpha_discrete(breaks = c("4", "6", "8"))
 ```
 
-## Labels
+## Legend Range
 
 <hr>
 
-```{r leg46, fig.align='center'}
+```{r leg12, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, alpha = factor(cyl)), color = 'blue') +
-  scale_alpha_manual(values = c(0.4, 0.6, 0.8), 
-    labels = c('Four', 'Six', 'Eight'))
+  scale_alpha_discrete(range = c(0.4, 0.8))
 ```
 
-## Limits
+## Legend Labels
 
 <hr>
 
-```{r leg47, fig.align='center'}
+```{r leg13, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, alpha = factor(cyl)), color = 'blue') +
-  scale_alpha_manual(values = c(0.4, 0.6, 0.8), limits = c(4, 6, 8))
+  scale_alpha_discrete(labels = c("Four", "Six", "Eight"))
 ```
 
-## Breaks
+## Alpha - Discrete Variable
 
 <hr>
 
-```{r leg48, fig.align='center'}
+```{r leg14, fig.align='center'}
 ggplot(mtcars) +
   geom_point(aes(disp, mpg, alpha = factor(cyl)), color = 'blue') +
-  scale_alpha_manual(values = c(0.4, 0.6, 0.8), breaks = c(4, 6, 8))
+  scale_alpha_discrete(name = "Cylinders", range = c(0.4, 0.8),
+    breaks = c("4", "6", "8"), labels = c("Four", "Six", "Eight"))
 ```
 
-## Alpha
+
+## Shape & Size
 
 <hr>
 
-```{r leg49, fig.align='center'}
-ggplot(mtcars) +
-  geom_point(aes(disp, mpg, alpha = factor(cyl)), color = 'blue') +
-  scale_alpha_manual(name = "Cylinders", labels = c('Four', 'Six', 'Eight'),
-    values = c(0.4, 0.6, 0.8), limits = c(4, 6, 8), breaks = c(4, 6, 8))
-```
+If you have mapped shape/size to a discrete variable which has less than six categories, you can use the following functions:
 
-## Shape
+- `scale_shape()`
+- `scale_size()`
 
-<hr>
-
-`scale_shape()` maps discrete variable to six shapes. If you have mapped shape to a discrete variable, use `scale_shape()` to modify 
-
-- title
-- labels
-- limits
-- breaks
-- type
-
-## Scatter Plot
+## Map Shape to Discrete Variable
 
 <hr>
 
@@ -710,7 +603,7 @@ ggplot(mtcars) +
   scale_shape()
 ```
 
-## Title
+## Legend Title
 
 <hr>
 
@@ -720,7 +613,7 @@ ggplot(mtcars) +
   scale_shape(name = 'Cylinders')
 ```
 
-## Labels
+## Legend Labels
 
 <hr>
 
@@ -730,7 +623,7 @@ ggplot(mtcars) +
   scale_shape(labels = c('Four', 'Six', 'Eight'))
 ```
 
-## Limits
+## Legend Limits
 
 <hr>
 
@@ -740,7 +633,7 @@ ggplot(mtcars) +
   scale_shape(limits = c(4, 6, 8))
 ```
 
-## Breaks
+## Legend Breaks
 
 <hr>
 
@@ -750,7 +643,7 @@ ggplot(mtcars) +
   scale_shape(breaks = c(4, 6, 8))
 ```
 
-## Types
+## Legend Types
 
 <hr>
 
@@ -760,7 +653,7 @@ ggplot(mtcars) +
   scale_shape(solid = FALSE)
 ```
 
-## Shape
+## Shape - Discrete Variable
 
 <hr>
 
@@ -769,31 +662,6 @@ ggplot(mtcars) +
   geom_point(aes(disp, mpg, shape = factor(cyl))) +
   scale_shape(solid = FALSE, name = 'Cylinders', limits = c(4, 6, 8),
     labels = c('Four', 'Six', 'Eight'), breaks = c(4, 6, 8))
-```
-
-## Size
-
-<hr>
-
-`scale_size()` maps discrete variable to six sizes. If you have mapped size to a discrete variable, use `scale_size()` to modify 
-
-## Scatter Plot
-
-<hr>
-
-```{r leg57, fig.align='center'}
-ggplot(mtcars) +
-  geom_point(aes(disp, mpg, size = hp))
-```
-
-## Scale Size
-
-<hr>
-
-```{r leg58, fig.align='center'}
-ggplot(mtcars) +
-  geom_point(aes(disp, mpg, size = hp)) +
-  scale_size(name = "Horsepower")
 ```
 
 ## Questions
