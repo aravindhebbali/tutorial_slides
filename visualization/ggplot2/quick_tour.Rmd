@@ -38,6 +38,9 @@ output:
     color: #0077aa;
     font-family: 'Helvetica Neue';
   }
+  .reveal h1 {
+    font-size: 24px;
+  }
   .reveal ul {
     display: block;
   }
@@ -77,11 +80,7 @@ output:
 
 <hr>
 
-## Intro
-
-<hr>
-
-In this module, we will learn to quickly build a set of plots that are routinely used to explore data:
+Learn to quickly build a set of plots that are routinely used to explore data:
 
 - Scatter Plot
 - Bar Plot
@@ -89,7 +88,7 @@ In this module, we will learn to quickly build a set of plots that are routinely
 - Line Chart
 - Histogram
 
-## Installation
+## Libraries
 
 <hr>
 
@@ -102,6 +101,18 @@ library(dplyr)
 library(ggplot2)
 library(dplyr)
 ```
+
+## qplot
+
+<hr>
+
+Shortcut designed for those familiar with base plots. You can quickly produce a number of different
+types of plots. Below are the key arguments:
+
+- `x`    : data for X axis
+- `y`    : data for Y axis
+- `geom` : symbols to represent data
+- `data` : a data frame or a tibble
 
 ## Scatter Plot
 
