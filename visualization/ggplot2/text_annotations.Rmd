@@ -33,11 +33,14 @@ output:
     border-color: #0077aa;
   }
   .reveal h1, h2, h3, h4, h5, h6 {
-    text-transform: capitalize;
+    text-transform: none;
     text-align: center;
     color: #0077aa;
     font-family: 'Helvetica Neue';
     font-size: 25px;
+  }
+  .reveal h1 {
+    font-size: 24px;
   }
   .reveal ul {
     display: block;
@@ -78,8 +81,14 @@ output:
 
 <hr>
 
+- add custom text 
+- modify color
+- modify size
+- modify fontface
+- modify angle
 
-## Installation
+
+## Libraries
 
 <hr>
 
@@ -91,18 +100,22 @@ library(ggplot2)
 library(ggplot2)
 ```
 
-## Intro
+## Annotate
 
 <hr>
 
-We will use the `annotate()` function to add custom text to the plots. You can use the `annotate()` function to add rectangles/segments/pointrange as well but our focus will be on adding and formatting text.
+Use `annotate()` to add custom text to a plot. It takes the following arguments:
 
-- color
-- size
-- fontface
-- angle
+- `geom`     : specify text
+- `x`        : x axis location
+- `y`        : y axis location
+- `label`    : custom text 
+- `color`    : color of text
+- `size`     : size of text
+- `fontface` : fontface of text
+- `angle`    : angle of text
 
-## Annotate
+## Add Text
 
 <hr>
 
