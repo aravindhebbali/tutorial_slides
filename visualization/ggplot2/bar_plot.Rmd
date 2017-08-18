@@ -33,11 +33,14 @@ output:
     border-color: #0077aa;
   }
   .reveal h1, h2, h3, h4, h5, h6 {
-    text-transform: capitalize;
+    text-transform: none;
     text-align: center;
     color: #0077aa;
     font-family: 'Helvetica Neue';
     font-size: 25px;
+  }
+  .reveal h1 {
+    font-size: 24px;
   }
   .reveal ul {
     display: block;
@@ -78,6 +81,19 @@ output:
 
 <hr>
 
+- build 
+    - simple bar plot
+    - stacked bar plot
+    - grouped bar plot
+    - proportional bar plot
+- map aesthetics to variables
+- specify values for 
+    - bar color
+    - bar line color
+    - bar line type
+    - bar line size
+
+
 ## Intro
 
 <hr>
@@ -98,27 +114,36 @@ library(dplyr)
 library(tidyr)
 ```
 
-
-## Case Study
+## Data
 
 <hr>
 
-We will continue to use the ecommerce data. You can download it from [here](https://github.com/rsquaredacademy/datasets/blob/master/web.csv) or import directly using the readr package.
-
-----
-
-```{r import2, echo=FALSE, eval=FALSE, results='hide', message=FALSE}
+```{r import, eval=FALSE}
 ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
 ```
 
-```{r import, echo=FALSE, eval=TRUE, message=FALSE}
+
+```{r import2, echo=FALSE, eval=TRUE, message=FALSE}
 ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
 ecom
 ```
 
+
 ## Data Dictionary
 
 <hr>
+
+- id: row id
+- referrer: referrer website/search engine
+- os: operating system
+- browser: browser
+- device: device used to visit the website
+- n_pages: number of pages visited
+- duration: time spent on the website (in seconds)
+- repeat: frequency of visits
+- country: country of origin
+- purchase: whether visitor purchased
+- order_value: order value of visitor (in dollars)
 
 ## Aesthetics
 
@@ -197,6 +222,16 @@ ggplot(ecom) +
   geom_bar(aes(device, fill = factor(referrer)), position = 'dodge')
 ```
 
+## Proportional Bar Plot
+
+<hr>
+
+```{r bar10, fig.align='center'}
+ggplot(ecom) +
+  geom_bar(aes(device, fill = factor(referrer)), position = 'fill')
+```
+
+
 ## Horizontal Bar Plot
 
 <hr>
@@ -211,6 +246,6 @@ ggplot(ecom) +
 
 <hr>
 
-## Next Steps
+## Questions
 
 <hr>
