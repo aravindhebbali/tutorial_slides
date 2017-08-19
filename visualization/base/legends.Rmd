@@ -4,41 +4,122 @@ output:
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
-    fig_width: 6
-    fig_height: 5
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
+    fig_height: 5
+    fig_width: 6
 ---
 
-# Introduction
+<style type="text/css">
+    .reveal p img {
+    align: middle;
+  }
+  .reveal code.r {
+    font-size: 16px;
+  }
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: none;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+    font-size: 25px;
+  }
+  .reveal h1 {
+    font-size: 24px;
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+  }
+  .reveal p img {
+    align: middle;
+  }
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
 
-----
+## Agenda
 
-This is the eighth module in the series **Data Visualisation With R**. In the previous module, we learnt to build histograms. In this module, we will learn how to add a legend to a plot in R.
+<hr>
 
-----
+Learn to add legend to a plot using the `legend()` function. Specifically
 
-Legends are used to convey information about the data being represented by a plot. To understand the importance of legends, let us look at the two plots below. In the first plot, would you be able to understand what the lines represent in the absence of a legend? May be yes but only if the author provides information in a textual form outside the plot. While such information will be useful, it will also be very inconvenient. 
+- position the legend within the plot
+- modify the layout using `ncol` and `horiz` arguments
+- add title using the `title.` set of arguments
+- modify the appearance and position of the legend box
+- modify the appearance of the text in the legend box
+  
 
-----
+## Introduction
 
-Now look at the second plot, from the legend at the top right we can easily interpret what the lines represent. Would you agree that a legend is integral to plot representing multiple data? If yes, let us go ahead and learn how to add a legend to different plots.
+<hr>
 
-----
+```{r compare, fig.align='center', fig.width= 10, fig.height=7, echo=FALSE}
+init <- par(no.readonly = TRUE)
+par(mfrow = c(1, 2))
+year <- seq(2010, 2014, 1)
+india <- c(10.3, 6.6, 5.6, 6.6, 7.2)
+china <- c(10.6, 9.5, 7.8, 7.7, 7.3)
+russia <- c(4.5, 4.3, 3.5, 1.3, 0.7)
+brazil <- c(7.5, 3.9, 1.9, 3.0, 0.1)
+s_africa <- c(3.2, 3.2, 2.2, 2.2, 1.5)
+gdp <- data.frame(year, india, china, russia, brazil, s_africa, stringsAsFactors = FALSE)
+{plot(gdp$year, gdp$india, type = 'l', ylim = c(-5, 15), xlab = 'Year',
+      ylab = 'Growth Rate', col = 'blue', main = 'BRICS: Growth Rate')
+lines(gdp$year, gdp$china, col = 'red')}
+{plot(gdp$year, gdp$india, type = 'l', ylim = c(-5, 15), xlab = 'Year',
+      ylab = 'Growth Rate', col = 'blue', main = 'BRICS: Growth Rate')
+lines(gdp$year, gdp$china, col = 'red')
+legend(x = 2012, y = 14, legend = c('india', 'china'), lty = 1, col = c('blue', 'red'))}
+```
 
-Since we have looked at a line graph in the above example, we will learn how to add a legend to a line graph. After that, we will generalise the steps to different plots. If you do not know how to create line plots in R, please refer to this module.
 
-# Line Graph
+## Data
 
-----
-
-Let us build a line graph that represents annual economic growth (GDP) data of the BRICS nations for the years 2010-14.
-
-----
+<hr>
 
 ```{r}
 year <- seq(2010, 2014, 1)
@@ -51,74 +132,51 @@ gdp <- data.frame(year, india, china, russia, brazil, s_africa, stringsAsFactors
 gdp
 ```
 
-----
+## Line Graph
 
-Below is the line graph that represents the above GDP data set:
+<hr>
 
-----
-
-```{r line1, fig.align='center', fig.width= 7, fig.height=7, echo=FALSE}
-{plot(gdp$year, gdp$india, type = 'l',
-      ylim = c(-5, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue',
-      main = 'BRICS: Growth Rate')
+```{r line1, fig.align='center', fig.width= 7, fig.height=5}
+{plot(gdp$year, gdp$india, type = 'l', ylim = c(-5, 15), xlab = 'Year',
+      ylab = 'Growth Rate', col = 'blue', main = 'BRICS: Growth Rate')
 lines(gdp$year, gdp$china, col = 'red')
 lines(gdp$year, gdp$russia, col = 'green')
 lines(gdp$year, gdp$brazil, col = 'yellow')
 lines(gdp$year, gdp$s_africa, col = 'violet')}
 ```
 
-----
+## Legend Location
 
-Without a legend, it will be very difficult to map the lines to the BRICS nations. We will add a legend to the above plot using the `legend()` function and do so one step at a time.
-
-## Legend
-
-# Location
-
-----
-
-In order to add a legend to the plot, the first thing we must specify is the location of the legend in the plot. There are 2 ways to do this:
+<hr>
 
 - use x and y axis coordinates
 - use keywords
+    - top
+    - bottom
+    - left
+    - right
+    - center
+    - bottomright
+    - bottomleft
+    - topright
+    - topleft
 
-----
+## Legend Location
 
-The list of keywords include:
-
-- top
-- bottom
-- left
-- right
-- center
-- bottomright
-- bottomleft
-- topright
-- topleft
-
-----
-
-But there is a glitch. If we do not specify what goes into the legend, the `legend()` function will return an error. Before we experiment with the location of the legend inside the plot, we need to learn about another argument used to specify the content of the legend. The argument is also named `legend`. It takes a vector as input. In the next example, we will plot the GDP data for India and China and add a basic legend.
-
-----
+<hr>
 
 ```{r leg1, fig.align='center', fig.height=5, fig.width=5}
-{plot(gdp$year, gdp$india, type = 'l',
-      ylim = c(-5, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue',
-      main = 'BRICS: Growth Rate')
+{plot(gdp$year, gdp$india, type = 'l', ylim = c(-5, 15), xlab = 'Year',
+      ylab = 'Growth Rate', col = 'blue', main = 'BRICS: Growth Rate')
 lines(gdp$year, gdp$china, col = 'red')
 legend(x = 2013, y = 14, legend = c('india', 'china'))}
 ```
 
-----
+## Legend Location
 
-You can see that a legend has been added bases on the X and Y axis coordinates we specified in the `legend()` function. But the legend is incomplete and a user still cannot map the lines to the countries using the legend. We will learn how to add lines inside the legend shortly but before that let us use keywords to position the legend inside the plot. 
+<hr>
 
-----
-
-```{r leg2, fig.align='center', fig.width=15, fig.height=15, echo=FALSE}
+```{r leg2, fig.align='center', fig.width=10, fig.height=7, echo=FALSE}
 init <- par(no.readonly = TRUE)
 par(mfrow = c(3, 3))
 values <- c('top', 'bottom', 'left', 'right', 'center',
@@ -134,95 +192,59 @@ for (i in values) {
 }
 ```
 
-----
+## Lines
 
-You can either use the keywords or the axis coordinates to position the legend inside the plot. Use the coordinates method if you want greater control over the position of the legend. Next step is to add lines inside the legend so that a user can map the lines in the plots to the countries.
-
-# Lines
-
-----
-
-Adding a line in the legend is very simple. Use the `lty` argument to specify the line type and the `col` argument to add color to the line. 
-
-----
+<hr>
 
 ```{r leg3, fig.align='center', fig.height=5, fig.width=5}
-{plot(gdp$year, gdp$india, type = 'l',
-      ylim = c(-5, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue',
-      main = 'BRICS: Growth Rate')
+{plot(gdp$year, gdp$india, type = 'l', ylim = c(-5, 15), xlab = 'Year',
+      ylab = 'Growth Rate', col = 'blue', main = 'BRICS: Growth Rate')
 lines(gdp$year, gdp$china, col = 'red')
-legend(x = 2012, y = 14, legend = c('india', 'china'),
-       lty = 1, col = c('blue', 'red'))}
+legend(x = 2012, y = 14, legend = c('india', 'china'), lty = 1, col = c('blue', 'red'))}
 ```
 
-----
+## Points
 
-Now we can map the lines to the respective countries using the legend. But our legend looks very simple right. Let us explore the options available to modify and enhance the appearance of the legend.
-
-# Points
-
-----
-
-If the plot has both lines and points, we can use the `pch` argument in the `legend()` function to specify the shape of the point.
-
-----
+<hr>
 
 ```{r leg4, fig.align='center', fig.height=5, fig.width=5}
-{plot(gdp$year, gdp$india, type = 'l',
-      ylim = c(-5, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue',
-      main = 'BRICS: Growth Rate')
+{plot(gdp$year, gdp$india, type = 'l', ylim = c(-5, 15), xlab = 'Year',
+      ylab = 'Growth Rate', col = 'blue', main = 'BRICS: Growth Rate')
 points(gdp$year, gdp$india, pch = 2, col = 'blue')
 lines(gdp$year, gdp$china, col = 'red')
 points(gdp$year, gdp$china, pch = 2, col = 'red')
-legend(x = 2012, y = 14, legend = c('india', 'china'),
-       lty = 1, pch = 2, col = c('blue', 'red'))}
+legend(x = 2012, y = 14, legend = c('india', 'china'), lty = 1, pch = 2, col = c('blue', 'red'))}
 ```
 
-# Text Placement
+## Text Placement
 
-----
+<hr>
 
-The contents of the legend can be positioned horizontally using the `horiz` argument. It takes logical values as inputs and the default is `FALSE`. Set it to `TRUE` to position the contents horizontally:
-
-----
-
-```{r leg5, fig.align='center', fig.height=5, fig.width=5}
-{plot(gdp$year, gdp$india, type = 'l',
-      ylim = c(-5, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue',
-      main = 'BRICS: Growth Rate')
+```{r leg5, fig.align='center', fig.height=4, fig.width=6}
+{plot(gdp$year, gdp$india, type = 'l', ylim = c(-5, 15), xlab = 'Year',
+      ylab = 'Growth Rate', col = 'blue', main = 'BRICS: Growth Rate')
 lines(gdp$year, gdp$china, col = 'red')
-legend(x = 2011, y = 14, legend = c('india', 'china'),
-       lty = 1, col = c('blue', 'red'),
-       horiz = TRUE)}
+legend(x = 2011, y = 14, legend = c('india', 'china'), 
+      lty = 1, col = c('blue', 'red'), horiz = TRUE)}
 ```
 
-----
+## Text Placement
 
-Another way to position the content inside the legend is to use columns. In the below example, we use the `ncol` argument to split the contents of the legend into two columns instead of the default one. 
+<hr>
 
-----
-
-```{r leg6, fig.align='center', fig.width= 7, fig.height=7, echo=FALSE}
-{plot(gdp$year, gdp$india, type = 'l',
-      ylim = c(-5, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue',
-      main = 'BRICS: Growth Rate')
+```{r leg6, fig.align='center', fig.width= 6, fig.height=4}
+{plot(gdp$year, gdp$india, type = 'l', ylim = c(-5, 25), xlab = 'Year',
+      ylab = 'Growth Rate', col = 'blue', main = 'BRICS: Growth Rate')
 lines(gdp$year, gdp$china, col = 'red')
 lines(gdp$year, gdp$russia, col = 'green')
 lines(gdp$year, gdp$brazil, col = 'yellow')
-legend(x = 2012, y = 0, legend = c('india', 'china', 'russia', 'brazil'),
-       lty = 1, col = c('blue', 'red', 'green', 'yellow'),
-       ncol = 2)}
+legend(x = 2012, y = 20, legend = c('india', 'china', 'russia', 'brazil'),
+       lty = 1, col = c('blue', 'red', 'green', 'yellow'), ncol = 2)}
 ```
 
-----
+## Text Placement
 
-The below plots show the difference in appearance:
-
-----
+<hr>
 
 ```{r leg7, fig.align='center', fig.width=15, fig.height=10, echo=FALSE}
 init <- par(no.readonly = TRUE)
@@ -243,64 +265,45 @@ for (i in values) {
 }
 ```
 
-# Title
+## Title
 
-----
+<hr>
 
-Let us add a title to the legend using the `title` argument:
-
-----
-
-```{r leg8, fig.align='center', fig.height=5, fig.width=5}
-{plot(gdp$year, gdp$india, type = 'l',
-      ylim = c(-5, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue',
-      main = 'BRICS: Growth Rate')
+```{r leg8, fig.align='center', fig.height=4, fig.width=6}
+{plot(gdp$year, gdp$india, type = 'l', ylim = c(-5, 15), xlab = 'Year',
+      ylab = 'Growth Rate', col = 'blue', main = 'BRICS: Growth Rate')
 lines(gdp$year, gdp$china, col = 'red')
 legend(x = 2012, y = 14, legend = c('india', 'china'),
-       lty = 1, col = c('blue', 'red'),
-       title = 'Nations')}
+       lty = 1, col = c('blue', 'red'), title = 'Nations')}
 ```
 
-----
+## Title Color
 
-The color of the title can be modified using the `title.col` argument:
+<hr>
 
-----
-
-```{r leg9, fig.align='center', fig.height=5, fig.width=5}
-{plot(gdp$year, gdp$india, type = 'l',
-      ylim = c(-5, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue',
-      main = 'BRICS: Growth Rate')
+```{r leg9, fig.align='center', fig.height=4, fig.width=6}
+{plot(gdp$year, gdp$india, type = 'l', ylim = c(-5, 15), xlab = 'Year',
+      ylab = 'Growth Rate', col = 'blue', main = 'BRICS: Growth Rate')
 lines(gdp$year, gdp$china, col = 'red')
-legend(x = 2012, y = 14, legend = c('india', 'china'),
-       lty = 1, col = c('blue', 'red'),
-       title = 'Nations', title.col = 'red')}
+legend(x = 2012, y = 3, legend = c('india', 'china'), lty = 1, 
+      col = c('blue', 'red'), title = 'Nations', title.col = 'red')}
 ```
 
-----
+## Title Position
 
-The title can be positioned within the legend box using the `title.adj` argument. It will take values between 0 and 1. The default is 0.5 and the title is positioned in the middle of the box. As the value moves away from 0.5, the position of the title moves to the left or right respectively.
+<hr>
 
-----
-
-```{r leg10, fig.align='center', fig.height=5, fig.width=7}
-{plot(gdp$year, gdp$india, type = 'l',
-      ylim = c(-5, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue',
-      main = 'BRICS: Growth Rate')
+```{r leg10, fig.align='center', fig.height=4, fig.width=6}
+{plot(gdp$year, gdp$india, type = 'l', ylim = c(-5, 15), xlab = 'Year',
+      ylab = 'Growth Rate', col = 'blue', main = 'BRICS: Growth Rate')
 lines(gdp$year, gdp$china, col = 'red')
-legend(x = 2012, y = 0, legend = c('india', 'china'),
-       lty = 1, col = c('blue', 'red'), horiz = TRUE,
-       title = 'Nations', title.adj = 0.1)}
+legend(x = 2012, y = 3, legend = c('india', 'china'), lty = 1, 
+      col = c('blue', 'red'), horiz = TRUE, title = 'Nations', title.adj = 0.1)}
 ```
 
-----
+## Title Position
 
-The below plots show the relative position of the title within the legend box for different values between 0 and 1.
-
-----
+<hr>
 
 ```{r leg11, fig.align='center', fig.width=15, fig.height=10, echo=FALSE}
 init <- par(no.readonly = TRUE)
@@ -319,13 +322,9 @@ for (i in values) {
 }
 ```
 
-# Box Appearance
+## Box Appearance
 
-----
-
-There are a lot of options to modify the appearance of the legend box. The below table displays the arguments and their descriptions. Let us look at them one by one:
-
-----
+<hr>
 
 ```{r kable, echo=FALSE}
 option <- c('Box Type', 'Background Color', 'Border Line Type',
@@ -341,13 +340,9 @@ legend <- data.frame(option, argument, values)
 knitr::kable(legend, format = "markdown", caption = "Legend Box Options")
 ```
 
-# Box Type
+## Box Type
 
-----
-
-The `bty` argument takes two values, `o` and `n`. If set to `n`, there will be no box around the legend.
-
-----
+<hr>
 
 ```{r leg12, fig.align='center', fig.width=10, fig.height=5, echo=FALSE}
 init <- par(no.readonly = TRUE)
@@ -366,28 +361,21 @@ for (i in values) {
 }
 ```
 
-# Background Color
+## Background Color
 
-----
+<hr>
 
-A background color can be added to the legend box using the `bg` argument. Below is an example:
-
-----
-
-```{r leg13, fig.align='center', fig.height=5, fig.width=5}
-{plot(gdp$year, gdp$india, type = 'l',
-      ylim = c(-5, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue',
-      main = 'BRICS: Growth Rate')
+```{r leg13, fig.align='center', fig.height=4, fig.width=6}
+{plot(gdp$year, gdp$india, type = 'l', ylim = c(-8, 15), xlab = 'Year',
+      ylab = 'Growth Rate', col = 'blue', main = 'BRICS: Growth Rate')
 lines(gdp$year, gdp$china, col = 'red')
-legend(x = 2012, y = 0, legend = c('india', 'china'),
-       lty = 1, col = c('blue', 'red'), bg = '#ffff66',
-       title = 'Nations')}
+legend(x = 2012, y = 3, legend = c('india', 'china'),
+       lty = 1, col = c('blue', 'red'), bg = '#ffff66', title = 'Nations')}
 ```
 
-# Border
+## Border
 
-----
+<hr>
 
 The following arguments can be used to modify the border of the legend box:
 
@@ -395,22 +383,22 @@ The following arguments can be used to modify the border of the legend box:
 - `box.lwd`: line width
 - `box.col`: color
 
-----
+## Border
 
-```{r leg14, fig.align='center', fig.height=5, fig.width=5}
-{plot(gdp$year, gdp$india, type = 'l',
-      ylim = c(-5, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue',
-      main = 'BRICS: Growth Rate')
+<hr>
+
+```{r leg14, fig.align='center', fig.height=4, fig.width=6}
+{plot(gdp$year, gdp$india, type = 'l', ylim = c(-8, 15), xlab = 'Year',
+      ylab = 'Growth Rate', col = 'blue', main = 'BRICS: Growth Rate')
 lines(gdp$year, gdp$china, col = 'red')
-legend(x = 2012, y = 0, legend = c('india', 'china'),
+legend(x = 2012, y = 3, legend = c('india', 'china'),
        lty = 1, col = c('blue', 'red'), title = 'Nations',
        box.lty = 3, box.lwd = 1.5, box.col = 'green')}
 ```
 
-# Justification
+## Justification
 
-----
+<hr>
 
 The `xjust` and `yjust` arguments can be used to position the legend relative to the **X** and **Y** axis respectively. Listed below is the value and the respective justification:
 
@@ -418,15 +406,11 @@ The `xjust` and `yjust` arguments can be used to position the legend relative to
 - `0.5`: centered
 - `1`: right justified
 
-----
-
-Let us look at a few examples to understand how it works.
-
 ## Horizontal Justification
 
-----
+<hr>
  
-```{r leg15, fig.align='center', fig.width=15, fig.height=5, echo=FALSE}
+```{r leg15, fig.align='center', fig.width=10, fig.height=7, echo=FALSE}
 init <- par(no.readonly = TRUE)
 par(mfrow = c(1, 3))
 values <- c(0, 0.5, 1)
@@ -445,9 +429,9 @@ for (i in values) {
 
 ## Vertical Justification
 
-----
+<hr>
 
-```{r leg16, fig.align='center', fig.width=15, fig.height=5, echo=FALSE}
+```{r leg16, fig.align='center', fig.width=10, fig.height=7, echo=FALSE}
 init <- par(no.readonly = TRUE)
 par(mfrow = c(1, 3))
 values <- c(0, 0.5, 1)
@@ -465,42 +449,23 @@ for (i in values) {
 ```
 
 
-# Text Appearance
+## Text Appearance
 
-----
+<hr>
 
-The last topic we will explore is the appearance of the text inside the legend box. We will modify the color and font of text using the `text.col` and `text.font` arguments.
-
-----
-
-```{r leg17, fig.align='center', fig.height=5, fig.width=5}
-{plot(gdp$year, gdp$india, type = 'l',
-      ylim = c(-5, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue',
-      main = 'BRICS: Growth Rate')
+```{r leg17, fig.align='center', fig.height=4, fig.width=6}
+{plot(gdp$year, gdp$india, type = 'l', ylim = c(-8, 15), xlab = 'Year',
+      ylab = 'Growth Rate', col = 'blue', main = 'BRICS: Growth Rate')
 lines(gdp$year, gdp$china, col = 'red')
-legend(x = 2012, y = 0, legend = c('india', 'china'),
+legend(x = 2012, y = 3, legend = c('india', 'china'),
        lty = 1, col = c('blue', 'red'), title = 'Nations',
        text.col = 'green', text.font = 3)}
 ```
 
+## Questions
 
-# Summary
+<hr>
 
-----
+## Thank You
 
-In this module, we learnt to add legend to a plot using the `legend()` function. Specifically, we learnt to
-
-- position the legend within the plot
-- modify the layout using `ncol` and `horiz` arguments
-- add title using the `title.` set of arguments
-- modify the appearance and position of the legend box
-- modify the appearance of the text in the legend box
-
-
-# Next Steps..
-
-----
-
-In the next module, we will learn how to add text annotations to a plot
-using the `text()` and `mtext()` functions.
+<hr>
