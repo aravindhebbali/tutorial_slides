@@ -1,24 +1,85 @@
 ---
-title: "Introduction"
+title: "Line Charts"
 output: 
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
-    fig_width: 6
-    fig_height: 5
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
+    fig_height: 5
+    fig_width: 6
 ---
 
-# Introduction
+<style type="text/css">
+    .reveal p img {
+    align: middle;
+  }
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: none;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+    font-size: 25px;
+  }
+  .reveal h1 {
+    font-size: 24px;
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+  }
+  .reveal p img {
+    align: middle;
+  }
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
 
-----
+## Agenda
 
-This is the fourth module in the course **Data Visualization With R**. In the previous module, we learnt how to build scatter plots. In this module, we will build line graphs. To be more specific we will learn to 
+<hr>
 
 - create line plots
 - add color to lines
@@ -28,84 +89,66 @@ This is the fourth module in the course **Data Visualization With R**. In the pr
 - modify axis range
 - add additional lines to the plot
 
-# Line Graph
+## Data
 
-----
-
-To build a line graph, we will learn a new argument in the `plot()` function called `type`. It allows us to specify the symbol that must be used to represent the data. Let us begin by building a simple line graph. We will use the `AirPassengers` data set in this post. Before we begin to build the plot, let us take a quick look at the data in order to understand what we are plotting.
-
-----
+<hr>
 
 ```{r airpas}
 head(AirPassengers)
 ```
 
-----
+## Line Chart
 
-In order to build a line plot, we will set the `type` argument in the `plot()` function to **l** (line). There are other values which `type` takes but we will explore them later.
-
-----
+<hr>
 
 ```{r line1, fig.align='center', fig.height=5, fig.width=5}
 data <- head(AirPassengers)
 plot(data, type = 'l')
 ```
 
-----
+## Lines & Points
 
-If you do not like plain lines, you can represent the data using lines interspersed with points by setting the `type` argument to **b** (both lines and points).
-
-----
+<hr>
 
 ```{r line2, fig.align='center', fig.height=5, fig.width=5}
 plot(data, type = 'b')
 ```
 
-----
+## Overplotted
 
-Another option is to have the points and lines overplotted. It can be achieved by setting the `type` argument to **o** (overplotted).
-
-----
+<hr>
 
 ```{r line3, fig.align='center', fig.height=5, fig.width=5}
 plot(data, type = 'o')
 ```
 
-----
+## Lines with Breaks
 
-You can also create lines without points but with breaks instead  by setting the `type` argument to **c**.
+<hr>
 
 ```{r line4, fig.align='center', fig.height=5, fig.width=5}
 plot(data, type = 'c')
 ```
 
-# Color
+## Line Color
 
-----
-
-So now we know how to build a simple line graph. Let us now make this plot more elegant by modifying its appearance. Let us begin by adding some color to the line using the `col` argument in the `plot()` function.
-
-----
+<hr>
 
 ```{r line5, fig.align='center', fig.height=5, fig.width=5}
 plot(data, type = 'l', col = 'blue')
 ```
 
-----
+## Color
 
-If you have points along with the line, they will have the same color as well. 
+<hr>
 
 ```{r line6, fig.align='center', fig.height=5, fig.width=5}
 plot(data, type = 'b', col = 'blue')
 ```
 
-# Line Type
+## Line Type
 
-----
-
-The line type can be modified using the `lty` argument. It takes values from 1 to 6 and the default value is 1. Below is an example:
-
-----
+<hr>
 
 ```{r line9, fig.align='center', fig.height=5, fig.width=5}
 plot(data, type = 'l', lty = 3)
@@ -113,20 +156,20 @@ plot(data, type = 'l', lty = 3)
 
 ## Line Types
 
-- 1:solid
-- 2:dashed
-- 3:dotted
-- 4:dotdash
-- 5:longdash
-- 6:twodash
+<hr>
 
-----
+- 1: solid
+- 2: dashed
+- 3: dotted
+- 4: dotdash
+- 5: longdash
+- 6: twodash
 
-Let us look at all the line types in the below example:
+## Line Types
 
-----
+<hr>
 
-```{r lin7, echo=FALSE, fig.align='center', fig.height=15, fig.width=10}
+```{r lin7, echo=FALSE, fig.align='center', fig.height=7, fig.width=10}
 init <- par(no.readonly = TRUE)
 par(mfrow = c(3, 2))
 values <- 1:6
@@ -136,13 +179,11 @@ for (i in values) {
 }
 ```
 
-----
+## Line Types
 
-Instead of specifying the numbers 1:6, you can use their description as well.
+<hr>
 
-----
-
-```{r lin8, echo=FALSE, fig.align='center', fig.height=15, fig.width=10}
+```{r lin8, echo=FALSE, fig.align='center', fig.height=7, fig.width=10}
 init <- par(no.readonly = TRUE)
 par(mfrow = c(3, 2))
 values <- c("solid", "dashed", "dotted", "dotdash", "longdash", "twodash")
@@ -152,25 +193,19 @@ for (i in values) {
 }
 ```
 
-# Line Width
+## Line Width
 
-----
-
-The width of the lines can be modified using the `lwd` argument in the `plot()` function. The default value for width is 1. 
-
-----
+<hr>
 
 ```{r line10, fig.align='center', fig.height=5, fig.width=5}
 plot(data, type = 'l', lwd = 2.5)
 ```
 
-----
+## Line Width
 
-In the below example, we look at the width of the lines relative to the default value.
+<hr>
 
-----
-
-```{r lin11, echo=FALSE, fig.align='center', fig.height=10, fig.width=10}
+```{r lin11, echo=FALSE, fig.align='center', fig.height=7, fig.width=10}
 init <- par(no.readonly = TRUE)
 par(mfrow = c(2, 2))
 values <- c(0.5, 1, 1.5, 2)
@@ -180,51 +215,26 @@ for (i in values) {
 }
 ```
 
-# Enhance Points
+## Enhance Points
 
-----
-
-We can enhance the points in the line plot in the same way as we enhanced the points in the scatter plot in this previous [post](https://rsquaredacademy.github.io/post/data-visualization-with-r-scatter-plots/). Let us look at an example:
-
-----
+<hr>
 
 ```{r line12, fig.align='center', fig.height=5, fig.width=5}
 plot(data, type = 'b', pch = 23, col = 'red', cex = 1.5)
 ```
 
-----
+## Add Points
 
-We have used the `pch`, `col` and `cex` arguments to modify the shape, color and size of the points. One drawback of the above method is that the color of the line and the points will be the same. What if we want them to have different colors? The solution is as follows:
-
-- build the line graph using the `plot()` function
-- add the points to the above plot using the `points()` function
-
-----
-
-In the next example, let us first build the line plot, add points using the `points()` function and then specify separate colors to the line and the points.
-
-----
+<hr>
 
 ```{r line13, fig.align='center', fig.height=5, fig.width=5}
 plot(data, type = 'l', col = 'red')
 points(data, pch = 23, col = 'blue', bg = 'green', cex = 1.5)
 ```
 
-# Additional Lines
+## Additional Lines
 
-----
-
-If you want to compare variables, you would want to add additional lines to the line graph. In R, this can be achieved using the `lines()` function. First we create the line plot using the base variable and then we can add as many lines as we want using the `lines()` function. 
-
-----
-
-**Before you add additional lines, it is important to ensure that the range of both the axis are modified to accommodate the data of the additional lines. If we do not modify the axis range, some of the lines will be outside the plot.**
-
-----
-
-Let us now create a line plot and add an additional line using the `lines()` function.We will use some dummy data for this example:
-
-----
+<hr>
 
 ```{r line14, fig.align='center', fig.height=5, fig.width=5}
 data1 <- c(7.2, 7.6, 6.8, 6.5, 7)
@@ -233,20 +243,18 @@ plot(data1, type = "b", col = "blue")
 lines(data2, type = "b", col = "red")
 ```
 
-----
+## Additional Lines - Modify Axis Range
 
-As you can see the second line is outside the plot. Let us recreate the plot but this time we will modify the range of the axis to accommodate the second line (data2).
-
-----
+<hr>
 
 ```{r line15, fig.align='center', fig.height=5, fig.width=5}
 plot(data1, type = "b", col = "blue", ylim = c(5, 9))
 lines(data2, type = "b", col = "red")
 ```
 
-# Line Plot
+## Line Plot
 
-----
+<hr>
 
 ```{r line16, fig.align='center', fig.height=5, fig.width=5}
 plot(data1, type = "b", col = "blue", 
@@ -255,19 +263,10 @@ plot(data1, type = "b", col = "blue",
 lines(data2, type = "b", col = "red")
 ```
 
-# Summary
+## Questions
 
-----
+<hr>
 
-In this module, we learnt how to 
+## Thank You
 
-- create line plots 
-- modify appearance of the line
-- add points to the line plot
-- add additional lines
-
-# Next Steps..
-
-----
-
-In the next module, we will learn how to build bar plots which are used to visualize a single categorical data or the relationship between two categorical variables.
+<hr>
