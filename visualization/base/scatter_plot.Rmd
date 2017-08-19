@@ -4,43 +4,99 @@ output:
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
-    fig_width: 6
-    fig_height: 5
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
+    fig_height: 5
+    fig_width: 6
 ---
 
-## Introduction
+<style type="text/css">
+    .reveal p img {
+    align: middle;
+  }
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: none;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+    font-size: 25px;
+  }
+  .reveal h1 {
+    font-size: 24px;
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+  }
+  .reveal p img {
+    align: middle;
+  }
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
 
-----
+## Agenda
 
-This is the third module in the course **Data Visualization With R**. In the previous module, we learned how to add title, subtitle and axis labels. We also learned how to modify the range of the axis. In this module, we will learn how to create scatter plots and enhance them by:
+<hr>
 
-- adding color to the points
-- modify shape of the points
-- modify size of the points
+- create scatter plot
+- modify symbol
+    - color
+    - shape 
+    - and shape
 
-## Basic Plot
 
-----
-
-Let us recreate the plot that we had created in the first post by using the `mtcars` data set. We will use the `disp` (displacement) and `mpg` (miles per gallon) variables. `disp` will be on the X axis and `mpg` will be on the Y axis.
-
-----
+## Scatter Plot
 
 ```{r scatter1, fig.align='center', fig.height=5, fig.width=5}
 plot(mtcars$disp, mtcars$mpg)
 ```
 
-----
+## Title & Axis Labels
 
-We have created a very basic plot and any one looking at it for the first time will get confused with the axis labels `mtcars$disp` and `mtcars$mpg`. Let us put into practice what we learnt in the second [post](https://rsquaredacademy.github.io/post/data-visualization-with-r-title-and-axis-labels/) and add a title to the plot, and make the axis labels more meaningful.
-
-----
+<hr>
 
 ```{r scatter2, fig.align='center', fig.height=5, fig.width=5}
 plot(mtcars$disp, mtcars$mpg,
@@ -48,28 +104,19 @@ plot(mtcars$disp, mtcars$mpg,
      xlab = 'Displacement', ylab = 'Miles Per Gallon')
 ```
 
-----
-
-Now the plot clearly communicates that it represents the relationship between the displacement and mileage of cars. Now the color of the points in the plot is black by default. Some of us may agree that black is beautiful but not all of us will like it.As a first step in enhancing the way our plot looks, let us change the shape of the points. 
-
 ## Shape
 
-----
-
-The shape of the point can be specified using the `pch` argument. It will take values between **0** and **25**. Below is an example:
-
-----
+<hr>
 
 ```{r scatter-shape, fig.align='center', fig.width=5, fig.height=5}
-# point shape
 plot(mtcars$disp, mtcars$mpg, pch = 6)
 ```
 
-----
+## Shape 
 
-Let us check out a few of the other shapes:
+<hr>
 
-```{r scatter-pch, echo=FALSE, fig.align='center', fig.width=10, fig.height=10}
+```{r scatter-pch, echo=FALSE, fig.align='center', fig.width=10, fig.height=7}
 init <- par(no.readonly = TRUE)
 par(mfrow = c(2, 2))
 values <- c(4, 10, 16, 22)
@@ -79,43 +126,35 @@ for (i in values) {
 }
 ```
 
-----
+## Shape
 
-We can specify the shape based on a third (categorical variable as well). In the below plot, the shape is based on the levels of the categorical variable `cyl` (number of cylinders) from the `mtcars` data set:
-
-----
+<hr>
 
 ```{r scatter-pch2, fig.align='center', fig.width=5, fig.height=5}
-# shape  based on number of levels of a third variable
 plot(mtcars$disp, mtcars$mpg, pch = nlevels(factor(mtcars$cyl)))
 ```
 
-----
+## Shape
+
+<hr>
 
 ```{r scatter-pch3, fig.align='center', fig.width=5, fig.height=5}
-# shape based on a third categorical variable
 plot(mtcars$disp, mtcars$mpg, pch = unclass(mtcars$cyl))
 ```
 
 ## Size
 
-----
-
-The size of the points in the scatter plot can be specified using the `cex` argument in the `plot()` function. The default value for `cex` is 1. 
-
-----
+<hr>
 
 ```{r scatter-size, fig.align='center', fig.width=5, fig.height= 5}
-# point size
 plot(mtcars$disp, mtcars$mpg, cex = 1.5)
 ```
 
-----
+## Size
 
-The below plots show the size of the points for values relative to 1.
+<hr>
 
-```{r scatter-cex, echo=FALSE, fig.align='center', fig.width=10, fig.height=10}
-# different point sizes
+```{r scatter-cex, echo=FALSE, fig.align='center', fig.width=10, fig.height=7}
 init <- par(no.readonly = TRUE)
 par(mfrow = c(2, 2))
 values <- c(0.5, 1, 1.5, 2)
@@ -127,56 +166,32 @@ for (i in values) {
 
 ## Color
 
-----
-
-We can specify a border color for the points using the `col` argument and a background color using the `bg` argument. The background color can be specified only for points whose `pch` argument takes values between **21** and **25**. Let us look at some examples to understand this distinction between border and background color.
-
-----
+<hr>
 
 ```{r col1, fig.align='center', fig.width=5, fig.height=5}
-# shape between 0 and 21
 plot(mtcars$disp, mtcars$mpg, pch = 5, col = 'blue', bg = 'red')
 ```
 
-----
+## Color
 
-You can observe that although we have specified a background color using the `bg` argument, we do not see the red background color as the value specified for the `pch` (shape) argument is not between 21 and 25. In the next example, we will use a value between 21 and 25 so that the `pch` argument is effective.
-
-----
+<hr>
 
 ```{r col2, fig.align='center', fig.width=5, fig.height=5}
-# shape between 0 and 21
 plot(mtcars$disp, mtcars$mpg, pch = 24, col = 'red', bg = 'blue')
 ```
 
-----
+## Color
 
-The color of the points can be specified using (levels) of a categorical variable as well. In the next example, we will use the `cyl` variable to specify the color of the points.
-
-----
+<hr>
 
 ```{r col3, fig.align='center', fig.width=5, fig.height=5}
-# color based on a third variable
 plot(mtcars$disp, mtcars$mpg, pch = 5, col = factor(mtcars$cyl))
 ```
 
-----
+## Questions
 
-Since `cyl` is a categorical variable with 3 levels, we can see that the points now have 3 different colors. The above method is useful when you want to segregate the points in a scatter plot based on a third variable.
+<hr>
 
-## Summary
+## Thank You
 
-----
-
-In this module, we learned how to 
-
-- create scatter plots
-- add color to the points
-- modify shape of the points
-- modify size of the points
-
-## Next Steps..
-
-----
-
-In certain cases we might want to fit a regression line or add horizontal/vertical lines to the scatter plots. We will learn to do that in the next module, where we build line plots.
+<hr>
