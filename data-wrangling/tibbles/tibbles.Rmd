@@ -1,9 +1,9 @@
 ---
-title: "Introduction to tibbles"
+title: 
 output: 
   revealjs::revealjs_presentation:
     transition: slide
-    incremental: true
+    incremental: false
     theme: default
     highlight: haddock
     center: false
@@ -12,10 +12,24 @@ output:
       previewLinks: true
 ---
 
+## {data-background="tibble_intro.png"}
+
+## Agenda
+
+<hr>
+
+- What are tibbles?
+- How are tibbles different from data frames?
+- How to create tibbles?
+- How to manipulate tibbles?
+
 <style type="text/css">
   .reveal p {
     text-align: left;
     font-size: 20px;
+  }
+  .reveal .title {
+    background-image: handshake.png;
   }
   .reveal body:after {
     content: url(handshake.png);
@@ -40,6 +54,7 @@ output:
     color: #3c3c3c; 
     /* set color of list item text */
     list-style: none; 
+    font-size: 20px;
   }
 
   .reveal ul li::before {
@@ -66,15 +81,7 @@ output:
   }
 </style>
 
-## Agenda
-
-<hr>
-
-- What are tibbles?
-- How are tibbles different from data frames?
-- How to create tibbles?
-- How to manipulate tibbles?
-
+## {data-background="tibbles1.png"}
 
 ## tibbles
 
@@ -91,6 +98,8 @@ tibble can be created using any of the following:
 - `tibble()`
 - `as_tibble()`
 - `tribble()`
+
+## {data-background="tibbles2.png"}
 
 ## Creating tibbles
 
@@ -234,7 +243,7 @@ browsers <- c(chrome = 40, firefox = 20, edge = 30, safari = 10)
 enframe(browsers)
 ```
 
-## Test objects
+## Membership Testing
 
 <hr>
 
@@ -283,66 +292,6 @@ tibble(
 )
 ```
 
-## Compare tibbles
-
-<hr>
-
-We can compare tibbles using the `all_equal()` function from the [dplyr](http://dplyr.tidyverse.org/) package. We need to specify the 
-tibbles being compared. Let us look at an example from the web traffic data. We have the details of browsers used in 2 formats. We will 
-test if they are the same.
-
-```{r tibble17} 
-browsers1 <- enframe(c(chrome = 40, firefox = 20, edge = 30, safari = 10))
-browsers2 <- enframe(c(edge = 30, firefox = 20, safari = 10, chrome = 40))
-all_equal(browsers1, browsers2)
-```
-
-## Compare tibbles
-
-<hr>
-
- The `all_equal()` function ignores the order of the rows while comparing the tibbles. Change this by setting 
-`ignore_row_order` to `TRUE`.
-
-```{r tibble18}
-all_equal(browsers1, browsers2, ignore_row_order = FALSE)
-```
-
-
-## Compare tibbles
-
-<hr>
-
-The order of the columns are ignored by default.
-
-```{r tibble19}
-traffic1 <- tibble(
-  browsers = c('chrome', 'firefox', 'edge', 'safari'),
-  visit = c(40, 20, 30, 10),
-  source = c('search', 'social', 'direct', 'affiliates'),
-  visits = c(35, 25, 10, 30)
-)
-
-traffic2 <- tibble(
-  source = c('search', 'social', 'direct', 'affiliates'),
-  visits = c(35, 25, 10, 30),
-  browsers = c('chrome', 'firefox', 'edge', 'safari'),
-  visit = c(40, 20, 30, 10)
-)
-
-all_equal(traffic1, traffic2)
-```
-
-
-## Compare tibbles
-
-<hr>
-
-Set `ignore_col_order` to `FALSE` to compare the order of the columns.
-
-```{r tibble20}
-all_equal(traffic1, traffic2, ignore_col_order = FALSE)
-```
 
 ## Add Rows
 
@@ -374,7 +323,7 @@ add_row(browsers, name = 'safari', value = 10, .before = 2)
 
 <hr>
 
-`add_col()` adds a new column to tibbles.
+`add_colum()` adds a new column to tibbles.
 
 ```{r tibble24}
 browsers <- enframe(c(chrome = 40, firefox = 20, edge = 30, safari = 10))
@@ -419,7 +368,7 @@ mtcars_tbl <- rownames_to_column(mtcars)
 column_to_rownames(mtcars_tbl)
 ```
 
-## Miscellaneous
+## Glimpse
 
 <hr>
 
@@ -440,10 +389,4 @@ has_name(mtcars, 'cyl')
 has_name(mtcars, 'gears')
 ```
 
-## Questions
-
-<hr>
-
-## Thank You
-
-<hr>
+## {data-background="thankyou.png"}

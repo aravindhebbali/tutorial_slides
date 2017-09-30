@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <title>Introduction to tibbles</title>
+  <title></title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -479,16 +479,26 @@ document.getElementsByTagName('head')[0].appendChild(style);
   <div class="reveal">
     <div class="slides">
 
-<section>
-    <h1 class="title">Introduction to tibbles</h1>
+
+<section id="section" class="slide level2" data-background="tibble_intro.png">
+<h1></h1>
 </section>
-
-<section class="slide level2">
-
+<section id="agenda" class="slide level2">
+<h1>Agenda</h1>
+<hr>
+<ul>
+<li>What are tibbles?</li>
+<li>How are tibbles different from data frames?</li>
+<li>How to create tibbles?</li>
+<li>How to manipulate tibbles?</li>
+</ul>
 <style type="text/css">
   .reveal p {
     text-align: left;
     font-size: 20px;
+  }
+  .reveal .title {
+    background-image: handshake.png;
   }
   .reveal body:after {
     content: url(handshake.png);
@@ -513,6 +523,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
     color: #3c3c3c; 
     /* set color of list item text */
     list-style: none; 
+    font-size: 20px;
   }
 
   .reveal ul li::before {
@@ -539,15 +550,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
   }
 </style>
 </section>
-<section id="agenda" class="slide level2">
-<h1>Agenda</h1>
-<hr>
-<ul>
-<li class="fragment">What are tibbles?</li>
-<li class="fragment">How are tibbles different from data frames?</li>
-<li class="fragment">How to create tibbles?</li>
-<li class="fragment">How to manipulate tibbles?</li>
-</ul>
+<section id="section-1" class="slide level2" data-background="tibbles1.png">
+<h1></h1>
 </section>
 <section id="tibbles" class="slide level2">
 <h1>tibbles</h1>
@@ -559,10 +563,13 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <p>tibble can be created using any of the following:</p>
 <ul>
-<li class="fragment"><code>tibble()</code></li>
-<li class="fragment"><code>as_tibble()</code></li>
-<li class="fragment"><code>tribble()</code></li>
+<li><code>tibble()</code></li>
+<li><code>as_tibble()</code></li>
+<li><code>tribble()</code></li>
 </ul>
+</section>
+<section id="section-2" class="slide level2" data-background="tibbles2.png">
+<h1></h1>
 </section>
 <section id="creating-tibbles-1" class="slide level2">
 <h1>Creating tibbles</h1>
@@ -573,26 +580,26 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <pre><code>## # A tibble: 26 x 3
 ##        x     y     z
 ##    &lt;chr&gt; &lt;int&gt; &lt;int&gt;
-##  1     a     1    34
-##  2     b     2    12
-##  3     c     3    84
-##  4     d     4    33
-##  5     e     5    11
-##  6     f     6    55
-##  7     g     7    47
-##  8     h     8    54
-##  9     i     9    23
-## 10     j    10    10
+##  1     a     1    55
+##  2     b     2    48
+##  3     c     3    47
+##  4     d     4    60
+##  5     e     5     7
+##  6     f     6    39
+##  7     g     7    95
+##  8     h     8    82
+##  9     i     9    18
+## 10     j    10    28
 ## # ... with 16 more rows</code></pre>
 </section>
 <section id="tibble-features" class="slide level2">
 <h1>tibble features</h1>
 <hr>
 <ul>
-<li class="fragment">never changes input’s types</li>
-<li class="fragment">never adjusts variable names</li>
-<li class="fragment">never prints all rows</li>
-<li class="fragment">never recycles vector of length greater than 1</li>
+<li>never changes input’s types</li>
+<li>never adjusts variable names</li>
+<li>never prints all rows</li>
+<li>never recycles vector of length greater than 1</li>
 </ul>
 </section>
 <section id="never-changes-inputs-types" class="slide level2">
@@ -604,16 +611,16 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <pre><code>## # A tibble: 26 x 3
 ##        x     y     z
 ##    &lt;chr&gt; &lt;int&gt; &lt;int&gt;
-##  1     a     1    33
-##  2     b     2    15
-##  3     c     3    92
-##  4     d     4     7
+##  1     a     1    60
+##  2     b     2    17
+##  3     c     3     1
+##  4     d     4    19
 ##  5     e     5    86
-##  6     f     6    17
-##  7     g     7     9
-##  8     h     8    23
-##  9     i     9    61
-## 10     j    10    88
+##  6     f     6    28
+##  7     g     7    63
+##  8     h     8    90
+##  9     i     9    74
+## 10     j    10    71
 ## # ... with 16 more rows</code></pre>
 </section>
 <section id="never-adjusts-variable-names" class="slide level2">
@@ -634,15 +641,15 @@ z &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">
 <pre><code>## # A tibble: 100 x 3
 ##        x     y     z
 ##    &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;
-##  1     1     a  TRUE
-##  2     2     a FALSE
+##  1     1     a FALSE
+##  2     2     a  TRUE
 ##  3     3     a  TRUE
-##  4     4     a FALSE
+##  4     4     a  TRUE
 ##  5     5     a FALSE
 ##  6     6     a  TRUE
 ##  7     7     a FALSE
-##  8     8     a  TRUE
-##  9     9     a FALSE
+##  8     8     a FALSE
+##  9     9     a  TRUE
 ## 10    10     a FALSE
 ## # ... with 90 more rows</code></pre>
 </section>
@@ -660,12 +667,12 @@ Error in <span class="kw">overscope_eval_next</span>(overscope, expr) :<span cla
 <hr>
 <p>In the previous section, we created tibbles using the <code>tibble()</code> function by directly entering data as arguments. In this section, we will convert the following objects to tibble using the <code>as_tibble()</code> function:</p>
 <ul>
-<li class="fragment">data.frame</li>
-<li class="fragment">list</li>
-<li class="fragment">matrix</li>
-<li class="fragment">table</li>
-<li class="fragment">tbl_df</li>
-<li class="fragment">atomic vectors</li>
+<li>data.frame</li>
+<li>list</li>
+<li>matrix</li>
+<li>table</li>
+<li>tbl_df</li>
+<li>atomic vectors</li>
 </ul>
 </section>
 <section id="dataframes" class="slide level2">
@@ -695,16 +702,16 @@ Error in <span class="kw">overscope_eval_next</span>(overscope, expr) :<span cla
 <pre><code>## # A tibble: 32 x 3
 ##        x     y          z
 ##    &lt;int&gt; &lt;int&gt;     &lt;list&gt;
-##  1     1    46 &lt;chr [26]&gt;
-##  2     2    44 &lt;chr [26]&gt;
-##  3     3    36 &lt;chr [26]&gt;
-##  4     4    85 &lt;chr [26]&gt;
-##  5     5    72 &lt;chr [26]&gt;
-##  6     6    51 &lt;chr [26]&gt;
-##  7     7    94 &lt;chr [26]&gt;
-##  8     8    65 &lt;chr [26]&gt;
-##  9     9    83 &lt;chr [26]&gt;
-## 10    10    92 &lt;chr [26]&gt;
+##  1     1    59 &lt;chr [26]&gt;
+##  2     2    89 &lt;chr [26]&gt;
+##  3     3    29 &lt;chr [26]&gt;
+##  4     4    68 &lt;chr [26]&gt;
+##  5     5    37 &lt;chr [26]&gt;
+##  6     6    26 &lt;chr [26]&gt;
+##  7     7    19 &lt;chr [26]&gt;
+##  8     8    51 &lt;chr [26]&gt;
+##  9     9    23 &lt;chr [26]&gt;
+## 10    10    44 &lt;chr [26]&gt;
 ## # ... with 22 more rows</code></pre>
 </section>
 <section id="matrix" class="slide level2">
@@ -716,16 +723,16 @@ Error in <span class="kw">overscope_eval_next</span>(overscope, expr) :<span cla
 <pre><code>## # A tibble: 100 x 26
 ##        a     b     c     d     e     f     g     h     i     j     k     l
 ##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
-##  1   460   229   438   869   492   373   761   317   273    85   606    63
-##  2   179   974   554   453   256   908   458    89   190   796   780   250
-##  3    37   511   938    50   786   908   669    76   861   486   312    80
-##  4   466   624   923   641   143    58   967   596   742   920   306   272
-##  5   414   336   899   472   571   634   797   739   178    76   319   208
-##  6   943   988   758   486   292   807   991   680   607   775   652   529
-##  7    34     6   206   425   157   216   413   649   410   330   732   968
-##  8   400   359   273   942   515    59   630   901   902   807   406   424
-##  9   418   512   112   675   683   507   970   929   136   192   936   332
-## 10   679   886   234    15   114   596   754   535   797   824   525   232
+##  1   695   667   958   251   164   469   957   637   695   994   668   195
+##  2   845   785   593   764   601   566   584   901   366    31   791   438
+##  3   506    84   981   938   367   146   995   543   337   478    24   452
+##  4   181   963   785   618   796   196   386   784   812   162   370   137
+##  5   424   981   483   444   643    71   945   312   370   862   102    31
+##  6   816   321   767   159   407   734   283   195   877   697   608    43
+##  7   627    15   789   439   206   163   812   321   981   669   166   173
+##  8   197   585   374   842   236   422   969   553   363   310    16   189
+##  9   865   311    84    38   254   526    38   388   156   581   226   634
+## 10   647   819   569   616   815   657    27   119   665   855   571   501
 ## # ... with 90 more rows, and 14 more variables: m &lt;int&gt;, n &lt;int&gt;, o &lt;int&gt;,
 ## #   p &lt;int&gt;, q &lt;int&gt;, r &lt;int&gt;, s &lt;int&gt;, t &lt;int&gt;, u &lt;int&gt;, v &lt;int&gt;,
 ## #   w &lt;int&gt;, x &lt;int&gt;, y &lt;int&gt;, z &lt;int&gt;</code></pre>
@@ -788,8 +795,8 @@ Error in <span class="kw">overscope_eval_next</span>(overscope, expr) :<span cla
 ## 3    edge    30
 ## 4  safari    10</code></pre>
 </section>
-<section id="test-objects" class="slide level2">
-<h1>Test objects</h1>
+<section id="membership-testing" class="slide level2">
+<h1>Membership Testing</h1>
 <hr>
 <p>We can test if an object is a tibble using the <code>is_tibble()</code> function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is_tibble</span>(mtcars)</code></pre></div>
@@ -802,10 +809,10 @@ Error in <span class="kw">overscope_eval_next</span>(overscope, expr) :<span cla
 <hr>
 <p>Another way to create tibbles is using <code>tribble()</code>:</p>
 <ul>
-<li class="fragment">it is short for transposed tibbles</li>
-<li class="fragment">it is customized for data entry in code</li>
-<li class="fragment">column names start with <code>~</code></li>
-<li class="fragment">and values are separated by commas</li>
+<li>it is short for transposed tibbles</li>
+<li>it is customized for data entry in code</li>
+<li>column names start with <code>~</code></li>
+<li>and values are separated by commas</li>
 </ul>
 </section>
 <section id="tribble-1" class="slide level2">
@@ -836,50 +843,6 @@ Error in <span class="kw">overscope_eval_next</span>(overscope, expr) :<span cla
 ##     ` `     `2`   `:)`
 ##   &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;
 ## 1 space integer smiley</code></pre>
-</section>
-<section id="compare-tibbles" class="slide level2">
-<h1>Compare tibbles</h1>
-<hr>
-<p>We can compare tibbles using the <code>all_equal()</code> function from the <a href="http://dplyr.tidyverse.org/">dplyr</a> package. We need to specify the tibbles being compared. Let us look at an example from the web traffic data. We have the details of browsers used in 2 formats. We will test if they are the same.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">browsers1 &lt;-<span class="st"> </span><span class="kw">enframe</span>(<span class="kw">c</span>(<span class="dt">chrome =</span> <span class="dv">40</span>, <span class="dt">firefox =</span> <span class="dv">20</span>, <span class="dt">edge =</span> <span class="dv">30</span>, <span class="dt">safari =</span> <span class="dv">10</span>))
-browsers2 &lt;-<span class="st"> </span><span class="kw">enframe</span>(<span class="kw">c</span>(<span class="dt">edge =</span> <span class="dv">30</span>, <span class="dt">firefox =</span> <span class="dv">20</span>, <span class="dt">safari =</span> <span class="dv">10</span>, <span class="dt">chrome =</span> <span class="dv">40</span>))
-<span class="kw">all_equal</span>(browsers1, browsers2)</code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
-</section>
-<section id="compare-tibbles-1" class="slide level2">
-<h1>Compare tibbles</h1>
-<hr>
-<p>The <code>all_equal()</code> function ignores the order of the rows while comparing the tibbles. Change this by setting <code>ignore_row_order</code> to <code>TRUE</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">all_equal</span>(browsers1, browsers2, <span class="dt">ignore_row_order =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<pre><code>## [1] &quot;Same row values, but different order&quot;</code></pre>
-</section>
-<section id="compare-tibbles-2" class="slide level2">
-<h1>Compare tibbles</h1>
-<hr>
-<p>The order of the columns are ignored by default.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">traffic1 &lt;-<span class="st"> </span><span class="kw">tibble</span>(
-  <span class="dt">browsers =</span> <span class="kw">c</span>(<span class="st">'chrome'</span>, <span class="st">'firefox'</span>, <span class="st">'edge'</span>, <span class="st">'safari'</span>),
-  <span class="dt">visit =</span> <span class="kw">c</span>(<span class="dv">40</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">10</span>),
-  <span class="dt">source =</span> <span class="kw">c</span>(<span class="st">'search'</span>, <span class="st">'social'</span>, <span class="st">'direct'</span>, <span class="st">'affiliates'</span>),
-  <span class="dt">visits =</span> <span class="kw">c</span>(<span class="dv">35</span>, <span class="dv">25</span>, <span class="dv">10</span>, <span class="dv">30</span>)
-)
-
-traffic2 &lt;-<span class="st"> </span><span class="kw">tibble</span>(
-  <span class="dt">source =</span> <span class="kw">c</span>(<span class="st">'search'</span>, <span class="st">'social'</span>, <span class="st">'direct'</span>, <span class="st">'affiliates'</span>),
-  <span class="dt">visits =</span> <span class="kw">c</span>(<span class="dv">35</span>, <span class="dv">25</span>, <span class="dv">10</span>, <span class="dv">30</span>),
-  <span class="dt">browsers =</span> <span class="kw">c</span>(<span class="st">'chrome'</span>, <span class="st">'firefox'</span>, <span class="st">'edge'</span>, <span class="st">'safari'</span>),
-  <span class="dt">visit =</span> <span class="kw">c</span>(<span class="dv">40</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">10</span>)
-)
-
-<span class="kw">all_equal</span>(traffic1, traffic2)</code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
-</section>
-<section id="compare-tibbles-3" class="slide level2">
-<h1>Compare tibbles</h1>
-<hr>
-<p>Set <code>ignore_col_order</code> to <code>FALSE</code> to compare the order of the columns.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">all_equal</span>(traffic1, traffic2, <span class="dt">ignore_col_order =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<pre><code>## [1] &quot;Same column names, but different order&quot;</code></pre>
 </section>
 <section id="add-rows" class="slide level2">
 <h1>Add Rows</h1>
@@ -918,7 +881,7 @@ browsers</code></pre></div>
 <section id="add-column" class="slide level2">
 <h1>Add Column</h1>
 <hr>
-<p><code>add_col()</code> adds a new column to tibbles.</p>
+<p><code>add_colum()</code> adds a new column to tibbles.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">browsers &lt;-<span class="st"> </span><span class="kw">enframe</span>(<span class="kw">c</span>(<span class="dt">chrome =</span> <span class="dv">40</span>, <span class="dt">firefox =</span> <span class="dv">20</span>, <span class="dt">edge =</span> <span class="dv">30</span>, <span class="dt">safari =</span> <span class="dv">10</span>))
 <span class="kw">add_column</span>(browsers, <span class="dt">visits =</span> <span class="kw">c</span>(<span class="dv">4000</span>, <span class="dv">2000</span>, <span class="dv">3000</span>, <span class="dv">1000</span>))</code></pre></div>
 <pre><code>## # A tibble: 4 x 3
@@ -1026,8 +989,8 @@ browsers</code></pre></div>
 ## Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
 ## Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
 </section>
-<section id="miscellaneous" class="slide level2">
-<h1>Miscellaneous</h1>
+<section id="glimpse" class="slide level2">
+<h1>Glimpse</h1>
 <hr>
 <p>Use the <code>glimpse()</code> function to get an overview of the data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glimpse</span>(mtcars)</code></pre></div>
@@ -1054,13 +1017,8 @@ browsers</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">has_name</span>(mtcars, <span class="st">'gears'</span>)</code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 </section>
-<section id="questions" class="slide level2">
-<h1>Questions</h1>
-<hr>
-</section>
-<section id="thank-you" class="slide level2">
-<h1>Thank You</h1>
-<hr>
+<section id="section-3" class="slide level2" data-background="thankyou.png">
+<h1></h1>
 </section>
     </div>
   </div>
