@@ -4,34 +4,97 @@ output:
   revealjs::revealjs_presentation:
     transition: slide
     incremental: true
-    theme: moon
-    highlight: monochrome
-    center: true
-    fig_width: 6
-    fig_height: 5
+    theme: default
+    highlight: haddock
+    center: false
     reveal_options:
       slideNumber: true
       previewLinks: true
+    fig_height: 5
+    fig_width: 6
 ---
 
-# Introduction
+<style type="text/css">
+    .reveal p img {
+    align: middle;
+  }
+  .reveal p {
+    text-align: left;
+    font-size: 20px;
+  }
+  .reveal body:after {
+    content: url(handshake.png);
+    position: fixed;
+    bottom: 3.5em;
+    left: 3.5em;
+    box-shadow: 5px 5px 10px #000; 
+  }
+  .reveal hr {
+    border-color: #0077aa;
+  }
+  .reveal h1, h2, h3, h4, h5, h6 {
+    text-transform: none;
+    text-align: center;
+    color: #0077aa;
+    font-family: 'Helvetica Neue';
+    font-size: 25px;
+  }
+  .reveal h1 {
+    font-size: 24px;
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ul li {
+    color: #3c3c3c; 
+    /* set color of list item text */
+    list-style: none; 
+  }
+  .reveal p img {
+    align: middle;
+  }
+  .reveal ul li::before {
+      color: #006b6e;  
+      /* color of bullet or square */
+      content: "\2022"; 
+      /* Unicode of character to precede the list item */
+      font-size: 1em; 
+      /* em or %*/ 
+      padding-right: 1.1225em; 
+      /* use em*/
+      position: relative;
+      top: 0em; 
+      /* use em or % */
+  }
+  .reveal ul {
+    line-height:150%
+  }
+  .reveal .fragment {
+    font-size: 20px;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
 
-----
+## Agenda
 
-This is the ninth module in the course **Data Visualization With R**. In the previous module, we learnt how to add legend to a plot. In this module, we will learn to add text annotations.
-
-----
-
-There are occassions when you want to display additional information in a plot. This is usually achieved by adding text either inside the plot or on the margins. For example, you might want to label a line/bar or add formulas to better communicate what is shown in the plot. The idea is to use the available space within/outside the plot to provide additional information that can be useful to the end users. 
-
-----
+<hr>
 
 We will learn to add text inside as well as on the margins of the plot. This is accomplished using the following two functions:
 
 - `text()` : add text inside the plot
 - `mtext()` : add text on the margins of the plot
 
-----
+## Introduction
+
+<hr>
+
+There are occassions when you want to display additional information in a plot. This is usually achieved by adding text either inside the plot or on the margins. For example, you might want to label a line/bar or add formulas to better communicate what is shown in the plot. The idea is to use the available space within/outside the plot to provide additional information that can be useful to the end users. 
+
+## Syntax
+
+<hr>
 
 Let us take a quick look at the syntax of both the functions:
 
@@ -46,15 +109,10 @@ mtext(text, side = 3, line = 0, outer = FALSE, at = NA,
       adj = NA, padj = NA, cex = NA, col = NA, font = NA, ...)
 ```
 
-----
 
-We will first explore the `text()` function and then move onto the `mtext()` function.
+## Text Inside the Plot
 
-----
-
-# Text Inside the Plot
-
-----
+<hr>
 
 To add text inside a plot, the following arguments must be supplied to the `text()` function:
 
@@ -63,40 +121,27 @@ To add text inside a plot, the following arguments must be supplied to the `text
 - `y` : y axis coordinate
 
 
-----
+## Text Inside the Plot
 
-Below is a simple example:
-
-----
+<hr>
 
 ```{r text1, fig.align='center', fig.width=5, fig.height=5}
 plot(mtcars$disp, mtcars$mpg)
 text(x = 340, y = 30, labels = 'Sample Text')
 ```
 
-----
+## Text Color
 
-The text appears at the coordinates (340, 30). Ensure that the text is enclosed in single/double quotes and the coordinates provided are within the range of the **X** and **Y** axis variables.
-
-
-# Color
-
-----
-
-The color of the text can be modified using the `col` argument in the `text()` function.
-
-----
+<hr>
 
 ```{r text2, fig.align='center', fig.width=5, fig.height=5}
 plot(mtcars$disp, mtcars$mpg)
 text(x = 340, y = 30, labels = 'Sample Text', col = 'red')
 ```
 
-----
+## Text Color
 
-The below plot depicts the appearance of the text for different values of the `col` argument:
-
-----
+<hr>
 
 ```{r text3, fig.align='center', fig.width=15, fig.height=5, echo=FALSE}
 init <- par(no.readonly = TRUE)
@@ -109,24 +154,18 @@ for (i in values) {
 }
 ```
 
-# Font
+## Font
 
-----
-
-The font of the text can be modified using the `font` argument in the `text()` function.
-
-----
+<hr>
 
 ```{r text4, fig.align='center', fig.width=5, fig.height=5}
 plot(mtcars$disp, mtcars$mpg)
 text(x = 340, y = 30, labels = 'Sample Text', col = 'red', font = 2)
 ```
 
-----
+## Font
 
-The below plot depicts the appearance of the text for different values of the `font` argument:
-
-----
+<hr>
 
 ```{r text5, fig.align='center', fig.width=10, fig.height=10, echo=FALSE}
 init <- par(no.readonly = TRUE)
@@ -139,24 +178,18 @@ for (i in values) {
 }
 ```
 
-# Font Family
+## Font Family
 
-----
-
-The font family of the text can be modified using the `family` argument in the `text()` function.
-
-----
+<hr>
 
 ```{r text6, fig.align='center', fig.width=5, fig.height=5}
 plot(mtcars$disp, mtcars$mpg)
 text(x = 340, y = 30, labels = 'Sample Text', col = 'red', family = 'mono')
 ```
 
-----
+## Font Family
 
-The below plot depicts the appearance of the text for different values of the `family` argument:
-
-----
+<hr>
 
 ```{r text7, fig.align='center', fig.width=15, fig.height=5, echo=FALSE}
 init <- par(no.readonly = TRUE)
@@ -169,24 +202,18 @@ for (i in values) {
 }
 ```
 
-# Font Size
+## Font Size
 
-----
-
-The font size of the text can be modified using the `cex` argument in the `text()` function.
-
-----
+<hr>
 
 ```{r text8, fig.align='center', fig.width=5, fig.height=5}
 plot(mtcars$disp, mtcars$mpg)
 text(x = 340, y = 30, labels = 'Sample Text', col = 'red', cex = 2)
 ```
 
-----
+## Font Size
 
-The below plot depicts the appearance of the text for different values of the `cex` argument:
-
-----
+<hr>
 
 ```{r text9, fig.align='center', fig.width=15, fig.height=5, echo=FALSE}
 init <- par(no.readonly = TRUE)
@@ -199,41 +226,33 @@ for (i in values) {
 }
 ```
 
-# Text on the Margins
+## Text on the Margins
 
-----
+<hr>
 
 The `mtext()` function allows the user to place the text on the margins of the plot. It allows the user to modify the location of the text in multiple ways and we will explore them one by one. To beign with, let us add text to the plot using the `mtext()` function. The minimum input you need to provide is the text itself. Below is a simple example:
 
-----
+## Text on the Margins
+
+<hr>
 
 ```{r mtext1, fig.align='center', fig.width=5, fig.height=5}
 plot(mtcars$disp, mtcars$mpg)
 mtext('Sample Text')
 ```
 
-----
+## Specify Margin
 
-As you can see, the text is placed on the margin of the plot and not inside the plot. Next, we will specify the margin on which to place the text.
-
-# Specify Margin
-
-----
-
-Use the `side` argument to specify the margin on which you want to place the text. If takes values 1 to 4, each representing one side of the plot.
-
-----
+<hr>
 
 ```{r mtext2, fig.align='center', fig.width=5, fig.height=5}
 plot(mtcars$disp, mtcars$mpg)
 mtext('Sample Text', side = 1)
 ```
 
-----
+## Specify Margin
 
-The below plot displays the appearance of the text when differnt options for `side` argument are supplied:
-
-----
+<hr>
 
 ```{r mtext3, fig.align='center', fig.width=10, fig.height=10, echo=FALSE}
 init <- par(no.readonly = TRUE)
@@ -246,35 +265,27 @@ for (i in values) {
 }
 ```
 
-# Line
+## Line
 
-----
-
-The `line` argument places the text at a specified distance from the margin. The default value is `0`. As the value increases, the text is placed farther from the margin and outside the plot. As the value decreases, the text is placed inside the plot and farther from the margin. Below is a example where the text is placed outside the plot as the value is greater than 1.
-
-----
+<hr>
 
 ```{r mtext4, fig.align='center', fig.width=5, fig.height=5}
 plot(mtcars$disp, mtcars$mpg)
 mtext('Sample Text', line = 1)
 ```
 
-----
+## Line
 
-When the value is less than `0`, the line argument places the text inside the plot.
-
-----
+<hr>
 
 ```{r mtext5, fig.align='center', fig.width=5, fig.height=5}
 plot(mtcars$disp, mtcars$mpg)
 mtext('Sample Text', line = -1)
 ```
 
-----
+## Line
 
-The below plot displays the appearance of the text when different values are supplied to the `line` argument:
-
-----
+<hr>
 
 ```{r mtext6, fig.align='center', fig.width=15, fig.height=10, echo=FALSE}
 init <- par(no.readonly = TRUE)
@@ -287,35 +298,27 @@ for (i in values) {
 }
 ```
 
-# Alignment
+## Alignment
 
-----
-
-The `adj` argument is used for horizontal alignment of the text. It takes values between 0 and 1. If set to `0`, the text will be left aligned and at `1`, it will be right aligned. Below is a example where the text is left aligned as `adj` is set to `0`.
-
-----
+<hr>
 
 ```{r mtext7, fig.align='center', fig.width=5, fig.height=5}
 plot(mtcars$disp, mtcars$mpg)
 mtext('Sample Text', adj = 0)
 ```
 
-----
+## Alignment
 
-When the value is set to `1`, the text is right aligned.
-
-----
+<hr>
 
 ```{r mtext8, fig.align='center', fig.width=5, fig.height=5}
 plot(mtcars$disp, mtcars$mpg)
 mtext('Sample Text', adj = 1)
 ```
 
-----
+## Alignment
 
-The below plot displays the appearance of the text when different values are supplied to the `adj` argument:
-
-----
+<hr>
 
 ```{r mtext9, fig.align='center', fig.width=15, fig.height=10, echo=FALSE}
 init <- par(no.readonly = TRUE)
@@ -328,19 +331,10 @@ for (i in values) {
 }
 ```
 
-# Summary
+## Questions
 
-----
+<hr>
 
-In this module, we learnt how to add text annotations to a plot. Specifically, we learnt to:
+## Thank You
 
-- add text inside the plot
-- add text on the margins of the plot
-- modify tehe color, font and size of the text
-- modify the position of the text
-
-# Next Steps..
-
-----
-
-In the next module, we will learn how to combine multiple plots into a single frame. 
+<hr>
