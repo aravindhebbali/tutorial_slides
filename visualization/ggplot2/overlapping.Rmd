@@ -39,6 +39,9 @@ output:
     font-family: 'Helvetica Neue';
     font-size: 25px;
   }
+  .reveal h1 {
+    font-size: 24px;
+  }
   .reveal ul {
     display: block;
   }
