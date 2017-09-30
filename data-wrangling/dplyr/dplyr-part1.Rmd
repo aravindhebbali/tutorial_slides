@@ -3,7 +3,7 @@ title: "Data Manipulation with dplyr - Part 1"
 output: 
   revealjs::revealjs_presentation:
     transition: slide
-    incremental: true
+    incremental: false
     theme: default
     highlight: haddock
     center: false
@@ -167,11 +167,11 @@ Below is the description of the data set:
 
 <hr>
 
-**What is the average order value by device types?**
+<!-- **What is the average order value by device types?** -->
 
-Average value of every order placed over a defined period of time. It is determined using sales per order and not sales per customer. Let us look at the steps to calculate AOV from the ecommerce data set.
+<!-- Average value of every order placed over a defined period of time. It is determined using sales per order and not sales per customer. Let us look at the steps to calculate AOV from the ecommerce data set. -->
 
-![alt text](J:/R/tutorial_slides/data-wrangling/dplyr/aov.png)
+![alt text](J:/R/tutorial_slides/data-wrangling/dplyr/image.jpg)
 
 ## AOV Computation
 
