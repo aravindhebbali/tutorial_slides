@@ -483,8 +483,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
     <h1 class="title">dbplyr: Data Wrangling in Database</h1>
 </section>
 
-<section class="slide level2">
-
+<section id="agenda" class="slide level2">
+<h2>Agenda</h2>
 <style type="text/css">
   .reveal p {
     text-align: left;
@@ -506,8 +506,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
     color: #0077aa;
     font-family: 'Helvetica Neue';
   }
-  .reveal h1 {
-    font-size: 24px;
+
+  .reveal h2 {
+    font-size: 22px;
+    color: #0077aa;
   }
   .reveal ul {
     display: block;
@@ -516,7 +518,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
     color: #3c3c3c; 
     /* set color of list item text */
     list-style: none; 
--  }
+    font-size: 20px;
+  }
 
   .reveal ul li::before {
       color: #006b6e;  
@@ -541,17 +544,14 @@ document.getElementsByTagName('head')[0].appendChild(style);
     display: block;
   }
 </style>
-</section>
-<section id="agenda" class="slide level2">
-<h1>Agenda</h1>
 <hr>
 </section>
 <section id="introduction" class="slide level2">
-<h1>Introduction</h1>
+<h2>Introduction</h2>
 <hr>
 </section>
 <section id="libraries" class="slide level2">
-<h1>Libraries</h1>
+<h2>Libraries</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dbplyr)
 <span class="kw">library</span>(dplyr)
@@ -559,22 +559,22 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <span class="kw">library</span>(RSQLite)</code></pre></div>
 </section>
 <section id="connect-to-database" class="slide level2">
-<h1>Connect to Database</h1>
+<h2>Connect to Database</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">con &lt;-<span class="st"> </span>DBI::<span class="kw">dbConnect</span>(RSQLite::<span class="kw">SQLite</span>(), <span class="st">&quot;:memory:&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">con &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbConnect</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="st">&quot;:memory:&quot;</span>)</code></pre></div>
 </section>
 <section id="copy-data" class="slide level2">
-<h1>Copy Data</h1>
+<h2>Copy Data</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">copy_to</span>(con, mtcars)</code></pre></div>
 </section>
 <section id="reference-copied-data-frame" class="slide level2">
-<h1>reference copied data frame</h1>
+<h2>reference copied data frame</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars2 &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&quot;mtcars&quot;</span>)
 mtcars2</code></pre></div>
 <pre><code>## # Source:   table&lt;mtcars&gt; [?? x 11]
-## # Database: sqlite 3.11.1 [:memory:]
+## # Database: sqlite 3.19.3 [:memory:]
 ##      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
 ##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ##  1  21.0     6 160.0   110  3.90 2.620 16.46     0     1     4     4
@@ -590,12 +590,12 @@ mtcars2</code></pre></div>
 ## # ... with more rows</code></pre>
 </section>
 <section id="query-data" class="slide level2">
-<h1>query data</h1>
+<h2>query data</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars2 %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars2 <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(mpg, cyl, drat)</code></pre></div>
 <pre><code>## # Source:   lazy query [?? x 3]
-## # Database: sqlite 3.11.1 [:memory:]
+## # Database: sqlite 3.19.3 [:memory:]
 ##      mpg   cyl  drat
 ##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ##  1  21.0     6  3.90
@@ -611,12 +611,12 @@ mtcars2</code></pre></div>
 ## # ... with more rows</code></pre>
 </section>
 <section id="query-data-1" class="slide level2">
-<h1>query data</h1>
+<h2>query data</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars2 %&gt;%
-<span class="st">  </span><span class="kw">filter</span>(mpg &gt;<span class="st"> </span><span class="dv">25</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars2 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(mpg <span class="op">&gt;</span><span class="st"> </span><span class="dv">25</span>)</code></pre></div>
 <pre><code>## # Source:   lazy query [?? x 11]
-## # Database: sqlite 3.11.1 [:memory:]
+## # Database: sqlite 3.19.3 [:memory:]
 ##     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1  32.4     4  78.7    66  4.08 2.200 19.47     1     1     4     1
@@ -627,13 +627,13 @@ mtcars2</code></pre></div>
 ## 6  30.4     4  95.1   113  3.77 1.513 16.90     1     1     5     2</code></pre>
 </section>
 <section id="query-data-2" class="slide level2">
-<h1>query data</h1>
+<h2>query data</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars2 %&gt;%
-<span class="st">  </span><span class="kw">group_by</span>(cyl) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars2 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mileage =</span> <span class="kw">mean</span>(mpg))</code></pre></div>
 <pre><code>## # Source:   lazy query [?? x 2]
-## # Database: sqlite 3.11.1 [:memory:]
+## # Database: sqlite 3.19.3 [:memory:]
 ##     cyl  mileage
 ##   &lt;dbl&gt;    &lt;dbl&gt;
 ## 1     4 26.66364
@@ -641,22 +641,22 @@ mtcars2</code></pre></div>
 ## 3     8 15.10000</code></pre>
 </section>
 <section id="show-query" class="slide level2">
-<h1>show query</h1>
+<h2>show query</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mileages &lt;-<span class="st"> </span>mtcars2 %&gt;%
-<span class="st">  </span><span class="kw">group_by</span>(cyl) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mileages &lt;-<span class="st"> </span>mtcars2 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mileage =</span> <span class="kw">mean</span>(mpg))
 
-mileages %&gt;%<span class="st"> </span><span class="kw">show_query</span>()</code></pre></div>
+mileages <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">show_query</span>()</code></pre></div>
 <pre><code>## &lt;SQL&gt;
 ## SELECT `cyl`, AVG(`mpg`) AS `mileage`
 ## FROM `mtcars`
 ## GROUP BY `cyl`</code></pre>
 </section>
 <section id="collect-data" class="slide level2">
-<h1>Collect Data</h1>
+<h2>Collect Data</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span>mileages %&gt;%<span class="st"> </span><span class="kw">collect</span>()
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span>mileages <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">collect</span>()
 data</code></pre></div>
 <pre><code>## # A tibble: 3 x 2
 ##     cyl  mileage
@@ -665,13 +665,13 @@ data</code></pre></div>
 ## 2     6 19.74286
 ## 3     8 15.10000</code></pre>
 </section>
-<section id="questions" class="slide level2">
-<h1>Questions</h1>
-<hr>
-</section>
-<section id="thank-you" class="slide level2">
-<h1>Thank You</h1>
-<hr>
+<section id="section" class="slide level2" data-background="thankyou.png">
+<h2></h2>
+<!-- To do: -->
+<!--   - add intro slide -->
+<!--   - add agenda -->
+<!--   - add introduction -->
+<!--   - list important functions -->
 </section>
     </div>
   </div>
