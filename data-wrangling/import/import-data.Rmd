@@ -12,6 +12,14 @@ output:
       previewLinks: true
 ---
 
+<!-- To do: -->
+<!--   - add intro slide -->
+<!--   - improve agenda -->
+<!--   - change introduction -->
+<!--   - change data -->
+<!--   - 1 paragraph about statistical softwares -->
+<!--   - use excel sheet while explaining readxl -->
+
 ## Agenda
 
 <style type="text/css">
@@ -71,7 +79,6 @@ output:
   }
 </style>
 
-
 <hr>
 
 read data from 
@@ -106,15 +113,7 @@ library(foreign)
 library(sas7bdat)
 ```
 
-## Data
-
-<hr>
-
-## Code
-
-<hr>
-
-## Excel
+## Overview
 
 <hr>
 
@@ -228,6 +227,10 @@ readxl::read_excel('sample2.xls', sheet = 2, range = cell_cols(2:3))
 
 <hr>
 
+- SAS
+- SPSS
+- STATA
+
 ## haven
 
 <hr>
@@ -252,6 +255,14 @@ other packages that can be used to import the files
 
 <hr>
 
+- `read_dta()`
+- `read_stata()`
+- `read.dta()`
+
+## stata
+
+<hr>
+
 ```{r import67, echo=TRUE, results='markup', message=FALSE}
 haven::read_dta('airline.dta')    
 ```
@@ -271,6 +282,14 @@ haven::read_stata('airline.dta')
 ```{r import69}
 foreign::read.dta('airline.dta')  
 ```
+
+## spss
+
+<hr>
+
+- `read_sav()`
+- `read_spss()`
+- `read.spss()`
 
 ## spss
 
@@ -301,6 +320,13 @@ foreign::read.spss('employee.sav', use.value.labels = FALSE,
 
 <hr>
 
+- `read_sas()`
+- `read.sas7bdat()`
+
+## SAS
+
+<hr>
+
 ```{r import73, echo=TRUE, results='markup', message=FALSE}
 read_sas('airline.sas7bdat')
 ```
@@ -313,10 +339,4 @@ read_sas('airline.sas7bdat')
 sas7bdat::read.sas7bdat('airline.sas7bdat')
 ```
 
-## Questions
-
-<hr>
-
-## Thank You
-
-<hr>
+## {data-background="thankyou.png"}
