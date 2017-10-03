@@ -483,8 +483,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
     <h1 class="title">Quick Guide: R &amp; SQLite</h1>
 </section>
 
-<section class="slide level2">
-
+<section id="agenda" class="slide level2">
+<h2>Agenda</h2>
 <style type="text/css">
   .reveal p {
     text-align: left;
@@ -506,8 +506,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
     color: #0077aa;
     font-family: 'Helvetica Neue';
   }
-  .reveal h1 {
-    font-size: 24px;
+
+  .reveal h2 {
+    font-size: 22px;
+    color: #0077aa;
   }
   .reveal ul {
     display: block;
@@ -516,7 +518,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
     color: #3c3c3c; 
     /* set color of list item text */
     list-style: none; 
--  }
+    font-size: 20px;
+  }
 
   .reveal ul li::before {
       color: #006b6e;  
@@ -541,17 +544,14 @@ document.getElementsByTagName('head')[0].appendChild(style);
     display: block;
   }
 </style>
-</section>
-<section id="agenda" class="slide level2">
-<h1>Agenda</h1>
 <hr>
 </section>
 <section id="introduction" class="slide level2">
-<h1>Introduction</h1>
+<h2>Introduction</h2>
 <hr>
 </section>
 <section id="libraries" class="slide level2">
-<h1>Libraries</h1>
+<h2>Libraries</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dbplyr)
 <span class="kw">library</span>(dplyr)
@@ -559,39 +559,39 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <span class="kw">library</span>(RSQLite)</code></pre></div>
 </section>
 <section id="data" class="slide level2">
-<h1>Data</h1>
+<h2>Data</h2>
 <hr>
 <p>We will use a database that contains the ecommerce data we have used in the previous modules. You can download the database from <a href="https://github.com/rsquaredacademy/dbplyr_tutorial">here</a>.</p>
 </section>
 <section id="connect" class="slide level2">
-<h1>Connect</h1>
+<h2>Connect</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">con &lt;-<span class="st"> </span>DBI::<span class="kw">dbConnect</span>(RSQLite::<span class="kw">SQLite</span>(), 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">con &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbConnect</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), 
                       <span class="dt">dbname =</span> <span class="st">&quot;J:/gist/dbplyr_tutorial/mydatabase.db&quot;</span>)</code></pre></div>
 </section>
 <section id="connection-summary" class="slide level2">
-<h1>Connection Summary</h1>
+<h2>Connection Summary</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(con)</code></pre></div>
 <pre><code>##           Length            Class             Mode 
 ##                1 SQLiteConnection               S4</code></pre>
 </section>
 <section id="list-tables" class="slide level2">
-<h1>List Tables</h1>
+<h2>List Tables</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbListTables</span>(con)</code></pre></div>
 <pre><code>## [1] &quot;COMPANY&quot;    &quot;DEPARTMENT&quot; &quot;ecom&quot;</code></pre>
 </section>
 <section id="list-fields" class="slide level2">
-<h1>List Fields</h1>
+<h2>List Fields</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI::<span class="kw">dbListFields</span>(con, <span class="st">&quot;ecom&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbListFields</span>(con, <span class="st">&quot;ecom&quot;</span>)</code></pre></div>
 <pre><code>##  [1] &quot;id&quot;          &quot;referrer&quot;    &quot;device&quot;      &quot;bouncers&quot;    &quot;n_visit&quot;    
 ##  [6] &quot;n_pages&quot;     &quot;duration&quot;    &quot;country&quot;     &quot;purchase&quot;    &quot;order_items&quot;
 ## [11] &quot;order_value&quot;</code></pre>
 </section>
 <section id="querying-data" class="slide level2">
-<h1>Querying Data</h1>
+<h2>Querying Data</h2>
 <hr>
 <ul>
 <li class="fragment"><code>dbReadTable()</code>: read entire table</li>
@@ -600,9 +600,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </ul>
 </section>
 <section id="entire-table" class="slide level2">
-<h1>Entire Table</h1>
+<h2>Entire Table</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI::<span class="kw">dbReadTable</span>(con, <span class="st">'ecom'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbReadTable</span>(con, <span class="st">'ecom'</span>)</code></pre></div>
 <pre><code>##        id referrer device bouncers n_visit n_pages duration
 ## 1       1   google laptop     true      10       1      693
 ## 2       2    yahoo tablet     true       9       1      459
@@ -2607,9 +2607,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 1000                            China    false           0           0</code></pre>
 </section>
 <section id="few-rows" class="slide level2">
-<h1>Few Rows</h1>
+<h2>Few Rows</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI::<span class="kw">dbGetQuery</span>(con, <span class="st">&quot;select * from ecom limit 10&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;select * from ecom limit 10&quot;</span>)</code></pre></div>
 <pre><code>##    id referrer device bouncers n_visit n_pages duration        country
 ## 1   1   google laptop     true      10       1      693 Czech Republic
 ## 2   2    yahoo tablet     true       9       1      459          Yemen
@@ -2634,10 +2634,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 10    false           0           0</code></pre>
 </section>
 <section id="read-data-in-batches" class="slide level2">
-<h1>Read Data in Batches</h1>
+<h2>Read Data in Batches</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">query &lt;-<span class="st"> </span>DBI::<span class="kw">dbSendQuery</span>(con, <span class="st">'select * from ecom'</span>)
-result &lt;-<span class="st"> </span>DBI::<span class="kw">dbFetch</span>(query, <span class="dt">n =</span> <span class="dv">30</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">query &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbSendQuery</span>(con, <span class="st">'select * from ecom'</span>)
+result &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbFetch</span>(query, <span class="dt">n =</span> <span class="dv">30</span>)
 result</code></pre></div>
 <pre><code>##    id referrer device bouncers n_visit n_pages duration        country
 ## 1   1   google laptop     true      10       1      693 Czech Republic
@@ -2703,15 +2703,15 @@ result</code></pre></div>
 ## 30    false           0           0</code></pre>
 </section>
 <section id="query-status" class="slide level2">
-<h1>Query Status</h1>
+<h2>Query Status</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI::<span class="kw">dbHasCompleted</span>(query)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbHasCompleted</span>(query)</code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 </section>
 <section id="query-info" class="slide level2">
-<h1>Query Info</h1>
+<h2>Query Info</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI::<span class="kw">dbGetInfo</span>(query)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbGetInfo</span>(query)</code></pre></div>
 <pre><code>## $statement
 ## [1] &quot;select * from ecom&quot;
 ## 
@@ -2725,27 +2725,27 @@ result</code></pre></div>
 ## [1] FALSE</code></pre>
 </section>
 <section id="latest-query" class="slide level2">
-<h1>Latest Query</h1>
+<h2>Latest Query</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI::<span class="kw">dbGetStatement</span>(query)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbGetStatement</span>(query)</code></pre></div>
 <pre><code>## [1] &quot;select * from ecom&quot;</code></pre>
 </section>
 <section id="rows-fetched" class="slide level2">
-<h1>Rows Fetched</h1>
+<h2>Rows Fetched</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI::<span class="kw">dbGetRowCount</span>(query)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbGetRowCount</span>(query)</code></pre></div>
 <pre><code>## [1] 30</code></pre>
 </section>
 <section id="rows-affected" class="slide level2">
-<h1>Rows Affected</h1>
+<h2>Rows Affected</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI::<span class="kw">dbGetRowsAffected</span>(query)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbGetRowsAffected</span>(query)</code></pre></div>
 <pre><code>## [1] 0</code></pre>
 </section>
 <section id="column-info" class="slide level2">
-<h1>Column Info</h1>
+<h2>Column Info</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI::<span class="kw">dbColumnInfo</span>(query)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbColumnInfo</span>(query)</code></pre></div>
 <pre><code>##           name      type
 ## 1           id   integer
 ## 2     referrer character
@@ -2760,31 +2760,30 @@ result</code></pre></div>
 ## 11 order_value    double</code></pre>
 </section>
 <section id="clear-results" class="slide level2">
-<h1>Clear Results</h1>
+<h2>Clear Results</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI::<span class="kw">dbClearResult</span>(query)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbClearResult</span>(query)</code></pre></div>
 </section>
 <section id="create-table" class="slide level2">
-<h1>Create Table</h1>
+<h2>Create Table</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">10</span>
-y &lt;-<span class="st"> </span>letters[<span class="dv">1</span>:<span class="dv">10</span>]
-trial &lt;-<span class="st"> </span>tibble::<span class="kw">tibble</span>(x, y)
-DBI::<span class="kw">dbWriteTable</span>(con, <span class="st">&quot;trial&quot;</span>, trial)</code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>
+y &lt;-<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]
+trial &lt;-<span class="st"> </span>tibble<span class="op">::</span><span class="kw">tibble</span>(x, y)
+DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(con, <span class="st">&quot;trial&quot;</span>, trial)</code></pre></div>
 </section>
 <section id="check-if-table-is-created-in-database" class="slide level2">
-<h1>check if table is created in database</h1>
+<h2>check if table is created in database</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI::<span class="kw">dbListTables</span>(con)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbListTables</span>(con)</code></pre></div>
 <pre><code>## [1] &quot;COMPANY&quot;    &quot;DEPARTMENT&quot; &quot;ecom&quot;       &quot;trial&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI::<span class="kw">dbExistsTable</span>(con, <span class="st">&quot;trial&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbExistsTable</span>(con, <span class="st">&quot;trial&quot;</span>)</code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 </section>
 <section id="query-sample-data-from-table" class="slide level2">
-<h1>query sample data from table</h1>
+<h2>query sample data from table</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI::<span class="kw">dbGetQuery</span>(con, <span class="st">&quot;select * from trial limit 5&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;select * from trial limit 5&quot;</span>)</code></pre></div>
 <pre><code>##   x y
 ## 1 1 a
 ## 2 2 b
@@ -2793,72 +2792,70 @@ DBI::<span class="kw">dbWriteTable</span>(con, <span class="st">&quot;trial&quot
 ## 5 5 e</code></pre>
 </section>
 <section id="overwrite-table-in-the-database" class="slide level2">
-<h1>overwrite table in the database</h1>
+<h2>overwrite table in the database</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">100</span>, <span class="dv">10</span>)
-y &lt;-<span class="st"> </span>letters[<span class="dv">11</span>:<span class="dv">20</span>]
-trial2 &lt;-<span class="st"> </span>tibble::<span class="kw">tibble</span>(x, y)
-DBI::<span class="kw">dbWriteTable</span>(con, <span class="st">&quot;trial&quot;</span>, trial2, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+y &lt;-<span class="st"> </span>letters[<span class="dv">11</span><span class="op">:</span><span class="dv">20</span>]
+trial2 &lt;-<span class="st"> </span>tibble<span class="op">::</span><span class="kw">tibble</span>(x, y)
+DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(con, <span class="st">&quot;trial&quot;</span>, trial2, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</code></pre></div>
 </section>
 <section id="query-sample-data-from-table-to-see-if-it-has-been-overwritten" class="slide level2">
-<h1>query sample data from table to see if it has been overwritten</h1>
+<h2>query sample data from table to see if it has been overwritten</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI::<span class="kw">dbGetQuery</span>(con, <span class="st">&quot;select * from trial limit 5&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;select * from trial limit 5&quot;</span>)</code></pre></div>
 <pre><code>##    x y
-## 1 50 k
-## 2 38 l
-## 3 48 m
-## 4 69 n
-## 5 96 o</code></pre>
+## 1 22 k
+## 2 63 l
+## 3 40 m
+## 4 19 n
+## 5 10 o</code></pre>
 </section>
 <section id="append-data-to-the-table-in-the-database" class="slide level2">
-<h1>append data to the table in the database</h1>
+<h2>append data to the table in the database</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">100</span>, <span class="dv">10</span>)
-y &lt;-<span class="st"> </span>letters[<span class="dv">5</span>:<span class="dv">14</span>]
-trial3 &lt;-<span class="st"> </span>tibble::<span class="kw">tibble</span>(x, y)
-DBI::<span class="kw">dbWriteTable</span>(con, <span class="st">&quot;trial&quot;</span>, trial3, <span class="dt">append =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+y &lt;-<span class="st"> </span>letters[<span class="dv">5</span><span class="op">:</span><span class="dv">14</span>]
+trial3 &lt;-<span class="st"> </span>tibble<span class="op">::</span><span class="kw">tibble</span>(x, y)
+DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(con, <span class="st">&quot;trial&quot;</span>, trial3, <span class="dt">append =</span> <span class="ot">TRUE</span>)</code></pre></div>
 </section>
 <section id="query-sample-data-from-table-to-see-if-new-data-is-appended" class="slide level2">
-<h1>query sample data from table to see if new data is appended</h1>
+<h2>query sample data from table to see if new data is appended</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI::<span class="kw">dbReadTable</span>(con, <span class="st">&quot;trial&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbReadTable</span>(con, <span class="st">&quot;trial&quot;</span>)</code></pre></div>
 <pre><code>##     x y
-## 1  50 k
-## 2  38 l
-## 3  48 m
-## 4  69 n
-## 5  96 o
-## 6  59 p
-## 7  35 q
-## 8  83 r
-## 9   8 s
-## 10 33 t
-## 11  5 e
-## 12 25 f
-## 13 94 g
-## 14 84 h
-## 15 87 i
-## 16 31 j
-## 17 46 k
-## 18 21 l
-## 19 95 m
-## 20 92 n</code></pre>
+## 1  22 k
+## 2  63 l
+## 3  40 m
+## 4  19 n
+## 5  10 o
+## 6  64 p
+## 7  94 q
+## 8  96 r
+## 9  69 s
+## 10 88 t
+## 11 46 e
+## 12 64 f
+## 13 13 g
+## 14 78 h
+## 15 91 i
+## 16 45 j
+## 17 42 k
+## 18 83 l
+## 19 79 m
+## 20  7 n</code></pre>
 </section>
 <section id="insert-rows" class="slide level2">
-<h1>Insert Rows</h1>
+<h2>Insert Rows</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI::<span class="kw">dbExecute</span>(con,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbExecute</span>(con,
   <span class="st">&quot;INSERT into trial (x, y) VALUES (32, 'c'), (45, 'k'), (61, 'h')&quot;</span>
 )</code></pre></div>
 <pre><code>## [1] 3</code></pre>
 </section>
 <section id="insert-rows-1" class="slide level2">
-<h1>Insert Rows</h1>
+<h2>Insert Rows</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI::<span class="kw">dbSendStatement</span>(con,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbSendStatement</span>(con,
   <span class="st">&quot;INSERT into trial (x, y) VALUES (25, 'm'), (54, 'l'), (16, 'y')&quot;</span>
 )</code></pre></div>
 <pre><code>## &lt;SQLiteResult&gt;
@@ -2867,40 +2864,40 @@ DBI::<span class="kw">dbWriteTable</span>(con, <span class="st">&quot;trial&quot
 ##        Changed: 3</code></pre>
 </section>
 <section id="sqlite-data-type" class="slide level2">
-<h1>SQLite data type</h1>
+<h2>SQLite data type</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI::<span class="kw">dbDataType</span>(RSQLite::<span class="kw">SQLite</span>(), <span class="st">&quot;a&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbDataType</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="st">&quot;a&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;TEXT&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI::<span class="kw">dbDataType</span>(RSQLite::<span class="kw">SQLite</span>(), <span class="dv">1</span>:<span class="dv">5</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbDataType</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</code></pre></div>
 <pre><code>## [1] &quot;INTEGER&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI::<span class="kw">dbDataType</span>(RSQLite::<span class="kw">SQLite</span>(), <span class="fl">1.5</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbDataType</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="fl">1.5</span>)</code></pre></div>
 <pre><code>## [1] &quot;REAL&quot;</code></pre>
 </section>
 <section id="remove-table-from-database" class="slide level2">
-<h1>remove table from database</h1>
+<h2>remove table from database</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI::<span class="kw">dbRemoveTable</span>(con, <span class="st">&quot;trial&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbRemoveTable</span>(con, <span class="st">&quot;trial&quot;</span>)</code></pre></div>
 <pre><code>## Warning: Closing open result set, pending rows</code></pre>
 </section>
 <section id="check-if-table-has-been-removed" class="slide level2">
-<h1>check if table has been removed</h1>
+<h2>check if table has been removed</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI::<span class="kw">dbListTables</span>(con)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbListTables</span>(con)</code></pre></div>
 <pre><code>## [1] &quot;COMPANY&quot;    &quot;DEPARTMENT&quot; &quot;ecom&quot;</code></pre>
 </section>
 <section id="generate-sql-query" class="slide level2">
-<h1>Generate SQL Query</h1>
+<h2>Generate SQL Query</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI::<span class="kw">sqlCreateTable</span>(con, <span class="st">&quot;new&quot;</span>, <span class="kw">c</span>(<span class="dt">x =</span> <span class="st">&quot;integer&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;text&quot;</span>))</code></pre></div>
-<pre><code>## &lt;SQL&gt; CREATE TABLE &quot;new&quot; (
-##   &quot;x&quot; integer,
-##   &quot;y&quot; text
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">sqlCreateTable</span>(con, <span class="st">&quot;new&quot;</span>, <span class="kw">c</span>(<span class="dt">x =</span> <span class="st">&quot;integer&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;text&quot;</span>))</code></pre></div>
+<pre><code>## &lt;SQL&gt; CREATE TABLE `new` (
+##   `x` integer,
+##   `y` text
 ## )</code></pre>
 </section>
 <section id="data-1" class="slide level2">
-<h1>Data</h1>
+<h2>Data</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom &lt;-<span class="st"> </span>readr::<span class="kw">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv'</span>)</code></pre></div>
 <pre><code>## # A tibble: 1,000 x 11
 ##       id referrer device bouncers n_visit n_pages duration        country
 ##    &lt;int&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;          &lt;chr&gt;
@@ -2918,31 +2915,34 @@ DBI::<span class="kw">dbWriteTable</span>(con, <span class="st">&quot;trial&quot
 ## #   order_items &lt;dbl&gt;, order_value &lt;dbl&gt;</code></pre>
 </section>
 <section id="append-table" class="slide level2">
-<h1>Append Table</h1>
+<h2>Append Table</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI::<span class="kw">sqlAppendTable</span>(con, <span class="st">&quot;ecom&quot;</span>, <span class="kw">head</span>(ecom))</code></pre></div>
-<pre><code>## &lt;SQL&gt; INSERT INTO &quot;ecom&quot;
-##   (&quot;id&quot;, &quot;referrer&quot;, &quot;device&quot;, &quot;bouncers&quot;, &quot;n_visit&quot;, &quot;n_pages&quot;, &quot;duration&quot;, &quot;country&quot;, &quot;purchase&quot;, &quot;order_items&quot;, &quot;order_value&quot;)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">sqlAppendTable</span>(con, <span class="st">&quot;ecom&quot;</span>, <span class="kw">head</span>(ecom))</code></pre></div>
+<pre><code>## &lt;SQL&gt; INSERT INTO `ecom`
+##   (`id`, `referrer`, `device`, `bouncers`, `n_visit`, `n_pages`, `duration`, `country`, `purchase`, `order_items`, `order_value`)
 ## VALUES
-##   (1, google, laptop, true, 10, 1, 693, Czech Republic, false, 0, 0),
-##   (2, yahoo, tablet, true, 9, 1, 459, Yemen, false, 0, 0),
-##   (3, direct, laptop, true, 0, 1, 996, Brazil, false, 0, 0),
-##   (4, bing, tablet, false, 3, 18, 468, China, true, 6, 434),
-##   (5, yahoo, mobile, true, 9, 1, 955, Poland, false, 0, 0),
-##   (6, yahoo, laptop, false, 5, 5, 135, South Africa, false, 0, 0)</code></pre>
+##   (1, 'google', 'laptop', 'true', 10, 1, 693, 'Czech Republic', 'false', 0, 0),
+##   (2, 'yahoo', 'tablet', 'true', 9, 1, 459, 'Yemen', 'false', 0, 0),
+##   (3, 'direct', 'laptop', 'true', 0, 1, 996, 'Brazil', 'false', 0, 0),
+##   (4, 'bing', 'tablet', 'false', 3, 18, 468, 'China', 'true', 6, 434),
+##   (5, 'yahoo', 'mobile', 'true', 9, 1, 955, 'Poland', 'false', 0, 0),
+##   (6, 'yahoo', 'laptop', 'false', 5, 5, 135, 'South Africa', 'false', 0, 0)</code></pre>
 </section>
 <section id="close-database-connection" class="slide level2">
-<h1>Close Database Connection</h1>
+<h2>Close Database Connection</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI::<span class="kw">dbDisconnect</span>(con)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbDisconnect</span>(con)</code></pre></div>
 </section>
-<section id="questions" class="slide level2">
-<h1>Questions</h1>
-<hr>
-</section>
-<section id="thank-you" class="slide level2">
-<h1>Thank You</h1>
-<hr>
+<section id="section" class="slide level2" data-background="thankyou.png">
+<h2></h2>
+<!-- To do: -->
+<!--   - add intro slide -->
+<!--   - add agenda -->
+<!--   - add introduction -->
+<!--   - describe data in case study -->
+<!--   - connect and list fields section -->
+<!--   - query data section -->
+<!--   - create table section -->
 </section>
     </div>
   </div>
