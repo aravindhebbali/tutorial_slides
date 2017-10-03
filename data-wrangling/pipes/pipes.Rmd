@@ -12,6 +12,8 @@ output:
       previewLinks: true
 ---
 
+## Agenda
+
 <style type="text/css">
   .reveal p {
     text-align: left;
@@ -66,7 +68,6 @@ output:
   }
 </style>
 
-## Agenda
 
 <hr>
 
@@ -143,7 +144,7 @@ ecom
 - purchase: whether visitor purchased
 - order_value: order value of visitor (in dollars)
 
-## Use Case 1
+## head
 
 <hr>
 
@@ -448,10 +449,9 @@ mt %>%
   is_weakly_greater_than(5)
 ```
 
-## Questions
+## {data-background="thankyou.png"}
 
-<hr>
-
-## Thank You
-
-<hr>
+<!-- To do: -->
+<!--     - intro slide -->
+<!--     - change introduction -->
+<!--     - explain functions before using them -->
