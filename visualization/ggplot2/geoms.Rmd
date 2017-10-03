@@ -12,70 +12,8 @@ output:
       previewLinks: true
     fig_height: 5
     fig_width: 6
+    css: styles.css
 ---
-
-<style type="text/css">
-    .reveal p img {
-    align: middle;
-  }
-  .reveal p {
-    text-align: left;
-    font-size: 20px;
-  }
-  .reveal body:after {
-    content: url(handshake.png);
-    position: fixed;
-    bottom: 3.5em;
-    left: 3.5em;
-    box-shadow: 5px 5px 10px #000; 
-  }
-  .reveal hr {
-    border-color: #0077aa;
-  }
-  .reveal h1, h2, h3, h4, h5, h6 {
-    text-transform: none;
-    text-align: center;
-    color: #0077aa;
-    font-family: 'Helvetica Neue';
-    font-size: 25px;
-  }
-  .reveal h1 {
-    font-size: 24px;
-  }
-  .reveal ul {
-    display: block;
-  }
-  .reveal ul li {
-    color: #3c3c3c; 
-    /* set color of list item text */
-    list-style: none; 
-  }
-  .reveal p img {
-    align: middle;
-  }
-  .reveal ul li::before {
-      color: #006b6e;  
-      /* color of bullet or square */
-      content: "\2022"; 
-      /* Unicode of character to precede the list item */
-      font-size: 1em; 
-      /* em or %*/ 
-      padding-right: 1.1225em; 
-      /* use em*/
-      position: relative;
-      top: 0em; 
-      /* use em or % */
-  }
-  .reveal ul {
-    line-height:150%
-  }
-  .reveal .fragment {
-    font-size: 20px;
-  }
-  .reveal ol {
-    display: block;
-  }
-</style>
 
 ## Agenda
 
@@ -157,8 +95,6 @@ ggplot(ecom, aes(x = n_pages, y = duration)) +
 
 <hr>
 
-Fit a regression line or using 
-
 - `geom_abline()`
 - `geom_smooth()`
 
@@ -194,8 +130,6 @@ ggplot(mtcars, aes(x = wt, y = mpg)) +
 
 <hr>
 
-Add horizontal or vertical lines using
-
 - `geom_hline()`
 - `geom_vline()`
 
@@ -224,15 +158,6 @@ ggplot(mtcars, aes(x = wt, y = mpg)) +
 
 <hr>
 
-Bar plots present grouped data with rectangular bars. The bars may represent the frequency of the groups or values. Bar plots can be: 
-
-- horizontal 
-- vertical
-- grouped
-- stacked 
-- proportional
-
-
 ## Frequency
 
 <hr>
@@ -251,25 +176,6 @@ ggplot(ecom, aes(x = factor(device))) +
   geom_bar(aes(weight = order_value))
 ```
 
-## Stacked Bar Plot
-
-<hr>
-
-```{r geoms10, fig.align='center'}
-ggplot(ecom, aes(x = factor(device))) +
-  geom_bar(aes(fill = purchase))
-```
-
-## Horizontal Bar Plot
-
-<hr>
-
-```{r geoms11, fig.align='center'}
-ggplot(ecom, aes(x = factor(device))) +
-  geom_bar(aes(fill = purchase)) +
-  coord_flip()
-```
-
 ## Columns
 
 <hr>
@@ -285,9 +191,6 @@ ggplot(traffic, aes(x = device, y = visits)) +
 ## Boxplot
 
 <hr>
-
-- examine the distribution of a variable  
-- detect outliers, boxplots are very handy
 
 ## Boxplot
 
@@ -312,11 +215,6 @@ ggplot(ecom, aes(x = factor(device), y = n_pages)) +
 
 <hr>
 
-Histograms are used to examine:
-
-- distribution of a continuous variable
-- skewness and kurtosis
-
 ## Histogram
 
 <hr>
@@ -339,9 +237,6 @@ ggplot(ecom, aes(x = duration)) +
 
 <hr>
 
-Line charts are used to examine trends over time.
-
-
 ## Data
 
 <hr>
@@ -362,16 +257,6 @@ gdp
 ```{r geomline1, fig.align='center'}
 ggplot(gdp, aes(year, india)) +
   geom_line()
-```
-
-
-## Line Color & Type 
-
-<hr>
-
-```{r geomline2, fig.align='center'}
-ggplot(gdp, aes(year, india)) +
-  geom_line(color = 'blue', linetype = 'dashed')
 ```
 
 ## Jitter
@@ -421,10 +306,10 @@ ggplot(mtcars, aes(x = disp, y = mpg, label = rownames(mtcars))) +
             size = 2, angle = 45)
 ```
 
-## Questions
+## {data-background="thankyou.png"}
 
-<hr>
-
-## Thank You
-
-<hr>
+<!-- To do: -->
+<!--   - add intro slide -->
+<!--   - change line chart data -->
+<!--   - remove description of plots -->
+<!--   - remove plot variations -->
