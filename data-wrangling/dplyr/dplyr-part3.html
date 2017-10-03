@@ -483,8 +483,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
     <h1 class="title">Data Manipulation with dplyr - Part 3</h1>
 </section>
 
-<section class="slide level2">
-
+<section id="agenda" class="slide level2">
+<h2>Agenda</h2>
 <style type="text/css">
   .reveal p {
     text-align: left;
@@ -506,8 +506,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
     color: #0077aa;
     font-family: 'Helvetica Neue';
   }
-  .reveal h1 {
-    font-size: 24px;
+
+  .reveal h2 {
+    font-size: 22px;
+    color: #0077aa;
   }
   .reveal ul {
     display: block;
@@ -516,7 +518,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
     color: #3c3c3c; 
     /* set color of list item text */
     list-style: none; 
--  }
+    font-size: 20px;
+  }
 
   .reveal ul li::before {
       color: #006b6e;  
@@ -541,9 +544,6 @@ document.getElementsByTagName('head')[0].appendChild(style);
     display: block;
   }
 </style>
-</section>
-<section id="agenda" class="slide level2">
-<h1>Agenda</h1>
 <hr>
 <p>In this module, we will explore a set of helper functions in order to:</p>
 <ul>
@@ -559,14 +559,14 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </ul>
 </section>
 <section id="case-study" class="slide level2">
-<h1>Case Study</h1>
+<h2>Case Study</h2>
 <hr>
 <p>Let us look at a case study (e-commerce data) and see how we can use dplyr helper functions to answer questions we have about and to modify/transform the underlying data set. You can download the data from <a href="https://github.com/rsquaredacademy/datasets/blob/master/web.csv">here</a> or import it directly using <code>read_csv()</code> from the <a href="readr.tidyverse.org">readr</a> package.</p>
 </section>
 <section id="data" class="slide level2">
-<h1>Data</h1>
+<h2>Data</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom &lt;-<span class="st"> </span>readr::<span class="kw">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv'</span>)</code></pre></div>
 <pre><code>## # A tibble: 1,000 x 11
 ##       id referrer device bouncers n_visit n_pages duration        country
 ##    &lt;int&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;          &lt;chr&gt;
@@ -584,7 +584,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## #   order_items &lt;dbl&gt;, order_value &lt;dbl&gt;</code></pre>
 </section>
 <section id="data-dictionary" class="slide level2">
-<h1>Data Dictionary</h1>
+<h2>Data Dictionary</h2>
 <hr>
 <ul>
 <li class="fragment">id: row id</li>
@@ -601,13 +601,13 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </ul>
 </section>
 <section id="data-sanitization" class="slide level2">
-<h1>Data Sanitization</h1>
+<h2>Data Sanitization</h2>
 <hr>
 </section>
 <section id="traffic-sources" class="slide level2">
-<h1>Traffic Sources</h1>
+<h2>Traffic Sources</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">distinct</span>(referrer)</code></pre></div>
 <pre><code>## # A tibble: 5 x 1
 ##   referrer
@@ -619,9 +619,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 5   social</code></pre>
 </section>
 <section id="device-types" class="slide level2">
-<h1>Device Types</h1>
+<h2>Device Types</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">distinct</span>(device)</code></pre></div>
 <pre><code>## # A tibble: 3 x 1
 ##   device
@@ -631,9 +631,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 3 mobile</code></pre>
 </section>
 <section id="rename-columns" class="slide level2">
-<h1>Rename Columns</h1>
+<h2>Rename Columns</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">rename</span>(<span class="dt">time_on_site =</span> duration)</code></pre></div>
 <pre><code>## # A tibble: 1,000 x 11
 ##       id referrer device bouncers n_visit n_pages time_on_site        country purchase order_items order_value
@@ -651,97 +651,101 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## # ... with 990 more rows</code></pre>
 </section>
 <section id="sampling-data" class="slide level2">
-<h1>Sampling Data</h1>
+<h2>Sampling Data</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom %&gt;%
+</section>
+<section id="sampling-data-1" class="slide level2">
+<h2>Sampling Data</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">700</span>)</code></pre></div>
 <pre><code>## # A tibble: 700 x 11
 ##       id referrer device bouncers n_visit n_pages duration        country purchase order_items order_value
 ##    &lt;int&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;          &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-##  1   841    yahoo tablet    false       7      18      198          China    false           2         820
-##  2   293     bing mobile     true      10       1      480         Panama    false           0           0
-##  3     6    yahoo laptop    false       5       5      135   South Africa    false           0           0
-##  4   958   direct tablet     true       4       1      136         Poland    false           0           0
-##  5   324   direct laptop    false       9      17      425          Niger     true           2        2488
-##  6   691   social tablet    false       9      15      405     Uzbekistan    false           0           0
-##  7   529   social tablet    false      10      10      170       Portugal    false           0           0
-##  8   589   social tablet     true       7       1      811 United Kingdom    false           0           0
-##  9   920    yahoo mobile     true       6       1       47          China    false           0           0
-## 10   270    yahoo mobile    false       4       9      189         Russia    false           5         947
+##  1   890   social laptop     true       0       1       52         Russia    false           0           0
+##  2   278    yahoo laptop    false       5      11      143         Norway    false           0           0
+##  3   608   direct laptop     true       2       1      386         Russia    false           0           0
+##  4   967   social laptop    false       6      10      150       Thailand    false          10        1397
+##  5   475   google tablet    false       1      18      180          China    false           0           0
+##  6    85   google tablet     true       3       1      652   Sierra Leone    false           0           0
+##  7   845   social tablet    false       0       7      175          China    false           0           0
+##  8   182     bing mobile    false       9       2       42      Indonesia    false           8        2429
+##  9   793     bing laptop     true       5       1      135        Denmark    false           0           0
+## 10   941   direct tablet    false       8       5       50 Czech Republic    false           7          27
 ## # ... with 690 more rows</code></pre>
 </section>
-<section id="sampling-data-1" class="slide level2">
-<h1>Sampling Data</h1>
+<section id="sampling-data-2" class="slide level2">
+<h2>Sampling Data</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom %&gt;%
-<span class="st">  </span><span class="kw">group_by</span>(referrer) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(referrer) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">100</span>)</code></pre></div>
 <pre><code>## # A tibble: 500 x 11
 ## # Groups:   referrer [5]
 ##       id referrer device bouncers n_visit n_pages duration        country purchase order_items order_value
 ##    &lt;int&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;          &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-##  1   822     bing laptop    false       4      11      198          China    false           0           0
-##  2   441     bing laptop     true       3       1      682  United States    false           0           0
-##  3   320     bing laptop    false       4       3       48         Sweden    false           3        2716
-##  4   252     bing tablet     true       3       1      798      Indonesia    false           0           0
-##  5   275     bing laptop     true       8       1      484          China    false           0           0
-##  6   544     bing mobile    false       2      18      198         France    false           0           0
-##  7   319     bing laptop    false      10       6       90 United Kingdom    false           6        2894
-##  8   539     bing mobile    false      10      20      560      Nicaragua    false           0           0
-##  9   950     bing mobile    false       6      12      144         France    false           0           0
-## 10    69     bing tablet     true       1       1      406   Turkmenistan    false           0           0
+##  1   257     bing laptop    false       5      13      286  United States    false           0           0
+##  2   810     bing mobile     true       3       1      119      Indonesia    false           0           0
+##  3   427     bing tablet    false       1      19      361 Czech Republic     true           5          44
+##  4   891     bing tablet    false       4      15      405       Portugal    false           0           0
+##  5   949     bing mobile    false      10       1       26          China    false           0           0
+##  6   709     bing mobile     true       6       1      966       Colombia    false           0           0
+##  7   325     bing tablet     true       9       1      281         Poland    false           0           0
+##  8   150     bing laptop    false       5      10      190          China    false           0           0
+##  9   461     bing tablet    false       8      17      425         Russia    false           0           0
+## 10   305     bing tablet    false       2      11      220      Argentina    false           6         631
 ## # ... with 490 more rows</code></pre>
 </section>
-<section id="sampling-data-2" class="slide level2">
-<h1>Sampling Data</h1>
+<section id="sampling-data-3" class="slide level2">
+<h2>Sampling Data</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">sample_frac</span>(<span class="dt">size =</span> <span class="fl">0.7</span>)</code></pre></div>
 <pre><code>## # A tibble: 700 x 11
 ##       id referrer device bouncers n_visit n_pages duration     country purchase order_items order_value
 ##    &lt;int&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;       &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-##  1    47     bing mobile     true       6       1      843      Sweden    false           0           0
-##  2   306   direct mobile    false       7       7       98 Philippines    false           9         632
-##  3   706   google tablet    false       3      18      468      Poland    false           0           0
-##  4   556    yahoo mobile    false       4      20      260      Poland     true           9         898
-##  5    83   social mobile     true       5       1      613     Ecuador    false           0           0
-##  6   197     bing mobile     true       1       1       67      Greece    false           0           0
-##  7   699   social mobile     true       8       1      619     Germany    false           0           0
-##  8   202    yahoo tablet    false       9      13      182      Brazil    false           0           0
-##  9   798   direct laptop     true       4       1      158      Serbia    false           0           0
-## 10   350   direct mobile    false       1      13      390    Malaysia     true           6        2765
+##  1   299    yahoo laptop    false      10      18      180 Afghanistan    false           0           0
+##  2   233   google tablet    false       3       3       78       China    false           0           0
+##  3   628    yahoo tablet    false       7       7      168      Russia    false           0           0
+##  4   141    yahoo tablet     true       1       1      949       Japan    false           0           0
+##  5    25    yahoo laptop     true       1       1      779      Brazil    false           0           0
+##  6   283   social mobile     true       5       1       22      Brazil    false           0           0
+##  7   432    yahoo mobile    false       6       1       21      Russia    false           0           0
+##  8   851   direct laptop     true       2       1      111    Portugal    false           0           0
+##  9   116   direct mobile     true      10       1      675   Indonesia    false           0           0
+## 10   634   social mobile    false       8       9      225       Italy    false           2         388
 ## # ... with 690 more rows</code></pre>
 </section>
-<section id="sampling-data-3" class="slide level2">
-<h1>Sampling Data</h1>
+<section id="sampling-data-4" class="slide level2">
+<h2>Sampling Data</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom %&gt;%
-<span class="st">  </span><span class="kw">group_by</span>(referrer) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(referrer) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">sample_frac</span>(<span class="fl">0.3</span>)</code></pre></div>
 <pre><code>## # A tibble: 299 x 11
 ## # Groups:   referrer [5]
-##       id referrer device bouncers n_visit n_pages duration       country purchase order_items order_value
-##    &lt;int&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;         &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-##  1   149     bing tablet    false       6       3       54        Sweden    false           2         393
-##  2   810     bing mobile     true       3       1      119     Indonesia    false           0           0
-##  3   170     bing tablet     true       0       1      985 United States    false           0           0
-##  4   539     bing mobile    false      10      20      560     Nicaragua    false           0           0
-##  5   740     bing mobile    false       9       2       24     Indonesia    false           0           0
-##  6   400     bing mobile    false       9       7      147        Poland    false           2         139
-##  7   895     bing tablet     true       0       1      425         China    false           0           0
-##  8   517     bing laptop     true       6       1      802       Croatia    false           0           0
-##  9   619     bing laptop     true      10       1      947        Sweden    false           0           0
-## 10   822     bing laptop    false       4      11      198         China    false           0           0
+##       id referrer device bouncers n_visit n_pages duration   country purchase order_items order_value
+##    &lt;int&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+##  1   305     bing tablet    false       2      11      220 Argentina    false           6         631
+##  2   544     bing mobile    false       2      18      198    France    false           0           0
+##  3   117     bing tablet    false       6      16      176 Swaziland    false           0           0
+##  4   356     bing laptop     true       4       1      750     Yemen    false           0           0
+##  5   334     bing mobile    false       2       7      196    Russia    false           0           0
+##  6   192     bing laptop     true       1       1      989     China    false           0           0
+##  7   333     bing tablet     true       1       1      721   Armenia    false           0           0
+##  8   950     bing mobile    false       6      12      144    France    false           0           0
+##  9   385     bing tablet    false      10      15      150  Portugal    false           0           0
+## 10   539     bing mobile    false      10      20      560 Nicaragua    false           0           0
 ## # ... with 289 more rows</code></pre>
 </section>
 <section id="extract-columns" class="slide level2">
-<h1>Extract Columns</h1>
+<h2>Extract Columns</h2>
 <hr>
 </section>
 <section id="extract-device-column" class="slide level2">
-<h1>Extract Device Column</h1>
+<h2>Extract Device Column</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pull</span>(device)</code></pre></div>
 <pre><code>##    [1] &quot;laptop&quot; &quot;tablet&quot; &quot;laptop&quot; &quot;tablet&quot; &quot;mobile&quot; &quot;laptop&quot; &quot;mobile&quot;
 ##    [8] &quot;mobile&quot; &quot;mobile&quot; &quot;mobile&quot; &quot;laptop&quot; &quot;tablet&quot; &quot;mobile&quot; &quot;tablet&quot;
@@ -888,9 +892,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ##  [995] &quot;tablet&quot; &quot;mobile&quot; &quot;laptop&quot; &quot;tablet&quot; &quot;mobile&quot; &quot;mobile&quot;</code></pre>
 </section>
 <section id="extract-first-column" class="slide level2">
-<h1>Extract First Column</h1>
+<h2>Extract First Column</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pull</span>(<span class="dv">1</span>)</code></pre></div>
 <pre><code>##    [1]    1    2    3    4    5    6    7    8    9   10   11   12   13
 ##   [14]   14   15   16   17   18   19   20   21   22   23   24   25   26
@@ -971,10 +975,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ##  [989]  989  990  991  992  993  994  995  996  997  998  999 1000</code></pre>
 </section>
 <section id="extract-last-column" class="slide level2">
-<h1>Extract Last Column</h1>
+<h2>Extract Last Column</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom %&gt;%
-<span class="st">  </span><span class="kw">pull</span>(-<span class="dv">1</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pull</span>(<span class="op">-</span><span class="dv">1</span>)</code></pre></div>
 <pre><code>##    [1]    0    0    0  434    0    0    0    0    0    0    0    0  651
 ##   [14]  362 2423    0 1049    0 1304 2077    0    0  237    0    0    0
 ##   [27]  622    0    0    0    0    0    0 1613    0 1885    0    0    0
@@ -1054,10 +1058,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ##  [989] 2397    0 2409 1232    0    0    0    0 2250    0    0    0</code></pre>
 </section>
 <section id="extract-first-20-rows" class="slide level2">
-<h1>Extract First 20 Rows</h1>
+<h2>Extract First 20 Rows</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom %&gt;%
-<span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span>:<span class="dv">20</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>)</code></pre></div>
 <pre><code>## # A tibble: 20 x 11
 ##       id referrer device bouncers n_visit n_pages duration        country purchase order_items order_value
 ##    &lt;int&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;          &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt;
@@ -1083,19 +1087,23 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 20    20   social tablet    false       2       1       28        Namibia    false           7        2077</code></pre>
 </section>
 <section id="extract-last-row" class="slide level2">
-<h1>Extract Last Row</h1>
+<h2>Extract Last Row</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">slice</span>(<span class="kw">n</span>())</code></pre></div>
 <pre><code>## # A tibble: 1 x 11
 ##      id referrer device bouncers n_visit n_pages duration country purchase order_items order_value
 ##   &lt;int&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;   &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt;
 ## 1  1000   google mobile     true       9       1      269   China    false           0           0</code></pre>
 </section>
-<section id="total-observations-in-data" class="slide level2">
-<h1>Total Observations in Data</h1>
+<section id="tabulate" class="slide level2">
+<h2>Tabulate</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom %&gt;%
+</section>
+<section id="total-observations-in-data" class="slide level2">
+<h2>Total Observations in Data</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">tally</span>()</code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##       n
@@ -1103,10 +1111,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 1  1000</code></pre>
 </section>
 <section id="tabulate-referrers" class="slide level2">
-<h1>Tabulate Referrers</h1>
+<h2>Tabulate Referrers</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom %&gt;%
-<span class="st">  </span><span class="kw">group_by</span>(referrer) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(referrer) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">tally</span>()</code></pre></div>
 <pre><code>## # A tibble: 5 x 2
 ##   referrer     n
@@ -1118,10 +1126,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 5    yahoo   207</code></pre>
 </section>
 <section id="tabulate-referrers-and-bouncers" class="slide level2">
-<h1>Tabulate referrers and bouncers</h1>
+<h2>Tabulate referrers and bouncers</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom %&gt;%
-<span class="st">  </span><span class="kw">group_by</span>(referrer, bouncers) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(referrer, bouncers) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">tally</span>()</code></pre></div>
 <pre><code>## # A tibble: 10 x 3
 ## # Groups:   referrer [?]
@@ -1139,10 +1147,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 10    yahoo     true    97</code></pre>
 </section>
 <section id="tabulate-referrers-and-purchasers" class="slide level2">
-<h1>Tabulate referrers and purchasers</h1>
+<h2>Tabulate referrers and purchasers</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom %&gt;%
-<span class="st">  </span><span class="kw">group_by</span>(referrer, purchase) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(referrer, purchase) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">tally</span>()</code></pre></div>
 <pre><code>## # A tibble: 10 x 3
 ## # Groups:   referrer [?]
@@ -1160,12 +1168,12 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 10    yahoo     true    22</code></pre>
 </section>
 <section id="tabulate-referrers-converts" class="slide level2">
-<h1>Tabulate Referrers &amp; Converts</h1>
+<h2>Tabulate Referrers &amp; Converts</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom %&gt;%
-<span class="st">  </span><span class="kw">group_by</span>(referrer, purchase) %&gt;%
-<span class="st">  </span><span class="kw">tally</span>() %&gt;%
-<span class="st">  </span><span class="kw">filter</span>(purchase ==<span class="st"> 'true'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(referrer, purchase) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">tally</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(purchase <span class="op">==</span><span class="st"> 'true'</span>)</code></pre></div>
 <pre><code>## # A tibble: 5 x 3
 ## # Groups:   referrer [5]
 ##   referrer purchase     n
@@ -1177,9 +1185,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 5    yahoo     true    22</code></pre>
 </section>
 <section id="count" class="slide level2">
-<h1>Count</h1>
+<h2>Count</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">count</span>(referrer, purchase)</code></pre></div>
 <pre><code>## # A tibble: 10 x 3
 ##    referrer purchase     n
@@ -1196,12 +1204,12 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 10    yahoo     true    22</code></pre>
 </section>
 <section id="top-2-referrers-by-orders" class="slide level2">
-<h1>Top 2 referrers by orders</h1>
+<h2>Top 2 referrers by orders</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom %&gt;%
-<span class="st">  </span><span class="kw">count</span>(referrer, purchase) %&gt;%
-<span class="st">  </span><span class="kw">filter</span>(purchase ==<span class="st"> 'true'</span>) %&gt;%
-<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n)) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(referrer, purchase) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(purchase <span class="op">==</span><span class="st"> 'true'</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">top_n</span>(<span class="dt">n =</span> <span class="dv">2</span>)</code></pre></div>
 <pre><code>## Selecting by n</code></pre>
 <pre><code>## # A tibble: 2 x 3
@@ -1211,10 +1219,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 2    yahoo     true    22</code></pre>
 </section>
 <section id="between" class="slide level2">
-<h1>Between</h1>
+<h2>Between</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom %&gt;%
-<span class="st">  </span><span class="kw">pull</span>(n_pages) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pull</span>(n_pages) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">between</span>(<span class="dv">5</span>, <span class="dv">15</span>) </code></pre></div>
 <pre><code>##    [1] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE
 ##   [12]  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
@@ -1309,15 +1317,15 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ##  [991]  TRUE FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE FALSE</code></pre>
 </section>
 <section id="case-when" class="slide level2">
-<h1>Case When</h1>
+<h2>Case When</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars %&gt;%
-<span class="st">  </span><span class="kw">select</span>(mpg, disp, cyl, gear, carb) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(mpg, disp, cyl, gear, carb) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
     <span class="dt">type =</span> <span class="kw">case_when</span>(
-      disp &gt;<span class="st"> </span><span class="dv">200</span> ~<span class="st"> 'High'</span>,
-      cyl ==<span class="st"> </span><span class="dv">8</span> ~<span class="st"> 'Eight'</span>,
-      <span class="ot">TRUE</span> ~<span class="st"> 'True'</span>
+      disp <span class="op">&gt;</span><span class="st"> </span><span class="dv">200</span> <span class="op">~</span><span class="st"> 'High'</span>,
+      cyl <span class="op">==</span><span class="st"> </span><span class="dv">8</span> <span class="op">~</span><span class="st"> 'Eight'</span>,
+      <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> 'True'</span>
     )
   )</code></pre></div>
 <pre><code>##     mpg  disp cyl gear carb type
@@ -1355,40 +1363,40 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 32 21.4 121.0   4    4    2 True</code></pre>
 </section>
 <section id="select-first-observation" class="slide level2">
-<h1>Select First Observation</h1>
+<h2>Select First Observation</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom %&gt;%
-<span class="st">  </span><span class="kw">pull</span>(referrer) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pull</span>(referrer) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">nth</span>(<span class="dv">1</span>)</code></pre></div>
 <pre><code>## [1] &quot;google&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom %&gt;%
-<span class="st">  </span><span class="kw">pull</span>(referrer) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pull</span>(referrer) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">first</span>()</code></pre></div>
 <pre><code>## [1] &quot;google&quot;</code></pre>
 </section>
 <section id="select-1000th-observation" class="slide level2">
-<h1>Select 1000th Observation</h1>
+<h2>Select 1000th Observation</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom %&gt;%
-<span class="st">  </span><span class="kw">pull</span>(referrer) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pull</span>(referrer) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">nth</span>(<span class="dv">1000</span>)</code></pre></div>
 <pre><code>## [1] &quot;google&quot;</code></pre>
 </section>
 <section id="select-last-observation" class="slide level2">
-<h1>Select Last Observation</h1>
+<h2>Select Last Observation</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom %&gt;%
-<span class="st">  </span><span class="kw">pull</span>(referrer) %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pull</span>(referrer) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">last</span>()</code></pre></div>
 <pre><code>## [1] &quot;google&quot;</code></pre>
 </section>
-<section id="questions" class="slide level2">
-<h1>Questions</h1>
-<hr>
-</section>
-<section id="thank-you" class="slide level2">
-<h1>Thank You</h1>
-<hr>
+<section id="section" class="slide level2" data-background="thankyou.png">
+<h2></h2>
+<!-- To do: -->
+<!--   - add intro slide -->
+<!--   - explain case study data -->
+<!--   - make each section background image -->
+<!--   - list functions used in each section -->
 </section>
     </div>
   </div>
