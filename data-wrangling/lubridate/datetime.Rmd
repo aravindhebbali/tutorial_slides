@@ -12,6 +12,8 @@ output:
       previewLinks: true
 ---
 
+## Agenda
+
 <style type="text/css">
   .reveal p {
     text-align: left;
@@ -33,8 +35,10 @@ output:
     color: #0077aa;
     font-family: 'Helvetica Neue';
   }
-  .reveal h1 {
-    font-size: 24px;
+
+  .reveal h2 {
+    font-size: 22px;
+    color: #0077aa;
   }
   .reveal ul {
     display: block;
@@ -43,7 +47,8 @@ output:
     color: #3c3c3c; 
     /* set color of list item text */
     list-style: none; 
--  }
+    font-size: 20px;
+  }
 
   .reveal ul li::before {
       color: #006b6e;  
@@ -69,7 +74,6 @@ output:
   }
 </style>
 
-## Agenda
 
 <hr>
 
@@ -79,7 +83,7 @@ output:
 
  In this module, we will learn to work with date/time data in R using [lubridate]( https://CRAN.R-project.org/package=lubridate), an R package that makes it easy to work with dates and time. Let us begin by installing and loading the lubridate pacakge.
  
-## Installation
+## Libraries
 
 <hr>
 
@@ -261,7 +265,10 @@ transact %>%
   select(Due, Payment, overlaps)
 ```
 
-----
+## Quarter
+
+<hr>
+
 ```{r lub8}
 transact %>%
   mutate(
@@ -291,7 +298,7 @@ transact %<>%
   )
 ```
 
-## Case Study
+## Duration
 
 <hr>
 
@@ -302,7 +309,7 @@ transact %>%
   )
 ```
 
-## Case Study
+## Interval
 
 <hr>
 
@@ -346,10 +353,9 @@ transact %>%
   )
 ```
 
-## Questions
+## {data-background="thankyou.png"}
 
-<hr>
-
-## Thank You
-
-<hr>
+<!-- To do: -->
+<!--   - add intro slide -->
+<!--   - add agenda -->
+<!--   - introduce functions with simple examples before using them in case study -->

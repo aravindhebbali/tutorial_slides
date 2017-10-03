@@ -483,8 +483,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
     <h1 class="title">Working with date and time in R</h1>
 </section>
 
-<section class="slide level2">
-
+<section id="agenda" class="slide level2">
+<h2>Agenda</h2>
 <style type="text/css">
   .reveal p {
     text-align: left;
@@ -506,8 +506,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
     color: #0077aa;
     font-family: 'Helvetica Neue';
   }
-  .reveal h1 {
-    font-size: 24px;
+
+  .reveal h2 {
+    font-size: 22px;
+    color: #0077aa;
   }
   .reveal ul {
     display: block;
@@ -516,7 +518,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
     color: #3c3c3c; 
     /* set color of list item text */
     list-style: none; 
--  }
+    font-size: 20px;
+  }
 
   .reveal ul li::before {
       color: #006b6e;  
@@ -541,45 +544,42 @@ document.getElementsByTagName('head')[0].appendChild(style);
     display: block;
   }
 </style>
-</section>
-<section id="agenda" class="slide level2">
-<h1>Agenda</h1>
 <hr>
 </section>
 <section id="introduction" class="slide level2">
-<h1>Introduction</h1>
+<h2>Introduction</h2>
 <hr>
 <p>In this module, we will learn to work with date/time data in R using <a href="https://CRAN.R-project.org/package=lubridate">lubridate</a>, an R package that makes it easy to work with dates and time. Let us begin by installing and loading the lubridate pacakge.</p>
 </section>
-<section id="installation" class="slide level2">
-<h1>Installation</h1>
+<section id="libraries" class="slide level2">
+<h2>Libraries</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lubridate)
 <span class="kw">library</span>(dplyr)
 <span class="kw">library</span>(magrittr)</code></pre></div>
 </section>
 <section id="origin" class="slide level2">
-<h1>Origin</h1>
+<h2>Origin</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lubridate::origin</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span>origin</code></pre></div>
 <pre><code>## [1] &quot;1970-01-01 UTC&quot;</code></pre>
 </section>
 <section id="current-datetime" class="slide level2">
-<h1>Current Date/Time</h1>
+<h2>Current Date/Time</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">now</span>()</code></pre></div>
-<pre><code>## [1] &quot;2017-08-17 20:10:45 IST&quot;</code></pre>
+<pre><code>## [1] &quot;2017-10-03 19:23:31 IST&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">today</span>()</code></pre></div>
-<pre><code>## [1] &quot;2017-08-17&quot;</code></pre>
+<pre><code>## [1] &quot;2017-10-03&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">am</span>(<span class="kw">now</span>())  </code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pm</span>(<span class="kw">now</span>())</code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 </section>
 <section id="data" class="slide level2">
-<h1>Data</h1>
+<h2>Data</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact &lt;-<span class="st"> </span>readr::<span class="kw">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rsquaredacademy/datasets/master/transact.csv'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rsquaredacademy/datasets/master/transact.csv'</span>)</code></pre></div>
 <pre><code>## # A tibble: 2,466 x 3
 ##       Invoice        Due    Payment
 ##        &lt;date&gt;     &lt;date&gt;     &lt;date&gt;
@@ -596,7 +596,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## # ... with 2,456 more rows</code></pre>
 </section>
 <section id="data-dictionary" class="slide level2">
-<h1>Data Dictionary</h1>
+<h2>Data Dictionary</h2>
 <hr>
 <p>The data set has 3 columns. All the dates are in the format (yyyy-mm-dd).</p>
 <ul>
@@ -606,7 +606,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </ul>
 </section>
 <section id="case-study" class="slide level2">
-<h1>Case Study</h1>
+<h2>Case Study</h2>
 <hr>
 <p>We will use the functions in the lubridate package to answer a few questions we have about the transact data.</p>
 <ul>
@@ -621,9 +621,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </ul>
 </section>
 <section id="extract-date-month-year-from-due-date" class="slide level2">
-<h1>Extract Date, Month &amp; Year from Due Date</h1>
+<h2>Extract Date, Month &amp; Year from Due Date</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
     <span class="dt">due_day =</span> <span class="kw">day</span>(Due),
     <span class="dt">due_month =</span> <span class="kw">month</span>(Due),
@@ -645,11 +645,11 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## # ... with 2,456 more rows</code></pre>
 </section>
 <section id="compute-days-to-settle-invoice" class="slide level2">
-<h1>compute days to settle invoice</h1>
+<h2>compute days to settle invoice</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">days_to_pay =</span> Payment -<span class="st"> </span>Invoice
+    <span class="dt">days_to_pay =</span> Payment <span class="op">-</span><span class="st"> </span>Invoice
   )</code></pre></div>
 <pre><code>## # A tibble: 2,466 x 4
 ##       Invoice        Due    Payment days_to_pay
@@ -667,11 +667,11 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## # ... with 2,456 more rows</code></pre>
 </section>
 <section id="compute-days-over-due" class="slide level2">
-<h1>compute days over due</h1>
+<h2>compute days over due</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">delay =</span> Payment -<span class="st"> </span>Due
+    <span class="dt">delay =</span> Payment <span class="op">-</span><span class="st"> </span>Due
   )</code></pre></div>
 <pre><code>## # A tibble: 2,466 x 4
 ##       Invoice        Due    Payment    delay
@@ -689,9 +689,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## # ... with 2,456 more rows</code></pre>
 </section>
 <section id="is-due-year-a-leap-year" class="slide level2">
-<h1>Is due year a leap year?</h1>
+<h2>Is due year a leap year?</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
     <span class="dt">due_year =</span> <span class="kw">year</span>(Due),
     <span class="dt">is_leap =</span> <span class="kw">leap_year</span>(due_year)
@@ -712,18 +712,18 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## # ... with 2,456 more rows</code></pre>
 </section>
 <section id="if-due-day-is-february-29-is-it-a-leap-year" class="slide level2">
-<h1>If due day is February 29, is it a leap year?</h1>
+<h2>If due day is February 29, is it a leap year?</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
     <span class="dt">due_day =</span> <span class="kw">day</span>(Due),
     <span class="dt">due_month =</span> <span class="kw">month</span>(Due),
     <span class="dt">days_due_month =</span> <span class="kw">days_in_month</span>(due_month),
     <span class="dt">due_year =</span> <span class="kw">year</span>(Due),
     <span class="dt">is_leap =</span> <span class="kw">leap_year</span>(due_year)
-  ) %&gt;%
-<span class="st">  </span><span class="kw">select</span>(-(Invoice), -(Payment)) %&gt;%
-<span class="st">  </span><span class="kw">filter</span>(due_month ==<span class="st"> </span><span class="dv">2</span>)</code></pre></div>
+  ) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>(Invoice), <span class="op">-</span>(Payment)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(due_month <span class="op">==</span><span class="st"> </span><span class="dv">2</span>)</code></pre></div>
 <pre><code>## # A tibble: 187 x 6
 ##           Due due_day due_month days_due_month due_year is_leap
 ##        &lt;date&gt;   &lt;int&gt;     &lt;dbl&gt;          &lt;int&gt;    &lt;dbl&gt;   &lt;lgl&gt;
@@ -740,15 +740,15 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## # ... with 177 more rows</code></pre>
 </section>
 <section id="how-many-invoices-were-settled-within-due-date" class="slide level2">
-<h1>how many invoices were settled within due date?</h1>
+<h2>how many invoices were settled within due date?</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
     <span class="dt">inv_due_interval =</span> <span class="kw">interval</span>(Invoice, Due),
-    <span class="dt">due_next =</span> Due +<span class="st"> </span><span class="kw">days</span>(<span class="dv">1</span>),
+    <span class="dt">due_next =</span> Due <span class="op">+</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">1</span>),
     <span class="dt">due_pay_interval =</span> <span class="kw">interval</span>(due_next, Payment),
     <span class="dt">overlaps =</span> <span class="kw">int_overlaps</span>(inv_due_interval, due_pay_interval)
-  ) %&gt;%
+  ) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(inv_due_interval, due_next, due_pay_interval, overlaps)</code></pre></div>
 <pre><code>## # A tibble: 2,466 x 4
 ##                  inv_due_interval   due_next
@@ -767,16 +767,16 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## #   Interval&gt;, overlaps &lt;lgl&gt;</code></pre>
 </section>
 <section id="how-many-invoices-were-settled-within-due-date-1" class="slide level2">
-<h1>how many invoices were settled within due date?</h1>
+<h2>how many invoices were settled within due date?</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># using int_shift</span>
-transact %&gt;%
+transact <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
     <span class="dt">inv_due_interval =</span> <span class="kw">interval</span>(Invoice, Due),
     <span class="dt">due_pay_interval =</span> <span class="kw">interval</span>(Due, Payment),  
     <span class="dt">due_pay_next =</span> <span class="kw">int_shift</span>(due_pay_interval, <span class="dt">by =</span> <span class="kw">days</span>(<span class="dv">1</span>)),
     <span class="dt">overlaps =</span> <span class="kw">int_overlaps</span>(inv_due_interval, due_pay_next)
-  ) %&gt;%
+  ) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(inv_due_interval, due_pay_next, overlaps)</code></pre></div>
 <pre><code>## # A tibble: 2,466 x 3
 ##                  inv_due_interval                   due_pay_next overlaps
@@ -794,13 +794,13 @@ transact %&gt;%
 ## # ... with 2,456 more rows</code></pre>
 </section>
 <section id="how-many-invoices-were-settled-within-due-date-2" class="slide level2">
-<h1>how many invoices were settled within due date?</h1>
+<h2>how many invoices were settled within due date?</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
     <span class="dt">inv_due_interval =</span> <span class="kw">interval</span>(Invoice, Due),
-    <span class="dt">overlaps =</span> Payment %within%<span class="st"> </span>inv_due_interval
-  ) %&gt;%
+    <span class="dt">overlaps =</span> Payment <span class="op">%within%</span><span class="st"> </span>inv_due_interval
+  ) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(Due, Payment, overlaps)</code></pre></div>
 <pre><code>## # A tibble: 2,466 x 3
 ##           Due    Payment overlaps
@@ -817,15 +817,16 @@ transact %&gt;%
 ## 10 2013-07-31 2013-07-26     TRUE
 ## # ... with 2,456 more rows</code></pre>
 </section>
-<section class="slide level2">
-
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact %&gt;%
+<section id="quarter" class="slide level2">
+<h2>Quarter</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
     <span class="dt">Quarter =</span> <span class="kw">quarter</span>(Due)
   )</code></pre></div>
 <pre><code>## # A tibble: 2,466 x 4
 ##       Invoice        Due    Payment Quarter
-##        &lt;date&gt;     &lt;date&gt;     &lt;date&gt;   &lt;dbl&gt;
+##        &lt;date&gt;     &lt;date&gt;     &lt;date&gt;   &lt;int&gt;
 ##  1 2013-01-02 2013-02-01 2013-01-15       1
 ##  2 2013-01-26 2013-02-25 2013-03-03       1
 ##  3 2013-07-03 2013-08-02 2013-07-08       3
@@ -839,9 +840,9 @@ transact %&gt;%
 ## # ... with 2,456 more rows</code></pre>
 </section>
 <section id="case-study-1" class="slide level2">
-<h1>Case Study</h1>
+<h2>Case Study</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
     <span class="dt">Quarter =</span> <span class="kw">quarter</span>(Due, <span class="dt">with_year =</span> <span class="ot">TRUE</span>)
   )</code></pre></div>
@@ -861,49 +862,49 @@ transact %&gt;%
 ## # ... with 2,456 more rows</code></pre>
 </section>
 <section id="case-study-2" class="slide level2">
-<h1>Case Study</h1>
+<h2>Case Study</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact %&lt;&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact <span class="op">%&lt;&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">days_to_pay =</span> Payment -<span class="st"> </span>Invoice
+    <span class="dt">days_to_pay =</span> Payment <span class="op">-</span><span class="st"> </span>Invoice
   )</code></pre></div>
 </section>
-<section id="case-study-3" class="slide level2">
-<h1>Case Study</h1>
+<section id="duration" class="slide level2">
+<h2>Duration</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
     <span class="dt">dseconds =</span> <span class="kw">duration</span>(<span class="kw">as.numeric</span>(days_to_pay), <span class="st">'days'</span>)
   )</code></pre></div>
 <pre><code>## # A tibble: 2,466 x 5
-##       Invoice        Due    Payment days_to_pay            dseconds
-##        &lt;date&gt;     &lt;date&gt;     &lt;date&gt;      &lt;time&gt;      &lt;S4: Duration&gt;
-##  1 2013-01-02 2013-02-01 2013-01-15     13 days 1123200s (~13 days)
-##  2 2013-01-26 2013-02-25 2013-03-03     36 days 3110400s (~36 days)
-##  3 2013-07-03 2013-08-02 2013-07-08      5 days   432000s (~5 days)
-##  4 2013-02-10 2013-03-12 2013-03-17     35 days 3024000s (~35 days)
-##  5 2012-10-25 2012-11-24 2012-11-28     34 days 2937600s (~34 days)
-##  6 2012-01-27 2012-02-26 2012-02-22     26 days 2246400s (~26 days)
-##  7 2013-08-13 2013-09-12 2013-09-09     27 days 2332800s (~27 days)
-##  8 2012-12-16 2013-01-15 2013-01-12     27 days 2332800s (~27 days)
-##  9 2012-05-14 2012-06-13 2012-07-01     48 days 4147200s (~48 days)
-## 10 2013-07-01 2013-07-31 2013-07-26     25 days 2160000s (~25 days)
+##       Invoice        Due    Payment days_to_pay               dseconds
+##        &lt;date&gt;     &lt;date&gt;     &lt;date&gt;      &lt;time&gt;         &lt;S4: Duration&gt;
+##  1 2013-01-02 2013-02-01 2013-01-15     13 days 1123200s (~1.86 weeks)
+##  2 2013-01-26 2013-02-25 2013-03-03     36 days 3110400s (~5.14 weeks)
+##  3 2013-07-03 2013-08-02 2013-07-08      5 days      432000s (~5 days)
+##  4 2013-02-10 2013-03-12 2013-03-17     35 days    3024000s (~5 weeks)
+##  5 2012-10-25 2012-11-24 2012-11-28     34 days 2937600s (~4.86 weeks)
+##  6 2012-01-27 2012-02-26 2012-02-22     26 days 2246400s (~3.71 weeks)
+##  7 2013-08-13 2013-09-12 2013-09-09     27 days 2332800s (~3.86 weeks)
+##  8 2012-12-16 2013-01-15 2013-01-12     27 days 2332800s (~3.86 weeks)
+##  9 2012-05-14 2012-06-13 2012-07-01     48 days 4147200s (~6.86 weeks)
+## 10 2013-07-01 2013-07-31 2013-07-26     25 days 2160000s (~3.57 weeks)
 ## # ... with 2,456 more rows</code></pre>
 </section>
-<section id="case-study-4" class="slide level2">
-<h1>Case Study</h1>
+<section id="interval" class="slide level2">
+<h2>Interval</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact %&lt;&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact <span class="op">%&lt;&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
     <span class="dt">inv_pay_int =</span> <span class="kw">interval</span>(Invoice, Payment)
   )</code></pre></div>
 </section>
-<section id="case-study-5" class="slide level2">
-<h1>Case Study</h1>
+<section id="case-study-3" class="slide level2">
+<h2>Case Study</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">inv_pay_days =</span> inv_pay_int /<span class="st"> </span><span class="kw">ddays</span>()
+    <span class="dt">inv_pay_days =</span> inv_pay_int <span class="op">/</span><span class="st"> </span><span class="kw">ddays</span>()
   )</code></pre></div>
 <pre><code>## # A tibble: 2,466 x 6
 ##       Invoice        Due    Payment days_to_pay
@@ -921,10 +922,10 @@ transact %&gt;%
 ## # ... with 2,456 more rows, and 2 more variables: inv_pay_int &lt;S4:
 ## #   Interval&gt;, inv_pay_days &lt;dbl&gt;</code></pre>
 </section>
-<section id="case-study-6" class="slide level2">
-<h1>Case Study</h1>
+<section id="case-study-4" class="slide level2">
+<h2>Case Study</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
     <span class="dt">inv_pay_days =</span> <span class="kw">time_length</span>(inv_pay_int, <span class="dt">unit =</span> <span class="st">&quot;days&quot;</span>)
   )</code></pre></div>
@@ -944,10 +945,10 @@ transact %&gt;%
 ## # ... with 2,456 more rows, and 2 more variables: inv_pay_int &lt;S4:
 ## #   Interval&gt;, inv_pay_days &lt;dbl&gt;</code></pre>
 </section>
-<section id="case-study-7" class="slide level2">
-<h1>Case Study</h1>
+<section id="case-study-5" class="slide level2">
+<h2>Case Study</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
     <span class="dt">inv_pay_days =</span> <span class="kw">as.period</span>(inv_pay_int)
   )</code></pre></div>
@@ -967,13 +968,12 @@ transact %&gt;%
 ## # ... with 2,456 more rows, and 2 more variables: inv_pay_int &lt;S4:
 ## #   Interval&gt;, inv_pay_days &lt;S4: Period&gt;</code></pre>
 </section>
-<section id="questions" class="slide level2">
-<h1>Questions</h1>
-<hr>
-</section>
-<section id="thank-you" class="slide level2">
-<h1>Thank You</h1>
-<hr>
+<section id="section" class="slide level2" data-background="thankyou.png">
+<h2></h2>
+<!-- To do: -->
+<!--   - add intro slide -->
+<!--   - add agenda -->
+<!--   - introduce functions with simple examples before using them in case study -->
 </section>
     </div>
   </div>
