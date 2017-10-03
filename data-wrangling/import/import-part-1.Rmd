@@ -12,6 +12,13 @@ output:
       previewLinks: true
 ---
 
+<!-- To do: -->
+<!--   - add intro image -->
+<!--   - improve agenda -->
+<!--   - outline functions and options in a table -->
+
+## Agenda
+
 <style type="text/css">
   .reveal p {
     text-align: left;
@@ -66,7 +73,6 @@ output:
   }
 </style>
 
-## Agenda
 
 <hr>
 
@@ -215,55 +221,8 @@ read.csv2('hsb.csv', header = TRUE)
 
 <hr>
 
-```{r import21, echo=TRUE, results='markup', message=FALSE}
-read_csv2('hsb.csv')
-```
-
-## readr
-
-<hr>
-
-```{r import22, echo=TRUE, results='markup', message=FALSE}
-read_delim('hsb.csv', delim = ';')
-```
-
-## Options
-
-<hr>
-
 ```{r import23, echo=TRUE, results='markup', message=FALSE}
 read_csv2('hsb.csv', col_names = FALSE, skip = 5, n_max = 50)
-```
-
-## Options
-
-<hr>
-
-```{r import24, echo=TRUE, results='markup', message=FALSE}
-read_delim('hsb.csv', delim = ';', col_names = FALSE, skip = 5, n_max = 50)
-```
-
-## Column Types
-
-<hr>
-
-```{r import29, echo=TRUE, results='markup', message=FALSE}
-read_csv2('hsb.csv', col_types = list(col_integer(), 
-  col_factor(levels = c(0, 1)), col_factor(levels = c(1, 2, 3, 4)), 
-  col_factor(levels = c(1, 2, 3)), col_factor(levels = c(1, 2)), 
-  col_factor(levels = c(1, 2, 3)), col_integer(), col_integer(), 
-  col_integer(), col_integer(), col_integer())            
-)
-```
-
-## Read Specific Columns
-
-<hr>
-
-```{r import30, echo=TRUE, results='markup', message=FALSE}
-read_csv2('hsb.csv', col_types = cols_only(id = col_integer(),
-  prog = col_factor(levels = c(1, 2, 3)), read = col_integer())
-)
 ```
 
 ## Tab Separated Values
@@ -295,57 +254,8 @@ read.table('mtcars.tsv', sep = '\t', header = TRUE, dec = '.')
 
 <hr>
 
-```{r import33, echo=TRUE, results='markup', message=FALSE}
-read_tsv('mtcars.tsv')
-```
-
-## readr
-
-<hr>
-
-```{r import34, echo=TRUE, results='markup', message=FALSE}
-read_delim('mtcars.tsv', delim = '\t')
-```
-
-## Options
-
-<hr>
-
 ```{r import35, echo=TRUE, results='markup', message=FALSE}
 read_tsv('mtcars.tsv', col_names = FALSE, skip = 5, n_max = 50)
-```
-
-## Options
-
-<hr>
-
-```{r import36, echo=TRUE, results='markup', message=FALSE}
-read_delim('mtcars.tsv', delim = '\t', col_names =  FALSE, 
-  skip = 5, n_max = 50)
-```
-
-## Column Types
-
-<hr>
-
-```{r import41, echo=TRUE, results='markup', message=FALSE}
-read_tsv('mtcars.tsv', col_types = list(col_double(), 
-  col_factor(levels = c(4, 6, 8)), col_double(), col_double(), col_double(), 
-  col_double(), col_double(), col_factor(levels = c(0, 1)), 
-  col_factor(levels = c(0, 1)), col_factor(levels = c(3, 4, 5)), 
-  col_factor(levels = c(1, 2, 3, 4, 6, 8)))            
-)
-```
-
-## Read Specific Columns
-
-<hr>
-
-```{r import42, echo=TRUE, results='markup', message=FALSE}
-read_tsv('mtcars.tsv', col_types = cols_only(mpg = col_double(),
-  cyl = col_factor(levels = c(4, 6, 8)), disp = col_double(),
-  gear = col_factor(levels = c(3, 4, 5)))
-)
 ```
 
 ## Space Separated Values
@@ -367,46 +277,11 @@ read.table('hsb1.csv', header = TRUE, sep = " ")
 
 <hr>
 
-```{r import45, echo=TRUE, results='markup', message=FALSE}
-read_table2('hsb1.csv')
-```
-
-## Options
-
-<hr>
-
 ```{r import46, echo=TRUE, results='markup', message=FALSE}
 read_table2('hsb1.csv', col_names = FALSE, skip = 5, n_max = 50)
 ```
 
-## Column Types
-
-<hr>
-
-```{r import49, echo=TRUE, results='markup', message=FALSE}
-read_table2('hsb1.csv', col_types = list(col_integer(), 
-  col_factor(levels = c(0, 1)), col_factor(levels = c(1, 2, 3, 4)), 
-  col_factor(levels = c(1, 2, 3)), col_factor(levels = c(1, 2)), 
-  col_factor(levels = c(1, 2, 3)), col_integer(), col_integer(), 
-  col_integer(), col_integer(), col_integer())            
-)
-```
-
-## Read Specific Columns
-
-<hr>
-
-```{r import50, echo=TRUE, results='markup', message=FALSE}
-read_table2('hsb1.csv', col_types = cols_only(id = col_integer(),
-  prog = col_factor(levels = c(1, 2, 3)), read = col_integer())
-)
-```
-
 ## Text Files
-
-<hr>
-
-## readr
 
 <hr>
 
@@ -415,10 +290,15 @@ read_table2('hsb.txt')
 ```
 
 
-## Questions
+## Summary
 
 <hr>
 
-## Thank You
+- `read_csv()`
+- `read_delim()`
+- `spec_csv()`
+- `read_csv2()`
+- `read_tsv()`
+- `read_table2()`
 
-<hr>
+## {data-background="thankyou.png"}

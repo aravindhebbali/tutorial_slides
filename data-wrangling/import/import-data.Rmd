@@ -12,6 +12,8 @@ output:
       previewLinks: true
 ---
 
+## Agenda
+
 <style type="text/css">
   .reveal p {
     text-align: left;
@@ -69,7 +71,6 @@ output:
   }
 </style>
 
-## Agenda
 
 <hr>
 
