@@ -12,6 +12,18 @@ output:
       previewLinks: true
 ---
 
+<!-- To do: -->
+<!--   - add intro slide -->
+<!--   - change introduction -->
+<!--   - add json data structure -->
+<!--   - add XML data structure -->
+<!--   - change html example -->
+<!--   - add xml workflow diagram -->
+<!--   - use this example: https://www.w3schools.com/xml/dom_nodes.asp -->
+<!--   - try xml2 as well -->
+
+## Agenda
+
 <style type="text/css">
   .reveal p {
     text-align: left;
@@ -69,8 +81,6 @@ output:
   }
 </style>
 
-## Agenda
-
 <hr>
 
 - XML
@@ -98,11 +108,6 @@ library(xml2)
 library(XML)
 ```
 
-## Data & Code
-
-<hr>
-
-
 ## JSON
 
 <hr>
@@ -120,6 +125,14 @@ jsonlite::fromJSON('mtcars.json')
 
 <hr>
 
+- `xmlParse()`: parse xml data
+- `class()`: class 
+- `xmlRoot()`: root node
+- `xmlChildren()`: child nodes
+- get child node names
+- get child node XML values
+- `getNodeSet()`: get particular node value
+- `xmlToDataFrame()`: coerce to data.frame 
 
 
 ## XML
@@ -226,13 +239,7 @@ xml2::read_xml("http://www.xmlfiles.com/examples/cd_catalog.xml")
 <hr>
 
 ```{r imp14}
-xml2::read_html("http://had.co.nz")
+xml2::read_html("http://r-project.org/")
 ```
 
-## Questions
-
-<hr>
-
-## Thank You
-
-<hr>
+## {data-background="thankyou.png"}
