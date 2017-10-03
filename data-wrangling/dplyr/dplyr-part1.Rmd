@@ -12,6 +12,8 @@ output:
       previewLinks: true
 ---
 
+## Agenda
+
 <style type="text/css">
   .reveal p {
     text-align: left;
@@ -34,8 +36,9 @@ output:
     font-family: 'Helvetica Neue';
   }
 
-  .reveal h1 {
-    font-size: 24px;
+  .reveal h2 {
+    font-size: 22px;
+    color: #0077aa;
   }
   .reveal ul {
     display: block;
@@ -44,6 +47,7 @@ output:
     color: #3c3c3c; 
     /* set color of list item text */
     list-style: none; 
+    font-size: 20px;
   }
 
   .reveal ul li::before {
@@ -70,7 +74,6 @@ output:
   }
 </style>
 
-## Agenda
 
 <hr>
 
@@ -92,10 +95,8 @@ dplyr helps us solve the most common data manipulation challenges such as filter
 
 <hr>
 
-You can install a stable version of `dplyr` from CRAN or the latest development version from GitHub.
 
 ```{r dplyr1, eval=FALSE}
-# install from cran
 install.packages('dplyr')
 library(dplyr)
 ```
@@ -415,11 +416,7 @@ ecom %>%
 
 <hr>
 
-In the above code, we take the output from each step and use it as an input for the next step using the pipe `%>%` operator. It reduces the intermediate data frames and makes the code readable. Take the `ecom` data frame `->` filter the purchasers `->` select device, order_value and order_items variables `->` group the resulting data frame by device type `->` compute the sum of all the variables in the grouped data frames `->` compute the average order value `->` select device type and aov
-
-## AOV by Devices
-
-<hr>
+In the above code, we take the output from each step and use it as an input for the next step using the pipe `%>%` operator. It reduces the intermediate data frames and makes the code readable. Take the `ecom` data frame `->` filter the purchasers `->` select device, order_value and order_items variables `->` group the resulting data frame by device type `->` compute the sum of all the variables in the grouped data frames `->` compute the average order value `->` select device type and aov.
 
 It is the same as the steps we wrote at the beginning of this module. Now you realize how powerful dplyr is along with the `%>%` operator. There are other functions in dplyr but we will cover them in another module. You are encouraged to use the above approach to answer the questions we have listed below.
 
@@ -431,11 +428,14 @@ It is the same as the steps we wrote at the beginning of this module. Now you re
 - what is the average time on site for purchasers vs non-purchasers?
 - what is the average number of pages visited by purchasers and non-purchasers using mobile?
 
+## {data-background="thankyou.png"}
 
-## Questions
-
-<hr>
-
-## Thank You
-
-<hr>
+<!-- To do: -->
+<!--   - add intro slide -->
+<!--   - add agenda -->
+<!--   - add image to introduction and why dplyr -->
+<!--   - image for dplyr verbs -->
+<!--   - image for aov computation -->
+<!--   - image for step 1 -->
+<!--   - image for step 2 -->
+<!--   - image for each step -->
