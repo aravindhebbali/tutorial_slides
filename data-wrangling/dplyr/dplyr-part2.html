@@ -483,8 +483,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
     <h1 class="title">Data Manipulation with dplyr - Part 2</h1>
 </section>
 
-<section class="slide level2">
-
+<section id="agenda" class="slide level2">
+<h2>Agenda</h2>
 <style type="text/css">
   .reveal p {
     text-align: left;
@@ -506,8 +506,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
     color: #0077aa;
     font-family: 'Helvetica Neue';
   }
-  .reveal h1 {
-    font-size: 24px;
+
+  .reveal h2 {
+    font-size: 22px;
+    color: #0077aa;
   }
   .reveal ul {
     display: block;
@@ -516,6 +518,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
     color: #3c3c3c; 
     /* set color of list item text */
     list-style: none; 
+    font-size: 20px;
   }
 
   .reveal ul li::before {
@@ -541,16 +544,13 @@ document.getElementsByTagName('head')[0].appendChild(style);
     display: block;
   }
 </style>
-</section>
-<section id="agenda" class="slide level2">
-<h1>Agenda</h1>
 <hr>
 <ul>
 <li class="fragment">combine tables</li>
 </ul>
 </section>
 <section id="introduction" class="slide level2">
-<h1>Introduction</h1>
+<h2>Introduction</h2>
 <hr>
 <p>In a previous module, we learnt about dplyr verbs and used them to compute average order value for an e-commerce website data. In this post, we will learn to combine tables using different <code>*_join</code> functions provided in dplyr. Let us assume we have 2 tables <strong>x</strong> and <strong>y</strong>.</p>
 <p>The following types of <code>join</code> functions are provided in dplyr:</p>
@@ -564,14 +564,14 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </ul>
 </section>
 <section id="case-study" class="slide level2">
-<h1>Case Study</h1>
+<h2>Case Study</h2>
 <hr>
 <p>We have two data sets with details of customers and their orders. We will use the above functions to combine the data sets in different ways to glean information about customer orders. Let us import the data from our github repository:</p>
 </section>
 <section id="data-orders" class="slide level2">
-<h1>Data: Orders</h1>
+<h2>Data: Orders</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">order &lt;-<span class="st"> </span>readr::<span class="kw">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rsquaredacademy/datasets/master/order.csv'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">order &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rsquaredacademy/datasets/master/order.csv'</span>)</code></pre></div>
 <pre><code>## # A tibble: 300 x 5
 ##       id order_data order_number customer_id  amount
 ##    &lt;int&gt;      &lt;chr&gt;        &lt;int&gt;       &lt;int&gt;   &lt;dbl&gt;
@@ -588,9 +588,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## # ... with 290 more rows</code></pre>
 </section>
 <section id="data-customers" class="slide level2">
-<h1>Data: Customers</h1>
+<h2>Data: Customers</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">customer &lt;-<span class="st"> </span>readr::<span class="kw">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rsquaredacademy/datasets/master/customer.csv'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">customer &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rsquaredacademy/datasets/master/customer.csv'</span>)</code></pre></div>
 <pre><code>## # A tibble: 91 x 5
 ##       id first_name             last_name       city           phone
 ##    &lt;int&gt;      &lt;chr&gt;                 &lt;chr&gt;      &lt;chr&gt;           &lt;chr&gt;
@@ -607,14 +607,14 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## # ... with 81 more rows</code></pre>
 </section>
 <section id="inner-join" class="slide level2">
-<h1>inner join</h1>
+<h2>inner join</h2>
 <hr>
 <p><code>inner_join()</code> returns all rows from x where there are matching values in y, and all columns from x and y. If there are multiple matches between x and y, all combination of the matches are returned.</p>
 </section>
 <section id="inner-join-1" class="slide level2">
-<h1>inner join</h1>
+<h2>inner join</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">customer %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">customer <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">inner_join</span>(order)</code></pre></div>
 <pre><code>## Joining, by = &quot;id&quot;</code></pre>
 <pre><code>## # A tibble: 55 x 9
@@ -633,14 +633,14 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## # ... with 45 more rows</code></pre>
 </section>
 <section id="left-join" class="slide level2">
-<h1>left join</h1>
+<h2>left join</h2>
 <hr>
 <p><code>left_join()</code> returns all rows from x, and all columns from x and y. Rows in x with no match in y will have NA values in the new columns. If there are multiple matches between x and y, all combinations of the matches are returned.</p>
 </section>
 <section id="left-join-1" class="slide level2">
-<h1>left join</h1>
+<h2>left join</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">customer %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">customer <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">left_join</span>(order)</code></pre></div>
 <pre><code>## Joining, by = &quot;id&quot;</code></pre>
 <pre><code>## # A tibble: 104 x 9
@@ -659,14 +659,14 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## # ... with 94 more rows</code></pre>
 </section>
 <section id="right-join" class="slide level2">
-<h1>right join</h1>
+<h2>right join</h2>
 <hr>
 <p><code>right_join()</code> returns all rows from y, and all columns from x and y. Rows in y with no match in x will have NA values in the new columns. If there are multiple matches between x and y, all combinations of the matches are returned.</p>
 </section>
 <section id="right-join-1" class="slide level2">
-<h1>right join</h1>
+<h2>right join</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">customer %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">customer <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">right_join</span>(order)</code></pre></div>
 <pre><code>## Joining, by = &quot;id&quot;</code></pre>
 <pre><code>## # A tibble: 300 x 9
@@ -685,14 +685,14 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## # ... with 290 more rows</code></pre>
 </section>
 <section id="semi-join" class="slide level2">
-<h1>semi join</h1>
+<h2>semi join</h2>
 <hr>
 <p><code>semi_join()</code> returns all rows from x where there are matching values in y, keeping just columns from x. A semi join differs from an inner join because an inner join will return one row of x for each matching row of y, where a semi join will never duplicate rows of x.</p>
 </section>
 <section id="semi-join-1" class="slide level2">
-<h1>semi join</h1>
+<h2>semi join</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">customer %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">customer <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">semi_join</span>(order)</code></pre></div>
 <pre><code>## Joining, by = &quot;id&quot;</code></pre>
 <pre><code>## # A tibble: 42 x 5
@@ -711,14 +711,14 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## # ... with 32 more rows</code></pre>
 </section>
 <section id="anti-join" class="slide level2">
-<h1>anti join</h1>
+<h2>anti join</h2>
 <hr>
 <p><code>anti_join()</code> returns all rows from x where there are not matching values in y, keeping just columns from x.</p>
 </section>
 <section id="anti-join-1" class="slide level2">
-<h1>anti join</h1>
+<h2>anti join</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">customer %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">customer <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">anti_join</span>(order)</code></pre></div>
 <pre><code>## Joining, by = &quot;id&quot;</code></pre>
 <pre><code>## # A tibble: 49 x 5
@@ -737,14 +737,14 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## # ... with 39 more rows</code></pre>
 </section>
 <section id="full-join" class="slide level2">
-<h1>full join</h1>
+<h2>full join</h2>
 <hr>
 <p><code>full_join()</code> returns all rows and all columns from both x and y. Where there are not matching values, returns NA for the one missing.</p>
 </section>
 <section id="full-join-1" class="slide level2">
-<h1>full join</h1>
+<h2>full join</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">customer %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">customer <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">full_join</span>(order)</code></pre></div>
 <pre><code>## Joining, by = &quot;id&quot;</code></pre>
 <pre><code>## # A tibble: 349 x 9
@@ -762,13 +762,13 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 10     7   Jeremiah              Carrabot California 1-(559)713-9864   7/8/2016       543477         483 1913.79
 ## # ... with 339 more rows</code></pre>
 </section>
-<section id="questions" class="slide level2">
-<h1>Questions</h1>
-<hr>
-</section>
-<section id="thank-you" class="slide level2">
-<h1>Thank You</h1>
-<hr>
+<section id="section" class="slide level2" data-background="thankyou.png">
+<h2></h2>
+<!-- To do: -->
+<!--   - add intro slide -->
+<!--   - change agenda -->
+<!--   - describe data sets in case study slide -->
+<!--   - images for each type of join -->
 </section>
     </div>
   </div>

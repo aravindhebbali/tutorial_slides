@@ -12,6 +12,8 @@ output:
       previewLinks: true
 ---
 
+## Agenda
+
 <style type="text/css">
   .reveal p {
     text-align: left;
@@ -33,8 +35,10 @@ output:
     color: #0077aa;
     font-family: 'Helvetica Neue';
   }
-  .reveal h1 {
-    font-size: 24px;
+
+  .reveal h2 {
+    font-size: 22px;
+    color: #0077aa;
   }
   .reveal ul {
     display: block;
@@ -43,6 +47,7 @@ output:
     color: #3c3c3c; 
     /* set color of list item text */
     list-style: none; 
+    font-size: 20px;
   }
 
   .reveal ul li::before {
@@ -69,7 +74,6 @@ output:
   }
 </style>
 
-## Agenda
 
 <hr>
 
@@ -223,10 +227,10 @@ customer %>%
   full_join(order)
 ```
 
-## Questions
+## {data-background="thankyou.png"}
 
-<hr>
-
-## Thank You
-
-<hr>
+<!-- To do: -->
+<!--   - add intro slide -->
+<!--   - change agenda -->
+<!--   - describe data sets in case study slide -->
+<!--   - images for each type of join -->
