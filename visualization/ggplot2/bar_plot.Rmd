@@ -1,5 +1,4 @@
 ---
-title: "ggplot2: Bar Plots"
 output: 
   revealjs::revealjs_presentation:
     transition: slide
@@ -14,6 +13,8 @@ output:
     fig_width: 6
     css: styles.css
 ---
+
+## {data-background="thankyou.png"}
 
 ## Agenda
 
