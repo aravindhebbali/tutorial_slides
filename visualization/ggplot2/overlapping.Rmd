@@ -1,5 +1,4 @@
 ---
-title: "ggplot2: Positioning Geoms"
 output: 
   revealjs::revealjs_presentation:
     transition: slide
@@ -12,70 +11,10 @@ output:
       previewLinks: true
     fig_height: 5
     fig_width: 6
+    css: styles.css
 ---
 
-<style type="text/css">
-    .reveal p img {
-    align: middle;
-  }
-  .reveal p {
-    text-align: left;
-    font-size: 20px;
-  }
-  .reveal body:after {
-    content: url(handshake.png);
-    position: fixed;
-    bottom: 3.5em;
-    left: 3.5em;
-    box-shadow: 5px 5px 10px #000; 
-  }
-  .reveal hr {
-    border-color: #0077aa;
-  }
-  .reveal h1, h2, h3, h4, h5, h6 {
-    text-transform: capitalize;
-    text-align: center;
-    color: #0077aa;
-    font-family: 'Helvetica Neue';
-    font-size: 25px;
-  }
-  .reveal h1 {
-    font-size: 24px;
-  }
-  .reveal ul {
-    display: block;
-  }
-  .reveal ul li {
-    color: #3c3c3c; 
-    /* set color of list item text */
-    list-style: none; 
-  }
-  .reveal p img {
-    align: middle;
-  }
-  .reveal ul li::before {
-      color: #006b6e;  
-      /* color of bullet or square */
-      content: "\2022"; 
-      /* Unicode of character to precede the list item */
-      font-size: 1em; 
-      /* em or %*/ 
-      padding-right: 1.1225em; 
-      /* use em*/
-      position: relative;
-      top: 0em; 
-      /* use em or % */
-  }
-  .reveal ul {
-    line-height:150%
-  }
-  .reveal .fragment {
-    font-size: 20px;
-  }
-  .reveal ol {
-    display: block;
-  }
-</style>
+## {data-background="thankyou.png"}
 
 ## Agenda
 
@@ -87,7 +26,7 @@ output:
 
 In this module, we will learn to position the geoms to avoid overlapping.
 
-## Installation
+## Libraries
 
 <hr>
 
@@ -111,14 +50,18 @@ Preserve the vertical position while adjusting the horizontal position.
 
 Create grouped bar plots.
 
-----
+## Dodge
+
+<hr>
 
 ```{r pos2, fig.align='center'}
 ggplot(data = mtcars, aes(factor(cyl), fill = factor(vs))) +
   geom_bar()
 ```
 
-----
+## Dodge
+
+<hr>
 
 ```{r pos3, fig.align='center'}
 ggplot(data = mtcars, aes(factor(cyl), fill = factor(vs))) +
@@ -131,35 +74,45 @@ ggplot(data = mtcars, aes(factor(cyl), fill = factor(vs))) +
 
 Add some noise to data points for better visualization.
 
-----
+## Jitter
+
+<hr>
 
 ```{r pos4, fig.align='center'}
 ggplot(data = mtcars, aes(am, vs)) +
   geom_jitter()
 ```
 
-----
+## Jitter
+
+<hr>
 
 ```{r pos5, fig.align='center'}
 ggplot(data = mtcars, aes(factor(am), factor(vs))) +
   geom_jitter()
 ```
 
-----
+## Jitter
+
+<hr>
 
 ```{r pos6, fig.align='center'}
 ggplot(data = mtcars, aes(factor(am), factor(vs))) +
   geom_jitter(position = position_jitter(width = 0.1, height = 0.1))
 ```
 
-----
+## Jitter
+
+<hr>
 
 ```{r pos7, fig.align='center'}
 ggplot(data = mtcars, aes(factor(am), factor(vs))) +
   geom_jitter(position = position_jitter(width = 0.05, height = 0.3))
 ```
 
-----
+## Jitter
+
+<hr>
 
 ```{r pos8, fig.align='center'}
 ggplot(data = mtcars, aes(am, vs)) +
@@ -172,7 +125,9 @@ ggplot(data = mtcars, aes(am, vs)) +
 
 Use with geom_text. Useful for adjusting text around points.
 
-----
+## Nudge
+
+<hr>
 
 ```{r pos9}
 df <- data.frame(
@@ -181,7 +136,9 @@ df <- data.frame(
 )
 ```
 
-----
+## Nudge
+
+<hr>
 
 ```{r pos12, fig.align='center'}
 ggplot(df, aes(x, y)) +
@@ -196,7 +153,9 @@ ggplot(df, aes(x, y)) +
 
 Proportional bar plots.
 
-----
+## Fill
+
+<hr>
 
 ```{r pos10, fig.align='center'}
 ggplot(data = mtcars, aes(factor(cyl), fill = factor(gear))) +
@@ -217,7 +176,9 @@ series <- data.frame(
 series$type2 <- factor(series$type, levels = c('c', 'b', 'd', 'a'))
 ```
 
-----
+## Stack
+
+<hr>
 
 ```{r pos13, fig.align='center'}
 ggplot(series, aes(time, value, group = type)) +
@@ -225,7 +186,9 @@ ggplot(series, aes(time, value, group = type)) +
   geom_point(aes(colour = type))
 ```
 
-----
+## Stack
+
+<hr>
 
 ```{r pos14, fig.align='center'}
 ggplot(series, aes(time, value, group = type)) +
@@ -233,10 +196,10 @@ ggplot(series, aes(time, value, group = type)) +
   geom_point(aes(colour = type), position = "stack")
 ```
 
-## Questions
+## {data-background="thankyou.png"}
 
-<hr>
-
-## Thank You
-
-<hr>
+<!-- To do: -->
+<!--   - add intro slide -->
+<!--   - add agenda -->
+<!--   - add introduction -->
+<!--   - slide with function description -->
