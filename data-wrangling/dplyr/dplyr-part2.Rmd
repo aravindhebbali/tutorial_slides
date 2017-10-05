@@ -29,6 +29,7 @@ The following types of `join` functions are provided in dplyr:
 - `anti_join()`
 - `full_join()`
 
+## {data-background="casestudy.png"}
 
 ## Case Study
 
@@ -68,11 +69,15 @@ customer <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/d
 customer
 ```
 
+## {data-background="innerjoin.png"}
+
 ## inner join
 
 <hr>
 
 `inner_join()` returns all rows from x where there are matching values in y, and all columns from x and y. If there are multiple matches between x and y, all combination of the matches are returned.
+
+![inner join](inner_join.png)
 
 ## inner join
 
@@ -83,11 +88,15 @@ customer %>%
   inner_join(order)
 ```
 
+## {data-background="leftjoin.png"}
+
 ## left join
 
 <hr>
 
 `left_join()` returns all rows from x, and all columns from x and y. Rows in x with no match in y will have NA values in the new columns. If there are multiple matches between x and y, all combinations of the matches are returned.
+
+![inner join](left_join.png)
 
 ## left join
 
@@ -98,11 +107,15 @@ customer %>%
   left_join(order)
 ```
 
+## {data-background="rightjoin.png"}
+
 ## right join
 
 <hr>
 
 `right_join()` returns all rows from y, and all columns from x and y. Rows in y with no match in x will have NA values in the new columns. If there are multiple matches between x and y, all combinations of the matches are returned.
+
+![inner join](right_join.png)
 
 ## right join
 
@@ -112,6 +125,8 @@ customer %>%
 customer %>%
   right_join(order)
 ```
+
+## {data-background="semijoin.png"}
 
 ## semi join
 
@@ -128,6 +143,8 @@ customer %>%
   semi_join(order)
 ```
 
+## {data-background="antijoin.png"}
+
 ## anti join
 
 <hr>
@@ -143,11 +160,15 @@ customer %>%
   anti_join(order)
 ```
 
+## {data-background="fulljoin.png"}
+
 ## full join
 
 <hr>
 
 `full_join()` returns all rows and all columns from both x and y. Where there are not matching values, returns NA for the one missing.
+
+![inner join](full_join.png)
 
 ## full join
 
