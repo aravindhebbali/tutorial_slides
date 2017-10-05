@@ -2,28 +2,17 @@
 output: _output.yaml
 ---
 
-<!-- To do: -->
-<!--   - add intro image -->
-<!--   - improve agenda -->
-<!--   - outline functions and options in a table -->
-
 ## {data-background="import.png"}
 
 ## Agenda
 
 <hr>
 
-read data from delimited files
+Importing data is the first step in any data analysis workflow. If you cannot import data from differernt sources or file formats, you cannot proceed with data analysis. R allows you to import data from several sources and a variety of file formats. In this module, we will focus on 
 
   - csv
   - tsv
   - txt
-
-## Introdction
-
-<hr>
-
-Importing data is the first step in any data analysis workflow. If you cannot import data from differernt sources or file formats, you cannot proceed with data analysis. R allows you to import data from several sources and a variety of file formats. In this module, we will focus on different file formats.
 
 ## Libraries
 
@@ -37,12 +26,9 @@ library(readr)
 library(readr)
 ```
 
-
 ## CSV 
 
 <hr>
-
-`.csv` files can be read using any of the following:
 
 - `read.csv()`
 - `read_csv()`
@@ -51,8 +37,6 @@ library(readr)
 ## Options
 
 <hr>
-
-Key arguments to be specified while reading files
 
 - `col_names`
 - `skip`
@@ -239,3 +223,7 @@ read_table2('hsb.txt')
 - `read_table2()`
 
 ## {data-background="thankyou.png"}
+
+<!-- To do: -->
+<!--   - improve agenda -->
+<!--   - outline functions and options in a table -->
