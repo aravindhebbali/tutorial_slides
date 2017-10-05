@@ -8,6 +8,14 @@ output: _output.yaml
 
 <hr>
 
+Use `dplyr` to:
+
+- select variables/columns
+- filter data
+- arrange data
+- generate new variables
+- grouped summaries
+
 ## Introduction
 
 <hr>
@@ -22,14 +30,14 @@ According to  a [survey](http://visit.crowdflower.com/rs/416-ZBE-142/images/Crow
 dplyr helps us solve the most common data manipulation challenges such as filtering rows, selecting columns, sorting data, creating new columns, summarizing data etc. In order to truly appreciate dplyr, we will compare it to the functions in base R.
 
 
-## Installation
+## Libraries
 
 <hr>
 
 
 ```{r dplyr1, eval=FALSE}
-install.packages('dplyr')
 library(dplyr)
+library(readr)
 ```
 
 ```{r libs, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
@@ -48,6 +56,7 @@ dplyr provides a set of verbs that help us solve the most common data manipulati
 - `mutate`: create new columns from existing columns
 - `summarise`: reduce data to a single summary
 
+## {data-background="casestudy.png"}
 
 ## Case Study
 
@@ -66,7 +75,7 @@ We will explore dummy data that we have created to resemble web logs of a ecomme
 <hr>
 
 ```{r import, eval=FALSE}
-ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+ecom <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
 ```
 
 
@@ -132,6 +141,8 @@ ecom %>%
   select(device, aov)
 ```
 
+## {data-background="filter.png"}
+
 ## Step 1: Filter Purchasers
 
 <hr>
@@ -169,6 +180,8 @@ filter(ecom, device == "mobile", n_pages > 5)
 ```{r dplyr5}
 filter(ecom, purchase == "true")
 ```
+
+## {data-background="select.png"}
 
 ## Step 2: Select relevant columns
 
@@ -222,6 +235,8 @@ ecom2 <- select(ecom1, device, order_value, order_items)
 ecom2
 ```
 
+## {data-background="group.png"}
+
 ## Step 3: Group data by devices
 
 <hr>
@@ -246,6 +261,8 @@ In the second line in the previous output, you can observe `Groups: referrer [5]
 ecom3 <- group_by(ecom2, device)
 ecom3
 ```
+
+## {data-background="summarise.png"}
 
 ## Step 4: Total order value and order items
 
@@ -282,6 +299,8 @@ ecom4 <- summarise_all(ecom3, funs(sum))
 ecom4
 ```
 
+## {data-background="mutate.png"}
+
 ## Step 5: Compute AOV
 
 <hr>
@@ -303,6 +322,8 @@ The last step is to select the relevant columns. We require the device type and 
 ecom6 <- select(ecom5, device, aov)
 ecom6
 ```
+
+## {data-background="aov2.png"}
 
 ## AOV by Devices
 
@@ -351,6 +372,8 @@ In the above code, we take the output from each step and use it as an input for 
 
 It is the same as the steps we wrote at the beginning of this module. Now you realize how powerful dplyr is along with the `%>%` operator. There are other functions in dplyr but we will cover them in another module. You are encouraged to use the above approach to answer the questions we have listed below.
 
+## {data-background="practice.png"}
+
 ## Practice Questions
 
 <hr>
@@ -362,11 +385,5 @@ It is the same as the steps we wrote at the beginning of this module. Now you re
 ## {data-background="thankyou.png"}
 
 <!-- To do: -->
-<!--   - add intro slide -->
-<!--   - add agenda -->
 <!--   - add image to introduction and why dplyr -->
-<!--   - image for dplyr verbs -->
-<!--   - image for aov computation -->
-<!--   - image for step 1 -->
-<!--   - image for step 2 -->
-<!--   - image for each step -->
+<!-- revise title slides -->

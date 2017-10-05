@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <title>Data Manipulation with dplyr - Part 1</title>
+  <title></title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -91,6 +91,7 @@ code > span.in { color: #008000; } /* Information */
 
     <style type="text/css">code{white-space: pre;}</style>
 
+    <link href="data:text/css;charset=utf-8,%2Ereveal%20p%20%7B%0Atext%2Dalign%3A%20left%3B%0Afont%2Dsize%3A%2020px%3B%0A%7D%0A%2Ereveal%20body%3Aafter%20%7B%0Aposition%3A%20fixed%3B%0Abottom%3A%203%2E5em%3B%0Aleft%3A%203%2E5em%3B%0Abox%2Dshadow%3A%205px%205px%2010px%20%23000%3B%20%7D%0A%2Ereveal%20hr%20%7B%0Aborder%2Dcolor%3A%20%230077aa%3B%0A%7D%0A%2Ereveal%20h1%2C%20h2%2C%20h3%2C%20h4%2C%20h5%2C%20h6%20%7B%0Atext%2Dtransform%3A%20capitalize%3B%0Atext%2Dalign%3A%20center%3B%0Acolor%3A%20%230077aa%3B%0Afont%2Dfamily%3A%20%27Helvetica%20Neue%27%3B%0A%7D%0A%2Ereveal%20h2%20%7B%0Afont%2Dsize%3A%2022px%3B%0Acolor%3A%20%230077aa%3B%0A%7D%0A%2Ereveal%20ul%20%7B%0Adisplay%3A%20block%3B%0A%7D%0A%2Ereveal%20ul%20li%20%7B%0Acolor%3A%20%233c3c3c%3B%20%0Alist%2Dstyle%3A%20none%3B%20font%2Dsize%3A%2020px%3B%0A%7D%0A%2Ereveal%20ul%20li%3A%3Abefore%20%7B%0Acolor%3A%20%23006b6e%3B%20%0Acontent%3A%20%22%5C2022%22%3B%20%0Afont%2Dsize%3A%201em%3B%20%20padding%2Dright%3A%201%2E1225em%3B%20%0Aposition%3A%20relative%3B%0Atop%3A%200em%3B%20%0A%7D%0A%2Ereveal%20ul%20%7B%0Aline%2Dheight%3A150%25%0A%7D%0A%2Ereveal%20%2Efragment%20%7B%0Afont%2Dsize%3A%2020px%3B%0A%7D%0A%2Ereveal%20ol%20%7B%0Adisplay%3A%20block%3B%0A%7D" rel="stylesheet" />
 
 <!-- Printing and PDF exports -->
 <script id="paper-css" type="application/dynamic-css">
@@ -479,72 +480,21 @@ document.getElementsByTagName('head')[0].appendChild(style);
   <div class="reveal">
     <div class="slides">
 
-<section>
-    <h1 class="title">Data Manipulation with dplyr - Part 1</h1>
-</section>
 
+<section id="section" class="slide level2" data-background="dplyr.png">
+<h2></h2>
+</section>
 <section id="agenda" class="slide level2">
 <h2>Agenda</h2>
-<style type="text/css">
-  .reveal p {
-    text-align: left;
-    font-size: 20px;
-  }
-  .reveal body:after {
-    content: url(handshake.png);
-    position: fixed;
-    bottom: 3.5em;
-    left: 3.5em;
-    box-shadow: 5px 5px 10px #000; 
-  }
-  .reveal hr {
-    border-color: #0077aa;
-  }
-  .reveal h1, h2, h3, h4, h5, h6 {
-    text-transform: capitalize;
-    text-align: center;
-    color: #0077aa;
-    font-family: 'Helvetica Neue';
-  }
-
-  .reveal h2 {
-    font-size: 22px;
-    color: #0077aa;
-  }
-  .reveal ul {
-    display: block;
-  }
-  .reveal ul li {
-    color: #3c3c3c; 
-    /* set color of list item text */
-    list-style: none; 
-    font-size: 20px;
-  }
-
-  .reveal ul li::before {
-      color: #006b6e;  
-      /* color of bullet or square */
-      content: "\2022"; 
-      /* Unicode of character to precede the list item */
-      font-size: 1em; 
-      /* em or %*/ 
-      padding-right: 1.1225em; 
-      /* use em*/
-      position: relative;
-      top: 0em; 
-      /* use em or % */
-  }
-  .reveal ul {
-    line-height:150%
-  }
-  .reveal .fragment {
-    font-size: 20px;
-  }
-  .reveal ol {
-    display: block;
-  }
-</style>
 <hr>
+<p>Use <code>dplyr</code> to:</p>
+<ul>
+<li class="fragment">select variables/columns</li>
+<li class="fragment">filter data</li>
+<li class="fragment">arrange data</li>
+<li class="fragment">generate new variables</li>
+<li class="fragment">grouped summaries</li>
+</ul>
 </section>
 <section id="introduction" class="slide level2">
 <h2>Introduction</h2>
@@ -556,39 +506,42 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <p>dplyr helps us solve the most common data manipulation challenges such as filtering rows, selecting columns, sorting data, creating new columns, summarizing data etc. In order to truly appreciate dplyr, we will compare it to the functions in base R.</p>
 </section>
-<section id="installation" class="slide level2">
-<h2>Installation</h2>
+<section id="libraries" class="slide level2">
+<h2>Libraries</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">'dplyr'</span>)
-<span class="kw">library</span>(dplyr)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(readr)</code></pre></div>
 </section>
 <section id="dplyr-verbs" class="slide level2">
 <h2>dplyr Verbs</h2>
 <hr>
 <p>dplyr provides a set of verbs that help us solve the most common data manipulation challenges while working with tabular data (dataframes, tibbles):</p>
 <ul>
-<li><code>select</code>: returns subset of columns</li>
-<li><code>filter</code>: returns a subset of rows</li>
-<li><code>arrange</code>: re-order or arrange rows according to single/multiple variables</li>
-<li><code>mutate</code>: create new columns from existing columns</li>
-<li><code>summarise</code>: reduce data to a single summary</li>
+<li class="fragment"><code>select</code>: returns subset of columns</li>
+<li class="fragment"><code>filter</code>: returns a subset of rows</li>
+<li class="fragment"><code>arrange</code>: re-order or arrange rows according to single/multiple variables</li>
+<li class="fragment"><code>mutate</code>: create new columns from existing columns</li>
+<li class="fragment"><code>summarise</code>: reduce data to a single summary</li>
 </ul>
+</section>
+<section id="section-1" class="slide level2" data-background="casestudy.png">
+<h2></h2>
 </section>
 <section id="case-study" class="slide level2">
 <h2>Case Study</h2>
 <hr>
 <p>We will explore dummy data that we have created to resemble web logs of a ecommerce company. You can download the data from <a href="https://github.com/rsquaredacademy/datasets/blob/master/web.csv">here</a> or import it directly using <code>read_csv()</code> from the <a href="readr.tidyverse.org">readr</a> package. We will use dplyr to answer a few questions we have about the above data:</p>
 <ul>
-<li>what is the average order value by device types?</li>
-<li>what is the average number of pages visited by purchasers and non-purchasers?</li>
-<li>what is the average time on site for purchasers vs non-purchasers?</li>
-<li>what is the average number of pages visited by purchasers and non-purchasers using mobile?</li>
+<li class="fragment">what is the average order value by device types?</li>
+<li class="fragment">what is the average number of pages visited by purchasers and non-purchasers?</li>
+<li class="fragment">what is the average time on site for purchasers vs non-purchasers?</li>
+<li class="fragment">what is the average number of pages visited by purchasers and non-purchasers using mobile?</li>
 </ul>
 </section>
 <section id="data" class="slide level2">
 <h2>Data</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv'</span>)</code></pre></div>
 <pre><code>## # A tibble: 1,000 x 11
 ##       id referrer device bouncers n_visit n_pages duration        country
 ##    &lt;int&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;          &lt;chr&gt;
@@ -610,17 +563,17 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <p>Below is the description of the data set:</p>
 <ul>
-<li>id: row id</li>
-<li>referrer: referrer website/search engine</li>
-<li>os: operating system</li>
-<li>browser: browser</li>
-<li>device: device used to visit the website</li>
-<li>n_pages: number of pages visited</li>
-<li>duration: time spent on the website (in seconds)</li>
-<li>repeat: frequency of visits</li>
-<li>country: country of origin</li>
-<li>purchase: whether visitor purchased</li>
-<li>order_value: order value of visitor (in dollars)</li>
+<li class="fragment">id: row id</li>
+<li class="fragment">referrer: referrer website/search engine</li>
+<li class="fragment">os: operating system</li>
+<li class="fragment">browser: browser</li>
+<li class="fragment">device: device used to visit the website</li>
+<li class="fragment">n_pages: number of pages visited</li>
+<li class="fragment">duration: time spent on the website (in seconds)</li>
+<li class="fragment">repeat: frequency of visits</li>
+<li class="fragment">country: country of origin</li>
+<li class="fragment">purchase: whether visitor purchased</li>
+<li class="fragment">order_value: order value of visitor (in dollars)</li>
 </ul>
 </section>
 <section id="average-order-value" class="slide level2">
@@ -634,12 +587,12 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>AOV Computation</h2>
 <hr>
 <ul>
-<li>Step 1: Filter Purchasers</li>
-<li>Step 2: Select data related to AOV (order value, order items) and device</li>
-<li>Step 3: Group order value and order items by device</li>
-<li>Step 4: Compute total order value and order items for each device</li>
-<li>Step 5: Compute AOV for each device</li>
-<li>Step 6: Select device and AOV data</li>
+<li class="fragment">Step 1: Filter Purchasers</li>
+<li class="fragment">Step 2: Select data related to AOV (order value, order items) and device</li>
+<li class="fragment">Step 3: Group order value and order items by device</li>
+<li class="fragment">Step 4: Compute total order value and order items for each device</li>
+<li class="fragment">Step 5: Compute AOV for each device</li>
+<li class="fragment">Step 6: Select device and AOV data</li>
 </ul>
 </section>
 <section id="aov-by-devices" class="slide level2">
@@ -660,6 +613,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 1 laptop 353.3188
 ## 2 mobile 279.9130
 ## 3 tablet 260.5127</code></pre>
+</section>
+<section id="section-2" class="slide level2" data-background="filter.png">
+<h2></h2>
 </section>
 <section id="step-1-filter-purchasers" class="slide level2">
 <h2>Step 1: Filter Purchasers</h2>
@@ -745,6 +701,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 10   101    yahoo tablet    false       2      14      364         Poland
 ## # ... with 93 more rows, and 3 more variables: purchase &lt;chr&gt;,
 ## #   order_items &lt;dbl&gt;, order_value &lt;dbl&gt;</code></pre>
+</section>
+<section id="section-3" class="slide level2" data-background="select.png">
+<h2></h2>
 </section>
 <section id="step-2-select-relevant-columns" class="slide level2">
 <h2>Step 2: Select relevant columns</h2>
@@ -850,6 +809,9 @@ ecom2</code></pre></div>
 ## 10 tablet        1667           6
 ## # ... with 93 more rows</code></pre>
 </section>
+<section id="section-4" class="slide level2" data-background="group.png">
+<h2></h2>
+</section>
 <section id="step-3-group-data-by-devices" class="slide level2">
 <h2>Step 3: Group data by devices</h2>
 <hr>
@@ -898,6 +860,9 @@ ecom3</code></pre></div>
 ## 10 tablet        1667           6
 ## # ... with 93 more rows</code></pre>
 </section>
+<section id="section-5" class="slide level2" data-background="summarise.png">
+<h2></h2>
+</section>
 <section id="step-4-total-order-value-and-order-items" class="slide level2">
 <h2>Step 4: Total order value and order items</h2>
 <hr>
@@ -935,6 +900,9 @@ ecom4</code></pre></div>
 ## 2 mobile       51504         184
 ## 3 tablet       51321         197</code></pre>
 </section>
+<section id="section-6" class="slide level2" data-background="mutate.png">
+<h2></h2>
+</section>
 <section id="step-5-compute-aov" class="slide level2">
 <h2>Step 5: Compute AOV</h2>
 <hr>
@@ -960,6 +928,9 @@ ecom6</code></pre></div>
 ## 1 laptop 353.3188
 ## 2 mobile 279.9130
 ## 3 tablet 260.5127</code></pre>
+</section>
+<section id="section-7" class="slide level2" data-background="aov2.png">
+<h2></h2>
 </section>
 <section id="aov-by-devices-1" class="slide level2">
 <h2>AOV by Devices</h2>
@@ -1009,26 +980,23 @@ ecom6</code></pre></div>
 <p>In the above code, we take the output from each step and use it as an input for the next step using the pipe <code>%&gt;%</code> operator. It reduces the intermediate data frames and makes the code readable. Take the <code>ecom</code> data frame <code>-&gt;</code> filter the purchasers <code>-&gt;</code> select device, order_value and order_items variables <code>-&gt;</code> group the resulting data frame by device type <code>-&gt;</code> compute the sum of all the variables in the grouped data frames <code>-&gt;</code> compute the average order value <code>-&gt;</code> select device type and aov.</p>
 <p>It is the same as the steps we wrote at the beginning of this module. Now you realize how powerful dplyr is along with the <code>%&gt;%</code> operator. There are other functions in dplyr but we will cover them in another module. You are encouraged to use the above approach to answer the questions we have listed below.</p>
 </section>
+<section id="section-8" class="slide level2" data-background="practice.png">
+<h2></h2>
+</section>
 <section id="practice-questions" class="slide level2">
 <h2>Practice Questions</h2>
 <hr>
 <ul>
-<li>what is the average number of pages visited by purchasers and non-purchasers?</li>
-<li>what is the average time on site for purchasers vs non-purchasers?</li>
-<li>what is the average number of pages visited by purchasers and non-purchasers using mobile?</li>
+<li class="fragment">what is the average number of pages visited by purchasers and non-purchasers?</li>
+<li class="fragment">what is the average time on site for purchasers vs non-purchasers?</li>
+<li class="fragment">what is the average number of pages visited by purchasers and non-purchasers using mobile?</li>
 </ul>
 </section>
-<section id="section" class="slide level2" data-background="thankyou.png">
+<section id="section-9" class="slide level2" data-background="thankyou.png">
 <h2></h2>
 <!-- To do: -->
-<!--   - add intro slide -->
-<!--   - add agenda -->
 <!--   - add image to introduction and why dplyr -->
-<!--   - image for dplyr verbs -->
-<!--   - image for aov computation -->
-<!--   - image for step 1 -->
-<!--   - image for step 2 -->
-<!--   - image for each step -->
+<!-- revise title slides -->
 </section>
     </div>
   </div>
