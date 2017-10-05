@@ -2,14 +2,6 @@
 output: _output.yaml
 ---
 
-<!-- To do: -->
-<!--   - add intro slide -->
-<!--   - improve agenda -->
-<!--   - change introduction -->
-<!--   - change data -->
-<!--   - 1 paragraph about statistical softwares -->
-<!--   - use excel sheet while explaining readxl -->
-
 ## {data-background="import.png"}
 
 ## Agenda
@@ -23,12 +15,6 @@ read data from
   - SAS
   - SPSS
   - STATA
-
-## Introdction
-
-<hr>
-
-Importing data is the first step in any data analysis workflow. If you cannot import data from differernt sources or file formats, you cannot proceed with data analysis. R allows you to import data from several sources and a variety of file formats. In this module, we will focus on excel and statistical softwares.
 
 ## Libraries
 
@@ -181,10 +167,8 @@ readxl::read_excel('sample2.xls', sheet = 2, range = cell_cols(2:3))
 
 <hr>
 
-other packages that can be used to import the files
-
-- sas: sas7bdat (last updated in 2014; version 0.5)
-- stata, spss: foreign (maintained; version 0.8)
+- SAS: sas7bdat (last updated in 2014; version 0.5)
+- STATA, SPSS: foreign (maintained; version 0.8)
 
 ## stata
 
@@ -275,3 +259,9 @@ sas7bdat::read.sas7bdat('airline.sas7bdat')
 ```
 
 ## {data-background="thankyou.png"}
+
+
+<!-- To do: -->
+<!--   - change data -->
+<!--   - 1 paragraph about statistical softwares -->
+<!--   - use excel sheet while explaining readxl -->
