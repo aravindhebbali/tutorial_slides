@@ -1,85 +1,10 @@
 ---
-title: "Importing Data into R: Part - 3"
-output: 
-  revealjs::revealjs_presentation:
-    transition: slide
-    incremental: true
-    theme: default
-    highlight: haddock
-    center: false
-    reveal_options:
-      slideNumber: true
-      previewLinks: true
+output: _output.yaml
 ---
 
-<!-- To do: -->
-<!--   - add intro slide -->
-<!--   - change introduction -->
-<!--   - add json data structure -->
-<!--   - add XML data structure -->
-<!--   - change html example -->
-<!--   - add xml workflow diagram -->
-<!--   - use this example: https://www.w3schools.com/xml/dom_nodes.asp -->
-<!--   - try xml2 as well -->
+## {data-background="import.png"}
 
 ## Agenda
-
-<style type="text/css">
-  .reveal p {
-    text-align: left;
-    font-size: 20px;
-  }
-  .reveal body:after {
-    content: url(handshake.png);
-    position: fixed;
-    bottom: 3.5em;
-    left: 3.5em;
-    box-shadow: 5px 5px 10px #000; 
-  }
-  .reveal hr {
-    border-color: #0077aa;
-  }
-  .reveal h1, h2, h3, h4, h5, h6 {
-    text-transform: capitalize;
-    text-align: center;
-    color: #0077aa;
-    font-family: 'Helvetica Neue';
-  }
-  .reveal ul {
-    display: block;
-  }
-  .reveal ul li {
-    color: #3c3c3c; 
-    /* set color of list item text */
-    list-style: none; 
-  }
-  .reveal .sourceCode pre code {
-    padding: 0px;
-    border: 0px;
-  }
-  .reveal ul li::before {
-      color: #006b6e;  
-      /* color of bullet or square */
-      content: "\2022"; 
-      /* Unicode of character to precede the list item */
-      font-size: 1em; 
-      /* em or %*/ 
-      padding-right: 1.1225em; 
-      /* use em*/
-      position: relative;
-      top: 0em; 
-      /* use em or % */
-  }
-  .reveal ul {
-    line-height:150%
-  }
-  .reveal .fragment {
-    font-size: 20px;
-  }
-  .reveal ol {
-    display: block;
-  }
-</style>
 
 <hr>
 
@@ -243,3 +168,13 @@ xml2::read_html("http://r-project.org/")
 ```
 
 ## {data-background="thankyou.png"}
+
+<!-- To do: -->
+<!--   - add intro slide -->
+<!--   - change introduction -->
+<!--   - add json data structure -->
+<!--   - add XML data structure -->
+<!--   - change html example -->
+<!--   - add xml workflow diagram -->
+<!--   - use this example: https://www.w3schools.com/xml/dom_nodes.asp -->
+<!--   - try xml2 as well -->
