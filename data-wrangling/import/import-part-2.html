@@ -487,15 +487,11 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="agenda" class="slide level2">
 <h2>Agenda</h2>
 <hr>
+<p>Read data from</p>
 <ul>
 <li class="fragment">XML</li>
 <li class="fragment">JSON</li>
 </ul>
-</section>
-<section id="introdction" class="slide level2">
-<h2>Introdction</h2>
-<hr>
-<p>Importing data is the first step in any data analysis workflow. If you cannot import data from differernt sources or file formats, you cannot proceed with data analysis. R allows you to import data from several sources and a variety of file formats. In this module, we will focus on googlesheets, JSON and XML file formats.</p>
 </section>
 <section id="libraries" class="slide level2">
 <h2>Libraries</h2>
@@ -504,11 +500,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <span class="kw">library</span>(xml2)
 <span class="kw">library</span>(XML)</code></pre></div>
 </section>
-<section id="json" class="slide level2">
-<h2>JSON</h2>
-<hr>
+<section id="section-1" class="slide level2" data-background="json.png">
+<h2></h2>
 </section>
-<section id="json-1" class="slide level2">
+<section id="json" class="slide level2">
 <h2>JSON</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="st">'mtcars.json'</span>)</code></pre></div>
@@ -546,6 +541,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
 ## Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
 </section>
+<section id="section-2" class="slide level2" data-background="xml.png">
+<h2></h2>
+</section>
 <section id="xml" class="slide level2">
 <h2>XML</h2>
 <hr>
@@ -560,19 +558,19 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <li class="fragment"><code>xmlToDataFrame()</code>: coerce to data.frame</li>
 </ul>
 </section>
-<section id="xml-1" class="slide level2">
-<h2>XML</h2>
+<section id="read-data" class="slide level2">
+<h2>Read Data</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xm &lt;-<span class="st"> </span><span class="kw">xmlParse</span>(<span class="st">&quot;sample_xml&quot;</span>)</code></pre></div>
 </section>
-<section id="xml-2" class="slide level2">
-<h2>XML</h2>
+<section id="class" class="slide level2">
+<h2>Class</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(xm)</code></pre></div>
 <pre><code>## [1] &quot;XMLInternalDocument&quot; &quot;XMLAbstractDocument&quot;</code></pre>
 </section>
-<section id="xml-3" class="slide level2">
-<h2>XML</h2>
+<section id="root-node" class="slide level2">
+<h2>Root Node</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xmlRoot</span>(xm)</code></pre></div>
 <pre><code>## &lt;catalog&gt;
@@ -695,13 +693,13 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ##   &lt;/book&gt;
 ## &lt;/catalog&gt;</code></pre>
 </section>
-<section id="xml-4" class="slide level2">
-<h2>XML</h2>
+<section id="child-nodes" class="slide level2">
+<h2>Child Nodes</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">c_child &lt;-<span class="st"> </span><span class="kw">xmlChildren</span>(xm)</code></pre></div>
 </section>
-<section id="xml-5" class="slide level2">
-<h2>XML</h2>
+<section id="child-node" class="slide level2">
+<h2>Child Node</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">c_child[[<span class="dv">1</span>]]</code></pre></div>
 <pre><code>## &lt;catalog&gt;
@@ -824,8 +822,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ##   &lt;/book&gt;
 ## &lt;/catalog&gt;</code></pre>
 </section>
-<section id="xml-6" class="slide level2">
-<h2>XML</h2>
+<section id="child-node-1" class="slide level2">
+<h2>Child Node</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">c_child[[<span class="dv">1</span>]][<span class="dv">1</span>]</code></pre></div>
 <pre><code>## $book
@@ -842,8 +840,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## attr(,&quot;class&quot;)
 ## [1] &quot;XMLInternalNodeList&quot; &quot;XMLNodeList&quot;</code></pre>
 </section>
-<section id="xml-7" class="slide level2">
-<h2>XML</h2>
+<section id="node-name" class="slide level2">
+<h2>Node Name</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sapply</span>(c_child[[<span class="dv">1</span>]][<span class="dv">1</span>], names)</code></pre></div>
 <pre><code>##              book          
@@ -854,14 +852,14 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## publish_date &quot;publish_date&quot;
 ## description  &quot;description&quot;</code></pre>
 </section>
-<section id="xml-8" class="slide level2">
-<h2>XML</h2>
+<section id="node-value" class="slide level2">
+<h2>Node Value</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sapply</span>(c_child[[<span class="dv">1</span>]][<span class="dv">1</span>], xmlValue)</code></pre></div>
 <pre><code>##                                                                                                                          book 
 ## &quot;Gambardella, MatthewXML Developer's GuideComputer44.952000-10-01An in-depth look at creating applications \n      with XML.&quot;</code></pre>
 </section>
-<section id="xml-9" class="slide level2">
+<section id="xml-1" class="slide level2">
 <h2>XML</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getNodeSet</span>(xm, <span class="st">&quot;//book&quot;</span>)</code></pre></div>
@@ -1009,7 +1007,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## attr(,&quot;class&quot;)
 ## [1] &quot;XMLNodeSet&quot;</code></pre>
 </section>
-<section id="xml-10" class="slide level2">
+<section id="xml-2" class="slide level2">
 <h2>XML</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getNodeSet</span>(xm, <span class="st">&quot;//author&quot;</span>)</code></pre></div>
@@ -1052,8 +1050,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## attr(,&quot;class&quot;)
 ## [1] &quot;XMLNodeSet&quot;</code></pre>
 </section>
-<section id="xml-11" class="slide level2">
-<h2>XML</h2>
+<section id="dataframe" class="slide level2">
+<h2>Dataframe</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">j &lt;-<span class="st"> </span><span class="kw">xmlToDataFrame</span>(
   <span class="kw">getNodeSet</span>(xm, <span class="st">&quot;//book&quot;</span>)
@@ -1136,11 +1134,9 @@ j</code></pre></div>
 ## [1] &lt;head&gt;\n&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset= ...
 ## [2] &lt;body&gt;\n    &lt;div class=&quot;container page&quot;&gt;\n      &lt;div class=&quot;row&quot;&gt;\n  ...</code></pre>
 </section>
-<section id="section-1" class="slide level2" data-background="thankyou.png">
+<section id="section-3" class="slide level2" data-background="thankyou.png">
 <h2></h2>
 <!-- To do: -->
-<!--   - add intro slide -->
-<!--   - change introduction -->
 <!--   - add json data structure -->
 <!--   - add XML data structure -->
 <!--   - change html example -->

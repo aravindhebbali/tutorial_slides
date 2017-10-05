@@ -8,14 +8,10 @@ output: _output.yaml
 
 <hr>
 
+Read data from
+
 - XML
 - JSON
-
-## Introdction
-
-<hr>
-
-Importing data is the first step in any data analysis workflow. If you cannot import data from differernt sources or file formats, you cannot proceed with data analysis. R allows you to import data from several sources and a variety of file formats. In this module, we will focus on googlesheets, JSON and XML file formats.
 
 ## Libraries
 
@@ -33,10 +29,7 @@ library(xml2)
 library(XML)
 ```
 
-## JSON
-
-<hr>
-
+## {data-background="json.png"}
 
 ## JSON
 
@@ -45,6 +38,8 @@ library(XML)
 ```{r imp1}
 jsonlite::fromJSON('mtcars.json')
 ```
+
+## {data-background="xml.png"}
 
 ## XML
 
@@ -60,7 +55,7 @@ jsonlite::fromJSON('mtcars.json')
 - `xmlToDataFrame()`: coerce to data.frame 
 
 
-## XML
+## Read Data
 
 <hr>
 
@@ -68,7 +63,7 @@ jsonlite::fromJSON('mtcars.json')
 xm <- xmlParse("sample_xml")
 ```
 
-## XML
+## Class
 
 <hr>
 
@@ -76,7 +71,7 @@ xm <- xmlParse("sample_xml")
 class(xm)
 ```
 
-## XML
+## Root Node
 
 <hr>
 
@@ -84,7 +79,7 @@ class(xm)
 xmlRoot(xm)
 ```
 
-## XML
+## Child Nodes
 
 <hr>
 
@@ -92,7 +87,7 @@ xmlRoot(xm)
 c_child <- xmlChildren(xm)
 ```
 
-## XML
+## Child Node
 
 <hr>
 
@@ -100,7 +95,7 @@ c_child <- xmlChildren(xm)
 c_child[[1]]
 ```
 
-## XML
+## Child Node
 
 <hr>
 
@@ -108,7 +103,7 @@ c_child[[1]]
 c_child[[1]][1]
 ```
 
-## XML
+## Node Name
 
 <hr>
 
@@ -116,7 +111,7 @@ c_child[[1]][1]
 sapply(c_child[[1]][1], names)
 ```
 
-## XML
+## Node Value
 
 <hr>
 
@@ -140,7 +135,7 @@ getNodeSet(xm, "//book")
 getNodeSet(xm, "//author")
 ```
 
-## XML
+## Dataframe
 
 <hr>
 
@@ -170,8 +165,6 @@ xml2::read_html("http://r-project.org/")
 ## {data-background="thankyou.png"}
 
 <!-- To do: -->
-<!--   - add intro slide -->
-<!--   - change introduction -->
 <!--   - add json data structure -->
 <!--   - add XML data structure -->
 <!--   - change html example -->
