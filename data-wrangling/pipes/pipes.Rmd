@@ -46,6 +46,7 @@ pipes:
 
 ```{r importlib1,eval=FALSE}
 library(magrittr)
+library(readr)
 ```
 
 ```{r importlib2, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
@@ -56,7 +57,7 @@ library(magrittr)
 <hr>
 
 ```{r import, eval=FALSE}
-ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+ecom <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
 ```
 
 
@@ -389,6 +390,5 @@ mt %>%
 ## {data-background="thankyou.png"}
 
 <!-- To do: -->
-<!--     - intro slide -->
 <!--     - change introduction -->
 <!--     - explain functions before using them -->
