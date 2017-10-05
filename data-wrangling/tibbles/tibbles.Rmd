@@ -1,15 +1,5 @@
 ---
-title: 
-output: 
-  revealjs::revealjs_presentation:
-    transition: slide
-    incremental: false
-    theme: default
-    highlight: haddock
-    center: false
-    reveal_options:
-      slideNumber: true
-      previewLinks: true
+output: _output.yaml 
 ---
 
 ## {data-background="tibble_intro.png"}
@@ -23,69 +13,13 @@ output:
 - How to create tibbles?
 - How to manipulate tibbles?
 
-<style type="text/css">
-  .reveal p {
-    text-align: left;
-    font-size: 20px;
-  }
-  .reveal .title {
-    background-image: handshake.png;
-  }
-  .reveal body:after {
-    content: url(handshake.png);
-    position: fixed;
-    bottom: 3.5em;
-    left: 3.5em;
-    box-shadow: 5px 5px 10px #000; 
-  }
-  .reveal hr {
-    border-color: #0077aa;
-  }
-  .reveal h1, h2, h3, h4, h5, h6 {
-    text-transform: capitalize;
-    text-align: center;
-    color: #0077aa;
-    font-family: 'Helvetica Neue';
-  }
-  .reveal ul {
-    display: block;
-  }
-  .reveal ul li {
-    color: #3c3c3c; 
-    /* set color of list item text */
-    list-style: none; 
-    font-size: 20px;
-  }
-
-  .reveal ul li::before {
-      color: #006b6e;  
-      /* color of bullet or square */
-      content: "\2022"; 
-      /* Unicode of character to precede the list item */
-      font-size: 1em; 
-      /* em or %*/ 
-      padding-right: 1.1225em; 
-      /* use em*/
-      position: relative;
-      top: 0em; 
-      /* use em or % */
-  }
-  .reveal ul {
-    line-height:150%
-  }
-  .reveal .fragment {
-    font-size: 20px;
-  }
-  .reveal ol {
-    display: block;
-  }
-</style>
-
 ## {data-background="tibbles1.png"}
 
 ## What are tibbles?
 
 <hr>
+
+## {data-background="creatingtibbles.png"}
 
 ## Creating tibbles
 
@@ -112,6 +46,8 @@ tibble(x = letters,
        y = 1:26,
        z = sample(100, 26))
 ```
+
+## {data-background="tibblefeatures.png"}
 
 ## tibble features
 
@@ -163,6 +99,8 @@ z <- sample(c(TRUE, FALSE), 100, replace = TRUE)
 tibble(x, y, z)
 Error in overscope_eval_next(overscope, expr) : object 'y' not found
 ```
+
+## {data-background="creatingtibbles2.png"}
 
 ## Creating tibbles II
 
@@ -222,6 +160,8 @@ k <- tbl_df(iris)
 as_tibble(k)
 ```
 
+## {data-background="enframe.png"}
+
 ## atomic vectors
 
 <hr>
@@ -250,6 +190,8 @@ We can test if an object is a tibble using `is_tibble()`.
 is_tibble(mtcars)
 is_tibble(as_tibble(mtcars))
 ```
+
+## {data-background="tribble.png"}
 
 ## Tribble
 
@@ -288,6 +230,8 @@ tibble(
   `:)` = 'smiley'
 )
 ```
+
+## {data-background="manipulatetibble.png"}
 
 
 ## Add Rows
@@ -384,22 +328,37 @@ has_name(mtcars, 'cyl')
 has_name(mtcars, 'gears')
 ```
 
+## {data-background="tibblesummary.png"}
+
 ## Summary
 
 <hr>
 
-- `tibble()`: create tibbles
-- `as_tibble()`: coerce other objects to tibble
-- `enframe()`: coerce vector to tibble
-- `is_tibble()`: test if an object is a tibble
-- `tribble()`: create tibble using data entry
-- `add_row()`: add a new row
-- `add_column()`: add a new column
-- `has_rownames()`: check whether a data set has rownames
-- `remove_rownames()`: remove rownames from data
-- `rownames_to_colum()`: coerce rowname to first column
-- `column_to_rownames()`: coerce first column to rownames
-- `glimpse()`: overview of data
-- `has_name()`: check if tibble has a specific column 
+- use `tibble()` to create tibbles
+- use `as_tibble()` to coerce other objects to tibble
+- use `enframe()` to coerce vector to tibble
+- use `tribble()` to create tibble using data entry
+
+## Summary
+
+<hr>
+
+- use `add_row()` to add a new row
+- use `add_column()` to add a new column
+- use `remove_rownames()` to remove rownames from data
+- use `rownames_to_colum()` to coerce rowname to first column
+- use `column_to_rownames()` to coerce first column to rownames
+
+## Summary
+
+<hr>
+
+- use `is_tibble()` to test if an object is a tibble
+- use `has_rownames()` to check whether a data set has rownames
+- use `has_name()` to check if tibble has a specific column 
+- use `glimpse()` to get an overview of data
 
 ## {data-background="thankyou.png"}
+
+<!-- To do: -->
+<!--   - what are tibbles -->

@@ -91,6 +91,7 @@ code > span.in { color: #008000; } /* Information */
 
     <style type="text/css">code{white-space: pre;}</style>
 
+    <link href="data:text/css;charset=utf-8,%2Ereveal%20p%20%7B%0Atext%2Dalign%3A%20left%3B%0Afont%2Dsize%3A%2020px%3B%0A%7D%0A%2Ereveal%20hr%20%7B%0Aborder%2Dcolor%3A%20%230077aa%3B%0A%7D%0A%2Ereveal%20h1%2C%20h2%2C%20h3%2C%20h4%2C%20h5%2C%20h6%20%7B%0Atext%2Dtransform%3A%20capitalize%3B%0Atext%2Dalign%3A%20center%3B%0Acolor%3A%20%230077aa%3B%0Afont%2Dfamily%3A%20%27Helvetica%20Neue%27%3B%0A%7D%0A%2Ereveal%20img%20%7B%0Aposition%3A%20absolute%3B%0Awidth%3A%20738px%3B%0Aheight%3A%20269px%3B%0A%7D%0A%2Ereveal%20h2%20%7B%0Afont%2Dsize%3A%2022px%3B%0Acolor%3A%20%230077aa%3B%0A%7D%0A%2Ereveal%20ul%20%7B%0Adisplay%3A%20block%3B%0A%7D%0A%2Ereveal%20ul%20li%20%7B%0Acolor%3A%20%233c3c3c%3B%20%0Alist%2Dstyle%3A%20none%3B%20font%2Dsize%3A%2020px%3B%0A%7D%0A%2Ereveal%20ul%20li%3A%3Abefore%20%7B%0Acolor%3A%20%23006b6e%3B%20%0Acontent%3A%20%22%5C2022%22%3B%20%0Afont%2Dsize%3A%201em%3B%20%20padding%2Dright%3A%201%2E1225em%3B%20%0Aposition%3A%20relative%3B%0Atop%3A%200em%3B%20%0A%7D%0A%2Ereveal%20ul%20%7B%0Aline%2Dheight%3A150%25%0A%7D%0A%2Ereveal%20%2Efragment%20%7B%0Afont%2Dsize%3A%2020px%3B%0A%7D%0A%2Ereveal%20ol%20%7B%0Adisplay%3A%20block%3B%0A%7D" rel="stylesheet" />
 
 <!-- Printing and PDF exports -->
 <script id="paper-css" type="application/dynamic-css">
@@ -487,68 +488,11 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>Agenda</h2>
 <hr>
 <ul>
-<li>What are tibbles?</li>
-<li>How are tibbles different from data frames?</li>
-<li>How to create tibbles?</li>
-<li>How to manipulate tibbles?</li>
+<li class="fragment">What are tibbles?</li>
+<li class="fragment">How are tibbles different from data frames?</li>
+<li class="fragment">How to create tibbles?</li>
+<li class="fragment">How to manipulate tibbles?</li>
 </ul>
-<style type="text/css">
-  .reveal p {
-    text-align: left;
-    font-size: 20px;
-  }
-  .reveal .title {
-    background-image: handshake.png;
-  }
-  .reveal body:after {
-    content: url(handshake.png);
-    position: fixed;
-    bottom: 3.5em;
-    left: 3.5em;
-    box-shadow: 5px 5px 10px #000; 
-  }
-  .reveal hr {
-    border-color: #0077aa;
-  }
-  .reveal h1, h2, h3, h4, h5, h6 {
-    text-transform: capitalize;
-    text-align: center;
-    color: #0077aa;
-    font-family: 'Helvetica Neue';
-  }
-  .reveal ul {
-    display: block;
-  }
-  .reveal ul li {
-    color: #3c3c3c; 
-    /* set color of list item text */
-    list-style: none; 
-    font-size: 20px;
-  }
-
-  .reveal ul li::before {
-      color: #006b6e;  
-      /* color of bullet or square */
-      content: "\2022"; 
-      /* Unicode of character to precede the list item */
-      font-size: 1em; 
-      /* em or %*/ 
-      padding-right: 1.1225em; 
-      /* use em*/
-      position: relative;
-      top: 0em; 
-      /* use em or % */
-  }
-  .reveal ul {
-    line-height:150%
-  }
-  .reveal .fragment {
-    font-size: 20px;
-  }
-  .reveal ol {
-    display: block;
-  }
-</style>
 </section>
 <section id="section-1" class="slide level2" data-background="tibbles1.png">
 <h2></h2>
@@ -557,14 +501,17 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>What are tibbles?</h2>
 <hr>
 </section>
+<section id="section-2" class="slide level2" data-background="creatingtibbles.png">
+<h2></h2>
+</section>
 <section id="creating-tibbles" class="slide level2">
 <h2>Creating tibbles</h2>
 <hr>
 <p>tibble can be created using any of the following:</p>
 <ul>
-<li><code>tibble()</code></li>
-<li><code>as_tibble()</code></li>
-<li><code>tribble()</code></li>
+<li class="fragment"><code>tibble()</code></li>
+<li class="fragment"><code>as_tibble()</code></li>
+<li class="fragment"><code>tribble()</code></li>
 </ul>
 </section>
 <section id="creating-tibbles-1" class="slide level2">
@@ -576,26 +523,29 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <pre><code>## # A tibble: 26 x 3
 ##        x     y     z
 ##    &lt;chr&gt; &lt;int&gt; &lt;int&gt;
-##  1     a     1    35
-##  2     b     2    20
-##  3     c     3   100
-##  4     d     4    83
-##  5     e     5    58
-##  6     f     6    44
-##  7     g     7    29
-##  8     h     8    41
-##  9     i     9    53
-## 10     j    10    79
+##  1     a     1    15
+##  2     b     2    44
+##  3     c     3    30
+##  4     d     4    17
+##  5     e     5    84
+##  6     f     6     7
+##  7     g     7    22
+##  8     h     8     6
+##  9     i     9    66
+## 10     j    10    19
 ## # ... with 16 more rows</code></pre>
+</section>
+<section id="section-3" class="slide level2" data-background="tibblefeatures.png">
+<h2></h2>
 </section>
 <section id="tibble-features" class="slide level2">
 <h2>tibble features</h2>
 <hr>
 <ul>
-<li>never changes input’s types</li>
-<li>never adjusts variable names</li>
-<li>never prints all rows</li>
-<li>never recycles vector of length greater than 1</li>
+<li class="fragment">never changes input’s types</li>
+<li class="fragment">never adjusts variable names</li>
+<li class="fragment">never prints all rows</li>
+<li class="fragment">never recycles vector of length greater than 1</li>
 </ul>
 </section>
 <section id="never-changes-inputs-types" class="slide level2">
@@ -607,16 +557,16 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <pre><code>## # A tibble: 26 x 3
 ##        x     y     z
 ##    &lt;chr&gt; &lt;int&gt; &lt;int&gt;
-##  1     a     1    81
-##  2     b     2    99
-##  3     c     3    39
-##  4     d     4    23
-##  5     e     5    60
-##  6     f     6     9
-##  7     g     7    20
-##  8     h     8    29
-##  9     i     9    78
-## 10     j    10    74
+##  1     a     1    84
+##  2     b     2    16
+##  3     c     3    14
+##  4     d     4    13
+##  5     e     5    49
+##  6     f     6    91
+##  7     g     7    59
+##  8     h     8    69
+##  9     i     9    97
+## 10     j    10    43
 ## # ... with 16 more rows</code></pre>
 </section>
 <section id="never-adjusts-variable-names" class="slide level2">
@@ -640,11 +590,11 @@ z &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">
 ##  1     1     a FALSE
 ##  2     2     a  TRUE
 ##  3     3     a  TRUE
-##  4     4     a FALSE
-##  5     5     a FALSE
-##  6     6     a  TRUE
-##  7     7     a  TRUE
-##  8     8     a  TRUE
+##  4     4     a  TRUE
+##  5     5     a  TRUE
+##  6     6     a FALSE
+##  7     7     a FALSE
+##  8     8     a FALSE
 ##  9     9     a  TRUE
 ## 10    10     a FALSE
 ## # ... with 90 more rows</code></pre>
@@ -658,17 +608,20 @@ z &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">
 <span class="kw">tibble</span>(x, y, z)
 Error <span class="cf">in</span> <span class="kw">overscope_eval_next</span>(overscope, expr) <span class="op">:</span><span class="st"> </span>object <span class="st">'y'</span> not found</code></pre></div>
 </section>
+<section id="section-4" class="slide level2" data-background="creatingtibbles2.png">
+<h2></h2>
+</section>
 <section id="creating-tibbles-ii" class="slide level2">
 <h2>Creating tibbles II</h2>
 <hr>
 <p>In the previous section, we created tibbles using <code>tibble()</code> by directly entering data as arguments. In this section, we will convert the following objects to tibble using <code>as_tibble()</code>:</p>
 <ul>
-<li>data.frame</li>
-<li>list</li>
-<li>matrix</li>
-<li>table</li>
-<li>tbl_df</li>
-<li>atomic vectors</li>
+<li class="fragment">data.frame</li>
+<li class="fragment">list</li>
+<li class="fragment">matrix</li>
+<li class="fragment">table</li>
+<li class="fragment">tbl_df</li>
+<li class="fragment">atomic vectors</li>
 </ul>
 </section>
 <section id="dataframes" class="slide level2">
@@ -698,16 +651,16 @@ Error <span class="cf">in</span> <span class="kw">overscope_eval_next</span>(ove
 <pre><code>## # A tibble: 32 x 3
 ##        x     y          z
 ##    &lt;int&gt; &lt;int&gt;     &lt;list&gt;
-##  1     1    44 &lt;chr [26]&gt;
-##  2     2    31 &lt;chr [26]&gt;
-##  3     3    46 &lt;chr [26]&gt;
-##  4     4    14 &lt;chr [26]&gt;
-##  5     5    87 &lt;chr [26]&gt;
-##  6     6     8 &lt;chr [26]&gt;
-##  7     7    99 &lt;chr [26]&gt;
-##  8     8    81 &lt;chr [26]&gt;
-##  9     9    29 &lt;chr [26]&gt;
-## 10    10    34 &lt;chr [26]&gt;
+##  1     1    24 &lt;chr [26]&gt;
+##  2     2    74 &lt;chr [26]&gt;
+##  3     3    73 &lt;chr [26]&gt;
+##  4     4    66 &lt;chr [26]&gt;
+##  5     5    96 &lt;chr [26]&gt;
+##  6     6    36 &lt;chr [26]&gt;
+##  7     7    37 &lt;chr [26]&gt;
+##  8     8    17 &lt;chr [26]&gt;
+##  9     9    58 &lt;chr [26]&gt;
+## 10    10    41 &lt;chr [26]&gt;
 ## # ... with 22 more rows</code></pre>
 </section>
 <section id="matrix" class="slide level2">
@@ -719,16 +672,16 @@ Error <span class="cf">in</span> <span class="kw">overscope_eval_next</span>(ove
 <pre><code>## # A tibble: 100 x 26
 ##        a     b     c     d     e     f     g     h     i     j     k     l
 ##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
-##  1   722   152    94   676   298   129   525   714    25    41   767   662
-##  2   958   760   614   351   282   391   470   553   764   849   462   594
-##  3    52   978   266   455   897   954   215   959   804   415   819   119
-##  4   218   194   599   890   206   348   420    40   332   284    72   573
-##  5   357    47   951    11   655   343   432   444    58   786   775   338
-##  6   510   671   322   586   592   334   301   272   860   231   223   834
-##  7   310    75   497   565   864    58   642   869     2   710   904   464
-##  8   530   683   834   243   984   700   274   684   802    28   794   195
-##  9   360   108   567   516   307   345   995   866   960   477   140   142
-## 10   328    29   632   867   550   900   364   845   242   700   600   579
+##  1   886   844   116   751   435   411   355   270   478   615   656   408
+##  2   716   920   740   229    64   728   248   417   490   954   325   800
+##  3   890   965   913   842   597     9   205   724    78   112   895   640
+##  4   758   361   421   382   859   894   918    89   274   853   730   271
+##  5   118   744   447   530   399   960   558   600   967   405   114   375
+##  6   122   262   924    72   576   570   944   760   975   970   630   458
+##  7   697   540   709   372   132   257   863   830   329   188   433   210
+##  8   295   635   914   802   597   170   998   564   678   624   535   460
+##  9   702   988   400   413   722   797   127   344   344   338   840   570
+## 10   600   476   524   757   256   107   797    80   147   140   262   380
 ## # ... with 90 more rows, and 14 more variables: m &lt;int&gt;, n &lt;int&gt;, o &lt;int&gt;,
 ## #   p &lt;int&gt;, q &lt;int&gt;, r &lt;int&gt;, s &lt;int&gt;, t &lt;int&gt;, u &lt;int&gt;, v &lt;int&gt;,
 ## #   w &lt;int&gt;, x &lt;int&gt;, y &lt;int&gt;, z &lt;int&gt;</code></pre>
@@ -765,6 +718,9 @@ Error <span class="cf">in</span> <span class="kw">overscope_eval_next</span>(ove
 ## 10          4.9         3.1          1.5         0.1  setosa
 ## # ... with 140 more rows</code></pre>
 </section>
+<section id="section-5" class="slide level2" data-background="enframe.png">
+<h2></h2>
+</section>
 <section id="atomic-vectors" class="slide level2">
 <h2>atomic vectors</h2>
 <hr>
@@ -800,15 +756,18 @@ Error <span class="cf">in</span> <span class="kw">overscope_eval_next</span>(ove
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is_tibble</span>(<span class="kw">as_tibble</span>(mtcars))</code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 </section>
+<section id="section-6" class="slide level2" data-background="tribble.png">
+<h2></h2>
+</section>
 <section id="tribble" class="slide level2">
 <h2>Tribble</h2>
 <hr>
 <p>Another way to create tibbles is using <code>tribble()</code>:</p>
 <ul>
-<li>it is short for transposed tibbles</li>
-<li>it is customized for data entry in code</li>
-<li>column names start with <code>~</code></li>
-<li>and values are separated by commas</li>
+<li class="fragment">it is short for transposed tibbles</li>
+<li class="fragment">it is customized for data entry in code</li>
+<li class="fragment">column names start with <code>~</code></li>
+<li class="fragment">and values are separated by commas</li>
 </ul>
 </section>
 <section id="tribble-1" class="slide level2">
@@ -839,6 +798,9 @@ Error <span class="cf">in</span> <span class="kw">overscope_eval_next</span>(ove
 ##     ` `     `2`   `:)`
 ##   &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;
 ## 1 space integer smiley</code></pre>
+</section>
+<section id="section-7" class="slide level2" data-background="manipulatetibble.png">
+<h2></h2>
 </section>
 <section id="add-rows" class="slide level2">
 <h2>Add Rows</h2>
@@ -1013,27 +975,44 @@ browsers</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">has_name</span>(mtcars, <span class="st">'gears'</span>)</code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 </section>
+<section id="section-8" class="slide level2" data-background="tibblesummary.png">
+<h2></h2>
+</section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
 <hr>
 <ul>
-<li><code>tibble()</code>: create tibbles</li>
-<li><code>as_tibble()</code>: coerce other objects to tibble</li>
-<li><code>enframe()</code>: coerce vector to tibble</li>
-<li><code>is_tibble()</code>: test if an object is a tibble</li>
-<li><code>tribble()</code>: create tibble using data entry</li>
-<li><code>add_row()</code>: add a new row</li>
-<li><code>add_column()</code>: add a new column</li>
-<li><code>has_rownames()</code>: check whether a data set has rownames</li>
-<li><code>remove_rownames()</code>: remove rownames from data</li>
-<li><code>rownames_to_colum()</code>: coerce rowname to first column</li>
-<li><code>column_to_rownames()</code>: coerce first column to rownames</li>
-<li><code>glimpse()</code>: overview of data</li>
-<li><code>has_name()</code>: check if tibble has a specific column</li>
+<li class="fragment">use <code>tibble()</code> to create tibbles</li>
+<li class="fragment">use <code>as_tibble()</code> to coerce other objects to tibble</li>
+<li class="fragment">use <code>enframe()</code> to coerce vector to tibble</li>
+<li class="fragment">use <code>tribble()</code> to create tibble using data entry</li>
 </ul>
 </section>
-<section id="section-2" class="slide level2" data-background="thankyou.png">
+<section id="summary-1" class="slide level2">
+<h2>Summary</h2>
+<hr>
+<ul>
+<li class="fragment">use <code>add_row()</code> to add a new row</li>
+<li class="fragment">use <code>add_column()</code> to add a new column</li>
+<li class="fragment">use <code>remove_rownames()</code> to remove rownames from data</li>
+<li class="fragment">use <code>rownames_to_colum()</code> to coerce rowname to first column</li>
+<li class="fragment">use <code>column_to_rownames()</code> to coerce first column to rownames</li>
+</ul>
+</section>
+<section id="summary-2" class="slide level2">
+<h2>Summary</h2>
+<hr>
+<ul>
+<li class="fragment">use <code>is_tibble()</code> to test if an object is a tibble</li>
+<li class="fragment">use <code>has_rownames()</code> to check whether a data set has rownames</li>
+<li class="fragment">use <code>has_name()</code> to check if tibble has a specific column</li>
+<li class="fragment">use <code>glimpse()</code> to get an overview of data</li>
+</ul>
+</section>
+<section id="section-9" class="slide level2" data-background="thankyou.png">
 <h2></h2>
+<!-- To do: -->
+<!--   - what are tibbles -->
 </section>
     </div>
   </div>

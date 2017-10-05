@@ -2,12 +2,6 @@
     text-align: left;
     font-size: 20px;
   }
-  .reveal body:after {
-    position: fixed;
-    bottom: 3.5em;
-    left: 3.5em;
-    box-shadow: 5px 5px 10px #000; 
-  }
   .reveal hr {
     border-color: #0077aa;
   }
@@ -17,7 +11,11 @@
     color: #0077aa;
     font-family: 'Helvetica Neue';
   }
-
+  .reveal img {
+    position: absolute;
+    width: 738px;
+    height: 269px;
+  }
   .reveal h2 {
     font-size: 22px;
     color: #0077aa;
