@@ -69,6 +69,8 @@ customer <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/d
 customer
 ```
 
+## {data-background="canva_join.png"}
+
 ## {data-background="innerjoin.png"}
 
 ## inner join
@@ -78,6 +80,8 @@ customer
 `inner_join()` returns all rows from x where there are matching values in y, and all columns from x and y. If there are multiple matches between x and y, all combination of the matches are returned.
 
 ![inner join](inner_join.png)
+
+## {data-background="canva_inner.png"}
 
 ## inner join
 
@@ -98,6 +102,8 @@ customer %>%
 
 ![inner join](left_join.png)
 
+## {data-background="canva_left.png"}
+
 ## left join
 
 <hr>
@@ -117,6 +123,8 @@ customer %>%
 
 ![inner join](right_join.png)
 
+## {data-background="canva_right.png"}
+
 ## right join
 
 <hr>
@@ -127,6 +135,8 @@ customer %>%
 ```
 
 ## {data-background="semijoin.png"}
+
+## {data-background="canva_semi.png"}
 
 ## semi join
 
@@ -145,6 +155,8 @@ customer %>%
 
 ## {data-background="antijoin.png"}
 
+## {data-background="canva_anti.png"}
+
 ## anti join
 
 <hr>
@@ -161,6 +173,8 @@ customer %>%
 ```
 
 ## {data-background="fulljoin.png"}
+
+## {data-background="canva_full.png"}
 
 ## full join
 
