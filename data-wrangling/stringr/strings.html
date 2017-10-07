@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <title>Hacking strings with stringr</title>
+  <title></title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -91,6 +91,7 @@ code > span.in { color: #008000; } /* Information */
 
     <style type="text/css">code{white-space: pre;}</style>
 
+    <link href="data:text/css;charset=utf-8,%2Ereveal%20p%20%7B%0Atext%2Dalign%3A%20left%3B%0Afont%2Dsize%3A%2020px%3B%0A%7D%0A%2Ereveal%20body%3Aafter%20%7B%0Aposition%3A%20fixed%3B%0Abottom%3A%203%2E5em%3B%0Aleft%3A%203%2E5em%3B%0Abox%2Dshadow%3A%205px%205px%2010px%20%23000%3B%20%7D%0A%2Ereveal%20hr%20%7B%0Aborder%2Dcolor%3A%20%230077aa%3B%0A%7D%0A%2Ereveal%20h1%2C%20h2%2C%20h3%2C%20h4%2C%20h5%2C%20h6%20%7B%0Atext%2Dtransform%3A%20capitalize%3B%0Atext%2Dalign%3A%20center%3B%0Acolor%3A%20%230077aa%3B%0Afont%2Dfamily%3A%20%27Helvetica%20Neue%27%3B%0A%7D%0A%2Ereveal%20h2%20%7B%0Afont%2Dsize%3A%2022px%3B%0Acolor%3A%20%230077aa%3B%0A%7D%0A%2Ereveal%20ul%20%7B%0Adisplay%3A%20block%3B%0A%7D%0A%2Ereveal%20ul%20li%20%7B%0Acolor%3A%20%233c3c3c%3B%20%0Alist%2Dstyle%3A%20none%3B%20font%2Dsize%3A%2020px%3B%0A%7D%0A%2Ereveal%20ul%20li%3A%3Abefore%20%7B%0Acolor%3A%20%23006b6e%3B%20%0Acontent%3A%20%22%5C2022%22%3B%20%0Afont%2Dsize%3A%201em%3B%20%20padding%2Dright%3A%201%2E1225em%3B%20%0Aposition%3A%20relative%3B%0Atop%3A%200em%3B%20%0A%7D%0A%2Ereveal%20ul%20%7B%0Aline%2Dheight%3A150%25%0A%7D%0A%2Ereveal%20%2Efragment%20%7B%0Afont%2Dsize%3A%2020px%3B%0A%7D%0A%2Ereveal%20ol%20%7B%0Adisplay%3A%20block%3B%0A%7D" rel="stylesheet" />
 
 <!-- Printing and PDF exports -->
 <script id="paper-css" type="application/dynamic-css">
@@ -479,71 +480,12 @@ document.getElementsByTagName('head')[0].appendChild(style);
   <div class="reveal">
     <div class="slides">
 
-<section>
-    <h1 class="title">Hacking strings with stringr</h1>
-</section>
 
+<section id="section" class="slide level2" data-background="stringr.png">
+<h2></h2>
+</section>
 <section id="agenda" class="slide level2">
 <h2>Agenda</h2>
-<style type="text/css">
-  .reveal p {
-    text-align: left;
-    font-size: 20px;
-  }
-  .reveal body:after {
-    content: url(handshake.png);
-    position: fixed;
-    bottom: 3.5em;
-    left: 3.5em;
-    box-shadow: 5px 5px 10px #000; 
-  }
-  .reveal hr {
-    border-color: #0077aa;
-  }
-  .reveal h1, h2, h3, h4, h5, h6 {
-    text-transform: capitalize;
-    text-align: center;
-    color: #0077aa;
-    font-family: 'Helvetica Neue';
-  }
-
-  .reveal h2 {
-    font-size: 22px;
-    color: #0077aa;
-  }
-  .reveal ul {
-    display: block;
-  }
-  .reveal ul li {
-    color: #3c3c3c; 
-    /* set color of list item text */
-    list-style: none; 
-    font-size: 20px;
-  }
-
-  .reveal ul li::before {
-      color: #006b6e;  
-      /* color of bullet or square */
-      content: "\2022"; 
-      /* Unicode of character to precede the list item */
-      font-size: 1em; 
-      /* em or %*/ 
-      padding-right: 1.1225em; 
-      /* use em*/
-      position: relative;
-      top: 0em; 
-      /* use em or % */
-  }
-  .reveal ul {
-    line-height:150%
-  }
-  .reveal .fragment {
-    font-size: 20px;
-  }
-  .reveal ol {
-    display: block;
-  }
-</style>
 <hr>
 </section>
 <section id="introduction" class="slide level2">
@@ -558,12 +500,13 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <span class="kw">library</span>(tibble)
 <span class="kw">library</span>(magrittr)
 <span class="kw">library</span>(purrr)
-<span class="kw">library</span>(dplyr)</code></pre></div>
+<span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(readr)</code></pre></div>
 </section>
 <section id="data" class="slide level2">
 <h2>Data</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mockstring &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rsquaredacademy/datasets/master/mock_strings.csv'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mockstring &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rsquaredacademy/datasets/master/mock_strings.csv'</span>)</code></pre></div>
 <pre><code>## # A tibble: 1,000 x 16
 ##       id                bundle_id    app_name
 ##    &lt;int&gt;                    &lt;chr&gt;       &lt;chr&gt;
@@ -603,63 +546,296 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="extract-domain-name-from-email-ids" class="slide level2">
 <h2>extract domain name from email ids</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mockstring<span class="op">$</span>email[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="op">%&gt;%</span><span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">emails &lt;-<span class="st"> </span>mockstring <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pull</span>(email) <span class="op">%&gt;%</span>
+<span class="st">  </span>head
+emails</code></pre></div>
+<pre><code>## [1] &quot;mnewburn0@fastcompany.com&quot;    &quot;mdankersley1@digg.com&quot;       
+## [3] &quot;hgirhard2@altervista.org&quot;     &quot;pmcmenamy3@sciencedirect.com&quot;
+## [5] &quot;drisbrough4@bandcamp.com&quot;     &quot;cphlippi5@surveymonkey.com&quot;</code></pre>
+</section>
+<section id="extract-domain-name-from-email-ids-1" class="slide level2">
+<h2>extract domain name from email ids</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">emails <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">'@'</span>)</code></pre></div>
+<pre><code>## [[1]]
+## [1] &quot;mnewburn0&quot;       &quot;fastcompany.com&quot;
+## 
+## [[2]]
+## [1] &quot;mdankersley1&quot; &quot;digg.com&quot;    
+## 
+## [[3]]
+## [1] &quot;hgirhard2&quot;      &quot;altervista.org&quot;
+## 
+## [[4]]
+## [1] &quot;pmcmenamy3&quot;        &quot;sciencedirect.com&quot;
+## 
+## [[5]]
+## [1] &quot;drisbrough4&quot;  &quot;bandcamp.com&quot;
+## 
+## [[6]]
+## [1] &quot;cphlippi5&quot;        &quot;surveymonkey.com&quot;</code></pre>
+</section>
+<section id="extract-domain-name-from-email-ids-2" class="slide level2">
+<h2>extract domain name from email ids</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">emails <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">'@'</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">str_subset</span>(<span class="dt">pattern =</span> <span class="st">'</span><span class="ch">\\</span><span class="st">.'</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map_chr</span>(<span class="dv">2</span>)</code></pre></div>
+<pre><code>## [1] &quot;fastcompany.com&quot;   &quot;digg.com&quot;          &quot;altervista.org&quot;   
+## [4] &quot;sciencedirect.com&quot; &quot;bandcamp.com&quot;      &quot;surveymonkey.com&quot;</code></pre>
+</section>
+<section id="extract-domain-name-from-email-ids-3" class="slide level2">
+<h2>extract domain name from email ids</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">emails <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">'@'</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map_chr</span>(<span class="dv">2</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">'</span><span class="ch">\\</span><span class="st">.'</span>) </code></pre></div>
+<pre><code>## [[1]]
+## [1] &quot;fastcompany&quot; &quot;com&quot;        
+## 
+## [[2]]
+## [1] &quot;digg&quot; &quot;com&quot; 
+## 
+## [[3]]
+## [1] &quot;altervista&quot; &quot;org&quot;       
+## 
+## [[4]]
+## [1] &quot;sciencedirect&quot; &quot;com&quot;          
+## 
+## [[5]]
+## [1] &quot;bandcamp&quot; &quot;com&quot;     
+## 
+## [[6]]
+## [1] &quot;surveymonkey&quot; &quot;com&quot;</code></pre>
+</section>
+<section id="extract-domain-name-from-email-ids-4" class="slide level2">
+<h2>extract domain name from email ids</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">emails <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">'@'</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map_chr</span>(<span class="dv">2</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">'</span><span class="ch">\\</span><span class="st">.'</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span>purrr<span class="op">::</span><span class="kw">map_chr</span>(<span class="kw">extract</span>(<span class="dv">1</span>))</code></pre></div>
-<pre><code>## [1] &quot;fastcompany&quot; &quot;digg&quot;</code></pre>
+<span class="st">  </span><span class="kw">map_chr</span>(<span class="kw">extract</span>(<span class="dv">1</span>))</code></pre></div>
+<pre><code>## [1] &quot;fastcompany&quot;   &quot;digg&quot;          &quot;altervista&quot;    &quot;sciencedirect&quot;
+## [5] &quot;bandcamp&quot;      &quot;surveymonkey&quot;</code></pre>
+</section>
+<section id="extract-domain-name-from-email-ids-5" class="slide level2">
+<h2>extract domain name from email ids</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">emails <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">'@'</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map_chr</span>(<span class="dv">2</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">'</span><span class="ch">\\</span><span class="st">.'</span>, <span class="dt">simplify =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">extract</span>(, <span class="dv">2</span>)</code></pre></div>
+<pre><code>## [1] &quot;com&quot; &quot;com&quot; &quot;org&quot; &quot;com&quot; &quot;com&quot; &quot;com&quot;</code></pre>
 </section>
 <section id="extract-image-type-from-url" class="slide level2">
 <h2>Extract image type from URL</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mockstring<span class="op">$</span>imageurl[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>] <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">img &lt;-<span class="st"> </span>mockstring <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pull</span>(imageurl) <span class="op">%&gt;%</span>
+<span class="st">  </span>head
+img</code></pre></div>
+<pre><code>## [1] &quot;http://dummyimage.com/130x183.jpg/dddddd/000000&quot;
+## [2] &quot;http://dummyimage.com/106x217.bmp/dddddd/000000&quot;
+## [3] &quot;http://dummyimage.com/146x127.bmp/cc0000/ffffff&quot;
+## [4] &quot;http://dummyimage.com/181x194.png/5fa2dd/ffffff&quot;
+## [5] &quot;http://dummyimage.com/220x123.jpg/ff4444/ffffff&quot;
+## [6] &quot;http://dummyimage.com/118x176.bmp/dddddd/000000&quot;</code></pre>
+</section>
+<section id="extract-image-type-from-url-1" class="slide level2">
+<h2>Extract image type from URL</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">img <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">'</span><span class="ch">\\</span><span class="st">.'</span>)</code></pre></div>
+<pre><code>## [[1]]
+## [1] &quot;http://dummyimage&quot; &quot;com/130x183&quot;       &quot;jpg/dddddd/000000&quot;
+## 
+## [[2]]
+## [1] &quot;http://dummyimage&quot; &quot;com/106x217&quot;       &quot;bmp/dddddd/000000&quot;
+## 
+## [[3]]
+## [1] &quot;http://dummyimage&quot; &quot;com/146x127&quot;       &quot;bmp/cc0000/ffffff&quot;
+## 
+## [[4]]
+## [1] &quot;http://dummyimage&quot; &quot;com/181x194&quot;       &quot;png/5fa2dd/ffffff&quot;
+## 
+## [[5]]
+## [1] &quot;http://dummyimage&quot; &quot;com/220x123&quot;       &quot;jpg/ff4444/ffffff&quot;
+## 
+## [[6]]
+## [1] &quot;http://dummyimage&quot; &quot;com/118x176&quot;       &quot;bmp/dddddd/000000&quot;</code></pre>
+</section>
+<section id="extract-image-type-from-url-2" class="slide level2">
+<h2>Extract image type from URL</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">img <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">'</span><span class="ch">\\</span><span class="st">.'</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span>purrr<span class="op">::</span><span class="kw">map_chr</span>(<span class="kw">extract</span>(<span class="dv">3</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map_chr</span>(<span class="kw">extract</span>(<span class="dv">3</span>))</code></pre></div>
+<pre><code>## [1] &quot;jpg/dddddd/000000&quot; &quot;bmp/dddddd/000000&quot; &quot;bmp/cc0000/ffffff&quot;
+## [4] &quot;png/5fa2dd/ffffff&quot; &quot;jpg/ff4444/ffffff&quot; &quot;bmp/dddddd/000000&quot;</code></pre>
+</section>
+<section id="extract-image-type-from-url-3" class="slide level2">
+<h2>Extract image type from URL</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">img <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">'</span><span class="ch">\\</span><span class="st">.'</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map_chr</span>(<span class="kw">extract</span>(<span class="dv">3</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">start =</span> <span class="dv">1</span>, <span class="dt">end =</span> <span class="dv">3</span>)</code></pre></div>
-<pre><code>## [1] &quot;jpg&quot; &quot;bmp&quot; &quot;bmp&quot; &quot;png&quot; &quot;jpg&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mockstring<span class="op">$</span>imageurl[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>] <span class="op">%&gt;%</span>
+<pre><code>## [1] &quot;jpg&quot; &quot;bmp&quot; &quot;bmp&quot; &quot;png&quot; &quot;jpg&quot; &quot;bmp&quot;</code></pre>
+</section>
+<section id="extract-image-type-from-url-4" class="slide level2">
+<h2>Extract image type from URL</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">img <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">'</span><span class="ch">\\</span><span class="st">.'</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span>purrr<span class="op">::</span><span class="kw">map_chr</span>(<span class="kw">extract</span>(<span class="dv">3</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map_chr</span>(<span class="kw">extract</span>(<span class="dv">3</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">'/'</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span>purrr<span class="op">::</span><span class="kw">map_chr</span>(<span class="kw">extract</span>(<span class="dv">1</span>))</code></pre></div>
-<pre><code>## [1] &quot;jpg&quot; &quot;bmp&quot; &quot;bmp&quot; &quot;png&quot; &quot;jpg&quot;</code></pre>
+<span class="st">  </span><span class="kw">map_chr</span>(<span class="kw">extract</span>(<span class="dv">1</span>))</code></pre></div>
+<pre><code>## [1] &quot;jpg&quot; &quot;bmp&quot; &quot;bmp&quot; &quot;png&quot; &quot;jpg&quot; &quot;bmp&quot;</code></pre>
 </section>
 <section id="extract-image-dimesion-from-url" class="slide level2">
 <h2>Extract Image Dimesion from URL</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pattern &lt;-<span class="st"> &quot;[:digits:]&quot;</span>
-mockstring<span class="op">$</span>imageurl[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>] <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">img <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">str_locate</span>(<span class="dt">pattern =</span> <span class="st">&quot;[0-9]&quot;</span>) </code></pre></div>
 <pre><code>##      start end
 ## [1,]    23  23
 ## [2,]    23  23
 ## [3,]    23  23
 ## [4,]    23  23
-## [5,]    23  23</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mockstring<span class="op">$</span>imageurl[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>] <span class="op">%&gt;%</span>
+## [5,]    23  23
+## [6,]    23  23</code></pre>
+</section>
+<section id="extract-image-dimesion-from-url-1" class="slide level2">
+<h2>Extract Image Dimesion from URL</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">img <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">start =</span> <span class="dv">23</span>) </code></pre></div>
+<pre><code>## [1] &quot;130x183.jpg/dddddd/000000&quot; &quot;106x217.bmp/dddddd/000000&quot;
+## [3] &quot;146x127.bmp/cc0000/ffffff&quot; &quot;181x194.png/5fa2dd/ffffff&quot;
+## [5] &quot;220x123.jpg/ff4444/ffffff&quot; &quot;118x176.bmp/dddddd/000000&quot;</code></pre>
+</section>
+<section id="extract-image-dimesion-from-url-2" class="slide level2">
+<h2>Extract Image Dimesion from URL</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">img <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">start =</span> <span class="dv">23</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">'</span><span class="ch">\\</span><span class="st">.'</span>) </code></pre></div>
+<pre><code>## [[1]]
+## [1] &quot;130x183&quot;           &quot;jpg/dddddd/000000&quot;
+## 
+## [[2]]
+## [1] &quot;106x217&quot;           &quot;bmp/dddddd/000000&quot;
+## 
+## [[3]]
+## [1] &quot;146x127&quot;           &quot;bmp/cc0000/ffffff&quot;
+## 
+## [[4]]
+## [1] &quot;181x194&quot;           &quot;png/5fa2dd/ffffff&quot;
+## 
+## [[5]]
+## [1] &quot;220x123&quot;           &quot;jpg/ff4444/ffffff&quot;
+## 
+## [[6]]
+## [1] &quot;118x176&quot;           &quot;bmp/dddddd/000000&quot;</code></pre>
+</section>
+<section id="extract-image-dimesion-from-url-3" class="slide level2">
+<h2>Extract Image Dimesion from URL</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">img <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">start =</span> <span class="dv">23</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">'</span><span class="ch">\\</span><span class="st">.'</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span>purrr<span class="op">::</span><span class="kw">map_chr</span>(<span class="kw">extract</span>(<span class="dv">1</span>))</code></pre></div>
-<pre><code>## [1] &quot;130x183&quot; &quot;106x217&quot; &quot;146x127&quot; &quot;181x194&quot; &quot;220x123&quot;</code></pre>
+<span class="st">  </span><span class="kw">map_chr</span>(<span class="kw">extract</span>(<span class="dv">1</span>))</code></pre></div>
+<pre><code>## [1] &quot;130x183&quot; &quot;106x217&quot; &quot;146x127&quot; &quot;181x194&quot; &quot;220x123&quot; &quot;118x176&quot;</code></pre>
 </section>
 <section id="extract-http-protocol-from-url" class="slide level2">
 <h2>Extract HTTP Protocol from URL</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mockstring<span class="op">$</span>url[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>] <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">url1 &lt;-<span class="st"> </span>mockstring <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pull</span>(url) <span class="op">%&gt;%</span>
+<span class="st">  </span>first
+url1</code></pre></div>
+<pre><code>## [1] &quot;https://engadget.com/nascetur/ridiculus/mus/vivamus/vestibulum.jsp?eu=est&amp;tincidunt=risus&amp;in=auctor&amp;leo=sed&amp;maecenas=tristique&amp;pulvinar=in&amp;lobortis=tempus&amp;est=sit&amp;phasellus=amet&amp;sit=sem&amp;amet=fusce&amp;erat=consequat&amp;nulla=nulla&amp;tempus=nisl&amp;vivamus=nunc&amp;in=nisl&amp;felis=duis&amp;eu=bibendum&amp;sapien=felis&amp;cursus=sed&amp;vestibulum=interdum&amp;proin=venenatis&amp;eu=turpis&amp;mi=enim&amp;nulla=blandit&amp;ac=mi&amp;enim=in&amp;in=porttitor&amp;tempor=pede&amp;turpis=justo&amp;nec=eu&amp;euismod=massa&amp;scelerisque=donec&amp;quam=dapibus&amp;turpis=duis&amp;adipiscing=at&amp;lorem=velit&amp;vitae=eu&amp;mattis=est&amp;nibh=congue&amp;ligula=elementum&amp;nec=in&amp;sem=hac&amp;duis=habitasse&amp;aliquam=platea&amp;convallis=dictumst&amp;nunc=morbi&amp;proin=vestibulum&amp;at=velit&amp;turpis=id&amp;a=pretium&amp;pede=iaculis&amp;posuere=diam&amp;nonummy=erat&amp;integer=fermentum&amp;non=justo&amp;velit=nec&amp;donec=condimentum&amp;diam=neque&amp;neque=sapien&amp;vestibulum=placerat&amp;eget=ante&amp;vulputate=nulla&amp;ut=justo&amp;ultrices=aliquam&amp;vel=quis&amp;augue=turpis&amp;vestibulum=eget&amp;ante=elit&amp;ipsum=sodales&amp;primis=scelerisque&amp;in=mauris&amp;faucibus=sit&amp;orci=amet&amp;luctus=eros&amp;et=suspendisse&amp;ultrices=accumsan&amp;posuere=tortor&amp;cubilia=quis&amp;curae=turpis&amp;donec=sed&amp;pharetra=ante&amp;magna=vivamus&amp;vestibulum=tortor&amp;aliquet=duis&amp;ultrices=mattis&amp;erat=egestas&amp;tortor=metus&amp;sollicitudin=aenean&amp;mi=fermentum&amp;sit=donec&quot;</code></pre>
+</section>
+<section id="extract-http-protocol-from-url-1" class="slide level2">
+<h2>Extract HTTP Protocol from URL</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">url1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">'://'</span>) </code></pre></div>
+<pre><code>## [[1]]
+## [1] &quot;https&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+## [2] &quot;engadget.com/nascetur/ridiculus/mus/vivamus/vestibulum.jsp?eu=est&amp;tincidunt=risus&amp;in=auctor&amp;leo=sed&amp;maecenas=tristique&amp;pulvinar=in&amp;lobortis=tempus&amp;est=sit&amp;phasellus=amet&amp;sit=sem&amp;amet=fusce&amp;erat=consequat&amp;nulla=nulla&amp;tempus=nisl&amp;vivamus=nunc&amp;in=nisl&amp;felis=duis&amp;eu=bibendum&amp;sapien=felis&amp;cursus=sed&amp;vestibulum=interdum&amp;proin=venenatis&amp;eu=turpis&amp;mi=enim&amp;nulla=blandit&amp;ac=mi&amp;enim=in&amp;in=porttitor&amp;tempor=pede&amp;turpis=justo&amp;nec=eu&amp;euismod=massa&amp;scelerisque=donec&amp;quam=dapibus&amp;turpis=duis&amp;adipiscing=at&amp;lorem=velit&amp;vitae=eu&amp;mattis=est&amp;nibh=congue&amp;ligula=elementum&amp;nec=in&amp;sem=hac&amp;duis=habitasse&amp;aliquam=platea&amp;convallis=dictumst&amp;nunc=morbi&amp;proin=vestibulum&amp;at=velit&amp;turpis=id&amp;a=pretium&amp;pede=iaculis&amp;posuere=diam&amp;nonummy=erat&amp;integer=fermentum&amp;non=justo&amp;velit=nec&amp;donec=condimentum&amp;diam=neque&amp;neque=sapien&amp;vestibulum=placerat&amp;eget=ante&amp;vulputate=nulla&amp;ut=justo&amp;ultrices=aliquam&amp;vel=quis&amp;augue=turpis&amp;vestibulum=eget&amp;ante=elit&amp;ipsum=sodales&amp;primis=scelerisque&amp;in=mauris&amp;faucibus=sit&amp;orci=amet&amp;luctus=eros&amp;et=suspendisse&amp;ultrices=accumsan&amp;posuere=tortor&amp;cubilia=quis&amp;curae=turpis&amp;donec=sed&amp;pharetra=ante&amp;magna=vivamus&amp;vestibulum=tortor&amp;aliquet=duis&amp;ultrices=mattis&amp;erat=egestas&amp;tortor=metus&amp;sollicitudin=aenean&amp;mi=fermentum&amp;sit=donec&quot;</code></pre>
+</section>
+<section id="extract-http-protocol-from-url-2" class="slide level2">
+<h2>Extract HTTP Protocol from URL</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">url1 <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">'://'</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map_chr</span>(<span class="kw">extract</span>(<span class="dv">1</span>))</code></pre></div>
-<pre><code>## [1] &quot;https&quot; &quot;http&quot;  &quot;https&quot; &quot;http&quot;  &quot;https&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">k &lt;-<span class="st"> </span>mockstring<span class="op">$</span>url[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>] <span class="op">%&gt;%</span>
+<pre><code>## [1] &quot;https&quot;</code></pre>
+</section>
+<section id="extract-http-protocol-from-url-3" class="slide level2">
+<h2>Extract HTTP Protocol from URL</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">url1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_locate</span>(<span class="dt">pattern =</span> <span class="st">'://'</span>) </code></pre></div>
+<pre><code>##      start end
+## [1,]     6   8</code></pre>
+</section>
+<section id="extract-http-protocol-from-url-4" class="slide level2">
+<h2>Extract HTTP Protocol from URL</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">url1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_locate</span>(<span class="dt">pattern =</span> <span class="st">'://'</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">data.frame</span>() </code></pre></div>
+<pre><code>##   start end
+## 1     6   8</code></pre>
+</section>
+<section id="extract-http-protocol-from-url-5" class="slide level2">
+<h2>Extract HTTP Protocol from URL</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">url1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_locate</span>(<span class="dt">pattern =</span> <span class="st">'://'</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">extract2</span>(<span class="st">'start'</span>) </code></pre></div>
+<pre><code>## [1] 6</code></pre>
+</section>
+<section id="extract-http-protocol-from-url-6" class="slide level2">
+<h2>Extract HTTP Protocol from URL</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">url1 <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">str_locate</span>(<span class="dt">pattern =</span> <span class="st">'://'</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">extract2</span>(<span class="st">'start'</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">subtract</span>(<span class="dv">1</span>)
-
-mockstring<span class="op">$</span>url[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>] <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">subtract</span>(<span class="dv">1</span>)</code></pre></div>
+<pre><code>## [1] 5</code></pre>
+</section>
+<section id="extract-http-protocol-from-url-7" class="slide level2">
+<h2>Extract HTTP Protocol from URL</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">urls &lt;-<span class="st"> </span>mockstring <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pull</span>(url) <span class="op">%&gt;%</span>
+<span class="st">  </span>head</code></pre></div>
+</section>
+<section id="extract-http-protocol-from-url-8" class="slide level2">
+<h2>Extract HTTP Protocol from URL</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">k &lt;-<span class="st"> </span>urls <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_locate</span>(<span class="dt">pattern =</span> <span class="st">'://'</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">extract2</span>(<span class="st">'start'</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">subtract</span>(<span class="dv">1</span>)</code></pre></div>
+</section>
+<section id="extract-http-protocol-from-url-9" class="slide level2">
+<h2>Extract HTTP Protocol from URL</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">urls <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">start =</span> <span class="dv">1</span>, <span class="dt">end =</span> k)</code></pre></div>
-<pre><code>## [1] &quot;https&quot; &quot;http&quot;  &quot;https&quot; &quot;http&quot;  &quot;https&quot;</code></pre>
+<pre><code>## [1] &quot;https&quot; &quot;http&quot;  &quot;https&quot; &quot;http&quot;  &quot;https&quot; &quot;https&quot;</code></pre>
 </section>
 <section id="extract-domain-name" class="slide level2">
 <h2>Extract Domain Name</h2>
@@ -673,7 +849,10 @@ mockstring<span class="op">$</span>url[<span class="dv">1</span><span class="op"
 <span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">'</span><span class="ch">\\</span><span class="st">.'</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map_chr</span>(<span class="kw">extract</span>(<span class="dv">1</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">start =</span> k <span class="op">+</span><span class="st"> </span><span class="dv">4</span>)</code></pre></div>
-<pre><code>## [1] &quot;engadget&quot;   &quot;delicious&quot;  &quot;w3&quot;         &quot;indiatimes&quot; &quot;tumblr&quot;</code></pre>
+<pre><code>## Warning in stri_sub(string, from = start, to = end): longer object length
+## is not a multiple of shorter object length</code></pre>
+<pre><code>## [1] &quot;engadget&quot;   &quot;delicious&quot;  &quot;w3&quot;         &quot;indiatimes&quot; &quot;tumblr&quot;    
+## [6] &quot;engadget&quot;</code></pre>
 </section>
 <section id="extract-domain-extension" class="slide level2">
 <h2>extract domain extension</h2>
@@ -754,15 +933,12 @@ q</code></pre></div>
 <span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">start =</span> d, <span class="dt">end =</span> q)</code></pre></div>
 <pre><code>## [1] &quot;jsp&quot;  &quot;json&quot; &quot;json&quot;</code></pre>
 </section>
-<section id="section" class="slide level2" data-background="thankyou.png">
+<section id="section-1" class="slide level2" data-background="thankyou.png">
 <h2></h2>
 <!-- To do: -->
-<!--   - add intro slide -->
 <!--   - add agenda -->
 <!--   - describe data in case study -->
 <!--   - data dictionary -->
-<!--   - introduce functions before using them in case study -->
-<!--   - create background image for sections -->
 </section>
     </div>
   </div>

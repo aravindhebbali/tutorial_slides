@@ -25,6 +25,7 @@ library(tibble)
 library(magrittr)
 library(purrr)
 library(dplyr)
+library(readr)
 ```
 
 ```{r str1, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
@@ -33,6 +34,7 @@ library(tibble)
 library(magrittr)
 library(purrr)
 library(dplyr)
+library(readr)
 ```
 
 ## Data
@@ -40,7 +42,7 @@ library(dplyr)
 <hr>
 
 ```{r import, eval=FALSE}
-mockstring <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/mock_strings.csv')
+mockstring <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/mock_strings.csv')
 ```
 
 ```{r show, echo=FALSE, eval=TRUE, message=FALSE}
@@ -69,64 +71,259 @@ mockstring
 
 <hr>
 
-```{r str2}
-mockstring$email[1:2] %>% 
-  str_split(pattern = '@') %>%
-  unlist() %>%
-  str_subset(pattern = '\\.') %>%
-  str_split(pattern = '\\.') %>%
-  purrr::map_chr(extract(1))
+```{r str15}
+emails <- mockstring %>%
+  pull(email) %>%
+  head
+emails
 ```
 
+## extract domain name from email ids
+
+<hr>
+
+```{r str16}
+emails %>%
+  str_split(pattern = '@')
+```
+
+## extract domain name from email ids
+
+<hr>
+
+```{r str17}
+emails %>%
+  str_split(pattern = '@') %>%
+  map_chr(2)
+```
+
+## extract domain name from email ids
+
+<hr>
+
+```{r str18}
+emails %>%
+  str_split(pattern = '@') %>%
+  map_chr(2) %>%
+  str_split(pattern = '\\.') 
+```
+
+## extract domain name from email ids
+
+<hr>
+
+```{r str19}
+emails %>%
+  str_split(pattern = '@') %>%
+  map_chr(2) %>%
+  str_split(pattern = '\\.') %>%
+  map_chr(extract(1))
+```
+
+## extract domain name from email ids
+
+<hr>
+
+```{r str20}
+emails %>%
+  str_split(pattern = '@') %>%
+  map_chr(2) %>%
+  str_split(pattern = '\\.', simplify = TRUE) %>%
+  extract(, 2)
+```
 
 ## Extract image type from URL
 
 <hr>
 
-```{r str3}
-mockstring$imageurl[1:5] %>%
-  str_split(pattern = '\\.') %>%
-  purrr::map_chr(extract(3)) %>%
-  str_sub(start = 1, end = 3)
+```{r str21}
+img <- mockstring %>%
+  pull(imageurl) %>%
+  head
+img
+```
 
-mockstring$imageurl[1:5] %>%
+## Extract image type from URL
+
+<hr>
+
+```{r str22}
+img %>%
+  str_split(pattern = '\\.')
+```
+
+## Extract image type from URL
+
+<hr>
+
+```{r str23}
+img %>%
   str_split(pattern = '\\.') %>%
-  purrr::map_chr(extract(3)) %>%
+  map_chr(extract(3))
+```
+
+## Extract image type from URL
+
+<hr>
+
+```{r str24}
+img %>%
+  str_split(pattern = '\\.') %>%
+  map_chr(extract(3)) %>%
+  str_sub(start = 1, end = 3)
+``` 
+
+## Extract image type from URL
+
+<hr> 
+
+```{r str25}
+img %>%
+  str_split(pattern = '\\.') %>%
+  map_chr(extract(3)) %>%
   str_split(pattern = '/') %>%
-  purrr::map_chr(extract(1))
+  map_chr(extract(1))
 ```
 
 ## Extract Image Dimesion from URL
 
 <hr>
 
-```{r str4}
-pattern <- "[:digits:]"
-mockstring$imageurl[1:5] %>%
+```{r str26}
+img %>%
   str_locate(pattern = "[0-9]") 
-  
-mockstring$imageurl[1:5] %>%
+```
+
+## Extract Image Dimesion from URL
+
+<hr>
+
+```{r str27}
+img %>%
+  str_sub(start = 23) 
+```
+
+## Extract Image Dimesion from URL
+
+<hr>
+
+```{r str28}
+img %>%
+  str_sub(start = 23) %>%
+  str_split(pattern = '\\.') 
+```
+
+## Extract Image Dimesion from URL
+
+<hr>
+
+```{r str29}
+img %>%
   str_sub(start = 23) %>%
   str_split(pattern = '\\.') %>%
-  purrr::map_chr(extract(1))
+  map_chr(extract(1))
 ```
   
 ## Extract HTTP Protocol from URL
 
 <hr>
 
-```{r str6}
-mockstring$url[1:5] %>%
+```{r str30}
+url1 <- mockstring %>%
+  pull(url) %>%
+  first
+url1
+```
+
+## Extract HTTP Protocol from URL
+
+<hr>
+
+```{r str31}
+url1 %>%
+  str_split(pattern = '://') 
+```
+
+## Extract HTTP Protocol from URL
+
+<hr>
+
+```{r str32}
+url1 %>%
   str_split(pattern = '://') %>%
   map_chr(extract(1))
-  
-k <- mockstring$url[1:5] %>%
+```
+
+## Extract HTTP Protocol from URL
+
+<hr>
+
+```{r str33}
+url1 %>%
+  str_locate(pattern = '://') 
+```
+
+## Extract HTTP Protocol from URL
+
+<hr>
+
+```{r str34}
+url1 %>%
+  str_locate(pattern = '://') %>%
+  data.frame() 
+```
+
+## Extract HTTP Protocol from URL
+
+<hr>
+
+```{r str35}
+url1 %>%
+  str_locate(pattern = '://') %>%
+  data.frame() %>%
+  extract2('start') 
+```
+
+## Extract HTTP Protocol from URL
+
+<hr>
+
+```{r str36}
+url1 %>%
   str_locate(pattern = '://') %>%
   data.frame() %>%
   extract2('start') %>%
   subtract(1)
+```
 
-mockstring$url[1:5] %>%
+## Extract HTTP Protocol from URL
+
+<hr>
+
+```{r str37}
+urls <- mockstring %>%
+  pull(url) %>%
+  head
+```
+
+## Extract HTTP Protocol from URL
+
+<hr>
+
+```{r str38}
+k <- urls %>%
+  str_locate(pattern = '://') %>%
+  data.frame() %>%
+  extract2('start') %>%
+  subtract(1)
+```
+
+## Extract HTTP Protocol from URL
+
+<hr>
+
+```{r str39}
+urls %>%
   str_sub(start = 1, end = k)
 ```
 
@@ -239,9 +436,6 @@ mockstring$url[1:3] %>%
 ## {data-background="thankyou.png"}
 
 <!-- To do: -->
-<!--   - add intro slide -->
 <!--   - add agenda -->
 <!--   - describe data in case study -->
 <!--   - data dictionary -->
-<!--   - introduce functions before using them in case study -->
-<!--   - create background image for sections -->
