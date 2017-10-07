@@ -22,12 +22,14 @@ output: _output.yaml
 library(lubridate)
 library(dplyr)
 library(magrittr)
+library(readr)
 ```
 
 ```{r lub1, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
 library(lubridate)
 library(dplyr)
 library(magrittr)
+library(readr)
 ```
 
 ## Origin
@@ -54,7 +56,7 @@ pm(now())
 <hr>
 
 ```{r import, eval=FALSE}
-transact <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/transact.csv')
+transact <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/transact.csv')
 ```
 
 ```{r show, echo=FALSE, eval=TRUE, message=FALSE}
@@ -92,6 +94,17 @@ questions we have about the transact data.
 
 <hr>
 
+```{r lub18}
+this_day <- as_date('2017-03-23')
+day(this_day)
+month(this_day)
+year(this_day)
+```
+
+## Extract Date, Month & Year from Due Date
+
+<hr>
+
 ```{r lub2}
 transact %>%
   mutate(
@@ -100,6 +113,19 @@ transact %>%
     due_year = year(Due)
   )
 ```
+
+## compute days to settle invoice
+
+<hr>
+
+
+```{r lub19}
+course_start <- as_date('2017-04-12')
+course_end <- as_date('2017-04-21')
+course_duration <- course_end - course_start
+course_duration
+```
+
 
 ## compute days to settle invoice
 
@@ -144,12 +170,48 @@ transact %>%
   mutate(
     due_day = day(Due),
     due_month = month(Due),
-    days_due_month = days_in_month(due_month),
     due_year = year(Due),
     is_leap = leap_year(due_year)
   ) %>%
   select(-(Invoice), -(Payment)) %>%
-  filter(due_month == 2)
+  filter(due_month == 2 & due_day == 29)
+```
+
+## Shift Date
+
+```{r lab40}
+course_start + days(2)
+course_start + weeks(1)
+course_start + years(1)
+```
+
+## Interval
+
+<hr>
+
+```{r lub10}
+interval(course_start, course_end)
+```
+
+## Shift Interval
+
+```{r lab50}
+course_interval <- interval(course_start, course_end)
+course_interval %>%
+  int_shift(by = days(1))
+course_interval %>%
+  int_shift(by = weeks(1))
+course_interval %>%
+  int_shift(by = years(1))
+```
+
+## Intervals Overlap
+
+```{r lub60}
+vacation_start <- as_date('2017-04-19')
+vacation_end <- as_date('2017-04-25')
+vacation_interval <- interval(vacation_start, vacation_end)
+int_overlaps(course_interval, vacation_interval)
 ```
 
 ## how many invoices were settled within due date?
@@ -164,7 +226,7 @@ transact %>%
     due_pay_interval = interval(due_next, Payment),
     overlaps = int_overlaps(inv_due_interval, due_pay_interval)
   ) %>%
-  select(inv_due_interval, due_next, due_pay_interval, overlaps)
+  select(Invoice, Due, Payment, overlaps)
 ```
 
 ## how many invoices were settled within due date?
@@ -180,7 +242,14 @@ transact %>%
     due_pay_next = int_shift(due_pay_interval, by = days(1)),
     overlaps = int_overlaps(inv_due_interval, due_pay_next)
   ) %>%
-  select(inv_due_interval, due_pay_next, overlaps)
+  select(Invoice, Due, Payment, overlaps)
+```
+
+## Within
+
+```{r lub30}
+conference <- as_date('2017-04-15')
+conference %within% interval(course_start, course_end)
 ```
 
 ## how many invoices were settled within due date?
@@ -195,6 +264,19 @@ transact %>%
   ) %>%
   select(Due, Payment, overlaps)
 ```
+
+## Quarter
+
+<hr>
+
+```{r lub20}
+course_start
+course_start %>%
+  quarter()
+course_start %>%
+  quarter(with_year = TRUE)
+```
+
 
 ## Quarter
 
@@ -218,37 +300,14 @@ transact %>%
   )
 ```
 
-## Case Study
-
-<hr>
-
-```{r lub9}
-transact %<>%
-  mutate(
-    days_to_pay = Payment - Invoice
-  )
-```
-
 ## Duration
 
 <hr>
 
 ```{r lub15}
-transact %>%
-  mutate(
-    dseconds = duration(as.numeric(days_to_pay), 'days')
-  )
-```
-
-## Interval
-
-<hr>
-
-```{r lub10}
-transact %<>%
-  mutate(
-    inv_pay_int = interval(Invoice, Payment)
-  )
+course_duration %>%
+  as.numeric() %>%
+  duration(units = 'days')
 ```
 
 ## Case Study
@@ -256,10 +315,11 @@ transact %<>%
 <hr>
 
 ```{r lub11}
-transact %>%
-  mutate(
-    inv_pay_days = inv_pay_int / ddays()
-  )
+interval(course_start, course_end) / dseconds()
+interval(course_start, course_end) / dminutes()
+interval(course_start, course_end) / dhours()
+interval(course_start, course_end) / dweeks()
+interval(course_start, course_end) / dyears()
 ```
 
 ## Case Study
@@ -267,10 +327,12 @@ transact %>%
 <hr>
 
 ```{r lub16}
-transact %>%
-  mutate(
-    inv_pay_days = time_length(inv_pay_int, unit = "days")
-  )
+interval(course_start, course_end) %>%
+  time_length(unit = "seconds")
+interval(course_start, course_end) %>%
+  time_length(unit = "minutes")
+interval(course_start, course_end) %>%
+  time_length(unit = "hours")
 ```
 
 ## Case Study
@@ -278,15 +340,15 @@ transact %>%
 <hr>
 
 ```{r lub17}
-transact %>%
-  mutate(
-    inv_pay_days = as.period(inv_pay_int)
-  )
+interval(course_start, course_end) %>%
+  as.period(unit = "seconds")
+interval(course_start, course_end) %>%
+  as.period(unit = "minutes")
+interval(course_start, course_end) %>%
+  as.period(unit = "hours")
 ```
 
 ## {data-background="thankyou.png"}
 
 <!-- To do: -->
-<!--   - add intro slide -->
 <!--   - add agenda -->
-<!--   - introduce functions with simple examples before using them in case study -->
