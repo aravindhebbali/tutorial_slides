@@ -196,7 +196,5 @@ customer %>%
 ## {data-background="thankyou.png"}
 
 <!-- To do: -->
-<!--   - add intro slide -->
 <!--   - change agenda -->
 <!--   - describe data sets in case study slide -->
-<!--   - images for each type of join -->

@@ -25,6 +25,8 @@ In this module, we will explore a set of helper functions in order to:
 - extract/mutate data using predicate functions
 - count observations for different levels of a variable
 
+## {data-background="casestudy.png"}
+
 ## Case Study
 
 <hr>
@@ -63,14 +65,19 @@ ecom
 - order_value: order value of visitor (in dollars)
 
 
-## Data Sanitization
-
-<hr>
+## {data-background="sanitization.png"}
 
 ```{r dplyr1, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
 library(dplyr)
 options(tibble.width = Inf)
 ```
+
+## Data Sanitization
+
+<hr>
+
+- `distinct()`
+- `rename()`
 
 ## Traffic Sources
 
@@ -99,9 +106,7 @@ ecom %>%
   rename(time_on_site = duration)
 ```
 
-## Sampling Data
-
-<hr>
+## {data-background="sampling.png"}
 
 ## Sampling Data
 
@@ -142,10 +147,7 @@ ecom %>%
 ```
 
 
-## Extract Columns
-
-<hr>
-
+## {data-background="extract.png"}
 
 ## Extract Device Column
 
@@ -192,9 +194,7 @@ ecom %>%
   slice(n())
 ```
 
-## Tabulate 
-
-<hr>
+## {data-background="tabulate.png"}
 
 ## Total Observations in Data
 
@@ -254,6 +254,8 @@ ecom %>%
 ecom %>%
   count(referrer, purchase)
 ```
+
+## {data-background="sortfilter.png"}
 
 ## Top 2 referrers by orders
 
@@ -330,7 +332,5 @@ ecom %>%
 ## {data-background="thankyou.png"}
 
 <!-- To do: -->
-<!--   - add intro slide -->
 <!--   - explain case study data -->
-<!--   - make each section background image -->
 <!--   - list functions used in each section -->
