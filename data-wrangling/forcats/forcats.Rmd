@@ -25,6 +25,7 @@ library(magrittr)
 library(purrr)
 library(dplyr)
 library(ggplot2)
+library(readr)
 ```
 
 ```{r cat1, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
@@ -34,6 +35,7 @@ library(magrittr)
 library(purrr)
 library(dplyr)
 library(ggplot2)
+library(readr)
 ```
 
 ## Case Study
@@ -129,11 +131,66 @@ ggplot(refer_summary, aes(page, fct_reorder(referrer, page))) + geom_point()
 
 <hr>
 
+```{r cat21}
+ecom %>%
+  count(referrer, sort = TRUE)
+```
+
+## Plot Referrer Frequency (Descending Order)
+
+<hr>
+
+```{r cat22}
+ecom %>%
+  pull(referrer) %>%
+  as_factor() %>%
+  levels
+```
+
+## Plot Referrer Frequency (Descending Order)
+
+<hr>
+
+```{r cat23}
+ecom %>%
+  pull(referrer) %>%
+  as_factor() %>%
+  fct_infreq() %>%
+  levels
+```
+
+## Plot Referrer Frequency (Descending Order)
+
+<hr>
+
 ```{r cat4, fig.align='center', fig.width=6, fig.height=4}
 ecom %>%
   mutate(ref = referrer %>% fct_infreq()) %>%
   ggplot(aes(ref)) +
   geom_bar()
+```
+
+## Plot Referrer Frequency (Ascending Order)
+
+<hr>
+
+```{r cat24}
+ecom %>%
+  pull(referrer) %>%
+  as_factor() %>%
+  levels
+```
+
+## Plot Referrer Frequency (Ascending Order)
+
+<hr>
+
+```{r cat25}
+ecom %>%
+  pull(referrer) %>%
+  as_factor() %>%
+  fct_rev() %>%
+  levels 
 ```
 
 ## Plot Referrer Frequency (Ascending Order)
@@ -266,7 +323,6 @@ traffic$traffics %>% fct_lump(prop = -0.1) %>% table()
 ## {data-background="thankyou.png"}
 
 <!-- To do: -->
-<!--   - add intro slide -->
 <!--   - add agenda -->
 <!--   - describe data in case study -->
 <!--   - new section for case study -->
