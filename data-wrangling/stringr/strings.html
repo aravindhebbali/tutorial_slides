@@ -840,30 +840,143 @@ url1</code></pre></div>
 <section id="extract-domain-name" class="slide level2">
 <h2>Extract Domain Name</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span>mockstring<span class="op">$</span>url[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>] <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">url1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_locate_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;/&quot;</span>) </code></pre></div>
+<pre><code>## [[1]]
+##      start end
+## [1,]     7   7
+## [2,]     8   8
+## [3,]    21  21
+## [4,]    30  30
+## [5,]    40  40
+## [6,]    44  44
+## [7,]    52  52</code></pre>
+</section>
+<section id="extract-domain-name-1" class="slide level2">
+<h2>Extract Domain Name</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">url1 <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">str_locate_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;/&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">map_int</span>(<span class="kw">extract</span>(<span class="dv">3</span>))
-
-mockstring<span class="op">$</span>url[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>] <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map_int</span>(<span class="kw">extract</span>(<span class="dv">3</span>))</code></pre></div>
+<pre><code>## [1] 21</code></pre>
+</section>
+<section id="extract-domain-name-2" class="slide level2">
+<h2>Extract Domain Name</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span>url1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_locate_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;/&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map_int</span>(<span class="kw">extract</span>(<span class="dv">3</span>))</code></pre></div>
+</section>
+<section id="extract-domain-name-3" class="slide level2">
+<h2>Extract Domain Name</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">urls <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">end =</span> n) </code></pre></div>
+<pre><code>## [1] &quot;https://engadget.com/&quot; &quot;http://delicious.com/&quot; &quot;https://w3.org/sed/au&quot;
+## [4] &quot;http://indiatimes.com&quot; &quot;https://tumblr.com/id&quot; &quot;https://unblog.fr/est&quot;</code></pre>
+</section>
+<section id="extract-domain-name-4" class="slide level2">
+<h2>Extract Domain Name</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">urls <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">end =</span> n) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">'</span><span class="ch">\\</span><span class="st">.'</span>) </code></pre></div>
+<pre><code>## [[1]]
+## [1] &quot;https://engadget&quot; &quot;com/&quot;            
+## 
+## [[2]]
+## [1] &quot;http://delicious&quot; &quot;com/&quot;            
+## 
+## [[3]]
+## [1] &quot;https://w3&quot; &quot;org/sed/au&quot;
+## 
+## [[4]]
+## [1] &quot;http://indiatimes&quot; &quot;com&quot;              
+## 
+## [[5]]
+## [1] &quot;https://tumblr&quot; &quot;com/id&quot;        
+## 
+## [[6]]
+## [1] &quot;https://unblog&quot; &quot;fr/est&quot;</code></pre>
+</section>
+<section id="extract-domain-name-5" class="slide level2">
+<h2>Extract Domain Name</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">urls <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">end =</span> n) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">'</span><span class="ch">\\</span><span class="st">.'</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map_chr</span>(<span class="kw">extract</span>(<span class="dv">1</span>)) </code></pre></div>
+<pre><code>## [1] &quot;https://engadget&quot;  &quot;http://delicious&quot;  &quot;https://w3&quot;       
+## [4] &quot;http://indiatimes&quot; &quot;https://tumblr&quot;    &quot;https://unblog&quot;</code></pre>
+</section>
+<section id="extract-domain-name-6" class="slide level2">
+<h2>Extract Domain Name</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">urls <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">end =</span> n) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">'</span><span class="ch">\\</span><span class="st">.'</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map_chr</span>(<span class="kw">extract</span>(<span class="dv">1</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">start =</span> k <span class="op">+</span><span class="st"> </span><span class="dv">4</span>)</code></pre></div>
-<pre><code>## Warning in stri_sub(string, from = start, to = end): longer object length
-## is not a multiple of shorter object length</code></pre>
 <pre><code>## [1] &quot;engadget&quot;   &quot;delicious&quot;  &quot;w3&quot;         &quot;indiatimes&quot; &quot;tumblr&quot;    
-## [6] &quot;engadget&quot;</code></pre>
+## [6] &quot;unblog&quot;</code></pre>
 </section>
 <section id="extract-domain-extension" class="slide level2">
 <h2>extract domain extension</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mockstring<span class="op">$</span>url[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>] <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">url1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">end =</span> n) </code></pre></div>
+<pre><code>## [1] &quot;https://engadget.com/&quot;</code></pre>
+</section>
+<section id="extract-domain-extension-1" class="slide level2">
+<h2>extract domain extension</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">url1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">end =</span> n) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">'</span><span class="ch">\\</span><span class="st">.'</span>) </code></pre></div>
+<pre><code>## [[1]]
+## [1] &quot;https://engadget&quot; &quot;com/&quot;</code></pre>
+</section>
+<section id="extract-domain-extension-2" class="slide level2">
+<h2>extract domain extension</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">url1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">end =</span> n) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">'</span><span class="ch">\\</span><span class="st">.'</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map_chr</span>(<span class="kw">extract</span>(<span class="dv">2</span>)) </code></pre></div>
+<pre><code>## [1] &quot;com/&quot;</code></pre>
+</section>
+<section id="extract-domain-extension-3" class="slide level2">
+<h2>extract domain extension</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">url1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">end =</span> n) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">'</span><span class="ch">\\</span><span class="st">.'</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map_chr</span>(<span class="kw">extract</span>(<span class="dv">2</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">'/'</span>) </code></pre></div>
+<pre><code>## [[1]]
+## [1] &quot;com&quot; &quot;&quot;</code></pre>
+</section>
+<section id="extract-domain-extension-4" class="slide level2">
+<h2>extract domain extension</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">url1 <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">end =</span> n) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">'</span><span class="ch">\\</span><span class="st">.'</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map_chr</span>(<span class="kw">extract</span>(<span class="dv">2</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">'/'</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">map_chr</span>(<span class="kw">extract</span>(<span class="dv">1</span>))</code></pre></div>
-<pre><code>## [1] &quot;com&quot; &quot;com&quot; &quot;org&quot; &quot;com&quot; &quot;com&quot;</code></pre>
+<pre><code>## [1] &quot;com&quot;</code></pre>
+</section>
+<section id="extract-domain-extension-5" class="slide level2">
+<h2>extract domain extension</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">urls <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">end =</span> n) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">'</span><span class="ch">\\</span><span class="st">.'</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map_chr</span>(<span class="kw">extract</span>(<span class="dv">2</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="dt">pattern =</span> <span class="st">'/'</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map_chr</span>(<span class="kw">extract</span>(<span class="dv">1</span>))</code></pre></div>
+<pre><code>## [1] &quot;com&quot; &quot;com&quot; &quot;org&quot; &quot;com&quot; &quot;com&quot; &quot;fr&quot;</code></pre>
 </section>
 <section id="extract-file-type" class="slide level2">
 <h2>extract file type</h2>
@@ -937,6 +1050,7 @@ q</code></pre></div>
 <h2></h2>
 <!-- To do: -->
 <!--   - add agenda -->
+<!-- - explain patterns -->
 <!--   - describe data in case study -->
 <!--   - data dictionary -->
 </section>
