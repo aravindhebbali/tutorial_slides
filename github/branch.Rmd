@@ -1,0 +1,14 @@
+---
+output: _output.yaml
+---
+
+## Agenda
+
+- intro
+- create branch locally
+- create remote branch
+- sync local and remote branches
+- switch between branches
+- merge branch
+- delete branch
+

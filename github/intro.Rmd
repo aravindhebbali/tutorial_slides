@@ -1,0 +1,15 @@
+---
+output: _output.yaml
+---
+
+## Agenda
+
+- what is version control?
+- what is git?
+- why git?
+- what is github?
+- why github?
+- audience
+- pre-requisites
+- what is not covered?
+

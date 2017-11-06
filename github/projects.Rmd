@@ -1,0 +1,10 @@
+---
+output: _output.yaml
+---
+
+## Agenda
+
+- new project, github first
+- existing project, github first
+- existing project, github last
+

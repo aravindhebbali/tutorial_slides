@@ -1,0 +1,15 @@
+---
+output: _output.yaml
+---
+
+## Agenda
+
+- intro
+- repository
+- fork, watch and star
+- issues & reproducible examples
+- pull request
+- search for repos
+- continuous integration and code coverage
+
+

@@ -1,0 +1,11 @@
+---
+output: _output.yaml
+---
+
+## Agenda
+
+- GitHub account
+- install git
+- configure git
+- configure RStudio
+- git clients
