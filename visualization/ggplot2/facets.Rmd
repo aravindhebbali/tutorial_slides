@@ -1,19 +1,8 @@
 ---
-title: "ggplot2: Facets"
-output: 
-  revealjs::revealjs_presentation:
-    transition: slide
-    incremental: true
-    theme: default
-    highlight: haddock
-    center: false
-    reveal_options:
-      slideNumber: true
-      previewLinks: true
-    fig_height: 5
-    fig_width: 6
-    css: styles.css
+output: _output.yaml
 ---
+
+## {data-background="gg_facet.png"}
 
 ## Agenda
 
@@ -35,6 +24,8 @@ library(ggplot2)
 library(dplyr)
 library(tidyr)
 ```
+
+## {data-background="casestudy.png"}
 
 ## Data
 
@@ -73,6 +64,8 @@ Generate subplots that each display one subset of the data using
 
 - `facet_grid()`
 - `facet_wrap()`
+
+## {data-background="grid.png"}
 
 ## Columns
 
@@ -131,6 +124,8 @@ ggplot(ecom, aes(n_pages, duration)) +
   geom_point() + 
   facet_grid(device ~ purchase, switch = "both") 
 ```
+
+## {data-background="wrap.png"}
 
 ## Wrap
 

@@ -1,19 +1,8 @@
 ---
-title: "ggplot2: Box Plots"
-output: 
-  revealjs::revealjs_presentation:
-    transition: slide
-    incremental: true
-    theme: default
-    highlight: haddock
-    center: false
-    reveal_options:
-      slideNumber: true
-      previewLinks: true
-    fig_height: 5
-    fig_width: 6
-    css: styles.css
+output: _output.yaml
 ---
+
+## {data-background="gg_box.png"}
 
 ## Agenda
 
@@ -35,6 +24,18 @@ output:
 ## Intro
 
 <hr>
+
+The box plot is a standardized way of displaying the distribution of data based on the five number summary: minimum, first quartile, median, third quartile, and maximum. Box plots are useful for detecting outliers and for comparing distributions. It shows the shape, central tendancy and variability of the data.
+
+## Structure
+
+<hr>
+
+- The body of the boxplot consists of a "box" (hence, the name), which goes from the first quartile (Q1) to the third quartile (Q3). 
+- Within the box, a vertical line is drawn at the Q2, the median of the data set. 
+- Two horizontal lines, called whiskers, extend from the front and back of the box. 
+- The front whisker goes from Q1 to the smallest non-outlier in the data set, and the back whisker goes from Q3 to the largest non-outlier. 
+- If the data set includes one or more outliers, they are plotted separately as points on the chart. 
 
 ## Libraries
 
@@ -130,6 +131,8 @@ ggplot(ecom, aes(x = factor(device), y = n_visit)) +
   geom_jitter(width = 0.2, color = 'blue')
 ```
 
+## {data-background="outliers.png"}
+
 ## Outliers
 
 <hr>
@@ -190,6 +193,8 @@ ggplot(ecom) +
                outlier.color = 'blue', outlier.alpha = 0.3) +
   expand_limits(y = c(0, 1100))
 ```
+
+## {data-background="aesthetics.png"}
 
 ## Box Aesthetics
 

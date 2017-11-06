@@ -1,20 +1,8 @@
 ---
-output: 
-  revealjs::revealjs_presentation:
-    transition: slide
-    incremental: true
-    theme: default
-    highlight: haddock
-    center: false
-    reveal_options:
-      slideNumber: true
-      previewLinks: true
-    fig_height: 5
-    fig_width: 6
-    css: styles.css
+output: _output.yaml
 ---
 
-## {data-background="thankyou.png"}
+## {data-background="gg_bar.png"}
 
 ## Agenda
 
@@ -36,6 +24,15 @@ output:
 ## Intro
 
 <hr>
+
+A bar plot represents data in rectangular bars. The length of the bars are proportional to the values they represent. Bar plots can be either horizontal or vertical. The X axis of the plot represents the levels or the categories and the Y axis represents the frequency/count of the variable. 
+
+## Univariate Bar Plot
+
+<hr>
+
+A univariate bar plot represents a single categorical variable. The categories in the variable are represented on the X axis and their frequencies on the Y axis. In the below example, the `cyl` variable from the `mtcars` data set is visualized using a bar plot. The categories or levels are `4`, `6` and `8` which represent the number of cylinders in the automobile and are represented on the X axis. The frequency for each type of cylinder is represented by the Y axis.
+
 
 ## Libraries
 

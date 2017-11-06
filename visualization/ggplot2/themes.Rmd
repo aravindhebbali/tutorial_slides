@@ -1,20 +1,8 @@
 ---
-output: 
-  revealjs::revealjs_presentation:
-    transition: slide
-    incremental: true
-    theme: default
-    highlight: haddock
-    center: false
-    reveal_options:
-      slideNumber: true
-      previewLinks: true
-    fig_height: 5
-    fig_width: 6
-    css: styles.css
+output: _output.yaml
 ---
 
-## {data-background="thankyou.png"}
+## {data-background="gg_themes.png"}
 
 ## Agenda
 
@@ -22,23 +10,16 @@ output:
 
 In this module, we will learn to 
 
-- modify theme components
+- modify the appearance of all non data components of the plot such as
+    - axis
+    - legend
+    - panel
+    - plot area
+    - background
+    - margin
+    - facets
 - use different themes 
 
-
-## Intro
-
-<hr>
-
-Use `theme()` to modify the appearance of all non data components of the plot such as
-
-- axis
-- legend
-- panel
-- plot area
-- background
-- margin
-- facets
 
 ## Libraries
 

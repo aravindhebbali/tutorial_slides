@@ -1,81 +1,10 @@
 ---
-title: "ggplot2: Aesthetics"
-output: 
-  revealjs::revealjs_presentation:
-    transition: slide
-    incremental: true
-    theme: default
-    highlight: haddock
-    center: false
-    reveal_options:
-      slideNumber: true
-      previewLinks: true
-    fig_height: 5
-    fig_width: 6
+output: _output.yaml
 ---
 
+## {data-background="gg_aesthetics.png"}
+
 ## Agenda
-
-<style type="text/css">
-  .reveal p {
-    text-align: left;
-    font-size: 20px;
-  }
-  .reveal body:after {
-    content: url(handshake.png);
-    position: fixed;
-    bottom: 3.5em;
-    left: 3.5em;
-    box-shadow: 5px 5px 10px #000; 
-  }
-  .reveal hr {
-    border-color: #0077aa;
-  }
-  .reveal h1, h2, h3, h4, h5, h6 {
-    text-transform: capitalize;
-    text-align: center;
-    color: #0077aa;
-    font-family: 'Helvetica Neue';
-  }
-
-  .reveal h2 {
-    font-size: 22px;
-    color: #0077aa;
-  }
-  .reveal ul {
-    display: block;
-  }
-  .reveal ul li {
-    color: #3c3c3c; 
-    /* set color of list item text */
-    list-style: none; 
-    font-size: 20px;
-  }
-
-  .reveal ul li::before {
-      color: #006b6e;  
-      /* color of bullet or square */
-      content: "\2022"; 
-      /* Unicode of character to precede the list item */
-      font-size: 1em; 
-      /* em or %*/ 
-      padding-right: 1.1225em; 
-      /* use em*/
-      position: relative;
-      top: 0em; 
-      /* use em or % */
-  }
-  .reveal ul {
-    line-height:150%
-  }
-  .reveal .fragment {
-    font-size: 20px;
-  }
-  .reveal ol {
-    display: block;
-  }
-</style>
-
 
 <hr>
 
@@ -110,6 +39,8 @@ library(dplyr)
 library(tidyr)
 ```
 
+## {data-background="color.png"}
+
 ## Map Color to Variable
 
 <hr>
@@ -136,6 +67,8 @@ ggplot(mtcars, aes(x = disp, y = mpg)) +
 ggplot(mtcars, aes(x = disp, y = mpg)) +
   geom_point(color = 'blue')
 ```
+
+## {data-background="shape.png"}
 
 ## Map Shape to Variable
 
@@ -173,6 +106,8 @@ ggplot(mtcars, aes(x = disp, y = mpg)) +
   geom_point(shape = 5, color = 'blue')
 ```
 
+## {data-background="fill.png"}
+
 ## Fill
 
 <hr>
@@ -200,6 +135,8 @@ ggplot(mtcars, aes(x = disp, y = mpg)) +
   geom_point(shape = 22, color = 'blue')
 ```
 
+## {data-background="size.png"}
+
 ## Map Size to Variable (Continuous)
 
 <hr>
@@ -226,6 +163,8 @@ ggplot(mtcars, aes(x = disp, y = mpg)) +
 ggplot(mtcars, aes(x = disp, y = mpg)) +
   geom_point(aes(alpha = factor(cyl)), color = 'blue')
 ```
+
+## {data-background="line_aesthetics.png"}
 
 ## Line Color, Type & Width
 
@@ -347,6 +286,8 @@ ggplot(gdp2, aes(year, gdp, group = country)) +
   geom_line(aes(size = country))
 ```
 
+## {data-background="other_plots.png"}
+
 ## Other Plots
 
 <hr>
@@ -417,6 +358,4 @@ ggplot(ecom) +
 ## {data-background="thankyou.png"}
 
 <!-- To do: -->
-<!--   - add intro slide -->
 <!--   - change line plot color -->
-<!--   - add section slides -->

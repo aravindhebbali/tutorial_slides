@@ -1,20 +1,8 @@
 ---
-output: 
-  revealjs::revealjs_presentation:
-    transition: slide
-    incremental: true
-    theme: default
-    highlight: haddock
-    center: false
-    reveal_options:
-      slideNumber: true
-      previewLinks: true
-    fig_height: 5
-    fig_width: 6
-    css: styles.css
+output: _output.yaml
 ---
 
-## {data-background="thankyou.png"}
+## {data-background="gg_hist.png"}
 
 ## Agenda
 
@@ -34,6 +22,26 @@ output:
 ## Intro
 
 <hr>
+
+A histogram is a plot that can be used to examine the shape and spread of  continuous data. It looks very similar to a bar graph and can be used to detect outliers and skewness in data. The histogram graphically shows the following:
+
+- center (location) of the data
+- spread (dispersion) of the data
+- skewness
+- outliers
+- presence of multiple modes
+
+## Histograms
+
+<hr>
+
+To construct a histogram
+
+- the data is split into intervals called bins 
+- the intervals may or may not be equal sized 
+- for each bin, the number of data points that fall into it are counted (frequency) 
+- the Y axis of the histogram represents the frequency and 
+- the X axis represents the variable
 
 ## Libraries
 

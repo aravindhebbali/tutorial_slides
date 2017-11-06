@@ -1,20 +1,8 @@
 ---
-output: 
-  revealjs::revealjs_presentation:
-    transition: slide
-    incremental: true
-    theme: default
-    highlight: haddock
-    center: false
-    reveal_options:
-      slideNumber: true
-      previewLinks: true
-    fig_height: 5
-    fig_width: 6
-    css: styles.css
+output: _output.yaml
 ---
 
-## {data-background="thankyou.png"}
+## {data-background="gg_overlap.png"}
 
 ## Agenda
 
@@ -46,9 +34,11 @@ library(tidyr)
 
 <hr>
 
-Preserve the vertical position while adjusting the horizontal position.
-
-Create grouped bar plots.
+- `dodge`: preserve the vertical position while adjusting the horizontal position
+- `jitter`: add some noise to data points for better visualization
+- `nudege`: useful for adjusting text around points
+- `fill`:
+- `stack`:
 
 ## Dodge
 
