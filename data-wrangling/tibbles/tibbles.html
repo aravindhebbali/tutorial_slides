@@ -500,6 +500,12 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="what-are-tibbles" class="slide level2">
 <h2>What are tibbles?</h2>
 <hr>
+<blockquote>
+<p>A <strong>tibble</strong>, or <code>tbl_df</code>, is a modern reimagining of the data.frame, keeping what time has proven to be effective, and throwing out what is not. Tibbles are data.frames that are lazy and surly: they do less (i.e. they don’t change variable names or types, and don’t do partial matching) and complain more (e.g. when a variable does not exist). This forces you to confront problems earlier, typically leading to cleaner, more expressive code. Tibbles also have an enhanced <code>print method()</code> which makes them easier to use with large datasets containing complex objects.</p>
+</blockquote>
+<blockquote>
+<p>Source: <a href="http://tibble.tidyverse.org/" class="uri">http://tibble.tidyverse.org/</a></p>
+</blockquote>
 </section>
 <section id="section-2" class="slide level2" data-background="creatingtibbles.png">
 <h2></h2>
@@ -523,16 +529,16 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <pre><code>## # A tibble: 26 x 3
 ##        x     y     z
 ##    &lt;chr&gt; &lt;int&gt; &lt;int&gt;
-##  1     a     1    15
-##  2     b     2    44
-##  3     c     3    30
-##  4     d     4    17
-##  5     e     5    84
-##  6     f     6     7
-##  7     g     7    22
-##  8     h     8     6
-##  9     i     9    66
-## 10     j    10    19
+##  1     a     1    13
+##  2     b     2    31
+##  3     c     3    11
+##  4     d     4    58
+##  5     e     5    86
+##  6     f     6    90
+##  7     g     7    84
+##  8     h     8    18
+##  9     i     9    83
+## 10     j    10    80
 ## # ... with 16 more rows</code></pre>
 </section>
 <section id="section-3" class="slide level2" data-background="tibblefeatures.png">
@@ -557,16 +563,16 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <pre><code>## # A tibble: 26 x 3
 ##        x     y     z
 ##    &lt;chr&gt; &lt;int&gt; &lt;int&gt;
-##  1     a     1    84
-##  2     b     2    16
-##  3     c     3    14
-##  4     d     4    13
-##  5     e     5    49
-##  6     f     6    91
-##  7     g     7    59
-##  8     h     8    69
-##  9     i     9    97
-## 10     j    10    43
+##  1     a     1    53
+##  2     b     2    82
+##  3     c     3    11
+##  4     d     4    57
+##  5     e     5    26
+##  6     f     6     9
+##  7     g     7    24
+##  8     h     8    15
+##  9     i     9    31
+## 10     j    10    37
 ## # ... with 16 more rows</code></pre>
 </section>
 <section id="never-adjusts-variable-names" class="slide level2">
@@ -587,16 +593,16 @@ z &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">
 <pre><code>## # A tibble: 100 x 3
 ##        x     y     z
 ##    &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;
-##  1     1     a FALSE
-##  2     2     a  TRUE
-##  3     3     a  TRUE
+##  1     1     a  TRUE
+##  2     2     a FALSE
+##  3     3     a FALSE
 ##  4     4     a  TRUE
-##  5     5     a  TRUE
+##  5     5     a FALSE
 ##  6     6     a FALSE
-##  7     7     a FALSE
-##  8     8     a FALSE
-##  9     9     a  TRUE
-## 10    10     a FALSE
+##  7     7     a  TRUE
+##  8     8     a  TRUE
+##  9     9     a FALSE
+## 10    10     a  TRUE
 ## # ... with 90 more rows</code></pre>
 </section>
 <section id="never-recycle-vector-of-length-greater-than-1" class="slide level2">
@@ -651,16 +657,16 @@ Error <span class="cf">in</span> <span class="kw">overscope_eval_next</span>(ove
 <pre><code>## # A tibble: 32 x 3
 ##        x     y          z
 ##    &lt;int&gt; &lt;int&gt;     &lt;list&gt;
-##  1     1    24 &lt;chr [26]&gt;
-##  2     2    74 &lt;chr [26]&gt;
-##  3     3    73 &lt;chr [26]&gt;
-##  4     4    66 &lt;chr [26]&gt;
-##  5     5    96 &lt;chr [26]&gt;
-##  6     6    36 &lt;chr [26]&gt;
-##  7     7    37 &lt;chr [26]&gt;
-##  8     8    17 &lt;chr [26]&gt;
-##  9     9    58 &lt;chr [26]&gt;
-## 10    10    41 &lt;chr [26]&gt;
+##  1     1    26 &lt;chr [26]&gt;
+##  2     2    94 &lt;chr [26]&gt;
+##  3     3    43 &lt;chr [26]&gt;
+##  4     4    44 &lt;chr [26]&gt;
+##  5     5    76 &lt;chr [26]&gt;
+##  6     6    97 &lt;chr [26]&gt;
+##  7     7     5 &lt;chr [26]&gt;
+##  8     8    99 &lt;chr [26]&gt;
+##  9     9    13 &lt;chr [26]&gt;
+## 10    10    60 &lt;chr [26]&gt;
 ## # ... with 22 more rows</code></pre>
 </section>
 <section id="matrix" class="slide level2">
@@ -672,16 +678,16 @@ Error <span class="cf">in</span> <span class="kw">overscope_eval_next</span>(ove
 <pre><code>## # A tibble: 100 x 26
 ##        a     b     c     d     e     f     g     h     i     j     k     l
 ##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
-##  1   886   844   116   751   435   411   355   270   478   615   656   408
-##  2   716   920   740   229    64   728   248   417   490   954   325   800
-##  3   890   965   913   842   597     9   205   724    78   112   895   640
-##  4   758   361   421   382   859   894   918    89   274   853   730   271
-##  5   118   744   447   530   399   960   558   600   967   405   114   375
-##  6   122   262   924    72   576   570   944   760   975   970   630   458
-##  7   697   540   709   372   132   257   863   830   329   188   433   210
-##  8   295   635   914   802   597   170   998   564   678   624   535   460
-##  9   702   988   400   413   722   797   127   344   344   338   840   570
-## 10   600   476   524   757   256   107   797    80   147   140   262   380
+##  1   518   455   199   569   752   653   323   364   491   398   906   935
+##  2   863   525   931    66   339   158   639   425   111   122   246   247
+##  3   817   353   131   317    10   527   735   382   943   420   100   212
+##  4   818   179   518   208   780   805   260   326   109   923   543   543
+##  5   473    20   219    53   437   478   230   579   433   825    47   128
+##  6   886   284   392   848   177   154   205   941   201   709   871   634
+##  7   212   618   842   877     1   831   397   711   209   447   675   161
+##  8   943   764   599   977   677    48   917   320   655   190   790   784
+##  9   798   527   853    79   250    78   350   982   220   807   886   330
+## 10   240   435   374   296   859   762   586   333   407   434   357   616
 ## # ... with 90 more rows, and 14 more variables: m &lt;int&gt;, n &lt;int&gt;, o &lt;int&gt;,
 ## #   p &lt;int&gt;, q &lt;int&gt;, r &lt;int&gt;, s &lt;int&gt;, t &lt;int&gt;, u &lt;int&gt;, v &lt;int&gt;,
 ## #   w &lt;int&gt;, x &lt;int&gt;, y &lt;int&gt;, z &lt;int&gt;</code></pre>
