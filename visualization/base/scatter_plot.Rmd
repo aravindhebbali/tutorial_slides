@@ -2,7 +2,7 @@
 output: _output.yaml
 ---
 
-## {data-background="thankyou.png"}
+## {data-background="viz_scatter.png"}
 
 ## Agenda
 
@@ -13,6 +13,16 @@ output: _output.yaml
     - color
     - shape 
     - and shape
+
+## Intro
+
+<hr>
+
+A scatter plot displays the relationship between two continuous variables. In ggplot2, we can build a scatter plot using `geom_point()`. Scatterplots can show you visually 
+
+- the strength of the relationship between the variables 
+- the direction of the relationship between the variables 
+- and whether outliers exist
 
 
 ## Scatter Plot

@@ -2,7 +2,7 @@
 output: _output.yaml
 ---
 
-## {data-background="thankyou.png"}
+## {data-background="viz_hist.png"}
 
 ## Agenda
 
@@ -215,22 +215,6 @@ hist(mtcars$mpg, probability = TRUE)
 
 ```{r hist13, fig.align='center', fig.height=5, fig.width=5}
 hist(mtcars$mpg, col = 'blue')
-```
-
-## Different Colors
-
-<hr>
-
-```{r hist14, fig.align='center', fig.height=5, fig.width=5}
-hist(mtcars$mpg, col = c('red', 'blue', 'green', 'yellow', 'brown'))
-```
-
-## Recycled Colors
-
-<hr>
-
-```{r hist15, fig.align='center', fig.height=5, fig.width=5}
-hist(mtcars$mpg, col = c('red', 'blue'))
 ```
 
 ## Border Color

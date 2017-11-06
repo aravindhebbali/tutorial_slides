@@ -1,20 +1,8 @@
 ---
-output: 
-  revealjs::revealjs_presentation:
-    transition: slide
-    incremental: true
-    theme: default
-    highlight: haddock
-    center: false
-    reveal_options:
-      slideNumber: true
-      previewLinks: true
-    fig_height: 5
-    fig_width: 6
-    css: styles.css
+output: _output.yaml
 ---
 
-## {data-background="thankyou.png"}
+## {data-background="viz_bar.png"}
 
 ## Agenda
 
@@ -83,38 +71,6 @@ cyl_freq
 barplot(cyl_freq, horiz = TRUE)
 ```
 
-## Bar Width (Equal Width)
-
-<hr>
-
-```{r bar4, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_freq, width = 2)
-```
-
-## Bar Width (Different Widths)
-
-<hr>
-
-```{r bar5, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_freq, width = c(1, 1, 2))
-```
-
-## Bar Width (Different Widths)
-
-<hr>
-
-```{r bar6, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_freq, width = c(1, 0.5, 2))
-```
-
-## Space Between Bars
-
-<hr>
-
-```{r bar7, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_freq, space = c(1, 1, 2))
-```
-
 ## Labels
 
 <hr>
@@ -131,100 +87,7 @@ barplot(cyl_freq, names.arg = c('Four', 'Six', 'Eight'))
 barplot(cyl_freq, col = 'blue')
 ```
 
-## Different Color 
-
-<hr>
-
-```{r bar10, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_freq, col = c('blue', 'red', 'green'))
-```
-
-## Recycling colors
-
-<hr>
-
-```{r bar11, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_freq, col = c('blue', 'red'))
-```
-
-## Border Color
-
-<hr>
-
-```{r bar12, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_freq, border = 'blue')
-```
-
-## Different Color
-
-<hr>
-
-```{r bar13, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_freq, border = c('blue', 'red', 'green'))
-```
-
-## Recycling Colors
-
-<hr>
-
-```{r bar14, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_freq, border = c('blue', 'red'))
-```
-
-## Remove axes
-
-<hr>
-
-```{r bar15, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_freq, axes = FALSE)
-```
-
-## Axis Line Type
-
-<hr>
-
-```{r bar16, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_freq, axis.lty = 3)
-```
-
-## Offset Y Axes
-
-<hr>
-
-```{r bar17, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_freq, offset = 5)
-```
-
-## Axis Range
-
-<hr>
-
-```{r bar18, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_freq, ylim = c(0, 30))
-```
-
-## Bar Plot
-
-<hr>
-
-```{r bar19, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_freq, col = c('blue', 'red', 'green'),
-        horiz = TRUE, width = c(1, 1, 2),
-        names.arg = c('Four', 'Six', 'Eight'),
-        axis.lty = 2, offset = 2)
-```
-
-## Title & Axis Labels
-
-<hr>
-
-```{r bar20, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_freq, col = c('blue', 'red', 'green'), horiz = TRUE, axis.lty = 2,
-        width = c(1, 1, 2), names.arg = c('Four', 'Six', 'Eight'), offset = 2)
-title(main = 'Distribution of Cylinders',
-      xlab = 'Frequency', ylab = 'Number of Cylinders')
-```
-
+## {data-background="stacked.png"}
 
 ## Data 
 
@@ -270,6 +133,86 @@ barplot(cyl_gear, col = c('blue', 'red', 'green'),
 barplot(cyl_gear, col = c('blue', 'red', 'green'), beside = TRUE, 
         legend.text = TRUE, main = 'Gears vs Cylinders',
         xlab = 'Number of Gears', ylab = 'Frequency')
+```
+
+## {data-background="aesthetics.png"}
+
+## Bar Width (Equal Width)
+
+<hr>
+
+```{r bar4, fig.align='center', fig.height=5, fig.width=5}
+barplot(cyl_freq, width = 2)
+```
+
+## Space Between Bars
+
+<hr>
+
+```{r bar7, fig.align='center', fig.height=5, fig.width=5}
+barplot(cyl_freq, space = c(1, 1, 2))
+```
+
+## Border Color
+
+<hr>
+
+```{r bar12, fig.align='center', fig.height=5, fig.width=5}
+barplot(cyl_freq, border = 'blue')
+```
+
+## Remove axes
+
+<hr>
+
+```{r bar15, fig.align='center', fig.height=5, fig.width=5}
+barplot(cyl_freq, axes = FALSE)
+```
+
+## Axis Line Type
+
+<hr>
+
+```{r bar16, fig.align='center', fig.height=5, fig.width=5}
+barplot(cyl_freq, axis.lty = 3)
+```
+
+## Offset Y Axes
+
+<hr>
+
+```{r bar17, fig.align='center', fig.height=5, fig.width=5}
+barplot(cyl_freq, offset = 5)
+```
+
+## Axis Range
+
+<hr>
+
+```{r bar18, fig.align='center', fig.height=5, fig.width=5}
+barplot(cyl_freq, ylim = c(0, 30))
+```
+
+## Putting it all together...
+
+<hr>
+
+```{r bar19, fig.align='center', fig.height=5, fig.width=5}
+barplot(cyl_freq, col = c('blue', 'red', 'green'),
+        horiz = TRUE, width = c(1, 1, 2),
+        names.arg = c('Four', 'Six', 'Eight'),
+        axis.lty = 2, offset = 2)
+```
+
+## Title & Axis Labels
+
+<hr>
+
+```{r bar20, fig.align='center', fig.height=5, fig.width=5}
+barplot(cyl_freq, col = c('blue', 'red', 'green'), horiz = TRUE, axis.lty = 2,
+        width = c(1, 1, 2), names.arg = c('Four', 'Six', 'Eight'), offset = 2)
+title(main = 'Distribution of Cylinders',
+      xlab = 'Frequency', ylab = 'Number of Cylinders')
 ```
 
 ## {data-background="thankyou.png"}

@@ -2,7 +2,7 @@
 output: _output.yaml 
 ---
 
-## {data-background="thankyou.png"}
+## {data-background="viz_legend.png"}
 
 ## Agenda
 

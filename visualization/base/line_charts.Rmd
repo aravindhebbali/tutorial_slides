@@ -2,7 +2,7 @@
 output: _output.yaml
 ---
 
-## {data-background="thankyou.png"}
+## {data-background="viz_line.png"}
 
 ## Agenda
 
@@ -15,6 +15,12 @@ output: _output.yaml
 - add points to the lines
 - modify axis range
 - add additional lines to the plot
+
+## Intro
+
+<hr>
+
+Line charts are used to examine trend over time.
 
 ## Data
 
@@ -179,7 +185,7 @@ plot(data1, type = "b", col = "blue", ylim = c(5, 9))
 lines(data2, type = "b", col = "red")
 ```
 
-## Line Plot
+## Putting it all together...
 
 <hr>
 

@@ -1,20 +1,8 @@
 ---
-output: 
-  revealjs::revealjs_presentation:
-    transition: slide
-    incremental: true
-    theme: default
-    highlight: haddock
-    center: false
-    reveal_options:
-      slideNumber: true
-      previewLinks: true
-    fig_height: 5
-    fig_width: 6
-    css: styles.css
+output: _output.yaml
 ---
 
-## {data-background="thankyou.png"}
+## {data-background="viz_box.png"}
 
 ## Agenda
 
@@ -44,6 +32,8 @@ The box plot is a standardized way of displaying the distribution of data based 
 - The front whisker goes from Q1 to the smallest non-outlier in the data set, and the back whisker goes from Q3 to the largest non-outlier. 
 - If the data set includes one or more outliers, they are plotted separately as points on the chart. 
 
+## {data-background="uboxplot.png"}
+
 ## Univariate Box Plot
 
 <hr>
@@ -68,50 +58,12 @@ boxplot(mtcars$mpg, horizontal = TRUE)
 boxplot(mtcars$mpg, col = 'blue')
 ```
 
-## Border Color
- 
-<hr>
-
-```{r box4, fig.align='center', fig.width=5, fig.height=5}
-boxplot(mtcars$mpg, border = 'red')
-```
-
-## Range
-
-<hr>
-
-```{r box5, fig.align='center', fig.width=5, fig.height=5}
-boxplot(mtcars$mpg, range = 0)
-```
-
-## Range
-
-<hr>
-
-```{r box6, fig.align='center', fig.width=5, fig.height=5}
-boxplot(mtcars$mpg, range = 1)
-```
-
-## Range
-
-<hr>
-
-```{r box7, fig.align='center', fig.width=10, fig.height=7, echo=FALSE}
-init <- par(no.readonly = TRUE)
-par(mfrow = c(2, 2))
-values <- c(0, 0.25, 0.63, 1)
-for (i in values) {
-  boxplot(mtcars$mpg, range = i)
-  mtext(paste("range = ", i), side = 3, col = "blue")
-}
-```
-
 ## Outliers
 
 <hr>
 
 ```{r box8, fig.align='center', fig.width=5, fig.height=5}
-boxplot(mtcars$mpg, range = 1, outline = FALSE)
+boxplot(mtcars$mpg, range = 1, outline = TRUE)
 ```
 
 ## Outliers
@@ -128,19 +80,7 @@ for (i in values) {
 }
 ```
 
-## Varwidth
-
-<hr>
-
-```{r box10, fig.align='center', fig.width=10, fig.height=7, echo=FALSE}
-init <- par(no.readonly = TRUE)
-par(mfrow = c(1, 2))
-values <- c(TRUE, FALSE)
-for (i in values) {
-  boxplot(mtcars$mpg, varwidth = i, range = 1)
-  mtext(paste("varwidth = ", i), side = 3, col = "blue")
-}
-```
+## {data-background="bboxplot.png"}
 
 ## Box Plot
 
@@ -197,7 +137,61 @@ boxplot(hsb$read ~ hsb$female, notch = TRUE,
         col = c('red', 'blue'))
 ```
 
-## Title & Axis Labels
+## Border Color
+ 
+<hr>
+
+```{r box4, fig.align='center', fig.width=5, fig.height=5}
+boxplot(mtcars$mpg, border = 'red')
+```
+
+## Range
+
+<hr>
+
+```{r box5, fig.align='center', fig.width=5, fig.height=5}
+boxplot(mtcars$mpg, range = 0)
+```
+
+## Range
+
+<hr>
+
+```{r box6, fig.align='center', fig.width=5, fig.height=5}
+boxplot(mtcars$mpg, range = 1)
+```
+
+## Range
+
+<hr>
+
+```{r box7, fig.align='center', fig.width=10, fig.height=7, echo=FALSE}
+init <- par(no.readonly = TRUE)
+par(mfrow = c(2, 2))
+values <- c(0, 0.25, 0.63, 1)
+for (i in values) {
+  boxplot(mtcars$mpg, range = i)
+  mtext(paste("range = ", i), side = 3, col = "blue")
+}
+```
+
+
+## Varwidth
+
+<hr>
+
+```{r box10, fig.align='center', fig.width=10, fig.height=7, echo=FALSE}
+init <- par(no.readonly = TRUE)
+par(mfrow = c(1, 2))
+values <- c(TRUE, FALSE)
+for (i in values) {
+  boxplot(mtcars$mpg, varwidth = i, range = 1)
+  mtext(paste("varwidth = ", i), side = 3, col = "blue")
+}
+```
+
+
+## Putting it all together..
 
 <hr>
 
@@ -212,6 +206,5 @@ boxplot(mtcars$mpg ~ mtcars$cyl, range = 1, outline = TRUE,
 ## {data-background="thankyou.png"}
 
 <!-- To do: -->
-<!--   - add intro slide -->
 <!--   - improve introduction -->
 <!--   - use image to explain structure of box plot -->
