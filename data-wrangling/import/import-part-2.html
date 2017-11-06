@@ -498,7 +498,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(jsonlite)
 <span class="kw">library</span>(xml2)
-<span class="kw">library</span>(XML)</code></pre></div>
+<span class="kw">library</span>(XML)
+<span class="kw">library</span>(tibble)
+<span class="kw">library</span>(purrr)</code></pre></div>
 </section>
 <section id="section-1" class="slide level2" data-background="json.png">
 <h2></h2>
@@ -541,24 +543,397 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
 ## Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
 </section>
-<section id="section-2" class="slide level2" data-background="xml.png">
+<section id="section-2" class="slide level2" data-background="xml2.png">
 <h2></h2>
 </section>
-<section id="xml" class="slide level2">
-<h2>XML</h2>
-<hr>
-<ul>
-<li class="fragment"><code>xmlParse()</code>: parse xml data</li>
-<li class="fragment"><code>class()</code>: class</li>
-<li class="fragment"><code>xmlRoot()</code>: root node</li>
-<li class="fragment"><code>xmlChildren()</code>: child nodes</li>
-<li class="fragment">get child node names</li>
-<li class="fragment">get child node XML values</li>
-<li class="fragment"><code>getNodeSet()</code>: get particular node value</li>
-<li class="fragment"><code>xmlToDataFrame()</code>: coerce to data.frame</li>
-</ul>
-</section>
 <section id="read-data" class="slide level2">
+<h2>Read Data</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">books &lt;-<span class="st"> </span><span class="kw">read_xml</span>(<span class="st">'books.xml'</span>)</code></pre></div>
+</section>
+<section id="name" class="slide level2">
+<h2>Name</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xml_name</span>(books)</code></pre></div>
+<pre><code>## [1] &quot;catalog&quot;</code></pre>
+</section>
+<section id="child-node" class="slide level2">
+<h2>Child Node</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xml_children</span>(books)</code></pre></div>
+<pre><code>## {xml_nodeset (12)}
+##  [1] &lt;book id=&quot;bk101&quot;&gt;\n  &lt;author&gt;Gambardella, Matthew&lt;/author&gt;\n  &lt;titl ...
+##  [2] &lt;book id=&quot;bk102&quot;&gt;\n  &lt;author&gt;Ralls, Kim&lt;/author&gt;\n  &lt;title&gt;Midnight ...
+##  [3] &lt;book id=&quot;bk103&quot;&gt;\n  &lt;author&gt;Corets, Eva&lt;/author&gt;\n  &lt;title&gt;Maeve A ...
+##  [4] &lt;book id=&quot;bk104&quot;&gt;\n  &lt;author&gt;Corets, Eva&lt;/author&gt;\n  &lt;title&gt;Oberon' ...
+##  [5] &lt;book id=&quot;bk105&quot;&gt;\n  &lt;author&gt;Corets, Eva&lt;/author&gt;\n  &lt;title&gt;The Sun ...
+##  [6] &lt;book id=&quot;bk106&quot;&gt;\n  &lt;author&gt;Randall, Cynthia&lt;/author&gt;\n  &lt;title&gt;Lo ...
+##  [7] &lt;book id=&quot;bk107&quot;&gt;\n  &lt;author&gt;Thurman, Paula&lt;/author&gt;\n  &lt;title&gt;Spli ...
+##  [8] &lt;book id=&quot;bk108&quot;&gt;\n  &lt;author&gt;Knorr, Stefan&lt;/author&gt;\n  &lt;title&gt;Creep ...
+##  [9] &lt;book id=&quot;bk109&quot;&gt;\n  &lt;author&gt;Kress, Peter&lt;/author&gt;\n  &lt;title&gt;Parado ...
+## [10] &lt;book id=&quot;bk110&quot;&gt;\n  &lt;author&gt;O'Brien, Tim&lt;/author&gt;\n  &lt;title&gt;Micros ...
+## [11] &lt;book id=&quot;bk111&quot;&gt;\n  &lt;author&gt;O'Brien, Tim&lt;/author&gt;\n  &lt;title&gt;MSXML3 ...
+## [12] &lt;book id=&quot;bk112&quot;&gt;\n  &lt;author&gt;Galos, Mike&lt;/author&gt;\n  &lt;title&gt;Visual  ...</code></pre>
+</section>
+<section id="child-node-1" class="slide level2">
+<h2>Child Node</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xml_child</span>(books)</code></pre></div>
+<pre><code>## {xml_node}
+## &lt;book id=&quot;bk101&quot;&gt;
+## [1] &lt;author&gt;Gambardella, Matthew&lt;/author&gt;
+## [2] &lt;title&gt;XML Developer's Guide&lt;/title&gt;
+## [3] &lt;genre&gt;Computer&lt;/genre&gt;
+## [4] &lt;price&gt;44.95&lt;/price&gt;
+## [5] &lt;publish_date&gt;2000-10-01&lt;/publish_date&gt;
+## [6] &lt;description&gt;An in-depth look at creating applications \n      with  ...</code></pre>
+</section>
+<section id="contents" class="slide level2">
+<h2>Contents</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xml2<span class="op">::</span><span class="kw">xml_contents</span>(books)</code></pre></div>
+<pre><code>## {xml_nodeset (12)}
+##  [1] &lt;book id=&quot;bk101&quot;&gt;\n  &lt;author&gt;Gambardella, Matthew&lt;/author&gt;\n  &lt;titl ...
+##  [2] &lt;book id=&quot;bk102&quot;&gt;\n  &lt;author&gt;Ralls, Kim&lt;/author&gt;\n  &lt;title&gt;Midnight ...
+##  [3] &lt;book id=&quot;bk103&quot;&gt;\n  &lt;author&gt;Corets, Eva&lt;/author&gt;\n  &lt;title&gt;Maeve A ...
+##  [4] &lt;book id=&quot;bk104&quot;&gt;\n  &lt;author&gt;Corets, Eva&lt;/author&gt;\n  &lt;title&gt;Oberon' ...
+##  [5] &lt;book id=&quot;bk105&quot;&gt;\n  &lt;author&gt;Corets, Eva&lt;/author&gt;\n  &lt;title&gt;The Sun ...
+##  [6] &lt;book id=&quot;bk106&quot;&gt;\n  &lt;author&gt;Randall, Cynthia&lt;/author&gt;\n  &lt;title&gt;Lo ...
+##  [7] &lt;book id=&quot;bk107&quot;&gt;\n  &lt;author&gt;Thurman, Paula&lt;/author&gt;\n  &lt;title&gt;Spli ...
+##  [8] &lt;book id=&quot;bk108&quot;&gt;\n  &lt;author&gt;Knorr, Stefan&lt;/author&gt;\n  &lt;title&gt;Creep ...
+##  [9] &lt;book id=&quot;bk109&quot;&gt;\n  &lt;author&gt;Kress, Peter&lt;/author&gt;\n  &lt;title&gt;Parado ...
+## [10] &lt;book id=&quot;bk110&quot;&gt;\n  &lt;author&gt;O'Brien, Tim&lt;/author&gt;\n  &lt;title&gt;Micros ...
+## [11] &lt;book id=&quot;bk111&quot;&gt;\n  &lt;author&gt;O'Brien, Tim&lt;/author&gt;\n  &lt;title&gt;MSXML3 ...
+## [12] &lt;book id=&quot;bk112&quot;&gt;\n  &lt;author&gt;Galos, Mike&lt;/author&gt;\n  &lt;title&gt;Visual  ...</code></pre>
+</section>
+<section id="structure" class="slide level2">
+<h2>Structure</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xml2<span class="op">::</span><span class="kw">xml_structure</span>(books)</code></pre></div>
+<pre><code>## &lt;catalog&gt;
+##   &lt;book [id]&gt;
+##     &lt;author&gt;
+##       {text}
+##     &lt;title&gt;
+##       {text}
+##     &lt;genre&gt;
+##       {text}
+##     &lt;price&gt;
+##       {text}
+##     &lt;publish_date&gt;
+##       {text}
+##     &lt;description&gt;
+##       {text}
+##   &lt;book [id]&gt;
+##     &lt;author&gt;
+##       {text}
+##     &lt;title&gt;
+##       {text}
+##     &lt;genre&gt;
+##       {text}
+##     &lt;price&gt;
+##       {text}
+##     &lt;publish_date&gt;
+##       {text}
+##     &lt;description&gt;
+##       {text}
+##   &lt;book [id]&gt;
+##     &lt;author&gt;
+##       {text}
+##     &lt;title&gt;
+##       {text}
+##     &lt;genre&gt;
+##       {text}
+##     &lt;price&gt;
+##       {text}
+##     &lt;publish_date&gt;
+##       {text}
+##     &lt;description&gt;
+##       {text}
+##   &lt;book [id]&gt;
+##     &lt;author&gt;
+##       {text}
+##     &lt;title&gt;
+##       {text}
+##     &lt;genre&gt;
+##       {text}
+##     &lt;price&gt;
+##       {text}
+##     &lt;publish_date&gt;
+##       {text}
+##     &lt;description&gt;
+##       {text}
+##   &lt;book [id]&gt;
+##     &lt;author&gt;
+##       {text}
+##     &lt;title&gt;
+##       {text}
+##     &lt;genre&gt;
+##       {text}
+##     &lt;price&gt;
+##       {text}
+##     &lt;publish_date&gt;
+##       {text}
+##     &lt;description&gt;
+##       {text}
+##   &lt;book [id]&gt;
+##     &lt;author&gt;
+##       {text}
+##     &lt;title&gt;
+##       {text}
+##     &lt;genre&gt;
+##       {text}
+##     &lt;price&gt;
+##       {text}
+##     &lt;publish_date&gt;
+##       {text}
+##     &lt;description&gt;
+##       {text}
+##   &lt;book [id]&gt;
+##     &lt;author&gt;
+##       {text}
+##     &lt;title&gt;
+##       {text}
+##     &lt;genre&gt;
+##       {text}
+##     &lt;price&gt;
+##       {text}
+##     &lt;publish_date&gt;
+##       {text}
+##     &lt;description&gt;
+##       {text}
+##   &lt;book [id]&gt;
+##     &lt;author&gt;
+##       {text}
+##     &lt;title&gt;
+##       {text}
+##     &lt;genre&gt;
+##       {text}
+##     &lt;price&gt;
+##       {text}
+##     &lt;publish_date&gt;
+##       {text}
+##     &lt;description&gt;
+##       {text}
+##   &lt;book [id]&gt;
+##     &lt;author&gt;
+##       {text}
+##     &lt;title&gt;
+##       {text}
+##     &lt;genre&gt;
+##       {text}
+##     &lt;price&gt;
+##       {text}
+##     &lt;publish_date&gt;
+##       {text}
+##     &lt;description&gt;
+##       {text}
+##   &lt;book [id]&gt;
+##     &lt;author&gt;
+##       {text}
+##     &lt;title&gt;
+##       {text}
+##     &lt;genre&gt;
+##       {text}
+##     &lt;price&gt;
+##       {text}
+##     &lt;publish_date&gt;
+##       {text}
+##     &lt;description&gt;
+##       {text}
+##   &lt;book [id]&gt;
+##     &lt;author&gt;
+##       {text}
+##     &lt;title&gt;
+##       {text}
+##     &lt;genre&gt;
+##       {text}
+##     &lt;price&gt;
+##       {text}
+##     &lt;publish_date&gt;
+##       {text}
+##     &lt;description&gt;
+##       {text}
+##   &lt;book [id]&gt;
+##     &lt;author&gt;
+##       {text}
+##     &lt;title&gt;
+##       {text}
+##     &lt;genre&gt;
+##       {text}
+##     &lt;price&gt;
+##       {text}
+##     &lt;publish_date&gt;
+##       {text}
+##     &lt;description&gt;
+##       {text}</code></pre>
+</section>
+<section id="length" class="slide level2">
+<h2>Length</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xml2<span class="op">::</span><span class="kw">xml_length</span>(books)</code></pre></div>
+<pre><code>## [1] 12</code></pre>
+</section>
+<section id="root-node" class="slide level2">
+<h2>Root Node</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xml2<span class="op">::</span><span class="kw">xml_root</span>(books)</code></pre></div>
+<pre><code>## {xml_document}
+## &lt;catalog&gt;
+##  [1] &lt;book id=&quot;bk101&quot;&gt;\n  &lt;author&gt;Gambardella, Matthew&lt;/author&gt;\n  &lt;titl ...
+##  [2] &lt;book id=&quot;bk102&quot;&gt;\n  &lt;author&gt;Ralls, Kim&lt;/author&gt;\n  &lt;title&gt;Midnight ...
+##  [3] &lt;book id=&quot;bk103&quot;&gt;\n  &lt;author&gt;Corets, Eva&lt;/author&gt;\n  &lt;title&gt;Maeve A ...
+##  [4] &lt;book id=&quot;bk104&quot;&gt;\n  &lt;author&gt;Corets, Eva&lt;/author&gt;\n  &lt;title&gt;Oberon' ...
+##  [5] &lt;book id=&quot;bk105&quot;&gt;\n  &lt;author&gt;Corets, Eva&lt;/author&gt;\n  &lt;title&gt;The Sun ...
+##  [6] &lt;book id=&quot;bk106&quot;&gt;\n  &lt;author&gt;Randall, Cynthia&lt;/author&gt;\n  &lt;title&gt;Lo ...
+##  [7] &lt;book id=&quot;bk107&quot;&gt;\n  &lt;author&gt;Thurman, Paula&lt;/author&gt;\n  &lt;title&gt;Spli ...
+##  [8] &lt;book id=&quot;bk108&quot;&gt;\n  &lt;author&gt;Knorr, Stefan&lt;/author&gt;\n  &lt;title&gt;Creep ...
+##  [9] &lt;book id=&quot;bk109&quot;&gt;\n  &lt;author&gt;Kress, Peter&lt;/author&gt;\n  &lt;title&gt;Parado ...
+## [10] &lt;book id=&quot;bk110&quot;&gt;\n  &lt;author&gt;O'Brien, Tim&lt;/author&gt;\n  &lt;title&gt;Micros ...
+## [11] &lt;book id=&quot;bk111&quot;&gt;\n  &lt;author&gt;O'Brien, Tim&lt;/author&gt;\n  &lt;title&gt;MSXML3 ...
+## [12] &lt;book id=&quot;bk112&quot;&gt;\n  &lt;author&gt;Galos, Mike&lt;/author&gt;\n  &lt;title&gt;Visual  ...</code></pre>
+</section>
+<section id="attributes" class="slide level2">
+<h2>Attributes</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xml_find_all</span>(books, <span class="st">'.//book'</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">map_chr</span>(xml_attrs)</code></pre></div>
+<pre><code>##  [1] &quot;bk101&quot; &quot;bk102&quot; &quot;bk103&quot; &quot;bk104&quot; &quot;bk105&quot; &quot;bk106&quot; &quot;bk107&quot; &quot;bk108&quot;
+##  [9] &quot;bk109&quot; &quot;bk110&quot; &quot;bk111&quot; &quot;bk112&quot;</code></pre>
+</section>
+<section id="book-author" class="slide level2">
+<h2>Book Author</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xml_find_all</span>(books, <span class="st">'.//author'</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">xml_text</span>()</code></pre></div>
+<pre><code>##  [1] &quot;Gambardella, Matthew&quot; &quot;Ralls, Kim&quot;           &quot;Corets, Eva&quot;         
+##  [4] &quot;Corets, Eva&quot;          &quot;Corets, Eva&quot;          &quot;Randall, Cynthia&quot;    
+##  [7] &quot;Thurman, Paula&quot;       &quot;Knorr, Stefan&quot;        &quot;Kress, Peter&quot;        
+## [10] &quot;O'Brien, Tim&quot;         &quot;O'Brien, Tim&quot;         &quot;Galos, Mike&quot;</code></pre>
+</section>
+<section id="book-title" class="slide level2">
+<h2>Book Title</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xml_find_all</span>(books, <span class="st">'.//title'</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">xml_text</span>()</code></pre></div>
+<pre><code>##  [1] &quot;XML Developer's Guide&quot;                 
+##  [2] &quot;Midnight Rain&quot;                         
+##  [3] &quot;Maeve Ascendant&quot;                       
+##  [4] &quot;Oberon's Legacy&quot;                       
+##  [5] &quot;The Sundered Grail&quot;                    
+##  [6] &quot;Lover Birds&quot;                           
+##  [7] &quot;Splish Splash&quot;                         
+##  [8] &quot;Creepy Crawlies&quot;                       
+##  [9] &quot;Paradox Lost&quot;                          
+## [10] &quot;Microsoft .NET: The Programming Bible&quot; 
+## [11] &quot;MSXML3: A Comprehensive Guide&quot;         
+## [12] &quot;Visual Studio 7: A Comprehensive Guide&quot;</code></pre>
+</section>
+<section id="book-genre" class="slide level2">
+<h2>Book Genre</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xml_find_all</span>(books, <span class="st">'.//genre'</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">xml_text</span>()</code></pre></div>
+<pre><code>##  [1] &quot;Computer&quot;        &quot;Fantasy&quot;         &quot;Fantasy&quot;        
+##  [4] &quot;Fantasy&quot;         &quot;Fantasy&quot;         &quot;Romance&quot;        
+##  [7] &quot;Romance&quot;         &quot;Horror&quot;          &quot;Science Fiction&quot;
+## [10] &quot;Computer&quot;        &quot;Computer&quot;        &quot;Computer&quot;</code></pre>
+</section>
+<section id="book-price" class="slide level2">
+<h2>Book Price</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xml_find_all</span>(books, <span class="st">'.//price'</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">xml_double</span>()</code></pre></div>
+<pre><code>##  [1] 44.95  5.95  5.95  5.95  5.95  4.95  4.95  4.95  6.95 36.95 36.95
+## [12] 49.95</code></pre>
+</section>
+<section id="publishing-date" class="slide level2">
+<h2>Publishing Date</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xml_find_all</span>(books, <span class="st">'.//publish_date'</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">xml_text</span>()</code></pre></div>
+<pre><code>##  [1] &quot;2000-10-01&quot; &quot;2000-12-16&quot; &quot;2000-11-17&quot; &quot;2001-03-10&quot; &quot;2001-09-10&quot;
+##  [6] &quot;2000-09-02&quot; &quot;2000-11-02&quot; &quot;2000-12-06&quot; &quot;2000-11-02&quot; &quot;2000-12-09&quot;
+## [11] &quot;2000-12-01&quot; &quot;2001-04-16&quot;</code></pre>
+</section>
+<section id="description" class="slide level2">
+<h2>Description</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xml_find_all</span>(books, <span class="st">'.//description'</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">xml_text</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span>stringr<span class="op">::</span><span class="kw">str_replace_all</span>(<span class="st">&quot;[</span><span class="ch">\n</span><span class="st">]&quot;</span>, <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>stringr<span class="op">::</span><span class="kw">str_replace_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;      &quot;</span>, <span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>stringr<span class="op">::</span><span class="kw">str_replace_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;  &quot;</span>, <span class="st">&quot; &quot;</span>)</code></pre></div>
+<pre><code>##  [1] &quot;An in-depth look at creating applications with XML.&quot;                                                                                                               
+##  [2] &quot;A former architect battles corporate zombies, an evil sorceress, and her own childhood to become queen of the world.&quot;                                              
+##  [3] &quot;After the collapse of a nanotechnology society in England, the young survivors lay the foundation for a new society.&quot;                                              
+##  [4] &quot;In post-apocalypse England, the mysterious agent known only as Oberon helps to create a new life for the inhabitants of London. Sequel to Maeve Ascendant.&quot;        
+##  [5] &quot;The two daughters of Maeve, half-sisters, battle one another for control of England. Sequel to Oberon's Legacy.&quot;                                                   
+##  [6] &quot;When Carla meets Paul at an ornithology conference, tempers fly as feathers get ruffled.&quot;                                                                          
+##  [7] &quot;A deep sea diver finds true love twenty thousand leagues beneath the sea.&quot;                                                                                         
+##  [8] &quot;An anthology of horror stories about roaches, centipedes, scorpions and other insects.&quot;                                                                            
+##  [9] &quot;After an inadvertant trip through a Heisenberg Uncertainty Device, James Salway discovers the problems of being quantum.&quot;                                          
+## [10] &quot;Microsoft's .NET initiative is explored in detail in this deep programmer's reference.&quot;                                                                            
+## [11] &quot;The Microsoft MSXML3 parser is covered in detail, with attention to XML DOM interfaces, XSLT processing, SAX and more.&quot;                                            
+## [12] &quot;Microsoft Visual Studio 7 is explored in depth, looking at how Visual Basic, Visual C++, C#, and ASP+ are integrated into a comprehensive development environment.&quot;</code></pre>
+</section>
+<section id="tibble" class="slide level2">
+<h2>tibble</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">book &lt;-<span class="st"> </span>tibble<span class="op">::</span><span class="kw">tibble</span>(
+  <span class="dt">author =</span> <span class="kw">xml_find_all</span>(books, <span class="st">'.//author'</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">xml_text</span>(),
+  <span class="dt">title =</span> <span class="kw">xml_find_all</span>(books, <span class="st">'.//title'</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">xml_text</span>(),
+  <span class="dt">genre =</span> <span class="kw">xml_find_all</span>(books, <span class="st">'.//genre'</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">xml_text</span>(),
+  <span class="dt">price =</span> <span class="kw">xml_find_all</span>(books, <span class="st">'.//price'</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">xml_double</span>(),
+  <span class="dt">published =</span> <span class="kw">xml_find_all</span>(books, <span class="st">'.//publish_date'</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">xml_text</span>(),
+  <span class="dt">description =</span> <span class="kw">xml_find_all</span>(books, <span class="st">'.//description'</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">xml_text</span>() <span class="op">%&gt;%</span>
+<span class="st">    </span>stringr<span class="op">::</span><span class="kw">str_replace_all</span>(<span class="st">&quot;[</span><span class="ch">\r\n</span><span class="st">]&quot;</span>, <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span>stringr<span class="op">::</span><span class="kw">str_replace_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;      &quot;</span>, <span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span>stringr<span class="op">::</span><span class="kw">str_replace_all</span>(<span class="dt">pattern =</span> <span class="st">&quot;  &quot;</span>, <span class="st">&quot; &quot;</span>)
+)</code></pre></div>
+</section>
+<section id="tibble-1" class="slide level2">
+<h2>tibble</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">book</code></pre></div>
+<pre><code>## # A tibble: 12 x 6
+##                  author                                  title
+##                   &lt;chr&gt;                                  &lt;chr&gt;
+##  1 Gambardella, Matthew                  XML Developer's Guide
+##  2           Ralls, Kim                          Midnight Rain
+##  3          Corets, Eva                        Maeve Ascendant
+##  4          Corets, Eva                        Oberon's Legacy
+##  5          Corets, Eva                     The Sundered Grail
+##  6     Randall, Cynthia                            Lover Birds
+##  7       Thurman, Paula                          Splish Splash
+##  8        Knorr, Stefan                        Creepy Crawlies
+##  9         Kress, Peter                           Paradox Lost
+## 10         O'Brien, Tim  Microsoft .NET: The Programming Bible
+## 11         O'Brien, Tim          MSXML3: A Comprehensive Guide
+## 12          Galos, Mike Visual Studio 7: A Comprehensive Guide
+## # ... with 4 more variables: genre &lt;chr&gt;, price &lt;dbl&gt;, published &lt;chr&gt;,
+## #   description &lt;chr&gt;</code></pre>
+</section>
+<section id="section-3" class="slide level2" data-background="xml.png">
+<h2></h2>
+<!-- ## XML -->
+<!-- <hr> -->
+<!-- - `xmlParse()`: parse xml data -->
+<!-- - `class()`: class  -->
+<!-- - `xmlRoot()`: root node -->
+<!-- - `xmlChildren()`: child nodes -->
+<!-- - get child node names -->
+<!-- - get child node XML values -->
+<!-- - `getNodeSet()`: get particular node value -->
+<!-- - `xmlToDataFrame()`: coerce to data.frame  -->
+</section>
+<section id="read-data-1" class="slide level2">
 <h2>Read Data</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xm &lt;-<span class="st"> </span><span class="kw">xmlParse</span>(<span class="st">&quot;sample_xml&quot;</span>)</code></pre></div>
@@ -569,7 +944,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(xm)</code></pre></div>
 <pre><code>## [1] &quot;XMLInternalDocument&quot; &quot;XMLAbstractDocument&quot;</code></pre>
 </section>
-<section id="root-node" class="slide level2">
+<section id="root-node-1" class="slide level2">
 <h2>Root Node</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xmlRoot</span>(xm)</code></pre></div>
@@ -698,7 +1073,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">c_child &lt;-<span class="st"> </span><span class="kw">xmlChildren</span>(xm)</code></pre></div>
 </section>
-<section id="child-node" class="slide level2">
+<section id="child-node-2" class="slide level2">
 <h2>Child Node</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">c_child[[<span class="dv">1</span>]]</code></pre></div>
@@ -822,7 +1197,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ##   &lt;/book&gt;
 ## &lt;/catalog&gt;</code></pre>
 </section>
-<section id="child-node-1" class="slide level2">
+<section id="child-node-3" class="slide level2">
 <h2>Child Node</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">c_child[[<span class="dv">1</span>]][<span class="dv">1</span>]</code></pre></div>
@@ -859,8 +1234,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <pre><code>##                                                                                                                          book 
 ## &quot;Gambardella, MatthewXML Developer's GuideComputer44.952000-10-01An in-depth look at creating applications \n      with XML.&quot;</code></pre>
 </section>
-<section id="xml-1" class="slide level2">
-<h2>XML</h2>
+<section id="book" class="slide level2">
+<h2>Book</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getNodeSet</span>(xm, <span class="st">&quot;//book&quot;</span>)</code></pre></div>
 <pre><code>## [[1]]
@@ -1007,8 +1382,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## attr(,&quot;class&quot;)
 ## [1] &quot;XMLNodeSet&quot;</code></pre>
 </section>
-<section id="xml-2" class="slide level2">
-<h2>XML</h2>
+<section id="author" class="slide level2">
+<h2>Author</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getNodeSet</span>(xm, <span class="st">&quot;//author&quot;</span>)</code></pre></div>
 <pre><code>## [[1]]
@@ -1100,30 +1475,7 @@ j</code></pre></div>
 <section id="xml-web" class="slide level2">
 <h2>XML (Web)</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xml2<span class="op">::</span><span class="kw">read_xml</span>(<span class="st">&quot;http://www.xmlfiles.com/examples/cd_catalog.xml&quot;</span>)</code></pre></div>
-<pre><code>## {xml_document}
-## &lt;CATALOG&gt;
-##  [1] &lt;CD&gt;\n  &lt;TITLE&gt;Empire Burlesque&lt;/TITLE&gt;\n  &lt;ARTIST&gt;Bob Dylan&lt;/ARTIS ...
-##  [2] &lt;CD&gt;\n  &lt;TITLE&gt;Hide your heart&lt;/TITLE&gt;\n  &lt;ARTIST&gt;Bonnie Tylor&lt;/ART ...
-##  [3] &lt;CD&gt;\n  &lt;TITLE&gt;Greatest Hits&lt;/TITLE&gt;\n  &lt;ARTIST&gt;Dolly Parton&lt;/ARTIS ...
-##  [4] &lt;CD&gt;\n  &lt;TITLE&gt;Still got the blues&lt;/TITLE&gt;\n  &lt;ARTIST&gt;Gary More&lt;/AR ...
-##  [5] &lt;CD&gt;\n  &lt;TITLE&gt;Eros&lt;/TITLE&gt;\n  &lt;ARTIST&gt;Eros Ramazzotti&lt;/ARTIST&gt;\n   ...
-##  [6] &lt;CD&gt;\n  &lt;TITLE&gt;One night only&lt;/TITLE&gt;\n  &lt;ARTIST&gt;Bee Gees&lt;/ARTIST&gt;\ ...
-##  [7] &lt;CD&gt;\n  &lt;TITLE&gt;Sylvias Mother&lt;/TITLE&gt;\n  &lt;ARTIST&gt;Dr.Hook&lt;/ARTIST&gt;\n ...
-##  [8] &lt;CD&gt;\n  &lt;TITLE&gt;Maggie May&lt;/TITLE&gt;\n  &lt;ARTIST&gt;Rod Stewart&lt;/ARTIST&gt;\n ...
-##  [9] &lt;CD&gt;\n  &lt;TITLE&gt;Romanza&lt;/TITLE&gt;\n  &lt;ARTIST&gt;Andrea Bocelli&lt;/ARTIST&gt;\n ...
-## [10] &lt;CD&gt;\n  &lt;TITLE&gt;When a man loves a woman&lt;/TITLE&gt;\n  &lt;ARTIST&gt;Percy Sl ...
-## [11] &lt;CD&gt;\n  &lt;TITLE&gt;Black angel&lt;/TITLE&gt;\n  &lt;ARTIST&gt;Savage Rose&lt;/ARTIST&gt;\ ...
-## [12] &lt;CD&gt;\n  &lt;TITLE&gt;1999 Grammy Nominees&lt;/TITLE&gt;\n  &lt;ARTIST&gt;Many&lt;/ARTIST ...
-## [13] &lt;CD&gt;\n  &lt;TITLE&gt;For the good times&lt;/TITLE&gt;\n  &lt;ARTIST&gt;Kenny Rogers&lt;/ ...
-## [14] &lt;CD&gt;\n  &lt;TITLE&gt;Big Willie style&lt;/TITLE&gt;\n  &lt;ARTIST&gt;Will Smith&lt;/ARTI ...
-## [15] &lt;CD&gt;\n  &lt;TITLE&gt;Tupelo Honey&lt;/TITLE&gt;\n  &lt;ARTIST&gt;Van Morrison&lt;/ARTIST ...
-## [16] &lt;CD&gt;\n  &lt;TITLE&gt;Soulsville&lt;/TITLE&gt;\n  &lt;ARTIST&gt;Jorn Hoel&lt;/ARTIST&gt;\n   ...
-## [17] &lt;CD&gt;\n  &lt;TITLE&gt;The very best of&lt;/TITLE&gt;\n  &lt;ARTIST&gt;Cat Stevens&lt;/ART ...
-## [18] &lt;CD&gt;\n  &lt;TITLE&gt;Stop&lt;/TITLE&gt;\n  &lt;ARTIST&gt;Sam Brown&lt;/ARTIST&gt;\n  &lt;COUNT ...
-## [19] &lt;CD&gt;\n  &lt;TITLE&gt;Bridge of Spies&lt;/TITLE&gt;\n  &lt;ARTIST&gt;T`Pau&lt;/ARTIST&gt;\n  ...
-## [20] &lt;CD&gt;\n  &lt;TITLE&gt;Private Dancer&lt;/TITLE&gt;\n  &lt;ARTIST&gt;Tina Turner&lt;/ARTIS ...
-## ...</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># xml2::read_xml(&quot;http://www.xmlfiles.com/examples/cd_catalog.xml&quot;)</span></code></pre></div>
 </section>
 <section id="html" class="slide level2">
 <h2>HTML</h2>
@@ -1134,7 +1486,7 @@ j</code></pre></div>
 ## [1] &lt;head&gt;\n&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset= ...
 ## [2] &lt;body&gt;\n    &lt;div class=&quot;container page&quot;&gt;\n      &lt;div class=&quot;row&quot;&gt;\n  ...</code></pre>
 </section>
-<section id="section-3" class="slide level2" data-background="thankyou.png">
+<section id="section-4" class="slide level2" data-background="thankyou.png">
 <h2></h2>
 <!-- To do: -->
 <!--   - add json data structure -->

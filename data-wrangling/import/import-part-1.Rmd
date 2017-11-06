@@ -30,9 +30,9 @@ library(readr)
 
 <hr>
 
-- `read.csv()`
 - `read_csv()`
 - `read_delim()`
+- `read.csv()`
 
 ## Options
 
@@ -42,14 +42,6 @@ library(readr)
 - `skip`
 - `n_max`
 - `col_types`
-
-## Base R
-
-<hr>
-
-```{r import1}
-read.csv('hsb2.csv', header = TRUE)
-```
 
 ## readr
 
@@ -122,21 +114,21 @@ read_csv('hsb2.csv', col_types = cols_only(id = col_integer(),
 spec_csv('hsb2.csv')
 ```
 
-## Semicolon Separated Values
-
-<hr>
-
-- `read.csv2()`
-- `read_csv2()`
-- `read_delim()`
-
 ## Base R
 
 <hr>
 
-```{r import20, echo=TRUE, results='markup', message=FALSE}
-read.csv2('hsb.csv', header = TRUE)
+```{r import1}
+read.csv('hsb2.csv', header = TRUE)
 ```
+
+## Semicolon Separated Values
+
+<hr>
+
+- `read_csv2()`
+- `read_delim()`
+- `read.csv2()`
 
 ## readr
 
@@ -146,14 +138,30 @@ read.csv2('hsb.csv', header = TRUE)
 read_csv2('hsb.csv', col_names = FALSE, skip = 5, n_max = 50)
 ```
 
+## Base R
+
+<hr>
+
+```{r import20, echo=TRUE, results='markup', message=FALSE}
+read.csv2('hsb.csv', header = TRUE)
+```
+
 ## Tab Separated Values
 
 <hr>
 
-- `read.delim()`
-- `read.table()`
 - `read_tsv()`
 - `read_delim()`
+- `read.delim()`
+- `read.table()`
+
+## readr
+
+<hr>
+
+```{r import35, echo=TRUE, results='markup', message=FALSE}
+read_tsv('mtcars.tsv', col_names = FALSE, skip = 5, n_max = 50)
+```
 
 ## Base R
 
@@ -171,28 +179,12 @@ read.delim('mtcars.tsv', dec = '.')
 read.table('mtcars.tsv', sep = '\t', header = TRUE, dec = '.')
 ```
 
-## readr
-
-<hr>
-
-```{r import35, echo=TRUE, results='markup', message=FALSE}
-read_tsv('mtcars.tsv', col_names = FALSE, skip = 5, n_max = 50)
-```
-
 ## Space Separated Values
 
 <hr>
 
-- `read.table()`
 - `read_table2()`
-
-## Base R
-
-<hr>
-
-```{r import43}
-read.table('hsb1.csv', header = TRUE, sep = " ")
-```
+- `read.table()`
 
 ## readr
 
@@ -200,6 +192,14 @@ read.table('hsb1.csv', header = TRUE, sep = " ")
 
 ```{r import46, echo=TRUE, results='markup', message=FALSE}
 read_table2('hsb1.csv', col_names = FALSE, skip = 5, n_max = 50)
+```
+
+## Base R
+
+<hr>
+
+```{r import43}
+read.table('hsb1.csv', header = TRUE, sep = " ")
 ```
 
 ## Text Files
@@ -210,17 +210,7 @@ read_table2('hsb1.csv', col_names = FALSE, skip = 5, n_max = 50)
 read_table2('hsb.txt') 
 ```
 
-
-## Summary
-
-<hr>
-
-- `read_csv()`
-- `read_delim()`
-- `spec_csv()`
-- `read_csv2()`
-- `read_tsv()`
-- `read_table2()`
+## {data-background="import_funcs.png"}
 
 ## {data-background="thankyou.png"}
 

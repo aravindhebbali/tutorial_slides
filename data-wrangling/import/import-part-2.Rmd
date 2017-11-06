@@ -21,12 +21,16 @@ Read data from
 library(jsonlite)
 library(xml2)
 library(XML)
+library(tibble)
+library(purrr)
 ```
 
 ```{r importlib2, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
 library(jsonlite)
 library(xml2)
 library(XML)
+library(tibble)
+library(purrr)
 ```
 
 ## {data-background="json.png"}
@@ -39,20 +43,184 @@ library(XML)
 jsonlite::fromJSON('mtcars.json')
 ```
 
-## {data-background="xml.png"}
+## {data-background="xml2.png"}
 
-## XML
+## Read Data
 
 <hr>
 
-- `xmlParse()`: parse xml data
-- `class()`: class 
-- `xmlRoot()`: root node
-- `xmlChildren()`: child nodes
-- get child node names
-- get child node XML values
-- `getNodeSet()`: get particular node value
-- `xmlToDataFrame()`: coerce to data.frame 
+```{r imp15}
+books <- read_xml('books.xml')
+```
+
+## Name
+
+<hr>
+
+```{r imp16}
+xml_name(books)
+```
+
+## Child Node
+
+<hr>
+
+```{r imp17}
+xml_children(books)
+```
+
+## Child Node
+
+<hr>
+
+```{r imp18}
+xml_child(books)
+```
+
+## Contents
+
+<hr>
+
+```{r imp19}
+xml2::xml_contents(books)
+```
+
+## Structure
+
+<hr>
+
+```{r imp21}
+xml2::xml_structure(books)
+```
+
+## Length
+
+<hr>
+
+```{r imp22}
+xml2::xml_length(books)
+```
+
+## Root Node
+
+<hr>
+
+```{r imp23}
+xml2::xml_root(books)
+```
+
+## Attributes
+
+<hr>
+
+```{r imp24}
+xml_find_all(books, './/book') %>% 
+  map_chr(xml_attrs)
+```
+
+## Book Author
+
+<hr>
+
+```{r imp25}
+xml_find_all(books, './/author') %>%
+  xml_text()
+```
+
+## Book Title
+
+<hr>
+
+```{r imp26}
+xml_find_all(books, './/title') %>%
+  xml_text()
+```
+
+## Book Genre
+
+<hr>
+
+```{r imp27}
+xml_find_all(books, './/genre') %>%
+  xml_text()
+```
+
+## Book Price
+
+<hr>
+
+```{r imp28}
+xml_find_all(books, './/price') %>%
+  xml_double()
+```
+
+## Publishing Date
+
+<hr>
+
+```{r imp29}
+xml_find_all(books, './/publish_date') %>%
+  xml_text()
+```
+
+## Description
+
+<hr>
+
+```{r imp30}
+xml_find_all(books, './/description') %>%
+  xml_text() %>%
+  stringr::str_replace_all("[\n]", "") %>%
+  stringr::str_replace_all(pattern = "      ", " ") %>%
+  stringr::str_replace_all(pattern = "  ", " ")
+```
+
+## tibble
+
+<hr>
+
+```{r imp31}
+book <- tibble::tibble(
+  author = xml_find_all(books, './/author') %>%
+    xml_text(),
+  title = xml_find_all(books, './/title') %>%
+    xml_text(),
+  genre = xml_find_all(books, './/genre') %>%
+    xml_text(),
+  price = xml_find_all(books, './/price') %>%
+    xml_double(),
+  published = xml_find_all(books, './/publish_date') %>%
+    xml_text(),
+  description = xml_find_all(books, './/description') %>%
+    xml_text() %>%
+    stringr::str_replace_all("[\r\n]", "") %>%
+    stringr::str_replace_all(pattern = "      ", " ") %>%
+    stringr::str_replace_all(pattern = "  ", " ")
+)
+```
+
+## tibble
+
+<hr>
+
+```{r imp32}
+book
+```
+
+## {data-background="xml.png"}
+
+<!-- ## XML -->
+
+<!-- <hr> -->
+
+<!-- - `xmlParse()`: parse xml data -->
+<!-- - `class()`: class  -->
+<!-- - `xmlRoot()`: root node -->
+<!-- - `xmlChildren()`: child nodes -->
+<!-- - get child node names -->
+<!-- - get child node XML values -->
+<!-- - `getNodeSet()`: get particular node value -->
+<!-- - `xmlToDataFrame()`: coerce to data.frame  -->
 
 
 ## Read Data
@@ -119,7 +287,7 @@ sapply(c_child[[1]][1], names)
 sapply(c_child[[1]][1], xmlValue)
 ```
 
-## XML
+## Book
 
 <hr>
 
@@ -127,7 +295,7 @@ sapply(c_child[[1]][1], xmlValue)
 getNodeSet(xm, "//book")
 ```
 
-## XML
+## Author
 
 <hr>
 
@@ -151,7 +319,7 @@ j
 <hr>
 
 ```{r xmlread, eval=TRUE}
-xml2::read_xml("http://www.xmlfiles.com/examples/cd_catalog.xml")
+# xml2::read_xml("http://www.xmlfiles.com/examples/cd_catalog.xml")
 ```
 
 ## HTML

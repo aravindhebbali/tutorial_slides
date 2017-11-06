@@ -263,5 +263,4 @@ sas7bdat::read.sas7bdat('airline.sas7bdat')
 
 <!-- To do: -->
 <!--   - change data -->
-<!--   - 1 paragraph about statistical softwares -->
 <!--   - use excel sheet while explaining readxl -->
