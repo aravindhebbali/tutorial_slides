@@ -22,7 +22,7 @@ library(dplyr)
 
 <hr>
 
-When you are dealing with a sequence of multiple operations, R code can get a bit cramped and not so easy on the eyes. The [magrittr](https://CRAN.R-project.org/package=magrittr) package by Stefan Milton Bache provides pipes enabling us to write R code that is readable.
+When you are dealing with a sequence of multiple operations, R code can get a bit cramped and not so easy on the eyes. The [magrittr](https://CRAN.R-project.org/package=magrittr) package by [Stefan Milton Bache](http://stefanbache.dk/) provides pipes enabling us to write R code that is readable.
 
 - especially useful when you have nested functions
 - similar in spirit to javascript's method chaining
@@ -33,8 +33,7 @@ When you are dealing with a sequence of multiple operations, R code can get a bi
 
 <hr>
 
-R being a functional language, code contains a lot of parentheses. Complex code results in nested functions making them hard to read and maintain. If you are using tidyverse packages, magrittr will be automatically loaded. We will look at 3 different types of 
-pipes:
+R being a functional language, code contains a lot of parentheses. Complex code results in nested functions making them hard to read and maintain. If you are using [tidyverse](https://www.tidyverse.org/), magrittr will be automatically loaded. We will look at 3 different types of pipes:
 
 - `%>%` : pipe a value forward into an expression or function call
 - `%<>%`: result assigned to left hand side object instead of returning it 
@@ -47,10 +46,13 @@ pipes:
 ```{r importlib1,eval=FALSE}
 library(magrittr)
 library(readr)
+library(purrr)
 ```
 
 ```{r importlib2, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
 library(magrittr)
+library(readr)
+library(purrr)
 ```
 ## Data
 
@@ -62,7 +64,7 @@ ecom <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/mas
 
 
 ```{r show, echo=FALSE, eval=TRUE, message=FALSE}
-ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+ecom <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
 ecom
 ```
 
@@ -118,7 +120,7 @@ y <- ecom %$% n_pages
 head(y)
 
 # compute square root of y and assign it to y 
-y %<>% sqrt()
+y %<>% sqrt
 head(y)
 ```
 
@@ -129,8 +131,9 @@ head(y)
 ```{r mag5}
 y <- ecom %$% 
   n_pages %>% 
-  sqrt()
-head(y)
+  sqrt %>%
+  head
+y
 ```
 
 ## Correlation
@@ -164,8 +167,8 @@ barplot(table(subset(ecom, purchase == 'true')$referrer))
 ecom %>%
   subset(purchase == 'true') %>%
   extract('referrer') %>%
-  table() %>%
-  barplot()
+  table %>%
+  barplot
 ```
 
 ## Regression
@@ -183,7 +186,7 @@ summary(lm(duration ~ n_pages, data = ecom))
 ```{r mag22}
 ecom %$%
   lm(duration ~ n_pages) %>%
-  summary()
+  summary
 ```
 
 ## String Manipulation
@@ -202,7 +205,19 @@ email %>%
   extract2(1) %>%
   extract(1) %>%
   strtrim(width = 6) %>%
-  toupper()
+  toupper
+```
+
+## String Manipulation
+
+<hr>
+
+```{r map39}
+email %>%
+  strsplit(split = '@') %>%
+  map_chr(1) %>%
+  strtrim(width = 6) %>%
+  toupper
 ```
 
 ## Data Extraction
