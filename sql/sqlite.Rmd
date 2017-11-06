@@ -1,83 +1,10 @@
 ---
-title: "Quick Guide: R & SQLite"
-output: 
-  revealjs::revealjs_presentation:
-    transition: slide
-    incremental: true
-    theme: default
-    highlight: haddock
-    center: false
-    reveal_options:
-      slideNumber: true
-      previewLinks: true
+output: _output.yaml
 ---
 
+## {data-background="database.png"}
+
 ## Agenda
-
-<style type="text/css">
-  .reveal p {
-    text-align: left;
-    font-size: 20px;
-  }
-  .reveal body:after {
-    content: url(handshake.png);
-    position: fixed;
-    bottom: 3.5em;
-    left: 3.5em;
-    box-shadow: 5px 5px 10px #000; 
-  }
-  .reveal hr {
-    border-color: #0077aa;
-  }
-  .reveal h1, h2, h3, h4, h5, h6 {
-    text-transform: capitalize;
-    text-align: center;
-    color: #0077aa;
-    font-family: 'Helvetica Neue';
-  }
-
-  .reveal h2 {
-    font-size: 22px;
-    color: #0077aa;
-  }
-  .reveal ul {
-    display: block;
-  }
-  .reveal ul li {
-    color: #3c3c3c; 
-    /* set color of list item text */
-    list-style: none; 
-    font-size: 20px;
-  }
-
-  .reveal ul li::before {
-      color: #006b6e;  
-      /* color of bullet or square */
-      content: "\2022"; 
-      /* Unicode of character to precede the list item */
-      font-size: 1em; 
-      /* em or %*/ 
-      padding-right: 1.1225em; 
-      /* use em*/
-      position: relative;
-      top: 0em; 
-      /* use em or % */
-  }
-  .reveal ul {
-    line-height:150%
-  }
-  .reveal .fragment {
-    font-size: 20px;
-  }
-  .reveal ol {
-    display: block;
-  }
-</style>
-
-
-<hr>
-
-## Introduction
 
 <hr>
 
@@ -106,6 +33,37 @@ library(RSQLite)
 We will use a database that contains the ecommerce data we have used in the previous modules. You can download the 
 database from [here](https://github.com/rsquaredacademy/dbplyr_tutorial).
 
+```{r import, eval=FALSE}
+ecom <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+```
+
+
+```{r show, echo=FALSE, eval=TRUE, message=FALSE}
+ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+ecom
+```
+
+
+## Data Dictionary
+
+<hr>
+
+Below is the description of the data set:
+
+- id: row id
+- referrer: referrer website/search engine
+- os: operating system
+- browser: browser
+- device: device used to visit the website
+- n_pages: number of pages visited
+- duration: time spent on the website (in seconds)
+- repeat: frequency of visits
+- country: country of origin
+- purchase: whether visitor purchased
+- order_value: order value of visitor (in dollars)
+
+
+## {data-background="connect.png"}
 
 ## Connect
 
@@ -113,7 +71,7 @@ database from [here](https://github.com/rsquaredacademy/dbplyr_tutorial).
 
 ```{r lite2}
 con <- DBI::dbConnect(RSQLite::SQLite(), 
-                      dbname = "J:/gist/dbplyr_tutorial/mydatabase.db")
+                      dbname = "mydatabase.db")
 ```
 
 ## Connection Summary
@@ -139,6 +97,8 @@ dbListTables(con)
 ```{r lite7}
 DBI::dbListFields(con, "ecom")
 ```
+
+## {data-background="query_data.png"}
 
 ## Querying Data
 
@@ -229,6 +189,8 @@ DBI::dbColumnInfo(query)
 ```{r lite17}
 DBI::dbClearResult(query)
 ```
+
+## {data-background="create_table.png"}
 
 ## Create Table
 
@@ -384,10 +346,5 @@ DBI::dbDisconnect(con)
 ## {data-background="thankyou.png"}
 
 <!-- To do: -->
-<!--   - add intro slide -->
 <!--   - add agenda -->
 <!--   - add introduction -->
-<!--   - describe data in case study -->
-<!--   - connect and list fields section -->
-<!--   - query data section -->
-<!--   - create table section -->
