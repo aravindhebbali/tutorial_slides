@@ -159,6 +159,8 @@ ecom %>%
 barplot(table(subset(ecom, purchase == 'true')$referrer))
 ```
 
+## {data-background="pipes_viz_canva.png"}
+
 ## Visualization - Using pipe
 
 <hr>
@@ -207,6 +209,8 @@ email %>%
   strtrim(width = 6) %>%
   toupper
 ```
+
+## {data-background="pipes_canva.png"}
 
 ## String Manipulation
 
