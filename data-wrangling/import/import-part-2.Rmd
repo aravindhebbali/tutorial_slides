@@ -319,7 +319,7 @@ j
 <hr>
 
 ```{r xmlread, eval=TRUE}
-# xml2::read_xml("http://www.xmlfiles.com/examples/cd_catalog.xml")
+xml2::read_xml("http://www.xmlfiles.com/examples/cd_catalog.xml")
 ```
 
 ## HTML
@@ -335,7 +335,5 @@ xml2::read_html("http://r-project.org/")
 <!-- To do: -->
 <!--   - add json data structure -->
 <!--   - add XML data structure -->
-<!--   - change html example -->
 <!--   - add xml workflow diagram -->
 <!--   - use this example: https://www.w3schools.com/xml/dom_nodes.asp -->
-<!--   - try xml2 as well -->

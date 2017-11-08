@@ -258,6 +258,8 @@ read_sas('airline.sas7bdat')
 sas7bdat::read.sas7bdat('airline.sas7bdat')
 ```
 
+## {data-background="haven_summary.png"}
+
 ## {data-background="thankyou.png"}
 
 
