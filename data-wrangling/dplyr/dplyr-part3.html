@@ -611,18 +611,18 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">700</span>)</code></pre></div>
 <pre><code>## # A tibble: 700 x 11
-##       id referrer device bouncers n_visit n_pages duration     country purchase order_items order_value
-##    &lt;int&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;       &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-##  1   444   direct tablet    false       3       1       21 Philippines    false           4         793
-##  2   348   social laptop    false      10      20      280       Japan     true           1        2011
-##  3   882   direct laptop    false       1      14      364   Indonesia     true           1        2802
-##  4   202    yahoo tablet    false       9      13      182      Brazil    false           0           0
-##  5    71   social laptop     true       0       1      874      Brazil    false           0           0
-##  6   663   google tablet     true       2       1      614    Pakistan    false           0           0
-##  7   893    yahoo laptop    false       2       9      162    Thailand    false           0           0
-##  8   711    yahoo tablet    false       7      19      304    Honduras    false           0           0
-##  9    75   direct tablet     true       9       1       47      Russia    false           0           0
-## 10    48    yahoo laptop     true       4       1      781     Uruguay    false           0           0
+##       id referrer device bouncers n_visit n_pages duration       country purchase order_items order_value
+##    &lt;int&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;         &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+##  1   603   google mobile     true       7       1      414        Russia    false           0           0
+##  2   687   direct laptop    false       1      10      120      Paraguay    false          10         828
+##  3   272   direct mobile    false       6      12      324         China    false           0           0
+##  4   883    yahoo mobile     true       4       1      377        Brazil    false           0           0
+##  5   653   direct mobile     true       6       1      501 United States    false           0           0
+##  6   551   social mobile     true      10       1      866         China    false           0           0
+##  7   321     bing tablet    false       1      17      170   New Zealand    false           9        2433
+##  8   612   social mobile    false       1      16      336   Philippines     true           3          17
+##  9   119     bing laptop     true       1       1      938         China    false           0           0
+## 10   988   direct laptop    false       0      15      255     Indonesia    false           0           0
 ## # ... with 690 more rows</code></pre>
 </section>
 <section id="sampling-data-1" class="slide level2">
@@ -633,18 +633,18 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">100</span>)</code></pre></div>
 <pre><code>## # A tibble: 500 x 11
 ## # Groups:   referrer [5]
-##       id referrer device bouncers n_visit n_pages duration     country purchase order_items order_value
-##    &lt;int&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;       &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-##  1   744     bing tablet     true       2       1      489   Indonesia    false           0           0
-##  2   523     bing tablet    false       4      15      210   Indonesia    false           0           0
-##  3   322     bing tablet     true       3       1      192     Uruguay    false           0           0
-##  4   540     bing tablet     true       7       1      718    Thailand    false           0           0
-##  5   182     bing mobile    false       9       2       42   Indonesia    false           8        2429
-##  6   656     bing laptop    false       0      13      390 Philippines     true           7         683
-##  7   963     bing laptop     true       4       1      857 Philippines    false           0           0
-##  8   914     bing mobile    false       4       2       46      Sweden    false           5        1607
-##  9   949     bing mobile    false      10       1       26       China    false           0           0
-## 10   406     bing mobile    false      10      14      140        Peru    false           0           0
+##       id referrer device bouncers n_visit n_pages duration                          country purchase order_items order_value
+##    &lt;int&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;                            &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+##  1   402     bing laptop    false       0      18      180                           Russia    false           0           0
+##  2   119     bing laptop     true       1       1      938                            China    false           0           0
+##  3   765     bing laptop    false       8      10      260                            China     true           7        1531
+##  4   170     bing tablet     true       0       1      985                    United States    false           0           0
+##  5   341     bing mobile    false       5      15      405                           Russia     true           7        2274
+##  6   208     bing tablet    false       0       2       52                          Denmark    false           1         178
+##  7    97     bing tablet     true       2       1      292 Democratic Republic of the Congo    false           0           0
+##  8   705     bing laptop     true       3       1      271                      Philippines    false           0           0
+##  9   736     bing tablet    false       1      14      168                           Israel    false           0           0
+## 10   424     bing tablet     true       8       1      318                    United States    false           0           0
 ## # ... with 490 more rows</code></pre>
 </section>
 <section id="sampling-data-2" class="slide level2">
@@ -653,18 +653,18 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">sample_frac</span>(<span class="dt">size =</span> <span class="fl">0.7</span>)</code></pre></div>
 <pre><code>## # A tibble: 700 x 11
-##       id referrer device bouncers n_visit n_pages duration        country purchase order_items order_value
-##    &lt;int&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;          &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-##  1   209    yahoo laptop     true       3       1      373         Serbia    false           0           0
-##  2   124   social mobile     true       0       1      345      Indonesia    false           0           0
-##  3   682   direct tablet    false       5      18      414    Afghanistan     true           8        2006
-##  4   401     bing tablet    false       1       9      135     Tajikistan    false           0           0
-##  5   283   social mobile     true       5       1       22         Brazil    false           0           0
-##  6   129   google tablet     true       8       1      249         Brazil    false           0           0
-##  7   585   direct tablet     true       0       1      840 United Kingdom    false           0           0
-##  8   875   direct laptop    false       2       4       80  United States    false           0           0
-##  9   353   social tablet     true       1       1      200        Croatia    false           0           0
-## 10     6    yahoo laptop    false       5       5      135   South Africa    false           0           0
+##       id referrer device bouncers n_visit n_pages duration       country purchase order_items order_value
+##    &lt;int&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;         &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+##  1    11   direct laptop     true       9       1      738       Jamaica    false           0           0
+##  2   147   direct tablet    false       4       5       55        Panama    false           1        2055
+##  3    55   direct mobile     true       0       1      566 United States    false           0           0
+##  4   641   direct laptop     true       6       1      140       Mayotte    false           0           0
+##  5   960    yahoo laptop    false       2       8      232        Russia    false           0           0
+##  6   575     bing laptop    false       1      19      380         Yemen     true           4        2036
+##  7   320     bing laptop    false       4       3       48        Sweden    false           3        2716
+##  8   745   direct mobile     true       5       1      352        Mexico    false           0           0
+##  9   214   direct laptop    false       8      10      210        France    false           0           0
+## 10   102   google mobile    false       2       3       69       Bahamas    false           3         583
 ## # ... with 690 more rows</code></pre>
 </section>
 <section id="sampling-data-3" class="slide level2">
@@ -675,18 +675,18 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <span class="st">  </span><span class="kw">sample_frac</span>(<span class="fl">0.3</span>)</code></pre></div>
 <pre><code>## # A tibble: 299 x 11
 ## # Groups:   referrer [5]
-##       id referrer device bouncers n_visit n_pages duration    country purchase order_items order_value
-##    &lt;int&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;      &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-##  1   909     bing mobile    false       6      18      342   Colombia     true           1         637
-##  2   305     bing tablet    false       2      11      220  Argentina    false           6         631
-##  3    98     bing mobile    false       3      18      288   Portugal     true           6         764
-##  4   724     bing laptop     true       3       1      550     Sweden    false           0           0
-##  5   414     bing tablet    false       7       3       42 Madagascar    false           4         260
-##  6   749     bing laptop    false       0      17      272  Indonesia     true           9        1384
-##  7   327     bing laptop     true       2       1      646   Bulgaria    false           0           0
-##  8   949     bing mobile    false      10       1       26      China    false           0           0
-##  9   303     bing mobile     true       4       1      979 Madagascar    false           0           0
-## 10   604     bing tablet     true       6       1      567  Indonesia    false           0           0
+##       id referrer device bouncers n_visit n_pages duration        country purchase order_items order_value
+##    &lt;int&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;          &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+##  1    52     bing mobile     true       7       1      569         Brazil    false           0           0
+##  2   600     bing laptop    false       9      13      299          China    false           0           0
+##  3   949     bing mobile    false      10       1       26          China    false           0           0
+##  4    41     bing mobile    false       4      20      440 Czech Republic     true           3         184
+##  5   500     bing mobile     true       9       1      574          Egypt    false           0           0
+##  6     4     bing tablet    false       3      18      468          China     true           6         434
+##  7   768     bing tablet    false       2      17      510  United States    false           0           0
+##  8   231     bing tablet     true       0       1      697       Portugal    false           0           0
+##  9   177     bing laptop    false       5       1       20       Thailand    false           3        1252
+## 10    90     bing mobile    false       7       1       22      Indonesia    false           0           0
 ## # ... with 289 more rows</code></pre>
 </section>
 <section id="section-4" class="slide level2" data-background="extract.png">
@@ -1346,7 +1346,6 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2></h2>
 <!-- To do: -->
 <!--   - explain case study data -->
-<!--   - list functions used in each section -->
 </section>
     </div>
   </div>

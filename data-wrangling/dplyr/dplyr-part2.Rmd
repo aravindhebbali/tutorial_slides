@@ -8,35 +8,24 @@ output: _output.yaml
 
 <hr>
 
-- combine tables
-
-## Introduction
-
-<hr>
-
 ```{r libs, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
 library(dplyr)
 ```
 
-In a previous module, we learnt about dplyr verbs and used them to compute average order value for an e-commerce website data. In this post, we will learn to combine tables using different `*_join` functions provided in dplyr. Let us assume we have 2 tables **x** and **y**. 
+In the previous module, we learnt about dplyr verbs and used them to compute average order value for an e-commerce website data. In this module, we will learn to combine tables using different `*_join` functions provided in dplyr. Let us assume we have 2 tables **x** and **y**. 
 
-The following types of `join` functions are provided in dplyr:
+We will explore the following type of `joins` 
 
-- `inner_join()`
-- `left_join()`
-- `right_join()`
-- `semi_join()`
-- `anti_join()`
-- `full_join()`
+- inner join
+- left join
+- right join
+- semi join
+- anti join
+- full join
 
 ## {data-background="casestudy.png"}
 
-## Case Study
-
-<hr>
-
-We have two data sets with details of customers and their orders. We will use the above functions to combine the data sets in different ways to glean information about customer orders. Let us import the data from our github repository:
-
+## {data-background="join_case_study.png"}
 
 ```{r dplyr1, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
 library(dplyr)
@@ -73,14 +62,6 @@ customer
 
 ## {data-background="innerjoin.png"}
 
-## inner join
-
-<hr>
-
-`inner_join()` returns all rows from x where there are matching values in y, and all columns from x and y. If there are multiple matches between x and y, all combination of the matches are returned.
-
-![inner join](inner_join.png)
-
 ## {data-background="canva_inner.png"}
 
 ## inner join
@@ -94,14 +75,6 @@ customer %>%
 
 ## {data-background="leftjoin.png"}
 
-## left join
-
-<hr>
-
-`left_join()` returns all rows from x, and all columns from x and y. Rows in x with no match in y will have NA values in the new columns. If there are multiple matches between x and y, all combinations of the matches are returned.
-
-![inner join](left_join.png)
-
 ## {data-background="canva_left.png"}
 
 ## left join
@@ -114,14 +87,6 @@ customer %>%
 ```
 
 ## {data-background="rightjoin.png"}
-
-## right join
-
-<hr>
-
-`right_join()` returns all rows from y, and all columns from x and y. Rows in y with no match in x will have NA values in the new columns. If there are multiple matches between x and y, all combinations of the matches are returned.
-
-![inner join](right_join.png)
 
 ## {data-background="canva_right.png"}
 
@@ -142,12 +107,6 @@ customer %>%
 
 <hr>
 
-`semi_join()` returns all rows from x where there are matching values in y, keeping just columns from x. A semi join differs from an inner join because an inner join will return one row of x for each matching row of y, where a semi join will never duplicate rows of x.
-
-## semi join
-
-<hr>
-
 ```{r dplyr6}
 customer %>%
   semi_join(order)
@@ -161,12 +120,6 @@ customer %>%
 
 <hr>
 
-`anti_join()` returns all rows from x where there are not matching values in y, keeping just columns from x.
-
-## anti join
-
-<hr>
-
 ```{r dplyr7}
 customer %>%
   anti_join(order)
@@ -175,14 +128,6 @@ customer %>%
 ## {data-background="fulljoin.png"}
 
 ## {data-background="canva_full.png"}
-
-## full join
-
-<hr>
-
-`full_join()` returns all rows and all columns from both x and y. Where there are not matching values, returns NA for the one missing.
-
-![inner join](full_join.png)
 
 ## full join
 

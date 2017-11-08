@@ -22,6 +22,7 @@ Use `dplyr` to:
 
 According to  a [survey](http://visit.crowdflower.com/rs/416-ZBE-142/images/CrowdFlower_DataScienceReport_2016.pdf) by [CrowdFlower](https://www.crowdflower.com/), data scientists spend most of their time cleaning and manipulating data rather than mining or modeling them for insights. As such, it becomes important to have tools that make data manipulation faster and easier. In today's post, we introduce you to [dplyr](http://dplyr.tidyverse.org/), a grammar of data manipulation.
 
+![survey](crowd_flower3.png)
 
 ## Why dplyr
 
@@ -103,7 +104,6 @@ Below is the description of the data set:
 - purchase: whether visitor purchased
 - order_value: order value of visitor (in dollars)
 
-
 ## Average Order Value
 
 <hr>
@@ -114,16 +114,7 @@ Below is the description of the data set:
 
 ![alt text](J:/R/tutorial_slides/data-wrangling/dplyr/image.jpg)
 
-## AOV Computation
-
-<hr>
-
-- Step 1: Filter Purchasers
-- Step 2: Select data related to AOV (order value, order items) and device
-- Step 3: Group order value and order items by device
-- Step 4: Compute total order value and order items for each device
-- Step 5: Compute AOV for each device
-- Step 6: Select device and AOV data
+## {data-background="aov_flow_canva.png"}
 
 ## AOV by Devices
 
@@ -364,13 +355,7 @@ ecom %>%
   select(device, aov)
 ```
 
-## AOV by Devices
-
-<hr>
-
-In the above code, we take the output from each step and use it as an input for the next step using the pipe `%>%` operator. It reduces the intermediate data frames and makes the code readable. Take the `ecom` data frame `->` filter the purchasers `->` select device, order_value and order_items variables `->` group the resulting data frame by device type `->` compute the sum of all the variables in the grouped data frames `->` compute the average order value `->` select device type and aov.
-
-It is the same as the steps we wrote at the beginning of this module. Now you realize how powerful dplyr is along with the `%>%` operator. There are other functions in dplyr but we will cover them in another module. You are encouraged to use the above approach to answer the questions we have listed below.
+## {data-background="aov_flow_map_canva.png"}
 
 ## {data-background="practice.png"}
 
