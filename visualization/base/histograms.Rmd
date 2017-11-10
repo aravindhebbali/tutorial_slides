@@ -33,26 +33,13 @@ A histogram is a plot that can be used to examine the shape and spread of  conti
 
 <hr>
 
-To construct a histogram, the data is split into intervals called bins. The intervals may or may not be equal sized. For each bin, the number of data points that fall into it are counted (frequency). The Y axis of the histogram represents the frequency and the X axis represents the variable. 
+To construct a histogram
 
-## Normal Distribution
-
-<hr>
-
-```{r hist1, fig.align='center', fig.height=5, fig.width=5, echo=FALSE}
-hist(rbeta(10000, 5, 5), ann = FALSE, col = 'blue')
-```
-
-## Skewed Distribution
-
-<hr>
-
-```{r hist2, fig.align='center', fig.width=10, fig.height=5, echo=FALSE}
-init <- par(no.readonly = TRUE)
-par(mfrow = c(1, 2))
-hist(rbeta(10000, 2, 5), ann = FALSE, col = 'blue')
-hist(rbeta(10000, 5, 2), ann = FALSE, col = 'blue')
-```
+- the data is split into intervals called bins 
+- the intervals may or may not be equal sized 
+- for each bin, the number of data points that fall into it are counted (frequency) 
+- the Y axis of the histogram represents the frequency and 
+- the X axis represents the variable
 
 ## Histogram
 
@@ -121,24 +108,10 @@ for (i in values) {
 <hr>
 
 ```{r hist7, fig.align='center', fig.height=5, fig.width=5}
-hist(mtcars$mpg, breaks = c(10, 18, 24, 30, 35))
-```
-
-## Frequency Density
-
-<hr>
-
-Frequency Density =  Relative Frequency / Class Width
-
-Relative Frequency = Frequency / Total Observations
-
-## Breaks
-
-<hr>
-
-```{r hist8, fig.align='center'}
 h <- hist(mtcars$mpg, breaks = c(10, 18, 24, 30, 35))
 ```
+
+## {data-background="freqden.png"}
 
 ## Frequency Density
 
@@ -149,7 +122,8 @@ frequency <- h$counts
 class_width <- c(8, 6, 6, 5)
 rel_freq <- frequency / length(mtcars$mpg)
 freq_density <- rel_freq / class_width
-d <- data.frame(frequency = frequency, class_width = class_width, relative_frequency = rel_freq, frequency_density = freq_density)
+d <- data.frame(frequency = frequency, class_width = class_width, 
+  relative_frequency = rel_freq, frequency_density = freq_density)
 d
 ```
 
@@ -250,6 +224,25 @@ hist(mtcars$mpg, labels = TRUE, prob = TRUE,
      ylim = c(0, 0.1), xlab = 'Miles Per Gallon',
      main = 'Distribution of Miles Per Gallon',
      col = rainbow(5))
+```
+
+## Normal Distribution
+
+<hr>
+
+```{r hist1, fig.align='center', fig.height=5, fig.width=5, echo=FALSE}
+hist(rbeta(10000, 5, 5), ann = FALSE, col = 'blue')
+```
+
+## Skewed Distribution
+
+<hr>
+
+```{r hist2, fig.align='center', fig.width=10, fig.height=5, echo=FALSE}
+init <- par(no.readonly = TRUE)
+par(mfrow = c(1, 2))
+hist(rbeta(10000, 2, 5), ann = FALSE, col = 'blue')
+hist(rbeta(10000, 5, 2), ann = FALSE, col = 'blue')
 ```
 
 ## {data-background="thankyou.png"}
