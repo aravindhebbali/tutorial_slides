@@ -197,7 +197,7 @@ for (i in values) {
 {plot(gdp$year, gdp$india, type = 'l', ylim = c(-5, 15), xlab = 'Year',
       ylab = 'Growth Rate', col = 'blue', main = 'BRICS: Growth Rate')
 lines(gdp$year, gdp$china, col = 'red')
-legend(x = 2012, y = 14, legend = c('india', 'china'),
+legend(x = 2013, y = 4, legend = c('india', 'china'),
        lty = 1, col = c('blue', 'red'), title = 'Nations')}
 ```
 
