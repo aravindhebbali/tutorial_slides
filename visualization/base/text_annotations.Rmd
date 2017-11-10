@@ -4,20 +4,14 @@ output: _output.yaml
 
 ## {data-background="viz_text_ann.png"}
 
-## Agenda
-
-<hr>
-
-We will learn to add text inside as well as on the margins of the plot. This is accomplished using the following two functions:
-
-- `text()` : add text inside the plot
-- `mtext()` : add text on the margins of the plot
-
 ## Introduction
 
 <hr>
 
-There are occassions when you want to display additional information in a plot. This is usually achieved by adding text either inside the plot or on the margins. For example, you might want to label a line/bar or add formulas to better communicate what is shown in the plot. The idea is to use the available space within/outside the plot to provide additional information that can be useful to the end users. 
+There are occassions when you want to display additional information in a plot. This is usually achieved by adding text either inside the plot or on the margins. For example, you might want to label a line/bar or add formulas to better communicate what is shown in the plot. The idea is to use the available space within/outside the plot to provide additional information that can be useful to the end users. We will learn to add text inside as well as on the margins of the plot. This is accomplished using the following two functions:
+
+- `text()` : add text inside the plot
+- `mtext()` : add text on the margins of the plot
 
 ## Syntax
 
@@ -70,7 +64,7 @@ text(x = 340, y = 30, labels = 'Sample Text', col = 'red')
 
 <hr>
 
-```{r text3, fig.align='center', fig.width=15, fig.height=5, echo=FALSE}
+```{r text3, fig.align='center', fig.width = 8, fig.height=5, echo=FALSE}
 init <- par(no.readonly = TRUE)
 par(mfrow = c(1, 3))
 values <- c('red', 'blue', 'green')
@@ -94,7 +88,7 @@ text(x = 340, y = 30, labels = 'Sample Text', col = 'red', font = 2)
 
 <hr>
 
-```{r text5, fig.align='center', fig.width=10, fig.height=10, echo=FALSE}
+```{r text5, fig.align='center', fig.width=8, fig.height=6, echo=FALSE}
 init <- par(no.readonly = TRUE)
 par(mfrow = c(2, 2))
 values <- c(1, 2, 3, 4)
@@ -109,7 +103,7 @@ for (i in values) {
 
 <hr>
 
-```{r text6, fig.align='center', fig.width=5, fig.height=5}
+```{r text6, fig.align='center', fig.width=8, fig.height=5}
 plot(mtcars$disp, mtcars$mpg)
 text(x = 340, y = 30, labels = 'Sample Text', col = 'red', family = 'mono')
 ```
@@ -118,7 +112,7 @@ text(x = 340, y = 30, labels = 'Sample Text', col = 'red', family = 'mono')
 
 <hr>
 
-```{r text7, fig.align='center', fig.width=15, fig.height=5, echo=FALSE}
+```{r text7, fig.align='center', fig.width=8, fig.height=5, echo=FALSE}
 init <- par(no.readonly = TRUE)
 par(mfrow = c(1, 3))
 values <- c('mono', 'serif', 'sans-serif')
@@ -142,7 +136,7 @@ text(x = 340, y = 30, labels = 'Sample Text', col = 'red', cex = 2)
 
 <hr>
 
-```{r text9, fig.align='center', fig.width=15, fig.height=5, echo=FALSE}
+```{r text9, fig.align='center', fig.width=8, fig.height=5, echo=FALSE}
 init <- par(no.readonly = TRUE)
 par(mfrow = c(1, 3))
 values <- c(0.5, 1, 1.5)
@@ -157,7 +151,11 @@ for (i in values) {
 
 <hr>
 
-The `mtext()` function allows the user to place the text on the margins of the plot. It allows the user to modify the location of the text in multiple ways and we will explore them one by one. To beign with, let us add text to the plot using the `mtext()` function. The minimum input you need to provide is the text itself. Below is a simple example:
+The `mtext()` function allows the user to place the text on the margins of the plot. It allows the user to modify the location of the text in multiple ways using the following options:
+
+- `side`
+- `line`
+- `adj`
 
 ## Text on the Margins
 
@@ -181,7 +179,7 @@ mtext('Sample Text', side = 1)
 
 <hr>
 
-```{r mtext3, fig.align='center', fig.width=10, fig.height=10, echo=FALSE}
+```{r mtext3, fig.align='center', fig.width=8, fig.height=6, echo=FALSE}
 init <- par(no.readonly = TRUE)
 par(mfrow = c(2, 2))
 values <- c(1, 2, 3, 4)
