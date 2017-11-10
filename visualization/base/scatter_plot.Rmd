@@ -13,6 +13,8 @@ output: _output.yaml
     - color
     - shape 
     - and shape
+- add horizontal & vertical lines
+- fit regression line
 
 ## Intro
 
@@ -123,6 +125,52 @@ plot(mtcars$disp, mtcars$mpg, pch = 24, col = 'red', bg = 'blue')
 
 ```{r col3, fig.align='center', fig.width=5, fig.height=5}
 plot(mtcars$disp, mtcars$mpg, pch = 5, col = factor(mtcars$cyl))
+```
+
+## Horizontal Line
+
+<hr>
+
+```{r hline, fig.align='center', fig.width=5, fig.height=5}
+plot(mtcars$disp, mtcars$mpg)
+abline(h = 20)
+```
+
+## Vertical Line
+
+<hr>
+
+```{r vline, fig.align='center', fig.width=5, fig.height=5}
+plot(mtcars$disp, mtcars$mpg)
+abline(v = 200)
+```
+
+## Regression Line (Intercept & Slope)
+
+<hr>
+
+```{r rline1, fig.align='center', fig.width=5, fig.height=5}
+plot(mtcars$disp, mtcars$mpg)
+abline(a = 29.59, b = -0.0412)
+```
+
+## Regression Line (Coefficients)
+
+<hr>
+
+```{r rline2, fig.align='center', fig.width=5, fig.height=5}
+plot(mtcars$disp, mtcars$mpg)
+abline(c(29.59, -0.0412))
+```
+
+## Regression Line (Using Model)
+
+<hr>
+
+```{r rline3, fig.align='center', fig.width=5, fig.height=5}
+plot(mtcars$disp, mtcars$mpg)
+model <- lm(mpg ~ disp, data = mtcars)
+abline(coef(model))
 ```
 
 ## {data-background="thankyou.png"}
