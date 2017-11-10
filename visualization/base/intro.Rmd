@@ -73,7 +73,7 @@ help(plot)
 help(mtcars)
 ```
 
-## mtcars 
+## Data: mtcars 
 
 <hr>
 
@@ -82,7 +82,7 @@ help(mtcars)
 head(mtcars)
 ```
 
-## variable info
+## Variable Info
 
 <hr>
 
@@ -103,7 +103,7 @@ Now that we have some idea about the data set, let us explore the `plot()` funct
 - Case 5: 1 continuous and 1 categorical variable
 - Case 6: 1 categorical and 1 continuous variable
 
-## One continuous variable
+## plot(): One Continuous Variable
 
 <hr>
 
@@ -111,7 +111,7 @@ Now that we have some idea about the data set, let us explore the `plot()` funct
 plot(mtcars$mpg)
 ```
 
-## One categorical variable
+## plot(): One Categorical Variable
 
 <hr>
 
@@ -119,7 +119,7 @@ plot(mtcars$mpg)
 plot(as.factor(mtcars$cyl))
 ```
 
-## Two continuous variables
+## plot(): Two Continuous Variables
 
 <hr>
 
@@ -127,7 +127,7 @@ plot(as.factor(mtcars$cyl))
 plot(mtcars$disp, mtcars$mpg)
 ```
 
-## Two categorical variables
+## plot(): Two Categorical Variables
 
 <hr>
 
@@ -135,7 +135,7 @@ plot(mtcars$disp, mtcars$mpg)
 plot(as.factor(mtcars$am), as.factor(mtcars$cyl))
 ```
 
-## Continuous/Categorical variable
+## plot(): Continuous/Categorical Variables
 
 <hr>
 
@@ -143,7 +143,7 @@ plot(as.factor(mtcars$am), as.factor(mtcars$cyl))
 plot(mtcars$mpg, mtcars$cyl)
 ```
 
-## Categorical/Continuous variable
+## plot(): Categorical/Continuous Variables
 
 <hr>
 
