@@ -324,8 +324,5 @@ traffic$traffics %>% fct_lump(prop = -0.1) %>% table()
 
 <!-- To do: -->
 <!--   - add agenda -->
-<!--   - describe data in case study -->
-<!--   - new section for case study -->
-<!--   - introduce functions with simple examples before case study -->
 <!--   - describe case study 2 -->
 <!--   - modify ecommerce data -->
