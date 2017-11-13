@@ -6,13 +6,7 @@ output: _output.yaml
 
 ## Agenda
 
-In this section, we will learn to combine multiple graphs in a single frame using the following functions:
-
-- `par()` 
-- `layout()`
-
-
-## Introduction
+<hr>
 
 Often, it is useful to have multiple plots in the same frame as it allows us to get a comprehensive view of a particular variable or compare among different variables. The Graphics package offers two methods to combine multiple plots. `par()` can be used to set graphical parameters regarding plot layout using the mfcol and mfrow arguments. `layout()` serves the same purpose but offers more flexibility by allowing us to modify the height and width of rows and columns.
 
@@ -33,11 +27,13 @@ mfrow(number of rows, number of columns)
 
 Let us begin by combining 4 plots in 2 rows and 2 columns:
 
-## Case Study 1
+## Case Study 1: Arrange 4 plots in 2 rows and 2 columns
 
-Let us begin by combining 4 plots in 2 rows and 2 columns. The plots will be filled by rows as we are using the mfrow function:
+<hr>
 
-```{r facet1,fig.align='center',fig.height=7,fig.width=7, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Case Study 1'}
+Let us begin by arranging 4 plots in 2 rows and 2 columns. The plots will be filled by rows as we are using the mfrow function:
+
+```{r facet1,fig.align='center',fig.height=6,fig.width=7, eval = FALSE}
 # store the current parameter settings in init
 init <- par(no.readonly=TRUE)
  
@@ -54,11 +50,33 @@ boxplot(mtcars$mpg)
 par(init)
 ```
 
-## Case Study 2
+## Case Study 1: Arrange 4 plots in 2 rows and 2 columns
 
-Combine 2 plots in 1 row and 2 columns. 
+<hr>
 
-```{r facet2,fig.align='center',fig.height=7,fig.width=7}
+```{r facet1a,fig.align='center',fig.height=6,fig.width=7, eval = TRUE, echo=FALSE}
+# store the current parameter settings in init
+init <- par(no.readonly=TRUE)
+ 
+# specify that 4 graphs to be combined and filled by rows
+par(mfrow = c(2, 2))
+ 
+# specify the graphs to be combined
+plot(mtcars$mpg)
+plot(mtcars$disp, mtcars$mpg)
+hist(mtcars$mpg)
+boxplot(mtcars$mpg)
+ 
+# restore the setting stored in init
+par(init)
+```
+
+
+## Case Study 2: Arrange 2 plots in 1 row and 2 columns
+
+<hr>
+
+```{r facet2,fig.align='center',fig.height=6,fig.width=7, eval=FALSE}
 # store the current parameter settings in init
 init <- par(no.readonly=TRUE)
  
@@ -73,11 +91,30 @@ boxplot(mtcars$mpg)
 par(init)
 ```
 
-## Case Study 3
+## Case Study 2: Arrange 2 plots in 1 row and 2 columns
 
-Combine 2 plots in 2 rows and 1 column. 
+<hr>
 
-```{r facet3,fig.align='center',fig.height=7,fig.width=7}
+```{r facet2a,fig.align='center',fig.height=6,fig.width=7, eval=TRUE, echo=FALSE}
+# store the current parameter settings in init
+init <- par(no.readonly=TRUE)
+ 
+# specify that 2 graphs to be combined and filled by rows
+par(mfrow = c(1, 2))
+ 
+# specify the graphs to be combined
+hist(mtcars$mpg)
+boxplot(mtcars$mpg)
+ 
+# restore the setting stored in init
+par(init)
+```
+
+## Case Study 3: Arrange 2 plots in 2 rows and 1 column
+
+<hr>
+
+```{r facet3,fig.align='center',fig.height=6,fig.width=7, eval=FALSE}
 # store the current parameter settings in init
 init <- par(no.readonly=TRUE)
  
@@ -92,11 +129,30 @@ boxplot(mtcars$mpg)
 par(init)
 ```
 
-## Case Study 4
+## Case Study 3: Arrange 2 plots in 2 rows and 1 column
 
-Combine 3 plots in 1 row and 3 columns. 
+<hr>
 
-```{r facet4,fig.align='center',fig.height=7,fig.width=7}
+```{r facet3a,fig.align='center',fig.height=6,fig.width=7, echo=FALSE}
+# store the current parameter settings in init
+init <- par(no.readonly=TRUE)
+ 
+# specify that 2 graphs to be combined and filled by rows
+par(mfrow = c(2, 1))
+ 
+# specify the graphs to be combined
+hist(mtcars$mpg)
+boxplot(mtcars$mpg)
+ 
+# restore the setting stored in init
+par(init)
+```
+
+## Case Study 4: Arrange 3 plots in 1 row and 3 columns
+
+<hr>
+
+```{r facet4,fig.align='center',fig.height=6,fig.width=7, eval=FALSE}
 # store the current parameter settings in init
 init <- par(no.readonly=TRUE)
  
@@ -112,11 +168,51 @@ boxplot(mtcars$mpg)
 par(init)
 ```
 
-## Case Study 5
+## Case Study 4: Arrange 3 plots in 1 row and 3 columns
 
-Combine 3 plots in 3 rows and 1 column. 
+<hr>
 
-```{r facet5,fig.align='center',fig.height=7,fig.width=7}
+```{r facet4a,fig.align='center',fig.height=6,fig.width=7, echo=FALSE}
+# store the current parameter settings in init
+init <- par(no.readonly=TRUE)
+ 
+# specify that 3 graphs to be combined and filled by rows
+par(mfrow = c(1, 3))
+ 
+# specify the graphs to be combined
+plot(mtcars$disp, mtcars$mpg)
+hist(mtcars$mpg)
+boxplot(mtcars$mpg)
+ 
+# restore the setting stored in init
+par(init)
+```
+
+## Case Study 5: Arrange 3 plots in 3 rows and 1 column
+
+<hr>
+
+```{r facet5,fig.align='center',fig.height=6,fig.width=7, eval=FALSE}
+# store the current parameter settings in init
+init <- par(no.readonly=TRUE)
+ 
+# specify that 3 graphs to be combined and filled by rows
+par(mfrow = c(3, 1))
+ 
+# specify the graphs to be combined
+plot(mtcars$disp, mtcars$mpg)
+hist(mtcars$mpg)
+boxplot(mtcars$mpg)
+ 
+# restore the setting stored in init
+par(init)
+```
+
+## Case Study 5: Arrange 3 plots in 3 rows and 1 column
+
+<hr>
+
+```{r facet5a,fig.align='center',fig.height=6,fig.width=7, echo=FALSE}
 # store the current parameter settings in init
 init <- par(no.readonly=TRUE)
  
@@ -134,6 +230,8 @@ par(init)
 
 ## mfcol
 
+<hr>
+
 mfcol combines plots filled by columns i.e it takes two arguments, the number of rows and number of columns and then starts filling the plots by columns. Below is the syntax for mfrow:
 
 ```{r facetsyntax2, eval=FALSE}
@@ -143,11 +241,32 @@ mfcol(number of rows, number of columns)
 
 Let us begin by combining 4 plots in 2 rows and 2 columns:
 
-## Case Study 6
+## Case Study 6: Arrange 3 plots in 3 rows and 1 column
 
-Combine 3 plots in 3 rows and 1 column. 
+<hr>
 
-```{r facet6,fig.align='center',fig.height=7,fig.width=7}
+```{r facet6,fig.align='center',fig.height=6,fig.width=7, eval=FALSE}
+# store the current parameter settings in init
+init <- par(no.readonly=TRUE)
+ 
+# specify that 4 graphs to be combined and filled by columns 
+par(mfcol = c(2, 2))
+ 
+# specify the graphs to be combined
+plot(mtcars$mpg)
+plot(mtcars$disp, mtcars$mpg)
+hist(mtcars$mpg)
+boxplot(mtcars$mpg)
+ 
+# restore the setting stored in init
+par(init)
+```
+
+## Case Study 6: Arrange 3 plots in 3 rows and 1 column
+
+<hr>
+
+```{r facet6a,fig.align='center',fig.height=6,fig.width=7, echo=FALSE}
 # store the current parameter settings in init
 init <- par(no.readonly=TRUE)
  
@@ -166,6 +285,8 @@ par(init)
 
 ## Special Cases
 
+<hr>
+
 What happens if we specify lesser or more number of graphs? In the next two examples, we will specify lesser or more number of graphs than we ask the par() function to combine. Let us see what happens in such instances:
 
 Case 1: Lesser number of graphs specified
@@ -175,9 +296,11 @@ Case 2: Extra graph specified
 We will specify that 4 plots need to be combined in 2 rows and 2 columns but specify 6 graphs instead of 4.
 
 
-## Case Study 7
+## Case Study 7: Arrange 4 plots, filled by rows
 
-```{r facet7,fig.align='center',fig.height=7,fig.width=7}
+<hr>
+
+```{r facet7,fig.align='center',fig.height=6,fig.width=7, eval=FALSE}
 # store the current parameter settings in init
 init <- par(no.readonly=TRUE)
  
@@ -193,9 +316,54 @@ boxplot(mtcars$mpg)
 par(init)
 ```
 
-## Case Study 8
+## Case Study 7: Arrange 4 plots, filled by rows
 
-```{r facet8,fig.align='center',fig.height=7,fig.width=7}
+<hr>
+
+```{r facet7a,fig.align='center',fig.height=6,fig.width=7, echo=FALSE}
+# store the current parameter settings in init
+init <- par(no.readonly=TRUE)
+ 
+# specify that 4 graphs to be combined and filled by rows
+par(mfrow = c(2, 2))
+ 
+# specify the graphs to be combined
+plot(mtcars$disp, mtcars$mpg)
+hist(mtcars$mpg)
+boxplot(mtcars$mpg)
+ 
+# restore the setting stored in init
+par(init)
+```
+
+## Case Study 8: Arrange 6 plots, filled by rows
+
+<hr>
+
+```{r facet8,fig.align='center',fig.height=6,fig.width=7, eval=FALSE}
+# store the current parameter settings in init
+init <- par(no.readonly=TRUE)
+ 
+# specify that 4 graphs to be combined and filled by rows
+par(mfrow = c(2, 2))
+ 
+# specify the graphs to be combined
+plot(mtcars$mpg)
+plot(mtcars$disp, mtcars$mpg)
+hist(mtcars$mpg)
+boxplot(mtcars$mpg)
+plot(mtcars$disp, mtcars$mpg)
+boxplot(mtcars$mpg)
+
+# restore the setting stored in init
+par(init)
+```
+
+## Case Study 8: Arrange 6 plots, filled by rows
+
+<hr>
+
+```{r facet8a,fig.align='center',fig.height=6,fig.width=7, echo=FALSE}
 # store the current parameter settings in init
 init <- par(no.readonly=TRUE)
  
@@ -216,6 +384,8 @@ par(init)
 
 ## Introduction
 
+<hr>
+
 At the core of the layout() function is a matrix. We communicate the structure in which the plots must be combined using a matrix. As such, the layout function is more flexible compared to the par() function.
 
 |Option|Description|Value|
@@ -226,11 +396,11 @@ At the core of the layout() function is a matrix. We communicate the structure i
 
 Let us begin by combining 4 plots in a 2 row/2 column structure. We do this by creating a layout using the matrix function.
 
-## Case Study 1
+## Case Study 1: Arrange 4 plots in 2 rows/2 columns, filled by rows
 
-Combine 4 plots in 2 rows/2 columns filled by rows.
+<hr>
 
-```{r facet9,fig.align='center',fig.height=7,fig.width=7}
+```{r facet9,fig.align='center',fig.height=6,fig.width=7, eval=FALSE}
 # specify the layout
 # 4 plots to be combined in 2 row/ 2 columns and arranged by row
 layout(matrix(c(1, 2, 3, 4), nrow = 2, byrow = TRUE))
@@ -242,13 +412,29 @@ boxplot(mtcars$mpg)
 plot(mtcars$mpg)
 ```
 
-## Case Study 2
+## Case Study 1: Arrange 4 plots in 2 rows/2 columns, filled by rows
 
-Combine 4 plots in 2 rows/2 columns filled by columns
+<hr>
+
+```{r facet9a,fig.align='center',fig.height=6,fig.width=7, echo=FALSE}
+# specify the layout
+# 4 plots to be combined in 2 row/ 2 columns and arranged by row
+layout(matrix(c(1, 2, 3, 4), nrow = 2, byrow = TRUE))
+ 
+# specify the 4 plots
+plot(mtcars$disp, mtcars$mpg)
+hist(mtcars$mpg)
+boxplot(mtcars$mpg)
+plot(mtcars$mpg)
+```
+
+## Case Study 2: Arrange 4 plots in 2 rows/2 columns, filled by columns
+
+<hr>
 
 To fill the plots by column, we specify byrow = FALSE in the matrix.
 
-```{r facet10,fig.align='center',fig.height=7,fig.width=7}
+```{r facet10,fig.align='center',fig.height=6,fig.width=7, eval=FALSE}
 # specify the layout
 # 4 plots to be combined in 2 row/ 2 columns and filled by columns
 layout(matrix(c(1, 2, 3, 4), nrow = 2, byrow = FALSE))
@@ -260,14 +446,30 @@ boxplot(mtcars$mpg)
 plot(mtcars$mpg)
 ```
 
-## Case Study 3
+## Case Study 2: Arrange 4 plots in 2 rows/2 columns, filled by columns
 
-Combine 3 plots in 2 rows/2 columns filled by rows
+<hr>
+
+```{r facet10a,fig.align='center',fig.height=6,fig.width=7, echo=FALSE}
+# specify the layout
+# 4 plots to be combined in 2 row/ 2 columns and filled by columns
+layout(matrix(c(1, 2, 3, 4), nrow = 2, byrow = FALSE))
+ 
+# specify the 4 plots
+plot(mtcars$disp, mtcars$mpg)
+hist(mtcars$mpg)
+boxplot(mtcars$mpg)
+plot(mtcars$mpg)
+```
+
+## Case Study 3: Arrange 3 plots in 2 rows/2 columns, filled by rows
+
+<hr>
 
 The magic of the layout() function begins here. We want to combine 3 plots and the first plot should occupy both the columns in row 1 and the next 2 plots should be in row 2. If you look at the matrix below, 1 is specified twice and since the matrix is filled by row, it will occupy both the columns in the first row. Similarly the first plot will occupy the entire first row. It will be crystal clear when you see the plot.
 
 
-```{r facet11,fig.align='center',fig.height=7,fig.width=7}
+```{r facet11,fig.align='center',fig.height=6,fig.width=7, eval=FALSE}
 # specify the matrix
 matrix(c(1, 1, 2, 3), nrow = 2, byrow = TRUE)
 
@@ -280,13 +482,27 @@ hist(mtcars$mpg)
 boxplot(mtcars$mpg)
 ```
 
-## Case Study 4
+## Case Study 3: Arrange 3 plots in 2 rows/2 columns, filled by rows
 
-Combine 3 plots in 2 rows/2 columns filled by rows
+<hr>
+
+```{r facet11a,fig.align='center',fig.height=6,fig.width=7, echo=FALSE}
+# 3 plots to be combined in 2 row/ 2 columns and arranged by row
+layout(matrix(c(1, 1, 2, 3), nrow = 2, byrow = TRUE))
+ 
+# specify the 3 plots
+plot(mtcars$disp, mtcars$mpg)
+hist(mtcars$mpg)
+boxplot(mtcars$mpg)
+```
+
+## Case Study 4: Arrange 3 plots in 2 rows/2 columns, filled by rows
+
+<hr>
 
 The plots must be filled by rows and the third plot must occupy both the columns of the second row while the other two plots will be placed in the first row. The matrix would look like this:
 
-```{r facet12,fig.align='center',fig.height=7,fig.width=7}
+```{r facet12,fig.align='center',fig.height=6,fig.width=7, eval=FALSE}
 # specify the matrix
 matrix(c(1, 2, 3, 3), nrow = 2, byrow = TRUE)
 
@@ -299,14 +515,27 @@ boxplot(mtcars$mpg)
 plot(mtcars$disp, mtcars$mpg)
 ```
 
-## Case Study 5
+## Case Study 4: Arrange 3 plots in 2 rows/2 columns, filled by rows
 
-Combine 3 plots in 2 rows/2 columns filled by columns
+<hr>
+
+```{r facet12a,fig.align='center',fig.height=6,fig.width=7, echo=FALSE}
+# 3 plots to be combined in 2 row/ 2 columns and arranged by row
+layout(matrix(c(1, 2, 3, 3), nrow = 2, byrow = TRUE))
+ 
+# specify the 3 plots
+hist(mtcars$mpg)
+boxplot(mtcars$mpg)
+plot(mtcars$disp, mtcars$mpg)
+```
+
+## Case Study 5: Arrange 3 plots in 2 rows/2 columns, filled by columns
+
+<hr>
 
 The plots must be filled by columns and the first plot must occupy both the rows of the first column while the other two plots will be placed in the second column in two rows. The matrix would look like this:
 
-
-```{r facet13,fig.align='center',fig.height=7,fig.width=7}
+```{r facet13,fig.align='center',fig.height=6,fig.width=7, eval=FALSE}
 # specify the matrix
 matrix(c(1, 1, 2, 3), nrow = 2, byrow = FALSE)
 
@@ -319,14 +548,27 @@ plot(mtcars$disp, mtcars$mpg)
 boxplot(mtcars$mpg)
 ```
 
-## Case Study 6
+## Case Study 5: Arrange 3 plots in 2 rows/2 columns, filled by columns
 
-Combine 3 plots in 2 rows/2 columns filled by columns
+<hr>
+
+```{r facet13a,fig.align='center',fig.height=6,fig.width=7, echo=FALSE}
+# 3 plots to be combined in 2 row/ 2 columns and arranged by columns
+layout(matrix(c(1, 1, 2, 3), nrow = 2, byrow = FALSE))
+ 
+# specify the 3 plots
+hist(mtcars$mpg)
+plot(mtcars$disp, mtcars$mpg)
+boxplot(mtcars$mpg)
+```
+
+## Case Study 6: Arrange 3 plots in 2 rows/2 columns, filled by columns
+
+<hr>
 
 The plots must be filled by columns and the first plot must occupy both the rows of the second column while the other two plots will be placed in the first column in two rows. The matrix would look like this:
 
-
-```{r facet14,fig.align='center',fig.height=7,fig.width=7}
+```{r facet14,fig.align='center',fig.height=6,fig.width=7, eval=FALSE}
 # specify the matrix
 matrix(c(1, 2, 3, 3), nrow = 2, byrow = FALSE)
 
@@ -339,16 +581,32 @@ plot(mtcars$disp, mtcars$mpg)
 hist(mtcars$mpg)
 ```
 
+## Case Study 6: Arrange 3 plots in 2 rows/2 columns, filled by columns
+
+<hr>
+
+```{r facet14a,fig.align='center',fig.height=6,fig.width=7, echo=FALSE}
+# 3 plots to be combined in 2 row/ 2 columns and arranged by columns
+layout(matrix(c(1, 2, 3, 3), nrow = 2, byrow = FALSE))
+ 
+# specify the 3 plots
+boxplot(mtcars$mpg)
+plot(mtcars$disp, mtcars$mpg)
+hist(mtcars$mpg)
+```
+
 ## Widths
+
+<hr>
 
 In all the layouts created so far, we have kept the size of the rows and columns equal. What if you want to modify the width and height of the columns and rows? The widths and heights arguments in the layout() function address the above mentioned issue. Let us check them out one by one:
 The widths argument is used for specifying the width of the columns. Based on the number of columns in the layout, you can specify the width of each column. Let us look at some examples.
 
-## Case Study 7
+## Case Study 7: Width of the 2nd column is twice the width of the 1st column
 
-Width of the 2nd column is twice the width of the 1st column
+<hr>
 
-```{r facet15,fig.align='center',fig.height=7,fig.width=7}
+```{r facet15,fig.align='center',fig.height=6,fig.width=7, eval=FALSE}
 # specify the matrix
 matrix(c(1, 2, 3, 4), nrow = 2, byrow = TRUE)
 
@@ -362,11 +620,26 @@ boxplot(mtcars$mpg)
 plot(mtcars$mpg)
 ```
 
-## Case Study 8
+## Case Study 7: Width of the 2nd column is twice the width of the 1st column
 
-Width of the 2nd column is twice that of the first and last column
+<hr>
 
-```{r facet16,fig.align='center',fig.height=7,fig.width=7}
+```{r facet15a,fig.align='center',fig.height=6,fig.width=7, echo=FALSE}
+# 4 plots to be combined in 2 row/ 2 columns and arranged by columns
+layout(matrix(c(1, 2, 3, 4), nrow = 2, byrow = TRUE), widths = c(1, 3))
+ 
+# specify the plots
+plot(mtcars$disp, mtcars$mpg)
+hist(mtcars$mpg)
+boxplot(mtcars$mpg)
+plot(mtcars$mpg)
+```
+
+## Case Study 8: Width of the 2nd column is twice that of the first and last column
+
+<hr>
+
+```{r facet16,fig.align='center',fig.height=6,fig.width=7, eval=FALSE}
 # specify the matrix
 matrix(c(1, 2, 3, 4, 5, 6), nrow = 2, byrow = TRUE)
     
@@ -382,15 +655,49 @@ hist(mtcars$mpg)
 boxplot(mtcars$mpg)
 ```
 
+## Case Study 8: Width of the 2nd column is twice that of the first and last column
+
+<hr>
+
+```{r facet16a,fig.align='center',fig.height=6,fig.width=7, echo=FALSE}
+# 6 plots to be combined in 2 row/ 3 columns and filled by rows
+layout(matrix(c(1, 2, 3, 4, 5, 6), nrow = 2, byrow = TRUE), widths = c(1, 2, 1))
+ 
+# specify the plots
+plot(mtcars$disp, mtcars$mpg)
+hist(mtcars$mpg)
+boxplot(mtcars$mpg)
+plot(mtcars$mpg)
+hist(mtcars$mpg)
+boxplot(mtcars$mpg)
+```
+
 ## Heights
+
+<hr>
 
 The heights arguments is used to modify the height of the rows and based on the number of rows specified in the layout, we can specify the height of each row. 
 
-## Case Study 9
+## Case Study 9: Height of the 2nd row is twice that of the first row
 
-Height of the 2nd row is twice that of the first row
+<hr>
 
-```{r facet17,fig.align='center',fig.height=7,fig.width=7}
+```{r facet17,fig.align='center',fig.height=6,fig.width=7, eval=FALSE}
+# 4 plots to be combined in 2 row/ 2 columns and filled by rows
+layout(matrix(c(1, 2, 3, 4), nrow = 2, byrow = TRUE), heights= c(1, 2))
+ 
+# specify the 4 plots
+plot(mtcars$disp, mtcars$mpg)
+hist(mtcars$mpg)
+boxplot(mtcars$mpg)
+plot(mtcars$mpg)
+```
+
+## Case Study 9: Height of the 2nd row is twice that of the first row
+
+<hr>
+
+```{r facet17a,fig.align='center',fig.height=6,fig.width=7, echo=FALSE}
 # 4 plots to be combined in 2 row/ 2 columns and filled by rows
 layout(matrix(c(1, 2, 3, 4), nrow = 2, byrow = TRUE), heights= c(1, 2))
  
@@ -403,9 +710,11 @@ plot(mtcars$mpg)
 
 ## Putting it all together...
 
-Before we end this section, let us combine plots using both the widths and heights option
+<hr>
 
-```{r facet18,fig.align='center',fig.height=7,fig.width=7}
+Before we end this section, let us arrange plots using both the widths and heights option
+
+```{r facet18,fig.align='center',fig.height=6,fig.width=7, eval=FALSE}
 # specify the matrix
 matrix(c(1, 2, 3, 4, 5, 6), nrow = 3, byrow = TRUE)
 
@@ -421,3 +730,23 @@ plot(mtcars$mpg)
 hist(mtcars$mpg)
 boxplot(mtcars$mpg)
 ```
+
+## Putting it all together...
+
+<hr>
+
+```{r facet18a,fig.align='center',fig.height=6,fig.width=7, echo=FALSE}
+# 6 plots to be combined in 3 row/ 2 columns and arranged by rows
+layout(matrix(c(1, 2, 3, 4, 5, 6), nrow = 3, byrow = TRUE), heights= c(1, 2, 1),
+widths = c(2, 1))
+ 
+# specify the 6 plots
+plot(mtcars$disp, mtcars$mpg)
+hist(mtcars$mpg)
+boxplot(mtcars$mpg)
+plot(mtcars$mpg)
+hist(mtcars$mpg)
+boxplot(mtcars$mpg)
+```
+
+## {data-background="thankyou.png"}
