@@ -28,22 +28,72 @@ output: _output.yaml
 
 <hr>
 
-A bar plot represents data in rectangular bars. The length of the bars are proportional to the values they represent. Bar plots can be either horizontal or vertical. The X axis of the plot represents the levels or the categories and the Y axis represents the frequency/count of the variable. 
+- a bar plot represents data in rectangular bars 
+- the length of the bars are proportional to the values they represent 
+- bar plots can be either horizontal or vertical 
+- the X axis of the plot represents the levels or the categories
+- and the Y axis represents the frequency/count of the variable 
 
-## Univariate Bar Plot
+<!-- ## Univariate Bar Plot -->
+
+<!-- <hr> -->
+
+<!-- A univariate bar plot represents a single categorical variable. The categories in the variable are represented on the X axis and their frequencies on the Y axis. In the below example, the `cyl` variable from the `mtcars` data set is visualized using a bar plot. The categories or levels are `4`, `6` and `8` which represent the number of cylinders in the automobile and are represented on the X axis. The frequency for each type of cylinder is represented by the Y axis. -->
+
+<!-- In R, bar plots can be created using either the `plot()` or `barplot()` function. The input to both the functions are different. In case of the `plot()` function, we can specify the variable but it must be converted to a factor variable. In case of the `barplot()` function, the input must be the count or frequency of the variable. The `table()` function can be used to generate the counts/frequency for a variable. Let us use both the functions to create the bar plot: -->
+
+## Libraries
 
 <hr>
 
-A univariate bar plot represents a single categorical variable. The categories in the variable are represented on the X axis and their frequencies on the Y axis. In the below example, the `cyl` variable from the `mtcars` data set is visualized using a bar plot. The categories or levels are `4`, `6` and `8` which represent the number of cylinders in the automobile and are represented on the X axis. The frequency for each type of cylinder is represented by the Y axis.
+```{r dplyr1, eval=FALSE}
+library(readr)
+library(dplyr)
+library(magrittr)
+```
 
-In R, bar plots can be created using either the `plot()` or `barplot()` function. The input to both the functions are different. In case of the `plot()` function, we can specify the variable but it must be converted to a factor variable. In case of the `barplot()` function, the input must be the count or frequency of the variable. The `table()` function can be used to generate the counts/frequency for a variable. Let us use both the functions to create the bar plot:
+```{r libs, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+library(readr)
+library(dplyr)
+library(magrittr)
+```
+
+## Data
+
+<hr>
+
+```{r import, eval=FALSE}
+ecom <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/ecom.csv',
+  col_types = list(col_factor(levels = c('Desktop', 'Mobile', 'Tablet')), 
+  col_factor(levels = c(TRUE, FALSE)), col_factor(levels = c(TRUE, FALSE)), 
+  col_factor(levels = c('Affiliates', 'Direct', 'Display', 'Organic', 'Paid', 'Referral', 'Social'))))
+```
+
+```{r show, echo=FALSE, eval=TRUE, message=FALSE}
+ecom <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/ecom.csv',
+  col_types = list(col_factor(levels = c('Desktop', 'Mobile', 'Tablet')), 
+  col_factor(levels = c(TRUE, FALSE)), col_factor(levels = c(TRUE, FALSE)), 
+  col_factor(levels = c('Affiliates', 'Direct', 'Display', 'Organic', 'Paid', 'Referral', 'Social'))))
+ecom
+```
+
+## Data Dictionary
+
+<hr>
+
+Below is the description of the data set:
+
+- device: device used to visit the website
+- bouncers: whether visit was a bouncer (exit website from landing page)
+- purchase: whether visitor purchased
+- referrer: referrer website/search engine
 
 ## Using plot function
 
 <hr>
 
 ```{r bar1, fig.align='center', fig.height=5, fig.width=5}
-plot(as.factor(mtcars$cyl))
+plot(ecom$device)
 ```
 
 ## Using barplot function
@@ -51,7 +101,7 @@ plot(as.factor(mtcars$cyl))
 <hr>
 
 ```{r bar2, fig.align='center', fig.height=5, fig.width=5}
-barplot(table(mtcars$cyl))
+barplot(table(ecom$device))
 ```
 
 ## Data
@@ -59,8 +109,8 @@ barplot(table(mtcars$cyl))
 <hr>
 
 ```{r bardata}
-cyl_freq <- table(mtcars$cyl)
-cyl_freq
+device_freq <- table(ecom$device)
+device_freq
 ```
 
 ## Horizontal Bar Plot
@@ -68,7 +118,7 @@ cyl_freq
 <hr>
 
 ```{r bar3, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_freq, horiz = TRUE)
+barplot(device_freq, horiz = TRUE)
 ```
 
 ## Labels
@@ -76,7 +126,7 @@ barplot(cyl_freq, horiz = TRUE)
 <hr>
 
 ```{r bar8, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_freq, names.arg = c('Four', 'Six', 'Eight'))
+barplot(device_freq, names.arg = c('Desktop', 'Mobile', 'Tablet'))
 ```
 
 ## Color
@@ -84,7 +134,7 @@ barplot(cyl_freq, names.arg = c('Four', 'Six', 'Eight'))
 <hr>
 
 ```{r bar9, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_freq, col = 'blue')
+barplot(device_freq, col = 'blue')
 ```
 
 ## {data-background="stacked.png"}
@@ -94,9 +144,8 @@ barplot(cyl_freq, col = 'blue')
 <hr>
 
 ```{r}
-table(mtcars$gear)
-cyl_gear <- table(mtcars$cyl, mtcars$gear)
-cyl_gear
+device_referrer <- table(ecom$device, ecom$referrer)
+device_referrer
 ```
 
 ## Stacked Bar Plot
@@ -104,7 +153,7 @@ cyl_gear
 <hr>
 
 ```{r bar21, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_gear)
+barplot(device_referrer)
 ```
 
 ## Color
@@ -112,7 +161,7 @@ barplot(cyl_gear)
 <hr>
 
 ```{r bar22, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_gear, col = c('blue', 'red', 'green'))
+barplot(device_referrer, col = c('blue', 'red', 'green'))
 ```
 
 ## Legend
@@ -120,9 +169,9 @@ barplot(cyl_gear, col = c('blue', 'red', 'green'))
 <hr>
 
 ```{r bar23, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_gear, col = c('blue', 'red', 'green'),
+barplot(device_referrer, col = c('blue', 'red', 'green'),
         main = 'Gears vs Cylinders', legend.text = TRUE,
-        xlab = 'Number of Gears', ylab = 'Frequency')
+        xlab = 'Accquisition Channel', ylab = 'Visitors')
 ```
 
 ## Grouped Bar Plot
@@ -130,9 +179,9 @@ barplot(cyl_gear, col = c('blue', 'red', 'green'),
 <hr>
 
 ```{r bar24, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_gear, col = c('blue', 'red', 'green'), beside = TRUE, 
-        legend.text = TRUE, main = 'Gears vs Cylinders',
-        xlab = 'Number of Gears', ylab = 'Frequency')
+barplot(device_referrer, col = c('blue', 'red', 'green'), beside = TRUE, 
+        legend.text = TRUE, main = 'Device Distribution by Referrer Type',
+        xlab = 'Accquisition Channel', ylab = 'Visitors')
 ```
 
 ## {data-background="aesthetics.png"}
@@ -142,7 +191,7 @@ barplot(cyl_gear, col = c('blue', 'red', 'green'), beside = TRUE,
 <hr>
 
 ```{r bar4, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_freq, width = 2)
+barplot(device_freq, width = 2)
 ```
 
 ## Space Between Bars
@@ -150,7 +199,7 @@ barplot(cyl_freq, width = 2)
 <hr>
 
 ```{r bar7, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_freq, space = c(1, 1, 2))
+barplot(device_freq, space = c(1, 1, 2))
 ```
 
 ## Border Color
@@ -158,7 +207,7 @@ barplot(cyl_freq, space = c(1, 1, 2))
 <hr>
 
 ```{r bar12, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_freq, border = 'blue')
+barplot(device_freq, border = 'blue')
 ```
 
 ## Remove axes
@@ -166,7 +215,7 @@ barplot(cyl_freq, border = 'blue')
 <hr>
 
 ```{r bar15, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_freq, axes = FALSE)
+barplot(device_freq, axes = FALSE)
 ```
 
 ## Axis Line Type
@@ -174,7 +223,7 @@ barplot(cyl_freq, axes = FALSE)
 <hr>
 
 ```{r bar16, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_freq, axis.lty = 3)
+barplot(device_freq, axis.lty = 3)
 ```
 
 ## Offset Y Axes
@@ -182,7 +231,7 @@ barplot(cyl_freq, axis.lty = 3)
 <hr>
 
 ```{r bar17, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_freq, offset = 5)
+barplot(device_freq, offset = 10)
 ```
 
 ## Axis Range
@@ -190,7 +239,7 @@ barplot(cyl_freq, offset = 5)
 <hr>
 
 ```{r bar18, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_freq, ylim = c(0, 30))
+barplot(device_freq, ylim = c(0, 4000))
 ```
 
 ## Putting it all together...
@@ -198,10 +247,10 @@ barplot(cyl_freq, ylim = c(0, 30))
 <hr>
 
 ```{r bar19, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_freq, col = c('blue', 'red', 'green'),
+barplot(device_freq, col = c('blue', 'red', 'green'),
         horiz = TRUE, width = c(1, 1, 2),
-        names.arg = c('Four', 'Six', 'Eight'),
-        axis.lty = 2, offset = 2)
+        names.arg = c('Desktop', 'Mobile', 'Tablet'),
+        axis.lty = 2, offset = 10)
 ```
 
 ## Title & Axis Labels
@@ -209,10 +258,10 @@ barplot(cyl_freq, col = c('blue', 'red', 'green'),
 <hr>
 
 ```{r bar20, fig.align='center', fig.height=5, fig.width=5}
-barplot(cyl_freq, col = c('blue', 'red', 'green'), horiz = TRUE, axis.lty = 2,
-        width = c(1, 1, 2), names.arg = c('Four', 'Six', 'Eight'), offset = 2)
-title(main = 'Distribution of Cylinders',
-      xlab = 'Frequency', ylab = 'Number of Cylinders')
+barplot(device_freq, col = c('blue', 'red', 'green'), axis.lty = 2,
+        width = c(2, 1, 0.5), names.arg = c('Desktop', 'Mobile', 'Tablet'), offset = 2)
+title(main = 'Distribution of Devices',
+      ylab = 'Visitors', xlab = 'Device')
 ```
 
 ## {data-background="thankyou.png"}
