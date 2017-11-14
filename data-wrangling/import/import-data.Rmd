@@ -52,7 +52,7 @@ library(sas7bdat)
 <hr>
 
 ```{r import55}
-excel_sheets('sample2.xls')
+excel_sheets('sample.xls')
 ```
 
 ## Read Sheet
@@ -60,7 +60,7 @@ excel_sheets('sample2.xls')
 <hr>
 
 ```{r import56, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample2.xls', sheet = 1)
+readxl::read_excel('sample.xls', sheet = 1)
 ```
 
 ## Read Specific Cells
@@ -68,17 +68,15 @@ readxl::read_excel('sample2.xls', sheet = 1)
 <hr>
 
 ```{r import58, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample2.xls', sheet = 2, range = "B3:C7")
+readxl::read_excel('sample.xls', sheet = 1, range = "B1:C4")
 ```
-
-Remember first row is always column name in excel so add 1 to row number while selecting the cell.
 
 ## Read Specific Cells
 
 <hr>
 
 ```{r import59, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample2.xls', sheet = 2, range = "A3:C5")
+readxl::read_excel('sample.xls', sheet = 1, range = "A1:C5")
 ```
 
 ## Read Specific Cells
@@ -86,7 +84,7 @@ readxl::read_excel('sample2.xls', sheet = 2, range = "A3:C5")
 <hr>
 
 ```{r import61, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample2.xls', sheet = 2, col_names = FALSE,
+readxl::read_excel('sample.xls', sheet = 1, col_names = FALSE,
   range = anchored("A4", dim = c(3, 2)))
 ```
 
@@ -95,7 +93,7 @@ readxl::read_excel('sample2.xls', sheet = 2, col_names = FALSE,
 <hr>
 
 ```{r import65, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample2.xls', sheet = 2,
+readxl::read_excel('sample.xls', sheet = 1,
   range = cell_limits(c(1, 2), c(NA, NA)))
 ```
 
@@ -106,8 +104,8 @@ Use cell_limits to specify one end of the rectangle such as top left or top righ
 <hr>
 
 ```{r import66, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample2.xls', sheet = 2,
-  range = cell_limits(c(3, NA), c(NA, 2)))
+readxl::read_excel('sample.xls', sheet = 1,
+  range = cell_limits(c(1, NA), c(NA, 2)))
 ```
 
 ## Read Single Row
@@ -115,7 +113,7 @@ readxl::read_excel('sample2.xls', sheet = 2,
 <hr>
 
 ```{r import60, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample2.xls', sheet = 2, range = "A3:C4")
+readxl::read_excel('sample.xls', sheet = 1, range = "A1:C4")
 ```
 
 ## Read Single Column
@@ -123,7 +121,7 @@ readxl::read_excel('sample2.xls', sheet = 2, range = "A3:C4")
 <hr>
 
 ```{r import64, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample2.xls', sheet = 2, range = cell_cols(2))
+readxl::read_excel('sample.xls', sheet = 1, range = cell_cols(2))
 ```
 
 
@@ -132,7 +130,7 @@ readxl::read_excel('sample2.xls', sheet = 2, range = cell_cols(2))
 <hr>
 
 ```{r import62, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample2.xls', sheet = 2, range = cell_rows(3:6))
+readxl::read_excel('sample.xls', sheet = 1, range = cell_rows(1:4))
 ```
 
 ## Specify Columns
@@ -140,7 +138,7 @@ readxl::read_excel('sample2.xls', sheet = 2, range = cell_rows(3:6))
 <hr>
 
 ```{r import63, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample2.xls', sheet = 2, range = cell_cols(2:3))
+readxl::read_excel('sample.xls', sheet = 1, range = cell_cols(2:3))
 ```
 
 

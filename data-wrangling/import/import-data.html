@@ -520,162 +520,143 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="list-sheets" class="slide level2">
 <h2>List Sheets</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">excel_sheets</span>(<span class="st">'sample2.xls'</span>)</code></pre></div>
-<pre><code>## [1] &quot;Sheet1&quot; &quot;Sheet2&quot; &quot;Sheet3&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">excel_sheets</span>(<span class="st">'sample.xls'</span>)</code></pre></div>
+<pre><code>## [1] &quot;ecom&quot;</code></pre>
 </section>
 <section id="read-sheet" class="slide level2">
 <h2>Read Sheet</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample2.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>)</code></pre></div>
-<pre><code>## # A tibble: 135 x 13
-##       ID Point Strain   sex `sex#`   age bodywt brainwt MedUNshOB Res1_sex
-##    &lt;dbl&gt; &lt;dbl&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-##  1   169   0.3      B     F      2   189   29.4   495.8    31.976 11.49506
-##  2   171   0.3      B     F      2    51   19.7   474.9    24.772  4.29106
-##  3   232   0.3      B     M      1   294   35.0   476.1    24.836  4.44382
-##  4  1709   0.3      B     M      1    70   26.0   478.5    22.957  2.56518
-##  5   247   0.4      D     M      1   203   26.7   397.2    20.035 -0.35698
-##  6   248   0.4      D     M      1   294   26.8   408.9    22.523  2.13082
-##  7   871   0.4      D     M      1    56   23.7   419.2    20.617  0.22434
-##  8  1541   0.4      D     M      1    65   16.2   402.4    18.144 -2.24814
-##  9   101   1.0   BxD1     M      1    52   24.0   449.3    21.817  1.42492
-## 10   104   1.0   BxD1     M      1    53   18.5   445.0    21.404  1.01182
-## # ... with 125 more rows, and 3 more variables: `Res2_sex-age` &lt;dbl&gt;,
-## #   `Res3_sex-age-bw` &lt;dbl&gt;, `Res4_sex-age-bw-brnw` &lt;dbl&gt;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>)</code></pre></div>
+<pre><code>## # A tibble: 7 x 5
+##          channel users new_users sessions bounce_rate
+##            &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;       &lt;chr&gt;
+## 1 Organic Search 43296     40238    50810      48.72%
+## 2         Direct 12916     12311    16419      49.27%
+## 3       Referral 10983      7636    18105      22.26%
+## 4         Social 10346     10029    11101      61.92%
+## 5        Display  5564      4790     7220      83.30%
+## 6    Paid Search  2687      2205     3438      38.02%
+## 7     Affiliates  1773      1585     2167      55.75%</code></pre>
 </section>
 <section id="read-specific-cells" class="slide level2">
 <h2>Read Specific Cells</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample2.xls'</span>, <span class="dt">sheet =</span> <span class="dv">2</span>, <span class="dt">range =</span> <span class="st">&quot;B3:C7&quot;</span>)</code></pre></div>
-<pre><code>## # A tibble: 4 x 2
-##          D2B6F1          x
-##           &lt;chr&gt;      &lt;dbl&gt;
-## 1 B  (C57BL/6J)  2.6126475
-## 2    D (DBA/2J) -0.7128575
-## 3          BxD1 -2.5248700
-## 4          BxD2 -0.7649925</code></pre>
-<p>Remember first row is always column name in excel so add 1 to row number while selecting the cell.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">range =</span> <span class="st">&quot;B1:C4&quot;</span>)</code></pre></div>
+<pre><code>## # A tibble: 3 x 2
+##   users new_users
+##   &lt;dbl&gt;     &lt;dbl&gt;
+## 1 43296     40238
+## 2 12916     12311
+## 3 10983      7636</code></pre>
 </section>
 <section id="read-specific-cells-1" class="slide level2">
 <h2>Read Specific Cells</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample2.xls'</span>, <span class="dt">sheet =</span> <span class="dv">2</span>, <span class="dt">range =</span> <span class="st">&quot;A3:C5&quot;</span>)</code></pre></div>
-<pre><code>## # A tibble: 2 x 3
-##   `0.2`        D2B6F1          x
-##   &lt;dbl&gt;         &lt;chr&gt;      &lt;dbl&gt;
-## 1   0.3 B  (C57BL/6J)  2.6126475
-## 2   0.4    D (DBA/2J) -0.7128575</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">range =</span> <span class="st">&quot;A1:C5&quot;</span>)</code></pre></div>
+<pre><code>## # A tibble: 4 x 3
+##          channel users new_users
+##            &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt;
+## 1 Organic Search 43296     40238
+## 2         Direct 12916     12311
+## 3       Referral 10983      7636
+## 4         Social 10346     10029</code></pre>
 </section>
 <section id="read-specific-cells-2" class="slide level2">
 <h2>Read Specific Cells</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample2.xls'</span>, <span class="dt">sheet =</span> <span class="dv">2</span>, <span class="dt">col_names =</span> <span class="ot">FALSE</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">col_names =</span> <span class="ot">FALSE</span>,
   <span class="dt">range =</span> <span class="kw">anchored</span>(<span class="st">&quot;A4&quot;</span>, <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">2</span>)))</code></pre></div>
 <pre><code>## # A tibble: 3 x 2
-##    X__1          X__2
-##   &lt;dbl&gt;         &lt;chr&gt;
-## 1   0.3 B  (C57BL/6J)
-## 2   0.4    D (DBA/2J)
-## 3   1.0          BxD1</code></pre>
+##       X__1  X__2
+##      &lt;chr&gt; &lt;dbl&gt;
+## 1 Referral 10983
+## 2   Social 10346
+## 3  Display  5564</code></pre>
 </section>
 <section id="read-specific-cells-3" class="slide level2">
 <h2>Read Specific Cells</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample2.xls'</span>, <span class="dt">sheet =</span> <span class="dv">2</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>,
   <span class="dt">range =</span> <span class="kw">cell_limits</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="kw">c</span>(<span class="ot">NA</span>, <span class="ot">NA</span>)))</code></pre></div>
-<pre><code>## # A tibble: 41 x 2
-##           Strain      Res_4
-##            &lt;chr&gt;      &lt;chr&gt;
-##  1        B6D2F1          x
-##  2        D2B6F1          x
-##  3 B  (C57BL/6J)    2.61265
-##  4    D (DBA/2J)  -0.712858
-##  5          BxD1   -2.52487
-##  6          BxD2  -0.764992
-##  7          BxD5  -0.659102
-##  8          BxD6    3.94894
-##  9          BxD8    1.65269
-## 10          BxD9 -0.0555975
-## # ... with 31 more rows</code></pre>
+<pre><code>## # A tibble: 7 x 4
+##   users new_users sessions bounce_rate
+##   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;       &lt;chr&gt;
+## 1 43296     40238    50810      48.72%
+## 2 12916     12311    16419      49.27%
+## 3 10983      7636    18105      22.26%
+## 4 10346     10029    11101      61.92%
+## 5  5564      4790     7220      83.30%
+## 6  2687      2205     3438      38.02%
+## 7  1773      1585     2167      55.75%</code></pre>
 <p>Use cell_limits to specify one end of the rectangle such as top left or top right.</p>
 </section>
 <section id="read-specific-cells-4" class="slide level2">
 <h2>Read Specific Cells</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample2.xls'</span>, <span class="dt">sheet =</span> <span class="dv">2</span>,
-  <span class="dt">range =</span> <span class="kw">cell_limits</span>(<span class="kw">c</span>(<span class="dv">3</span>, <span class="ot">NA</span>), <span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">2</span>)))</code></pre></div>
-<pre><code>## # A tibble: 39 x 2
-##    `0.2`        D2B6F1
-##    &lt;chr&gt;         &lt;chr&gt;
-##  1   0.3 B  (C57BL/6J)
-##  2   0.4    D (DBA/2J)
-##  3     1          BxD1
-##  4     2          BxD2
-##  5     5          BxD5
-##  6     6          BxD6
-##  7     8          BxD8
-##  8     9          BxD9
-##  9    11         BxD11
-## 10    12         BxD12
-## # ... with 29 more rows</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>,
+  <span class="dt">range =</span> <span class="kw">cell_limits</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="ot">NA</span>), <span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">2</span>)))</code></pre></div>
+<pre><code>## # A tibble: 7 x 2
+##          channel users
+##            &lt;chr&gt; &lt;dbl&gt;
+## 1 Organic Search 43296
+## 2         Direct 12916
+## 3       Referral 10983
+## 4         Social 10346
+## 5        Display  5564
+## 6    Paid Search  2687
+## 7     Affiliates  1773</code></pre>
 </section>
 <section id="read-single-row" class="slide level2">
 <h2>Read Single Row</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample2.xls'</span>, <span class="dt">sheet =</span> <span class="dv">2</span>, <span class="dt">range =</span> <span class="st">&quot;A3:C4&quot;</span>)</code></pre></div>
-<pre><code>## # A tibble: 1 x 3
-##   `0.2`        D2B6F1        x
-##   &lt;dbl&gt;         &lt;chr&gt;    &lt;dbl&gt;
-## 1   0.3 B  (C57BL/6J) 2.612648</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">range =</span> <span class="st">&quot;A1:C4&quot;</span>)</code></pre></div>
+<pre><code>## # A tibble: 3 x 3
+##          channel users new_users
+##            &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt;
+## 1 Organic Search 43296     40238
+## 2         Direct 12916     12311
+## 3       Referral 10983      7636</code></pre>
 </section>
 <section id="read-single-column" class="slide level2">
 <h2>Read Single Column</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample2.xls'</span>, <span class="dt">sheet =</span> <span class="dv">2</span>, <span class="dt">range =</span> <span class="kw">cell_cols</span>(<span class="dv">2</span>))</code></pre></div>
-<pre><code>## # A tibble: 41 x 1
-##           Strain
-##            &lt;chr&gt;
-##  1        B6D2F1
-##  2        D2B6F1
-##  3 B  (C57BL/6J)
-##  4    D (DBA/2J)
-##  5          BxD1
-##  6          BxD2
-##  7          BxD5
-##  8          BxD6
-##  9          BxD8
-## 10          BxD9
-## # ... with 31 more rows</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">range =</span> <span class="kw">cell_cols</span>(<span class="dv">2</span>))</code></pre></div>
+<pre><code>## # A tibble: 7 x 1
+##   users
+##   &lt;dbl&gt;
+## 1 43296
+## 2 12916
+## 3 10983
+## 4 10346
+## 5  5564
+## 6  2687
+## 7  1773</code></pre>
 </section>
 <section id="specify-rows" class="slide level2">
 <h2>Specify Rows</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample2.xls'</span>, <span class="dt">sheet =</span> <span class="dv">2</span>, <span class="dt">range =</span> <span class="kw">cell_rows</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">6</span>))</code></pre></div>
-<pre><code>## # A tibble: 3 x 3
-##   `0.2`        D2B6F1          x
-##   &lt;dbl&gt;         &lt;chr&gt;      &lt;dbl&gt;
-## 1   0.3 B  (C57BL/6J)  2.6126475
-## 2   0.4    D (DBA/2J) -0.7128575
-## 3   1.0          BxD1 -2.5248700</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">range =</span> <span class="kw">cell_rows</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>))</code></pre></div>
+<pre><code>## # A tibble: 3 x 5
+##          channel users new_users sessions bounce_rate
+##            &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;       &lt;chr&gt;
+## 1 Organic Search 43296     40238    50810      48.72%
+## 2         Direct 12916     12311    16419      49.27%
+## 3       Referral 10983      7636    18105      22.26%</code></pre>
 </section>
 <section id="specify-columns" class="slide level2">
 <h2>Specify Columns</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample2.xls'</span>, <span class="dt">sheet =</span> <span class="dv">2</span>, <span class="dt">range =</span> <span class="kw">cell_cols</span>(<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>))</code></pre></div>
-<pre><code>## # A tibble: 41 x 2
-##           Strain      Res_4
-##            &lt;chr&gt;      &lt;chr&gt;
-##  1        B6D2F1          x
-##  2        D2B6F1          x
-##  3 B  (C57BL/6J)    2.61265
-##  4    D (DBA/2J)  -0.712858
-##  5          BxD1   -2.52487
-##  6          BxD2  -0.764992
-##  7          BxD5  -0.659102
-##  8          BxD6    3.94894
-##  9          BxD8    1.65269
-## 10          BxD9 -0.0555975
-## # ... with 31 more rows</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">range =</span> <span class="kw">cell_cols</span>(<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>))</code></pre></div>
+<pre><code>## # A tibble: 7 x 2
+##   users new_users
+##   &lt;dbl&gt;     &lt;dbl&gt;
+## 1 43296     40238
+## 2 12916     12311
+## 3 10983      7636
+## 4 10346     10029
+## 5  5564      4790
+## 6  2687      2205
+## 7  1773      1585</code></pre>
 </section>
 <section id="statistical-softwares" class="slide level2">
 <h2>Statistical Softwares</h2>
