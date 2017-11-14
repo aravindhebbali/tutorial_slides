@@ -245,6 +245,102 @@ hist(rbeta(10000, 2, 5), ann = FALSE, col = 'blue')
 hist(rbeta(10000, 5, 2), ann = FALSE, col = 'blue')
 ```
 
+## Case Study
+
+## Data
+
+<hr>
+
+```{r import, eval=FALSE}
+returns <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/tickers.csv')
+```
+
+```{r show, echo=FALSE, eval=TRUE, message=FALSE}
+returns <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/tickers.csv')
+returns
+```
+
+## Daily Returns Summary: Apple
+
+<hr>
+
+```{r hist25}
+summary(returns$AAPL)
+```
+
+
+## Daily Returns: Apple
+
+<hr>
+
+```{r hist24, fig.align='center', fig.height=5, fig.width=5}
+hist(returns$AAPL)
+```
+
+## Daily Returns Summary: Google
+
+<hr>
+
+```{r hist26}
+summary(returns$GOOG)
+```
+
+## Daily Returns: Google
+
+<hr>
+
+```{r hist20, fig.align='center', fig.height=5, fig.width=5}
+hist(returns$GOOG)
+```
+
+## Daily Returns Summary: Facebook
+
+<hr>
+
+```{r hist27}
+summary(returns$FB)
+```
+
+## Daily Returns: Facebook
+
+<hr>
+
+```{r hist21, fig.align='center', fig.height=5, fig.width=5}
+hist(returns$FB)
+```
+
+## Daily Returns Summary: Microsoft
+
+<hr>
+
+```{r hist28}
+summary(returns$MSFT)
+```
+
+## Daily Returns: Microsoft
+
+<hr>
+
+```{r hist22, fig.align='center', fig.height=5, fig.width=5}
+hist(returns$MSFT)
+```
+
+## Daily Returns Summary: Amazon
+
+<hr>
+
+```{r hist29}
+summary(returns$AMZN)
+```
+
+## Daily Returns: Amazon
+
+<hr>
+
+```{r hist23, fig.align='center', fig.height=5, fig.width=5}
+hist(returns$AMZN)
+```
+
 ## {data-background="thankyou.png"}
 
 <!-- To do: -->
