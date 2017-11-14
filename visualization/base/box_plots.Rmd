@@ -20,26 +20,41 @@ output: _output.yaml
 
 <hr>
 
-The box plot is a standardized way of displaying the distribution of data based on the five number summary: minimum, first quartile, median, third quartile, and maximum. Box plots are useful for detecting outliers and for comparing distributions. It shows the shape, central tendancy and variability of the data.
+- the box plot is a standardized way of displaying the distribution of data  
+- box plots are useful for detecting outliers and for comparing distributions 
+- it shows the shape, central tendancy and variability of the data
 
 ## Structure
 
 <hr>
 
-- The body of the boxplot consists of a "box" (hence, the name), which goes from the first quartile (Q1) to the third quartile (Q3). 
-- Within the box, a vertical line is drawn at the Q2, the median of the data set. 
-- Two horizontal lines, called whiskers, extend from the front and back of the box. 
-- The front whisker goes from Q1 to the smallest non-outlier in the data set, and the back whisker goes from Q3 to the largest non-outlier. 
-- If the data set includes one or more outliers, they are plotted separately as points on the chart. 
+- the body of the boxplot consists of a "box" (hence, the name), which goes from the first quartile (Q1) to the third quartile (Q3)
+- within the box, a vertical line is drawn at the Q2, the median of the data set
+- two horizontal lines, called whiskers, extend from the front and back of the box 
+- the front whisker goes from Q1 to the smallest non-outlier in the data set, and the back whisker goes from Q3 to the largest non-outlier
+- if the data set includes one or more outliers, they are plotted separately as points on the chart
 
 ## {data-background="uboxplot.png"}
+
+## Data
+
+<hr>
+
+```{r import, eval=FALSE}
+daily_returns <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/tickers.csv')
+```
+
+```{r show, echo=FALSE, eval=TRUE, message=FALSE}
+daily_returns <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/tickers.csv')
+daily_returns
+```
 
 ## Univariate Box Plot
 
 <hr>
 
 ```{r box1, fig.align='center', fig.width=5, fig.height=5}
-boxplot(mtcars$mpg)
+boxplot(daily_returns$AAPL)
 ```
 
 ## Horizontal Box Plot
@@ -47,7 +62,7 @@ boxplot(mtcars$mpg)
 <hr>
 
 ```{r box2, fig.align='center', fig.width=5, fig.height=5}
-boxplot(mtcars$mpg, horizontal = TRUE)
+boxplot(daily_returns$AAPL, horizontal = TRUE)
 ```
 
 ## Color
@@ -55,7 +70,7 @@ boxplot(mtcars$mpg, horizontal = TRUE)
 <hr>
 
 ```{r box3, fig.align='center', fig.width=5, fig.height=5}
-boxplot(mtcars$mpg, col = 'blue')
+boxplot(daily_returns$AAPL, col = 'blue')
 ```
 
 ## Outliers
@@ -63,7 +78,7 @@ boxplot(mtcars$mpg, col = 'blue')
 <hr>
 
 ```{r box8, fig.align='center', fig.width=5, fig.height=5}
-boxplot(mtcars$mpg, range = 1, outline = TRUE)
+boxplot(daily_returns$AAPL, range = 1, outline = TRUE)
 ```
 
 ## Outliers
@@ -75,39 +90,32 @@ init <- par(no.readonly = TRUE)
 par(mfrow = c(1, 2))
 values <- c(TRUE, FALSE)
 for (i in values) {
-  boxplot(mtcars$mpg, outline = i, range = 1)
+  boxplot(daily_returns$AAPL, outline = i, range = 1)
   mtext(paste("outline = ", i), side = 3, col = "blue")
 }
 ```
 
 ## {data-background="bboxplot.png"}
 
+## Data
+
+<hr>
+
+```{r import2, eval=FALSE}
+tidy_returns <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/tidy_tickers.csv')
+```
+
+```{r show2, echo=FALSE, eval=TRUE, message=FALSE}
+tidy_returns <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/tidy_tickers.csv')
+tidy_returns
+```
+
 ## Box Plot
 
 <hr>
 
 ```{r box11, fig.align='center', fig.width=5, fig.height=5}
-boxplot(mtcars$mpg ~ mtcars$cyl)
-```
-
-## Data
-
-<hr>
-
-```{r box12}
-mpg_split <- split(mtcars$mpg, mtcars$cyl)
-mpg_split
-```
-
-## Box Plot
-
-<hr>
-
-```{r box13, fig.align='center', fig.width=5, fig.height=5}
-mpg_4 <- mpg_split$`4`
-mpg_6 <- mpg_split$`6`
-mpg_8 <- mpg_split$`8`
-boxplot(mpg_4, mpg_6, mpg_8)
+boxplot(tidy_returns$returns ~ tidy_returns$stock)
 ```
 
 ## Color
@@ -115,7 +123,7 @@ boxplot(mpg_4, mpg_6, mpg_8)
 <hr>
 
 ```{r box14, fig.align='center', fig.width=5, fig.height=5}
-boxplot(mtcars$mpg ~ mtcars$cyl, col = 'blue')
+boxplot(tidy_returns$returns ~ tidy_returns$stock, col = 'blue')
 ```
 
 ## Different Colors
@@ -123,7 +131,16 @@ boxplot(mtcars$mpg ~ mtcars$cyl, col = 'blue')
 <hr>
 
 ```{r box15, fig.align='center', fig.width=5, fig.height=5}
-boxplot(mtcars$mpg ~ mtcars$cyl, 
+boxplot(tidy_returns$returns ~ tidy_returns$stock, 
+        col = c('red', 'blue', 'yellow'))
+```
+
+## Compare Medians
+
+<hr>
+
+```{r box16a, fig.align='center', fig.width=5, fig.height=5}
+boxplot(tidy_returns$returns ~ tidy_returns$stock, notch = TRUE,
         col = c('red', 'blue', 'yellow'))
 ```
 
@@ -142,7 +159,7 @@ boxplot(hsb$read ~ hsb$female, notch = TRUE,
 <hr>
 
 ```{r box4, fig.align='center', fig.width=5, fig.height=5}
-boxplot(mtcars$mpg, border = 'red')
+boxplot(daily_returns$AAPL, border = 'red')
 ```
 
 ## Range
@@ -150,7 +167,7 @@ boxplot(mtcars$mpg, border = 'red')
 <hr>
 
 ```{r box5, fig.align='center', fig.width=5, fig.height=5}
-boxplot(mtcars$mpg, range = 0)
+boxplot(daily_returns$AAPL, range = 0)
 ```
 
 ## Range
@@ -158,7 +175,7 @@ boxplot(mtcars$mpg, range = 0)
 <hr>
 
 ```{r box6, fig.align='center', fig.width=5, fig.height=5}
-boxplot(mtcars$mpg, range = 1)
+boxplot(daily_returns$AAPL, range = 1)
 ```
 
 ## Range
@@ -170,7 +187,7 @@ init <- par(no.readonly = TRUE)
 par(mfrow = c(2, 2))
 values <- c(0, 0.25, 0.63, 1)
 for (i in values) {
-  boxplot(mtcars$mpg, range = i)
+  boxplot(daily_returns$AAPL, range = i)
   mtext(paste("range = ", i), side = 3, col = "blue")
 }
 ```
@@ -185,7 +202,7 @@ init <- par(no.readonly = TRUE)
 par(mfrow = c(1, 2))
 values <- c(TRUE, FALSE)
 for (i in values) {
-  boxplot(mtcars$mpg, varwidth = i, range = 1)
+  boxplot(daily_returns$AAPL, varwidth = i, range = 1)
   mtext(paste("varwidth = ", i), side = 3, col = "blue")
 }
 ```
@@ -196,11 +213,10 @@ for (i in values) {
 <hr>
 
 ```{r box17, fig.align='center', fig.width=5, fig.height=5}
-boxplot(mtcars$mpg ~ mtcars$cyl, range = 1, outline = TRUE, 
-        horizontal = TRUE, col = c('red', 'blue', 'yellow'),
-        main = 'Miles Per Gallon by Cylinders', 
-        ylab = 'Number of Cylinders', xlab = 'Miles Per Gallon',
-        names = c('Four', 'Six', 'Eight'))
+boxplot(tidy_returns$returns ~ tidy_returns$stock, range = 1, outline = TRUE, 
+        col = c('red', 'blue', 'yellow'), main = 'Daily Returns', 
+        ylab = 'Stock', xlab = 'Daily Returns',
+        names = c('AAPL', 'AMZN', 'FB', 'GOOG', 'MSFT'))
 ```
 
 ## {data-background="thankyou.png"}
