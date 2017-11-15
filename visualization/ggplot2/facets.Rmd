@@ -15,46 +15,13 @@ output: _output.yaml
 
 ```{r show, eval=FALSE}
 library(ggplot2)
-library(dplyr)
-library(tidyr)
 ```
 
 ```{r load, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
 library(ggplot2)
-library(dplyr)
-library(tidyr)
 ```
 
 ## {data-background="casestudy.png"}
-
-## Data
-
-<hr>
-
-```{r import2, eval=FALSE}
-ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
-```
-
-```{r import, echo=FALSE, eval=TRUE, message=FALSE}
-ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
-ecom
-```
-
-## Data Dictionary
-
-<hr>
-
-- id: row id
-- referrer: referrer website/search engine
-- os: operating system
-- browser: browser
-- device: device used to visit the website
-- n_pages: number of pages visited
-- duration: time spent on the website (in seconds)
-- repeat: frequency of visits
-- country: country of origin
-- purchase: whether visitor purchased
-- order_value: order value of visitor (in dollars)
 
 ## Facet - Intro
 
@@ -72,9 +39,9 @@ Generate subplots that each display one subset of the data using
 <hr>
 
 ```{r facet1, fig.align='center'}
-ggplot(ecom, aes(n_pages, duration)) + 
+ggplot(mtcars, aes(disp, mpg)) + 
   geom_point() +
-  facet_grid(. ~ device)
+  facet_grid(. ~ cyl)
 ```
 
 ## Rows
@@ -82,9 +49,9 @@ ggplot(ecom, aes(n_pages, duration)) +
 <hr>
 
 ```{r facet2, fig.align='center'}
-ggplot(ecom, aes(n_pages, duration)) + 
+ggplot(mtcars, aes(disp, mpg)) + 
   geom_point() +
-  facet_grid(device ~ .)
+  facet_grid(cyl ~ .)
 ```
 
 ## Rows & Columns
@@ -92,17 +59,17 @@ ggplot(ecom, aes(n_pages, duration)) +
 <hr>
 
 ```{r facet3, fig.align='center'}
-ggplot(ecom, aes(n_pages, duration)) + 
+ggplot(mtcars, aes(disp, mpg)) + 
   geom_point() +
-  facet_grid(purchase ~ device)
+  facet_grid(gear ~ cyl)
 ```
 
 ## Rows & Columns
 
 ```{r facet4, fig.align='center'}
-ggplot(ecom, aes(n_pages, duration)) + 
+ggplot(mtcars, aes(disp, mpg)) + 
   geom_point() +
-  facet_grid(device ~ purchase)
+  facet_grid(cyl ~ gear)
 ```
 
 ## Scales
@@ -110,9 +77,9 @@ ggplot(ecom, aes(n_pages, duration)) +
 <hr>  
 
 ```{r facet5, fig.align='center'}
-ggplot(ecom, aes(n_pages, duration, color = factor(device))) +
+ggplot(mtcars, aes(disp, mpg, color = factor(cyl))) +
   geom_point() + 
-  facet_grid(. ~ device, scales = "free")
+  facet_grid(. ~ cyl, scales = "free")
 ```
 
 ## Switch Axis
@@ -120,9 +87,9 @@ ggplot(ecom, aes(n_pages, duration, color = factor(device))) +
 <hr>
 
 ```{r facet6, fig.align='center'}
-ggplot(ecom, aes(n_pages, duration)) + 
+ggplot(mtcars, aes(disp, mpg)) + 
   geom_point() + 
-  facet_grid(device ~ purchase, switch = "both") 
+  facet_grid(cyl ~ gear, switch = "both") 
 ```
 
 ## {data-background="wrap.png"}
@@ -132,9 +99,9 @@ ggplot(ecom, aes(n_pages, duration)) +
 <hr>
 
 ```{r facet7, fig.align='center'}
-ggplot(ecom, aes(n_pages, duration)) +
+ggplot(mtcars, aes(disp, mpg)) +
   geom_point() +
-  facet_wrap(~device)
+  facet_wrap(~cyl)
 ```
 
 ## Specify Rows
@@ -142,9 +109,9 @@ ggplot(ecom, aes(n_pages, duration)) +
 <hr>
 
 ```{r facet8, fig.align='center'}
-ggplot(ecom, aes(n_pages, duration)) +
+ggplot(mtcars, aes(disp, mpg)) +
   geom_point() +
-  facet_wrap(~device, nrow = 2)
+  facet_wrap(~cyl, nrow = 2)
 ```
 
 ## Specify Rows
@@ -152,9 +119,9 @@ ggplot(ecom, aes(n_pages, duration)) +
 <hr>
 
 ```{r facet9, fig.align='center'}
-ggplot(ecom, aes(n_pages, duration)) +
+ggplot(mtcars, aes(disp, mpg)) +
   geom_point() +
-  facet_wrap(~device, nrow = 3)
+  facet_wrap(~cyl, nrow = 3)
 ```
 
 ## Rows & Columns
@@ -162,9 +129,9 @@ ggplot(ecom, aes(n_pages, duration)) +
 <hr>
 
 ```{r facet10, fig.align='center'}
-ggplot(ecom, aes(n_pages, duration)) +
+ggplot(mtcars, aes(disp, mpg)) +
   geom_point() +
-  facet_wrap(~device + purchase)
+  facet_wrap(~cyl + gear)
 ```
 
 ## Rows & Columns
@@ -172,9 +139,9 @@ ggplot(ecom, aes(n_pages, duration)) +
 <hr>
 
 ```{r facet11, fig.align='center'}
-ggplot(ecom, aes(n_pages, duration)) +
+ggplot(mtcars, aes(disp, mpg)) +
   geom_point() +
-  facet_wrap(c("device", "purchase"))
+  facet_wrap(c("cyl", "gear"))
 ```
 
 ## Scales
@@ -182,14 +149,10 @@ ggplot(ecom, aes(n_pages, duration)) +
 <hr>
 
 ```{r facet12, fig.align='center'}
-ggplot(ecom, aes(n_pages, duration)) +
+ggplot(mtcars, aes(disp, mpg)) +
   geom_point() +
-  facet_wrap(~device, scales = "free")
+  facet_wrap(~cyl, scales = "free")
 ```
 
 ## {data-background="thankyou.png"}
 
-<!-- To do: -->
-<!--   - add intro slide -->
-<!--   - add agenda -->
-<!--   - separate section for grid and wrap -->
