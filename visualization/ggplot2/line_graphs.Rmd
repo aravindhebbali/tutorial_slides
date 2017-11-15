@@ -17,53 +17,56 @@ output: _output.yaml
     - type
     - size
 
-## Intro
-
-<hr>
-
-Line charts are used to examine trend over time.
-
 ## Libraries
 
 <hr>
 
 ```{r show, eval=FALSE}
 library(ggplot2)
-library(dplyr)
-library(tidyr)
+library(readr)
 ```
 
 ```{r load, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
 library(ggplot2)
-library(dplyr)
-library(tidyr)
+library(readr)
 ```
-
-## Case Study
-
-<hr>
-
-We will use a data set related to GDP growth rate. You can download it from [here](https://github.com/rsquaredacademy/datasets/blob/master/gdp.csv). It contains GDP (Gross Domestic Product) growth data for the BRICS (Brazil, Russia, India, China, South Africa) for the years 2000 to 2005.
 
 ## Data
 
 <hr>
 
-```{r imports2, eval=FALSE}
-gdp <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/gdp.csv')
+```{r import, eval=FALSE}
+users <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/users_device.csv',
+  col_types = list(col_date(format = "%m/%d/%y"), col_integer(),
+                   col_integer(), col_integer()))
 ```
 
-```{r import2, echo=FALSE, eval=TRUE, message=FALSE}
-gdp <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/gdp.csv')
-gdp
+```{r show2, echo=FALSE, eval=TRUE, message=FALSE}
+library(readr)
+users <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/users_device.csv',
+  col_types = list(col_date(format = "%m/%d/%y"), col_integer(),
+                   col_integer(), col_integer()))
+users
 ```
+
+
+## Data Dictionary
+
+<hr>
+
+Below is the description of the data set:
+
+- Date: date 
+- Desktop: visitors from a desktop device
+- Mobile: visitors from a mobile device
+- Tablet: visitors from a tablet device
 
 ## Line Chart
 
 <hr>
 
 ```{r line100, fig.align='center'}
-ggplot(gdp, aes(year, india)) +
+ggplot(users, aes(Date, Desktop)) +
   geom_line()
 ```
 
@@ -72,7 +75,7 @@ ggplot(gdp, aes(year, india)) +
 <hr>
 
 ```{r line1, fig.align='center'}
-ggplot(gdp, aes(year, india)) +
+ggplot(users, aes(Date, Desktop)) +
   geom_line(color = 'blue')
 ```
 
@@ -93,7 +96,7 @@ ggplot(gdp, aes(year, india)) +
 <hr>
 
 ```{r line2, fig.align='center'}
-ggplot(gdp, aes(year, india)) +
+ggplot(users, aes(Date, Desktop)) +
   geom_line(linetype = 2)
 ```
 
@@ -102,7 +105,7 @@ ggplot(gdp, aes(year, india)) +
 <hr>
 
 ```{r line3, fig.align='center'}
-ggplot(gdp, aes(year, india)) +
+ggplot(users, aes(Date, Desktop)) +
   geom_line(linetype = 'dashed')
 ```
 
@@ -111,63 +114,83 @@ ggplot(gdp, aes(year, india)) +
 <hr>
 
 ```{r line4, fig.align='center'}
-ggplot(gdp, aes(year, india)) +
+ggplot(users, aes(Date, Desktop)) +
   geom_line(size = 2)
 ```
 
-## Modify Data
+## Additional Lines
 
 <hr>
 
-Now let us map the aesthetics to the variables. The data used in the above example cannot be used as we need a variable with country names. We will use `gather()` function from the `tidyr` package to reshape the data.
-
-```{r line5, fig.align='center'}
-gdp2 <- gdp %>% 
-  select(year, growth, india, china) %>% 
-  gather(key = country, value = gdp, -year)
-gdp2
+```{r line10, fig.align='center'}
+ggplot(users) +
+  geom_line(aes(Date, Desktop)) +
+  geom_line(aes(Date, Mobile)) +
+  geom_line(aes(Date, Tablet)) 
 ```
+
+## Data
+
+<hr>
+
+```{r import3, eval=FALSE}
+tidy_users <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/tidy_users.csv',
+  col_types = list(col_date(format = "%m/%d/%y"), col_character(), col_integer()))
+```
+
+```{r show3, echo=FALSE, eval=TRUE, message=FALSE}
+library(readr)
+tidy_users <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/tidy_users.csv',
+  col_types = list(col_date(format = "%m/%d/%y"), col_character(), col_integer()))
+tidy_users
+```
+
+
+## Data Dictionary
+
+<hr>
+
+Below is the description of the data set:
+
+- Date: date 
+- Device: device used by visitors
+- Users: total daily visitors
 
 ## Grouped Line Chart
 
 <hr>
 
 ```{r line6, fig.align='center'}
-ggplot(gdp2, aes(year, gdp, group = country)) +
+ggplot(tidy_users, aes(Date, Users, group = Device)) +
   geom_line()
 ```
 
-## Map Color to Country
+## Map Color to Device
 
 <hr>
 
 ```{r line7, fig.align='center'}
-ggplot(gdp2, aes(year, gdp, group = country)) +
-  geom_line(aes(color = country))
+ggplot(tidy_users, aes(Date, Users, group = Device)) +
+  geom_line(aes(color = Device))
 ```
 
-## Map Line Type to Country
+## Map Line Type to Device
 
 <hr>
 
 ```{r line8, fig.align='center'}
-ggplot(gdp2, aes(year, gdp, group = country)) +
-  geom_line(aes(linetype = country))
+ggplot(tidy_users, aes(Date, Users, group = Device)) +
+  geom_line(aes(linetype = Device))
 ```
 
-## Map Line Width to Country
+## Map Line Width to Device
 
 <hr>
 
 ```{r line9, fig.align='center'}
-ggplot(gdp2, aes(year, gdp, group = country)) +
-  geom_line(aes(size = country))
+ggplot(tidy_users, aes(Date, Users, group = Device)) +
+  geom_line(aes(size = Device))
 ```
 
 ## {data-background="thankyou.png"}
 
-<!-- To do: -->
-<!--   - add intro slide -->
-<!--   - add introduction -->
-<!--   - change case study data -->
-<!--   - add section for grouped line chart -->
