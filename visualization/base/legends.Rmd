@@ -21,23 +21,26 @@ Learn to add legend to a plot using the `legend()` function. Specifically
 
 <hr>
 
-```{r compare, fig.align='center', fig.width= 10, fig.height=7, echo=FALSE}
+```{r show, echo=FALSE, eval=TRUE, message=FALSE, results='hide'}
+library(readr)
+users <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/users_device.csv',
+  col_types = list(col_date(format = "%m/%d/%y"), col_integer(),
+                   col_integer(), col_integer()))
+users
+```
+
+```{r compare, fig.align='center', fig.width= 7, fig.height=6, echo=FALSE}
 init <- par(no.readonly = TRUE)
-par(mfrow = c(1, 2))
-year <- seq(2010, 2014, 1)
-india <- c(10.3, 6.6, 5.6, 6.6, 7.2)
-china <- c(10.6, 9.5, 7.8, 7.7, 7.3)
-russia <- c(4.5, 4.3, 3.5, 1.3, 0.7)
-brazil <- c(7.5, 3.9, 1.9, 3.0, 0.1)
-s_africa <- c(3.2, 3.2, 2.2, 2.2, 1.5)
-gdp <- data.frame(year, india, china, russia, brazil, s_africa, stringsAsFactors = FALSE)
-{plot(gdp$year, gdp$india, type = 'l', ylim = c(-5, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue', main = 'BRICS: Growth Rate')
-lines(gdp$year, gdp$china, col = 'red')}
-{plot(gdp$year, gdp$india, type = 'l', ylim = c(-5, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue', main = 'BRICS: Growth Rate')
-lines(gdp$year, gdp$china, col = 'red')
-legend(x = 2012, y = 14, legend = c('india', 'china'), lty = 1, col = c('blue', 'red'))}
+{plot(users$Date, users$Desktop, type = "l", col = "blue", main = 'Daily Visitors',
+     ylim = c(0, 4000), xlab = 'Date', ylab = 'Visitors')
+lines(users$Date, users$Mobile, type = "l", col = "red")
+lines(users$Date, users$Tablet, type = "l", col = "green")}
+{plot(users$Date, users$Desktop, type = "l", col = "blue", main = 'Daily Visitors',
+     ylim = c(0, 4000), xlab = 'Date', ylab = 'Visitors')
+lines(users$Date, users$Mobile, type = "l", col = "red")
+lines(users$Date, users$Tablet, type = "l", col = "green")  
+legend(x = as.Date('2017-10-13'), y = 3900, legend = c('Desktop', 'Mobile', 'Tablet'), lty = 1, 
+       col = c('blue', 'red', 'green'), horiz = TRUE)}
 ```
 
 
@@ -45,29 +48,39 @@ legend(x = 2012, y = 14, legend = c('india', 'china'), lty = 1, col = c('blue', 
 
 <hr>
 
-```{r}
-year <- seq(2010, 2014, 1)
-india <- c(10.3, 6.6, 5.6, 6.6, 7.2)
-china <- c(10.6, 9.5, 7.8, 7.7, 7.3)
-russia <- c(4.5, 4.3, 3.5, 1.3, 0.7)
-brazil <- c(7.5, 3.9, 1.9, 3.0, 0.1)
-s_africa <- c(3.2, 3.2, 2.2, 2.2, 1.5)
-gdp <- data.frame(year, india, china, russia, brazil, s_africa, stringsAsFactors = FALSE)
-gdp
+```{r import, eval=FALSE}
+users <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/users_device.csv',
+  col_types = list(col_date(format = "%m/%d/%y"), col_integer(),
+                   col_integer(), col_integer()))
 ```
+
+```{r show2, echo=FALSE, eval=TRUE, message=FALSE}
+users
+```
+
+
+## Data Dictionary
+
+<hr>
+
+Below is the description of the data set:
+
+- Date: date 
+- Desktop: visitors from a desktop device
+- Mobile: visitors from a mobile device
+- Tablet: visitors from a tablet device
 
 ## Line Graph
 
 <hr>
 
-```{r line1, fig.align='center', fig.width= 7, fig.height=5}
-{plot(gdp$year, gdp$india, type = 'l', ylim = c(-5, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue', main = 'BRICS: Growth Rate')
-lines(gdp$year, gdp$china, col = 'red')
-lines(gdp$year, gdp$russia, col = 'green')
-lines(gdp$year, gdp$brazil, col = 'yellow')
-lines(gdp$year, gdp$s_africa, col = 'violet')}
+```{r line1, fig.align='center', fig.height=5, fig.width=7}
+plot(users$Date, users$Desktop, type = "l", col = "blue", main = 'Daily Visitors',
+     ylim = c(0, 3000), xlab = 'Date', ylab = 'Visitors')
+lines(users$Date, users$Mobile, type = "l", col = "red")
+lines(users$Date, users$Tablet, type = "l", col = "green")
 ```
+
 
 ## Legend Location
 
@@ -90,10 +103,11 @@ lines(gdp$year, gdp$s_africa, col = 'violet')}
 <hr>
 
 ```{r leg1, fig.align='center', fig.height=5, fig.width=5}
-{plot(gdp$year, gdp$india, type = 'l', ylim = c(-5, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue', main = 'BRICS: Growth Rate')
-lines(gdp$year, gdp$china, col = 'red')
-legend(x = 2013, y = 14, legend = c('india', 'china'))}
+{plot(users$Date, users$Desktop, type = "l", col = "blue", main = 'Daily Visitors',
+     ylim = c(0, 4000), xlab = 'Date', ylab = 'Visitors')
+lines(users$Date, users$Mobile, type = "l", col = "red")
+lines(users$Date, users$Tablet, type = "l", col = "green")  
+legend(x = as.Date('2017-10-13'), y = 3900, legend = c('Desktop', 'Mobile', 'Tablet'))}
 ```
 
 ## Legend Location
@@ -106,12 +120,11 @@ par(mfrow = c(3, 3))
 values <- c('top', 'bottom', 'left', 'right', 'center',
             'bottomright', 'bottomleft', 'topright', 'topleft')
 for (i in values) {
-  plot(gdp$year, gdp$india, type = 'l',
-      ylim = c(-5, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue',
-      main = 'BRICS: Growth Rate')
-  lines(gdp$year, gdp$china, col = 'red')
-  legend(x = i, legend = c('india', 'china'))
+  plot(users$Date, users$Desktop, type = "l", col = "blue", main = 'Daily Visitors',
+     ylim = c(0, 4000), xlab = 'Date', ylab = 'Visitors')
+  lines(users$Date, users$Mobile, type = "l", col = "red")
+  lines(users$Date, users$Tablet, type = "l", col = "green")  
+  legend(x = i, legend = c('Desktop', 'Mobile', 'Tablet'))
   mtext(paste("x = ", i), side = 3, col = "blue")
 }
 ```
@@ -121,10 +134,12 @@ for (i in values) {
 <hr>
 
 ```{r leg3, fig.align='center', fig.height=5, fig.width=5}
-{plot(gdp$year, gdp$india, type = 'l', ylim = c(-5, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue', main = 'BRICS: Growth Rate')
-lines(gdp$year, gdp$china, col = 'red')
-legend(x = 2012, y = 14, legend = c('india', 'china'), lty = 1, col = c('blue', 'red'))}
+{plot(users$Date, users$Desktop, type = "l", col = "blue", main = 'Daily Visitors',
+     ylim = c(0, 4000), xlab = 'Date', ylab = 'Visitors')
+lines(users$Date, users$Mobile, type = "l", col = "red")
+lines(users$Date, users$Tablet, type = "l", col = "green")  
+legend(x = as.Date('2017-10-13'), y = 3900, legend = c('Desktop', 'Mobile', 'Tablet'), lty = 1, 
+       col = c('blue', 'red', 'green'))}
 ```
 
 ## Points
@@ -132,12 +147,15 @@ legend(x = 2012, y = 14, legend = c('india', 'china'), lty = 1, col = c('blue', 
 <hr>
 
 ```{r leg4, fig.align='center', fig.height=5, fig.width=5}
-{plot(gdp$year, gdp$india, type = 'l', ylim = c(-5, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue', main = 'BRICS: Growth Rate')
-points(gdp$year, gdp$india, pch = 2, col = 'blue')
-lines(gdp$year, gdp$china, col = 'red')
-points(gdp$year, gdp$china, pch = 2, col = 'red')
-legend(x = 2012, y = 14, legend = c('india', 'china'), lty = 1, pch = 2, col = c('blue', 'red'))}
+{plot(users$Date, users$Desktop, type = "l", col = "blue", main = 'Daily Visitors',
+     ylim = c(0, 4000), xlab = 'Date', ylab = 'Visitors')
+points(users$Date, users$Desktop, pch = 2, col = 'blue')
+lines(users$Date, users$Mobile, type = "l", col = "red")
+points(users$Date, users$Mobile, pch = 2, col = 'red')
+lines(users$Date, users$Tablet, type = "l", col = "green")
+points(users$Date, users$Tablet, pch = 2, col = 'green')  
+legend(x = as.Date('2017-10-13'), y = 3900, legend = c('Desktop', 'Mobile', 'Tablet'), lty = 1, 
+       col = c('blue', 'red', 'green'), pch = 2)}
 ```
 
 ## Text Placement
@@ -145,11 +163,12 @@ legend(x = 2012, y = 14, legend = c('india', 'china'), lty = 1, pch = 2, col = c
 <hr>
 
 ```{r leg5, fig.align='center', fig.height=4, fig.width=6}
-{plot(gdp$year, gdp$india, type = 'l', ylim = c(-5, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue', main = 'BRICS: Growth Rate')
-lines(gdp$year, gdp$china, col = 'red')
-legend(x = 2011, y = 14, legend = c('india', 'china'), 
-      lty = 1, col = c('blue', 'red'), horiz = TRUE)}
+{plot(users$Date, users$Desktop, type = "l", col = "blue", main = 'Daily Visitors',
+     ylim = c(0, 4000), xlab = 'Date', ylab = 'Visitors')
+lines(users$Date, users$Mobile, type = "l", col = "red")
+lines(users$Date, users$Tablet, type = "l", col = "green")  
+legend(x = as.Date('2017-10-13'), y = 3900, legend = c('Desktop', 'Mobile', 'Tablet'), lty = 1, 
+       col = c('blue', 'red', 'green'), horiz = TRUE)}
 ```
 
 ## Text Placement
@@ -157,13 +176,12 @@ legend(x = 2011, y = 14, legend = c('india', 'china'),
 <hr>
 
 ```{r leg6, fig.align='center', fig.width= 6, fig.height=4}
-{plot(gdp$year, gdp$india, type = 'l', ylim = c(-5, 25), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue', main = 'BRICS: Growth Rate')
-lines(gdp$year, gdp$china, col = 'red')
-lines(gdp$year, gdp$russia, col = 'green')
-lines(gdp$year, gdp$brazil, col = 'yellow')
-legend(x = 2012, y = 20, legend = c('india', 'china', 'russia', 'brazil'),
-       lty = 1, col = c('blue', 'red', 'green', 'yellow'), ncol = 2)}
+{plot(users$Date, users$Desktop, type = "l", col = "blue", main = 'Daily Visitors',
+     ylim = c(0, 4000), xlab = 'Date', ylab = 'Visitors')
+lines(users$Date, users$Mobile, type = "l", col = "red")
+lines(users$Date, users$Tablet, type = "l", col = "green")  
+legend(x = as.Date('2017-10-13'), y = 3900, legend = c('Desktop', 'Mobile', 'Tablet'), lty = 1, 
+       col = c('blue', 'red', 'green'), ncol = 2)}
 ```
 
 ## Text Placement
@@ -175,16 +193,12 @@ init <- par(no.readonly = TRUE)
 par(mfrow = c(2, 2))
 values <- c(1, 2, 3, 4)
 for (i in values) {
-  plot(gdp$year, gdp$india, type = 'l',
-      ylim = c(-5, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue',
-      main = 'BRICS: Growth Rate')
-  lines(gdp$year, gdp$china, col = 'red')
-  lines(gdp$year, gdp$russia, col = 'green')
-  lines(gdp$year, gdp$brazil, col = 'yellow')
-  legend(x = 2010, y = 0, legend = c('india', 'china', 'russia','brazil'),
-       lty = 1, col = c('blue', 'red', 'green', 'yellow'),
-       ncol = i)
+  plot(users$Date, users$Desktop, type = "l", col = "blue", main = 'Daily Visitors',
+     ylim = c(0, 4000), xlab = 'Date', ylab = 'Visitors')
+lines(users$Date, users$Mobile, type = "l", col = "red")
+lines(users$Date, users$Tablet, type = "l", col = "green")  
+legend(x = as.Date('2017-10-13'), y = 3900, legend = c('Desktop', 'Mobile', 'Tablet'), lty = 1, 
+       col = c('blue', 'red', 'green'), ncol = i)
   mtext(paste("ncol = ", i), side = 3, col = "blue")
 }
 ```
@@ -194,11 +208,12 @@ for (i in values) {
 <hr>
 
 ```{r leg8, fig.align='center', fig.height=4, fig.width=6}
-{plot(gdp$year, gdp$india, type = 'l', ylim = c(-5, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue', main = 'BRICS: Growth Rate')
-lines(gdp$year, gdp$china, col = 'red')
-legend(x = 2013, y = 4, legend = c('india', 'china'),
-       lty = 1, col = c('blue', 'red'), title = 'Nations')}
+{plot(users$Date, users$Desktop, type = "l", col = "blue", main = 'Daily Visitors',
+     ylim = c(0, 4000), xlab = 'Date', ylab = 'Visitors')
+lines(users$Date, users$Mobile, type = "l", col = "red")
+lines(users$Date, users$Tablet, type = "l", col = "green")  
+legend(x = as.Date('2017-10-13'), y = 3900, legend = c('Desktop', 'Mobile', 'Tablet'), lty = 1, 
+       col = c('blue', 'red', 'green'), title = 'Devices', horiz = TRUE)}
 ```
 
 ## Title Color
@@ -206,11 +221,12 @@ legend(x = 2013, y = 4, legend = c('india', 'china'),
 <hr>
 
 ```{r leg9, fig.align='center', fig.height=4, fig.width=6}
-{plot(gdp$year, gdp$india, type = 'l', ylim = c(-5, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue', main = 'BRICS: Growth Rate')
-lines(gdp$year, gdp$china, col = 'red')
-legend(x = 2012, y = 3, legend = c('india', 'china'), lty = 1, 
-      col = c('blue', 'red'), title = 'Nations', title.col = 'red')}
+{plot(users$Date, users$Desktop, type = "l", col = "blue", main = 'Daily Visitors',
+     ylim = c(0, 4000), xlab = 'Date', ylab = 'Visitors')
+lines(users$Date, users$Mobile, type = "l", col = "red")
+lines(users$Date, users$Tablet, type = "l", col = "green")  
+legend(x = as.Date('2017-10-13'), y = 3900, legend = c('Desktop', 'Mobile', 'Tablet'), lty = 1, 
+       col = c('blue', 'red', 'green'), title = 'Devices', title.col = 'red', horiz = TRUE)}
 ```
 
 ## Title Position
@@ -218,11 +234,12 @@ legend(x = 2012, y = 3, legend = c('india', 'china'), lty = 1,
 <hr>
 
 ```{r leg10, fig.align='center', fig.height=4, fig.width=6}
-{plot(gdp$year, gdp$india, type = 'l', ylim = c(-5, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue', main = 'BRICS: Growth Rate')
-lines(gdp$year, gdp$china, col = 'red')
-legend(x = 2012, y = 3, legend = c('india', 'china'), lty = 1, 
-      col = c('blue', 'red'), horiz = TRUE, title = 'Nations', title.adj = 0.1)}
+{plot(users$Date, users$Desktop, type = "l", col = "blue", main = 'Daily Visitors',
+     ylim = c(0, 4000), xlab = 'Date', ylab = 'Visitors')
+lines(users$Date, users$Mobile, type = "l", col = "red")
+lines(users$Date, users$Tablet, type = "l", col = "green")  
+legend(x = as.Date('2017-10-13'), y = 3900, legend = c('Desktop', 'Mobile', 'Tablet'), lty = 1, 
+       col = c('blue', 'red', 'green'), title = 'Devices', title.adj = 0.1, horiz = TRUE)}
 ```
 
 ## Title Position
@@ -234,14 +251,12 @@ init <- par(no.readonly = TRUE)
 par(mfrow = c(2, 2))
 values <- c(0.2, 0.4, 0.6, 0.8)
 for (i in values) {
-  plot(gdp$year, gdp$india, type = 'l',
-      ylim = c(-5, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue',
-      main = 'BRICS: Growth Rate')
-  lines(gdp$year, gdp$china, col = 'red')
-  legend(x = 2010, y = 0, legend = c('india', 'china'),
-       lty = 1, col = c('blue', 'red'), horiz = TRUE,
-       title = 'Nations', title.adj = i)
+  plot(users$Date, users$Desktop, type = "l", col = "blue", main = 'Daily Visitors',
+     ylim = c(0, 4000), xlab = 'Date', ylab = 'Visitors')
+  lines(users$Date, users$Mobile, type = "l", col = "red")
+  lines(users$Date, users$Tablet, type = "l", col = "green")  
+  legend(x = as.Date('2017-10-13'), y = 3900, legend = c('Desktop', 'Mobile', 'Tablet'), lty = 1, 
+       col = c('blue', 'red', 'green'), title = 'Devices', title.adj = i, horiz = TRUE)
   mtext(paste("title.adj = ", i), side = 3, col = "blue")
 }
 ```
@@ -273,14 +288,12 @@ init <- par(no.readonly = TRUE)
 par(mfrow = c(1, 2))
 values <- c('o', 'n')
 for (i in values) {
-  plot(gdp$year, gdp$india, type = 'l',
-      ylim = c(-5, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue',
-      main = 'BRICS: Growth Rate')
-  lines(gdp$year, gdp$china, col = 'red')
-  legend(x = 2012, y = 0, legend = c('india', 'china'),
-       lty = 1, col = c('blue', 'red'), bty = i,
-       title = 'Nations')
+  plot(users$Date, users$Desktop, type = "l", col = "blue", main = 'Daily Visitors',
+     ylim = c(0, 4000), xlab = 'Date', ylab = 'Visitors')
+  lines(users$Date, users$Mobile, type = "l", col = "red")
+  lines(users$Date, users$Tablet, type = "l", col = "green")  
+  legend(x = as.Date('2017-10-13'), y = 3900, legend = c('Desktop', 'Mobile', 'Tablet'), lty = 1, 
+       col = c('blue', 'red', 'green'), title = 'Devices', bty = i, horiz = TRUE)
   mtext(paste("bty = ", i), side = 3, col = "blue")
 }
 ```
@@ -290,11 +303,12 @@ for (i in values) {
 <hr>
 
 ```{r leg13, fig.align='center', fig.height=4, fig.width=6}
-{plot(gdp$year, gdp$india, type = 'l', ylim = c(-8, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue', main = 'BRICS: Growth Rate')
-lines(gdp$year, gdp$china, col = 'red')
-legend(x = 2012, y = 3, legend = c('india', 'china'),
-       lty = 1, col = c('blue', 'red'), bg = '#ffff66', title = 'Nations')}
+{plot(users$Date, users$Desktop, type = "l", col = "blue", main = 'Daily Visitors',
+     ylim = c(0, 4000), xlab = 'Date', ylab = 'Visitors')
+lines(users$Date, users$Mobile, type = "l", col = "red")
+lines(users$Date, users$Tablet, type = "l", col = "green")  
+legend(x = as.Date('2017-10-13'), y = 3900, legend = c('Desktop', 'Mobile', 'Tablet'), lty = 1, 
+       col = c('blue', 'red', 'green'), title = 'Devices', bg = '#ffff66', horiz = TRUE)}
 ```
 
 ## Border
@@ -312,11 +326,12 @@ The following arguments can be used to modify the border of the legend box:
 <hr>
 
 ```{r leg14, fig.align='center', fig.height=4, fig.width=6}
-{plot(gdp$year, gdp$india, type = 'l', ylim = c(-8, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue', main = 'BRICS: Growth Rate')
-lines(gdp$year, gdp$china, col = 'red')
-legend(x = 2012, y = 3, legend = c('india', 'china'),
-       lty = 1, col = c('blue', 'red'), title = 'Nations',
+{plot(users$Date, users$Desktop, type = "l", col = "blue", main = 'Daily Visitors',
+     ylim = c(0, 4000), xlab = 'Date', ylab = 'Visitors')
+lines(users$Date, users$Mobile, type = "l", col = "red")
+lines(users$Date, users$Tablet, type = "l", col = "green")  
+legend(x = as.Date('2017-10-13'), y = 3900, legend = c('Desktop', 'Mobile', 'Tablet'), lty = 1, 
+       col = c('blue', 'red', 'green'), title = 'Devices', horiz = TRUE,
        box.lty = 3, box.lwd = 1.5, box.col = 'green')}
 ```
 
@@ -339,14 +354,12 @@ init <- par(no.readonly = TRUE)
 par(mfrow = c(1, 3))
 values <- c(0, 0.5, 1)
 for (i in values) {
-  plot(gdp$year, gdp$india, type = 'l',
-      ylim = c(-5, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue',
-      main = 'BRICS: Growth Rate')
-  lines(gdp$year, gdp$china, col = 'red')
-  legend(x = 2012, y = 0, legend = c('india', 'china'),
-       lty = 1, col = c('blue', 'red'), xjust = i,
-       title = 'Nations')
+  plot(users$Date, users$Desktop, type = "l", col = "blue", main = 'Daily Visitors',
+     ylim = c(0, 4000), xlab = 'Date', ylab = 'Visitors')
+  lines(users$Date, users$Mobile, type = "l", col = "red")
+  lines(users$Date, users$Tablet, type = "l", col = "green")  
+  legend(x = as.Date('2017-10-13'), y = 3900, legend = c('Desktop', 'Mobile', 'Tablet'), lty = 1, 
+       col = c('blue', 'red', 'green'), title = 'Devices', xjust = i, horiz = TRUE)
   mtext(paste("xjust = ", i), side = 3, col = "blue")
 }
 ```
@@ -360,14 +373,12 @@ init <- par(no.readonly = TRUE)
 par(mfrow = c(1, 3))
 values <- c(0, 0.5, 1)
 for (i in values) {
-  plot(gdp$year, gdp$india, type = 'l',
-      ylim = c(-5, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue',
-      main = 'BRICS: Growth Rate')
-  lines(gdp$year, gdp$china, col = 'red')
-  legend(x = 2012, y = 0, legend = c('india', 'china'),
-       lty = 1, col = c('blue', 'red'), yjust = i,
-       title = 'Nations')
+  plot(users$Date, users$Desktop, type = "l", col = "blue", main = 'Daily Visitors',
+     ylim = c(0, 4000), xlab = 'Date', ylab = 'Visitors')
+  lines(users$Date, users$Mobile, type = "l", col = "red")
+  lines(users$Date, users$Tablet, type = "l", col = "green")  
+  legend(x = as.Date('2017-10-13'), y = 3900, legend = c('Desktop', 'Mobile', 'Tablet'), lty = 1, 
+       col = c('blue', 'red', 'green'), title = 'Devices', yjust = i, horiz = TRUE)
   mtext(paste("xjust = ", i), side = 3, col = "blue")
 }
 ```
@@ -378,12 +389,13 @@ for (i in values) {
 <hr>
 
 ```{r leg17, fig.align='center', fig.height=4, fig.width=6}
-{plot(gdp$year, gdp$india, type = 'l', ylim = c(-8, 15), xlab = 'Year',
-      ylab = 'Growth Rate', col = 'blue', main = 'BRICS: Growth Rate')
-lines(gdp$year, gdp$china, col = 'red')
-legend(x = 2012, y = 3, legend = c('india', 'china'),
-       lty = 1, col = c('blue', 'red'), title = 'Nations',
-       text.col = 'green', text.font = 3)}
+{plot(users$Date, users$Desktop, type = "l", col = "blue", main = 'Daily Visitors',
+     ylim = c(0, 4000), xlab = 'Date', ylab = 'Visitors')
+lines(users$Date, users$Mobile, type = "l", col = "red")
+lines(users$Date, users$Tablet, type = "l", col = "green")  
+legend(x = as.Date('2017-10-13'), y = 3900, legend = c('Desktop', 'Mobile', 'Tablet'), lty = 1, 
+       col = c('blue', 'red', 'green'), title = 'Devices', 
+       text.col = 'green', text.font = 3, horiz = TRUE)}
 ```
 
 ## {data-background="thankyou.png"}
