@@ -23,12 +23,12 @@ Create some of the most routinely used plots to explore data using the `geom_*` 
 
 ```{r show, eval=FALSE}
 library(ggplot2)
-library(dplyr)
+library(readr)
 ```
 
 ```{r load, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
 library(ggplot2)
-library(dplyr)
+library(readr)
 ```
 
 ## Data
@@ -36,7 +36,7 @@ library(dplyr)
 <hr>
 
 ```{r import, eval=FALSE}
-ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+ecom <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
 ```
 
 ```{r use, echo=FALSE, eval=TRUE, message=FALSE}
@@ -66,7 +66,7 @@ ecom
 <hr>
 
 ```{r geoms2, fig.align='center'}
-ggplot(ecom, aes(x = n_pages, y = duration)) + 
+ggplot(mtcars, aes(x = disp, y = mpg)) + 
   geom_point()
 ```
 
@@ -171,14 +171,28 @@ ggplot(traffic, aes(x = device, y = visits)) +
 
 <hr>
 
-## Boxplot
+## Data
 
 <hr>
 
-```{r geoms13, fig.align='center'}
-ggplot(ecom, aes(x = factor(device), y = n_pages)) +
-  geom_boxplot()
+```{r import2, eval=FALSE}
+tidy_returns <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/tidy_tickers.csv')
 ```
+
+```{r show2, echo=FALSE, eval=TRUE, message=FALSE}
+tidy_returns <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/tidy_tickers.csv')
+tidy_returns
+```
+
+## Box Plot
+
+<hr>
+
+```{r box3, fig.align='center'}
+ggplot(tidy_returns) +
+  geom_boxplot(aes(x = factor(stock), y = returns))
+```
+
 
 ## Add Jitter
 
@@ -220,21 +234,26 @@ ggplot(ecom, aes(x = duration)) +
 
 <hr>
 
-```{r imports2, eval=FALSE}
-gdp <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/gdp.csv')
+```{r import3, eval=FALSE}
+users <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/users_device.csv',
+  col_types = list(col_date(format = "%m/%d/%y"), col_integer(),
+                   col_integer(), col_integer()))
 ```
 
-```{r import2, echo=FALSE, eval=TRUE, message=FALSE}
-gdp <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/gdp.csv')
-gdp
+```{r show3, echo=FALSE, eval=TRUE, message=FALSE}
+library(readr)
+users <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/users_device.csv',
+  col_types = list(col_date(format = "%m/%d/%y"), col_integer(),
+                   col_integer(), col_integer()))
+users
 ```
 
 ## Line Chart
 
 <hr>
 
-```{r geomline1, fig.align='center'}
-ggplot(gdp, aes(year, india)) +
+```{r line100, fig.align='center'}
+ggplot(users, aes(Date, Desktop)) +
   geom_line()
 ```
 
@@ -286,9 +305,3 @@ ggplot(mtcars, aes(x = disp, y = mpg, label = rownames(mtcars))) +
 ```
 
 ## {data-background="thankyou.png"}
-
-<!-- To do: -->
-<!--   - add intro slide -->
-<!--   - change line chart data -->
-<!--   - remove description of plots -->
-<!--   - remove plot variations -->
