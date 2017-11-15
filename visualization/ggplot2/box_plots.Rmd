@@ -21,36 +21,58 @@ output: _output.yaml
     - size 
     - alpha
 
-## Intro
+## Introduction
 
 <hr>
 
-The box plot is a standardized way of displaying the distribution of data based on the five number summary: minimum, first quartile, median, third quartile, and maximum. Box plots are useful for detecting outliers and for comparing distributions. It shows the shape, central tendancy and variability of the data.
+- the box plot is a standardized way of displaying the distribution of data  
+- box plots are useful for detecting outliers and for comparing distributions 
+- it shows the shape, central tendancy and variability of the data
 
 ## Structure
 
 <hr>
 
-- The body of the boxplot consists of a "box" (hence, the name), which goes from the first quartile (Q1) to the third quartile (Q3). 
-- Within the box, a vertical line is drawn at the Q2, the median of the data set. 
-- Two horizontal lines, called whiskers, extend from the front and back of the box. 
-- The front whisker goes from Q1 to the smallest non-outlier in the data set, and the back whisker goes from Q3 to the largest non-outlier. 
-- If the data set includes one or more outliers, they are plotted separately as points on the chart. 
+- the body of the boxplot consists of a "box" (hence, the name), which goes from the first quartile (Q1) to the third quartile (Q3)
+- within the box, a vertical line is drawn at the Q2, the median of the data set
+- two horizontal lines, called whiskers, extend from the front and back of the box 
+- the front whisker goes from Q1 to the smallest non-outlier in the data set, and the back whisker goes from Q3 to the largest non-outlier
+- if the data set includes one or more outliers, they are plotted separately as points on the chart
 
 ## Libraries
 
 <hr>
 
-```{r show, eval=FALSE}
+```{r show3, eval=FALSE}
 library(ggplot2)
-library(dplyr)
-library(tidyr)
+library(readr)
 ```
 
 ```{r load, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
 library(ggplot2)
-library(dplyr)
-library(tidyr)
+library(readr)
+```
+
+## Data
+
+<hr>
+
+```{r import, eval=FALSE}
+daily_returns <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/tickers.csv')
+```
+
+```{r show, echo=FALSE, eval=TRUE, message=FALSE}
+daily_returns <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/tickers.csv')
+daily_returns
+```
+
+## Univariate Box Plot
+
+<hr>
+
+```{r box2, fig.align='center'}
+ggplot(daily_returns) +
+  geom_boxplot(aes(x = factor(1), y = AAPL))
 ```
 
 ## Data
@@ -58,38 +80,12 @@ library(tidyr)
 <hr>
 
 ```{r import2, eval=FALSE}
-ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+tidy_returns <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/tidy_tickers.csv')
 ```
 
-```{r import, echo=FALSE, eval=TRUE, message=FALSE}
-ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
-ecom
-```
-
-## Data Dictionary
-
-<hr>
-
-- id: row id
-- referrer: referrer website/search engine
-- os: operating system
-- browser: browser
-- device: device used to visit the website
-- n_pages: number of pages visited
-- duration: time spent on the website (in seconds)
-- repeat: frequency of visits
-- country: country of origin
-- purchase: whether visitor purchased
-- order_value: order value of visitor (in dollars)
-
-
-## Univariate Box Plot
-
-<hr>
-
-```{r box2, fig.align='center'}
-ggplot(ecom) +
-  geom_boxplot(aes(x = factor(1), y = n_visit))
+```{r show2, echo=FALSE, eval=TRUE, message=FALSE}
+tidy_returns <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/tidy_tickers.csv')
+tidy_returns
 ```
 
 ## Box Plot
@@ -97,8 +93,8 @@ ggplot(ecom) +
 <hr>
 
 ```{r box3, fig.align='center'}
-ggplot(ecom) +
-  geom_boxplot(aes(x = factor(device), y = n_visit))
+ggplot(tidy_returns) +
+  geom_boxplot(aes(x = factor(stock), y = returns))
 ```
 
 ## Horizontal Box Plot
@@ -106,8 +102,8 @@ ggplot(ecom) +
 <hr>   
 
 ```{r box4, fig.align='center'}
-ggplot(ecom) +
-  geom_boxplot(aes(x = factor(device), y = n_visit)) +
+ggplot(tidy_returns) +
+  geom_boxplot(aes(x = factor(stock), y = returns)) +
   coord_flip()
 ```
 
@@ -116,9 +112,9 @@ ggplot(ecom) +
 <hr>
 
 ```{r box5, fig.align='center'}
-ggplot(ecom) +
-  geom_boxplot(aes(x = factor(device), y = n_visit),
-               notch = TRUE) 
+ggplot(tidy_returns) +
+  geom_boxplot(aes(x = factor(stock), y = returns),
+    notch = TRUE) 
 ```
 
 ## Jitter
@@ -126,7 +122,7 @@ ggplot(ecom) +
 <hr>
 
 ```{r box6, fig.align='center'}
-ggplot(ecom, aes(x = factor(device), y = n_visit)) +
+ggplot(tidy_returns, aes(x = factor(stock), y = returns)) +
   geom_boxplot() +
   geom_jitter(width = 0.2, color = 'blue')
 ```
@@ -147,19 +143,9 @@ ggplot(ecom, aes(x = factor(device), y = n_visit)) +
 <hr>
 
 ```{r box7, fig.align='center'}
-ggplot(ecom) +
-  geom_boxplot(aes(x = factor(device), y = duration),
+ggplot(tidy_returns) +
+  geom_boxplot(aes(x = factor(stock), y = returns),
                outlier.color = 'red')
-```
-
-## Outlier Shape
-
-<hr>
-
-```{r box8, fig.align='center'}
-ggplot(ecom) +
-  geom_boxplot(aes(x = factor(device), y = duration),
-               outlier.shape = 23)
 ```
 
 ## Outlier Shape
@@ -168,9 +154,8 @@ ggplot(ecom) +
 
 
 ```{r box9, fig.align='center'}
-ggplot(ecom) +
-  geom_boxplot(aes(x = factor(device), y = duration), outlier.shape = 23) +
-  expand_limits(y = c(0, 1100))
+ggplot(tidy_returns) +
+  geom_boxplot(aes(x = factor(stock), y = returns), outlier.shape = 23) 
 ```
 
 ## Outlier Size
@@ -178,9 +163,8 @@ ggplot(ecom) +
 <hr>
 
 ```{r box10, fig.align='center'}
-ggplot(ecom) +
-  geom_boxplot(aes(x = factor(device), y = duration), outlier.size = 3) +
-  expand_limits(y = c(0, 1100))
+ggplot(tidy_returns) +
+  geom_boxplot(aes(x = factor(stock), y = returns), outlier.size = 3) 
 ```
 
 ## Outlier Alpha
@@ -188,10 +172,9 @@ ggplot(ecom) +
 <hr>
 
 ```{r box11, fig.align='center'}
-ggplot(ecom) +
-  geom_boxplot(aes(x = factor(device), y = duration),
-               outlier.color = 'blue', outlier.alpha = 0.3) +
-  expand_limits(y = c(0, 1100))
+ggplot(tidy_returns) +
+  geom_boxplot(aes(x = factor(stock), y = returns),
+               outlier.color = 'blue', outlier.alpha = 0.3) 
 ```
 
 ## {data-background="aesthetics.png"}
@@ -212,10 +195,9 @@ ggplot(ecom) +
 <hr>
 
 ```{r box12, fig.align='center'}
-ggplot(ecom) +
-  geom_boxplot(aes(x = factor(device), y = duration),
-               fill = c('blue', 'red', 'green')) +
-  expand_limits(y = c(0, 1100))
+ggplot(tidy_returns) +
+  geom_boxplot(aes(x = factor(stock), y = returns),
+               fill = c('blue', 'red', 'green', 'yellow', 'brown')) 
 ```
 
 ## Map Fill to Variable
@@ -223,19 +205,17 @@ ggplot(ecom) +
 <hr>
 
 ```{r box13, fig.align='center'}
-ggplot(ecom) +
-  geom_boxplot(aes(x = factor(device), y = duration,
-               fill = factor(device))) +
-  expand_limits(y = c(0, 1100))
+ggplot(tidy_returns) +
+  geom_boxplot(aes(x = factor(stock), y = returns,
+               fill = factor(stock))) 
 ```
 
 ## Specify Values for Alpha
 
 ```{r box14, fig.align='center'}
-ggplot(ecom) +
-  geom_boxplot(aes(x = factor(device), y = duration),
-               fill = 'blue', alpha = 0.3) +
-  expand_limits(y = c(0, 1100))
+ggplot(tidy_returns) +
+  geom_boxplot(aes(x = factor(stock), y = returns),
+               fill = 'blue', alpha = 0.3) 
 ```
 
 ## Specify Values for Color
@@ -243,10 +223,9 @@ ggplot(ecom) +
 <hr>
 
 ```{r box15, fig.align='center'}
-ggplot(ecom) +
-  geom_boxplot(aes(x = factor(device), y = duration),
-               color = c('blue', 'red', 'green')) +
-  expand_limits(y = c(0, 1100))
+ggplot(tidy_returns) +
+  geom_boxplot(aes(x = factor(stock), y = returns),
+               color = c('blue', 'red', 'green', 'yellow', 'brown')) 
 ```
 
 ## Map Color to Variables
@@ -254,10 +233,9 @@ ggplot(ecom) +
 <hr>
 
 ```{r box16, fig.align='center'}
-ggplot(ecom) +
-  geom_boxplot(aes(x = factor(device), y = duration,
-               color = factor(device))) +
-  expand_limits(y = c(0, 1100))
+ggplot(tidy_returns) +
+  geom_boxplot(aes(x = factor(stock), y = returns,
+               color = factor(stock))) 
 ```
 
 
@@ -266,10 +244,9 @@ ggplot(ecom) +
 <hr>
 
 ```{r box17, fig.align='center'}
-ggplot(ecom) +
-  geom_boxplot(aes(x = factor(device), y = duration),
-               size = 1.5) +
-  expand_limits(y = c(0, 1100))
+ggplot(tidy_returns) +
+  geom_boxplot(aes(x = factor(stock), y = returns),
+               size = 1.5) 
 ```
 
 ## Specify Values for Line Type
@@ -277,10 +254,9 @@ ggplot(ecom) +
 <hr>
 
 ```{r box18, fig.align='center'}
-ggplot(ecom) +
-  geom_boxplot(aes(x = factor(device), y = duration),
-               linetype = 2) +
-  expand_limits(y = c(0, 1100))
+ggplot(tidy_returns) +
+  geom_boxplot(aes(x = factor(stock), y = returns),
+               linetype = 2) 
 ```
 
 ## {data-background="thankyou.png"}
