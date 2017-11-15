@@ -25,29 +25,31 @@ output: _output.yaml
 
 <hr>
 
-A bar plot represents data in rectangular bars. The length of the bars are proportional to the values they represent. Bar plots can be either horizontal or vertical. The X axis of the plot represents the levels or the categories and the Y axis represents the frequency/count of the variable. 
+- a bar plot represents data in rectangular bars 
+- the length of the bars are proportional to the values they represent 
+- bar plots can be either horizontal or vertical 
+- the X axis of the plot represents the levels or the categories
+- and the Y axis represents the frequency/count of the variable 
 
-## Univariate Bar Plot
+<!-- ## Univariate Bar Plot -->
 
-<hr>
+<!-- <hr> -->
 
-A univariate bar plot represents a single categorical variable. The categories in the variable are represented on the X axis and their frequencies on the Y axis. In the below example, the `cyl` variable from the `mtcars` data set is visualized using a bar plot. The categories or levels are `4`, `6` and `8` which represent the number of cylinders in the automobile and are represented on the X axis. The frequency for each type of cylinder is represented by the Y axis.
+<!-- A univariate bar plot represents a single categorical variable. The categories in the variable are represented on the X axis and their frequencies on the Y axis. In the below example, the `cyl` variable from the `mtcars` data set is visualized using a bar plot. The categories or levels are `4`, `6` and `8` which represent the number of cylinders in the automobile and are represented on the X axis. The frequency for each type of cylinder is represented by the Y axis. -->
 
 
 ## Libraries
 
 <hr>
 
-```{r show, eval=FALSE}
+```{r show1, eval=FALSE}
 library(ggplot2)
-library(dplyr)
-library(tidyr)
+library(readr)
 ```
 
 ```{r load, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
 library(ggplot2)
-library(dplyr)
-library(tidyr)
+library(readr)
 ```
 
 ## Data
@@ -55,31 +57,30 @@ library(tidyr)
 <hr>
 
 ```{r import, eval=FALSE}
-ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+ecom <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/ecom.csv',
+  col_types = list(col_factor(levels = c('Desktop', 'Mobile', 'Tablet')), 
+  col_factor(levels = c(TRUE, FALSE)), col_factor(levels = c(TRUE, FALSE)), 
+  col_factor(levels = c('Affiliates', 'Direct', 'Display', 'Organic', 'Paid', 'Referral', 'Social'))))
 ```
 
-
-```{r import2, echo=FALSE, eval=TRUE, message=FALSE}
-ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+```{r show, echo=FALSE, eval=TRUE, message=FALSE}
+ecom <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/ecom.csv',
+  col_types = list(col_factor(levels = c('Desktop', 'Mobile', 'Tablet')), 
+  col_factor(levels = c(TRUE, FALSE)), col_factor(levels = c(TRUE, FALSE)), 
+  col_factor(levels = c('Affiliates', 'Direct', 'Display', 'Organic', 'Paid', 'Referral', 'Social'))))
 ecom
 ```
-
 
 ## Data Dictionary
 
 <hr>
 
-- id: row id
-- referrer: referrer website/search engine
-- os: operating system
-- browser: browser
+Below is the description of the data set:
+
 - device: device used to visit the website
-- n_pages: number of pages visited
-- duration: time spent on the website (in seconds)
-- repeat: frequency of visits
-- country: country of origin
+- bouncers: whether visit was a bouncer (exit website from landing page)
 - purchase: whether visitor purchased
-- order_value: order value of visitor (in dollars)
+- referrer: referrer website/search engine
 
 ## Aesthetics
 
@@ -178,7 +179,3 @@ ggplot(ecom) +
 ```
 
 ## {data-background="thankyou.png"}
-
-<!-- To do: -->
-<!--   - add intro slide -->
-<!--   - add introduction -->
