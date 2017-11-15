@@ -98,8 +98,8 @@ ggplot(ecom) +
 <hr>
 
 ```{r stat4, fig.align='center'}
-ggplot(ecom) +
-  stat_identity(aes(n_pages, duration), position = 'jitter')
+ggplot(mtcars) +
+  stat_identity(aes(disp, mpg), position = 'jitter')
 ```
 
 ## Histogram
@@ -117,8 +117,8 @@ ggplot(ecom) +
 <hr>
 
 ```{r stat6, fig.align='center'}
-ggplot(ecom) +
-  stat_unique(aes(n_pages, duration), 
+ggplot(mtcars) +
+  stat_unique(aes(disp, mpg), 
               position = 'jitter')
 ```
 
