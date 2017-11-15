@@ -16,75 +16,97 @@ output: _output.yaml
 - modify axis range
 - add additional lines to the plot
 
-## Intro
-
-<hr>
-
-Line charts are used to examine trend over time.
-
 ## Data
 
 <hr>
 
-```{r airpas}
-head(AirPassengers)
+```{r import, eval=FALSE}
+users <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/users_device.csv',
+  col_types = list(col_date(format = "%m/%d/%y"), col_integer(),
+                   col_integer(), col_integer()))
 ```
+
+```{r show, echo=FALSE, eval=TRUE, message=FALSE}
+library(readr)
+users <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/users_device.csv',
+  col_types = list(col_date(format = "%m/%d/%y"), col_integer(),
+                   col_integer(), col_integer()))
+users
+```
+
+
+## Data Dictionary
+
+<hr>
+
+Below is the description of the data set:
+
+- Date: date 
+- Desktop: visitors from a desktop device
+- Mobile: visitors from a mobile device
+- Tablet: visitors from a tablet device
 
 ## Line Chart
 
 <hr>
 
-```{r line1, fig.align='center', fig.height=5, fig.width=5}
-data <- head(AirPassengers)
-plot(data, type = 'l')
+```{r line1, fig.align='center', fig.height=5, fig.width=7}
+plot(users$Date, users$Desktop, type = 'l', main = 'Daily Visitors',
+     xlab = 'Date', ylab = 'Visitors')
 ```
 
 ## Lines & Points
 
 <hr>
 
-```{r line2, fig.align='center', fig.height=5, fig.width=5}
-plot(data, type = 'b')
+```{r line2, fig.align='center', fig.height=5, fig.width=7}
+plot(users$Date, users$Desktop, type = 'b', main = 'Daily Visitors',
+     xlab = 'Date', ylab = 'Visitors')
 ```
 
 ## Overplotted
 
 <hr>
 
-```{r line3, fig.align='center', fig.height=5, fig.width=5}
-plot(data, type = 'o')
+```{r line3, fig.align='center', fig.height=5, fig.width=7}
+plot(users$Date, users$Desktop, type = 'o', main = 'Daily Visitors',
+     xlab = 'Date', ylab = 'Visitors')
 ```
 
 ## Lines with Breaks
 
 <hr>
 
-```{r line4, fig.align='center', fig.height=5, fig.width=5}
-plot(data, type = 'c')
+```{r line4, fig.align='center', fig.height=5, fig.width=7}
+plot(users$Date, users$Desktop, type = 'c', main = 'Daily Visitors',
+     xlab = 'Date', ylab = 'Visitors')
 ```
 
 ## Line Color
 
 <hr>
 
-```{r line5, fig.align='center', fig.height=5, fig.width=5}
-plot(data, type = 'l', col = 'blue')
+```{r line5, fig.align='center', fig.height=5, fig.width=7}
+plot(users$Date, users$Desktop, type = 'l', col = 'blue', main = 'Daily Visitors',
+     xlab = 'Date', ylab = 'Visitors')
 ```
 
 ## Color
 
 <hr>
 
-```{r line6, fig.align='center', fig.height=5, fig.width=5}
-plot(data, type = 'b', col = 'blue')
+```{r line6, fig.align='center', fig.height=5, fig.width=7}
+plot(users$Date, users$Desktop, type = 'b', col = 'blue', main = 'Daily Visitors',
+     xlab = 'Date', ylab = 'Visitors')
 ```
 
 ## Line Type
 
 <hr>
 
-```{r line9, fig.align='center', fig.height=5, fig.width=5}
-plot(data, type = 'l', lty = 3)
+```{r line9, fig.align='center', fig.height=5, fig.width=7}
+plot(users$Date, users$Desktop, type = 'l', lty = 3, main = 'Daily Visitors',
+     xlab = 'Date', ylab = 'Visitors')
 ```
 
 ## Line Types
@@ -107,7 +129,8 @@ init <- par(no.readonly = TRUE)
 par(mfrow = c(3, 2))
 values <- 1:6
 for (i in values) {
-    plot(data, type = "l", lty = i, col ="red")
+    plot(users$Date, users$Desktop, type = "l", lty = i, col ="red",
+     xlab = 'Date', ylab = 'Visitors')
     mtext(paste("lty = ", i), side = 3, col = "blue", line = 1)
 }
 ```
@@ -121,7 +144,8 @@ init <- par(no.readonly = TRUE)
 par(mfrow = c(3, 2))
 values <- c("solid", "dashed", "dotted", "dotdash", "longdash", "twodash")
 for (i in values) {
-    plot(data, type = "l", lty = i, col ="red")
+    plot(users$Date, users$Desktop, type = "l", lty = i, col ="red",
+     xlab = 'Date', ylab = 'Visitors')
     mtext(paste("lty = ", i), side = 3, col = "blue", line = 1)
 }
 ```
@@ -130,8 +154,9 @@ for (i in values) {
 
 <hr>
 
-```{r line10, fig.align='center', fig.height=5, fig.width=5}
-plot(data, type = 'l', lwd = 2.5)
+```{r line10, fig.align='center', fig.height=5, fig.width=7}
+plot(users$Date, users$Desktop, type = 'l', lwd = 2.5,
+     xlab = 'Date', ylab = 'Visitors')
 ```
 
 ## Line Width
@@ -143,7 +168,8 @@ init <- par(no.readonly = TRUE)
 par(mfrow = c(2, 2))
 values <- c(0.5, 1, 1.5, 2)
 for (i in values) {
-    plot(data, type = "l", lwd = i, col ="red")
+    plot(users$Date, users$Desktop, type = "l", lwd = i, col ="red", main = 'Daily Visitors',
+     xlab = 'Date', ylab = 'Visitors')
     mtext(paste("lwd = ", i), side = 3, col = "blue", line = 1)
 }
 ```
@@ -152,52 +178,53 @@ for (i in values) {
 
 <hr>
 
-```{r line12, fig.align='center', fig.height=5, fig.width=5}
-plot(data, type = 'b', pch = 23, col = 'red', cex = 1.5)
+```{r line12, fig.align='center', fig.height=5, fig.width=7}
+plot(users$Date, users$Desktop, type = 'b', pch = 23, col = 'red', cex = 1.5, 
+	main = 'Daily Visitors', xlab = 'Date', ylab = 'Visitors')
 ```
 
 ## Add Points
 
 <hr>
 
-```{r line13, fig.align='center', fig.height=5, fig.width=5}
-plot(data, type = 'l', col = 'red')
-points(data, pch = 23, col = 'blue', bg = 'green', cex = 1.5)
+```{r line13, fig.align='center', fig.height=5, fig.width=7}
+plot(users$Date, users$Desktop, type = 'l', col = 'red', 
+	main = 'Daily Visitors', xlab = 'Date', ylab = 'Visitors')
+points(users$Date, users$Desktop, pch = 23, col = 'blue', bg = 'green', cex = 1.5)
 ```
 
 ## Additional Lines
 
 <hr>
 
-```{r line14, fig.align='center', fig.height=5, fig.width=5}
-data1 <- c(7.2, 7.6, 6.8, 6.5, 7)
-data2 <- c(6.8, 7.2, 7.8, 7, 6.2)
-plot(data1, type = "b", col = "blue")
-lines(data2, type = "b", col = "red")
+```{r line14, fig.align='center', fig.height=5, fig.width=7}
+plot(users$Date, users$Desktop, type = "l", col = "blue", 
+	main = 'Daily Visitors', xlab = 'Date', ylab = 'Visitors')
+lines(users$Date, users$Mobile, type = "l", col = "red")
+lines(users$Date, users$Tablet, type = "l", col = "green")
 ```
 
 ## Additional Lines - Modify Axis Range
 
 <hr>
 
-```{r line15, fig.align='center', fig.height=5, fig.width=5}
-plot(data1, type = "b", col = "blue", ylim = c(5, 9))
-lines(data2, type = "b", col = "red")
+```{r line15, fig.align='center', fig.height=5, fig.width=7}
+plot(users$Date, users$Desktop, type = "l", col = "blue", ylim = c(0, 3000), 
+	main = 'Daily Visitors', xlab = 'Date', ylab = 'Visitors')
+lines(users$Date, users$Mobile, type = "l", col = "red")
+lines(users$Date, users$Tablet, type = "l", col = "green")
 ```
 
 ## Putting it all together...
 
 <hr>
 
-```{r line16, fig.align='center', fig.height=5, fig.width=5}
-plot(data1, type = "b", col = "blue", 
-     ylim = c(5, 9), main = 'Line Graph',
-     xlab = 'Index', ylab = 'Data')
-lines(data2, type = "b", col = "red")
+```{r line16, fig.align='center', fig.height=5, fig.width=7}
+plot(users$Date, users$Desktop, type = "l", col = "blue", main = 'Daily Visitors',
+     ylim = c(0, 3000), xlab = 'Date', ylab = 'Visitors')
+lines(users$Date, users$Mobile, type = "l", col = "red")
+lines(users$Date, users$Tablet, type = "l", col = "green")
 ```
 
 ## {data-background="thankyou.png"}
 
-<!-- To do: -->
-<!--   - add intro slide -->
-<!--   - change data -->
