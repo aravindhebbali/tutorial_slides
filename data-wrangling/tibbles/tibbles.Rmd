@@ -8,10 +8,10 @@ output: _output.yaml
 
 <hr>
 
-- What are tibbles?
-- How are tibbles different from data frames?
-- How to create tibbles?
-- How to manipulate tibbles?
+- what are tibbles?
+- how are tibbles different from data frames?
+- how to create tibbles?
+- how to manipulate tibbles?
 
 ## {data-background="tibbles1.png"}
 
@@ -24,17 +24,6 @@ output: _output.yaml
 > Source: http://tibble.tidyverse.org/
 
 ## {data-background="creatingtibbles.png"}
-
-## Creating tibbles
-
-<hr>
-
-tibble can be created using any of the following:
-
-- `tibble()`
-- `as_tibble()`
-- `tribble()`
-
 
 ## Creating tibbles
 
@@ -62,7 +51,7 @@ tibble(x = letters,
 - never prints all rows
 - never recycles vector of length greater than 1
 
-## never changes input's types
+## Never changes input's types
 
 <hr>
 
@@ -72,7 +61,16 @@ tibble(x = letters,
        z = sample(100, 26))
 ```
 
-## never adjusts variable names
+## Never changes input's types
+
+<hr>
+
+```{r tibble3a}
+data <- data.frame(x = letters, y = 1:26, z = sample(100, 26))
+str(data)
+```
+
+## Never adjusts variable names
 
 <hr>
 
@@ -81,7 +79,7 @@ names(data.frame(`order value` = 10))
 names(tibble(`order value` = 10))
 ```
 
-## never prints all rows
+## Never prints all rows
 
 <hr>
 
@@ -92,7 +90,7 @@ z <- sample(c(TRUE, FALSE), 100, replace = TRUE)
 tibble(x, y, z)
 ```
 
-## never recycle vector of length greater than 1
+## Never recycle vector of length greater than 1
 
 <hr>
 
@@ -104,69 +102,9 @@ tibble(x, y, z)
 Error in overscope_eval_next(overscope, expr) : object 'y' not found
 ```
 
-## {data-background="creatingtibbles2.png"}
-
-## Creating tibbles II
-
-<hr>
-
-In the previous section, we created tibbles using `tibble()` by directly entering data as arguments. In this section, we will convert the following objects to tibble using `as_tibble()`:
-
-- data.frame
-- list
-- matrix
-- table
-- tbl_df
-- atomic vectors
-
-## DataFrames
-
-<hr>
-
-```{r tibble7}
-as_tibble(iris)
-```
-
-## Lists
-
-<hr>
-
-```{r tibble8}
-l <- list(x = 1:32, y = sample(100, 32), z = replicate(32, letters, simplify = FALSE))
-as_tibble(l)
-```
-
-## Matrix
-
-<hr>
-
-```{r tibble9}
-m <- matrix(sample(1000, 2600, replace = TRUE), ncol = 26)
-colnames(m) <- letters
-as_tibble(m)
-```
-
-## Table
-
-<hr>
-
-```{r tibble10}
-k <- table(mtcars$cyl)
-as_tibble(k)
-```
-
-## tbl_df
-
-<hr>
-
-```{r tibble11}
-k <- tbl_df(iris)
-as_tibble(k)
-```
-
 ## {data-background="enframe.png"}
 
-## atomic vectors
+## Atomic Vectors
 
 <hr>
 
@@ -175,24 +113,13 @@ browsers <- c('chrome', 'safari', 'firefox', 'edge')
 enframe(browsers)
 ```
 
-## atomic vectors
+## Atomic Vectors
 
 <hr>
 
 ```{r tibble13}
 browsers <- c(chrome = 40, firefox = 20, edge = 30, safari = 10)
 enframe(browsers)
-```
-
-## Membership Testing
-
-<hr>
-
-We can test if an object is a tibble using `is_tibble()`.
-
-```{r tibble14}
-is_tibble(mtcars)
-is_tibble(as_tibble(mtcars))
 ```
 
 ## {data-background="tribble.png"}
@@ -229,8 +156,8 @@ Names of the columns in tibbles need not be valid R variable names. They can con
 
 ```{r tibble16}
 tibble(
-  ` ` = 'space',
-  `2` = 'integer',
+  ` `  = 'space',
+  `2`  = 'integer',
   `:)` = 'smiley'
 )
 ```
@@ -241,8 +168,6 @@ tibble(
 ## Add Rows
 
 <hr>
-
-Let us add data related to **Safari** browser to the web traffic data using `add_row()`.
 
 ```{r tibble21}
 browsers <- enframe(c(chrome = 40, firefox = 20, edge = 30))
@@ -257,8 +182,6 @@ add_row(browsers, name = 'safari', value = 10)
 
 <hr>
 
-If we want to add the data at a particular row, we can specify the row number using the `.before` argument. Let us add the data related to **Safari** browser in the second row instead of the last row.
-
 ```{r tibble23}
 add_row(browsers, name = 'safari', value = 10, .before = 2)
 ```
@@ -267,21 +190,9 @@ add_row(browsers, name = 'safari', value = 10, .before = 2)
 
 <hr>
 
-`add_column()` adds a new column to tibbles.
-
 ```{r tibble24}
 browsers <- enframe(c(chrome = 40, firefox = 20, edge = 30, safari = 10))
 add_column(browsers, visits = c(4000, 2000, 3000, 1000))
-```
-
-## Rownames
-
-<hr>
-
-The [tibble](tibble.tidyverse.org) package provides a set of functions to deal with rownames. Remember, `tibble` does not have `rownames` unlike `data.frame`. To check whether a data set has rownames, use `has_rownames()`.
-
-```{r tibble25}
-has_rownames(mtcars)
 ```
 
 ## Remove Rownames
@@ -304,8 +215,6 @@ head(rownames_to_column(mtcars))
 
 <hr>
 
-To convert the first column in the data set to rownames, use `column_to_rownames()`:
-
 ```{r tibble28}
 mtcars_tbl <- rownames_to_column(mtcars)
 column_to_rownames(mtcars_tbl)
@@ -315,17 +224,30 @@ column_to_rownames(mtcars_tbl)
 
 <hr>
 
-Use `glimpse()` to get an overview of the data.
-
 ```{r tibble 29}
 glimpse(mtcars)
+```
+
+## Membership Testing
+
+<hr>
+
+```{r tibble14}
+is_tibble(mtcars)
+is_tibble(as_tibble(mtcars))
+```
+
+## Rownames
+
+<hr>
+
+```{r tibble25}
+has_rownames(mtcars)
 ```
 
 ## Check Column 
 
 <hr>
-
-`has_name()` can be used to check if a tibble has a specific column.
 
 ```{r tibble30}
 has_name(mtcars, 'cyl')
@@ -350,7 +272,7 @@ has_name(mtcars, 'gears')
 - use `add_row()` to add a new row
 - use `add_column()` to add a new column
 - use `remove_rownames()` to remove rownames from data
-- use `rownames_to_colum()` to coerce rowname to first column
+- use `rownames_to_column()` to coerce rowname to first column
 - use `column_to_rownames()` to coerce first column to rownames
 
 ## Summary

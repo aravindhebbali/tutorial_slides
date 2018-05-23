@@ -487,8 +487,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="agenda" class="slide level2">
 <h2>Agenda</h2>
 <hr>
-<p>In the previous module, we learnt about dplyr verbs and used them to compute average order value for an e-commerce website data. In this module, we will learn to combine tables using different <code>*_join</code> functions provided in dplyr. Let us assume we have 2 tables <strong>x</strong> and <strong>y</strong>.</p>
-<p>We will explore the following type of <code>joins</code></p>
+<p>Learn to combine tables using different <code>*_join</code> functions provided in dplyr. Let us assume we have 2 tables <strong>x</strong> and <strong>y</strong>. We will explore the following type of <code>joins</code></p>
 <ul>
 <li class="fragment">inner join</li>
 <li class="fragment">left join</li>
@@ -504,23 +503,30 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="section-2" class="slide level2" data-background="join_case_study.png">
 <h2></h2>
 </section>
+<section id="libraries" class="slide level2">
+<h2>Libraries</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(readr)
+<span class="kw">options</span>(<span class="dt">tibble.width =</span> <span class="ot">Inf</span>)</code></pre></div>
+</section>
 <section id="data-orders" class="slide level2">
 <h2>Data: Orders</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">order &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rsquaredacademy/datasets/master/order.csv'</span>)</code></pre></div>
 <pre><code>## # A tibble: 300 x 5
-##       id order_data order_number customer_id  amount
-##    &lt;int&gt;      &lt;chr&gt;        &lt;int&gt;       &lt;int&gt;   &lt;dbl&gt;
-##  1   368   7/2/2016       543346         352  364.97
-##  2   286  11/2/2016       543390         305 2063.53
-##  3    28  2/22/2017       543404          78  432.06
-##  4   309   3/5/2017       543389         447  480.22
-##  5     2 12/28/2016       543233         374  235.37
-##  6    31 12/30/2016       543475          48 2745.24
-##  7   179 12/21/2016       543155         280 2358.25
-##  8   484 11/24/2016       543485         445 1030.58
-##  9   115   9/9/2016       543489         278 1217.50
-## 10   340   5/6/2017       543246         131 1184.39
+##       id order_data order_number customer_id amount
+##    &lt;int&gt; &lt;chr&gt;             &lt;int&gt;       &lt;int&gt;  &lt;dbl&gt;
+##  1   368 7/2/2016         543346         352    365
+##  2   286 11/2/2016        543390         305   2064
+##  3    28 2/22/2017        543404          78    432
+##  4   309 3/5/2017         543389         447    480
+##  5     2 12/28/2016       543233         374    235
+##  6    31 12/30/2016       543475          48   2745
+##  7   179 12/21/2016       543155         280   2358
+##  8   484 11/24/2016       543485         445   1031
+##  9   115 9/9/2016         543489         278   1218
+## 10   340 5/6/2017         543246         131   1184
 ## # ... with 290 more rows</code></pre>
 </section>
 <section id="data-customers" class="slide level2">
@@ -528,27 +534,27 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">customer &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rsquaredacademy/datasets/master/customer.csv'</span>)</code></pre></div>
 <pre><code>## # A tibble: 91 x 5
-##       id first_name             last_name       city           phone
-##    &lt;int&gt;      &lt;chr&gt;                 &lt;chr&gt;      &lt;chr&gt;           &lt;chr&gt;
-##  1     1  Elbertine            Robertucci California 1-(805)951-9083
-##  2     2   Marcella              Kilshall   Colorado 1-(303)642-9320
-##  3     3      Daria de la Valette Parisot    Florida 1-(352)629-9125
-##  4     4   Sherilyn                  Widd Distric... 1-(202)453-3897
-##  5     5      Ketty               Cridlin      Texas 1-(214)455-2169
-##  6     6     Jethro            Lubomirski California 1-(510)278-9668
-##  7     7   Jeremiah              Carrabot California 1-(559)713-9864
-##  8     8 Constancia              Eastmead      Texas 1-(806)550-1701
-##  9     9      Muire             Prestwich      Idaho 1-(208)811-7437
-## 10    10    Abigail                Craigs      Texas 1-(469)653-1340
+##       id first_name last_name             city       phone          
+##    &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;                 &lt;chr&gt;      &lt;chr&gt;          
+##  1     1 Elbertine  Robertucci            California 1-(805)951-9083
+##  2     2 Marcella   Kilshall              Colorado   1-(303)642-9320
+##  3     3 Daria      de la Valette Parisot Florida    1-(352)629-9125
+##  4     4 Sherilyn   Widd                  Distric... 1-(202)453-3897
+##  5     5 Ketty      Cridlin               Texas      1-(214)455-2169
+##  6     6 Jethro     Lubomirski            California 1-(510)278-9668
+##  7     7 Jeremiah   Carrabot              California 1-(559)713-9864
+##  8     8 Constancia Eastmead              Texas      1-(806)550-1701
+##  9     9 Muire      Prestwich             Idaho      1-(208)811-7437
+## 10    10 Abigail    Craigs                Texas      1-(469)653-1340
 ## # ... with 81 more rows</code></pre>
 </section>
-<section id="section-3" class="slide level2" data-background="canva_join.png">
+<section id="section-3" class="slide level2" data-background="join_example_data.png">
 <h2></h2>
 </section>
 <section id="section-4" class="slide level2" data-background="innerjoin.png">
 <h2></h2>
 </section>
-<section id="section-5" class="slide level2" data-background="canva_inner.png">
+<section id="section-5" class="slide level2" data-background="join_inner.png">
 <h2></h2>
 </section>
 <section id="inner-join" class="slide level2">
@@ -558,24 +564,36 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <span class="st">  </span><span class="kw">inner_join</span>(order)</code></pre></div>
 <pre><code>## Joining, by = &quot;id&quot;</code></pre>
 <pre><code>## # A tibble: 55 x 9
-##       id first_name  last_name       city           phone order_data order_number customer_id  amount
-##    &lt;int&gt;      &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;           &lt;chr&gt;      &lt;chr&gt;        &lt;int&gt;       &lt;int&gt;   &lt;dbl&gt;
-##  1     2   Marcella   Kilshall   Colorado 1-(303)642-9320 12/28/2016       543233         374  235.37
-##  2     2   Marcella   Kilshall   Colorado 1-(303)642-9320  8/31/2016       543129         334 1150.40
-##  3     5      Ketty    Cridlin      Texas 1-(214)455-2169  1/17/2017       543453         475  346.07
-##  4     6     Jethro Lubomirski California 1-(510)278-9668  1/27/2017       543274         218 2317.16
-##  5     7   Jeremiah   Carrabot California 1-(559)713-9864  6/21/2016       543423         282  135.53
-##  6     7   Jeremiah   Carrabot California 1-(559)713-9864  2/13/2017       543379         346 1407.32
-##  7     7   Jeremiah   Carrabot California 1-(559)713-9864   7/8/2016       543477         483 1913.79
-##  8     8 Constancia   Eastmead      Texas 1-(806)550-1701  11/5/2016       543157         341 2461.46
-##  9     8 Constancia   Eastmead      Texas 1-(806)550-1701  5/19/2017       543117         364 2714.20
-## 10     9      Muire  Prestwich      Idaho 1-(208)811-7437 12/28/2016       543201         207  187.03
+##       id first_name last_name  city       phone           order_data
+##    &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;           &lt;chr&gt;     
+##  1     2 Marcella   Kilshall   Colorado   1-(303)642-9320 12/28/2016
+##  2     2 Marcella   Kilshall   Colorado   1-(303)642-9320 8/31/2016 
+##  3     5 Ketty      Cridlin    Texas      1-(214)455-2169 1/17/2017 
+##  4     6 Jethro     Lubomirski California 1-(510)278-9668 1/27/2017 
+##  5     7 Jeremiah   Carrabot   California 1-(559)713-9864 6/21/2016 
+##  6     7 Jeremiah   Carrabot   California 1-(559)713-9864 2/13/2017 
+##  7     7 Jeremiah   Carrabot   California 1-(559)713-9864 7/8/2016  
+##  8     8 Constancia Eastmead   Texas      1-(806)550-1701 11/5/2016 
+##  9     8 Constancia Eastmead   Texas      1-(806)550-1701 5/19/2017 
+## 10     9 Muire      Prestwich  Idaho      1-(208)811-7437 12/28/2016
+##    order_number customer_id amount
+##           &lt;int&gt;       &lt;int&gt;  &lt;dbl&gt;
+##  1       543233         374    235
+##  2       543129         334   1150
+##  3       543453         475    346
+##  4       543274         218   2317
+##  5       543423         282    136
+##  6       543379         346   1407
+##  7       543477         483   1914
+##  8       543157         341   2461
+##  9       543117         364   2714
+## 10       543201         207    187
 ## # ... with 45 more rows</code></pre>
 </section>
 <section id="section-6" class="slide level2" data-background="leftjoin.png">
 <h2></h2>
 </section>
-<section id="section-7" class="slide level2" data-background="canva_left.png">
+<section id="section-7" class="slide level2" data-background="join_left.png">
 <h2></h2>
 </section>
 <section id="left-join" class="slide level2">
@@ -585,24 +603,36 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <span class="st">  </span><span class="kw">left_join</span>(order)</code></pre></div>
 <pre><code>## Joining, by = &quot;id&quot;</code></pre>
 <pre><code>## # A tibble: 104 x 9
-##       id first_name             last_name       city           phone order_data order_number customer_id  amount
-##    &lt;int&gt;      &lt;chr&gt;                 &lt;chr&gt;      &lt;chr&gt;           &lt;chr&gt;      &lt;chr&gt;        &lt;int&gt;       &lt;int&gt;   &lt;dbl&gt;
-##  1     1  Elbertine            Robertucci California 1-(805)951-9083       &lt;NA&gt;           NA          NA      NA
-##  2     2   Marcella              Kilshall   Colorado 1-(303)642-9320 12/28/2016       543233         374  235.37
-##  3     2   Marcella              Kilshall   Colorado 1-(303)642-9320  8/31/2016       543129         334 1150.40
-##  4     3      Daria de la Valette Parisot    Florida 1-(352)629-9125       &lt;NA&gt;           NA          NA      NA
-##  5     4   Sherilyn                  Widd Distric... 1-(202)453-3897       &lt;NA&gt;           NA          NA      NA
-##  6     5      Ketty               Cridlin      Texas 1-(214)455-2169  1/17/2017       543453         475  346.07
-##  7     6     Jethro            Lubomirski California 1-(510)278-9668  1/27/2017       543274         218 2317.16
-##  8     7   Jeremiah              Carrabot California 1-(559)713-9864  6/21/2016       543423         282  135.53
-##  9     7   Jeremiah              Carrabot California 1-(559)713-9864  2/13/2017       543379         346 1407.32
-## 10     7   Jeremiah              Carrabot California 1-(559)713-9864   7/8/2016       543477         483 1913.79
+##       id first_name last_name             city       phone          
+##    &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;                 &lt;chr&gt;      &lt;chr&gt;          
+##  1     1 Elbertine  Robertucci            California 1-(805)951-9083
+##  2     2 Marcella   Kilshall              Colorado   1-(303)642-9320
+##  3     2 Marcella   Kilshall              Colorado   1-(303)642-9320
+##  4     3 Daria      de la Valette Parisot Florida    1-(352)629-9125
+##  5     4 Sherilyn   Widd                  Distric... 1-(202)453-3897
+##  6     5 Ketty      Cridlin               Texas      1-(214)455-2169
+##  7     6 Jethro     Lubomirski            California 1-(510)278-9668
+##  8     7 Jeremiah   Carrabot              California 1-(559)713-9864
+##  9     7 Jeremiah   Carrabot              California 1-(559)713-9864
+## 10     7 Jeremiah   Carrabot              California 1-(559)713-9864
+##    order_data order_number customer_id amount
+##    &lt;chr&gt;             &lt;int&gt;       &lt;int&gt;  &lt;dbl&gt;
+##  1 &lt;NA&gt;                 NA          NA     NA
+##  2 12/28/2016       543233         374    235
+##  3 8/31/2016        543129         334   1150
+##  4 &lt;NA&gt;                 NA          NA     NA
+##  5 &lt;NA&gt;                 NA          NA     NA
+##  6 1/17/2017        543453         475    346
+##  7 1/27/2017        543274         218   2317
+##  8 6/21/2016        543423         282    136
+##  9 2/13/2017        543379         346   1407
+## 10 7/8/2016         543477         483   1914
 ## # ... with 94 more rows</code></pre>
 </section>
 <section id="section-8" class="slide level2" data-background="rightjoin.png">
 <h2></h2>
 </section>
-<section id="section-9" class="slide level2" data-background="canva_right.png">
+<section id="section-9" class="slide level2" data-background="join_right.png">
 <h2></h2>
 </section>
 <section id="right-join" class="slide level2">
@@ -612,24 +642,36 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <span class="st">  </span><span class="kw">right_join</span>(order)</code></pre></div>
 <pre><code>## Joining, by = &quot;id&quot;</code></pre>
 <pre><code>## # A tibble: 300 x 9
-##       id first_name last_name      city           phone order_data order_number customer_id  amount
-##    &lt;int&gt;      &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;           &lt;chr&gt;      &lt;chr&gt;        &lt;int&gt;       &lt;int&gt;   &lt;dbl&gt;
-##  1   368       &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;            &lt;NA&gt;   7/2/2016       543346         352  364.97
-##  2   286       &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;            &lt;NA&gt;  11/2/2016       543390         305 2063.53
-##  3    28      Avrit    Lerven     Texas 1-(817)651-5322  2/22/2017       543404          78  432.06
-##  4   309       &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;            &lt;NA&gt;   3/5/2017       543389         447  480.22
-##  5     2   Marcella  Kilshall  Colorado 1-(303)642-9320 12/28/2016       543233         374  235.37
-##  6    31    Clemmie   McKeady Tennessee 1-(865)334-8263 12/30/2016       543475          48 2745.24
-##  7   179       &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;            &lt;NA&gt; 12/21/2016       543155         280 2358.25
-##  8   484       &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;            &lt;NA&gt; 11/24/2016       543485         445 1030.58
-##  9   115       &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;            &lt;NA&gt;   9/9/2016       543489         278 1217.50
-## 10   340       &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;            &lt;NA&gt;   5/6/2017       543246         131 1184.39
+##       id first_name last_name city      phone           order_data
+##    &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;           &lt;chr&gt;     
+##  1   368 &lt;NA&gt;       &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;            7/2/2016  
+##  2   286 &lt;NA&gt;       &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;            11/2/2016 
+##  3    28 Avrit      Lerven    Texas     1-(817)651-5322 2/22/2017 
+##  4   309 &lt;NA&gt;       &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;            3/5/2017  
+##  5     2 Marcella   Kilshall  Colorado  1-(303)642-9320 12/28/2016
+##  6    31 Clemmie    McKeady   Tennessee 1-(865)334-8263 12/30/2016
+##  7   179 &lt;NA&gt;       &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;            12/21/2016
+##  8   484 &lt;NA&gt;       &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;            11/24/2016
+##  9   115 &lt;NA&gt;       &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;            9/9/2016  
+## 10   340 &lt;NA&gt;       &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;            5/6/2017  
+##    order_number customer_id amount
+##           &lt;int&gt;       &lt;int&gt;  &lt;dbl&gt;
+##  1       543346         352    365
+##  2       543390         305   2064
+##  3       543404          78    432
+##  4       543389         447    480
+##  5       543233         374    235
+##  6       543475          48   2745
+##  7       543155         280   2358
+##  8       543485         445   1031
+##  9       543489         278   1218
+## 10       543246         131   1184
 ## # ... with 290 more rows</code></pre>
 </section>
 <section id="section-10" class="slide level2" data-background="semijoin.png">
 <h2></h2>
 </section>
-<section id="section-11" class="slide level2" data-background="canva_semi.png">
+<section id="section-11" class="slide level2" data-background="join_semi.png">
 <h2></h2>
 </section>
 <section id="semi-join" class="slide level2">
@@ -639,24 +681,24 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <span class="st">  </span><span class="kw">semi_join</span>(order)</code></pre></div>
 <pre><code>## Joining, by = &quot;id&quot;</code></pre>
 <pre><code>## # A tibble: 42 x 5
-##       id first_name  last_name       city           phone
-##    &lt;int&gt;      &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;           &lt;chr&gt;
-##  1     2   Marcella   Kilshall   Colorado 1-(303)642-9320
-##  2     5      Ketty    Cridlin      Texas 1-(214)455-2169
-##  3     6     Jethro Lubomirski California 1-(510)278-9668
-##  4     7   Jeremiah   Carrabot California 1-(559)713-9864
-##  5     8 Constancia   Eastmead      Texas 1-(806)550-1701
-##  6     9      Muire  Prestwich      Idaho 1-(208)811-7437
-##  7    15  Valentijn     Reddel California 1-(562)760-7094
-##  8    16    Monique    Van Zon   Missouri 1-(314)444-6148
-##  9    20    Colette  Doddridge      Texas 1-(214)267-1433
-## 10    28      Avrit     Lerven      Texas 1-(817)651-5322
+##       id first_name last_name  city       phone          
+##    &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          
+##  1     2 Marcella   Kilshall   Colorado   1-(303)642-9320
+##  2     5 Ketty      Cridlin    Texas      1-(214)455-2169
+##  3     6 Jethro     Lubomirski California 1-(510)278-9668
+##  4     7 Jeremiah   Carrabot   California 1-(559)713-9864
+##  5     8 Constancia Eastmead   Texas      1-(806)550-1701
+##  6     9 Muire      Prestwich  Idaho      1-(208)811-7437
+##  7    15 Valentijn  Reddel     California 1-(562)760-7094
+##  8    16 Monique    Van Zon    Missouri   1-(314)444-6148
+##  9    20 Colette    Doddridge  Texas      1-(214)267-1433
+## 10    28 Avrit      Lerven     Texas      1-(817)651-5322
 ## # ... with 32 more rows</code></pre>
 </section>
 <section id="section-12" class="slide level2" data-background="antijoin.png">
 <h2></h2>
 </section>
-<section id="section-13" class="slide level2" data-background="canva_anti.png">
+<section id="section-13" class="slide level2" data-background="join_anti.png">
 <h2></h2>
 </section>
 <section id="anti-join" class="slide level2">
@@ -666,24 +708,24 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <span class="st">  </span><span class="kw">anti_join</span>(order)</code></pre></div>
 <pre><code>## Joining, by = &quot;id&quot;</code></pre>
 <pre><code>## # A tibble: 49 x 5
-##       id first_name             last_name       city           phone
-##    &lt;int&gt;      &lt;chr&gt;                 &lt;chr&gt;      &lt;chr&gt;           &lt;chr&gt;
-##  1     1  Elbertine            Robertucci California 1-(805)951-9083
-##  2     3      Daria de la Valette Parisot    Florida 1-(352)629-9125
-##  3     4   Sherilyn                  Widd Distric... 1-(202)453-3897
-##  4    10    Abigail                Craigs      Texas 1-(469)653-1340
-##  5    11      Wynne                 Roote    Georgia 1-(404)911-0264
-##  6    12     Pietra                Hynson  Minnesota 1-(651)506-8628
-##  7    13       Bram                 Valde       Iowa 1-(515)637-1353
-##  8    14       Rees           MacAllester   New York 1-(716)187-2661
-##  9    17     Orazio                Boddis  Louisiana 1-(318)313-4592
-## 10    18      Mason             Letterick      Texas 1-(806)351-0113
+##       id first_name last_name             city       phone          
+##    &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;                 &lt;chr&gt;      &lt;chr&gt;          
+##  1     1 Elbertine  Robertucci            California 1-(805)951-9083
+##  2     3 Daria      de la Valette Parisot Florida    1-(352)629-9125
+##  3     4 Sherilyn   Widd                  Distric... 1-(202)453-3897
+##  4    10 Abigail    Craigs                Texas      1-(469)653-1340
+##  5    11 Wynne      Roote                 Georgia    1-(404)911-0264
+##  6    12 Pietra     Hynson                Minnesota  1-(651)506-8628
+##  7    13 Bram       Valde                 Iowa       1-(515)637-1353
+##  8    14 Rees       MacAllester           New York   1-(716)187-2661
+##  9    17 Orazio     Boddis                Louisiana  1-(318)313-4592
+## 10    18 Mason      Letterick             Texas      1-(806)351-0113
 ## # ... with 39 more rows</code></pre>
 </section>
 <section id="section-14" class="slide level2" data-background="fulljoin.png">
 <h2></h2>
 </section>
-<section id="section-15" class="slide level2" data-background="canva_full.png">
+<section id="section-15" class="slide level2" data-background="join_full.png">
 <h2></h2>
 </section>
 <section id="full-join" class="slide level2">
@@ -693,18 +735,30 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <span class="st">  </span><span class="kw">full_join</span>(order)</code></pre></div>
 <pre><code>## Joining, by = &quot;id&quot;</code></pre>
 <pre><code>## # A tibble: 349 x 9
-##       id first_name             last_name       city           phone order_data order_number customer_id  amount
-##    &lt;int&gt;      &lt;chr&gt;                 &lt;chr&gt;      &lt;chr&gt;           &lt;chr&gt;      &lt;chr&gt;        &lt;int&gt;       &lt;int&gt;   &lt;dbl&gt;
-##  1     1  Elbertine            Robertucci California 1-(805)951-9083       &lt;NA&gt;           NA          NA      NA
-##  2     2   Marcella              Kilshall   Colorado 1-(303)642-9320 12/28/2016       543233         374  235.37
-##  3     2   Marcella              Kilshall   Colorado 1-(303)642-9320  8/31/2016       543129         334 1150.40
-##  4     3      Daria de la Valette Parisot    Florida 1-(352)629-9125       &lt;NA&gt;           NA          NA      NA
-##  5     4   Sherilyn                  Widd Distric... 1-(202)453-3897       &lt;NA&gt;           NA          NA      NA
-##  6     5      Ketty               Cridlin      Texas 1-(214)455-2169  1/17/2017       543453         475  346.07
-##  7     6     Jethro            Lubomirski California 1-(510)278-9668  1/27/2017       543274         218 2317.16
-##  8     7   Jeremiah              Carrabot California 1-(559)713-9864  6/21/2016       543423         282  135.53
-##  9     7   Jeremiah              Carrabot California 1-(559)713-9864  2/13/2017       543379         346 1407.32
-## 10     7   Jeremiah              Carrabot California 1-(559)713-9864   7/8/2016       543477         483 1913.79
+##       id first_name last_name             city       phone          
+##    &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;                 &lt;chr&gt;      &lt;chr&gt;          
+##  1     1 Elbertine  Robertucci            California 1-(805)951-9083
+##  2     2 Marcella   Kilshall              Colorado   1-(303)642-9320
+##  3     2 Marcella   Kilshall              Colorado   1-(303)642-9320
+##  4     3 Daria      de la Valette Parisot Florida    1-(352)629-9125
+##  5     4 Sherilyn   Widd                  Distric... 1-(202)453-3897
+##  6     5 Ketty      Cridlin               Texas      1-(214)455-2169
+##  7     6 Jethro     Lubomirski            California 1-(510)278-9668
+##  8     7 Jeremiah   Carrabot              California 1-(559)713-9864
+##  9     7 Jeremiah   Carrabot              California 1-(559)713-9864
+## 10     7 Jeremiah   Carrabot              California 1-(559)713-9864
+##    order_data order_number customer_id amount
+##    &lt;chr&gt;             &lt;int&gt;       &lt;int&gt;  &lt;dbl&gt;
+##  1 &lt;NA&gt;                 NA          NA     NA
+##  2 12/28/2016       543233         374    235
+##  3 8/31/2016        543129         334   1150
+##  4 &lt;NA&gt;                 NA          NA     NA
+##  5 &lt;NA&gt;                 NA          NA     NA
+##  6 1/17/2017        543453         475    346
+##  7 1/27/2017        543274         218   2317
+##  8 6/21/2016        543423         282    136
+##  9 2/13/2017        543379         346   1407
+## 10 7/8/2016         543477         483   1914
 ## # ... with 339 more rows</code></pre>
 </section>
 <section id="section-16" class="slide level2" data-background="thankyou.png">

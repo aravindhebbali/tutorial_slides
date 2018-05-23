@@ -488,11 +488,6 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>Agenda</h2>
 <hr>
 </section>
-<section id="introduction" class="slide level2">
-<h2>Introduction</h2>
-<hr>
-<p>In this module, we will learn to work with date/time data in R using <a href="https://CRAN.R-project.org/package=lubridate">lubridate</a>, an R package that makes it easy to work with dates and time. Let us begin by installing and loading the lubridate pacakge.</p>
-</section>
 <section id="libraries" class="slide level2">
 <h2>Libraries</h2>
 <hr>
@@ -511,9 +506,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>Current Date/Time</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">now</span>()</code></pre></div>
-<pre><code>## [1] &quot;2017-11-08 21:05:05 IST&quot;</code></pre>
+<pre><code>## [1] &quot;2018-05-02 15:25:04 IST&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">today</span>()</code></pre></div>
-<pre><code>## [1] &quot;2017-11-08&quot;</code></pre>
+<pre><code>## [1] &quot;2018-05-02&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">am</span>(<span class="kw">now</span>())  </code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pm</span>(<span class="kw">now</span>())</code></pre></div>
@@ -524,8 +519,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rsquaredacademy/datasets/master/transact.csv'</span>)</code></pre></div>
 <pre><code>## # A tibble: 2,466 x 3
-##       Invoice        Due    Payment
-##        &lt;date&gt;     &lt;date&gt;     &lt;date&gt;
+##    Invoice    Due        Payment   
+##    &lt;date&gt;     &lt;date&gt;     &lt;date&gt;    
 ##  1 2013-01-02 2013-02-01 2013-01-15
 ##  2 2013-01-26 2013-02-25 2013-03-03
 ##  3 2013-07-03 2013-08-02 2013-07-08
@@ -563,6 +558,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <li class="fragment">what is the average duration between invoice date and payment date</li>
 </ul>
 </section>
+<section id="section-1" class="slide level2" data-background="canva_day_week_month.png">
+<h2></h2>
+</section>
 <section id="extract-date-month-year-from-due-date" class="slide level2">
 <h2>Extract Date, Month &amp; Year from Due Date</h2>
 <hr>
@@ -579,76 +577,79 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">due_day =</span> <span class="kw">day</span>(Due),
+    <span class="dt">due_day   =</span> <span class="kw">day</span>(Due),
     <span class="dt">due_month =</span> <span class="kw">month</span>(Due),
-    <span class="dt">due_year =</span> <span class="kw">year</span>(Due)
+    <span class="dt">due_year  =</span> <span class="kw">year</span>(Due)
   )</code></pre></div>
 <pre><code>## # A tibble: 2,466 x 6
-##       Invoice        Due    Payment due_day due_month due_year
-##        &lt;date&gt;     &lt;date&gt;     &lt;date&gt;   &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-##  1 2013-01-02 2013-02-01 2013-01-15       1         2     2013
-##  2 2013-01-26 2013-02-25 2013-03-03      25         2     2013
-##  3 2013-07-03 2013-08-02 2013-07-08       2         8     2013
-##  4 2013-02-10 2013-03-12 2013-03-17      12         3     2013
-##  5 2012-10-25 2012-11-24 2012-11-28      24        11     2012
-##  6 2012-01-27 2012-02-26 2012-02-22      26         2     2012
-##  7 2013-08-13 2013-09-12 2013-09-09      12         9     2013
-##  8 2012-12-16 2013-01-15 2013-01-12      15         1     2013
-##  9 2012-05-14 2012-06-13 2012-07-01      13         6     2012
-## 10 2013-07-01 2013-07-31 2013-07-26      31         7     2013
+##    Invoice    Due        Payment    due_day due_month due_year
+##    &lt;date&gt;     &lt;date&gt;     &lt;date&gt;       &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+##  1 2013-01-02 2013-02-01 2013-01-15       1      2.00     2013
+##  2 2013-01-26 2013-02-25 2013-03-03      25      2.00     2013
+##  3 2013-07-03 2013-08-02 2013-07-08       2      8.00     2013
+##  4 2013-02-10 2013-03-12 2013-03-17      12      3.00     2013
+##  5 2012-10-25 2012-11-24 2012-11-28      24     11.0      2012
+##  6 2012-01-27 2012-02-26 2012-02-22      26      2.00     2012
+##  7 2013-08-13 2013-09-12 2013-09-09      12      9.00     2013
+##  8 2012-12-16 2013-01-15 2013-01-12      15      1.00     2013
+##  9 2012-05-14 2012-06-13 2012-07-01      13      6.00     2012
+## 10 2013-07-01 2013-07-31 2013-07-26      31      7.00     2013
 ## # ... with 2,456 more rows</code></pre>
 </section>
-<section id="compute-days-to-settle-invoice" class="slide level2">
-<h2>compute days to settle invoice</h2>
+<section id="section-2" class="slide level2" data-background="canva_course_duration.png">
+<h2></h2>
+</section>
+<section id="course-duration" class="slide level2">
+<h2>Course Duration</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">course_start &lt;-<span class="st"> </span><span class="kw">as_date</span>(<span class="st">'2017-04-12'</span>)
-course_end &lt;-<span class="st"> </span><span class="kw">as_date</span>(<span class="st">'2017-04-21'</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">course_start    &lt;-<span class="st"> </span><span class="kw">as_date</span>(<span class="st">'2017-04-12'</span>)
+course_end      &lt;-<span class="st"> </span><span class="kw">as_date</span>(<span class="st">'2017-04-21'</span>)
 course_duration &lt;-<span class="st"> </span>course_end <span class="op">-</span><span class="st"> </span>course_start
 course_duration</code></pre></div>
 <pre><code>## Time difference of 9 days</code></pre>
 </section>
-<section id="compute-days-to-settle-invoice-1" class="slide level2">
-<h2>compute days to settle invoice</h2>
+<section id="compute-days-to-settle-invoice" class="slide level2">
+<h2>Compute days to settle invoice</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
     <span class="dt">days_to_pay =</span> Payment <span class="op">-</span><span class="st"> </span>Invoice
   )</code></pre></div>
 <pre><code>## # A tibble: 2,466 x 4
-##       Invoice        Due    Payment days_to_pay
-##        &lt;date&gt;     &lt;date&gt;     &lt;date&gt;      &lt;time&gt;
-##  1 2013-01-02 2013-02-01 2013-01-15     13 days
-##  2 2013-01-26 2013-02-25 2013-03-03     36 days
-##  3 2013-07-03 2013-08-02 2013-07-08      5 days
-##  4 2013-02-10 2013-03-12 2013-03-17     35 days
-##  5 2012-10-25 2012-11-24 2012-11-28     34 days
-##  6 2012-01-27 2012-02-26 2012-02-22     26 days
-##  7 2013-08-13 2013-09-12 2013-09-09     27 days
-##  8 2012-12-16 2013-01-15 2013-01-12     27 days
-##  9 2012-05-14 2012-06-13 2012-07-01     48 days
-## 10 2013-07-01 2013-07-31 2013-07-26     25 days
+##    Invoice    Due        Payment    days_to_pay
+##    &lt;date&gt;     &lt;date&gt;     &lt;date&gt;     &lt;time&gt;     
+##  1 2013-01-02 2013-02-01 2013-01-15 13         
+##  2 2013-01-26 2013-02-25 2013-03-03 36         
+##  3 2013-07-03 2013-08-02 2013-07-08 5          
+##  4 2013-02-10 2013-03-12 2013-03-17 35         
+##  5 2012-10-25 2012-11-24 2012-11-28 34         
+##  6 2012-01-27 2012-02-26 2012-02-22 26         
+##  7 2013-08-13 2013-09-12 2013-09-09 27         
+##  8 2012-12-16 2013-01-15 2013-01-12 27         
+##  9 2012-05-14 2012-06-13 2012-07-01 48         
+## 10 2013-07-01 2013-07-31 2013-07-26 25         
 ## # ... with 2,456 more rows</code></pre>
 </section>
 <section id="compute-days-over-due" class="slide level2">
-<h2>compute days over due</h2>
+<h2>Compute days over due</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
     <span class="dt">delay =</span> Payment <span class="op">-</span><span class="st"> </span>Due
   )</code></pre></div>
 <pre><code>## # A tibble: 2,466 x 4
-##       Invoice        Due    Payment    delay
-##        &lt;date&gt;     &lt;date&gt;     &lt;date&gt;   &lt;time&gt;
-##  1 2013-01-02 2013-02-01 2013-01-15 -17 days
-##  2 2013-01-26 2013-02-25 2013-03-03   6 days
-##  3 2013-07-03 2013-08-02 2013-07-08 -25 days
-##  4 2013-02-10 2013-03-12 2013-03-17   5 days
-##  5 2012-10-25 2012-11-24 2012-11-28   4 days
-##  6 2012-01-27 2012-02-26 2012-02-22  -4 days
-##  7 2013-08-13 2013-09-12 2013-09-09  -3 days
-##  8 2012-12-16 2013-01-15 2013-01-12  -3 days
-##  9 2012-05-14 2012-06-13 2012-07-01  18 days
-## 10 2013-07-01 2013-07-31 2013-07-26  -5 days
+##    Invoice    Due        Payment    delay 
+##    &lt;date&gt;     &lt;date&gt;     &lt;date&gt;     &lt;time&gt;
+##  1 2013-01-02 2013-02-01 2013-01-15 -17   
+##  2 2013-01-26 2013-02-25 2013-03-03 6     
+##  3 2013-07-03 2013-08-02 2013-07-08 -25   
+##  4 2013-02-10 2013-03-12 2013-03-17 5     
+##  5 2012-10-25 2012-11-24 2012-11-28 4     
+##  6 2012-01-27 2012-02-26 2012-02-22 -4    
+##  7 2013-08-13 2013-09-12 2013-09-09 -3    
+##  8 2012-12-16 2013-01-15 2013-01-12 -3    
+##  9 2012-05-14 2012-06-13 2012-07-01 18    
+## 10 2013-07-01 2013-07-31 2013-07-26 -5    
 ## # ... with 2,456 more rows</code></pre>
 </section>
 <section id="is-due-year-a-leap-year" class="slide level2">
@@ -657,21 +658,21 @@ course_duration</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
     <span class="dt">due_year =</span> <span class="kw">year</span>(Due),
-    <span class="dt">is_leap =</span> <span class="kw">leap_year</span>(due_year)
+    <span class="dt">is_leap  =</span> <span class="kw">leap_year</span>(due_year)
   )</code></pre></div>
 <pre><code>## # A tibble: 2,466 x 5
-##       Invoice        Due    Payment due_year is_leap
-##        &lt;date&gt;     &lt;date&gt;     &lt;date&gt;    &lt;dbl&gt;   &lt;lgl&gt;
-##  1 2013-01-02 2013-02-01 2013-01-15     2013   FALSE
-##  2 2013-01-26 2013-02-25 2013-03-03     2013   FALSE
-##  3 2013-07-03 2013-08-02 2013-07-08     2013   FALSE
-##  4 2013-02-10 2013-03-12 2013-03-17     2013   FALSE
-##  5 2012-10-25 2012-11-24 2012-11-28     2012    TRUE
-##  6 2012-01-27 2012-02-26 2012-02-22     2012    TRUE
-##  7 2013-08-13 2013-09-12 2013-09-09     2013   FALSE
-##  8 2012-12-16 2013-01-15 2013-01-12     2013   FALSE
-##  9 2012-05-14 2012-06-13 2012-07-01     2012    TRUE
-## 10 2013-07-01 2013-07-31 2013-07-26     2013   FALSE
+##    Invoice    Due        Payment    due_year is_leap
+##    &lt;date&gt;     &lt;date&gt;     &lt;date&gt;        &lt;dbl&gt; &lt;lgl&gt;  
+##  1 2013-01-02 2013-02-01 2013-01-15     2013 F      
+##  2 2013-01-26 2013-02-25 2013-03-03     2013 F      
+##  3 2013-07-03 2013-08-02 2013-07-08     2013 F      
+##  4 2013-02-10 2013-03-12 2013-03-17     2013 F      
+##  5 2012-10-25 2012-11-24 2012-11-28     2012 T      
+##  6 2012-01-27 2012-02-26 2012-02-22     2012 T      
+##  7 2013-08-13 2013-09-12 2013-09-09     2013 F      
+##  8 2012-12-16 2013-01-15 2013-01-12     2013 F      
+##  9 2012-05-14 2012-06-13 2012-07-01     2012 T      
+## 10 2013-07-01 2013-07-31 2013-07-26     2013 F      
 ## # ... with 2,456 more rows</code></pre>
 </section>
 <section id="if-due-day-is-february-29-is-it-a-leap-year" class="slide level2">
@@ -679,23 +680,27 @@ course_duration</code></pre></div>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
-    <span class="dt">due_day =</span> <span class="kw">day</span>(Due),
+    <span class="dt">due_day   =</span> <span class="kw">day</span>(Due),
     <span class="dt">due_month =</span> <span class="kw">month</span>(Due),
-    <span class="dt">due_year =</span> <span class="kw">year</span>(Due),
-    <span class="dt">is_leap =</span> <span class="kw">leap_year</span>(due_year)
+    <span class="dt">due_year  =</span> <span class="kw">year</span>(Due),
+    <span class="dt">is_leap   =</span> <span class="kw">leap_year</span>(due_year)
   ) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>(Invoice), <span class="op">-</span>(Payment)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(due_month <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>due_day <span class="op">==</span><span class="st"> </span><span class="dv">29</span>)</code></pre></div>
 <pre><code>## # A tibble: 4 x 5
-##          Due due_day due_month due_year is_leap
-##       &lt;date&gt;   &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;lgl&gt;
-## 1 2012-02-29      29         2     2012    TRUE
-## 2 2012-02-29      29         2     2012    TRUE
-## 3 2012-02-29      29         2     2012    TRUE
-## 4 2012-02-29      29         2     2012    TRUE</code></pre>
+##   Due        due_day due_month due_year is_leap
+##   &lt;date&gt;       &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;lgl&gt;  
+## 1 2012-02-29      29      2.00     2012 T      
+## 2 2012-02-29      29      2.00     2012 T      
+## 3 2012-02-29      29      2.00     2012 T      
+## 4 2012-02-29      29      2.00     2012 T</code></pre>
+</section>
+<section id="section-3" class="slide level2" data-background="canva_shift_dates.png">
+<h2></h2>
 </section>
 <section id="shift-date" class="slide level2">
 <h2>Shift Date</h2>
+<hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">course_start <span class="op">+</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">2</span>)</code></pre></div>
 <pre><code>## [1] &quot;2017-04-14&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">course_start <span class="op">+</span><span class="st"> </span><span class="kw">weeks</span>(<span class="dv">1</span>)</code></pre></div>
@@ -703,14 +708,21 @@ course_duration</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">course_start <span class="op">+</span><span class="st"> </span><span class="kw">years</span>(<span class="dv">1</span>)</code></pre></div>
 <pre><code>## [1] &quot;2018-04-12&quot;</code></pre>
 </section>
+<section id="section-4" class="slide level2" data-background="canva_course_interval.png">
+<h2></h2>
+</section>
 <section id="interval" class="slide level2">
 <h2>Interval</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">interval</span>(course_start, course_end)</code></pre></div>
 <pre><code>## [1] 2017-04-12 UTC--2017-04-21 UTC</code></pre>
 </section>
+<section id="section-5" class="slide level2" data-background="canva_shift_interval.png">
+<h2></h2>
+</section>
 <section id="shift-interval" class="slide level2">
 <h2>Shift Interval</h2>
+<hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">course_interval &lt;-<span class="st"> </span><span class="kw">interval</span>(course_start, course_end)
 course_interval <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">int_shift</span>(<span class="dt">by =</span> <span class="kw">days</span>(<span class="dv">1</span>))</code></pre></div>
@@ -722,38 +734,42 @@ course_interval <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">int_shift</span>(<span class="dt">by =</span> <span class="kw">years</span>(<span class="dv">1</span>))</code></pre></div>
 <pre><code>## [1] 2018-04-12 UTC--2018-04-21 UTC</code></pre>
 </section>
+<section id="section-6" class="slide level2" data-background="canva_interval_overlap.png">
+<h2></h2>
+</section>
 <section id="intervals-overlap" class="slide level2">
 <h2>Intervals Overlap</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vacation_start &lt;-<span class="st"> </span><span class="kw">as_date</span>(<span class="st">'2017-04-19'</span>)
-vacation_end &lt;-<span class="st"> </span><span class="kw">as_date</span>(<span class="st">'2017-04-25'</span>)
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vacation_start    &lt;-<span class="st"> </span><span class="kw">as_date</span>(<span class="st">'2017-04-19'</span>)
+vacation_end      &lt;-<span class="st"> </span><span class="kw">as_date</span>(<span class="st">'2017-04-25'</span>)
 vacation_interval &lt;-<span class="st"> </span><span class="kw">interval</span>(vacation_start, vacation_end)
 <span class="kw">int_overlaps</span>(course_interval, vacation_interval)</code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 </section>
 <section id="how-many-invoices-were-settled-within-due-date" class="slide level2">
-<h2>how many invoices were settled within due date?</h2>
+<h2>How many invoices were settled within due date?</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
     <span class="dt">inv_due_interval =</span> <span class="kw">interval</span>(Invoice, Due),
-    <span class="dt">due_next =</span> Due <span class="op">+</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">1</span>),
+    <span class="dt">due_next         =</span> Due <span class="op">+</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">1</span>),
     <span class="dt">due_pay_interval =</span> <span class="kw">interval</span>(due_next, Payment),
-    <span class="dt">overlaps =</span> <span class="kw">int_overlaps</span>(inv_due_interval, due_pay_interval)
+    <span class="dt">overlaps         =</span> <span class="kw">int_overlaps</span>(inv_due_interval, due_pay_interval)
   ) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(Invoice, Due, Payment, overlaps)</code></pre></div>
 <pre><code>## # A tibble: 2,466 x 4
-##       Invoice        Due    Payment overlaps
-##        &lt;date&gt;     &lt;date&gt;     &lt;date&gt;    &lt;lgl&gt;
-##  1 2013-01-02 2013-02-01 2013-01-15     TRUE
-##  2 2013-01-26 2013-02-25 2013-03-03    FALSE
-##  3 2013-07-03 2013-08-02 2013-07-08     TRUE
-##  4 2013-02-10 2013-03-12 2013-03-17    FALSE
-##  5 2012-10-25 2012-11-24 2012-11-28    FALSE
-##  6 2012-01-27 2012-02-26 2012-02-22     TRUE
-##  7 2013-08-13 2013-09-12 2013-09-09     TRUE
-##  8 2012-12-16 2013-01-15 2013-01-12     TRUE
-##  9 2012-05-14 2012-06-13 2012-07-01    FALSE
-## 10 2013-07-01 2013-07-31 2013-07-26     TRUE
+##    Invoice    Due        Payment    overlaps
+##    &lt;date&gt;     &lt;date&gt;     &lt;date&gt;     &lt;lgl&gt;   
+##  1 2013-01-02 2013-02-01 2013-01-15 T       
+##  2 2013-01-26 2013-02-25 2013-03-03 F       
+##  3 2013-07-03 2013-08-02 2013-07-08 T       
+##  4 2013-02-10 2013-03-12 2013-03-17 F       
+##  5 2012-10-25 2012-11-24 2012-11-28 F       
+##  6 2012-01-27 2012-02-26 2012-02-22 T       
+##  7 2013-08-13 2013-09-12 2013-09-09 T       
+##  8 2012-12-16 2013-01-15 2013-01-12 T       
+##  9 2012-05-14 2012-06-13 2012-07-01 F       
+## 10 2013-07-01 2013-07-31 2013-07-26 T       
 ## # ... with 2,456 more rows</code></pre>
 </section>
 <section id="how-many-invoices-were-settled-within-due-date-1" class="slide level2">
@@ -764,27 +780,31 @@ transact <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
     <span class="dt">inv_due_interval =</span> <span class="kw">interval</span>(Invoice, Due),
     <span class="dt">due_pay_interval =</span> <span class="kw">interval</span>(Due, Payment),  
-    <span class="dt">due_pay_next =</span> <span class="kw">int_shift</span>(due_pay_interval, <span class="dt">by =</span> <span class="kw">days</span>(<span class="dv">1</span>)),
-    <span class="dt">overlaps =</span> <span class="kw">int_overlaps</span>(inv_due_interval, due_pay_next)
+    <span class="dt">due_pay_next     =</span> <span class="kw">int_shift</span>(due_pay_interval, <span class="dt">by =</span> <span class="kw">days</span>(<span class="dv">1</span>)),
+    <span class="dt">overlaps         =</span> <span class="kw">int_overlaps</span>(inv_due_interval, due_pay_next)
   ) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(Invoice, Due, Payment, overlaps)</code></pre></div>
 <pre><code>## # A tibble: 2,466 x 4
-##       Invoice        Due    Payment overlaps
-##        &lt;date&gt;     &lt;date&gt;     &lt;date&gt;    &lt;lgl&gt;
-##  1 2013-01-02 2013-02-01 2013-01-15     TRUE
-##  2 2013-01-26 2013-02-25 2013-03-03    FALSE
-##  3 2013-07-03 2013-08-02 2013-07-08     TRUE
-##  4 2013-02-10 2013-03-12 2013-03-17    FALSE
-##  5 2012-10-25 2012-11-24 2012-11-28    FALSE
-##  6 2012-01-27 2012-02-26 2012-02-22     TRUE
-##  7 2013-08-13 2013-09-12 2013-09-09     TRUE
-##  8 2012-12-16 2013-01-15 2013-01-12     TRUE
-##  9 2012-05-14 2012-06-13 2012-07-01    FALSE
-## 10 2013-07-01 2013-07-31 2013-07-26     TRUE
+##    Invoice    Due        Payment    overlaps
+##    &lt;date&gt;     &lt;date&gt;     &lt;date&gt;     &lt;lgl&gt;   
+##  1 2013-01-02 2013-02-01 2013-01-15 T       
+##  2 2013-01-26 2013-02-25 2013-03-03 F       
+##  3 2013-07-03 2013-08-02 2013-07-08 T       
+##  4 2013-02-10 2013-03-12 2013-03-17 F       
+##  5 2012-10-25 2012-11-24 2012-11-28 F       
+##  6 2012-01-27 2012-02-26 2012-02-22 T       
+##  7 2013-08-13 2013-09-12 2013-09-09 T       
+##  8 2012-12-16 2013-01-15 2013-01-12 T       
+##  9 2012-05-14 2012-06-13 2012-07-01 F       
+## 10 2013-07-01 2013-07-31 2013-07-26 T       
 ## # ... with 2,456 more rows</code></pre>
+</section>
+<section id="section-7" class="slide level2" data-background="canva_within.png">
+<h2></h2>
 </section>
 <section id="within" class="slide level2">
 <h2>Within</h2>
+<hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">conference &lt;-<span class="st"> </span><span class="kw">as_date</span>(<span class="st">'2017-04-15'</span>)
 conference <span class="op">%within%</span><span class="st"> </span><span class="kw">interval</span>(course_start, course_end)</code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
@@ -799,19 +819,22 @@ conference <span class="op">%within%</span><span class="st"> </span><span class=
   ) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(Due, Payment, overlaps)</code></pre></div>
 <pre><code>## # A tibble: 2,466 x 3
-##           Due    Payment overlaps
-##        &lt;date&gt;     &lt;date&gt;    &lt;lgl&gt;
-##  1 2013-02-01 2013-01-15     TRUE
-##  2 2013-02-25 2013-03-03    FALSE
-##  3 2013-08-02 2013-07-08     TRUE
-##  4 2013-03-12 2013-03-17    FALSE
-##  5 2012-11-24 2012-11-28    FALSE
-##  6 2012-02-26 2012-02-22     TRUE
-##  7 2013-09-12 2013-09-09     TRUE
-##  8 2013-01-15 2013-01-12     TRUE
-##  9 2012-06-13 2012-07-01    FALSE
-## 10 2013-07-31 2013-07-26     TRUE
+##    Due        Payment    overlaps
+##    &lt;date&gt;     &lt;date&gt;     &lt;lgl&gt;   
+##  1 2013-02-01 2013-01-15 T       
+##  2 2013-02-25 2013-03-03 F       
+##  3 2013-08-02 2013-07-08 T       
+##  4 2013-03-12 2013-03-17 F       
+##  5 2012-11-24 2012-11-28 F       
+##  6 2012-02-26 2012-02-22 T       
+##  7 2013-09-12 2013-09-09 T       
+##  8 2013-01-15 2013-01-12 T       
+##  9 2012-06-13 2012-07-01 F       
+## 10 2013-07-31 2013-07-26 T       
 ## # ... with 2,456 more rows</code></pre>
+</section>
+<section id="section-8" class="slide level2" data-background="canva_quarter_semester.png">
+<h2></h2>
 </section>
 <section id="quarter" class="slide level2">
 <h2>Quarter</h2>
@@ -833,8 +856,8 @@ conference <span class="op">%within%</span><span class="st"> </span><span class=
     <span class="dt">Quarter =</span> <span class="kw">quarter</span>(Due)
   )</code></pre></div>
 <pre><code>## # A tibble: 2,466 x 4
-##       Invoice        Due    Payment Quarter
-##        &lt;date&gt;     &lt;date&gt;     &lt;date&gt;   &lt;int&gt;
+##    Invoice    Due        Payment    Quarter
+##    &lt;date&gt;     &lt;date&gt;     &lt;date&gt;       &lt;int&gt;
 ##  1 2013-01-02 2013-02-01 2013-01-15       1
 ##  2 2013-01-26 2013-02-25 2013-03-03       1
 ##  3 2013-07-03 2013-08-02 2013-07-08       3
@@ -855,18 +878,18 @@ conference <span class="op">%within%</span><span class="st"> </span><span class=
     <span class="dt">Quarter =</span> <span class="kw">quarter</span>(Due, <span class="dt">with_year =</span> <span class="ot">TRUE</span>)
   )</code></pre></div>
 <pre><code>## # A tibble: 2,466 x 4
-##       Invoice        Due    Payment Quarter
-##        &lt;date&gt;     &lt;date&gt;     &lt;date&gt;   &lt;dbl&gt;
-##  1 2013-01-02 2013-02-01 2013-01-15  2013.1
-##  2 2013-01-26 2013-02-25 2013-03-03  2013.1
-##  3 2013-07-03 2013-08-02 2013-07-08  2013.3
-##  4 2013-02-10 2013-03-12 2013-03-17  2013.1
-##  5 2012-10-25 2012-11-24 2012-11-28  2012.4
-##  6 2012-01-27 2012-02-26 2012-02-22  2012.1
-##  7 2013-08-13 2013-09-12 2013-09-09  2013.3
-##  8 2012-12-16 2013-01-15 2013-01-12  2013.1
-##  9 2012-05-14 2012-06-13 2012-07-01  2012.2
-## 10 2013-07-01 2013-07-31 2013-07-26  2013.3
+##    Invoice    Due        Payment    Quarter
+##    &lt;date&gt;     &lt;date&gt;     &lt;date&gt;       &lt;dbl&gt;
+##  1 2013-01-02 2013-02-01 2013-01-15    2013
+##  2 2013-01-26 2013-02-25 2013-03-03    2013
+##  3 2013-07-03 2013-08-02 2013-07-08    2013
+##  4 2013-02-10 2013-03-12 2013-03-17    2013
+##  5 2012-10-25 2012-11-24 2012-11-28    2012
+##  6 2012-01-27 2012-02-26 2012-02-22    2012
+##  7 2013-08-13 2013-09-12 2013-09-09    2013
+##  8 2012-12-16 2013-01-15 2013-01-12    2013
+##  9 2012-05-14 2012-06-13 2012-07-01    2012
+## 10 2013-07-01 2013-07-31 2013-07-26    2013
 ## # ... with 2,456 more rows</code></pre>
 </section>
 <section id="duration" class="slide level2">
@@ -876,6 +899,9 @@ conference <span class="op">%within%</span><span class="st"> </span><span class=
 <span class="st">  </span><span class="kw">as.numeric</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">duration</span>(<span class="dt">units =</span> <span class="st">'days'</span>)</code></pre></div>
 <pre><code>## [1] &quot;777600s (~1.29 weeks)&quot;</code></pre>
+</section>
+<section id="section-9" class="slide level2" data-background="canva_convert.png">
+<h2></h2>
 </section>
 <section id="case-study-2" class="slide level2">
 <h2>Case Study</h2>
@@ -891,6 +917,9 @@ conference <span class="op">%within%</span><span class="st"> </span><span class=
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">interval</span>(course_start, course_end) <span class="op">/</span><span class="st"> </span><span class="kw">dyears</span>()</code></pre></div>
 <pre><code>## [1] 0.02465753</code></pre>
 </section>
+<section id="section-10" class="slide level2" data-background="canva_time_length.png">
+<h2></h2>
+</section>
 <section id="case-study-3" class="slide level2">
 <h2>Case Study</h2>
 <hr>
@@ -903,6 +932,9 @@ conference <span class="op">%within%</span><span class="st"> </span><span class=
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">interval</span>(course_start, course_end) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">time_length</span>(<span class="dt">unit =</span> <span class="st">&quot;hours&quot;</span>)</code></pre></div>
 <pre><code>## [1] 216</code></pre>
+</section>
+<section id="section-11" class="slide level2" data-background="canva_as_period.png">
+<h2></h2>
 </section>
 <section id="case-study-4" class="slide level2">
 <h2>Case Study</h2>
@@ -917,7 +949,7 @@ conference <span class="op">%within%</span><span class="st"> </span><span class=
 <span class="st">  </span><span class="kw">as.period</span>(<span class="dt">unit =</span> <span class="st">&quot;hours&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;216H 0M 0S&quot;</code></pre>
 </section>
-<section id="section-1" class="slide level2" data-background="thankyou.png">
+<section id="section-12" class="slide level2" data-background="thankyou.png">
 <h2></h2>
 <!-- To do: -->
 <!--   - add agenda -->

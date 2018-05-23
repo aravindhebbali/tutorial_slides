@@ -23,15 +23,11 @@ Read data from
 ```{r importlib1,eval=FALSE}
 library(readxl)
 library(haven)
-library(foreign)
-library(sas7bdat)
 ```
 
 ```{r importlib2, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
 library(readxl)
 library(haven)
-library(foreign)
-library(sas7bdat)
 ```
 
 ## Overview
@@ -40,12 +36,9 @@ library(sas7bdat)
 
 - list sheets in an excel file
 - read data from an excel sheet
-- read specific cells from an excel sheet
-- read a single row
-- read a single column
-- read several rows
-- read several columns
-
+- read specific cells
+- read specific rows
+- read specific columns
 
 ## List Sheets
 
@@ -60,32 +53,40 @@ excel_sheets('sample.xls')
 <hr>
 
 ```{r import56, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample.xls', sheet = 1)
+read_excel('sample.xls', sheet = 1)
 ```
+
+## {data-background="readxl_range_canva.png"}
 
 ## Read Specific Cells
 
 <hr>
 
 ```{r import58, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample.xls', sheet = 1, range = "B1:C4")
+read_excel('sample.xls', sheet = 1, range = "B1:C4")
 ```
 
-## Read Specific Cells
-
-<hr>
-
-```{r import59, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample.xls', sheet = 1, range = "A1:C5")
-```
+## {data-background="readxl_anchored_canva.png"}
 
 ## Read Specific Cells
 
 <hr>
 
 ```{r import61, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample.xls', sheet = 1, col_names = FALSE,
+read_excel('sample.xls', sheet = 1, col_names = FALSE,
   range = anchored("A4", dim = c(3, 2)))
+```
+
+
+## {data-background="readxl_celllimits_canva.png"}
+
+## Read Specific Cells
+
+<hr>
+
+```{r import65a, echo=TRUE, results='markup', message=FALSE}
+read_excel('sample.xls', sheet = 1,
+  range = cell_limits(c(1, 1), c(6, 4)))
 ```
 
 ## Read Specific Cells
@@ -93,27 +94,17 @@ readxl::read_excel('sample.xls', sheet = 1, col_names = FALSE,
 <hr>
 
 ```{r import65, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample.xls', sheet = 1,
+read_excel('sample.xls', sheet = 1,
   range = cell_limits(c(1, 2), c(NA, NA)))
 ```
-
-Use cell_limits to specify one end of the rectangle such as top left or top right.
 
 ## Read Specific Cells
 
 <hr>
 
 ```{r import66, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample.xls', sheet = 1,
+read_excel('sample.xls', sheet = 1,
   range = cell_limits(c(1, NA), c(NA, 2)))
-```
-
-## Read Single Row
-
-<hr>
-
-```{r import60, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample.xls', sheet = 1, range = "A1:C4")
 ```
 
 ## Read Single Column
@@ -121,25 +112,27 @@ readxl::read_excel('sample.xls', sheet = 1, range = "A1:C4")
 <hr>
 
 ```{r import64, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample.xls', sheet = 1, range = cell_cols(2))
+read_excel('sample.xls', sheet = 1, range = cell_cols(2))
 ```
 
 
-## Specify Rows
+## Read Specific Rows
 
 <hr>
 
 ```{r import62, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample.xls', sheet = 1, range = cell_rows(1:4))
+read_excel('sample.xls', sheet = 1, range = cell_rows(1:4))
 ```
 
-## Specify Columns
+## Read Specific Columns
 
 <hr>
 
 ```{r import63, echo=TRUE, results='markup', message=FALSE}
-readxl::read_excel('sample.xls', sheet = 1, range = cell_cols(2:3))
+read_excel('sample.xls', sheet = 1, range = cell_cols(2:3))
 ```
+
+## {data-background="range_summary_canva.png"}
 
 
 ## Statistical Softwares
@@ -150,95 +143,21 @@ readxl::read_excel('sample.xls', sheet = 1, range = cell_cols(2:3))
 - SPSS
 - STATA
 
-## haven
-
-<hr>
-
-- `read_dta()`
-- `read_stata()`
-- `read_sav()`
-- `read_spss()`
-- `read_sas()`
-
-
-## Other Libraries
-
-<hr>
-
-- SAS: sas7bdat (last updated in 2014; version 0.5)
-- STATA, SPSS: foreign (maintained; version 0.8)
-
-## stata
-
-<hr>
-
-- `read_dta()`
-- `read_stata()`
-- `read.dta()`
-
-## stata
-
-<hr>
-
-```{r import67, echo=TRUE, results='markup', message=FALSE}
-haven::read_dta('airline.dta')    
-```
-
-## stata
+## STATA
 
 <hr>
 
 ```{r import68, echo=TRUE, results='markup', message=FALSE}
-haven::read_stata('airline.dta')  
+read_stata('airline.dta')  
 ```
 
-## stata
-
-<hr>
-
-```{r import69}
-foreign::read.dta('airline.dta')  
-```
-
-## spss
-
-<hr>
-
-- `read_sav()`
-- `read_spss()`
-- `read.spss()`
-
-## spss
-
-<hr>
-
-```{r import70, echo=TRUE, results='markup', message=FALSE}
-read_sav('employee.sav')   
-```
-
-## spss
+## SPSS
 
 <hr>
 
 ```{r import71, echo=TRUE, results='markup', message=FALSE}
 read_spss('employee.sav')  
 ```
-
-## spss
-
-<hr>
-
-```{r import72}
-foreign::read.spss('employee.sav', use.value.labels = FALSE,
-                   to.data.frame = TRUE)
-```
-
-## SAS
-
-<hr>
-
-- `read_sas()`
-- `read.sas7bdat()`
 
 ## SAS
 
@@ -248,15 +167,7 @@ foreign::read.spss('employee.sav', use.value.labels = FALSE,
 read_sas('airline.sas7bdat')
 ```
 
-## SAS
-
-<hr>
-
-```{r import74}
-sas7bdat::read.sas7bdat('airline.sas7bdat')
-```
-
-## {data-background="haven_summary.png"}
+## {data-background="readxl_functions_summary_canva.png"}
 
 ## {data-background="thankyou.png"}
 

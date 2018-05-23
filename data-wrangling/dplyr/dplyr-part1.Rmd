@@ -43,6 +43,7 @@ library(readr)
 
 ```{r libs, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
 library(dplyr)
+library(readr)
 ```
 
 ## dplyr Verbs

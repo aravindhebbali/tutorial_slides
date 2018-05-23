@@ -500,9 +500,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>Libraries</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readxl)
-<span class="kw">library</span>(haven)
-<span class="kw">library</span>(foreign)
-<span class="kw">library</span>(sas7bdat)</code></pre></div>
+<span class="kw">library</span>(haven)</code></pre></div>
 </section>
 <section id="overview" class="slide level2">
 <h2>Overview</h2>
@@ -510,11 +508,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <ul>
 <li class="fragment">list sheets in an excel file</li>
 <li class="fragment">read data from an excel sheet</li>
-<li class="fragment">read specific cells from an excel sheet</li>
-<li class="fragment">read a single row</li>
-<li class="fragment">read a single column</li>
-<li class="fragment">read several rows</li>
-<li class="fragment">read several columns</li>
+<li class="fragment">read specific cells</li>
+<li class="fragment">read specific rows</li>
+<li class="fragment">read specific columns</li>
 </ul>
 </section>
 <section id="list-sheets" class="slide level2">
@@ -526,22 +522,25 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="read-sheet" class="slide level2">
 <h2>Read Sheet</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_excel</span>(<span class="st">'sample.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>)</code></pre></div>
 <pre><code>## # A tibble: 7 x 5
-##          channel users new_users sessions bounce_rate
-##            &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;       &lt;chr&gt;
-## 1 Organic Search 43296     40238    50810      48.72%
-## 2         Direct 12916     12311    16419      49.27%
-## 3       Referral 10983      7636    18105      22.26%
-## 4         Social 10346     10029    11101      61.92%
-## 5        Display  5564      4790     7220      83.30%
-## 6    Paid Search  2687      2205     3438      38.02%
-## 7     Affiliates  1773      1585     2167      55.75%</code></pre>
+##   channel        users new_users sessions bounce_rate
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;      
+## 1 Organic Search 43296     40238    50810 48.72%     
+## 2 Direct         12916     12311    16419 49.27%     
+## 3 Referral       10983      7636    18105 22.26%     
+## 4 Social         10346     10029    11101 61.92%     
+## 5 Display         5564      4790     7220 83.30%     
+## 6 Paid Search     2687      2205     3438 38.02%     
+## 7 Affiliates      1773      1585     2167 55.75%</code></pre>
+</section>
+<section id="section-1" class="slide level2" data-background="readxl_range_canva.png">
+<h2></h2>
 </section>
 <section id="read-specific-cells" class="slide level2">
 <h2>Read Specific Cells</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">range =</span> <span class="st">&quot;B1:C4&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_excel</span>(<span class="st">'sample.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">range =</span> <span class="st">&quot;B1:C4&quot;</span>)</code></pre></div>
 <pre><code>## # A tibble: 3 x 2
 ##   users new_users
 ##   &lt;dbl&gt;     &lt;dbl&gt;
@@ -549,78 +548,74 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 2 12916     12311
 ## 3 10983      7636</code></pre>
 </section>
+<section id="section-2" class="slide level2" data-background="readxl_anchored_canva.png">
+<h2></h2>
+</section>
 <section id="read-specific-cells-1" class="slide level2">
 <h2>Read Specific Cells</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">range =</span> <span class="st">&quot;A1:C5&quot;</span>)</code></pre></div>
-<pre><code>## # A tibble: 4 x 3
-##          channel users new_users
-##            &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt;
-## 1 Organic Search 43296     40238
-## 2         Direct 12916     12311
-## 3       Referral 10983      7636
-## 4         Social 10346     10029</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_excel</span>(<span class="st">'sample.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">col_names =</span> <span class="ot">FALSE</span>,
+  <span class="dt">range =</span> <span class="kw">anchored</span>(<span class="st">&quot;A4&quot;</span>, <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">2</span>)))</code></pre></div>
+<pre><code>## # A tibble: 3 x 2
+##   X__1      X__2
+##   &lt;chr&gt;    &lt;dbl&gt;
+## 1 Referral 10983
+## 2 Social   10346
+## 3 Display   5564</code></pre>
+</section>
+<section id="section-3" class="slide level2" data-background="readxl_celllimits_canva.png">
+<h2></h2>
 </section>
 <section id="read-specific-cells-2" class="slide level2">
 <h2>Read Specific Cells</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">col_names =</span> <span class="ot">FALSE</span>,
-  <span class="dt">range =</span> <span class="kw">anchored</span>(<span class="st">&quot;A4&quot;</span>, <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">2</span>)))</code></pre></div>
-<pre><code>## # A tibble: 3 x 2
-##       X__1  X__2
-##      &lt;chr&gt; &lt;dbl&gt;
-## 1 Referral 10983
-## 2   Social 10346
-## 3  Display  5564</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_excel</span>(<span class="st">'sample.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>,
+  <span class="dt">range =</span> <span class="kw">cell_limits</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="kw">c</span>(<span class="dv">6</span>, <span class="dv">4</span>)))</code></pre></div>
+<pre><code>## # A tibble: 5 x 4
+##   channel        users new_users sessions
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 Organic Search 43296     40238    50810
+## 2 Direct         12916     12311    16419
+## 3 Referral       10983      7636    18105
+## 4 Social         10346     10029    11101
+## 5 Display         5564      4790     7220</code></pre>
 </section>
 <section id="read-specific-cells-3" class="slide level2">
 <h2>Read Specific Cells</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_excel</span>(<span class="st">'sample.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>,
   <span class="dt">range =</span> <span class="kw">cell_limits</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="kw">c</span>(<span class="ot">NA</span>, <span class="ot">NA</span>)))</code></pre></div>
 <pre><code>## # A tibble: 7 x 4
 ##   users new_users sessions bounce_rate
-##   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;       &lt;chr&gt;
-## 1 43296     40238    50810      48.72%
-## 2 12916     12311    16419      49.27%
-## 3 10983      7636    18105      22.26%
-## 4 10346     10029    11101      61.92%
-## 5  5564      4790     7220      83.30%
-## 6  2687      2205     3438      38.02%
-## 7  1773      1585     2167      55.75%</code></pre>
-<p>Use cell_limits to specify one end of the rectangle such as top left or top right.</p>
+##   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;      
+## 1 43296     40238    50810 48.72%     
+## 2 12916     12311    16419 49.27%     
+## 3 10983      7636    18105 22.26%     
+## 4 10346     10029    11101 61.92%     
+## 5  5564      4790     7220 83.30%     
+## 6  2687      2205     3438 38.02%     
+## 7  1773      1585     2167 55.75%</code></pre>
 </section>
 <section id="read-specific-cells-4" class="slide level2">
 <h2>Read Specific Cells</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_excel</span>(<span class="st">'sample.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>,
   <span class="dt">range =</span> <span class="kw">cell_limits</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="ot">NA</span>), <span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">2</span>)))</code></pre></div>
 <pre><code>## # A tibble: 7 x 2
-##          channel users
-##            &lt;chr&gt; &lt;dbl&gt;
+##   channel        users
+##   &lt;chr&gt;          &lt;dbl&gt;
 ## 1 Organic Search 43296
-## 2         Direct 12916
-## 3       Referral 10983
-## 4         Social 10346
-## 5        Display  5564
-## 6    Paid Search  2687
-## 7     Affiliates  1773</code></pre>
-</section>
-<section id="read-single-row" class="slide level2">
-<h2>Read Single Row</h2>
-<hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">range =</span> <span class="st">&quot;A1:C4&quot;</span>)</code></pre></div>
-<pre><code>## # A tibble: 3 x 3
-##          channel users new_users
-##            &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt;
-## 1 Organic Search 43296     40238
-## 2         Direct 12916     12311
-## 3       Referral 10983      7636</code></pre>
+## 2 Direct         12916
+## 3 Referral       10983
+## 4 Social         10346
+## 5 Display         5564
+## 6 Paid Search     2687
+## 7 Affiliates      1773</code></pre>
 </section>
 <section id="read-single-column" class="slide level2">
 <h2>Read Single Column</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">range =</span> <span class="kw">cell_cols</span>(<span class="dv">2</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_excel</span>(<span class="st">'sample.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">range =</span> <span class="kw">cell_cols</span>(<span class="dv">2</span>))</code></pre></div>
 <pre><code>## # A tibble: 7 x 1
 ##   users
 ##   &lt;dbl&gt;
@@ -632,21 +627,21 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 6  2687
 ## 7  1773</code></pre>
 </section>
-<section id="specify-rows" class="slide level2">
-<h2>Specify Rows</h2>
+<section id="read-specific-rows" class="slide level2">
+<h2>Read Specific Rows</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">range =</span> <span class="kw">cell_rows</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_excel</span>(<span class="st">'sample.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">range =</span> <span class="kw">cell_rows</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>))</code></pre></div>
 <pre><code>## # A tibble: 3 x 5
-##          channel users new_users sessions bounce_rate
-##            &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;       &lt;chr&gt;
-## 1 Organic Search 43296     40238    50810      48.72%
-## 2         Direct 12916     12311    16419      49.27%
-## 3       Referral 10983      7636    18105      22.26%</code></pre>
+##   channel        users new_users sessions bounce_rate
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;      
+## 1 Organic Search 43296     40238    50810 48.72%     
+## 2 Direct         12916     12311    16419 49.27%     
+## 3 Referral       10983      7636    18105 22.26%</code></pre>
 </section>
-<section id="specify-columns" class="slide level2">
-<h2>Specify Columns</h2>
+<section id="read-specific-columns" class="slide level2">
+<h2>Read Specific Columns</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">'sample.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">range =</span> <span class="kw">cell_cols</span>(<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_excel</span>(<span class="st">'sample.xls'</span>, <span class="dt">sheet =</span> <span class="dv">1</span>, <span class="dt">range =</span> <span class="kw">cell_cols</span>(<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>))</code></pre></div>
 <pre><code>## # A tibble: 7 x 2
 ##   users new_users
 ##   &lt;dbl&gt;     &lt;dbl&gt;
@@ -658,6 +653,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 6  2687      2205
 ## 7  1773      1585</code></pre>
 </section>
+<section id="section-4" class="slide level2" data-background="range_summary_canva.png">
+<h2></h2>
+</section>
 <section id="statistical-softwares" class="slide level2">
 <h2>Statistical Softwares</h2>
 <hr>
@@ -667,710 +665,67 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <li class="fragment">STATA</li>
 </ul>
 </section>
-<section id="haven" class="slide level2">
-<h2>haven</h2>
-<hr>
-<ul>
-<li class="fragment"><code>read_dta()</code></li>
-<li class="fragment"><code>read_stata()</code></li>
-<li class="fragment"><code>read_sav()</code></li>
-<li class="fragment"><code>read_spss()</code></li>
-<li class="fragment"><code>read_sas()</code></li>
-</ul>
-</section>
-<section id="other-libraries" class="slide level2">
-<h2>Other Libraries</h2>
-<hr>
-<ul>
-<li class="fragment">SAS: sas7bdat (last updated in 2014; version 0.5)</li>
-<li class="fragment">STATA, SPSS: foreign (maintained; version 0.8)</li>
-</ul>
-</section>
 <section id="stata" class="slide level2">
-<h2>stata</h2>
+<h2>STATA</h2>
 <hr>
-<ul>
-<li class="fragment"><code>read_dta()</code></li>
-<li class="fragment"><code>read_stata()</code></li>
-<li class="fragment"><code>read.dta()</code></li>
-</ul>
-</section>
-<section id="stata-1" class="slide level2">
-<h2>stata</h2>
-<hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">haven<span class="op">::</span><span class="kw">read_dta</span>(<span class="st">'airline.dta'</span>)    </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_stata</span>(<span class="st">'airline.dta'</span>)  </code></pre></div>
 <pre><code>## # A tibble: 32 x 6
-##     year     y     w      r     l     k
-##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1  1948 1.214 0.243 0.1454 1.415 0.612
-##  2  1949 1.354 0.260 0.2181 1.384 0.559
-##  3  1950 1.569 0.278 0.3157 1.388 0.573
-##  4  1951 1.948 0.297 0.3940 1.550 0.564
-##  5  1952 2.265 0.310 0.3559 1.802 0.574
-##  6  1953 2.731 0.322 0.3593 1.926 0.711
-##  7  1954 3.025 0.335 0.4025 1.964 0.776
-##  8  1955 3.562 0.350 0.3961 2.116 0.827
-##  9  1956 3.979 0.361 0.3822 2.435 0.800
-## 10  1957 4.420 0.379 0.3045 2.707 0.921
+##     year     y     w     r     l     k
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1  1948  1.21 0.243 0.145  1.41 0.612
+##  2  1949  1.35 0.260 0.218  1.38 0.559
+##  3  1950  1.57 0.278 0.316  1.39 0.573
+##  4  1951  1.95 0.297 0.394  1.55 0.564
+##  5  1952  2.27 0.310 0.356  1.80 0.574
+##  6  1953  2.73 0.322 0.359  1.93 0.711
+##  7  1954  3.03 0.335 0.403  1.96 0.776
+##  8  1955  3.56 0.350 0.396  2.12 0.827
+##  9  1956  3.98 0.361 0.382  2.43 0.800
+## 10  1957  4.42 0.379 0.305  2.71 0.921
 ## # ... with 22 more rows</code></pre>
-</section>
-<section id="stata-2" class="slide level2">
-<h2>stata</h2>
-<hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">haven<span class="op">::</span><span class="kw">read_stata</span>(<span class="st">'airline.dta'</span>)  </code></pre></div>
-<pre><code>## # A tibble: 32 x 6
-##     year     y     w      r     l     k
-##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1  1948 1.214 0.243 0.1454 1.415 0.612
-##  2  1949 1.354 0.260 0.2181 1.384 0.559
-##  3  1950 1.569 0.278 0.3157 1.388 0.573
-##  4  1951 1.948 0.297 0.3940 1.550 0.564
-##  5  1952 2.265 0.310 0.3559 1.802 0.574
-##  6  1953 2.731 0.322 0.3593 1.926 0.711
-##  7  1954 3.025 0.335 0.4025 1.964 0.776
-##  8  1955 3.562 0.350 0.3961 2.116 0.827
-##  9  1956 3.979 0.361 0.3822 2.435 0.800
-## 10  1957 4.420 0.379 0.3045 2.707 0.921
-## # ... with 22 more rows</code></pre>
-</section>
-<section id="stata-3" class="slide level2">
-<h2>stata</h2>
-<hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">foreign<span class="op">::</span><span class="kw">read.dta</span>(<span class="st">'airline.dta'</span>)  </code></pre></div>
-<pre><code>##    year      y     w      r     l     k
-## 1  1948  1.214 0.243 0.1454 1.415 0.612
-## 2  1949  1.354 0.260 0.2181 1.384 0.559
-## 3  1950  1.569 0.278 0.3157 1.388 0.573
-## 4  1951  1.948 0.297 0.3940 1.550 0.564
-## 5  1952  2.265 0.310 0.3559 1.802 0.574
-## 6  1953  2.731 0.322 0.3593 1.926 0.711
-## 7  1954  3.025 0.335 0.4025 1.964 0.776
-## 8  1955  3.562 0.350 0.3961 2.116 0.827
-## 9  1956  3.979 0.361 0.3822 2.435 0.800
-## 10 1957  4.420 0.379 0.3045 2.707 0.921
-## 11 1958  4.563 0.391 0.3284 2.706 1.067
-## 12 1959  5.385 0.426 0.3856 2.846 1.083
-## 13 1960  5.554 0.441 0.3193 3.089 1.481
-## 14 1961  5.465 0.460 0.3079 3.122 1.736
-## 15 1962  5.825 0.485 0.3783 3.184 1.926
-## 16 1963  6.876 0.506 0.4180 3.263 2.041
-## 17 1964  7.823 0.538 0.5163 3.412 1.997
-## 18 1965  9.120 0.564 0.5879 3.623 2.257
-## 19 1966 10.512 0.586 0.5369 4.074 2.742
-## 20 1967 13.020 0.622 0.4443 4.710 3.564
-## 21 1968 15.261 0.666 0.3052 5.217 4.767
-## 22 1969 16.313 0.731 0.2332 5.569 6.511
-## 23 1970 16.002 0.831 0.1883 5.495 7.627
-## 24 1971 15.876 0.906 0.2023 5.334 8.673
-## 25 1972 16.662 1.000 0.2506 5.345 8.331
-## 26 1973 17.014 1.056 0.2668 5.662 8.557
-## 27 1974 19.305 1.131 0.2664 5.729 9.508
-## 28 1975 18.721 1.247 0.2301 5.722 9.062
-## 29 1976 19.250 1.375 0.3452 5.762 8.262
-## 30 1977 20.647 1.544 0.4508 5.877 7.474
-## 31 1978 22.726 1.703 0.5877 6.108 7.104
-## 32 1979 23.619 1.779 0.5346 6.852 6.874</code></pre>
 </section>
 <section id="spss" class="slide level2">
-<h2>spss</h2>
-<hr>
-<ul>
-<li class="fragment"><code>read_sav()</code></li>
-<li class="fragment"><code>read_spss()</code></li>
-<li class="fragment"><code>read.spss()</code></li>
-</ul>
-</section>
-<section id="spss-1" class="slide level2">
-<h2>spss</h2>
-<hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_sav</span>(<span class="st">'employee.sav'</span>)   </code></pre></div>
-<pre><code>## # A tibble: 474 x 9
-##       id    gender      educ    jobcat    salary  salbegin   jobtime
-##    &lt;dbl&gt; &lt;chr+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt;
-##  1     1         m        15         3     57000     27000        98
-##  2     2         m        16         1     40200     18750        98
-##  3     3         f        12         1     21450     12000        98
-##  4     4         f         8         1     21900     13200        98
-##  5     5         m        15         1     45000     21000        98
-##  6     6         m        15         1     32100     13500        98
-##  7     7         m        15         1     36000     18750        98
-##  8     8         f        12         1     21900      9750        98
-##  9     9         f        15         1     27900     12750        98
-## 10    10         f        12         1     24000     13500        98
-## # ... with 464 more rows, and 2 more variables: prevexp &lt;dbl+lbl&gt;,
-## #   minority &lt;dbl+lbl&gt;</code></pre>
-</section>
-<section id="spss-2" class="slide level2">
-<h2>spss</h2>
+<h2>SPSS</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_spss</span>(<span class="st">'employee.sav'</span>)  </code></pre></div>
 <pre><code>## # A tibble: 474 x 9
-##       id    gender      educ    jobcat    salary  salbegin   jobtime
-##    &lt;dbl&gt; &lt;chr+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt;
-##  1     1         m        15         3     57000     27000        98
-##  2     2         m        16         1     40200     18750        98
-##  3     3         f        12         1     21450     12000        98
-##  4     4         f         8         1     21900     13200        98
-##  5     5         m        15         1     45000     21000        98
-##  6     6         m        15         1     32100     13500        98
-##  7     7         m        15         1     36000     18750        98
-##  8     8         f        12         1     21900      9750        98
-##  9     9         f        15         1     27900     12750        98
-## 10    10         f        12         1     24000     13500        98
-## # ... with 464 more rows, and 2 more variables: prevexp &lt;dbl+lbl&gt;,
-## #   minority &lt;dbl+lbl&gt;</code></pre>
-</section>
-<section id="spss-3" class="slide level2">
-<h2>spss</h2>
-<hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">foreign<span class="op">::</span><span class="kw">read.spss</span>(<span class="st">'employee.sav'</span>, <span class="dt">use.value.labels =</span> <span class="ot">FALSE</span>,
-                   <span class="dt">to.data.frame =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## re-encoding from CP1252</code></pre>
-<pre><code>##      id gender educ jobcat salary salbegin jobtime prevexp minority
-## 1     1      m   15      3  57000    27000      98     144        0
-## 2     2      m   16      1  40200    18750      98      36        0
-## 3     3      f   12      1  21450    12000      98     381        0
-## 4     4      f    8      1  21900    13200      98     190        0
-## 5     5      m   15      1  45000    21000      98     138        0
-## 6     6      m   15      1  32100    13500      98      67        0
-## 7     7      m   15      1  36000    18750      98     114        0
-## 8     8      f   12      1  21900     9750      98       0        0
-## 9     9      f   15      1  27900    12750      98     115        0
-## 10   10      f   12      1  24000    13500      98     244        0
-## 11   11      f   16      1  30300    16500      98     143        0
-## 12   15      m   12      1  27300    13500      97      66        0
-## 13   16      m   12      1  40800    15000      97      24        0
-## 14   17      m   15      1  46000    14250      97      48        0
-## 15   18      m   16      3 103750    27510      97      70        0
-## 16   19      m   12      1  42300    14250      97     103        0
-## 17   20      f   12      1  26250    11550      97      48        0
-## 18   21      f   16      1  38850    15000      97      17        0
-## 19   26      m   15      1  31050    12600      96      14        0
-## 20   27      m   19      3  60375    27480      96      96        0
-## 21   28      m   15      1  32550    14250      96      43        0
-## 22   29      m   19      3 135000    79980      96     199        0
-## 23   30      m   15      1  31200    14250      96      54        0
-## 24   31      m   12      1  36150    14250      96      83        0
-## 25   32      m   19      3 110625    45000      96     120        0
-## 26   33      m   15      1  42000    15000      96      68        0
-## 27   34      m   19      3  92000    39990      96     175        0
-## 28   35      m   17      3  81250    30000      96      18        0
-## 29   36      f    8      1  31350    11250      96      52        0
-## 30   42      m   15      1  35100    16500      95      90        0
-## 31   43      m   12      1  23250    14250      95      46        0
-## 32   44      m    8      1  29250    14250      95      50        0
-## 33   45      m   12      2  30750    13500      95     307        0
-## 34   46      f   15      1  22350    12750      95     165        0
-## 35   47      f   12      1  30000    16500      95     228        0
-## 36   48      m   12      2  30750    14100      94     240        0
-## 37   49      m   15      1  34800    16500      94      93        0
-## 38   50      m   16      3  60000    23730      94      59        0
-## 39   51      m   12      1  35550    15000      94      48        0
-## 40   52      m   15      1  45150    15000      94      40        0
-## 41   53      m   18      3  73750    26250      94      56        0
-## 42   54      m   12      1  25050    13500      94     444        0
-## 43   55      m   12      1  27000    15000      94     120        0
-## 44   56      m   15      1  26850    13500      94       5        0
-## 45   57      m   15      1  33900    15750      94      78        0
-## 46   58      f   15      1  26400    13500      94       3        0
-## 47   62      m   16      3  48000    21750      93      22        0
-## 48   63      m   17      3  55000    26250      93      32        0
-## 49   64      m   16      3  53125    21000      93      48        0
-## 50   65      m    8      1  21900    14550      93      41        0
-## 51   66      m   19      3  78125    30000      93       7        0
-## 52   67      m   16      3  46000    21240      93      35        0
-## 53   68      m   16      3  45250    21480      93      36        0
-## 54   69      m   16      3  56550    25000      93      34        0
-## 55   70      m   15      1  41100    20250      93      27        0
-## 56   71      m   17      3  82500    34980      93     207        0
-## 57   72      f   16      1  54000    18000      93      11        0
-## 58   73      f   12      1  26400    10500      93       0        0
-## 59   74      f   15      1  33900    19500      93     192        0
-## 60   75      f   15      1  24150    11550      93       0        0
-## 61   76      f   15      1  29250    11550      93      11        0
-## 62   77      f   12      1  27600    11400      93       6        0
-## 63   78      f   12      1  22950    10500      93      10        0
-## 64   79      f   16      1  34800    14550      93       8        0
-## 65   80      f   16      1  51000    18000      93      22        0
-## 66   81      f   12      1  24300    10950      93       5        0
-## 67   85      m   15      1  25950    17100      92      42        0
-## 68   86      m   15      1  31650    15750      92      64        0
-## 69   87      m   12      1  24150    14100      92     130        0
-## 70   88      m   19      3  72500    28740      92      10        0
-## 71   89      m   19      3  68750    27480      92       8        0
-## 72   90      f    8      1  16200     9750      92       0        0
-## 73   91      f   12      1  20100    11250      92      24        0
-## 74   92      f    8      1  24000    10950      92       6        0
-## 75   93      f   12      1  25950    10950      92       0        0
-## 76   94      f   12      1  24600    10050      92      44        0
-## 77   95      f   12      1  28500    10500      92       6        0
-## 78  100      m   18      3  78250    27480      91      47        0
-## 79  101      m   16      3  60625    22500      91      44        0
-## 80  102      m   14      1  39900    15750      91      59        0
-## 81  103      m   19      3  97000    35010      91      68        0
-## 82  104      m   15      1  27450    15750      91      48        0
-## 83  105      m   15      1  31650    13500      91      18        0
-## 84  106      m   19      3  91250    29490      91      23        0
-## 85  107      f   12      1  25200    14400      91      83        0
-## 86  108      f   12      1  21000    11550      91     108        0
-## 87  113      m   16      3  54875    27480      90      68        0
-## 88  114      m   14      1  37800    16500      90      60        0
-## 89  115      m   15      1  33450    14100      90      85        0
-## 90  116      m   15      1  30300    16500      90      16        0
-## 91  117      f   12      1  31500    18750      90     205        0
-## 92  118      f   12      1  31650    14250      90      48        0
-## 93  119      f   12      1  25200    14100      90      55        0
-## 94  120      f   16      3  37800    15750      90       7        0
-## 95  121      f   15      1  18750    10500      90      54        0
-## 96  122      f   15      1  32550    13500      90      22        0
-## 97  123      f   12      1  33300    15000      90       3        0
-## 98  124      f   16      1  38550    16500      90       0        0
-## 99  129      m   17      3  68750    27510      89      38        0
-## 100 130      m   20      3  59375    30000      89       6        0
-## 101 131      m   15      1  31500    15750      89      22        0
-## 102 132      m   12      1  27300    17250      89     175        0
-## 103 133      m   15      1  27000    15750      89      87        0
-## 104 134      f   16      3  41550    24990      89     285        0
-## 105 135      f   12      1  26250    10950      89       0        0
-## 106 136      m   12      1  22200    15000      88     324        0
-## 107 137      m   21      3  65000    37500      88     264        0
-## 108 138      m   12      1  30900    15000      88     252        0
-## 109 139      f    8      1  20100    13200      88      90        0
-## 110 140      f   12      1  22350    13500      88      26        0
-## 111 141      f   15      1  35550    13350      88      32        0
-## 112 142      f   12      1  28500    13950      88      34        0
-## 113 143      f   12      1  24450    13200      88     107        0
-## 114 144      f    8      1  16650     9750      88     412        0
-## 115 149      m   12      1  27600    15000      87      75        0
-## 116 150      m   12      1  25800    15000      87     143        0
-## 117 151      m   16      3  42300    26250      87     126        0
-## 118 152      m    8      2  30750    15000      87     451        0
-## 119 153      f   12      1  26700    12900      87      18        0
-## 120 154      f   12      1  20850    12000      87     163        0
-## 121 160      m   16      3  66000    47490      86     150        0
-## 122 161      m   16      1  52650    19500      86      20        0
-## 123 162      m   16      3  45625    23250      86      60        0
-## 124 163      m   15      1  30900    15000      86      25        0
-## 125 164      f   15      1  29400    16500      86      24        0
-## 126 165      f   15      1  33300    13500      86      24        0
-## 127 166      f   12      1  21900     9750      86     156        0
-## 128 167      f   12      1  18150     9750      86      72        0
-## 129 168      f   16      3  46875    17250      86      19        0
-## 130 173      m   20      3  69250    42480      85     134        0
-## 131 174      m    8      2  31950    15000      85     438        0
-## 132 175      m    8      1  26250    15600      85     171        0
-## 133 176      f   16      1  35700    17250      85      19        0
-## 134 177      f   12      1  28500    16500      85      69        0
-## 135 178      f   12      1  17100    10200      85      72        0
-## 136 183      m   15      1  39300    15750      84      72        0
-## 137 184      m   15      1  38850    15000      84      53        0
-## 138 185      m    8      2  30750    15000      84     380        0
-## 139 186      m   15      1  37500    20400      84      33        0
-## 140 187      m   16      3  58750    21750      84      13        0
-## 141 188      f   12      1  34500    18750      84     208        0
-## 142 189      f   12      1  36000    19980      84     240        0
-## 143 190      f    8      1  29100    16500      84      35        0
-## 144 191      f   12      1  16500    10200      84     288        0
-## 145 197      m   15      3  54900    25500      83      49        0
-## 146 198      m   19      3  70875    43500      83     156        0
-## 147 199      m   16      3  51250    27480      83      69        0
-## 148 200      m   17      3  67500    34980      83       9        0
-## 149 201      m   12      1  29340    19500      83     150        0
-## 150 202      m   15      1  39600    16500      83      47        0
-## 151 203      m   12      1  29100    15000      83      50        0
-## 152 204      m   15      1  33150    16500      83      69        0
-## 153 205      m   16      3  66750    52500      83     258        0
-## 154 206      m   12      2  33750    15000      83     284        0
-## 155 207      m   15      1  27300    17250      83      91        0
-## 156 208      f   12      1  24000    11250      83      16        0
-## 157 209      f    8      1  19800    10200      83      75        0
-## 158 216      m   15      1  30150    15750      82      72        0
-## 159 217      m   16      1  34620    27750      82     149        0
-## 160 218      m   15      1  80000    15750      82      34        0
-## 161 219      m   12      1  25350    15000      82      32        0
-## 162 220      m   12      1  29850    15750      82      85        0
-## 163 221      f   12      1  24000    13800      82      97        0
-## 164 222      f   15      1  27750    19500      82     265        0
-## 165 223      f    8      1  22350    10200      82      48        0
-## 166 224      f   12      1  16200    10200      82       0        0
-## 167 225      f   15      1  21900    12750      82       0        0
-## 168 226      f   16      1  23250    15750      82       4        0
-## 169 227      f   12      1  33900    12000      82      11        0
-## 170 228      f   15      1  25650    14250      82      51        0
-## 171 229      f   12      1  17250    10200      82     358        0
-## 172 231      m   16      3  40200    21000      81       3        0
-## 173 232      m   19      3  55500    33750      81      62        0
-## 174 233      m   15      1  26550    15000      81      52        0
-## 175 234      m   15      1  50550    19500      81      44        0
-## 176 235      m   19      3  75000    31500      81      13        0
-## 177 236      f    8      1  27450    12000      81       9        0
-## 178 237      f   12      1  22650    11250      81       0        0
-## 179 238      f   12      1  27300    11250      81       5        0
-## 180 239      f   12      1  27750    11225      81       5        0
-## 181 240      f   16      3  54375    18750      81      81        0
-## 182 241      f    8      1  17400    10200      81     390        0
-## 183 242      f   12      1  40800    18000      81       4        0
-## 184 243      f   12      1  23100    10950      81       0        0
-## 185 244      f    8      1  22500    10950      81       5        0
-## 186 245      f   12      1  26700    11550      81      18        0
-## 187 246      f   12      1  24900    11250      81       0        0
-## 188 247      f   12      1  19650    10950      81      11        0
-## 189 248      f   12      1  22050    10950      81       9        0
-## 190 249      f   12      1  25500    12000      81      11        0
-## 191 250      f   15      1  28200    12750      81      19        0
-## 192 251      f   12      1  23100    11250      81      13        0
-## 193 254      m   18      3  68125    32490      80      29        0
-## 194 255      m   12      2  30600    15750      80     460        0
-## 195 256      m   19      3  52125    27480      80     221        0
-## 196 257      m   19      3  61875    36750      80     199        0
-## 197 258      m    8      1  21300    11550      80      24        0
-## 198 259      f   12      1  19650    11250      80       5        0
-## 199 260      f   12      1  22350    11250      80       5        0
-## 200 261      f   12      1  23400    11250      80      18        0
-## 201 262      f   12      1  24300    10950      80       8        0
-## 202 263      f   12      1  28500    11250      80       4        0
-## 203 264      f   12      1  19950    11250      80       8        0
-## 204 265      f   12      1  23400    11250      80       0        0
-## 205 266      f   16      1  34500    17250      80       3        0
-## 206 267      f   12      1  18150    10950      80       0        0
-## 207 269      m   15      1  40200    17250      79      38        0
-## 208 270      m   15      1  28650    18000      79     261        0
-## 209 271      m   15      1  27750    16500      79      55        0
-## 210 272      m   18      1  66875    31980      79      30        0
-## 211 273      m   12      2  30000    15750      79     308        0
-## 212 274      m   16      3  83750    21750      79      12        0
-## 213 275      m   12      1  33900    16500      79      94        0
-## 214 276      m   16      3  56500    21000      79      12        0
-## 215 277      f   16      3  43000    17490      79      20        0
-## 216 278      f    8      1  20850    12000      79      70        0
-## 217 279      f   12      1  24450    12000      79       8        0
-## 218 280      f   12      1  24750    10950      79       5        0
-## 219 283      m   19      3  68125    32010      78      35        0
-## 220 284      m   19      3  73500    33000      78      45        0
-## 221 285      m    8      2  30750    15750      78     429        0
-## 222 286      m   15      3  40050    25500      78     133        0
-## 223 287      m   16      1  40350    19500      78      20        0
-## 224 288      m   15      3  38700    23730      78     176        0
-## 225 289      m   17      3  65000    30750      78      26        0
-## 226 290      m   18      3  51450    36240      78     149        0
-## 227 291      m   12      2  35250    15750      78     387        0
-## 228 292      m   14      1  25950    15000      78      53        0
-## 229 293      m   15      1  25050    14250      78      24        0
-## 230 294      m   12      1  26700    12750      78      25        0
-## 231 295      m    8      1  24000    15750      78     476        0
-## 232 296      m   12      1  26850    15000      78      48        0
-## 233 297      f   12      1  23400    15300      78     209        0
-## 234 298      f   12      1  24600    13500      78      47        0
-## 235 299      f   15      1  32550    18000      78       6        0
-## 236 305      m   12      2  30750    15750      77     317        0
-## 237 306      m   15      1  30750    16500      77      41        0
-## 238 307      m   16      3  50000    32490      77     264        0
-## 239 308      m   15      1  34500    18000      77      63        0
-## 240 309      m   15      1  26250    15750      77      38        0
-## 241 310      m   16      1  44875    21240      77      22        0
-## 242 311      f   12      1  22500    12000      77      63        0
-## 243 312      f   12      1  25650    14250      77      64        0
-## 244 313      f   12      1  21300    11250      77       0        0
-## 245 314      f   12      1  29850    13500      77      38        0
-## 246 315      f   12      1  34500    12150      77       4        0
-## 247 318      m   16      3  48750    21990      76      61        0
-## 248 319      m   15      1  43410    15750      76      12        0
-## 249 320      m   12      1  22050    15000      76     385        0
-## 250 321      f   12      1  22050    12000      76       6        0
-## 251 322      f   12      1  22500    14250      76      90        0
-## 252 323      f   15      1  25500    12000      76       7        0
-## 253 324      f   12      1  29160    15000      76      22        0
-## 254 325      f    8      1  16800    10200      76      76        0
-## 255 328      m   18      3  55000    32490      75     125        0
-## 256 329      m   18      3  62500    34980      75      74        0
-## 257 330      m   15      1  27300    17250      75     132        0
-## 258 331      f   12      1  24450    12000      75     144        0
-## 259 332      f   16      1  33000    18000      75      26        0
-## 260 333      f   15      1  37050    18000      75       5        0
-## 261 335      m    8      2  31950    15750      74     408        0
-## 262 336      m   16      3  47250    21240      74      45        0
-## 263 337      f   12      1  26100    11550      74       2        0
-## 264 338      f    8      1  15900    10200      74      43        0
-## 265 339      f    8      1  23700    10650      74     281        0
-## 266 340      f    8      1  21750    12450      74     318        0
-## 267 343      m   16      3 103500    60000      73     150        0
-## 268 344      m   12      1  35700    16500      73      72        0
-## 269 345      f   12      1  22200    16500      73       7        0
-## 270 346      f   15      1  22950    13950      73      22        0
-## 271 347      f   12      1  23100    12000      73     228        0
-## 272 348      f   16      3  56750    30000      73      15        0
-## 273 349      f   17      1  29100    12750      73     375        0
-## 274 350      f   12      1  37650    15750      73     132        0
-## 275 351      f   12      1  27900    13500      73      32        0
-## 276 352      f    8      1  21150    12000      73     159        0
-## 277 355      m   15      1  25950    17250      72      83        0
-## 278 356      m   15      1  28350    15000      72      48        0
-## 279 357      f    8      1  17700    10200      72     184        0
-## 280 358      f   15      1  23550    13500      72      49        0
-## 281 359      f   12      1  19950    10200      72      56        0
-## 282 360      f   12      1  29400    15300      72      30        0
-## 283 361      f   12      1  28800    13950      72      18        0
-## 284 362      f    8      1  16950    10200      72     319        0
-## 285 369      m   14      1  28050    15000      71      15        0
-## 286 370      f   16      1  36600    18000      71      12        0
-## 287 371      f   16      3  58125    18000      71      11        0
-## 288 372      m   15      1  21300    15750      70     372        0
-## 289 373      m   12      1  22500    16500      70     216        0
-## 290 374      m   15      1  29400    15750      70      15        0
-## 291 375      m   12      1  27450    14700      70      41        0
-## 292 376      m   15      1  29850    15750      70      48        0
-## 293 377      m   15      1  25350    15750      70      56        0
-## 294 378      f    8      1  15750    10200      70     275        0
-## 295 379      f    8      1  19650    13050      70     102        0
-## 296 380      f   12      1  21000    13500      70      82        0
-## 297 385      m   12      2  30000    15750      69     348        0
-## 298 386      m    8      2  28500    15750      69     174        0
-## 299 387      m   19      3  65000    31980      69      74        0
-## 300 388      m   14      1  30150    16500      69     110        0
-## 301 389      m   19      3  66875    32490      69      81        0
-## 302 390      f   15      1  24150    13500      69       7        0
-## 303 391      f   12      1  24450    12450      69      12        0
-## 304 392      f   12      1  21600    12000      69       0        0
-## 305 393      f   12      1  27900    12450      69       0        0
-## 306 394      f    8      1  29100    12450      69      17        0
-## 307 395      f   12      1  22650    11250      69       2        0
-## 308 396      f   12      1  20850    11250      69       0        0
-## 309 397      f   12      1  22950    12300      69       5        0
-## 310 398      f   12      1  30600    12450      69       5        0
-## 311 399      f   12      1  20400    11250      69       0        0
-## 312 400      f   12      1  23850    12750      69      20        0
-## 313 401      f   12      1  22800    11250      69       0        0
-## 314 402      f   12      1  20700    11250      69       2        0
-## 315 406      m   17      3  60000    32490      68      17        0
-## 316 407      m   15      1  30300    15750      68      55        0
-## 317 408      m   19      3  61250    33000      68       9        0
-## 318 409      m   19      1  36000    19500      68      21        0
-## 319 410      f    8      1  25200    18750      68     344        0
-## 320 411      f   12      1  16200    10200      68     180        0
-## 321 412      f   12      1  22800    11250      68       2        0
-## 322 413      f   16      3  43500    19500      68      11        0
-## 323 416      m   15      1  35250    13500      67       6        0
-## 324 417      m   15      1  37800    15000      67      36        0
-## 325 418      m   15      1  31200    15750      67      46        0
-## 326 419      m   15      1  29400    16500      67      68        0
-## 327 420      m   19      3  70000    35040      67      75        0
-## 328 421      m   15      1  33900    15750      67      96        0
-## 329 422      m   15      1  27150    16500      67      78        0
-## 330 423      f   12      1  22200    13800      67     196        0
-## 331 424      f   15      1  31350    11100      67      47        0
-## 332 425      f   12      1  20850    13500      67     181        0
-## 333 431      m   18      3  86250    45000      66      50        0
-## 334 432      m   12      1  30750    15000      66      56        0
-## 335 433      m   12      1  33540    15750      66      47        0
-## 336 434      m   16      1  34950    20250      66      55        0
-## 337 435      m   15      1  40350    16500      66      80        0
-## 338 436      m   12      1  30270    15750      66      80        0
-## 339 437      m    8      1  26250    16050      66     264        0
-## 340 438      m   15      1  32400    15000      66      64        0
-## 341 439      f   12      1  20400    11250      66       0        0
-## 342 440      f    8      1  24150    12750      66      96        0
-## 343 441      f   15      1  23850    13500      66     122        0
-## 344 442      f   12      1  29700    13500      66      26        0
-## 345 443      f    8      1  21600    13500      66     228        0
-## 346 444      f   12      1  24450    15750      66      87        0
-## 347 449      m   16      3  70000    21750      65      19        0
-## 348 450      m   19      3  55000    34980      65     129        0
-## 349 451      m   15      1  28500    14250      65      20        0
-## 350 452      m   12      1  28800    18000      65     210        0
-## 351 453      m   15      1  24450    15750      65     338        0
-## 352 454      m   19      3  90625    31250      65      18        0
-## 353 455      m   16      3  43650    19500      65      19        0
-## 354 456      m   19      3  75000    42510      65      54        0
-## 355 457      m   15      1  31650    14250      65      10        0
-## 356 458      m   19      3  61875    28740      65      26        0
-## 357 459      f   12      1  21750    11250      65       0        0
-## 358 460      f   12      1  22500    12750      65      24        0
-## 359 461      f    8      1  21600    13500      65     173        0
-## 360 462      f   16      3  34410    19500      65      79        0
-## 361 463      f   15      1  20700    14250      65     241        0
-## 362 464      m   19      3  47550    33000      64      27        0
-## 363 465      m   12      1  33900    16500      64     106        0
-## 364 466      f   12      1  23400    13500      64     198        0
-## 365 467      f   16      1  32850    19500      64      20        0
-## 366 468      f   16      3  55750    19980      64      36        0
-## 367 469      f   15      1  25200    13950      64      57        0
-## 368 472      m   15      1  39150    15750      63      46        0
-## 369 473      f   12      1  21450    12750      63     139        0
-## 370 474      f   12      1  29400    14250      63       9        0
-## 371  12      m    8      1  28350    12000      98      26        1
-## 372  13      m   15      1  27750    14250      98      34        1
-## 373  14      f   15      1  35100    16800      98     137        1
-## 374  22      m   12      1  21750    12750      97     315        1
-## 375  23      f   15      1  24000    11100      97      75        1
-## 376  24      f   12      1  16950     9000      97     124        1
-## 377  25      f   15      1  21150     9000      97     171        1
-## 378  37      m   12      1  29100    13500      96     113        1
-## 379  38      m   15      1  31350    15000      96      49        1
-## 380  39      m   16      1  36000    15000      96      46        1
-## 381  40      f   15      1  19200     9000      96      23        1
-## 382  41      f   12      1  23550    11550      96      52        1
-## 383  59      m   15      1  28050    14250      94      36        1
-## 384  60      m   12      1  30900    15000      94     102        1
-## 385  61      m    8      1  22500     9750      94      36        1
-## 386  82      f   12      1  24750    14250      93     193        1
-## 387  83      f   12      1  22950    11250      93       0        1
-## 388  84      f    8      1  25050    10950      93       8        1
-## 389  96      m    8      2  30750    15000      92     432        1
-## 390  97      m   17      1  40200    19500      92     168        1
-## 391  98      m    8      2  30000    15000      92     144        1
-## 392  99      f   12      1  22050    10950      92       5        1
-## 393 109      m   12      1  30450    15000      91      49        1
-## 394 110      m   15      1  28350    18000      91     151        1
-## 395 111      m   12      2  30750     9000      91     314        1
-## 396 112      m   12      2  30750    15000      91     240        1
-## 397 125      m   12      1  27450    15000      90     173        1
-## 398 126      m   15      2  24300    15000      90     191        1
-## 399 127      m   12      2  30750    15000      90     209        1
-## 400 128      f   12      1  19650     9750      90     229        1
-## 401 145      m   12      1  26700    13500      88      38        1
-## 402 146      m   18      1  43950    23250      88     182        1
-## 403 147      m   15      1  23700    13500      88     359        1
-## 404 148      f   15      1  26550    14250      88      61        1
-## 405 155      m   15      1  35250    15000      87      54        1
-## 406 156      m   15      1  26700    15000      87      56        1
-## 407 157      f   12      1  26550    13050      87      11        1
-## 408 158      f   12      1  27750    12000      87      11        1
-## 409 159      f   16      1  25050    12750      87     123        1
-## 410 169      m   12      1  25500    14400      86      37        1
-## 411 170      m   12      1  26550    15000      86      38        1
-## 412 171      m   12      1  26700    13500      86     367        1
-## 413 172      f   15      1  29850    15000      86      79        1
-## 414 179      m   12      1  25200    13050      85      29        1
-## 415 180      f   12      1  24000    12750      85      59        1
-## 416 181      f   12      1  27450    10200      85     101        1
-## 417 182      f   12      1  18450    10200      85     228        1
-## 418 192      m   12      1  19650    12750      84     180        1
-## 419 193      f   12      1  24750    12000      84      41        1
-## 420 194      f   15      1  27150    15750      84     231        1
-## 421 195      f   12      1  26400    12750      84      36        1
-## 422 196      f   16      1  23100    12000      84     214        1
-## 423 210      m   15      1  30600    16500      83     216        1
-## 424 211      m   15      1  28950    15000      83     108        1
-## 425 212      m   15      1  38400    16500      83      64        1
-## 426 213      m    8      2  30750    15000      83     302        1
-## 427 214      f   12      1  20400    10950      83       9        1
-## 428 215      f   12      1  19200    11100      83       7        1
-## 429 230      m   15      1  22500    15000      82     371        1
-## 430 252      m   12      1  25500    11400      81       9        1
-## 431 253      f    8      1  17100    10200      81       0        1
-## 432 268      m   12      1  22350    15000      80     272        1
-## 433 281      m    8      2  34500    15750      79     246        1
-## 434 282      m   14      1  27900    15000      79      47        1
-## 435 300      m   16      1  26550    15000      78     105        1
-## 436 301      m   12      1  31500    13500      78       7        1
-## 437 302      m    8      1  22350    15000      78     320        1
-## 438 303      m   12      2  35250    15750      78     281        1
-## 439 304      f   15      1  25800    13500      78      51        1
-## 440 316      m   15      1  27750    15000      77      52        1
-## 441 317      m   12      1  27750    11550      77      12        1
-## 442 326      m    8      2  29550    15750      76     144        1
-## 443 327      m   12      1  26700    15750      76      18        1
-## 444 334      f   12      1  24450    10950      75      32        1
-## 445 341      m   12      3  59400    33750      74     272        1
-## 446 342      f   12      1  24450    14250      74     117        1
-## 447 353      m   12      2  31200    15750      73     155        1
-## 448 354      f   12      1  20550    11250      73     154        1
-## 449 363      m   16      1  35700    18000      72     138        1
-## 450 364      f   12      1  17400    10200      72     116        1
-## 451 365      f    8      1  21450    10200      72     194        1
-## 452 366      f   12      1  24750    12000      72      68        1
-## 453 367      f   12      1  16950    10200      72     271        1
-## 454 368      f   12      1  26100    13500      72     169        1
-## 455 381      m   17      1  27000    18000      70     192        1
-## 456 382      m   12      1  24000    15750      70     120        1
-## 457 383      m   17      3  78500    28740      70      67        1
-## 458 384      f   12      1  20850    13050      70     127        1
-## 459 403      f   12      1  21300    11250      69       3        1
-## 460 404      f   12      1  24300    15000      69     121        1
-## 461 405      f   12      1  19650    13950      69     133        1
-## 462 414      m    8      2  30300    15750      68     155        1
-## 463 415      m   15      1  31950    15750      68      70        1
-## 464 426      m   16      1  33300    17490      67     120        1
-## 465 427      m    8      1  26250    16050      67      97        1
-## 466 428      m   15      1  31950    15750      67      58        1
-## 467 429      m    8      2  30000    15750      67     305        1
-## 468 430      m   19      3  66250    34980      67      99        1
-## 469 445      m   15      1  28050    16500      66      84        1
-## 470 446      m   16      3 100000    44100      66     128        1
-## 471 447      m   15      1  49000    20550      66      86        1
-## 472 448      f   12      1  16350    10200      66     163        1
-## 473 470      m   12      1  26250    15750      64      69        1
-## 474 471      m   15      1  26400    15750      64      32        1</code></pre>
+##       id gender    educ   jobcat  salary salbegin jobtime prevexp minority
+##    &lt;dbl&gt; &lt;chr+lbl&gt; &lt;dbl+&gt; &lt;dbl+l&gt; &lt;dbl+&gt; &lt;dbl+lb&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+lb&gt;
+##  1  1.00 m         15     3       57000  27000    98      144     0       
+##  2  2.00 m         16     1       40200  18750    98      36      0       
+##  3  3.00 f         12     1       21450  12000    98      381     0       
+##  4  4.00 f         8      1       21900  13200    98      190     0       
+##  5  5.00 m         15     1       45000  21000    98      138     0       
+##  6  6.00 m         15     1       32100  13500    98      67      0       
+##  7  7.00 m         15     1       36000  18750    98      114     0       
+##  8  8.00 f         12     1       21900  9750     98      0       0       
+##  9  9.00 f         15     1       27900  12750    98      115     0       
+## 10 10.0  f         12     1       24000  13500    98      244     0       
+## # ... with 464 more rows</code></pre>
 </section>
 <section id="sas" class="slide level2">
 <h2>SAS</h2>
 <hr>
-<ul>
-<li class="fragment"><code>read_sas()</code></li>
-<li class="fragment"><code>read.sas7bdat()</code></li>
-</ul>
-</section>
-<section id="sas-1" class="slide level2">
-<h2>SAS</h2>
-<hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_sas</span>(<span class="st">'airline.sas7bdat'</span>)</code></pre></div>
 <pre><code>## # A tibble: 32 x 6
-##     YEAR     Y     W      R     L     K
-##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1  1948 1.214 0.243 0.1454 1.415 0.612
-##  2  1949 1.354 0.260 0.2181 1.384 0.559
-##  3  1950 1.569 0.278 0.3157 1.388 0.573
-##  4  1951 1.948 0.297 0.3940 1.550 0.564
-##  5  1952 2.265 0.310 0.3559 1.802 0.574
-##  6  1953 2.731 0.322 0.3593 1.926 0.711
-##  7  1954 3.025 0.335 0.4025 1.964 0.776
-##  8  1955 3.562 0.350 0.3961 2.116 0.827
-##  9  1956 3.979 0.361 0.3822 2.435 0.800
-## 10  1957 4.420 0.379 0.3045 2.707 0.921
+##     YEAR     Y     W     R     L     K
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1  1948  1.21 0.243 0.145  1.41 0.612
+##  2  1949  1.35 0.260 0.218  1.38 0.559
+##  3  1950  1.57 0.278 0.316  1.39 0.573
+##  4  1951  1.95 0.297 0.394  1.55 0.564
+##  5  1952  2.27 0.310 0.356  1.80 0.574
+##  6  1953  2.73 0.322 0.359  1.93 0.711
+##  7  1954  3.03 0.335 0.403  1.96 0.776
+##  8  1955  3.56 0.350 0.396  2.12 0.827
+##  9  1956  3.98 0.361 0.382  2.43 0.800
+## 10  1957  4.42 0.379 0.305  2.71 0.921
 ## # ... with 22 more rows</code></pre>
 </section>
-<section id="sas-2" class="slide level2">
-<h2>SAS</h2>
-<hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sas7bdat<span class="op">::</span><span class="kw">read.sas7bdat</span>(<span class="st">'airline.sas7bdat'</span>)</code></pre></div>
-<pre><code>##    YEAR      Y     W      R     L     K
-## 1  1948  1.214 0.243 0.1454 1.415 0.612
-## 2  1949  1.354 0.260 0.2181 1.384 0.559
-## 3  1950  1.569 0.278 0.3157 1.388 0.573
-## 4  1951  1.948 0.297 0.3940 1.550 0.564
-## 5  1952  2.265 0.310 0.3559 1.802 0.574
-## 6  1953  2.731 0.322 0.3593 1.926 0.711
-## 7  1954  3.025 0.335 0.4025 1.964 0.776
-## 8  1955  3.562 0.350 0.3961 2.116 0.827
-## 9  1956  3.979 0.361 0.3822 2.435 0.800
-## 10 1957  4.420 0.379 0.3045 2.707 0.921
-## 11 1958  4.563 0.391 0.3284 2.706 1.067
-## 12 1959  5.385 0.426 0.3856 2.846 1.083
-## 13 1960  5.554 0.441 0.3193 3.089 1.481
-## 14 1961  5.465 0.460 0.3079 3.122 1.736
-## 15 1962  5.825 0.485 0.3783 3.184 1.926
-## 16 1963  6.876 0.506 0.4180 3.263 2.041
-## 17 1964  7.823 0.538 0.5163 3.412 1.997
-## 18 1965  9.120 0.564 0.5879 3.623 2.257
-## 19 1966 10.512 0.586 0.5369 4.074 2.742
-## 20 1967 13.020 0.622 0.4443 4.710 3.564
-## 21 1968 15.261 0.666 0.3052 5.217 4.767
-## 22 1969 16.313 0.731 0.2332 5.569 6.511
-## 23 1970 16.002 0.831 0.1883 5.495 7.627
-## 24 1971 15.876 0.906 0.2023 5.334 8.673
-## 25 1972 16.662 1.000 0.2506 5.345 8.331
-## 26 1973 17.014 1.056 0.2668 5.662 8.557
-## 27 1974 19.305 1.131 0.2664 5.729 9.508
-## 28 1975 18.721 1.247 0.2301 5.722 9.062
-## 29 1976 19.250 1.375 0.3452 5.762 8.262
-## 30 1977 20.647 1.544 0.4508 5.877 7.474
-## 31 1978 22.726 1.703 0.5877 6.108 7.104
-## 32 1979 23.619 1.779 0.5346 6.852 6.874</code></pre>
-</section>
-<section id="section-1" class="slide level2" data-background="haven_summary.png">
+<section id="section-5" class="slide level2" data-background="readxl_functions_summary_canva.png">
 <h2></h2>
 </section>
-<section id="section-2" class="slide level2" data-background="thankyou.png">
+<section id="section-6" class="slide level2" data-background="thankyou.png">
 <h2></h2>
 <!-- To do: -->
 <!--   - change data -->

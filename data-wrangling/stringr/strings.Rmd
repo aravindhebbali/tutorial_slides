@@ -8,12 +8,12 @@ output: _output.yaml
 
 <hr>
 
-## Introduction
-
-<hr>
-
-In this module, we will learn to work with string data in R using [stringr](http://stringr.tidyverse.org). As we did in the earlier modules, we will use a case study to explore the various features of the stringr package. You can
-download the data for the case study from [here](https://raw.githubusercontent.com/rsquaredacademy/datasets/master/mock_strings.csv) or directly import the data using the readr package.  Let us begin by installing and loading stringr and a set of other pacakges we will be using.
+- detect patterns 
+- count occurence of patterns 
+- split strings
+- replace strings
+- extract patterns 
+- locate patterns 
  
 ## Libraries
 
@@ -21,18 +21,12 @@ download the data for the case study from [here](https://raw.githubusercontent.c
 
 ```{r install, eval=FALSE}
 library(stringr)
-library(tibble)
-library(magrittr)
-library(purrr)
 library(dplyr)
 library(readr)
 ```
 
 ```{r str1, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
 library(stringr)
-library(tibble)
-library(magrittr)
-library(purrr)
 library(dplyr)
 library(readr)
 ```
@@ -46,13 +40,9 @@ mockstring <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datase
 ```
 
 ```{r show, echo=FALSE, eval=TRUE, message=FALSE}
-mockstring <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/mock_strings.csv')
+mockstring <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/mock_strings.csv')
 mockstring
 ```
-
-## Data Dictionary
-
-<hr>
 
 ## Case Study
 
@@ -67,486 +57,169 @@ mockstring
 - extract extension from url
 - extract file type from url
 
-## extract domain name from email ids
+## Sample Data
 
 <hr>
 
-```{r str15}
-emails <- mockstring %>%
-  pull(email) %>%
-  head
-emails
+
+```{r sample, echo = FALSE}
+mock_data <-
+  mockstring %>%
+  slice(1:10) %>%
+  select(email, address, full_name, currency, )
 ```
 
-## extract domain name from email ids
+```{r sample2}
+mock_data
+```
+
+## {data-background="str_canva_detect.png"}
+
+## Detect @
 
 <hr>
 
-```{r str16}
-emails %>%
-  str_split(pattern = '@')
+```{r detect}
+str_detect(mock_data$email, pattern = "@")
 ```
 
-## extract domain name from email ids
+
+## {data-background="str_canva_count.png"}
+
+## Count @
 
 <hr>
 
-```{r str17}
-emails %>%
-  str_split(pattern = '@') %>%
-  map_chr(2)
+```{r count}
+str_count(mock_data$email, pattern = "@")
 ```
 
-## extract domain name from email ids
+## {data-background="str_canva_c.png"}
+
+## Concatenate
 
 <hr>
 
-```{r str18}
-emails %>%
-  str_split(pattern = '@') %>%
-  map_chr(2) %>%
-  str_split(pattern = '\\.') 
+```{r concatenate}
+str_c("email id:", mock_data$email)
 ```
 
-## extract domain name from email ids
+## {data-background="str_canva_split.png"}
+
+## Split
 
 <hr>
 
-```{r str19}
-emails %>%
-  str_split(pattern = '@') %>%
-  map_chr(2) %>%
-  str_split(pattern = '\\.') %>%
-  map_chr(extract(1))
+```{r split}
+str_split(mock_data$email, pattern = "@")
 ```
 
-## extract domain name from email ids
+## {data-background="str_canva_sort.png"}
+
+## Sort
 
 <hr>
 
-```{r str20}
-emails %>%
-  str_split(pattern = '@') %>%
-  map_chr(2) %>%
-  str_split(pattern = '\\.', simplify = TRUE) %>%
-  extract(, 2)
+```{r sort}
+str_sort(mock_data$email)
 ```
 
-## Extract image type from URL
+## {data-background="str_canva_sort_descending.png"}
+
+## Sort
 
 <hr>
 
-```{r str21}
-img <- mockstring %>%
-  pull(imageurl) %>%
-  head
-img
+```{r sort2}
+str_sort(mock_data$email, descending = TRUE)
 ```
 
-## Extract image type from URL
+## {data-background="str_canva_to_upper.png"}
+
+## Case
 
 <hr>
 
-```{r str22}
-img %>%
-  str_split(pattern = '\\.')
+```{r case}
+str_to_upper(mock_data$full_name)
 ```
 
-## Extract image type from URL
+
+## {data-background="str_canva_replace.png"}
+
+## Replace
 
 <hr>
 
-```{r str23}
-img %>%
-  str_split(pattern = '\\.') %>%
-  map_chr(extract(3))
+```{r replace}
+str_replace(mock_data$address, "Street", "ST")
 ```
 
-## Extract image type from URL
+
+## {data-background="str_canva_extract.png"}
+
+## Extract
 
 <hr>
 
-```{r str24}
-img %>%
-  str_split(pattern = '\\.') %>%
-  map_chr(extract(3)) %>%
-  str_sub(start = 1, end = 3)
-``` 
-
-## Extract image type from URL
-
-<hr> 
-
-```{r str25}
-img %>%
-  str_split(pattern = '\\.') %>%
-  map_chr(extract(3)) %>%
-  str_split(pattern = '/') %>%
-  map_chr(extract(1))
+```{r extract}
+str_extract(mock_data$email, pattern = "com")
 ```
 
-## Extract Image Dimesion from URL
+
+## {data-background="str_canva_match.png"}
+
+## Match
 
 <hr>
 
-```{r str26}
-img %>%
-  str_locate(pattern = "[0-9]") 
+```{r match}
+str_match(mock_data$email, pattern = "com")
 ```
 
-## Extract Image Dimesion from URL
+
+## {data-background="str_canva_which.png"}
+
+## Index
 
 <hr>
 
-```{r str27}
-img %>%
-  str_sub(start = 23) 
+```{r which}
+str_which(mock_data$email, pattern = "com")
 ```
 
-## Extract Image Dimesion from URL
+
+## {data-background="str_canva_locate.png"}
+
+## Locate
 
 <hr>
 
-```{r str28}
-img %>%
-  str_sub(start = 23) %>%
-  str_split(pattern = '\\.') 
+```{r locate}
+str_locate(mock_data$email, pattern = "com")
 ```
 
-## Extract Image Dimesion from URL
+## {data-background="str_canva_length.png"}
+
+## {data-background="str_canva_sub.png"}
+
+## Extract
 
 <hr>
 
-```{r str29}
-img %>%
-  str_sub(start = 23) %>%
-  str_split(pattern = '\\.') %>%
-  map_chr(extract(1))
+```{r sub}
+str_sub(mock_data$currency, start = 1, end = 1)
 ```
-  
-## Extract HTTP Protocol from URL
+
+## {data-background="str_canva_word.png"}
+
+## Word
 
 <hr>
 
-```{r str30}
-url1 <- mockstring %>%
-  pull(url) %>%
-  first
-url1
+```{r word}
+word(mock_data$full_name, 1)
 ```
 
-## Extract HTTP Protocol from URL
-
-<hr>
-
-```{r str31}
-url1 %>%
-  str_split(pattern = '://') 
-```
-
-## Extract HTTP Protocol from URL
-
-<hr>
-
-```{r str32}
-url1 %>%
-  str_split(pattern = '://') %>%
-  map_chr(extract(1))
-```
-
-## Extract HTTP Protocol from URL
-
-<hr>
-
-```{r str33}
-url1 %>%
-  str_locate(pattern = '://') 
-```
-
-## Extract HTTP Protocol from URL
-
-<hr>
-
-```{r str34}
-url1 %>%
-  str_locate(pattern = '://') %>%
-  data.frame() 
-```
-
-## Extract HTTP Protocol from URL
-
-<hr>
-
-```{r str35}
-url1 %>%
-  str_locate(pattern = '://') %>%
-  data.frame() %>%
-  extract2('start') 
-```
-
-## Extract HTTP Protocol from URL
-
-<hr>
-
-```{r str36}
-url1 %>%
-  str_locate(pattern = '://') %>%
-  data.frame() %>%
-  extract2('start') %>%
-  subtract(1)
-```
-
-## Extract HTTP Protocol from URL
-
-<hr>
-
-```{r str37}
-urls <- mockstring %>%
-  pull(url) %>%
-  head
-```
-
-## Extract HTTP Protocol from URL
-
-<hr>
-
-```{r str38}
-k <- urls %>%
-  str_locate(pattern = '://') %>%
-  data.frame() %>%
-  extract2('start') %>%
-  subtract(1)
-```
-
-## Extract HTTP Protocol from URL
-
-<hr>
-
-```{r str39}
-urls %>%
-  str_sub(start = 1, end = k)
-```
-
-## Extract Domain Name
-
-<hr> 
-
-```{r str40}
-url1 %>%
-  str_locate_all(pattern = "/") 
-```
-
-## Extract Domain Name
-
-<hr> 
-
-```{r str41}
-url1 %>%
-  str_locate_all(pattern = "/") %>%
-  map_int(extract(3))
-```
-
-## Extract Domain Name
-
-<hr> 
-
-```{r str42}
-n <- url1 %>%
-  str_locate_all(pattern = "/") %>%
-  map_int(extract(3))
-```
-
-## Extract Domain Name
-
-<hr> 
-
-```{r str43}
-urls %>%
-  str_sub(end = n) 
-```
-
-## Extract Domain Name
-
-<hr> 
-
-```{r str44}
-urls %>%
-  str_sub(end = n) %>%
-  str_split(pattern = '\\.') 
-```
-
-## Extract Domain Name
-
-<hr> 
-
-```{r str45}
-urls %>%
-  str_sub(end = n) %>%
-  str_split(pattern = '\\.') %>%
-  map_chr(extract(1)) 
-```
-
-## Extract Domain Name
-
-<hr> 
-
-```{r str46}
-urls %>%
-  str_sub(end = n) %>%
-  str_split(pattern = '\\.') %>%
-  map_chr(extract(1)) %>%
-  str_sub(start = k + 4)
-```
-
-## extract domain extension
-
-<hr>
-
-```{r str47}
-url1 %>%
-  str_sub(end = n) 
-```
-
-## extract domain extension
-
-<hr>
-
-```{r str48}
-url1 %>%
-  str_sub(end = n) %>%
-  str_split(pattern = '\\.') 
-```
-
-## extract domain extension
-
-<hr>
-
-```{r str49}
-url1 %>%
-  str_sub(end = n) %>%
-  str_split(pattern = '\\.') %>%
-  map_chr(extract(2)) 
-```
-
-## extract domain extension
-
-<hr>
-
-```{r str50}
-url1 %>%
-  str_sub(end = n) %>%
-  str_split(pattern = '\\.') %>%
-  map_chr(extract(2)) %>%
-  str_split(pattern = '/') 
-```
-
-## extract domain extension
-
-<hr>
-
-```{r str51}
-url1 %>%
-  str_sub(end = n) %>%
-  str_split(pattern = '\\.') %>%
-  map_chr(extract(2)) %>%
-  str_split(pattern = '/') %>%
-  map_chr(extract(1))
-```
-
-## extract domain extension
-
-<hr>
-
-```{r str52}
-urls %>%
-  str_sub(end = n) %>%
-  str_split(pattern = '\\.') %>%
-  map_chr(extract(2)) %>%
-  str_split(pattern = '/') %>%
-  map_chr(extract(1))
-```
-
-## extract file type
-
-<hr>
-
-```{r str14}
-mockstring$url[1:3]
-```
-
-## Steps
-
-<hr>
-
-- check if there are only 2 dots in the URL
-- check if there is only 1 question mark in the URL
-- detect the location of the second dot 
-- detect the location of the first question mark
-- use the locations to specify the index position for extracting file type
-
-## step 1: check if there are only 2 dots in the URL
-
-<hr>
-
-```{r str9}
-mockstring$url[1:3] %>%
-  str_locate_all(pattern = '\\.') %>%
-  map_int(nrow) %>%
-  is_greater_than(2) %>%
-  sum()
-```
-
-## step 2: check if there is only 1 question mark in the URL
-
-<hr>
-
-```{r str10}  
-mockstring$url[1:3] %>%
-  str_locate_all(pattern = "[?]") %>%
-  map_int(nrow) %>%
-  is_greater_than(1) %>%
-  sum()
-```
-
-## step 3: detect the location of the second dot
-
-<hr>
-
-```{r str11}
-d <- mockstring$url[1:3] %>%
-  str_locate_all(pattern = '\\.') %>%
-  map_int(extract(2)) %>%
-  add(1)
-
-d  
-```
-
-## step 4: detect the location of the first question mark
-
-<hr>
-
-```{r str12}
-q <- mockstring$url[1:3] %>%
-  str_locate_all(pattern = "[?]") %>%
-  map_int(extract(1)) %>%
-  subtract(1)
-
-q
-```
-
-## step 5: specify the index position for extracting file type
-
-<hr>
-
-```{r str13}
-mockstring$url[1:3] %>% 
-  str_sub(start = d, end = q)
-```
 
 ## {data-background="thankyou.png"}
-
-<!-- To do: -->
-<!--   - add agenda -->
-<!-- - explain patterns -->
-<!--   - describe data in case study -->
-<!--   - data dictionary -->

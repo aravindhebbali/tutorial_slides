@@ -8,11 +8,9 @@ output: _output.yaml
 
 <hr>
 
-Importing data is the first step in any data analysis workflow. If you cannot import data from differernt sources or file formats, you cannot proceed with data analysis. R allows you to import data from several sources and a variety of file formats. In this module, we will focus on 
-
-  - csv
-  - tsv
-  - txt
+- read data from flat or delimited files
+- specify column/variable types
+- read specific columns/variables 
 
 ## Libraries
 
@@ -26,37 +24,38 @@ library(readr)
 library(readr)
 ```
 
+## {data-background="csv_file.png"}
+
+## {data-background="semi_colon_file.png"}
+
+## {data-background="space_file.png"}
+
+## {data-background="tab_file.png"}
+
 ## CSV 
 
 <hr>
 
-- `read_csv()`
-- `read_delim()`
-- `read.csv()`
-
-## Options
-
-<hr>
-
-- `col_names`
-- `skip`
-- `n_max`
-- `col_types`
-
-## readr
-
-<hr>
-
 ```{r import2, echo=TRUE, results='markup', message=FALSE}
-read_csv('hsb2.csv')
+read_csv('mtcars.csv')
 ```
 
-## Delimiter 
+## CSV 
 
 <hr>
 
-```{r import3, echo=TRUE, results='markup', message=FALSE}
-read_delim('hsb2.csv', delim = ',')
+```{r import2a, echo=TRUE, results='markup', message=FALSE}
+read_delim('mtcars.csv', delim = ",")
+```
+
+## {data-background="columns_names.png"}
+
+## Column Names 
+
+<hr>
+
+```{r import4a, echo=TRUE, results='markup', message=FALSE}
+read_csv('mtcars1.csv')
 ```
 
 ## Column Names 
@@ -64,7 +63,17 @@ read_delim('hsb2.csv', delim = ',')
 <hr>
 
 ```{r import4, echo=TRUE, results='markup', message=FALSE}
-read_csv('hsb2.csv', col_names = FALSE)
+read_csv('mtcars1.csv', col_names = FALSE)
+```
+
+## {data-background="mtcars_skip_lines_file.png"}
+
+## Skip Lines 
+
+<hr>
+
+```{r import6a, echo=TRUE, results='markup', message=FALSE}
+read_csv('mtcars2.csv')
 ```
 
 ## Skip Lines 
@@ -72,7 +81,7 @@ read_csv('hsb2.csv', col_names = FALSE)
 <hr>
 
 ```{r import6, echo=TRUE, results='markup', message=FALSE}
-read_csv('hsb2.csv', skip = 5)
+read_csv('mtcars2.csv', skip = 19)
 ```
 
 ## Maximum Lines 
@@ -80,134 +89,50 @@ read_csv('hsb2.csv', skip = 5)
 <hr>
 
 ```{r import8, echo=TRUE, results='markup', message=FALSE}
-read_csv('hsb2.csv', n_max = 50)
+read_csv('mtcars.csv', n_max = 20)
 ```
 
-
-## Column Types 
-
-<hr>
-
-```{r import10, echo=TRUE, results='markup', message=FALSE}
-read_csv('hsb2.csv', col_types = list(col_integer(), col_factor(levels = c(0, 1)), 
-  col_factor(levels = c(1, 2, 3, 4)), col_factor(levels = c(1, 2, 3)), 
-  col_factor(levels = c(1, 2)), col_factor(levels = c(1, 2, 3)),
-  col_integer(), col_integer(), col_integer(), col_integer(), col_integer())            
-)
-```
-
-## Read Specific Columns 
-
-<hr>
-
-```{r import11, echo=TRUE, results='markup', message=FALSE}
-read_csv('hsb2.csv', col_types = cols_only(id = col_integer(),
-  prog = col_factor(levels = c(1, 2, 3)), read = col_integer())
-)
-```
+## {data-background="column_types_list_canva.png"}
 
 ## Column Types
 
 <hr>
 
 ```{r import55, echo=TRUE, results='markup', message=FALSE}
-spec_csv('hsb2.csv')
+spec_csv('mtcars5.csv')
 ```
 
-## Base R
+## {data-background="column_objective_canva.png"}
+
+## Column Types 
 
 <hr>
 
-```{r import1}
-read.csv('hsb2.csv', header = TRUE)
+```{r import10, echo=TRUE, results='markup', message=FALSE}
+read_csv('mtcars5.csv', 
+         col_types = list(col_double(), col_factor(levels = c(4, 6, 8)),
+                          col_double(), col_integer()))
 ```
 
-## Semicolon Separated Values
+## Skip Columns
 
 <hr>
 
-- `read_csv2()`
-- `read_delim()`
-- `read.csv2()`
-
-## readr
-
-<hr>
-
-```{r import23, echo=TRUE, results='markup', message=FALSE}
-read_csv2('hsb.csv', col_names = FALSE, skip = 5, n_max = 50)
+```{r import10a, echo=TRUE, results='markup', message=FALSE}
+read_csv('mtcars5.csv', 
+         col_types = list(col_double(), col_factor(levels = c(4, 6, 8)),
+                          col_skip(), col_integer()))
 ```
 
-## Base R
+
+## Read Specific Columns 
 
 <hr>
 
-```{r import20, echo=TRUE, results='markup', message=FALSE}
-read.csv2('hsb.csv', header = TRUE)
-```
-
-## Tab Separated Values
-
-<hr>
-
-- `read_tsv()`
-- `read_delim()`
-- `read.delim()`
-- `read.table()`
-
-## readr
-
-<hr>
-
-```{r import35, echo=TRUE, results='markup', message=FALSE}
-read_tsv('mtcars.tsv', col_names = FALSE, skip = 5, n_max = 50)
-```
-
-## Base R
-
-<hr>
-
-```{r import31}
-read.delim('mtcars.tsv', dec = '.')  
-```
-
-## Base R
-
-<hr>
-
-```{r import32}
-read.table('mtcars.tsv', sep = '\t', header = TRUE, dec = '.')
-```
-
-## Space Separated Values
-
-<hr>
-
-- `read_table2()`
-- `read.table()`
-
-## readr
-
-<hr>
-
-```{r import46, echo=TRUE, results='markup', message=FALSE}
-read_table2('hsb1.csv', col_names = FALSE, skip = 5, n_max = 50)
-```
-
-## Base R
-
-<hr>
-
-```{r import43}
-read.table('hsb1.csv', header = TRUE, sep = " ")
-```
-
-## Text Files
-
-<hr>
-
-```{r import54, echo=TRUE, results='markup', message=FALSE}
-read_table2('hsb.txt') 
+```{r import11, echo=TRUE, results='markup', message=FALSE}
+read_csv('mtcars5.csv', 
+         col_types = cols_only(mpg = col_double(), 
+                               cyl = col_factor(levels = c(4, 6, 8))))
 ```
 
 ## {data-background="import_funcs.png"}

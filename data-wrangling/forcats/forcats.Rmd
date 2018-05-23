@@ -8,11 +8,13 @@ output: _output.yaml
 
 <hr>
 
-## Introduction
-
-<hr>
-
-In this module, we will learn to work with categorical/qualitative data in R using [forcats](http://forcats.tidyverse.org). Let us begin by installing and loading forcats and a set of other pacakges we will be using.
+- tabulate levels
+- reorder levels
+- reverse levels
+- collapse levels
+- recode levels
+- recategorize levels
+- shift levels
 
 ## Libraries
 
@@ -20,201 +22,105 @@ In this module, we will learn to work with categorical/qualitative data in R usi
 
 ```{r cat, eval=FALSE}
 library(forcats)
-library(tibble)
 library(magrittr)
-library(purrr)
 library(dplyr)
-library(ggplot2)
 library(readr)
 ```
 
 ```{r cat1, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
 library(forcats)
-library(tibble)
 library(magrittr)
-library(purrr)
 library(dplyr)
-library(ggplot2)
 library(readr)
 ```
 
-## Case Study
-
-<hr>
-
-We will use a case study to explore the various features of the forcats package. You can download the data for the case study from [here](https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv) or directly import the data using the readr package. 
-
-## Data
-
-<hr>
-
-```{r import, eval=FALSE}
-ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
-```
-
-```{r show, echo=FALSE, eval=TRUE, message=FALSE}
-ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
-ecom
-```
-
-## Data Dictionary
-
-<hr>
-
-- id: row id
-- referrer: referrer website/search engine
-- os: operating system
-- browser: browser
-- device: device used to visit the website
-- n_pages: number of pages visited
-- duration: time spent on the website (in seconds)
-- repeat: frequency of visits
-- country: country of origin
-- purchase: whether visitor purchased
-- order_value: order value of visitor (in dollars)
-
-
-## Case Study
-
-<hr>
-
-We will do the following in this case study:
-
-- compute the frequency of different referrers
-- plot average number of pages browsed for different referrers
-- collapse referrers with low sample size into a single group
-- club traffic from social media websites into a new category
-- group referrers with traffic below a threshold into a single category
- 
-## Tabulate Referrers
-
-<hr>
-
-```{r cat2}
-ecom %>%
-  count(referrer)
-```
-
-## Avg. page visits by referrer type
-
-<hr>
-
-```{r cat3}
-refer_summary <- ecom %>%
-  group_by(referrer) %>%
-  summarise(
-    page = mean(n_pages),
-    tos = mean(duration),
-    n = n()
-  )
-
-refer_summary
-```
-
-## Avg. page visits by referrer type
-
-<hr>
-
-```{r cat10, fig.align='center', fig.width=6, fig.height=4}
-ggplot(refer_summary, aes(page, referrer)) + geom_point()
-```
-
-## Reorder Referrers
-
-<hr>
-
-```{r cat11, fig.align='center', fig.width=6, fig.height=4}
-ggplot(refer_summary, aes(page, fct_reorder(referrer, page))) + geom_point()
-```
-
-## Plot Referrer Frequency (Descending Order)
-
-<hr>
-
-```{r cat21}
-ecom %>%
-  count(referrer, sort = TRUE)
-```
-
-## Plot Referrer Frequency (Descending Order)
-
-<hr>
-
-```{r cat22}
-ecom %>%
-  pull(referrer) %>%
-  as_factor() %>%
-  levels
-```
-
-## Plot Referrer Frequency (Descending Order)
-
-<hr>
-
-```{r cat23}
-ecom %>%
-  pull(referrer) %>%
-  as_factor() %>%
-  fct_infreq() %>%
-  levels
-```
-
-## Plot Referrer Frequency (Descending Order)
-
-<hr>
-
-```{r cat4, fig.align='center', fig.width=6, fig.height=4}
-ecom %>%
-  mutate(ref = referrer %>% fct_infreq()) %>%
-  ggplot(aes(ref)) +
-  geom_bar()
-```
-
-## Plot Referrer Frequency (Ascending Order)
-
-<hr>
-
-```{r cat24}
-ecom %>%
-  pull(referrer) %>%
-  as_factor() %>%
-  levels
-```
-
-## Plot Referrer Frequency (Ascending Order)
-
-<hr>
-
-```{r cat25}
-ecom %>%
-  pull(referrer) %>%
-  as_factor() %>%
-  fct_rev() %>%
-  levels 
-```
-
-## Plot Referrer Frequency (Ascending Order)
-
-<hr>
-
-```{r cat5, fig.align='center', fig.width=6, fig.height=4}
-ecom %>%
-  mutate(ref = referrer %>% fct_infreq() %>% fct_rev()) %>%
-  ggplot(aes(ref)) +
-  geom_bar()
-```
-
-## Case Study 2
-
-<hr>
 
 ## Data 
 
 <hr>
 
 ```{r import2, message=FALSE}
-traffic <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web_traffic.csv')
+traffic <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web_traffic.csv',
+  col_types = list(col_factor(levels = c("google", "facebook", "affiliates", 
+    "bing", "yahoo", "twitter", "instagram", "unknown", "direct"))))
+
 traffic
+```
+
+## Data
+
+<hr>
+
+```{r import2a}
+traffics <- 
+  traffic %>%
+  use_series(traffics)
+
+traffics
+```
+
+
+## Case Study
+
+<hr>
+
+In this case study, we will:
+
+- compute the frequency of different referrers
+- collapse referrers with low sample size into a single group
+- club traffic from social media websites into a new category
+- group referrers with traffic below a threshold into a single category
+
+## {data-background="canva_fct_count.png"}
+ 
+## Tabulate Referrers
+
+<hr>
+
+```{r cat2}
+fct_count(traffics)
+```
+
+## Levels
+
+<hr>
+
+```{r cat22}
+levels(traffics)
+```
+
+## {data-background="canva_fct_infreq.png"}
+
+## Sort Referrer by Frequency
+
+<hr>
+
+```{r cat23}
+traffics %>%
+  fct_infreq() %>%
+  levels()
+```
+
+## Sort Referrer by Order of Appearance 
+
+<hr>
+
+```{r inorder}
+traffics %>%
+  fct_inorder() %>%
+  levels()
+```
+
+## {data-background="canva_fct_rev.png"}
+
+## Reverse Levels
+
+<hr>
+
+```{r cat25}
+traffics %>%
+  fct_rev() %>%
+  levels()
 ```
 
 ## Tabulate Referrer
@@ -222,30 +128,37 @@ traffic
 <hr>
 
 ```{r cat6}
-traffic$traffics %>% fct_count()
+fct_count(traffics)
 ```
+
+## {data-background="canva_fct_collapse.png"}
 
 ## Collapse Referrer Categories
 
 <hr>
 
 ```{r cat7}
-traffic2 <- fct_collapse(traffic$traffics,
+traffics %>% 
+  fct_collapse(
   social = c("facebook", "twitter", "instagram"),
-  search = c("google", "bing", "yahoo")
-)
-
-traffic2 %>% fct_count() 
+  search = c("google", "bing", "yahoo")) %>% 
+  fct_count() 
 ```
+
+## {data-background="canva_fct_lump_1.png"}
 
 ## Lump Infrequent Referrer Types
 
 <hr>
 
-```{r cat8}
-traffic$traffics %>% fct_count()
+```{r cat8, echo=FALSE}
+fct_count(traffics)
+```
 
-traffic$traffics %>% fct_lump() %>% table()
+```{r cat8b}
+traffics %>% 
+  fct_lump() %>% 
+  table()
 ```
 
 ## Retain top 3 referrers
@@ -253,19 +166,25 @@ traffic$traffics %>% fct_lump() %>% table()
 <hr>
 
 ```{r cat9, echo=FALSE}
-traffic$traffics %>% fct_count() %>% arrange(desc(n))
+traffics %>% 
+  fct_count() %>% 
+  arrange(desc(n))
 ```
 
 ```{r cat17}
-traffic$traffics %>% fct_lump(n = 3) %>% table()
+traffics %>% 
+  fct_lump(n = 3) %>% 
+  table()
 ```
+
+## {data-background="canva_fct_lump_2.png"}
 
 ## Lump Referrer Types with less than 10% traffic
 
 <hr>
 
 ```{r cat12, echo=FALSE}
-traffic$traffics %>% 
+traffics %>% 
   fct_count() %>%
   mutate(
     percent = round((n / sum(n)) * 100, 2)
@@ -273,7 +192,9 @@ traffic$traffics %>%
 ```
 
 ```{r cat16}
-traffic$traffics %>% fct_lump(prop = 0.1) %>% table()
+traffics %>% 
+  fct_lump(prop = 0.1) %>% 
+  table()
 ```
 
 ## Lump Referrer Types with less than 15% traffic
@@ -281,7 +202,7 @@ traffic$traffics %>% fct_lump(prop = 0.1) %>% table()
 <hr>
 
 ```{r cat13, echo=FALSE}
-traffic$traffics %>% 
+traffics %>% 
   fct_count() %>%
   mutate(
     percent = round((n / sum(n)) * 100, 2)
@@ -289,7 +210,9 @@ traffic$traffics %>%
 ```
 
 ```{r cat18}
-traffic$traffics %>% fct_lump(prop = 0.15) %>% table()
+traffics %>% 
+  fct_lump(prop = 0.15) %>% 
+  table()
 ```
 
 ## Retain 3 Referrer Types with lowest traffic
@@ -297,11 +220,15 @@ traffic$traffics %>% fct_lump(prop = 0.15) %>% table()
 <hr>
 
 ```{r cat14, echo=FALSE}
-traffic$traffics %>% fct_count() %>% arrange(n)
+traffics %>% 
+  fct_count() %>% 
+  arrange(n)
 ```
 
 ```{r cat19}
-traffic$traffics %>% fct_lump(n = -3) %>% table()
+traffics %>% 
+  fct_lump(n = -3) %>% 
+  table()
 ```
 
 ## Retain 3 Referrer Types with less than 10% traffic
@@ -309,7 +236,7 @@ traffic$traffics %>% fct_lump(n = -3) %>% table()
 <hr>
 
 ```{r cat15, echo=FALSE}
-traffic$traffics %>% 
+traffics %>% 
   fct_count() %>%
   mutate(
     percent = round((n / sum(n)) * 100, 2)
@@ -317,11 +244,129 @@ traffic$traffics %>%
 ```
 
 ```{r cat20}
-traffic$traffics %>% fct_lump(prop = -0.1) %>% table()
+traffics %>% 
+  fct_lump(prop = -0.1) %>% 
+  table()
+```
+
+## {data-background="canva_fct_drop.png"}
+
+## {data-background="canva_fct_others_1.png"}
+
+## Replace Levels with Other
+
+<hr>
+
+```{r other_1}
+fct_other(traffics, keep = c("google", "yahoo")) %>%
+  levels()
+```
+
+## {data-background="canva_fct_others_2.png"}
+
+## Replace Levels with Other
+
+<hr>
+
+```{r other_2}
+fct_other(traffics, drop = c("instagram", "twitter")) %>%
+  levels()
+```
+
+## {data-background="canva_fct_recode.png"}
+
+## Recode Levels
+
+<hr>
+
+```{r recode}
+fct_recode(traffics, search = "bing", search = "yahoo", search = "google",
+  social = "facebook", social = "twitter", social = "instagram") %>%
+  levels()
+```
+
+## {data-background="canva_fct_relevel_1.png"}
+
+## Reorder Levels
+
+<hr>
+
+```{r relevel_1}
+fct_relevel(traffics, "twitter") %>%
+  levels()
+```
+
+## {data-background="canva_fct_relevel_2.png"}
+
+## Reorder Levels
+
+<hr>
+
+```{r relevel_2}
+fct_relevel(traffics, "google", after = 2) %>%
+  levels()
+```
+
+## {data-background="canva_fct_relevel_3.png"}
+
+## Reorder Levels
+
+<hr>
+
+```{r relevel_3}
+fct_relevel(traffics, "facebook", after = Inf) %>%
+  levels()
+```
+
+## Data 
+
+<hr>
+
+```{r import3, message=FALSE}
+response <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/response.csv',
+  col_types = list(col_factor(levels = c("like", "like somewhat", "neutral", 
+    "dislike somewhat", "dislike"), ordered = TRUE)))
+
+response
+```
+
+## Data
+
+<hr>
+
+```{r import2b}
+responses <- 
+  response %>%
+  use_series(response)
+
+responses
+```
+
+
+## {data-background="canva_fct_shift_1.png"}
+
+## Shift Levels
+
+<hr>
+
+```{r shift_1}
+fct_shift(responses, 2) %>%
+  levels()
+```
+
+## {data-background="canva_fct_shift_2.png"}
+
+## Shift Levels
+
+<hr>
+
+```{r shift_2}
+fct_shift(responses, -2) %>%
+  levels()
 ```
 
 ## {data-background="thankyou.png"}
-
+  
 <!-- To do: -->
 <!--   - add agenda -->
 <!--   - describe case study 2 -->

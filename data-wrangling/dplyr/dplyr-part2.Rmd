@@ -8,13 +8,7 @@ output: _output.yaml
 
 <hr>
 
-```{r libs, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
-library(dplyr)
-```
-
-In the previous module, we learnt about dplyr verbs and used them to compute average order value for an e-commerce website data. In this module, we will learn to combine tables using different `*_join` functions provided in dplyr. Let us assume we have 2 tables **x** and **y**. 
-
-We will explore the following type of `joins` 
+Learn to combine tables using different `*_join` functions provided in dplyr. Let us assume we have 2 tables **x** and **y**. We will explore the following type of `joins` 
 
 - inner join
 - left join
@@ -27,8 +21,13 @@ We will explore the following type of `joins`
 
 ## {data-background="join_case_study.png"}
 
-```{r dplyr1, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+## Libraries
+
+<hr>
+
+```{r dplyr1, echo=TRUE, eval=TRUE, results='hide', message=FALSE}
 library(dplyr)
+library(readr)
 options(tibble.width = Inf)
 ```
 
@@ -58,11 +57,11 @@ customer <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/d
 customer
 ```
 
-## {data-background="canva_join.png"}
+## {data-background="join_example_data.png"}
 
 ## {data-background="innerjoin.png"}
 
-## {data-background="canva_inner.png"}
+## {data-background="join_inner.png"}
 
 ## inner join
 
@@ -75,7 +74,7 @@ customer %>%
 
 ## {data-background="leftjoin.png"}
 
-## {data-background="canva_left.png"}
+## {data-background="join_left.png"}
 
 ## left join
 
@@ -88,7 +87,7 @@ customer %>%
 
 ## {data-background="rightjoin.png"}
 
-## {data-background="canva_right.png"}
+## {data-background="join_right.png"}
 
 ## right join
 
@@ -101,7 +100,7 @@ customer %>%
 
 ## {data-background="semijoin.png"}
 
-## {data-background="canva_semi.png"}
+## {data-background="join_semi.png"}
 
 ## semi join
 
@@ -114,7 +113,7 @@ customer %>%
 
 ## {data-background="antijoin.png"}
 
-## {data-background="canva_anti.png"}
+## {data-background="join_anti.png"}
 
 ## anti join
 
@@ -127,7 +126,7 @@ customer %>%
 
 ## {data-background="fulljoin.png"}
 
-## {data-background="canva_full.png"}
+## {data-background="join_full.png"}
 
 ## full join
 
