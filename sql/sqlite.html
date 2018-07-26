@@ -487,33 +487,42 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="agenda" class="slide level2">
 <h2>Agenda</h2>
 <hr>
+<ul>
+<li class="fragment">connect to databases from R</li>
+<li class="fragment">display database information</li>
+<li class="fragment">list tables</li>
+<li class="fragment">create table</li>
+<li class="fragment">read data into R</li>
+<li class="fragment">export data to database</li>
+<li class="fragment">remove tables</li>
+<li class="fragment">query data using dplyr</li>
+<li class="fragment">disconnect from database</li>
+</ul>
 </section>
 <section id="libraries" class="slide level2">
 <h2>Libraries</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dbplyr)
-<span class="kw">library</span>(dplyr)
-<span class="kw">library</span>(DBI)
-<span class="kw">library</span>(RSQLite)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(DBI)
+<span class="kw">library</span>(dbplyr)
+<span class="kw">library</span>(dplyr)</code></pre></div>
 </section>
 <section id="data" class="slide level2">
 <h2>Data</h2>
 <hr>
-<p>We will use a database that contains the ecommerce data we have used in the previous modules. You can download the database from <a href="https://github.com/rsquaredacademy/dbplyr_tutorial">here</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv'</span>)</code></pre></div>
 <pre><code>## # A tibble: 1,000 x 11
-##       id referrer device bouncers n_visit n_pages duration        country
-##    &lt;int&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;          &lt;chr&gt;
-##  1     1   google laptop     true      10       1      693 Czech Republic
-##  2     2    yahoo tablet     true       9       1      459          Yemen
-##  3     3   direct laptop     true       0       1      996         Brazil
-##  4     4     bing tablet    false       3      18      468          China
-##  5     5    yahoo mobile     true       9       1      955         Poland
-##  6     6    yahoo laptop    false       5       5      135   South Africa
-##  7     7    yahoo mobile     true      10       1       75     Bangladesh
-##  8     8   direct mobile     true      10       1      908      Indonesia
-##  9     9     bing mobile    false       3      19      209    Netherlands
-## 10    10   google mobile     true       6       1      208 Czech Republic
+##       id referrer device bouncers n_visit n_pages duration country       
+##    &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;      &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;         
+##  1     1 google   laptop true          10       1      693 Czech Republic
+##  2     2 yahoo    tablet true           9       1      459 Yemen         
+##  3     3 direct   laptop true           0       1      996 Brazil        
+##  4     4 bing     tablet false          3      18      468 China         
+##  5     5 yahoo    mobile true           9       1      955 Poland        
+##  6     6 yahoo    laptop false          5       5      135 South Africa  
+##  7     7 yahoo    mobile true          10       1       75 Bangladesh    
+##  8     8 direct   mobile true          10       1      908 Indonesia     
+##  9     9 bing     mobile false          3      19      209 Netherlands   
+## 10    10 google   mobile true           6       1      208 Czech Republic
 ## # ... with 990 more rows, and 3 more variables: purchase &lt;chr&gt;,
 ## #   order_items &lt;dbl&gt;, order_value &lt;dbl&gt;</code></pre>
 </section>
@@ -572,9 +581,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>Querying Data</h2>
 <hr>
 <ul>
-<li class="fragment"><code>dbReadTable()</code>: read entire table</li>
-<li class="fragment"><code>dbGetQuery()</code>: read few rows</li>
-<li class="fragment"><code>dbSendQuery()</code> &amp; <code>dbFetch()</code>: read data in batches</li>
+<li class="fragment">read entire table</li>
+<li class="fragment">read few rows</li>
+<li class="fragment">read data in batches</li>
 </ul>
 </section>
 <section id="entire-table" class="slide level2">
@@ -2748,21 +2757,24 @@ result</code></pre></div>
 <section id="create-table" class="slide level2">
 <h2>Create Table</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>
-y &lt;-<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># sample data</span>
+x     &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>
+y     &lt;-<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]
 trial &lt;-<span class="st"> </span>tibble<span class="op">::</span><span class="kw">tibble</span>(x, y)
+
+<span class="co"># write table to database</span>
 DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(con, <span class="st">&quot;trial&quot;</span>, trial)</code></pre></div>
 </section>
-<section id="check-if-table-is-created-in-database" class="slide level2">
-<h2>check if table is created in database</h2>
+<section id="list-tables-1" class="slide level2">
+<h2>List Tables</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbListTables</span>(con)</code></pre></div>
 <pre><code>## [1] &quot;COMPANY&quot;    &quot;DEPARTMENT&quot; &quot;ecom&quot;       &quot;trial&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbExistsTable</span>(con, <span class="st">&quot;trial&quot;</span>)</code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 </section>
-<section id="query-sample-data-from-table" class="slide level2">
-<h2>query sample data from table</h2>
+<section id="query-data" class="slide level2">
+<h2>Query Data</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;select * from trial limit 5&quot;</span>)</code></pre></div>
 <pre><code>##   x y
@@ -2772,58 +2784,66 @@ DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(con, <span cla
 ## 4 4 d
 ## 5 5 e</code></pre>
 </section>
-<section id="overwrite-table-in-the-database" class="slide level2">
-<h2>overwrite table in the database</h2>
+<section id="overwrite-table" class="slide level2">
+<h2>Overwrite Table</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">100</span>, <span class="dv">10</span>)
-y &lt;-<span class="st"> </span>letters[<span class="dv">11</span><span class="op">:</span><span class="dv">20</span>]
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># sample data</span>
+x      &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">100</span>, <span class="dv">10</span>)
+y      &lt;-<span class="st"> </span>letters[<span class="dv">11</span><span class="op">:</span><span class="dv">20</span>]
 trial2 &lt;-<span class="st"> </span>tibble<span class="op">::</span><span class="kw">tibble</span>(x, y)
+
+<span class="co"># overwrite table trial</span>
 DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(con, <span class="st">&quot;trial&quot;</span>, trial2, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</code></pre></div>
 </section>
-<section id="query-sample-data-from-table-to-see-if-it-has-been-overwritten" class="slide level2">
-<h2>query sample data from table to see if it has been overwritten</h2>
+<section id="query-data-1" class="slide level2">
+<h2>Query Data</h2>
 <hr>
+<p>Let us check if <code>trial</code> table has been overwritten by querying data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;select * from trial limit 5&quot;</span>)</code></pre></div>
 <pre><code>##    x y
-## 1 38 k
-## 2 45 l
-## 3 95 m
-## 4 28 n
-## 5 37 o</code></pre>
+## 1 64 k
+## 2 79 l
+## 3 34 m
+## 4 68 n
+## 5 56 o</code></pre>
 </section>
-<section id="append-data-to-the-table-in-the-database" class="slide level2">
-<h2>append data to the table in the database</h2>
+<section id="append-data" class="slide level2">
+<h2>Append Data</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">100</span>, <span class="dv">10</span>)
-y &lt;-<span class="st"> </span>letters[<span class="dv">5</span><span class="op">:</span><span class="dv">14</span>]
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># sample data</span>
+x      &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">100</span>, <span class="dv">10</span>)
+y      &lt;-<span class="st"> </span>letters[<span class="dv">5</span><span class="op">:</span><span class="dv">14</span>]
 trial3 &lt;-<span class="st"> </span>tibble<span class="op">::</span><span class="kw">tibble</span>(x, y)
+
+<span class="co"># append data</span>
 DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(con, <span class="st">&quot;trial&quot;</span>, trial3, <span class="dt">append =</span> <span class="ot">TRUE</span>)</code></pre></div>
 </section>
-<section id="query-sample-data-from-table-to-see-if-new-data-is-appended" class="slide level2">
-<h2>query sample data from table to see if new data is appended</h2>
+<section id="query-data-2" class="slide level2">
+<h2>Query Data</h2>
 <hr>
+<p>Let us check if data has been appended by querying data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbReadTable</span>(con, <span class="st">&quot;trial&quot;</span>)</code></pre></div>
-<pre><code>##      x y
-## 1   38 k
-## 2   45 l
-## 3   95 m
-## 4   28 n
-## 5   37 o
-## 6   70 p
-## 7   77 q
-## 8   74 r
-## 9   55 s
-## 10  96 t
-## 11  94 e
-## 12  31 f
-## 13  11 g
-## 14  95 h
-## 15  61 i
-## 16  21 j
-## 17  63 k
-## 18  23 l
-## 19  34 m
-## 20 100 n</code></pre>
+<pre><code>##     x y
+## 1  64 k
+## 2  79 l
+## 3  34 m
+## 4  68 n
+## 5  56 o
+## 6  14 p
+## 7  28 q
+## 8  73 r
+## 9  22 s
+## 10 69 t
+## 11 87 e
+## 12 47 f
+## 13 24 g
+## 14 73 h
+## 15 82 i
+## 16  4 j
+## 17 31 k
+## 18 23 l
+## 19  8 m
+## 20 61 n</code></pre>
 </section>
 <section id="insert-rows" class="slide level2">
 <h2>Insert Rows</h2>
@@ -2844,8 +2864,8 @@ DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(con, <span cla
 ##   ROWS Fetched: 0 [complete]
 ##        Changed: 3</code></pre>
 </section>
-<section id="sqlite-data-type" class="slide level2">
-<h2>SQLite data type</h2>
+<section id="data-type" class="slide level2">
+<h2>Data Type</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbDataType</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="st">&quot;a&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;TEXT&quot;</code></pre>
@@ -2854,15 +2874,16 @@ DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(con, <span cla
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbDataType</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="fl">1.5</span>)</code></pre></div>
 <pre><code>## [1] &quot;REAL&quot;</code></pre>
 </section>
-<section id="remove-table-from-database" class="slide level2">
-<h2>remove table from database</h2>
+<section id="remove-table" class="slide level2">
+<h2>Remove Table</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbRemoveTable</span>(con, <span class="st">&quot;trial&quot;</span>)</code></pre></div>
 <pre><code>## Warning: Closing open result set, pending rows</code></pre>
 </section>
-<section id="check-if-table-has-been-removed" class="slide level2">
-<h2>check if table has been removed</h2>
+<section id="list-tables-2" class="slide level2">
+<h2>List Tables</h2>
 <hr>
+<p>Let us check if <code>trial</code> table has been removed from the database by listing all the tables.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbListTables</span>(con)</code></pre></div>
 <pre><code>## [1] &quot;COMPANY&quot;    &quot;DEPARTMENT&quot; &quot;ecom&quot;</code></pre>
 </section>
@@ -2870,6 +2891,8 @@ DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(con, <span cla
 <h2>Generate SQL Query</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">sqlCreateTable</span>(con, <span class="st">&quot;new&quot;</span>, <span class="kw">c</span>(<span class="dt">x =</span> <span class="st">&quot;integer&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;text&quot;</span>))</code></pre></div>
+<pre><code>## Warning: Do not rely on the default value of the row.names argument for
+## sqlCreateTable(), it will change in the future.</code></pre>
 <pre><code>## &lt;SQL&gt; CREATE TABLE `new` (
 ##   `x` integer,
 ##   `y` text
@@ -2878,20 +2901,21 @@ DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(con, <span cla
 <section id="data-1" class="slide level2">
 <h2>Data</h2>
 <hr>
+<p>Let us use the first 5 rows of the <code>ecom</code> table as sample data and append it to the <code>ecom</code> table itself.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv'</span>)</code></pre></div>
 <pre><code>## # A tibble: 1,000 x 11
-##       id referrer device bouncers n_visit n_pages duration        country
-##    &lt;int&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;          &lt;chr&gt;
-##  1     1   google laptop     true      10       1      693 Czech Republic
-##  2     2    yahoo tablet     true       9       1      459          Yemen
-##  3     3   direct laptop     true       0       1      996         Brazil
-##  4     4     bing tablet    false       3      18      468          China
-##  5     5    yahoo mobile     true       9       1      955         Poland
-##  6     6    yahoo laptop    false       5       5      135   South Africa
-##  7     7    yahoo mobile     true      10       1       75     Bangladesh
-##  8     8   direct mobile     true      10       1      908      Indonesia
-##  9     9     bing mobile    false       3      19      209    Netherlands
-## 10    10   google mobile     true       6       1      208 Czech Republic
+##       id referrer device bouncers n_visit n_pages duration country       
+##    &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;      &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;         
+##  1     1 google   laptop true          10       1      693 Czech Republic
+##  2     2 yahoo    tablet true           9       1      459 Yemen         
+##  3     3 direct   laptop true           0       1      996 Brazil        
+##  4     4 bing     tablet false          3      18      468 China         
+##  5     5 yahoo    mobile true           9       1      955 Poland        
+##  6     6 yahoo    laptop false          5       5      135 South Africa  
+##  7     7 yahoo    mobile true          10       1       75 Bangladesh    
+##  8     8 direct   mobile true          10       1      908 Indonesia     
+##  9     9 bing     mobile false          3      19      209 Netherlands   
+## 10    10 google   mobile true           6       1      208 Czech Republic
 ## # ... with 990 more rows, and 3 more variables: purchase &lt;chr&gt;,
 ## #   order_items &lt;dbl&gt;, order_value &lt;dbl&gt;</code></pre>
 </section>
@@ -2899,6 +2923,8 @@ DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(con, <span cla
 <h2>Append Table</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">sqlAppendTable</span>(con, <span class="st">&quot;ecom&quot;</span>, <span class="kw">head</span>(ecom))</code></pre></div>
+<pre><code>## Warning: Do not rely on the default value of the row.names argument for
+## sqlAppendTable(), it will change in the future.</code></pre>
 <pre><code>## &lt;SQL&gt; INSERT INTO `ecom`
 ##   (`id`, `referrer`, `device`, `bouncers`, `n_visit`, `n_pages`, `duration`, `country`, `purchase`, `order_items`, `order_value`)
 ## VALUES
@@ -2909,19 +2935,122 @@ DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(con, <span cla
 ##   (5, 'yahoo', 'mobile', 'true', 9, 1, 955, 'Poland', 'false', 0, 0),
 ##   (6, 'yahoo', 'laptop', 'false', 5, 5, 135, 'South Africa', 'false', 0, 0)</code></pre>
 </section>
-<section id="close-database-connection" class="slide level2">
-<h2>Close Database Connection</h2>
+<section id="copy-data" class="slide level2">
+<h2>Copy Data</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">copy_to</span>(con, mtcars)</code></pre></div>
+</section>
+<section id="reference-copied-data" class="slide level2">
+<h2>Reference Copied Data</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars2 &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&quot;mtcars&quot;</span>)
+mtcars2</code></pre></div>
+<pre><code>## # Source:   table&lt;mtcars&gt; [?? x 11]
+## # Database: sqlite 3.22.0 [J:\R\courses\tutorial_slides\sql\mydatabase.db]
+##      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1  21       6  160    110  3.9   2.62  16.5     0     1     4     4
+##  2  21       6  160    110  3.9   2.88  17.0     0     1     4     4
+##  3  22.8     4  108     93  3.85  2.32  18.6     1     1     4     1
+##  4  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
+##  5  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2
+##  6  18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
+##  7  14.3     8  360    245  3.21  3.57  15.8     0     0     3     4
+##  8  24.4     4  147.    62  3.69  3.19  20       1     0     4     2
+##  9  22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
+## 10  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
+## # ... with more rows</code></pre>
+</section>
+<section id="query-data-3" class="slide level2">
+<h2>Query Data</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars2 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(mpg, cyl, drat)</code></pre></div>
+<pre><code>## # Source:   lazy query [?? x 3]
+## # Database: sqlite 3.22.0 [J:\R\courses\tutorial_slides\sql\mydatabase.db]
+##      mpg   cyl  drat
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1  21       6  3.9 
+##  2  21       6  3.9 
+##  3  22.8     4  3.85
+##  4  21.4     6  3.08
+##  5  18.7     8  3.15
+##  6  18.1     6  2.76
+##  7  14.3     8  3.21
+##  8  24.4     4  3.69
+##  9  22.8     4  3.92
+## 10  19.2     6  3.92
+## # ... with more rows</code></pre>
+</section>
+<section id="query-data-4" class="slide level2">
+<h2>Query Data</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars2 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(mpg <span class="op">&gt;</span><span class="st"> </span><span class="dv">25</span>)</code></pre></div>
+<pre><code>## # Source:   lazy query [?? x 11]
+## # Database: sqlite 3.22.0 [J:\R\courses\tutorial_slides\sql\mydatabase.db]
+##     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  32.4     4  78.7    66  4.08  2.2   19.5     1     1     4     1
+## 2  30.4     4  75.7    52  4.93  1.62  18.5     1     1     4     2
+## 3  33.9     4  71.1    65  4.22  1.84  19.9     1     1     4     1
+## 4  27.3     4  79      66  4.08  1.94  18.9     1     1     4     1
+## 5  26       4 120.     91  4.43  2.14  16.7     0     1     5     2
+## 6  30.4     4  95.1   113  3.77  1.51  16.9     1     1     5     2</code></pre>
+</section>
+<section id="query-data-5" class="slide level2">
+<h2>Query Data</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars2 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mileage =</span> <span class="kw">mean</span>(mpg))</code></pre></div>
+<pre><code>## Warning: Missing values are always removed in SQL.
+## Use `AVG(x, na.rm = TRUE)` to silence this warning</code></pre>
+<pre><code>## # Source:   lazy query [?? x 2]
+## # Database: sqlite 3.22.0 [J:\R\courses\tutorial_slides\sql\mydatabase.db]
+##     cyl mileage
+##   &lt;dbl&gt;   &lt;dbl&gt;
+## 1     4    26.7
+## 2     6    19.7
+## 3     8    15.1</code></pre>
+</section>
+<section id="display-query" class="slide level2">
+<h2>Display Query</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mileages &lt;-<span class="st"> </span>
+<span class="st">  </span>mtcars2 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mileage =</span> <span class="kw">mean</span>(mpg))
+
+<span class="kw">show_query</span>(mileages)</code></pre></div>
+<pre><code>## Warning: Missing values are always removed in SQL.
+## Use `AVG(x, na.rm = TRUE)` to silence this warning</code></pre>
+<pre><code>## &lt;SQL&gt;
+## SELECT `cyl`, AVG(`mpg`) AS `mileage`
+## FROM `mtcars`
+## GROUP BY `cyl`</code></pre>
+</section>
+<section id="collect-data" class="slide level2">
+<h2>Collect Data</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span>mileages <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">collect</span>()</code></pre></div>
+<pre><code>## Warning: Missing values are always removed in SQL.
+## Use `AVG(x, na.rm = TRUE)` to silence this warning</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data</code></pre></div>
+<pre><code>## # A tibble: 3 x 2
+##     cyl mileage
+##   &lt;dbl&gt;   &lt;dbl&gt;
+## 1     4    26.7
+## 2     6    19.7
+## 3     8    15.1</code></pre>
+</section>
+<section id="close-connection" class="slide level2">
+<h2>Close Connection</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbDisconnect</span>(con)</code></pre></div>
 </section>
 <section id="section-4" class="slide level2" data-background="thankyou.png">
 <h2></h2>
-<!-- To do: -->
-<!--   - add agenda -->
-<!--   - add introduction -->
-<!--   - connect and list fields section -->
-<!--   - query data section -->
-<!--   - create table section -->
 </section>
     </div>
   </div>

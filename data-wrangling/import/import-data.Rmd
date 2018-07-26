@@ -56,7 +56,18 @@ excel_sheets('sample.xls')
 read_excel('sample.xls', sheet = 1)
 ```
 
-## {data-background="readxl_range_canva.png"}
+## Read Specific Cells
+
+<hr>
+
+<br>
+<br>
+<br>
+<br>
+
+```{r import74, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("readxl_range.png")
+```
 
 ## Read Specific Cells
 
@@ -66,7 +77,15 @@ read_excel('sample.xls', sheet = 1)
 read_excel('sample.xls', sheet = 1, range = "B1:C4")
 ```
 
-## {data-background="readxl_anchored_canva.png"}
+## Read Specific Cells
+
+<hr>
+
+<br>
+
+```{r import75, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("readxl_anchored_lucid.png")
+```
 
 ## Read Specific Cells
 
@@ -77,8 +96,15 @@ read_excel('sample.xls', sheet = 1, col_names = FALSE,
   range = anchored("A4", dim = c(3, 2)))
 ```
 
+## Read Specific Cells
 
-## {data-background="readxl_celllimits_canva.png"}
+<hr>
+
+<br>
+
+```{r import76, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("readxl_cell_limits_lucid.png")
+```
 
 ## Read Specific Cells
 
@@ -132,14 +158,21 @@ read_excel('sample.xls', sheet = 1, range = cell_rows(1:4))
 read_excel('sample.xls', sheet = 1, range = cell_cols(2:3))
 ```
 
-## {data-background="range_summary_canva.png"}
+## Read Specific Cells
 
+<hr>
+
+<br>
+
+```{r import77, echo=FALSE, out.width="80%", fig.align="center"}
+knitr::include_graphics("range_summary.png")
+```
 
 ## Statistical Softwares
 
 <hr>
 
-- SAS
+- sas7bdat
 - SPSS
 - STATA
 
@@ -167,11 +200,17 @@ read_spss('employee.sav')
 read_sas('airline.sas7bdat')
 ```
 
-## {data-background="readxl_functions_summary_canva.png"}
+## Read Specific Cells
+
+<hr>
+
+<br>
+<br>
+<br>
+<br>
+
+```{r import78, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("readxl_summary_lucid.png")
+```
 
 ## {data-background="thankyou.png"}
-
-
-<!-- To do: -->
-<!--   - change data -->
-<!--   - use excel sheet while explaining readxl -->

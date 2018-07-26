@@ -66,14 +66,23 @@ mockstring
 mock_data <-
   mockstring %>%
   slice(1:10) %>%
-  select(email, address, full_name, currency, )
+  select(email, address, full_name, currency)
 ```
 
 ```{r sample2}
 mock_data
 ```
 
-## {data-background="str_canva_detect.png"}
+## Detect @
+
+<hr>
+
+<br>
+<br>
+
+```{r str2, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("str_detect.png")
+```
 
 ## Detect @
 
@@ -83,8 +92,16 @@ mock_data
 str_detect(mock_data$email, pattern = "@")
 ```
 
+## Count @
 
-## {data-background="str_canva_count.png"}
+<hr>
+
+<br>
+<br>
+
+```{r str3, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("str_count.png")
+```
 
 ## Count @
 
@@ -94,7 +111,16 @@ str_detect(mock_data$email, pattern = "@")
 str_count(mock_data$email, pattern = "@")
 ```
 
-## {data-background="str_canva_c.png"}
+## Concatenate
+
+<hr>
+
+<br>
+<br>
+
+```{r str4, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("str_c.png")
+```
 
 ## Concatenate
 
@@ -104,7 +130,16 @@ str_count(mock_data$email, pattern = "@")
 str_c("email id:", mock_data$email)
 ```
 
-## {data-background="str_canva_split.png"}
+## Split
+
+<hr>
+
+<br>
+<br>
+
+```{r str5, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("str_split.png")
+```
 
 ## Split
 
@@ -114,7 +149,16 @@ str_c("email id:", mock_data$email)
 str_split(mock_data$email, pattern = "@")
 ```
 
-## {data-background="str_canva_sort.png"}
+## Sort
+
+<hr>
+
+<br>
+<br>
+
+```{r str6, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("str_sort.png")
+```
 
 ## Sort
 
@@ -124,7 +168,16 @@ str_split(mock_data$email, pattern = "@")
 str_sort(mock_data$email)
 ```
 
-## {data-background="str_canva_sort_descending.png"}
+## Sort
+
+<hr>
+
+<br>
+<br>
+
+```{r str7, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("str_sort_descending.png")
+```
 
 ## Sort
 
@@ -134,7 +187,16 @@ str_sort(mock_data$email)
 str_sort(mock_data$email, descending = TRUE)
 ```
 
-## {data-background="str_canva_to_upper.png"}
+## Case
+
+<hr>
+
+<br>
+<br>
+
+```{r str8, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("str_to_upper.png")
+```
 
 ## Case
 
@@ -144,8 +206,16 @@ str_sort(mock_data$email, descending = TRUE)
 str_to_upper(mock_data$full_name)
 ```
 
+## Replace
 
-## {data-background="str_canva_replace.png"}
+<hr>
+
+<br>
+<br>
+
+```{r str9, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("str_replace.png")
+```
 
 ## Replace
 
@@ -155,8 +225,16 @@ str_to_upper(mock_data$full_name)
 str_replace(mock_data$address, "Street", "ST")
 ```
 
+## Extract
 
-## {data-background="str_canva_extract.png"}
+<hr>
+
+<br>
+<br>
+
+```{r str10, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("str_extract.png")
+```
 
 ## Extract
 
@@ -166,8 +244,16 @@ str_replace(mock_data$address, "Street", "ST")
 str_extract(mock_data$email, pattern = "com")
 ```
 
+## Match
 
-## {data-background="str_canva_match.png"}
+<hr>
+
+<br>
+<br>
+
+```{r str11, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("str_match.png")
+```
 
 ## Match
 
@@ -177,8 +263,16 @@ str_extract(mock_data$email, pattern = "com")
 str_match(mock_data$email, pattern = "com")
 ```
 
+## Index
 
-## {data-background="str_canva_which.png"}
+<hr>
+
+<br>
+<br>
+
+```{r str12, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("str_which.png")
+```
 
 ## Index
 
@@ -188,8 +282,16 @@ str_match(mock_data$email, pattern = "com")
 str_which(mock_data$email, pattern = "com")
 ```
 
+## Locate
 
-## {data-background="str_canva_locate.png"}
+<hr>
+
+<br>
+<br>
+
+```{r str13, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("str_locate.png")
+```
 
 ## Locate
 
@@ -199,9 +301,27 @@ str_which(mock_data$email, pattern = "com")
 str_locate(mock_data$email, pattern = "com")
 ```
 
-## {data-background="str_canva_length.png"}
+## Length
 
-## {data-background="str_canva_sub.png"}
+<hr>
+
+<br>
+<br>
+
+```{r str14, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("str_length.png")
+```
+
+## Extract
+
+<hr>
+
+<br>
+<br>
+
+```{r str15, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("str_sub.png")
+```
 
 ## Extract
 
@@ -211,7 +331,16 @@ str_locate(mock_data$email, pattern = "com")
 str_sub(mock_data$currency, start = 1, end = 1)
 ```
 
-## {data-background="str_canva_word.png"}
+## Extract Word
+
+<hr>
+
+<br>
+<br>
+
+```{r str16, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("word.png")
+```
 
 ## Word
 
@@ -220,6 +349,5 @@ str_sub(mock_data$currency, start = 1, end = 1)
 ```{r word}
 word(mock_data$full_name, 1)
 ```
-
 
 ## {data-background="thankyou.png"}

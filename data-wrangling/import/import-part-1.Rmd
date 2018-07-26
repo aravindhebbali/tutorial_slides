@@ -9,6 +9,8 @@ output: _output.yaml
 <hr>
 
 - read data from flat or delimited files
+- handle column names/header
+- skip text/info 
 - specify column/variable types
 - read specific columns/variables 
 
@@ -24,15 +26,59 @@ library(readr)
 library(readr)
 ```
 
-## {data-background="csv_file.png"}
+## Comma Separated Values
 
-## {data-background="semi_colon_file.png"}
+<hr>
 
-## {data-background="space_file.png"}
+<br>
+<br>
+<br>
+<br>
 
-## {data-background="tab_file.png"}
+```{r import12, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("mtcars_comma.png")
+```
 
-## CSV 
+## Semi Colon Separated Values
+
+<hr>
+
+<br>
+<br>
+<br>
+<br>
+
+```{r import12a, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("mtcars_semicolon.png")
+```
+
+## Space Separated Values
+
+<hr>
+
+<br>
+<br>
+<br>
+<br>
+
+```{r import12b, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("mtcars_space.png")
+```
+
+## Tab Separated Values
+
+<hr>
+
+<br>
+<br>
+<br>
+<br>
+
+```{r import12c, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("mtcars_tab.png")
+```
+
+## Read CSV File
 
 <hr>
 
@@ -40,7 +86,7 @@ library(readr)
 read_csv('mtcars.csv')
 ```
 
-## CSV 
+## Read CSV File
 
 <hr>
 
@@ -48,7 +94,21 @@ read_csv('mtcars.csv')
 read_delim('mtcars.csv', delim = ",")
 ```
 
-## {data-background="columns_names.png"}
+## Column Names
+
+<hr>
+
+<br>
+
+```{r import13a, echo=FALSE, out.width="80%", fig.align="center"}
+knitr::include_graphics("mtcars_comma.png")
+```
+
+<br>
+
+```{r import13b, echo=FALSE, out.width="80%", fig.align="center"}
+knitr::include_graphics("mtcars_column_false.png")
+```
 
 ## Column Names 
 
@@ -66,7 +126,15 @@ read_csv('mtcars1.csv')
 read_csv('mtcars1.csv', col_names = FALSE)
 ```
 
-## {data-background="mtcars_skip_lines_file.png"}
+## Skip Lines
+
+<hr>
+
+<br>
+
+```{r import14a, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("mtcars_skip.png")
+```
 
 ## Skip Lines 
 
@@ -92,7 +160,15 @@ read_csv('mtcars2.csv', skip = 19)
 read_csv('mtcars.csv', n_max = 20)
 ```
 
-## {data-background="column_types_list_canva.png"}
+## Column Types
+
+<hr>
+
+<br>
+
+```{r import15a, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("column_types_list_canva.png")
+```
 
 ## Column Types
 
@@ -102,7 +178,15 @@ read_csv('mtcars.csv', n_max = 20)
 spec_csv('mtcars5.csv')
 ```
 
-## {data-background="column_objective_canva.png"}
+## Column Types
+
+<hr>
+
+<br>
+
+```{r import16a, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("column_objective_function_map.png")
+```
 
 ## Column Types 
 
@@ -118,10 +202,16 @@ read_csv('mtcars5.csv',
 
 <hr>
 
-```{r import10a, echo=TRUE, results='markup', message=FALSE}
+```{r import10a, echo=TRUE, eval=FALSE, results='markup', message=FALSE}
 read_csv('mtcars5.csv', 
          col_types = list(col_double(), col_factor(levels = c(4, 6, 8)),
                           col_skip(), col_integer()))
+```
+
+```{r import10b, echo=FALSE, results='markup', message=FALSE}
+suppressWarnings(read_csv('mtcars5.csv', 
+         col_types = list(col_double(), col_factor(levels = c(4, 6, 8)),
+                          col_skip(), col_integer())))
 ```
 
 
@@ -129,16 +219,27 @@ read_csv('mtcars5.csv',
 
 <hr>
 
-```{r import11, echo=TRUE, results='markup', message=FALSE}
+```{r import11a, echo=TRUE, eval=FALSE, results='markup', message=FALSE, warnings=FALSE}
 read_csv('mtcars5.csv', 
          col_types = cols_only(mpg = col_double(), 
                                cyl = col_factor(levels = c(4, 6, 8))))
 ```
 
-## {data-background="import_funcs.png"}
+
+```{r import11b, echo=FALSE, results='markup', message=FALSE, warnings=FALSE}
+suppressWarnings(read_csv('mtcars5.csv', 
+         col_types = cols_only(mpg = col_double(), 
+                               cyl = col_factor(levels = c(4, 6, 8)))))
+```
+
+## Summary
+
+<hr>
+
+<br>
+
+```{r import17a, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("import_funca.png")
+```
 
 ## {data-background="thankyou.png"}
-
-<!-- To do: -->
-<!--   - improve agenda -->
-<!--   - outline functions and options in a table -->

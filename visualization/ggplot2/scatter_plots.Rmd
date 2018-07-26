@@ -197,7 +197,7 @@ ggplot(mtcars, aes(disp, mpg)) +
 ```{r aes17, fig.align='center'}
 ggplot(mtcars, aes(disp, mpg)) +
   geom_point(position = 'jitter') +
-  geom_abline(slope = 29.59985, intercept = -0.04122)
+  geom_abline(intercept = 29.59985, slope = -0.04122)
 ```
 
 ## {data-background="thankyou.png"}

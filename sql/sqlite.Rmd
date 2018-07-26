@@ -8,15 +8,24 @@ output: _output.yaml
 
 <hr>
 
+- connect to databases from R
+- display database information
+- list tables 
+- create table
+- read data into R
+- export data to database
+- remove tables
+- query data using dplyr
+- disconnect from database
+
 ## Libraries
 
 <hr>
 
 ```{r lite1, eval=FALSE}
+library(DBI)
 library(dbplyr)
 library(dplyr)
-library(DBI)
-library(RSQLite)
 ```
 
 ```{r liteload, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
@@ -30,13 +39,9 @@ library(RSQLite)
 
 <hr>
 
-We will use a database that contains the ecommerce data we have used in the previous modules. You can download the 
-database from [here](https://github.com/rsquaredacademy/dbplyr_tutorial).
-
 ```{r import, eval=FALSE}
 ecom <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
 ```
-
 
 ```{r show, echo=FALSE, eval=TRUE, message=FALSE}
 ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
@@ -104,9 +109,9 @@ DBI::dbListFields(con, "ecom")
 
 <hr>
 
-- `dbReadTable()`: read entire table
-- `dbGetQuery()`: read few rows
-- `dbSendQuery()` & `dbFetch()`: read data in batches
+- read entire table
+- read few rows
+- read data in batches
 
 ## Entire Table
 
@@ -197,13 +202,16 @@ DBI::dbClearResult(query)
 <hr>
 
 ```{r lite18} 
-x <- 1:10
-y <- letters[1:10]
+# sample data
+x     <- 1:10
+y     <- letters[1:10]
 trial <- tibble::tibble(x, y)
+
+# write table to database
 DBI::dbWriteTable(con, "trial", trial)
 ```
 
-## check if table is created in database
+## List Tables
 
 <hr>
 
@@ -212,7 +220,7 @@ DBI::dbListTables(con)
 DBI::dbExistsTable(con, "trial")
 ```
 
-## query sample data from table
+## Query Data
 
 <hr>
 
@@ -220,39 +228,49 @@ DBI::dbExistsTable(con, "trial")
 DBI::dbGetQuery(con, "select * from trial limit 5")
 ```
 
-## overwrite table in the database
+## Overwrite Table
 
 <hr>
 
 ```{r lite21}
-x <- sample(100, 10)
-y <- letters[11:20]
+# sample data
+x      <- sample(100, 10)
+y      <- letters[11:20]
 trial2 <- tibble::tibble(x, y)
+
+# overwrite table trial
 DBI::dbWriteTable(con, "trial", trial2, overwrite = TRUE)
 ```
 
-## query sample data from table to see if it has been overwritten
+## Query Data
 
 <hr>
+
+Let us check if `trial` table has been overwritten by querying data.
 
 ```{r lite22}
 DBI::dbGetQuery(con, "select * from trial limit 5")
 ```
 
-## append data to the table in the database
+## Append Data
 
 <hr>
 
 ```{r lite23}
-x <- sample(100, 10)
-y <- letters[5:14]
+# sample data
+x      <- sample(100, 10)
+y      <- letters[5:14]
 trial3 <- tibble::tibble(x, y)
+
+# append data
 DBI::dbWriteTable(con, "trial", trial3, append = TRUE)
 ```
 
-## query sample data from table to see if new data is appended
+## Query Data
 
 <hr>
+
+Let us check if data has been appended by querying data.
 
 ```{r lite24}
 DBI::dbReadTable(con, "trial")
@@ -278,8 +296,7 @@ DBI::dbSendStatement(con,
 )
 ```
 
-
-## SQLite data type
+## Data Type
 
 <hr>
 
@@ -289,7 +306,7 @@ DBI::dbDataType(RSQLite::SQLite(), 1:5)
 DBI::dbDataType(RSQLite::SQLite(), 1.5)
 ```
 
-## remove table from database
+## Remove Table
 
 <hr>
 
@@ -297,9 +314,11 @@ DBI::dbDataType(RSQLite::SQLite(), 1.5)
 DBI::dbRemoveTable(con, "trial")
 ```
 
-## check if table has been removed 
+## List Tables
 
 <hr> 
+
+Let us check if `trial` table has been removed from the database by listing all the tables.
 
 ```{r lite29}
 DBI::dbListTables(con)
@@ -318,6 +337,9 @@ DBI::sqlCreateTable(con, "new", c(x = "integer", y = "text"))
 
 <hr>
 
+Let us use the first 5 rows of the `ecom` table as sample data and append it to the `ecom` table
+itself.
+
 ```{r lite34, eval=FALSE}
 ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
 ```
@@ -335,7 +357,73 @@ ecom
 DBI::sqlAppendTable(con, "ecom", head(ecom))
 ```
 
-## Close Database Connection
+## Copy Data
+
+<hr>
+
+```{r dbply2}
+copy_to(con, mtcars)
+```
+
+## Reference Copied Data
+
+<hr>
+
+```{r dbply3}
+mtcars2 <- tbl(con, "mtcars")
+mtcars2
+```
+
+## Query Data
+
+<hr>
+
+```{r dbply4}
+mtcars2 %>%
+  select(mpg, cyl, drat)
+```
+
+## Query Data
+
+<hr>
+
+```{r dbply5}
+mtcars2 %>%
+  filter(mpg > 25)
+```
+
+## Query Data
+
+<hr>
+
+```{r dbply6}
+mtcars2 %>%
+  group_by(cyl) %>%
+  summarise(mileage = mean(mpg))
+```
+
+## Display Query
+
+<hr>
+
+```{r dbply7}
+mileages <- 
+  mtcars2 %>%
+  group_by(cyl) %>%
+  summarise(mileage = mean(mpg))
+
+show_query(mileages)
+```
+
+## Collect Data
+
+<hr>
+
+```{r dbply9}
+collect(mileages)
+```
+
+## Close Connection
 
 <hr>
 
@@ -345,6 +433,3 @@ DBI::dbDisconnect(con)
 
 ## {data-background="thankyou.png"}
 
-<!-- To do: -->
-<!--   - add agenda -->
-<!--   - add introduction -->

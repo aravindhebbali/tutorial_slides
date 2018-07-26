@@ -19,16 +19,30 @@ Learn to combine tables using different `*_join` functions provided in dplyr. Le
 
 ## {data-background="casestudy.png"}
 
-## {data-background="join_case_study.png"}
+## Case Study
+
+<hr>
+
+<br>
+<br>
+
+```{r img1, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("join_data.png")
+```
 
 ## Libraries
 
 <hr>
 
-```{r dplyr1, echo=TRUE, eval=TRUE, results='hide', message=FALSE}
+```{r dplyr1, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+library(dplyr)
+suppressWarnings(library(readr))
+options(tibble.width = Inf)
+```
+
+```{r dplyr1a, echo=TRUE, eval=FALSE, results='hide', message=FALSE}
 library(dplyr)
 library(readr)
-options(tibble.width = Inf)
 ```
 
 ## Data: Orders
@@ -36,11 +50,11 @@ options(tibble.width = Inf)
 <hr>
 
 ```{r dplyr25, eval=FALSE}
-order <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/order.csv')
+order <- readr::read_delim('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/order.csv', delim = ';')
 ```
 
 ```{r dplyr2, echo=FALSE, eval=TRUE, message=FALSE}
-order <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/order.csv')
+order <- readr::read_delim('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/order.csv', delim = ';')
 order
 ```
 
@@ -49,96 +63,150 @@ order
 <hr>
 
 ```{r dplyr26, eval=FALSE}
-customer <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/customer.csv')
+customer <- readr::read_delim('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/customer.csv', delim = ';')
 ```
 
 ```{r dplyr, echo=FALSE, eval=TRUE, message=FALSE}
-customer <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/customer.csv')
+customer <- readr::read_delim('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/customer.csv', delim = ';')
 customer
 ```
 
-## {data-background="join_example_data.png"}
+## Example Data
+
+<hr>
+
+<br>
+<br>
+
+```{r img2, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("join.png")
+```
 
 ## {data-background="innerjoin.png"}
 
-## {data-background="join_inner.png"}
+## Inner Join
 
-## inner join
+<hr>
+
+<br>
+<br>
+
+```{r img3, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("draw_inner.png")
+```
+
+## Case Study
 
 <hr>
 
 ```{r dplyr3}
-customer %>%
-  inner_join(order)
+inner_join(customer, order, by = "id")
 ```
 
 ## {data-background="leftjoin.png"}
 
-## {data-background="join_left.png"}
+## Left Join
 
-## left join
+<hr>
+
+<br>
+<br>
+
+```{r img4, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("draw_left.png")
+```
+
+## Case Study
 
 <hr>
 
 ```{r dplyr4}
-customer %>%
-  left_join(order)
+left_join(customer, order, by = "id")
 ```
 
 ## {data-background="rightjoin.png"}
 
-## {data-background="join_right.png"}
+## Right Join
 
-## right join
+<hr>
+
+<br>
+<br>
+
+```{r img5, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("draw_right.png")
+```
+
+## Case Study
 
 <hr>
 
 ```{r dplyr5}
-customer %>%
-  right_join(order)
+right_join(customer, order, by = "id")
 ```
 
 ## {data-background="semijoin.png"}
 
-## {data-background="join_semi.png"}
+## Semi Join
 
-## semi join
+<hr>
+
+<br>
+<br>
+
+```{r img6, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("draw_semi.png")
+```
+
+## Case Study
 
 <hr>
 
 ```{r dplyr6}
-customer %>%
-  semi_join(order)
+semi_join(customer, order, by = "id")
 ```
 
 ## {data-background="antijoin.png"}
 
-## {data-background="join_anti.png"}
+## Anti Join
 
-## anti join
+<hr>
+
+<br>
+<br>
+
+```{r img7, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("draw_anti.png")
+```
+
+## Case Study
 
 <hr>
 
 ```{r dplyr7}
-customer %>%
-  anti_join(order)
+anti_join(customer, order, by = "id")
 ```
 
 ## {data-background="fulljoin.png"}
 
-## {data-background="join_full.png"}
+## Full Join
 
-## full join
+<hr>
+
+<br>
+<br>
+
+```{r img8, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("draw_full.png")
+```
+
+## Case Study
 
 <hr>
 
 ```{r dplyr8}
-customer %>%
-  full_join(order)
+full_join(customer, order, by = "id")
 ```
 
 ## {data-background="thankyou.png"}
 
-<!-- To do: -->
-<!--   - change agenda -->
-<!--   - describe data sets in case study slide -->

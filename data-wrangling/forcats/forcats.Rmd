@@ -71,7 +71,16 @@ In this case study, we will:
 - club traffic from social media websites into a new category
 - group referrers with traffic below a threshold into a single category
 
-## {data-background="canva_fct_count.png"}
+## Count
+
+<hr>
+
+<br>
+<br>
+
+```{r img1, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("fct_count.png")
+```
  
 ## Tabulate Referrers
 
@@ -89,7 +98,16 @@ fct_count(traffics)
 levels(traffics)
 ```
 
-## {data-background="canva_fct_infreq.png"}
+## Reorder Factor Levels
+
+<hr>
+
+<br>
+<br>
+
+```{r img2, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("fct_infreq.png")
+```
 
 ## Sort Referrer by Frequency
 
@@ -111,7 +129,16 @@ traffics %>%
   levels()
 ```
 
-## {data-background="canva_fct_rev.png"}
+## Reverse Levels
+
+<hr>
+
+<br>
+<br>
+
+```{r img3, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("fct_rev.png")
+```
 
 ## Reverse Levels
 
@@ -131,7 +158,16 @@ traffics %>%
 fct_count(traffics)
 ```
 
-## {data-background="canva_fct_collapse.png"}
+## Collapse Levels
+
+<hr>
+
+<br>
+<br>
+
+```{r img4, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("fct_collapse.png")
+```
 
 ## Collapse Referrer Categories
 
@@ -145,7 +181,16 @@ traffics %>%
   fct_count() 
 ```
 
-## {data-background="canva_fct_lump_1.png"}
+## Lump Categories
+
+<hr>
+
+<br>
+<br>
+
+```{r img5, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("fct_lump_1.png")
+```
 
 ## Lump Infrequent Referrer Types
 
@@ -177,7 +222,16 @@ traffics %>%
   table()
 ```
 
-## {data-background="canva_fct_lump_2.png"}
+## Lump Categories
+
+<hr>
+
+<br>
+<br>
+
+```{r img6, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("fct_lump_2.png")
+```
 
 ## Lump Referrer Types with less than 10% traffic
 
@@ -249,9 +303,27 @@ traffics %>%
   table()
 ```
 
-## {data-background="canva_fct_drop.png"}
+## Drop Levels
 
-## {data-background="canva_fct_others_1.png"}
+<hr>
+
+<br>
+<br>
+
+```{r img7, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("fct_drop.png")
+```
+
+## Replace Levels
+
+<hr>
+
+<br>
+<br>
+
+```{r img8, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("fct_others_1.png")
+```
 
 ## Replace Levels with Other
 
@@ -262,7 +334,16 @@ fct_other(traffics, keep = c("google", "yahoo")) %>%
   levels()
 ```
 
-## {data-background="canva_fct_others_2.png"}
+## Replace Levels
+
+<hr>
+
+<br>
+<br>
+
+```{r img9, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("fct_others_2.png")
+```
 
 ## Replace Levels with Other
 
@@ -273,19 +354,41 @@ fct_other(traffics, drop = c("instagram", "twitter")) %>%
   levels()
 ```
 
-## {data-background="canva_fct_recode.png"}
+## Recode Levels
+
+<hr>
+
+<br>
+<br>
+
+```{r img10, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("fct_recode.png")
+```
 
 ## Recode Levels
 
 <hr>
 
 ```{r recode}
-fct_recode(traffics, search = "bing", search = "yahoo", search = "google",
-  social = "facebook", social = "twitter", social = "instagram") %>%
+fct_recode(traffics, search = "bing", 
+                     search = "yahoo", 
+                     search = "google",
+                     social = "facebook", 
+                     social = "twitter", 
+                     social = "instagram") %>%
   levels()
 ```
 
-## {data-background="canva_fct_relevel_1.png"}
+## Reorder Levels
+
+<hr>
+
+<br>
+<br>
+
+```{r img11, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("fct_relevel_1.png")
+```
 
 ## Reorder Levels
 
@@ -296,7 +399,16 @@ fct_relevel(traffics, "twitter") %>%
   levels()
 ```
 
-## {data-background="canva_fct_relevel_2.png"}
+## Reorder Levels
+
+<hr>
+
+<br>
+<br>
+
+```{r img12, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("fct_relevel_2.png")
+```
 
 ## Reorder Levels
 
@@ -307,7 +419,16 @@ fct_relevel(traffics, "google", after = 2) %>%
   levels()
 ```
 
-## {data-background="canva_fct_relevel_3.png"}
+## Reorder Levels
+
+<hr>
+
+<br>
+<br>
+
+```{r img13, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("fct_relevel_3.png")
+```
 
 ## Reorder Levels
 
@@ -342,8 +463,16 @@ responses <-
 responses
 ```
 
+## Shift Levels
 
-## {data-background="canva_fct_shift_1.png"}
+<hr>
+
+<br>
+<br>
+
+```{r img14, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("fct_shift_1.png")
+```
 
 ## Shift Levels
 
@@ -354,7 +483,16 @@ fct_shift(responses, 2) %>%
   levels()
 ```
 
-## {data-background="canva_fct_shift_2.png"}
+## Shift Levels
+
+<hr>
+
+<br>
+<br>
+
+```{r img15, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("fct_shift_2.png")
+```
 
 ## Shift Levels
 
@@ -367,7 +505,3 @@ fct_shift(responses, -2) %>%
 
 ## {data-background="thankyou.png"}
   
-<!-- To do: -->
-<!--   - add agenda -->
-<!--   - describe case study 2 -->
-<!--   - modify ecommerce data -->

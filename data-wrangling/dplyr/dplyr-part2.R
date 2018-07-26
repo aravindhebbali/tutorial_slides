@@ -3,11 +3,13 @@ library(dplyr)
 library(readr)
 
 ## read order data
-order <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/order.csv')
+order <- read_delim('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/order.csv',
+                    delim = ';')
 order
 
 ## read customer data
-customer <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/customer.csv')
+customer <- read_delim('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/customer.csv',
+                       delim = ';')
 customer
 
 ## inner join

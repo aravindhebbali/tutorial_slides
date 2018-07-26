@@ -84,7 +84,16 @@ questions we have about the transact data.
 - how many invoices are due in each quarter
 - what is the average duration between invoice date and payment date
 
-## {data-background="canva_day_week_month.png"}
+## Day, Month & Year
+
+<hr>
+
+<br>
+<br>
+
+```{r img1, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("day_week_month.png")
+```
 
 ## Extract Date, Month & Year from Due Date
 
@@ -110,7 +119,16 @@ transact %>%
   )
 ```
 
-## {data-background="canva_course_duration.png"}
+## Duration
+
+<hr>
+
+<br>
+<br>
+
+```{r img2, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("course_duration.png")
+```
 
 ## Course Duration
 
@@ -175,7 +193,16 @@ transact %>%
   filter(due_month == 2 & due_day == 29)
 ```
 
-## {data-background="canva_shift_dates.png"}
+## Shift Date
+
+<hr>
+
+<br>
+<br>
+
+```{r img3, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("shift_dates.png")
+```
 
 ## Shift Date
 
@@ -187,7 +214,16 @@ course_start + weeks(1)
 course_start + years(1)
 ```
 
-## {data-background="canva_course_interval.png"}
+## Interval
+
+<hr>
+
+<br>
+<br>
+
+```{r img4, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("course_interval.png")
+```
 
 ## Interval
 
@@ -197,7 +233,16 @@ course_start + years(1)
 interval(course_start, course_end)
 ```
 
-## {data-background="canva_shift_interval.png"}
+## Shift Interval
+
+<hr>
+
+<br>
+<br>
+
+```{r img5, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("shift_interval.png")
+```
 
 ## Shift Interval
 
@@ -213,7 +258,16 @@ course_interval %>%
   int_shift(by = years(1))
 ```
 
-## {data-background="canva_interval_overlap.png"}
+## Interval Overlap
+
+<hr>
+
+<br>
+<br>
+
+```{r img6, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("interval_overlap.png")
+```
 
 ## Intervals Overlap
 
@@ -257,7 +311,16 @@ transact %>%
   select(Invoice, Due, Payment, overlaps)
 ```
 
-## {data-background="canva_within.png"}
+## Within
+
+<hr>
+
+<br>
+<br>
+
+```{r img7, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("within.png")
+```
 
 ## Within
 
@@ -281,7 +344,16 @@ transact %>%
   select(Due, Payment, overlaps)
 ```
 
-## {data-background="canva_quarter_semester.png"}
+## Quarter
+
+<hr>
+
+<br>
+<br>
+
+```{r img8, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("quarter_semester.png")
+```
 
 ## Quarter
 
@@ -328,7 +400,16 @@ course_duration %>%
   duration(units = 'days')
 ```
 
-## {data-background="canva_convert.png"}
+## Convert
+
+<hr>
+
+<br>
+<br>
+
+```{r img9, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("convert.png")
+```
 
 ## Case Study
 
@@ -342,7 +423,16 @@ interval(course_start, course_end) / dweeks()
 interval(course_start, course_end) / dyears()
 ```
 
-## {data-background="canva_time_length.png"}
+## Convert
+
+<hr>
+
+<br>
+<br>
+
+```{r img10, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("time_length.png")
+```
 
 ## Case Study
 
@@ -357,7 +447,16 @@ interval(course_start, course_end) %>%
   time_length(unit = "hours")
 ```
 
-## {data-background="canva_as_period.png"}
+## Convert
+
+<hr>
+
+<br>
+<br>
+
+```{r img11, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("as_period.png")
+```
 
 ## Case Study
 
@@ -374,5 +473,3 @@ interval(course_start, course_end) %>%
 
 ## {data-background="thankyou.png"}
 
-<!-- To do: -->
-<!--   - add agenda -->

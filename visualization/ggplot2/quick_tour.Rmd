@@ -41,6 +41,7 @@ types of plots. Below are the key arguments:
 - `geom` : symbols to represent data
 - `data` : a data frame or a tibble
 
+
 ## Scatter Plot
 
 <hr>

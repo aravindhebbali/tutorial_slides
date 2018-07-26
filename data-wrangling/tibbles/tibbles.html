@@ -519,16 +519,16 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <pre><code>## # A tibble: 26 x 3
 ##    x         y     z
 ##    &lt;chr&gt; &lt;int&gt; &lt;int&gt;
-##  1 a         1     3
-##  2 b         2    40
-##  3 c         3    49
-##  4 d         4    66
-##  5 e         5    64
-##  6 f         6    55
-##  7 g         7    58
-##  8 h         8    97
-##  9 i         9    20
-## 10 j        10     1
+##  1 a         1    77
+##  2 b         2    75
+##  3 c         3    47
+##  4 d         4    76
+##  5 e         5    22
+##  6 f         6    78
+##  7 g         7    23
+##  8 h         8    56
+##  9 i         9    13
+## 10 j        10    10
 ## # ... with 16 more rows</code></pre>
 </section>
 <section id="section-3" class="slide level2" data-background="tibblefeatures.png">
@@ -553,16 +553,16 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <pre><code>## # A tibble: 26 x 3
 ##    x         y     z
 ##    &lt;chr&gt; &lt;int&gt; &lt;int&gt;
-##  1 a         1    67
-##  2 b         2    32
-##  3 c         3    74
-##  4 d         4     4
-##  5 e         5    58
-##  6 f         6    10
-##  7 g         7    43
-##  8 h         8    63
-##  9 i         9    77
-## 10 j        10    46
+##  1 a         1    59
+##  2 b         2    22
+##  3 c         3    75
+##  4 d         4    15
+##  5 e         5    96
+##  6 f         6    91
+##  7 g         7    93
+##  8 h         8    17
+##  9 i         9    40
+## 10 j        10    55
 ## # ... with 16 more rows</code></pre>
 </section>
 <section id="never-changes-inputs-types-1" class="slide level2">
@@ -573,7 +573,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <pre><code>## 'data.frame':    26 obs. of  3 variables:
 ##  $ x: Factor w/ 26 levels &quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,..: 1 2 3 4 5 6 7 8 9 10 ...
 ##  $ y: int  1 2 3 4 5 6 7 8 9 10 ...
-##  $ z: int  51 37 45 60 24 94 35 95 42 36 ...</code></pre>
+##  $ z: int  51 64 78 29 83 87 81 61 65 85 ...</code></pre>
 </section>
 <section id="never-adjusts-variable-names" class="slide level2">
 <h2>Never adjusts variable names</h2>
@@ -593,16 +593,16 @@ z &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">
 <pre><code>## # A tibble: 100 x 3
 ##        x y     z    
 ##    &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;
-##  1     1 a     F    
-##  2     2 a     F    
-##  3     3 a     F    
-##  4     4 a     F    
-##  5     5 a     T    
-##  6     6 a     F    
-##  7     7 a     F    
-##  8     8 a     T    
-##  9     9 a     T    
-## 10    10 a     F    
+##  1     1 a     TRUE 
+##  2     2 a     TRUE 
+##  3     3 a     FALSE
+##  4     4 a     TRUE 
+##  5     5 a     TRUE 
+##  6     6 a     TRUE 
+##  7     7 a     TRUE 
+##  8     8 a     FALSE
+##  9     9 a     TRUE 
+## 10    10 a     TRUE 
 ## # ... with 90 more rows</code></pre>
 </section>
 <section id="never-recycle-vector-of-length-greater-than-1" class="slide level2">
@@ -638,10 +638,10 @@ Error <span class="cf">in</span> <span class="kw">overscope_eval_next</span>(ove
 <pre><code>## # A tibble: 4 x 2
 ##   name    value
 ##   &lt;chr&gt;   &lt;dbl&gt;
-## 1 chrome   40.0
-## 2 firefox  20.0
-## 3 edge     30.0
-## 4 safari   10.0</code></pre>
+## 1 chrome     40
+## 2 firefox    20
+## 3 edge       30
+## 4 safari     10</code></pre>
 </section>
 <section id="section-5" class="slide level2" data-background="tribble.png">
 <h2></h2>
@@ -669,8 +669,8 @@ Error <span class="cf">in</span> <span class="kw">overscope_eval_next</span>(ove
 <pre><code>## # A tibble: 2 x 3
 ##       x y     z    
 ##   &lt;dbl&gt; &lt;lgl&gt; &lt;chr&gt;
-## 1  1.00 T     a    
-## 2  2.00 F     b</code></pre>
+## 1     1 TRUE  a    
+## 2     2 FALSE b</code></pre>
 </section>
 <section id="column-names" class="slide level2">
 <h2>Column Names</h2>
@@ -697,17 +697,17 @@ browsers</code></pre></div>
 <pre><code>## # A tibble: 3 x 2
 ##   name    value
 ##   &lt;chr&gt;   &lt;dbl&gt;
-## 1 chrome   40.0
-## 2 firefox  20.0
-## 3 edge     30.0</code></pre>
+## 1 chrome     40
+## 2 firefox    20
+## 3 edge       30</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">add_row</span>(browsers, <span class="dt">name =</span> <span class="st">'safari'</span>, <span class="dt">value =</span> <span class="dv">10</span>)</code></pre></div>
 <pre><code>## # A tibble: 4 x 2
 ##   name    value
 ##   &lt;chr&gt;   &lt;dbl&gt;
-## 1 chrome   40.0
-## 2 firefox  20.0
-## 3 edge     30.0
-## 4 safari   10.0</code></pre>
+## 1 chrome     40
+## 2 firefox    20
+## 3 edge       30
+## 4 safari     10</code></pre>
 </section>
 <section id="add-rows-1" class="slide level2">
 <h2>Add Rows</h2>
@@ -716,10 +716,10 @@ browsers</code></pre></div>
 <pre><code>## # A tibble: 4 x 2
 ##   name    value
 ##   &lt;chr&gt;   &lt;dbl&gt;
-## 1 chrome   40.0
-## 2 safari   10.0
-## 3 firefox  20.0
-## 4 edge     30.0</code></pre>
+## 1 chrome     40
+## 2 safari     10
+## 3 firefox    20
+## 4 edge       30</code></pre>
 </section>
 <section id="add-column" class="slide level2">
 <h2>Add Column</h2>
@@ -729,10 +729,10 @@ browsers</code></pre></div>
 <pre><code>## # A tibble: 4 x 3
 ##   name    value visits
 ##   &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;
-## 1 chrome   40.0   4000
-## 2 firefox  20.0   2000
-## 3 edge     30.0   3000
-## 4 safari   10.0   1000</code></pre>
+## 1 chrome     40   4000
+## 2 firefox    20   2000
+## 3 edge       30   3000
+## 4 safari     10   1000</code></pre>
 </section>
 <section id="remove-rownames" class="slide level2">
 <h2>Remove Rownames</h2>

@@ -53,3 +53,6 @@
   .reveal ol {
     display: block;
   }
+  .reveal section img {
+    border-width: 0px;
+  }

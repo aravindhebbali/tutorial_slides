@@ -56,7 +56,7 @@ library(purrr)
 
 ```{r importlib2, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
 library(magrittr)
-library(readr)
+suppressMessages(library(readr))
 library(purrr)
 ```
 ## Data
@@ -129,7 +129,16 @@ y %<>% sqrt()
 head(y)
 ```
 
-## {data-background="canva_square_root.png"}
+## Square Root
+
+<hr>
+
+<br>
+<br>
+
+```{r mag24, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("pipes_square_root.png")
+```
 
 ## Square Root - Using pipe
 
@@ -144,7 +153,16 @@ y <-
 y
 ```
 
-## {data-background="canva_correlation.png"}
+## Correlation
+
+<hr>
+
+<br>
+<br>
+
+```{r mag25, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("pipes_correlation.png")
+```
 
 ## Correlation
 
@@ -169,7 +187,15 @@ ecom %>%
 barplot(table(subset(ecom, purchase == 'true')$referrer))
 ```
 
-## {data-background="canva_data_visualization.png"}
+## Visualization
+
+<hr>
+
+<br>
+
+```{r mag26, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("pipes_data_visualization.png")
+```
 
 ## Visualization - Using pipe
 
@@ -220,7 +246,15 @@ email %>%
   toupper()
 ```
 
-## {data-background="canva_string_manipulation.png"}
+## String Manipulation
+
+<hr>
+
+<br>
+
+```{r mag27, echo=FALSE, out.width="70%", fig.align="center"}
+knitr::include_graphics("pipes_string.png")
+```
 
 ## String Manipulation
 
@@ -418,6 +452,3 @@ mt %>%
 
 ## {data-background="thankyou.png"}
 
-<!-- To do: -->
-<!--     - change introduction -->
-<!--     - explain functions before using them -->

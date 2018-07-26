@@ -77,7 +77,16 @@ library(dplyr)
 options(tibble.width = Inf)
 ```
 
-## {data-background="distinct_canva.png"}
+## Distinct
+
+<hr>
+
+<br>
+<br>
+
+```{r img1, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("distinct_1.png")
+```
 
 ## Traffic Sources
 
@@ -95,7 +104,16 @@ distinct(ecom, referrer)
 distinct(ecom, device)
 ```
 
-## {data-background="rename_canva.png"}
+## Rename
+
+<hr>
+
+<br>
+<br>
+
+```{r img2, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("rename_1.png")
+```
 
 ## Rename Columns
 
@@ -105,7 +123,16 @@ distinct(ecom, device)
 rename(ecom, time_on_site = duration)
 ```
 
-## {data-background="sampling_canva.png"}
+## Sampling
+
+<hr>
+
+<br>
+<br>
+
+```{r img3, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("sample_frac_n.png")
+```
 
 ## Sampling Data
 
@@ -123,7 +150,16 @@ sample_n(ecom, size = 700)
 sample_frac(ecom, size = 0.7)
 ```
 
-## {data-background="pull_canva.png"}
+## Extract Columns
+
+<hr>
+
+<br>
+<br>
+
+```{r img4, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("pull_1.png")
+```
 
 ## Extract Device Column
 
@@ -149,7 +185,15 @@ pull(ecom, 1)
 pull(ecom, -1)
 ```
 
-## {data-background="slice_canva.png"}
+## Extract Rows
+
+<hr>
+
+<br>
+
+```{r img5, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("slice_1.png")
+```
 
 ## Extract First 20 Rows
 
@@ -167,7 +211,16 @@ slice(ecom, 1:20)
 slice(ecom, n())
 ```
 
-## {data-background="tally_canva.png"}
+## Tally
+
+<hr>
+
+<br>
+<br>
+
+```{r img6, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("tally_count.png")
+```
 
 ## Tabulate Referrers
 
@@ -179,7 +232,7 @@ ecom %>%
   tally()
 ```
 
-## Tabulate referrers and bouncers
+## Tabulate Referrers and Bouncers
 
 <hr>
 
@@ -189,7 +242,7 @@ ecom %>%
   tally()
 ```
 
-## Tabulate referrers and purchasers
+## Tabulate Referrers and Purchasers
 
 <hr>
 
@@ -218,9 +271,18 @@ ecom %>%
 count(ecom, referrer, purchase)
 ```
 
-## {data-background="arrange_canva.png"}
+## Arrange
 
-## Top 2 referrers by orders
+<hr>
+
+<br>
+<br>
+
+```{r img7, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("arrange_1.png")
+```
+
+## Top 2 Referrers by Orders
 
 <hr>
 
