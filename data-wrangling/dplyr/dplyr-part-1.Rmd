@@ -53,6 +53,8 @@ dplyr provides a set of verbs that help us solve the most common data manipulati
 - `mutate`: create new columns from existing columns
 - `summarise`: reduce data to a single summary
 
+## {data-background="casestudy.png"}
+
 ## Case Study
 
 <hr>
@@ -82,8 +84,6 @@ ecom
 ## Data Dictionary
 
 <hr>
-
-Below is the description of the data set:
 
 - id: row id
 - referrer: referrer website/search engine
@@ -137,11 +137,13 @@ ecom %>%
   select(device, aov)
 ```
 
-## Step 1: Filter Purchasers
+<!-- ## Step 1: Filter Purchasers
 
 <hr>
 
-In order to compute the AOV, we must first separate the purchasers from non-purchasers. We will do this by filtering the data related to purchasers using the `filter()` function. It allows us to filter rows that meet a specific criteria/condition. The first argument is the name of the data frame and the rest of the arguments are expressions for filtering the data. Let us look at a few examples:
+In order to compute the AOV, we must first separate the purchasers from non-purchasers. We will do this by filtering the data related to purchasers using the `filter()` function. It allows us to filter rows that meet a specific criteria/condition. The first argument is the name of the data frame and the rest of the arguments are expressions for filtering the data. Let us look at a few examples: -->
+
+## {data-background="filter.png"}
 
 ## Filter 
 
@@ -197,11 +199,13 @@ filter(ecom, device == "mobile", n_pages > 5)
 filter(ecom, purchase == "true")
 ```
 
-## Step 2: Select relevant columns
+<!-- ## Step 2: Select relevant columns
 
 <hr>
 
-After filtering the data, we need to select relevent variables to compute the AOV. Remember, we do not need all the columns in the data to compute a required metric (in our case, AOV). The `select()` function allows us to select a subset of columns. The first argument is the name of the data frame and the subsequent arguments specify the columns by name or position. Let us look at a few examples:
+After filtering the data, we need to select relevent variables to compute the AOV. Remember, we do not need all the columns in the data to compute a required metric (in our case, AOV). The `select()` function allows us to select a subset of columns. The first argument is the name of the data frame and the subsequent arguments specify the columns by name or position. Let us look at a few examples: -->
+
+## {data-background="select.png"}
 
 ## Select device and purchase columns 
 
@@ -282,11 +286,13 @@ ecom2 <- select(ecom1, device, order_value, order_items)
 ecom2
 ```
 
-## Step 3: Grouping Data
+<!-- ## Step 3: Grouping Data
 
 <hr>
 
-Since we want to compute the AOV for each device, we need to compute the total order value and total order items for each device. To achieve this, we will group the selected variables by device type. Using the `group_by()` function, we will group our case study data by device types. The first argument is the name of the data frame and the second argument is the name of the column based on which the data will be split. Let us look at a few examples:
+Since we want to compute the AOV for each device, we need to compute the total order value and total order items for each device. To achieve this, we will group the selected variables by device type. Using the `group_by()` function, we will group our case study data by device types. The first argument is the name of the data frame and the second argument is the name of the column based on which the data will be split. Let us look at a few examples: -->
+
+## {data-background="group.png"}
 
 ## Group data by referrer type 
 
@@ -307,11 +313,13 @@ ecom3 <- group_by(ecom2, device)
 ecom3
 ```
 
-## Step 4: Summarize
+<!-- ## Step 4: Summarize
 
 <hr>
 
-The next step is to compute the total order value and total order items for each device. We will use them to then compute the average order value. Now we need to reduce the order value and order items data to a single summary. We can achieve this using the `summarise()` function. The first argument is the name of a data frame and the subsequent arguments are functions that can generate a summary. For example, we can use `min`, `max`, `sum`, `mean` etc.
+The next step is to compute the total order value and total order items for each device. We will use them to then compute the average order value. Now we need to reduce the order value and order items data to a single summary. We can achieve this using the `summarise()` function. The first argument is the name of a data frame and the subsequent arguments are functions that can generate a summary. For example, we can use `min`, `max`, `sum`, `mean` etc. -->
+
+## {data-background="summarise.png"}
 
 ## Summarize: Total Order Items & Value
 
@@ -354,12 +362,13 @@ ecom4 <- summarise_all(ecom3, funs(sum))
 ecom4
 ```
 
-## Step 5: Compute AOV
+<!-- ## Step 5: Compute AOV
 
 <hr>
 
-Now that we have the total order value and total order items for each device category, we can compute the AOV. We will create a new column to store the result. To create a new column, we will use the `mutate()` function. The first argument is the name of the data frame and the subsequent arguments are expressions for creating new columns based out of existing columns.
+Now that we have the total order value and total order items for each device category, we can compute the AOV. We will create a new column to store the result. To create a new column, we will use the `mutate()` function. The first argument is the name of the data frame and the subsequent arguments are expressions for creating new columns based out of existing columns. -->
 
+## {data-background="mutate.png"}
 
 ## Mutate
 
@@ -381,11 +390,13 @@ ecom5 <- mutate(ecom4, aov = order_value / order_items)
 ecom5
 ```
 
-## Step 6: Select Relevant Columns
+<!-- ## Step 6: Select Relevant Columns
 
 <hr>
 
-The last step is to select the relevant columns. We require the device type and the corresponding aov and hence we can get rid of other columns. Use the `select()` function to extract the relevant columns.
+The last step is to select the relevant columns. We require the device type and the corresponding aov and hence we can get rid of other columns. Use the `select()` function to extract the relevant columns. -->
+
+## {data-background="select.png"}
 
 ```{r dplyr16}
 ecom6 <- select(ecom5, device, aov)
@@ -398,8 +409,6 @@ ecom6
 
 <hr>
 
-Let us combine all the code from the above steps:
-
 ```{r dplyr17}
 ecom1 <- filter(ecom, purchase == "true")
 ecom2 <- select(ecom1, device, order_value, order_items)
@@ -409,6 +418,17 @@ ecom5 <- mutate(ecom4, aov = order_value / order_items)
 ecom6 <- select(ecom5, device, aov)
 ecom6
 ```
+
+## AOV by Devices
+
+<hr>
+
+<br>
+
+```{r img12, echo=FALSE, out.width="80%", fig.align="center"}
+knitr::include_graphics("dplyr_aov_map.png")
+```
+
 
 ## AOV by Devices
 
@@ -426,15 +446,6 @@ ecom %>%
   select(device, aov)
 ```
 
-## AOV by Devices
-
-<hr>
-
-<br>
-
-```{r img12, echo=FALSE, out.width="80%", fig.align="center"}
-knitr::include_graphics("dplyr_aov_map.png")
-```
 
 ## Practice Questions
 
