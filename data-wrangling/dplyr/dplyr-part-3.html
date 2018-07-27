@@ -627,30 +627,30 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample_n</span>(ecom, <span class="dt">size =</span> <span class="dv">700</span>)</code></pre></div>
 <pre><code>## # A tibble: 700 x 11
-##       id referrer device bouncers n_visit n_pages duration
-##    &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;      &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;
-##  1   621 direct   mobile false          2      12      348
-##  2   563 social   tablet false          5      16      272
-##  3   929 social   tablet true           3       1      111
-##  4   100 google   laptop true           5       1      751
-##  5   228 direct   tablet true          10       1      497
-##  6   851 direct   laptop true           2       1      111
-##  7   936 google   mobile false          1      20      320
-##  8   622 google   mobile false          2       8      184
-##  9   436 bing     mobile false          8      20      380
-## 10   755 google   tablet false          8       3       69
-##    country               purchase order_items order_value
-##    &lt;chr&gt;                 &lt;chr&gt;          &lt;dbl&gt;       &lt;dbl&gt;
-##  1 Brazil                false              0           0
-##  2 China                 true               2         866
-##  3 China                 false              0           0
-##  4 Portugal              false              0           0
-##  5 Mexico                false              0           0
-##  6 Portugal              false              0           0
-##  7 Palestinian Territory false              0           0
-##  8 China                 false              5        2000
-##  9 Argentina             false              0           0
-## 10 Poland                false              7        2671
+##       id referrer device bouncers n_visit n_pages duration country    
+##    &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;      &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;      
+##  1   927 social   tablet false          1       7       77 Vietnam    
+##  2    37 bing     laptop true           0       1      897 Vietnam    
+##  3   910 google   laptop false         10       4       60 Russia     
+##  4   852 bing     tablet true           0       1      845 Philippines
+##  5   576 social   laptop false          8       3       30 Colombia   
+##  6    71 social   laptop true           0       1      874 Brazil     
+##  7   900 social   tablet false          1      19      399 Philippines
+##  8   347 yahoo    tablet true           2       1      652 Philippines
+##  9   240 direct   laptop false          6       4      104 France     
+## 10   547 google   laptop true           5       1      376 Belize     
+##    purchase order_items order_value
+##    &lt;chr&gt;          &lt;dbl&gt;       &lt;dbl&gt;
+##  1 false              0           0
+##  2 false              0           0
+##  3 false              0           0
+##  4 false              0           0
+##  5 false              0           0
+##  6 false              0           0
+##  7 true               5        2043
+##  8 false              0           0
+##  9 false              0           0
+## 10 false              0           0
 ## # ... with 690 more rows</code></pre>
 </section>
 <section id="sampling-data-1" class="slide level2">
@@ -658,29 +658,29 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample_frac</span>(ecom, <span class="dt">size =</span> <span class="fl">0.7</span>)</code></pre></div>
 <pre><code>## # A tibble: 700 x 11
-##       id referrer device bouncers n_visit n_pages duration country    
-##    &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;      &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;      
-##  1   495 google   laptop false          8      18      522 Japan      
-##  2   452 google   tablet false          6      14      406 East Timor 
-##  3   416 direct   laptop false          6      16      368 China      
-##  4    68 direct   mobile true           7       1      912 France     
-##  5   721 google   mobile false          4      16      416 Thailand   
-##  6   833 direct   mobile false          5       8      112 Uganda     
-##  7   737 google   mobile true           9       1      994 Portugal   
-##  8   232 social   laptop false          8       2       60 Afghanistan
-##  9   270 yahoo    mobile false          4       9      189 Russia     
-## 10   824 yahoo    laptop true           2       1      997 Somalia    
+##       id referrer device bouncers n_visit n_pages duration country   
+##    &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;      &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;     
+##  1  1000 google   mobile true           9       1      269 China     
+##  2   721 google   mobile false          4      16      416 Thailand  
+##  3   146 google   laptop true           7       1      792 Greece    
+##  4   509 yahoo    laptop true           1       1      991 Uganda    
+##  5    92 google   mobile false          5       8      192 Indonesia 
+##  6   372 social   tablet true           5       1      175 Pakistan  
+##  7    19 social   tablet false          7      10      290 Colombia  
+##  8     7 yahoo    mobile true          10       1       75 Bangladesh
+##  9   804 social   tablet false          0       2       46 Russia    
+## 10   532 google   mobile true           6       1      644 Russia    
 ##    purchase order_items order_value
 ##    &lt;chr&gt;          &lt;dbl&gt;       &lt;dbl&gt;
-##  1 true               8        2367
+##  1 false              0           0
 ##  2 false              0           0
-##  3 true               7        1729
+##  3 false              0           0
 ##  4 false              0           0
-##  5 false              0           0
+##  5 false              1        1273
 ##  6 false              0           0
-##  7 false              0           0
+##  7 true               9        1304
 ##  8 false              0           0
-##  9 false              5         947
+##  9 false              0           0
 ## 10 false              0           0
 ## # ... with 690 more rows</code></pre>
 </section>

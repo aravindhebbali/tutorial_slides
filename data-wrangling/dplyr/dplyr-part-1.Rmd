@@ -8,13 +8,11 @@ output: _output.yaml
 
 <hr>
 
-Use `dplyr` to:
-
+- filter rows
 - select variables/columns
-- filter data
-- arrange data
+- sort/arrange data
 - generate new variables
-- grouped summaries
+- create grouped summaries
 
 ## Introduction
 
@@ -22,14 +20,11 @@ Use `dplyr` to:
 
 According to  a [survey](http://visit.crowdflower.com/rs/416-ZBE-142/images/CrowdFlower_DataScienceReport_2016.pdf) by [CrowdFlower](https://www.crowdflower.com/), data scientists spend most of their time cleaning and manipulating data rather than mining or modeling them for insights. As such, it becomes important to have tools that make data manipulation faster and easier. In today's post, we introduce you to [dplyr](http://dplyr.tidyverse.org/), a grammar of data manipulation.
 
-![survey](crowd_flower3.png)
+<br>
 
-## Why dplyr
-
-<hr>
-
-dplyr helps us solve the most common data manipulation challenges such as filtering rows, selecting columns, sorting data, creating new columns, summarizing data etc. In order to truly appreciate dplyr, we will compare it to the functions in base R.
-
+```{r img1, echo=FALSE, out.width="70%", fig.align="center"}
+knitr::include_graphics("crowd_flower3.png")
+```
 
 ## Libraries
 
@@ -58,19 +53,16 @@ dplyr provides a set of verbs that help us solve the most common data manipulati
 - `mutate`: create new columns from existing columns
 - `summarise`: reduce data to a single summary
 
-## {data-background="casestudy.png"}
-
 ## Case Study
 
 <hr>
 
-We will explore dummy data that we have created to resemble web logs of a ecommerce company. You can download the data from [here](https://github.com/rsquaredacademy/datasets/blob/master/web.csv) or import it directly using `read_csv()` from the [readr](readr.tidyverse.org) package. We will use dplyr to answer a few questions we have about the above data:
+We will explore dummy data that resembles web logs of an ecommerce company. You can download the data from [here](https://github.com/rsquaredacademy/datasets/blob/master/web.csv) or import it directly using `read_csv()` from the [readr](readr.tidyverse.org) package. We will use dplyr to answer a few questions we have about the above data:
 
 - what is the average order value by device types?
 - what is the average number of pages visited by purchasers and non-purchasers?
 - what is the average time on site for purchasers vs non-purchasers?
 - what is the average number of pages visited by purchasers and non-purchasers using mobile?
-
 
 ## Data
 
@@ -82,7 +74,7 @@ ecom <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/mas
 
 
 ```{r show, echo=FALSE, eval=TRUE, message=FALSE}
-ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+ecom <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
 ecom
 ```
 
@@ -113,9 +105,21 @@ Below is the description of the data set:
 
 <!-- Average value of every order placed over a defined period of time. It is determined using sales per order and not sales per customer. Let us look at the steps to calculate AOV from the ecommerce data set. -->
 
-![alt text](J:/R/tutorial_slides/data-wrangling/dplyr/image.jpg)
+<br>
 
-## {data-background="aov_flow_canva.png"}
+```{r img2, echo=FALSE, out.width="80%", fig.align="center"}
+knitr::include_graphics("image.jpg")
+```
+
+## AOV Computation
+
+<hr>
+
+<br>
+
+```{r img3, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("aov_flow2.png")
+```
 
 ## AOV by Devices
 
@@ -133,15 +137,24 @@ ecom %>%
   select(device, aov)
 ```
 
-## {data-background="filter.png"}
-
 ## Step 1: Filter Purchasers
 
 <hr>
 
 In order to compute the AOV, we must first separate the purchasers from non-purchasers. We will do this by filtering the data related to purchasers using the `filter()` function. It allows us to filter rows that meet a specific criteria/condition. The first argument is the name of the data frame and the rest of the arguments are expressions for filtering the data. Let us look at a few examples:
 
-## Select all visits from mobile
+## Filter 
+
+<hr>
+
+<br>
+<br>
+
+```{r img4, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("filter_1.png")
+```
+
+## Filter all visits from mobile
 
 <hr>
 
@@ -149,7 +162,18 @@ In order to compute the AOV, we must first separate the purchasers from non-purc
 filter(ecom, device == "mobile")
 ```
 
-## visits from mobile that converted
+## Visits from mobile that converted
+
+<hr>
+
+<br>
+<br>
+
+```{r img5, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("filter_2.png")
+```
+
+## Visits from mobile that converted
 
 <hr>
 
@@ -157,7 +181,7 @@ filter(ecom, device == "mobile")
 filter(ecom, device == "mobile", purchase == "true")
 ```
 
-## from mobile & visited > 5 pages 
+## Visits from mobile & visited > 5 pages 
 
 <hr>
 
@@ -165,15 +189,13 @@ filter(ecom, device == "mobile", purchase == "true")
 filter(ecom, device == "mobile", n_pages > 5)
 ```
 
-## Case Study: visits that converted
+## Case Study
 
 <hr>
 
 ```{r dplyr5}
 filter(ecom, purchase == "true")
 ```
-
-## {data-background="select.png"}
 
 ## Step 2: Select relevant columns
 
@@ -185,11 +207,33 @@ After filtering the data, we need to select relevent variables to compute the AO
 
 <hr>
 
+<br>
+<br>
+
+```{r img6, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("select_1.png")
+```
+
+## Select device and purchase columns 
+
+<hr>
+
 ```{r dplyr6}
 select(ecom, device, purchase)
 ```
 
-## all columns from device to purchase
+## Select Multiple Columns
+
+<hr>
+
+<br>
+<br>
+
+```{r img7, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("select_2.png")
+```
+
+## Select all columns from device to purchase
 
 <hr> 
 
@@ -197,7 +241,18 @@ select(ecom, device, purchase)
 select(ecom, device:purchase)
 ```
 
-## all columns excluding id and country
+## Select Multiple Columns
+
+<hr>
+
+<br>
+<br>
+
+```{r img8, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("select_3.png")
+```
+
+## Select all columns excluding id and country
 
 <hr>
 
@@ -205,7 +260,7 @@ select(ecom, device:purchase)
 select(ecom, -id, -country)
 ```
 
-## Case Study: Select
+## Case Study
 
 <hr>
 
@@ -215,7 +270,7 @@ For our case study, we need to select the columns order value and order items to
 select(ecom, device, order_value, order_items)
 ```
 
-## Case Study: Select
+## Case Study
 
 <hr>
 
@@ -227,9 +282,7 @@ ecom2 <- select(ecom1, device, order_value, order_items)
 ecom2
 ```
 
-## {data-background="group.png"}
-
-## Step 3: Group data by devices
+## Step 3: Grouping Data
 
 <hr>
 
@@ -243,7 +296,7 @@ Since we want to compute the AOV for each device, we need to compute the total o
 group_by(ecom, referrer)
 ```
 
-## Case Study: Group 
+## Case Study
 
 <hr>
 
@@ -254,19 +307,29 @@ ecom3 <- group_by(ecom2, device)
 ecom3
 ```
 
-## {data-background="summarise.png"}
-
-## Step 4: Total order value and order items
+## Step 4: Summarize
 
 <hr>
 
 The next step is to compute the total order value and total order items for each device. We will use them to then compute the average order value. Now we need to reduce the order value and order items data to a single summary. We can achieve this using the `summarise()` function. The first argument is the name of a data frame and the subsequent arguments are functions that can generate a summary. For example, we can use `min`, `max`, `sum`, `mean` etc.
 
-## Summarise
+## Summarize: Total Order Items & Value
+
+<hr>
+
+<br>
+<br>
+
+```{r img10, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("groupby_summarise.png")
+```
+
+## Case Study
 
 <hr>
 
 For our case study, we need the totals of order value and order items. What function can we use to obtain them? The `sum()` function will generate the sum of the values and hence we will use it inside the `summarise()` function. Remember, we need to provide a name to the summary being generated. 
+
 
 ```{r dplyr13}
 ecom4 <- summarise(ecom3, total_value = sum(order_value),
@@ -280,7 +343,7 @@ ecom4
 
 There you go, we have the total order value and total order items for each device type. Another way to achieve the above result is to use the `summarise_all()` function. How does that work? It generates the specified summary for all the columns in the data set except for the column based on which the data has been grouped. So we need to ensure that the data frame does not have any irrelevant columns.
 
-## Case Study: Summarise
+## Case Study
 
 <hr>
 
@@ -291,20 +354,34 @@ ecom4 <- summarise_all(ecom3, funs(sum))
 ecom4
 ```
 
-## {data-background="mutate.png"}
-
 ## Step 5: Compute AOV
 
 <hr>
 
 Now that we have the total order value and total order items for each device category, we can compute the AOV. We will create a new column to store the result. To create a new column, we will use the `mutate()` function. The first argument is the name of the data frame and the subsequent arguments are expressions for creating new columns based out of existing columns.
 
+
+## Mutate
+
+<hr>
+
+<br>
+<br>
+
+```{r img11, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("mutate_1.png")
+```
+
+## Case Study
+
+<hr>
+
 ```{r dplyr15}
 ecom5 <- mutate(ecom4, aov = order_value / order_items)
 ecom5
 ```
 
-## Step 6: Select relevant columns
+## Step 6: Select Relevant Columns
 
 <hr>
 
@@ -337,13 +414,6 @@ ecom6
 
 <hr>
 
-
-If you observe, at each step we create a new variable(data frame) and then use it as an input in the next step i.e. the output from one function becomes the input for another function. Can we achieve the final outcome i.e. `ecom6` without creating the intermediate data frames (ecom1 - ecom5)? Yes, we can. We will use the `%>%` operator to chain the above steps so that we can avoid creating the intermediate data frames. Let us see how to do that.
-
-## AOV by Devices
-
-<hr>
-
 ```{r dplyr18}
 ecom %>%
   filter(purchase == 'true') %>%
@@ -356,9 +426,15 @@ ecom %>%
   select(device, aov)
 ```
 
-## {data-background="aov_flow_map_canva.png"}
+## AOV by Devices
 
-## {data-background="practice.png"}
+<hr>
+
+<br>
+
+```{r img12, echo=FALSE, out.width="80%", fig.align="center"}
+knitr::include_graphics("dplyr_aov_map.png")
+```
 
 ## Practice Questions
 
@@ -369,7 +445,3 @@ ecom %>%
 - what is the average number of pages visited by purchasers and non-purchasers using mobile?
 
 ## {data-background="thankyou.png"}
-
-<!-- To do: -->
-<!--   - add image to introduction and why dplyr -->
-<!-- revise title slides -->
