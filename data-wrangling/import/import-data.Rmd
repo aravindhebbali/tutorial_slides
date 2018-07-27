@@ -172,7 +172,7 @@ knitr::include_graphics("range_summary.png")
 
 <hr>
 
-- sas7bdat
+- SAS
 - SPSS
 - STATA
 
