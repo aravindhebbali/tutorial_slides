@@ -1,0 +1,167 @@
+---
+output: _output.yaml
+---
+
+## {data-background="forcats.png"}
+
+## Agenda
+
+<hr>
+
+Use the terminal/command line for 
+
+- listing files in a directory
+- navigate between directories
+- view contents of a file
+- word count
+- copy files
+- rename files
+- remove/delete files
+- move file to a new folder
+- remove directory
+- list all files in a directory
+- get help 
+- print variable value
+- create variables
+- store output in a file
+
+## pwd
+
+<hr>
+
+```{sh pwd}
+pwd
+```
+
+## who am i
+
+<hr>
+
+```{sh who}
+whoami
+```
+
+## ls
+
+<hr>
+
+```{sh ls}
+ls
+```
+
+## cat
+
+<hr>
+
+```{sh cat}
+cat shell.Rmd
+```
+
+## wc
+
+<hr>
+
+```{sh wc1}
+# characters, words and lines
+wc shell.Rmd
+```
+
+## wc
+
+<hr>
+
+```{sh wc2}
+# characters
+wc shell.Rmd -c
+```
+
+## wc
+
+<hr>
+
+```{sh wc3}
+# words
+wc shell.Rmd -w
+```
+
+## wc
+
+<hr>
+
+```{sh wc4}
+# lines
+wc shell.Rmd -l
+```
+
+## ls
+
+<hr>
+
+```{sh ls4}
+ls
+```
+
+
+## cp
+
+<hr>
+
+```{sh cp}
+cp shell.Rmd cyg.Rmd
+```
+
+## ls
+
+<hr>
+
+```{sh ls3}
+ls
+```
+
+## mv
+
+<hr>
+
+```{sh mv}
+mv branch.Rmd branches.Rmd
+```
+
+## ls
+
+<hr>
+
+```{sh ls2}
+ls
+```
+
+## rm
+
+<hr>
+
+```{sh rm}
+rm cyg.Rmd
+```
+
+## ls
+
+<hr>
+
+```{sh ls1}
+ls
+```
+
+## head
+
+<hr>
+
+```{sh head}
+head shell.Rmd
+```
+
+```{sh mv2, echo=FALSE}
+mv branches.Rmd branch.Rmd
+```
+
+
+## {data-background="thankyou.png"}
+  
