@@ -8,8 +8,6 @@ output: _output.yaml
 
 <hr>
 
-In this module, we will explore a set of helper functions in order to:
-
 - extract unique rows 
 - rename columns
 - sample data
@@ -309,13 +307,13 @@ ecom %>%
 <hr>
 
 ```{r dplyr20}
-mtcars %>%
-  select(mpg, disp, cyl, gear, carb) %>%
+ecom %>%
+  select(n_pages, order_value) %>%
   mutate(
     type = case_when(
-      disp > 300 ~ 'High',
-      cyl == 8 ~ 'Eight',
-      TRUE ~ 'True'
+      n_pages == 1 ~ 'Bouncers',
+      order_value > 0 ~ 'Converts',
+      TRUE ~ 'Others'
     )
   )
 ```

@@ -487,7 +487,6 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="agenda" class="slide level2">
 <h2>Agenda</h2>
 <hr>
-<p>In this module, we will explore a set of helper functions in order to:</p>
 <ul>
 <li class="fragment">extract unique rows</li>
 <li class="fragment">rename columns</li>
@@ -627,30 +626,30 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample_n</span>(ecom, <span class="dt">size =</span> <span class="dv">700</span>)</code></pre></div>
 <pre><code>## # A tibble: 700 x 11
-##       id referrer device bouncers n_visit n_pages duration country    
-##    &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;      &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;      
-##  1   927 social   tablet false          1       7       77 Vietnam    
-##  2    37 bing     laptop true           0       1      897 Vietnam    
-##  3   910 google   laptop false         10       4       60 Russia     
-##  4   852 bing     tablet true           0       1      845 Philippines
-##  5   576 social   laptop false          8       3       30 Colombia   
-##  6    71 social   laptop true           0       1      874 Brazil     
-##  7   900 social   tablet false          1      19      399 Philippines
-##  8   347 yahoo    tablet true           2       1      652 Philippines
-##  9   240 direct   laptop false          6       4      104 France     
-## 10   547 google   laptop true           5       1      376 Belize     
+##       id referrer device bouncers n_visit n_pages duration country  
+##    &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;      &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;    
+##  1   344 bing     mobile false          4       9      261 China    
+##  2   569 direct   laptop false          1      20      320 Sweden   
+##  3   105 direct   mobile true           1       1      423 Mexico   
+##  4   423 google   laptop true           5       1      304 Albania  
+##  5   178 direct   mobile false          9      15      210 Indonesia
+##  6   848 bing     mobile false          6      20      480 Thailand 
+##  7   881 google   mobile true           7       1      301 Portugal 
+##  8   116 direct   mobile true          10       1      675 Indonesia
+##  9   291 yahoo    laptop true           5       1      611 Colombia 
+## 10   383 social   mobile false          9      19      304 Croatia  
 ##    purchase order_items order_value
 ##    &lt;chr&gt;          &lt;dbl&gt;       &lt;dbl&gt;
 ##  1 false              0           0
-##  2 false              0           0
+##  2 true               5        2770
 ##  3 false              0           0
 ##  4 false              0           0
 ##  5 false              0           0
 ##  6 false              0           0
-##  7 true               5        2043
+##  7 false              0           0
 ##  8 false              0           0
 ##  9 false              0           0
-## 10 false              0           0
+## 10 true               4        2057
 ## # ... with 690 more rows</code></pre>
 </section>
 <section id="sampling-data-1" class="slide level2">
@@ -658,28 +657,28 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample_frac</span>(ecom, <span class="dt">size =</span> <span class="fl">0.7</span>)</code></pre></div>
 <pre><code>## # A tibble: 700 x 11
-##       id referrer device bouncers n_visit n_pages duration country   
-##    &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;      &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;     
-##  1  1000 google   mobile true           9       1      269 China     
-##  2   721 google   mobile false          4      16      416 Thailand  
-##  3   146 google   laptop true           7       1      792 Greece    
-##  4   509 yahoo    laptop true           1       1      991 Uganda    
-##  5    92 google   mobile false          5       8      192 Indonesia 
-##  6   372 social   tablet true           5       1      175 Pakistan  
-##  7    19 social   tablet false          7      10      290 Colombia  
-##  8     7 yahoo    mobile true          10       1       75 Bangladesh
-##  9   804 social   tablet false          0       2       46 Russia    
-## 10   532 google   mobile true           6       1      644 Russia    
+##       id referrer device bouncers n_visit n_pages duration country  
+##    &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;      &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;    
+##  1   938 google   laptop true           5       1      951 Brazil   
+##  2   619 bing     laptop true          10       1      947 Sweden   
+##  3   122 direct   laptop true           3       1      768 Argentina
+##  4   520 social   mobile false          1      10      170 Sweden   
+##  5   258 google   mobile false          3      17      510 Portugal 
+##  6   929 social   tablet true           3       1      111 China    
+##  7   857 google   tablet true           7       1      693 France   
+##  8   841 yahoo    tablet false          7      18      198 China    
+##  9   745 direct   mobile true           5       1      352 Mexico   
+## 10   344 bing     mobile false          4       9      261 China    
 ##    purchase order_items order_value
 ##    &lt;chr&gt;          &lt;dbl&gt;       &lt;dbl&gt;
 ##  1 false              0           0
 ##  2 false              0           0
 ##  3 false              0           0
-##  4 false              0           0
-##  5 false              1        1273
+##  4 false              3        2332
+##  5 false              0           0
 ##  6 false              0           0
-##  7 true               9        1304
-##  8 false              0           0
+##  7 false              0           0
+##  8 false              2         820
 ##  9 false              0           0
 ## 10 false              0           0
 ## # ... with 690 more rows</code></pre>
@@ -1290,48 +1289,29 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="case-when" class="slide level2">
 <h2>Case When</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">select</span>(mpg, disp, cyl, gear, carb) <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(n_pages, order_value) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
     <span class="dt">type =</span> <span class="kw">case_when</span>(
-      disp <span class="op">&gt;</span><span class="st"> </span><span class="dv">300</span> <span class="op">~</span><span class="st"> 'High'</span>,
-      cyl <span class="op">==</span><span class="st"> </span><span class="dv">8</span> <span class="op">~</span><span class="st"> 'Eight'</span>,
-      <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> 'True'</span>
+      n_pages <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">~</span><span class="st"> 'Bouncers'</span>,
+      order_value <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">~</span><span class="st"> 'Converts'</span>,
+      <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> 'Others'</span>
     )
   )</code></pre></div>
-<pre><code>##     mpg  disp cyl gear carb  type
-## 1  21.0 160.0   6    4    4  True
-## 2  21.0 160.0   6    4    4  True
-## 3  22.8 108.0   4    4    1  True
-## 4  21.4 258.0   6    3    1  True
-## 5  18.7 360.0   8    3    2  High
-## 6  18.1 225.0   6    3    1  True
-## 7  14.3 360.0   8    3    4  High
-## 8  24.4 146.7   4    4    2  True
-## 9  22.8 140.8   4    4    2  True
-## 10 19.2 167.6   6    4    4  True
-## 11 17.8 167.6   6    4    4  True
-## 12 16.4 275.8   8    3    3 Eight
-## 13 17.3 275.8   8    3    3 Eight
-## 14 15.2 275.8   8    3    3 Eight
-## 15 10.4 472.0   8    3    4  High
-## 16 10.4 460.0   8    3    4  High
-## 17 14.7 440.0   8    3    4  High
-## 18 32.4  78.7   4    4    1  True
-## 19 30.4  75.7   4    4    2  True
-## 20 33.9  71.1   4    4    1  True
-## 21 21.5 120.1   4    3    1  True
-## 22 15.5 318.0   8    3    2  High
-## 23 15.2 304.0   8    3    2  High
-## 24 13.3 350.0   8    3    4  High
-## 25 19.2 400.0   8    3    2  High
-## 26 27.3  79.0   4    4    1  True
-## 27 26.0 120.3   4    5    2  True
-## 28 30.4  95.1   4    5    2  True
-## 29 15.8 351.0   8    5    4  High
-## 30 19.7 145.0   6    5    6  True
-## 31 15.0 301.0   8    5    8  High
-## 32 21.4 121.0   4    4    2  True</code></pre>
+<pre><code>## # A tibble: 1,000 x 3
+##    n_pages order_value type    
+##      &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;   
+##  1       1           0 Bouncers
+##  2       1           0 Bouncers
+##  3       1           0 Bouncers
+##  4      18         434 Converts
+##  5       1           0 Bouncers
+##  6       5           0 Others  
+##  7       1           0 Bouncers
+##  8       1           0 Bouncers
+##  9      19           0 Others  
+## 10       1           0 Bouncers
+## # ... with 990 more rows</code></pre>
 </section>
 <section id="select-first-observation" class="slide level2">
 <h2>Select First Observation</h2>
