@@ -53,8 +53,6 @@ ecom
 
 <hr>
 
-Below is the description of the data set:
-
 - id: row id
 - referrer: referrer website/search engine
 - os: operating system
@@ -134,7 +132,7 @@ DBI::dbGetQuery(con, "select * from ecom limit 10")
 <hr>
 
 ```{r lite10}
-query <- DBI::dbSendQuery(con, 'select * from ecom')
+query  <- DBI::dbSendQuery(con, 'select * from ecom')
 result <- DBI::dbFetch(query, n = 30)
 result
 ```
@@ -357,15 +355,14 @@ ecom
 DBI::sqlAppendTable(con, "ecom", head(ecom))
 ```
 
-## Copy Data
+## {data-background="dbplyr.png"}
 
-<hr>
 
-```{r dbply2}
+```{r dbply2, echo=FALSE}
 copy_to(con, mtcars)
 ```
 
-## Reference Copied Data
+## Reference Data
 
 <hr>
 

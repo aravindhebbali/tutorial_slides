@@ -91,7 +91,7 @@ code > span.in { color: #008000; } /* Information */
 
     <style type="text/css">code{white-space: pre;}</style>
 
-    <link href="data:text/css;charset=utf-8,%2Ereveal%20p%20%7B%0Atext%2Dalign%3A%20left%3B%0Afont%2Dsize%3A%2020px%3B%0A%7D%0A%2Ereveal%20body%3Aafter%20%7B%0Aposition%3A%20fixed%3B%0Abottom%3A%203%2E5em%3B%0Aleft%3A%203%2E5em%3B%0Abox%2Dshadow%3A%205px%205px%2010px%20%23000%3B%20%7D%0A%2Ereveal%20hr%20%7B%0Aborder%2Dcolor%3A%20%230077aa%3B%0A%7D%0A%2Ereveal%20h1%2C%20h2%2C%20h3%2C%20h4%2C%20h5%2C%20h6%20%7B%0Atext%2Dtransform%3A%20capitalize%3B%0Atext%2Dalign%3A%20center%3B%0Acolor%3A%20%230077aa%3B%0Afont%2Dfamily%3A%20%27Helvetica%20Neue%27%3B%0A%7D%0A%2Ereveal%20h2%20%7B%0Afont%2Dsize%3A%2022px%3B%0Acolor%3A%20%230077aa%3B%0A%7D%0A%2Ereveal%20ul%20%7B%0Adisplay%3A%20block%3B%0A%7D%0A%2Ereveal%20ul%20li%20%7B%0Acolor%3A%20%233c3c3c%3B%20%0Alist%2Dstyle%3A%20none%3B%20font%2Dsize%3A%2020px%3B%0A%7D%0A%2Ereveal%20ul%20li%3A%3Abefore%20%7B%0Acolor%3A%20%23006b6e%3B%20%0Acontent%3A%20%22%5C2022%22%3B%20%0Afont%2Dsize%3A%201em%3B%20%20padding%2Dright%3A%201%2E1225em%3B%20%0Aposition%3A%20relative%3B%0Atop%3A%200em%3B%20%0A%7D%0A%2Ereveal%20ul%20%7B%0Aline%2Dheight%3A150%25%0A%7D%0A%2Ereveal%20%2Efragment%20%7B%0Afont%2Dsize%3A%2020px%3B%0A%7D%0A%2Ereveal%20ol%20%7B%0Adisplay%3A%20block%3B%0A%7D" rel="stylesheet" />
+    <link href="data:text/css;charset=utf-8,%2Ereveal%20p%20%7B%0Atext%2Dalign%3A%20left%3B%0Afont%2Dsize%3A%2020px%3B%0A%7D%0A%2Ereveal%20body%3Aafter%20%7B%0Aposition%3A%20fixed%3B%0Abottom%3A%203%2E5em%3B%0Aleft%3A%203%2E5em%3B%0Abox%2Dshadow%3A%205px%205px%2010px%20%23000%3B%20%7D%0A%2Ereveal%20hr%20%7B%0Aborder%2Dcolor%3A%20%230077aa%3B%0A%7D%0A%2Ereveal%20h1%2C%20h2%2C%20h3%2C%20h4%2C%20h5%2C%20h6%20%7B%0Atext%2Dtransform%3A%20capitalize%3B%0Atext%2Dalign%3A%20center%3B%0Acolor%3A%20%230077aa%3B%0Afont%2Dfamily%3A%20%27Helvetica%20Neue%27%3B%0A%7D%0A%2Ereveal%20h2%20%7B%0Afont%2Dsize%3A%2022px%3B%0Acolor%3A%20%230077aa%3B%0A%7D%0A%2Ereveal%20ul%20%7B%0Adisplay%3A%20block%3B%0A%7D%0A%2Ereveal%20ul%20li%20%7B%0Acolor%3A%20%233c3c3c%3B%20%0Alist%2Dstyle%3A%20none%3B%20font%2Dsize%3A%2020px%3B%0A%7D%0A%2Ereveal%20ul%20li%3A%3Abefore%20%7B%0Acolor%3A%20%23006b6e%3B%20%0Acontent%3A%20%22%5C2022%22%3B%20%0Afont%2Dsize%3A%201em%3B%20%20padding%2Dright%3A%201%2E1225em%3B%20%0Aposition%3A%20relative%3B%0Atop%3A%200em%3B%20%0A%7D%0A%2Ereveal%20ul%20%7B%0Aline%2Dheight%3A150%25%0A%7D%0A%2Ereveal%20%2Efragment%20%7B%0Afont%2Dsize%3A%2020px%3B%0A%7D%0A%2Ereveal%20ol%20%7B%0Adisplay%3A%20block%3B%0A%7D%0A%2Ereveal%20%2Eknitsql%2Dtable%20%7B%0Asize%3A%201px%3B%0A%7D" rel="stylesheet" />
 
 <!-- Printing and PDF exports -->
 <script id="paper-css" type="application/dynamic-css">
@@ -529,7 +529,6 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="data-dictionary" class="slide level2">
 <h2>Data Dictionary</h2>
 <hr>
-<p>Below is the description of the data set:</p>
 <ul>
 <li class="fragment">id: row id</li>
 <li class="fragment">referrer: referrer website/search engine</li>
@@ -2623,7 +2622,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="read-data-in-batches" class="slide level2">
 <h2>Read Data in Batches</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">query &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbSendQuery</span>(con, <span class="st">'select * from ecom'</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">query  &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbSendQuery</span>(con, <span class="st">'select * from ecom'</span>)
 result &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbFetch</span>(query, <span class="dt">n =</span> <span class="dv">30</span>)
 result</code></pre></div>
 <pre><code>##    id referrer device bouncers n_visit n_pages duration        country
@@ -2801,11 +2800,11 @@ DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(con, <span cla
 <p>Let us check if <code>trial</code> table has been overwritten by querying data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;select * from trial limit 5&quot;</span>)</code></pre></div>
 <pre><code>##    x y
-## 1 64 k
-## 2 79 l
-## 3 34 m
-## 4 68 n
-## 5 56 o</code></pre>
+## 1 32 k
+## 2 41 l
+## 3 77 m
+## 4 84 n
+## 5 74 o</code></pre>
 </section>
 <section id="append-data" class="slide level2">
 <h2>Append Data</h2>
@@ -2824,26 +2823,26 @@ DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(con, <span cla
 <p>Let us check if data has been appended by querying data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbReadTable</span>(con, <span class="st">&quot;trial&quot;</span>)</code></pre></div>
 <pre><code>##     x y
-## 1  64 k
-## 2  79 l
-## 3  34 m
-## 4  68 n
-## 5  56 o
-## 6  14 p
-## 7  28 q
-## 8  73 r
-## 9  22 s
-## 10 69 t
-## 11 87 e
-## 12 47 f
-## 13 24 g
-## 14 73 h
-## 15 82 i
-## 16  4 j
-## 17 31 k
-## 18 23 l
-## 19  8 m
-## 20 61 n</code></pre>
+## 1  32 k
+## 2  41 l
+## 3  77 m
+## 4  84 n
+## 5  74 o
+## 6  99 p
+## 7   7 q
+## 8  87 r
+## 9  73 s
+## 10 45 t
+## 11 42 e
+## 12 67 f
+## 13 33 g
+## 14 79 h
+## 15 12 i
+## 16  1 j
+## 17  4 k
+## 18 27 l
+## 19  5 m
+## 20 98 n</code></pre>
 </section>
 <section id="insert-rows" class="slide level2">
 <h2>Insert Rows</h2>
@@ -2935,13 +2934,11 @@ DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(con, <span cla
 ##   (5, 'yahoo', 'mobile', 'true', 9, 1, 955, 'Poland', 'false', 0, 0),
 ##   (6, 'yahoo', 'laptop', 'false', 5, 5, 135, 'South Africa', 'false', 0, 0)</code></pre>
 </section>
-<section id="copy-data" class="slide level2">
-<h2>Copy Data</h2>
-<hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">copy_to</span>(con, mtcars)</code></pre></div>
+<section id="section-4" class="slide level2" data-background="dbplyr.png">
+<h2></h2>
 </section>
-<section id="reference-copied-data" class="slide level2">
-<h2>Reference Copied Data</h2>
+<section id="reference-data" class="slide level2">
+<h2>Reference Data</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars2 &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&quot;mtcars&quot;</span>)
 mtcars2</code></pre></div>
@@ -3033,10 +3030,9 @@ mtcars2</code></pre></div>
 <section id="collect-data" class="slide level2">
 <h2>Collect Data</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span>mileages <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">collect</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">collect</span>(mileages)</code></pre></div>
 <pre><code>## Warning: Missing values are always removed in SQL.
 ## Use `AVG(x, na.rm = TRUE)` to silence this warning</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data</code></pre></div>
 <pre><code>## # A tibble: 3 x 2
 ##     cyl mileage
 ##   &lt;dbl&gt;   &lt;dbl&gt;
@@ -3049,7 +3045,7 @@ mtcars2</code></pre></div>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbDisconnect</span>(con)</code></pre></div>
 </section>
-<section id="section-4" class="slide level2" data-background="thankyou.png">
+<section id="section-5" class="slide level2" data-background="thankyou.png">
 <h2></h2>
 </section>
     </div>
