@@ -129,7 +129,7 @@ y %<>% sqrt()
 head(y)
 ```
 
-## Square Root
+## Square Root - Using Pipe
 
 <hr>
 
@@ -172,7 +172,13 @@ knitr::include_graphics("pipes_correlation.png")
 # without pipe
 ecom1 <- subset(ecom, purchase == 'true')
 cor(ecom1$n_pages, ecom1$duration)
+```
 
+## Correlation - Using pipe
+
+<hr>
+
+```{r mag6a}
 # with pipe
 ecom %>%
   subset(purchase == 'true') %$% 
@@ -236,7 +242,13 @@ email <- 'jovialcann@anymail.com'
 
 # without pipe
 toupper(strtrim(strsplit(email, '@')[[1]][1], 6))
+```
 
+## String Manipulation - Using Pipe
+
+<hr>
+
+```{r mag9a}
 # with pipe
 email %>%
   strsplit(split = '@') %>%
@@ -256,7 +268,7 @@ email %>%
 knitr::include_graphics("pipes_string.png")
 ```
 
-## String Manipulation
+## String Manipulation - Using Pipe
 
 <hr>
 
