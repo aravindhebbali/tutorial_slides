@@ -39,7 +39,11 @@ library(readr)
 
 <hr>
 
-```{r import2, message=FALSE}
+```{r import2, eval=FALSE, echo=TRUE, message=FALSE}
+traffic
+```
+
+```{r import2e, echo=FALSE, message=FALSE}
 traffic <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web_traffic.csv',
   col_types = list(col_factor(levels = c("google", "facebook", "affiliates", 
     "bing", "yahoo", "twitter", "instagram", "unknown", "direct"))))
@@ -443,7 +447,11 @@ fct_relevel(traffics, "facebook", after = Inf) %>%
 
 <hr>
 
-```{r import3, message=FALSE}
+```{r import3, eval=FALSE, message=FALSE}
+response
+```
+
+```{r import3a, echo=FALSE, message=FALSE}
 response <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/response.csv',
   col_types = list(col_factor(levels = c("like", "like somewhat", "neutral", 
     "dislike somewhat", "dislike"), ordered = TRUE)))
@@ -455,7 +463,7 @@ response
 
 <hr>
 
-```{r import2b}
+```{r import2n}
 responses <- 
   response %>%
   use_series(response)
