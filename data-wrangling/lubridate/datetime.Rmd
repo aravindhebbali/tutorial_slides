@@ -7,6 +7,12 @@ output: _output.yaml
 ## Agenda
 
 <hr>
+
+In this module, we will learn to:
+
+- extract date and time components
+- compute time differences
+- compute time interval and duration
  
 ## Libraries
 
