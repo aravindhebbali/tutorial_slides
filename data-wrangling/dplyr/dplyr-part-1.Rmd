@@ -345,11 +345,6 @@ ecom4 <- summarise(ecom3, total_value = sum(order_value),
 ecom4
 ```
 
-## Summarise
-
-<hr>
-
-There you go, we have the total order value and total order items for each device type. Another way to achieve the above result is to use the `summarise_all()` function. How does that work? It generates the specified summary for all the columns in the data set except for the column based on which the data has been grouped. So we need to ensure that the data frame does not have any irrelevant columns.
 
 ## Case Study
 
@@ -397,6 +392,10 @@ ecom5
 The last step is to select the relevant columns. We require the device type and the corresponding aov and hence we can get rid of other columns. Use the `select()` function to extract the relevant columns. -->
 
 ## {data-background="select.png"}
+
+## Select Relevant Columns
+
+<hr>
 
 ```{r dplyr16}
 ecom6 <- select(ecom5, device, aov)

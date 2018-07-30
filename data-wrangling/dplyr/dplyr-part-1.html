@@ -909,11 +909,6 @@ ecom4</code></pre></div>
 ## 2 mobile       51504         184
 ## 3 tablet       51321         197</code></pre>
 </section>
-<section id="summarise" class="slide level2">
-<h2>Summarise</h2>
-<hr>
-<p>There you go, we have the total order value and total order items for each device type. Another way to achieve the above result is to use the <code>summarise_all()</code> function. How does that work? It generates the specified summary for all the columns in the data set except for the column based on which the data has been grouped. So we need to ensure that the data frame does not have any irrelevant columns.</p>
-</section>
 <section id="case-study-6" class="slide level2">
 <h2>Case Study</h2>
 <hr>
@@ -960,6 +955,10 @@ The last step is to select the relevant columns. We require the device type and 
 </section>
 <section id="section-7" class="slide level2" data-background="select.png">
 <h2></h2>
+</section>
+<section id="select-relevant-columns" class="slide level2">
+<h2>Select Relevant Columns</h2>
+<hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ecom6 &lt;-<span class="st"> </span><span class="kw">select</span>(ecom5, device, aov)
 ecom6</code></pre></div>
 <pre><code>## # A tibble: 3 x 2
