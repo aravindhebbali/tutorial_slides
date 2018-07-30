@@ -488,67 +488,63 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>Agenda</h2>
 <hr>
 <ul>
-<li class="fragment">connect to databases from R</li>
-<li class="fragment">display database information</li>
-<li class="fragment">list tables</li>
-<li class="fragment">create table</li>
-<li class="fragment">read data into R</li>
-<li class="fragment">export data to database</li>
-<li class="fragment">remove tables</li>
-<li class="fragment">query data using dplyr</li>
-<li class="fragment">disconnect from database</li>
+<li class="fragment">select
+<ul>
+<li class="fragment">single column</li>
+<li class="fragment">multiple columns</li>
+<li class="fragment">distinct values in a column</li>
+</ul></li>
+<li class="fragment">limit the number of records returned</li>
+<li class="fragment">handle NULL values</li>
+<li class="fragment">and filter columns using the following operators
+<ul>
+<li class="fragment">WHERE</li>
+<li class="fragment">AND, or &amp; NOT</li>
+<li class="fragment">BETWEEN</li>
+<li class="fragment">IN</li>
+<li class="fragment">LIKE</li>
+</ul></li>
+<li class="fragment">aggregate data</li>
+<li class="fragment">order data</li>
+<li class="fragment">group data</li>
 </ul>
 </section>
 <section id="data" class="slide level2">
 <h2>Data</h2>
-<pre><code>## # A tibble: 1,000 x 11
-##       id referrer device bouncers n_visit n_pages duration country       
-##    &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;      &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;         
-##  1     1 google   laptop true          10       1      693 Czech Republic
-##  2     2 yahoo    tablet true           9       1      459 Yemen         
-##  3     3 direct   laptop true           0       1      996 Brazil        
-##  4     4 bing     tablet false          3      18      468 China         
-##  5     5 yahoo    mobile true           9       1      955 Poland        
-##  6     6 yahoo    laptop false          5       5      135 South Africa  
-##  7     7 yahoo    mobile true          10       1       75 Bangladesh    
-##  8     8 direct   mobile true          10       1      908 Indonesia     
-##  9     9 bing     mobile false          3      19      209 Netherlands   
-## 10    10 google   mobile true           6       1      208 Czech Republic
-## # ... with 990 more rows, and 3 more variables: purchase &lt;chr&gt;,
-## #   order_items &lt;dbl&gt;, order_value &lt;dbl&gt;</code></pre>
+<hr>
+<p><br> <br></p>
+<pre><code>## # A tibble: 1,000 x 6
+##    device referrer purchase duration n_visit country       
+##    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt;   &lt;int&gt; &lt;chr&gt;         
+##  1 laptop google   false         693      10 Czech Republic
+##  2 tablet yahoo    false         459       9 Yemen         
+##  3 laptop direct   false         996       0 Brazil        
+##  4 tablet bing     true          468       3 China         
+##  5 mobile yahoo    false         955       9 Poland        
+##  6 laptop yahoo    false         135       5 South Africa  
+##  7 mobile yahoo    false          75      10 Bangladesh    
+##  8 mobile direct   false         908      10 Indonesia     
+##  9 mobile bing     false         209       3 Netherlands   
+## 10 mobile google   false         208       6 Czech Republic
+## # ... with 990 more rows</code></pre>
 </section>
 <section id="data-dictionary" class="slide level2">
 <h2>Data Dictionary</h2>
 <hr>
-<p>Below is the description of the data set:</p>
 <ul>
 <li class="fragment">id: row id</li>
 <li class="fragment">referrer: referrer website/search engine</li>
-<li class="fragment">os: operating system</li>
-<li class="fragment">browser: browser</li>
 <li class="fragment">device: device used to visit the website</li>
-<li class="fragment">n_pages: number of pages visited</li>
 <li class="fragment">duration: time spent on the website (in seconds)</li>
-<li class="fragment">repeat: frequency of visits</li>
 <li class="fragment">country: country of origin</li>
 <li class="fragment">purchase: whether visitor purchased</li>
-<li class="fragment">order_value: order value of visitor (in dollars)</li>
+<li class="fragment">n_visit: number of visits</li>
 </ul>
-</section>
-<section id="select" class="slide level2">
-<h2>Select</h2>
-<hr>
-<p>The SQL SELECT statement is used to fetch the data from a database table.</p>
-<p>Below is the basic syntax of the SELECT statement.</p>
-<p><code>SELECT column1, column2, columnN FROM table_name;</code></p>
-<p>Here, column1, column2… are the fields of a table whose values you want to fetch. If you want to fetch all the fields, use the following syntax.</p>
-<p><code>SELECT * FROM table_name;</code></p>
 </section>
 <section id="select-single-column" class="slide level2">
 <h2>Select Single Column</h2>
 <hr>
-<p>Let us begin by selecting the <code>device</code> field from the <code>ecom</code> table.</p>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> device <span class="kw">FROM</span> ecom</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> device <span class="kw">FROM</span> trade</code></pre></div>
 <div class="knitsql-table">
 <table>
 <caption>Displaying records 1 - 6</caption>
@@ -583,7 +579,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="select-multiple-columns" class="slide level2">
 <h2>Select Multiple Columns</h2>
 <hr>
-<p>Select the following fields from the <code>ecom</code> table:</p>
+<p>Select the following fields from the <code>trade</code> table:</p>
 <ul>
 <li class="fragment"><code>referrer</code></li>
 <li class="fragment"><code>device</code></li>
@@ -593,7 +589,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="select-multiple-columns-1" class="slide level2">
 <h2>Select Multiple Columns</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> referrer, device, purchase  <span class="kw">FROM</span> ecom</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> referrer, device, purchase  <span class="kw">FROM</span> trade</code></pre></div>
 <div class="knitsql-table">
 <table>
 <caption>Displaying records 1 - 6</caption>
@@ -642,104 +638,68 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="select-all-columns" class="slide level2">
 <h2>Select All Columns</h2>
 <hr>
-<p>Select all the fields from the <code>ecom</code> table.</p>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> ecom</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> trade</code></pre></div>
 <div class="knitsql-table">
 <table>
 <caption>Displaying records 1 - 6</caption>
 <thead>
 <tr class="header">
-<th style="text-align: left;">id</th>
-<th style="text-align: left;">referrer</th>
 <th style="text-align: left;">device</th>
-<th style="text-align: left;">bouncers</th>
-<th style="text-align: right;">n_visit</th>
-<th style="text-align: right;">n_pages</th>
-<th style="text-align: right;">duration</th>
-<th style="text-align: left;">country</th>
+<th style="text-align: left;">referrer</th>
 <th style="text-align: left;">purchase</th>
-<th style="text-align: right;">order_items</th>
-<th style="text-align: right;">order_value</th>
+<th style="text-align: right;">duration</th>
+<th style="text-align: right;">n_visit</th>
+<th style="text-align: left;">country</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">1</td>
+<td style="text-align: left;">laptop</td>
 <td style="text-align: left;">google</td>
-<td style="text-align: left;">laptop</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">1</td>
+<td style="text-align: left;">false</td>
 <td style="text-align: right;">693</td>
+<td style="text-align: right;">10</td>
 <td style="text-align: left;">Czech Republic</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">2</td>
-<td style="text-align: left;">yahoo</td>
 <td style="text-align: left;">tablet</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">1</td>
+<td style="text-align: left;">yahoo</td>
+<td style="text-align: left;">false</td>
 <td style="text-align: right;">459</td>
-<td style="text-align: left;">Yemen</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">3</td>
-<td style="text-align: left;">direct</td>
-<td style="text-align: left;">laptop</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">996</td>
-<td style="text-align: left;">Brazil</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">4</td>
-<td style="text-align: left;">bing</td>
-<td style="text-align: left;">tablet</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">18</td>
-<td style="text-align: right;">468</td>
-<td style="text-align: left;">China</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">434</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">5</td>
-<td style="text-align: left;">yahoo</td>
-<td style="text-align: left;">mobile</td>
-<td style="text-align: left;">true</td>
 <td style="text-align: right;">9</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">955</td>
-<td style="text-align: left;">Poland</td>
+<td style="text-align: left;">Yemen</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">laptop</td>
+<td style="text-align: left;">direct</td>
 <td style="text-align: left;">false</td>
+<td style="text-align: right;">996</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: left;">Brazil</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">6</td>
+<td style="text-align: left;">tablet</td>
+<td style="text-align: left;">bing</td>
+<td style="text-align: left;">true</td>
+<td style="text-align: right;">468</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">China</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mobile</td>
 <td style="text-align: left;">yahoo</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: right;">955</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">Poland</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">laptop</td>
+<td style="text-align: left;">yahoo</td>
 <td style="text-align: left;">false</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">5</td>
 <td style="text-align: right;">135</td>
+<td style="text-align: right;">5</td>
 <td style="text-align: left;">South Africa</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
 </tr>
 </tbody>
 </table>
@@ -748,104 +708,68 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="limit" class="slide level2">
 <h2>Limit</h2>
 <hr>
-<p>If you have a large table with thousands of rows, returning all the records will take time. Use LIMIT to specify the number of records to return.</p>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> ecom <span class="kw">limit</span> <span class="dv">10</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> trade <span class="kw">limit</span> <span class="dv">10</span></code></pre></div>
 <div class="knitsql-table">
 <table>
 <caption>Displaying records 1 - 6</caption>
 <thead>
 <tr class="header">
-<th style="text-align: left;">id</th>
-<th style="text-align: left;">referrer</th>
 <th style="text-align: left;">device</th>
-<th style="text-align: left;">bouncers</th>
-<th style="text-align: right;">n_visit</th>
-<th style="text-align: right;">n_pages</th>
-<th style="text-align: right;">duration</th>
-<th style="text-align: left;">country</th>
+<th style="text-align: left;">referrer</th>
 <th style="text-align: left;">purchase</th>
-<th style="text-align: right;">order_items</th>
-<th style="text-align: right;">order_value</th>
+<th style="text-align: right;">duration</th>
+<th style="text-align: right;">n_visit</th>
+<th style="text-align: left;">country</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">1</td>
+<td style="text-align: left;">laptop</td>
 <td style="text-align: left;">google</td>
-<td style="text-align: left;">laptop</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">1</td>
+<td style="text-align: left;">false</td>
 <td style="text-align: right;">693</td>
+<td style="text-align: right;">10</td>
 <td style="text-align: left;">Czech Republic</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">2</td>
-<td style="text-align: left;">yahoo</td>
 <td style="text-align: left;">tablet</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">1</td>
+<td style="text-align: left;">yahoo</td>
+<td style="text-align: left;">false</td>
 <td style="text-align: right;">459</td>
-<td style="text-align: left;">Yemen</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">3</td>
-<td style="text-align: left;">direct</td>
-<td style="text-align: left;">laptop</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">996</td>
-<td style="text-align: left;">Brazil</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">4</td>
-<td style="text-align: left;">bing</td>
-<td style="text-align: left;">tablet</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">18</td>
-<td style="text-align: right;">468</td>
-<td style="text-align: left;">China</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">434</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">5</td>
-<td style="text-align: left;">yahoo</td>
-<td style="text-align: left;">mobile</td>
-<td style="text-align: left;">true</td>
 <td style="text-align: right;">9</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">955</td>
-<td style="text-align: left;">Poland</td>
+<td style="text-align: left;">Yemen</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">laptop</td>
+<td style="text-align: left;">direct</td>
 <td style="text-align: left;">false</td>
+<td style="text-align: right;">996</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: left;">Brazil</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">6</td>
+<td style="text-align: left;">tablet</td>
+<td style="text-align: left;">bing</td>
+<td style="text-align: left;">true</td>
+<td style="text-align: right;">468</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">China</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mobile</td>
 <td style="text-align: left;">yahoo</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: right;">955</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">Poland</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">laptop</td>
+<td style="text-align: left;">yahoo</td>
 <td style="text-align: left;">false</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">5</td>
 <td style="text-align: right;">135</td>
+<td style="text-align: right;">5</td>
 <td style="text-align: left;">South Africa</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
 </tr>
 </tbody>
 </table>
@@ -854,8 +778,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="distinct" class="slide level2">
 <h2>Distinct</h2>
 <hr>
-<p>A column in a table may often contain many duplicate values; and we might be interested only in the distinct/unique values. In such cases, we can use the SELECT DISTINCT statement to return only distinct values.</p>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="kw">distinct</span> referrer <span class="kw">FROM</span> ecom</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="kw">distinct</span> referrer <span class="kw">FROM</span> trade</code></pre></div>
 <div class="knitsql-table">
 <table>
 <caption>5 records</caption>
@@ -889,115 +812,79 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <p>Now that we know how to select columns, let us focus on filtering data. In SQL, the WHERE keyword is used to extract only those records that fulfill a specified condition. Data filter based on both text and numeric values in a table. Below are a few comparison operators we can use:</p>
 <ul>
-<li class="fragment"><code>=</code> equal</li>
-<li class="fragment"><code>&lt;&gt;</code> not equal</li>
-<li class="fragment"><code>&lt;</code> less than</li>
-<li class="fragment"><code>&gt;</code> greater than</li>
-<li class="fragment"><code>&lt;=</code> less than or equal to</li>
-<li class="fragment"><code>&gt;=</code> greater than or equal to</li>
+<li class="fragment"><code>=</code></li>
+<li class="fragment"><code>&lt;&gt;</code></li>
+<li class="fragment"><code>&lt;</code></li>
+<li class="fragment"><code>&gt;</code></li>
+<li class="fragment"><code>&lt;=</code></li>
+<li class="fragment"><code>&gt;=</code></li>
 </ul>
 </section>
 <section id="filter-1" class="slide level2">
 <h2>Filter</h2>
 <hr>
-<p>The following SQL statement filters all rows from the <code>ecom</code> table where the <code>duration</code> field is greater than 300.</p>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> ecom <span class="kw">WHERE</span> duration &gt; <span class="dv">300</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> trade <span class="kw">WHERE</span> duration &gt; <span class="dv">300</span></code></pre></div>
 <div class="knitsql-table">
 <table>
 <caption>Displaying records 1 - 6</caption>
 <thead>
 <tr class="header">
-<th style="text-align: right;">id</th>
-<th style="text-align: left;">referrer</th>
 <th style="text-align: left;">device</th>
-<th style="text-align: left;">bouncers</th>
-<th style="text-align: right;">n_visit</th>
-<th style="text-align: right;">n_pages</th>
-<th style="text-align: right;">duration</th>
-<th style="text-align: left;">country</th>
+<th style="text-align: left;">referrer</th>
 <th style="text-align: left;">purchase</th>
-<th style="text-align: right;">order_items</th>
-<th style="text-align: right;">order_value</th>
+<th style="text-align: right;">duration</th>
+<th style="text-align: right;">n_visit</th>
+<th style="text-align: left;">country</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">1</td>
+<td style="text-align: left;">laptop</td>
 <td style="text-align: left;">google</td>
-<td style="text-align: left;">laptop</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">1</td>
+<td style="text-align: left;">false</td>
 <td style="text-align: right;">693</td>
-<td style="text-align: left;">Czech Republic</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">2</td>
-<td style="text-align: left;">yahoo</td>
-<td style="text-align: left;">tablet</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">459</td>
-<td style="text-align: left;">Yemen</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">3</td>
-<td style="text-align: left;">direct</td>
-<td style="text-align: left;">laptop</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">996</td>
-<td style="text-align: left;">Brazil</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">4</td>
-<td style="text-align: left;">bing</td>
-<td style="text-align: left;">tablet</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">18</td>
-<td style="text-align: right;">468</td>
-<td style="text-align: left;">China</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">434</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">5</td>
-<td style="text-align: left;">yahoo</td>
-<td style="text-align: left;">mobile</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">955</td>
-<td style="text-align: left;">Poland</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">8</td>
-<td style="text-align: left;">direct</td>
-<td style="text-align: left;">mobile</td>
-<td style="text-align: left;">true</td>
 <td style="text-align: right;">10</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">908</td>
-<td style="text-align: left;">Indonesia</td>
+<td style="text-align: left;">Czech Republic</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tablet</td>
+<td style="text-align: left;">yahoo</td>
 <td style="text-align: left;">false</td>
+<td style="text-align: right;">459</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">Yemen</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">laptop</td>
+<td style="text-align: left;">direct</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: right;">996</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: left;">Brazil</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tablet</td>
+<td style="text-align: left;">bing</td>
+<td style="text-align: left;">true</td>
+<td style="text-align: right;">468</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">China</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mobile</td>
+<td style="text-align: left;">yahoo</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: right;">955</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">Poland</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mobile</td>
+<td style="text-align: left;">direct</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: right;">908</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">Indonesia</td>
 </tr>
 </tbody>
 </table>
@@ -1006,104 +893,68 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="filter-2" class="slide level2">
 <h2>Filter</h2>
 <hr>
-<p>Let us filter data based on a text value. In the following example, we filter all rows from the <code>ecom</code> table where the <code>device</code> used is <code>mobile</code>.</p>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> ecom <span class="kw">WHERE</span> device == <span class="st">'mobile'</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> trade <span class="kw">WHERE</span> device == <span class="st">'mobile'</span></code></pre></div>
 <div class="knitsql-table">
 <table>
 <caption>Displaying records 1 - 6</caption>
 <thead>
 <tr class="header">
-<th style="text-align: right;">id</th>
-<th style="text-align: left;">referrer</th>
 <th style="text-align: left;">device</th>
-<th style="text-align: left;">bouncers</th>
-<th style="text-align: right;">n_visit</th>
-<th style="text-align: right;">n_pages</th>
-<th style="text-align: right;">duration</th>
-<th style="text-align: left;">country</th>
+<th style="text-align: left;">referrer</th>
 <th style="text-align: left;">purchase</th>
-<th style="text-align: right;">order_items</th>
-<th style="text-align: right;">order_value</th>
+<th style="text-align: right;">duration</th>
+<th style="text-align: right;">n_visit</th>
+<th style="text-align: left;">country</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">5</td>
-<td style="text-align: left;">yahoo</td>
 <td style="text-align: left;">mobile</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">1</td>
+<td style="text-align: left;">yahoo</td>
+<td style="text-align: left;">false</td>
 <td style="text-align: right;">955</td>
+<td style="text-align: right;">9</td>
 <td style="text-align: left;">Poland</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">7</td>
+<td style="text-align: left;">mobile</td>
 <td style="text-align: left;">yahoo</td>
-<td style="text-align: left;">mobile</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">1</td>
+<td style="text-align: left;">false</td>
 <td style="text-align: right;">75</td>
+<td style="text-align: right;">10</td>
 <td style="text-align: left;">Bangladesh</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">8</td>
-<td style="text-align: left;">direct</td>
 <td style="text-align: left;">mobile</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">1</td>
+<td style="text-align: left;">direct</td>
+<td style="text-align: left;">false</td>
 <td style="text-align: right;">908</td>
+<td style="text-align: right;">10</td>
 <td style="text-align: left;">Indonesia</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">9</td>
-<td style="text-align: left;">bing</td>
 <td style="text-align: left;">mobile</td>
+<td style="text-align: left;">bing</td>
 <td style="text-align: left;">false</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">19</td>
 <td style="text-align: right;">209</td>
+<td style="text-align: right;">3</td>
 <td style="text-align: left;">Netherlands</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">10</td>
-<td style="text-align: left;">google</td>
 <td style="text-align: left;">mobile</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">208</td>
-<td style="text-align: left;">Czech Republic</td>
+<td style="text-align: left;">google</td>
 <td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: right;">208</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Czech Republic</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">13</td>
-<td style="text-align: left;">direct</td>
 <td style="text-align: left;">mobile</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">14</td>
-<td style="text-align: right;">406</td>
-<td style="text-align: left;">Ireland</td>
+<td style="text-align: left;">direct</td>
 <td style="text-align: left;">true</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">651</td>
+<td style="text-align: right;">406</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">Ireland</td>
 </tr>
 </tbody>
 </table>
@@ -1112,115 +963,78 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="and-or-not" class="slide level2">
 <h2>And, Or &amp; Not</h2>
 <hr>
-<p>The WHERE clause can be combined with other operators such as</p>
+<p>The WHERE clause can be combined with other operators to filter data based on more than one condition or to create more complex conditions. Below are the operators:</p>
 <ul>
 <li class="fragment">AND - displays a record if all the conditions separated by AND is TRUE</li>
 <li class="fragment">OR - displays a record if any of the conditions separated by OR is TRUE</li>
 <li class="fragment">NOT - displays a record if the condition(s) is NOT TRUE</li>
 </ul>
-<p>to filter data based on more than one condition or to create more complex conditions.</p>
-<p>In the next example, we filter all the rows from the <code>ecom</code> table where <code>n_visit</code> (visit count) is greater than 3 and <code>duration</code> (time spent on the site) is greater than 100. We use AND to create multiple conditions.</p>
 </section>
 <section id="and-or-not-1" class="slide level2">
 <h2>And, Or &amp; Not</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> ecom <span class="kw">WHERE</span> n_visit &gt; <span class="dv">3</span> <span class="kw">AND</span> duration &gt; <span class="dv">100</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> trade <span class="kw">WHERE</span> n_visit &gt; <span class="dv">3</span> <span class="kw">AND</span> duration &gt; <span class="dv">100</span></code></pre></div>
 <div class="knitsql-table">
 <table>
 <caption>Displaying records 1 - 6</caption>
 <thead>
 <tr class="header">
-<th style="text-align: right;">id</th>
-<th style="text-align: left;">referrer</th>
 <th style="text-align: left;">device</th>
-<th style="text-align: left;">bouncers</th>
-<th style="text-align: right;">n_visit</th>
-<th style="text-align: right;">n_pages</th>
-<th style="text-align: right;">duration</th>
-<th style="text-align: left;">country</th>
+<th style="text-align: left;">referrer</th>
 <th style="text-align: left;">purchase</th>
-<th style="text-align: right;">order_items</th>
-<th style="text-align: right;">order_value</th>
+<th style="text-align: right;">duration</th>
+<th style="text-align: right;">n_visit</th>
+<th style="text-align: left;">country</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">google</td>
 <td style="text-align: left;">laptop</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">1</td>
+<td style="text-align: left;">google</td>
+<td style="text-align: left;">false</td>
 <td style="text-align: right;">693</td>
+<td style="text-align: right;">10</td>
 <td style="text-align: left;">Czech Republic</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">2</td>
-<td style="text-align: left;">yahoo</td>
 <td style="text-align: left;">tablet</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">1</td>
+<td style="text-align: left;">yahoo</td>
+<td style="text-align: left;">false</td>
 <td style="text-align: right;">459</td>
-<td style="text-align: left;">Yemen</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">5</td>
-<td style="text-align: left;">yahoo</td>
-<td style="text-align: left;">mobile</td>
-<td style="text-align: left;">true</td>
 <td style="text-align: right;">9</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">955</td>
-<td style="text-align: left;">Poland</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">6</td>
-<td style="text-align: left;">yahoo</td>
-<td style="text-align: left;">laptop</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">135</td>
-<td style="text-align: left;">South Africa</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: left;">Yemen</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">8</td>
-<td style="text-align: left;">direct</td>
 <td style="text-align: left;">mobile</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">908</td>
-<td style="text-align: left;">Indonesia</td>
+<td style="text-align: left;">yahoo</td>
 <td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: right;">955</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">Poland</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">10</td>
-<td style="text-align: left;">google</td>
-<td style="text-align: left;">mobile</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">208</td>
-<td style="text-align: left;">Czech Republic</td>
+<td style="text-align: left;">laptop</td>
+<td style="text-align: left;">yahoo</td>
 <td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">South Africa</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mobile</td>
+<td style="text-align: left;">direct</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: right;">908</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">Indonesia</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mobile</td>
+<td style="text-align: left;">google</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: right;">208</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Czech Republic</td>
 </tr>
 </tbody>
 </table>
@@ -1229,7 +1043,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="and-or-not-2" class="slide level2">
 <h2>And, Or &amp; Not</h2>
 <hr>
-<p>In the next example, we will use both AND &amp; OR. Our goal is to filter all rows from the <code>ecom</code> table that follow the below conditions:</p>
+<p>In the next example, we will use both AND &amp; OR. Our goal is to filter all rows from the <code>trade</code> table that follow the below conditions:</p>
 <ul>
 <li class="fragment"><code>n_visit</code> (visit count) is either equal to 3 or 5</li>
 <li class="fragment"><code>device</code> used to visit the website is either <code>mobile</code> or <code>tablet</code></li>
@@ -1238,104 +1052,69 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="and-or-not-3" class="slide level2">
 <h2>And, Or &amp; Not</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> ecom <span class="kw">WHERE</span> (n_visit == <span class="dv">5</span> <span class="kw">OR</span> n_visit == <span class="dv">3</span>)  
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> trade <span class="kw">WHERE</span> (n_visit == <span class="dv">5</span> <span class="kw">OR</span> n_visit == <span class="dv">3</span>)  
   <span class="kw">AND</span> (device = <span class="st">'mobile'</span> <span class="kw">OR</span> device = <span class="st">'tablet'</span>)</code></pre></div>
 <div class="knitsql-table">
 <table>
 <caption>Displaying records 1 - 6</caption>
 <thead>
 <tr class="header">
-<th style="text-align: right;">id</th>
-<th style="text-align: left;">referrer</th>
 <th style="text-align: left;">device</th>
-<th style="text-align: left;">bouncers</th>
-<th style="text-align: right;">n_visit</th>
-<th style="text-align: right;">n_pages</th>
-<th style="text-align: right;">duration</th>
-<th style="text-align: left;">country</th>
+<th style="text-align: left;">referrer</th>
 <th style="text-align: left;">purchase</th>
-<th style="text-align: right;">order_items</th>
-<th style="text-align: right;">order_value</th>
+<th style="text-align: right;">duration</th>
+<th style="text-align: right;">n_visit</th>
+<th style="text-align: left;">country</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">4</td>
-<td style="text-align: left;">bing</td>
 <td style="text-align: left;">tablet</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">18</td>
+<td style="text-align: left;">bing</td>
+<td style="text-align: left;">true</td>
 <td style="text-align: right;">468</td>
+<td style="text-align: right;">3</td>
 <td style="text-align: left;">China</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">434</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">9</td>
-<td style="text-align: left;">bing</td>
 <td style="text-align: left;">mobile</td>
+<td style="text-align: left;">bing</td>
 <td style="text-align: left;">false</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">19</td>
 <td style="text-align: right;">209</td>
-<td style="text-align: left;">Netherlands</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">14</td>
-<td style="text-align: left;">yahoo</td>
-<td style="text-align: left;">tablet</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">80</td>
-<td style="text-align: left;">Philippines</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">362</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">17</td>
-<td style="text-align: left;">bing</td>
-<td style="text-align: left;">tablet</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">16</td>
-<td style="text-align: right;">368</td>
-<td style="text-align: left;">Peru</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">1049</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">22</td>
-<td style="text-align: left;">google</td>
-<td style="text-align: left;">mobile</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">147</td>
-<td style="text-align: left;">Brazil</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">38</td>
-<td style="text-align: left;">yahoo</td>
-<td style="text-align: left;">mobile</td>
-<td style="text-align: left;">true</td>
 <td style="text-align: right;">3</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">700</td>
-<td style="text-align: left;">Canada</td>
+<td style="text-align: left;">Netherlands</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tablet</td>
+<td style="text-align: left;">yahoo</td>
 <td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: right;">80</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Philippines</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tablet</td>
+<td style="text-align: left;">bing</td>
+<td style="text-align: left;">true</td>
+<td style="text-align: right;">368</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Peru</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mobile</td>
+<td style="text-align: left;">google</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: right;">147</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Brazil</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mobile</td>
+<td style="text-align: left;">yahoo</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: right;">700</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Canada</td>
 </tr>
 </tbody>
 </table>
@@ -1344,108 +1123,73 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="between" class="slide level2">
 <h2>BETWEEN</h2>
 <hr>
-<p>The BETWEEN operator selects values within a given range and is inclusive: begin and end values are included. The values can be numbers, text, or dates. In the following example, we filter rows from the <code>ecom</code> table where the visit count is between 1 and 3, and the <code>device</code> used to visit the website is <code>mobile</code>.</p>
+<p>The BETWEEN operator selects values within a given range and is inclusive: begin and end values are included. The values can be numbers, text, or dates. In the following example, we filter rows from the <code>trade</code> table where the visit count is between 1 and 3, and the <code>device</code> used to visit the website is <code>mobile</code>.</p>
 </section>
 <section id="between-1" class="slide level2">
 <h2>BETWEEN</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> ecom <span class="kw">WHERE</span> n_visit <span class="kw">BETWEEN</span> <span class="dv">1</span> <span class="kw">AND</span> <span class="dv">3</span> <span class="kw">AND</span> device = <span class="st">'mobile'</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> trade <span class="kw">WHERE</span> n_visit <span class="kw">BETWEEN</span> <span class="dv">1</span> <span class="kw">AND</span> <span class="dv">3</span> <span class="kw">AND</span> device = <span class="st">'mobile'</span></code></pre></div>
 <div class="knitsql-table">
 <table>
 <caption>Displaying records 1 - 6</caption>
 <thead>
 <tr class="header">
-<th style="text-align: right;">id</th>
-<th style="text-align: left;">referrer</th>
 <th style="text-align: left;">device</th>
-<th style="text-align: left;">bouncers</th>
-<th style="text-align: right;">n_visit</th>
-<th style="text-align: right;">n_pages</th>
-<th style="text-align: right;">duration</th>
-<th style="text-align: left;">country</th>
+<th style="text-align: left;">referrer</th>
 <th style="text-align: left;">purchase</th>
-<th style="text-align: right;">order_items</th>
-<th style="text-align: right;">order_value</th>
+<th style="text-align: right;">duration</th>
+<th style="text-align: right;">n_visit</th>
+<th style="text-align: left;">country</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">9</td>
-<td style="text-align: left;">bing</td>
 <td style="text-align: left;">mobile</td>
+<td style="text-align: left;">bing</td>
 <td style="text-align: left;">false</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">19</td>
 <td style="text-align: right;">209</td>
-<td style="text-align: left;">Netherlands</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">32</td>
-<td style="text-align: left;">direct</td>
-<td style="text-align: left;">mobile</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">501</td>
-<td style="text-align: left;">El Salvador</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">36</td>
-<td style="text-align: left;">bing</td>
-<td style="text-align: left;">mobile</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">25</td>
-<td style="text-align: left;">Ireland</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">1885</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">38</td>
-<td style="text-align: left;">yahoo</td>
-<td style="text-align: left;">mobile</td>
-<td style="text-align: left;">true</td>
 <td style="text-align: right;">3</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">700</td>
-<td style="text-align: left;">Canada</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">42</td>
-<td style="text-align: left;">direct</td>
-<td style="text-align: left;">mobile</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">13</td>
-<td style="text-align: right;">234</td>
-<td style="text-align: left;">Indonesia</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: left;">Netherlands</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">49</td>
-<td style="text-align: left;">social</td>
 <td style="text-align: left;">mobile</td>
+<td style="text-align: left;">direct</td>
 <td style="text-align: left;">false</td>
-<td style="text-align: right;">1</td>
+<td style="text-align: right;">501</td>
 <td style="text-align: right;">2</td>
-<td style="text-align: right;">44</td>
-<td style="text-align: left;">France</td>
+<td style="text-align: left;">El Salvador</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mobile</td>
+<td style="text-align: left;">bing</td>
 <td style="text-align: left;">false</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">1515</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Ireland</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mobile</td>
+<td style="text-align: left;">yahoo</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: right;">700</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Canada</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mobile</td>
+<td style="text-align: left;">direct</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: right;">234</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Indonesia</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mobile</td>
+<td style="text-align: left;">social</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">France</td>
 </tr>
 </tbody>
 </table>
@@ -1454,108 +1198,73 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="in" class="slide level2">
 <h2>IN</h2>
 <hr>
-<p>The IN operator allows us to specify multiple values in a WHERE clause. It is a shorthand for multiple OR conditions. In the below example, we filter rows from the <code>ecom</code> table where the visit count is either 2 or 4 or 6 or 8 or 10. Instead of using multiple OR conditions, we use the IN operator.</p>
+<p>The IN operator allows us to specify multiple values in a WHERE clause. It is a shorthand for multiple OR conditions. In the below example, we filter rows from the <code>trade</code> table where the visit count is either 2 or 4 or 6 or 8 or 10. Instead of using multiple OR conditions, we use the IN operator.</p>
 </section>
 <section id="in-1" class="slide level2">
 <h2>IN</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> ecom <span class="kw">WHERE</span> n_visit <span class="kw">IN</span> (<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> trade <span class="kw">WHERE</span> n_visit <span class="kw">IN</span> (<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>)</code></pre></div>
 <div class="knitsql-table">
 <table>
 <caption>Displaying records 1 - 6</caption>
 <thead>
 <tr class="header">
-<th style="text-align: right;">id</th>
-<th style="text-align: left;">referrer</th>
 <th style="text-align: left;">device</th>
-<th style="text-align: left;">bouncers</th>
-<th style="text-align: right;">n_visit</th>
-<th style="text-align: right;">n_pages</th>
-<th style="text-align: right;">duration</th>
-<th style="text-align: left;">country</th>
+<th style="text-align: left;">referrer</th>
 <th style="text-align: left;">purchase</th>
-<th style="text-align: right;">order_items</th>
-<th style="text-align: right;">order_value</th>
+<th style="text-align: right;">duration</th>
+<th style="text-align: right;">n_visit</th>
+<th style="text-align: left;">country</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">google</td>
 <td style="text-align: left;">laptop</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">693</td>
-<td style="text-align: left;">Czech Republic</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">7</td>
-<td style="text-align: left;">yahoo</td>
-<td style="text-align: left;">mobile</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">75</td>
-<td style="text-align: left;">Bangladesh</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">8</td>
-<td style="text-align: left;">direct</td>
-<td style="text-align: left;">mobile</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">908</td>
-<td style="text-align: left;">Indonesia</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">10</td>
 <td style="text-align: left;">google</td>
-<td style="text-align: left;">mobile</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">208</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: right;">693</td>
+<td style="text-align: right;">10</td>
 <td style="text-align: left;">Czech Republic</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">12</td>
-<td style="text-align: left;">direct</td>
-<td style="text-align: left;">tablet</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">132</td>
-<td style="text-align: left;">Estonia</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">20</td>
-<td style="text-align: left;">social</td>
+<td style="text-align: left;">mobile</td>
+<td style="text-align: left;">yahoo</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">Bangladesh</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mobile</td>
+<td style="text-align: left;">direct</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: right;">908</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">Indonesia</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mobile</td>
+<td style="text-align: left;">google</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: right;">208</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Czech Republic</td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;">tablet</td>
+<td style="text-align: left;">direct</td>
 <td style="text-align: left;">false</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">1</td>
+<td style="text-align: right;">132</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Estonia</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tablet</td>
+<td style="text-align: left;">social</td>
+<td style="text-align: left;">false</td>
 <td style="text-align: right;">28</td>
+<td style="text-align: right;">2</td>
 <td style="text-align: left;">Namibia</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">2077</td>
 </tr>
 </tbody>
 </table>
@@ -1564,15 +1273,15 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="is-null" class="slide level2">
 <h2>IS NULL</h2>
 <hr>
-<p>A field with a NULL value is a field with no value. If a field in a table is optional, it is possible to insert a new record or update a record without adding a value to this field. Then, the field will be saved with a NULL value. In the next example, we filter all rows from the <code>ecom</code> table where the <code>device</code> column has NULL values.</p>
+<p>A field with a NULL value is a field with no value. If a field in a table is optional, it is possible to insert a new record or update a record without adding a value to this field. Then, the field will be saved with a NULL value. In the next example, we filter all rows from the <code>trade</code> table where the <code>device</code> column has NULL values.</p>
 </section>
 <section id="is-null-1" class="slide level2">
 <h2>IS NULL</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> ecom <span class="kw">WHERE</span> device <span class="kw">IS</span> <span class="kw">NULL</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> trade <span class="kw">WHERE</span> device <span class="kw">IS</span> <span class="kw">NULL</span></code></pre></div>
 <div class="knitsql-table">
 <p>Table: 0 records</p>
-<p>id referrer device bouncers n_visit n_pages duration country purchase order_items order_value — ——— ——- ——— ——– ——– ——— ——– ——— ———— ————</p>
+<p>device referrer purchase duration n_visit country ——- ——— ——— ——— ——– ——–</p>
 </div>
 </section>
 <section id="like" class="slide level2">
@@ -1580,111 +1289,75 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <p>The LIKE operator is used to search for a specific pattern in a column. There are two wildcards used in conjunction with the LIKE operator:</p>
 <ul>
-<li class="fragment">% : represents zero, one, or multiple characters</li>
-<li class="fragment">_ : represents a single character</li>
+<li class="fragment"><code>%</code> : represents zero, one, or multiple characters</li>
+<li class="fragment"><code>_</code> : represents a single character</li>
 </ul>
-<p>In the following example, we filter all rows from the <code>ecom</code> table where the name of the <code>country</code> starts with <code>P</code>. We use <code>%</code> after <code>P</code> to indicate that it can be followed by any number or type of characters.</p>
 </section>
 <section id="like-1" class="slide level2">
 <h2>LIKE</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> ecom <span class="kw">WHERE</span> country <span class="kw">LIKE</span> <span class="st">'P%'</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> trade <span class="kw">WHERE</span> country <span class="kw">LIKE</span> <span class="st">'P%'</span></code></pre></div>
 <div class="knitsql-table">
 <table>
 <caption>Displaying records 1 - 6</caption>
 <thead>
 <tr class="header">
-<th style="text-align: right;">id</th>
-<th style="text-align: left;">referrer</th>
 <th style="text-align: left;">device</th>
-<th style="text-align: left;">bouncers</th>
-<th style="text-align: right;">n_visit</th>
-<th style="text-align: right;">n_pages</th>
-<th style="text-align: right;">duration</th>
-<th style="text-align: left;">country</th>
+<th style="text-align: left;">referrer</th>
 <th style="text-align: left;">purchase</th>
-<th style="text-align: right;">order_items</th>
-<th style="text-align: right;">order_value</th>
+<th style="text-align: right;">duration</th>
+<th style="text-align: right;">n_visit</th>
+<th style="text-align: left;">country</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">5</td>
-<td style="text-align: left;">yahoo</td>
 <td style="text-align: left;">mobile</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">1</td>
+<td style="text-align: left;">yahoo</td>
+<td style="text-align: left;">false</td>
 <td style="text-align: right;">955</td>
-<td style="text-align: left;">Poland</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">14</td>
-<td style="text-align: left;">yahoo</td>
-<td style="text-align: left;">tablet</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">80</td>
-<td style="text-align: left;">Philippines</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">362</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">17</td>
-<td style="text-align: left;">bing</td>
-<td style="text-align: left;">tablet</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">16</td>
-<td style="text-align: right;">368</td>
-<td style="text-align: left;">Peru</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">1049</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">43</td>
-<td style="text-align: left;">bing</td>
-<td style="text-align: left;">laptop</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">456</td>
-<td style="text-align: left;">Portugal</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">59</td>
-<td style="text-align: left;">yahoo</td>
-<td style="text-align: left;">tablet</td>
-<td style="text-align: left;">true</td>
 <td style="text-align: right;">9</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">706</td>
-<td style="text-align: left;">Philippines</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: left;">Poland</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">62</td>
-<td style="text-align: left;">direct</td>
 <td style="text-align: left;">tablet</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">814</td>
-<td style="text-align: left;">Philippines</td>
+<td style="text-align: left;">yahoo</td>
 <td style="text-align: left;">false</td>
+<td style="text-align: right;">80</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Philippines</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tablet</td>
+<td style="text-align: left;">bing</td>
+<td style="text-align: left;">true</td>
+<td style="text-align: right;">368</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Peru</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">laptop</td>
+<td style="text-align: left;">bing</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: right;">456</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: left;">Portugal</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tablet</td>
+<td style="text-align: left;">yahoo</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: right;">706</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">Philippines</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tablet</td>
+<td style="text-align: left;">direct</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: right;">814</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">Philippines</td>
 </tr>
 </tbody>
 </table>
@@ -1693,7 +1366,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="like-2" class="slide level2">
 <h2>LIKE</h2>
 <hr>
-<p>Let us look at another example where we filter all rows from the <code>ecom</code> table where the name of the country should follow the below conditions:</p>
+<p>Let us look at another example where we filter all rows from the <code>trade</code> table where the name of the country should follow the below conditions:</p>
 <ul>
 <li class="fragment">name can start with any character</li>
 <li class="fragment">the second character must be <code>o</code></li>
@@ -1703,103 +1376,68 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="like-3" class="slide level2">
 <h2>LIKE</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> ecom <span class="kw">WHERE</span> country <span class="kw">LIKE</span> <span class="st">'_o%'</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> trade <span class="kw">WHERE</span> country <span class="kw">LIKE</span> <span class="st">'_o%'</span></code></pre></div>
 <div class="knitsql-table">
 <table>
 <caption>Displaying records 1 - 6</caption>
 <thead>
 <tr class="header">
-<th style="text-align: right;">id</th>
-<th style="text-align: left;">referrer</th>
 <th style="text-align: left;">device</th>
-<th style="text-align: left;">bouncers</th>
-<th style="text-align: right;">n_visit</th>
-<th style="text-align: right;">n_pages</th>
-<th style="text-align: right;">duration</th>
-<th style="text-align: left;">country</th>
+<th style="text-align: left;">referrer</th>
 <th style="text-align: left;">purchase</th>
-<th style="text-align: right;">order_items</th>
-<th style="text-align: right;">order_value</th>
+<th style="text-align: right;">duration</th>
+<th style="text-align: right;">n_visit</th>
+<th style="text-align: left;">country</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">5</td>
-<td style="text-align: left;">yahoo</td>
 <td style="text-align: left;">mobile</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">1</td>
+<td style="text-align: left;">yahoo</td>
+<td style="text-align: left;">false</td>
 <td style="text-align: right;">955</td>
+<td style="text-align: right;">9</td>
 <td style="text-align: left;">Poland</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">6</td>
-<td style="text-align: left;">yahoo</td>
 <td style="text-align: left;">laptop</td>
+<td style="text-align: left;">yahoo</td>
 <td style="text-align: left;">false</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">5</td>
 <td style="text-align: right;">135</td>
+<td style="text-align: right;">5</td>
 <td style="text-align: left;">South Africa</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">19</td>
-<td style="text-align: left;">social</td>
 <td style="text-align: left;">tablet</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">290</td>
-<td style="text-align: left;">Colombia</td>
+<td style="text-align: left;">social</td>
 <td style="text-align: left;">true</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">1304</td>
+<td style="text-align: right;">290</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">Colombia</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">30</td>
-<td style="text-align: left;">yahoo</td>
 <td style="text-align: left;">mobile</td>
+<td style="text-align: left;">yahoo</td>
 <td style="text-align: left;">false</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">9</td>
 <td style="text-align: right;">225</td>
+<td style="text-align: right;">8</td>
 <td style="text-align: left;">Colombia</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">33</td>
-<td style="text-align: left;">direct</td>
 <td style="text-align: left;">laptop</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">658</td>
-<td style="text-align: left;">Colombia</td>
+<td style="text-align: left;">direct</td>
 <td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: right;">658</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">Colombia</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">43</td>
-<td style="text-align: left;">bing</td>
 <td style="text-align: left;">laptop</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">456</td>
-<td style="text-align: left;">Portugal</td>
+<td style="text-align: left;">bing</td>
 <td style="text-align: left;">false</td>
+<td style="text-align: right;">456</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: left;">Portugal</td>
 </tr>
 </tbody>
 </table>
@@ -1808,11 +1446,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="aggregate" class="slide level2">
 <h2>Aggregate</h2>
 <hr>
-<p>Let us combine the aggregate statements with WHERE statement to filter data.</p>
-<ul>
-<li class="fragment">SUM() : returns the total sum of a numeric column</li>
-</ul>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">SUM</span>(n_visit) <span class="kw">FROM</span> ecom</code></pre></div>
+<p>Let us combine the aggregate statements with WHERE statement to filter data. <code>SUM()</code> returns the total sum of a numeric column.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">SUM</span>(n_visit) <span class="kw">FROM</span> trade</code></pre></div>
 <div class="knitsql-table">
 <table>
 <caption>1 records</caption>
@@ -1828,7 +1463,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </tbody>
 </table>
 </div>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">SUM</span>(n_visit) <span class="kw">FROM</span> ecom <span class="kw">WHERE</span> n_visit &gt; <span class="dv">5</span></code></pre></div>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">SUM</span>(n_visit) <span class="kw">FROM</span> trade <span class="kw">WHERE</span> n_visit &gt; <span class="dv">5</span></code></pre></div>
 <div class="knitsql-table">
 <table>
 <caption>1 records</caption>
@@ -1848,10 +1484,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="aggregate-1" class="slide level2">
 <h2>Aggregate</h2>
 <hr>
-<ul>
-<li class="fragment">AVG() : returns the average value of a numeric column</li>
-</ul>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">AVG</span>(n_visit) <span class="kw">FROM</span> ecom</code></pre></div>
+<p><code>AVG()</code> returns the average value of a numeric column.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">AVG</span>(n_visit) <span class="kw">FROM</span> trade</code></pre></div>
 <div class="knitsql-table">
 <table>
 <caption>1 records</caption>
@@ -1867,7 +1501,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </tbody>
 </table>
 </div>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">AVG</span>(n_visit) <span class="kw">FROM</span> ecom 
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">AVG</span>(n_visit) <span class="kw">FROM</span> trade 
   <span class="kw">WHERE</span> country <span class="kw">LIKE</span> <span class="st">'P%'</span></code></pre></div>
 <div class="knitsql-table">
 <table>
@@ -1888,10 +1523,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="aggregate-2" class="slide level2">
 <h2>Aggregate</h2>
 <hr>
-<ul>
-<li class="fragment">MAX() : returns the largest value of the selected column</li>
-</ul>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">MAX</span>(n_visit) <span class="kw">FROM</span> ecom</code></pre></div>
+<p><code>MAX()</code> returns the largest value of the selected column.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">MAX</span>(n_visit) <span class="kw">FROM</span> trade</code></pre></div>
 <div class="knitsql-table">
 <table>
 <caption>1 records</caption>
@@ -1907,7 +1540,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </tbody>
 </table>
 </div>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">MAX</span>(n_visit) <span class="kw">FROM</span> ecom 
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">MAX</span>(n_visit) <span class="kw">FROM</span> trade 
   <span class="kw">WHERE</span> device == <span class="st">'tablet'</span></code></pre></div>
 <div class="knitsql-table">
 <table>
@@ -1928,10 +1562,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="aggregate-3" class="slide level2">
 <h2>Aggregate</h2>
 <hr>
-<ul>
-<li class="fragment">MIN() : returns the smallest value of the selected column</li>
-</ul>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">MIN</span>(n_visit) <span class="kw">FROM</span> ecom</code></pre></div>
+<p><code>MIN()</code> returns the smallest value of the selected column.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">MIN</span>(n_visit) <span class="kw">FROM</span> trade</code></pre></div>
 <div class="knitsql-table">
 <table>
 <caption>1 records</caption>
@@ -1947,7 +1579,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </tbody>
 </table>
 </div>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">MIN</span>(n_visit) <span class="kw">FROM</span> ecom 
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">MIN</span>(n_visit) <span class="kw">FROM</span> trade 
   <span class="kw">WHERE</span> duration <span class="kw">BETWEEN</span> <span class="dv">600</span> <span class="kw">AND</span> <span class="dv">900</span></code></pre></div>
 <div class="knitsql-table">
 <table>
@@ -1968,12 +1601,12 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="alias" class="slide level2">
 <h2>Alias</h2>
 <hr>
-<p>SQL aliases are used to give a table, or a column in a table, a temporary name. They are often used to make column names more readable. An alias only exists for the duration of the query. Below are a few examples:</p>
+<p>SQL aliases are used to give a table, or a column in a table, a temporary name. They are often used to make column names more readable. An alias only exists for the duration of the query.</p>
 </section>
 <section id="alias-1" class="slide level2">
 <h2>Alias</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">AVG</span>(n_visit) <span class="kw">AS</span> avg_mobile <span class="kw">FROM</span> ecom 
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">AVG</span>(n_visit) <span class="kw">AS</span> avg_mobile <span class="kw">FROM</span> trade 
   <span class="kw">WHERE</span> device == <span class="st">'mobile'</span></code></pre></div>
 <div class="knitsql-table">
 <table>
@@ -1994,7 +1627,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="alias-2" class="slide level2">
 <h2>Alias</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">MAX</span>(n_visit) <span class="kw">AS</span> max_visit <span class="kw">FROM</span> ecom</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">MAX</span>(n_visit) <span class="kw">AS</span> max_visit <span class="kw">FROM</span> trade</code></pre></div>
 <div class="knitsql-table">
 <table>
 <caption>1 records</caption>
@@ -2014,7 +1647,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="alias-3" class="slide level2">
 <h2>Alias</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">MIN</span>(duration) <span class="kw">AS</span> min_duration <span class="kw">FROM</span> ecom</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">MIN</span>(duration) <span class="kw">AS</span> min_duration <span class="kw">FROM</span> trade</code></pre></div>
 <div class="knitsql-table">
 <table>
 <caption>1 records</caption>
@@ -2035,103 +1668,68 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>Order By</h2>
 <hr>
 <p>The ORDER BY keyword is used to sort the records in ascending or descending order. By default, the records are sorted in ascending order. Use the DESC keyword if you want to sort the records in descending order,</p>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> ecom <span class="kw">ORDER</span> <span class="kw">BY</span> country</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> trade <span class="kw">ORDER</span> <span class="kw">BY</span> country</code></pre></div>
 <div class="knitsql-table">
 <table>
 <caption>Displaying records 1 - 6</caption>
 <thead>
 <tr class="header">
-<th style="text-align: right;">id</th>
-<th style="text-align: left;">referrer</th>
 <th style="text-align: left;">device</th>
-<th style="text-align: left;">bouncers</th>
-<th style="text-align: right;">n_visit</th>
-<th style="text-align: right;">n_pages</th>
-<th style="text-align: right;">duration</th>
-<th style="text-align: left;">country</th>
+<th style="text-align: left;">referrer</th>
 <th style="text-align: left;">purchase</th>
-<th style="text-align: right;">order_items</th>
-<th style="text-align: right;">order_value</th>
+<th style="text-align: right;">duration</th>
+<th style="text-align: right;">n_visit</th>
+<th style="text-align: left;">country</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">232</td>
-<td style="text-align: left;">social</td>
 <td style="text-align: left;">laptop</td>
+<td style="text-align: left;">social</td>
 <td style="text-align: left;">false</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">2</td>
 <td style="text-align: right;">60</td>
-<td style="text-align: left;">Afghanistan</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">299</td>
-<td style="text-align: left;">yahoo</td>
-<td style="text-align: left;">laptop</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">18</td>
-<td style="text-align: right;">180</td>
-<td style="text-align: left;">Afghanistan</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">570</td>
-<td style="text-align: left;">social</td>
-<td style="text-align: left;">laptop</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">274</td>
-<td style="text-align: left;">Afghanistan</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">677</td>
-<td style="text-align: left;">direct</td>
-<td style="text-align: left;">tablet</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">682</td>
-<td style="text-align: left;">Afghanistan</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">682</td>
-<td style="text-align: left;">direct</td>
-<td style="text-align: left;">tablet</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">18</td>
-<td style="text-align: right;">414</td>
-<td style="text-align: left;">Afghanistan</td>
-<td style="text-align: left;">true</td>
 <td style="text-align: right;">8</td>
-<td style="text-align: right;">2006</td>
+<td style="text-align: left;">Afghanistan</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">853</td>
-<td style="text-align: left;">bing</td>
-<td style="text-align: left;">tablet</td>
+<td style="text-align: left;">laptop</td>
+<td style="text-align: left;">yahoo</td>
 <td style="text-align: left;">false</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">34</td>
-<td style="text-align: left;">Afghanistan</td>
-<td style="text-align: left;">false</td>
+<td style="text-align: right;">180</td>
 <td style="text-align: right;">10</td>
-<td style="text-align: right;">2122</td>
+<td style="text-align: left;">Afghanistan</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">laptop</td>
+<td style="text-align: left;">social</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: right;">274</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Afghanistan</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tablet</td>
+<td style="text-align: left;">direct</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: right;">682</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">Afghanistan</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tablet</td>
+<td style="text-align: left;">direct</td>
+<td style="text-align: left;">true</td>
+<td style="text-align: right;">414</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Afghanistan</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tablet</td>
+<td style="text-align: left;">bing</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">Afghanistan</td>
 </tr>
 </tbody>
 </table>
@@ -2140,103 +1738,68 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="order-by-1" class="slide level2">
 <h2>Order By</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> ecom <span class="kw">ORDER</span> <span class="kw">BY</span> duration</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> trade <span class="kw">ORDER</span> <span class="kw">BY</span> duration</code></pre></div>
 <div class="knitsql-table">
 <table>
 <caption>Displaying records 1 - 6</caption>
 <thead>
 <tr class="header">
-<th style="text-align: right;">id</th>
-<th style="text-align: left;">referrer</th>
 <th style="text-align: left;">device</th>
-<th style="text-align: left;">bouncers</th>
-<th style="text-align: right;">n_visit</th>
-<th style="text-align: right;">n_pages</th>
-<th style="text-align: right;">duration</th>
-<th style="text-align: left;">country</th>
+<th style="text-align: left;">referrer</th>
 <th style="text-align: left;">purchase</th>
-<th style="text-align: right;">order_items</th>
-<th style="text-align: right;">order_value</th>
+<th style="text-align: right;">duration</th>
+<th style="text-align: right;">n_visit</th>
+<th style="text-align: left;">country</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">236</td>
-<td style="text-align: left;">yahoo</td>
 <td style="text-align: left;">tablet</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: left;">Poland</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">615</td>
-<td style="text-align: left;">social</td>
-<td style="text-align: left;">laptop</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: left;">Finland</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">392</td>
 <td style="text-align: left;">yahoo</td>
-<td style="text-align: left;">laptop</td>
 <td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: left;">Indonesia</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">688</td>
-<td style="text-align: left;">social</td>
-<td style="text-align: left;">mobile</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: left;">Botswana</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">468</td>
-<td style="text-align: left;">direct</td>
-<td style="text-align: left;">laptop</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">13</td>
-<td style="text-align: left;">Czech Republic</td>
-<td style="text-align: left;">false</td>
+<td style="text-align: right;">10</td>
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">1598</td>
+<td style="text-align: left;">Poland</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">63</td>
-<td style="text-align: left;">direct</td>
-<td style="text-align: left;">mobile</td>
+<td style="text-align: left;">laptop</td>
+<td style="text-align: left;">social</td>
 <td style="text-align: left;">false</td>
 <td style="text-align: right;">10</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">17</td>
-<td style="text-align: left;">China</td>
+<td style="text-align: left;">Finland</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">laptop</td>
+<td style="text-align: left;">yahoo</td>
 <td style="text-align: left;">false</td>
+<td style="text-align: right;">12</td>
 <td style="text-align: right;">0</td>
+<td style="text-align: left;">Indonesia</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mobile</td>
+<td style="text-align: left;">social</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Botswana</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">laptop</td>
+<td style="text-align: left;">direct</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: right;">13</td>
 <td style="text-align: right;">0</td>
+<td style="text-align: left;">Czech Republic</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mobile</td>
+<td style="text-align: left;">direct</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">China</td>
 </tr>
 </tbody>
 </table>
@@ -2245,103 +1808,68 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="order-by-2" class="slide level2">
 <h2>Order By</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> ecom <span class="kw">ORDER</span> <span class="kw">BY</span> n_visit <span class="kw">DESC</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> trade <span class="kw">ORDER</span> <span class="kw">BY</span> n_visit <span class="kw">DESC</span></code></pre></div>
 <div class="knitsql-table">
 <table>
 <caption>Displaying records 1 - 6</caption>
 <thead>
 <tr class="header">
-<th style="text-align: right;">id</th>
-<th style="text-align: left;">referrer</th>
 <th style="text-align: left;">device</th>
-<th style="text-align: left;">bouncers</th>
-<th style="text-align: right;">n_visit</th>
-<th style="text-align: right;">n_pages</th>
-<th style="text-align: right;">duration</th>
-<th style="text-align: left;">country</th>
+<th style="text-align: left;">referrer</th>
 <th style="text-align: left;">purchase</th>
-<th style="text-align: right;">order_items</th>
-<th style="text-align: right;">order_value</th>
+<th style="text-align: right;">duration</th>
+<th style="text-align: right;">n_visit</th>
+<th style="text-align: left;">country</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">google</td>
 <td style="text-align: left;">laptop</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">1</td>
+<td style="text-align: left;">google</td>
+<td style="text-align: left;">false</td>
 <td style="text-align: right;">693</td>
+<td style="text-align: right;">10</td>
 <td style="text-align: left;">Czech Republic</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">7</td>
+<td style="text-align: left;">mobile</td>
 <td style="text-align: left;">yahoo</td>
-<td style="text-align: left;">mobile</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">1</td>
+<td style="text-align: left;">false</td>
 <td style="text-align: right;">75</td>
+<td style="text-align: right;">10</td>
 <td style="text-align: left;">Bangladesh</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">8</td>
-<td style="text-align: left;">direct</td>
 <td style="text-align: left;">mobile</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">1</td>
+<td style="text-align: left;">direct</td>
+<td style="text-align: left;">false</td>
 <td style="text-align: right;">908</td>
+<td style="text-align: right;">10</td>
 <td style="text-align: left;">Indonesia</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">29</td>
-<td style="text-align: left;">google</td>
 <td style="text-align: left;">mobile</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">338</td>
-<td style="text-align: left;">Russia</td>
+<td style="text-align: left;">google</td>
 <td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: right;">338</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">Russia</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">40</td>
-<td style="text-align: left;">google</td>
 <td style="text-align: left;">mobile</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">479</td>
-<td style="text-align: left;">Cameroon</td>
+<td style="text-align: left;">google</td>
 <td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: right;">479</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">Cameroon</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">63</td>
-<td style="text-align: left;">direct</td>
 <td style="text-align: left;">mobile</td>
+<td style="text-align: left;">direct</td>
 <td style="text-align: left;">false</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">1</td>
 <td style="text-align: right;">17</td>
+<td style="text-align: right;">10</td>
 <td style="text-align: left;">China</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
 </tr>
 </tbody>
 </table>
@@ -2350,9 +1878,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="group-by" class="slide level2">
 <h2>Group By</h2>
 <hr>
-<p>The GROUP BY statement is used with aggregate functions (COUNT, MAX, MIN, SUM, AVG) to group the result by one or more columns.</p>
 <div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> device, <span class="fu">count</span>(*) <span class="kw">AS</span> visits 
-  <span class="kw">FROM</span> ecom 
+  <span class="kw">FROM</span> trade 
   <span class="kw">GROUP</span> <span class="kw">BY</span> device 
   <span class="kw">ORDER</span> <span class="kw">by</span> visits <span class="kw">DESC</span></code></pre></div>
 <div class="knitsql-table">
@@ -2385,7 +1912,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>Group By</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> device, <span class="fu">MAX</span>(duration) <span class="kw">AS</span> max_duration 
-  <span class="kw">FROM</span> ecom 
+  <span class="kw">FROM</span> trade 
   <span class="kw">GROUP</span> <span class="kw">BY</span> device 
   <span class="kw">ORDER</span> <span class="kw">by</span> max_duration <span class="kw">DESC</span></code></pre></div>
 <div class="knitsql-table">
@@ -2427,12 +1954,17 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </ul></li>
 <li class="fragment">limit the number of records returned</li>
 <li class="fragment">handle NULL values</li>
-<li class="fragment">and filter columns using the following operators</li>
+<li class="fragment">and filter columns using the following operators
+<ul>
 <li class="fragment">WHERE</li>
 <li class="fragment">AND, or &amp; NOT</li>
 <li class="fragment">BETWEEN</li>
 <li class="fragment">IN</li>
 <li class="fragment">LIKE</li>
+</ul></li>
+<li class="fragment">aggregate data</li>
+<li class="fragment">order data</li>
+<li class="fragment">group data</li>
 </ul>
 </section>
 <section id="section-1" class="slide level2" data-background="thankyou.png">

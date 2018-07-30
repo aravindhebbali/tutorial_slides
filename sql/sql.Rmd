@@ -8,15 +8,22 @@ output: _output.yaml
 
 <hr>
 
-- connect to databases from R
-- display database information
-- list tables 
-- create table
-- read data into R
-- export data to database
-- remove tables
-- query data using dplyr
-- disconnect from database
+- select 
+    - single column
+    - multiple columns
+    - distinct values in a column
+- limit the number of records returned
+- handle NULL values
+- and filter columns using the following operators
+    - WHERE
+    - AND, or & NOT
+    - BETWEEN
+    - IN
+    - LIKE
+- aggregate data
+- order data
+- group data
+
 
 
 ```{r liteload, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
@@ -28,64 +35,47 @@ library(RSQLite)
 
 ## Data
 
+<hr>
+
+<br>
+<br>
+
 ```{r show, echo=FALSE, eval=TRUE, message=FALSE}
-ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
-ecom
+trade <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv') %>%
+  select(device, referrer, purchase, duration, n_visit, country)
+trade
 ```
 
 ## Data Dictionary
 
 <hr>
 
-Below is the description of the data set:
-
 - id: row id
 - referrer: referrer website/search engine
-- os: operating system
-- browser: browser
 - device: device used to visit the website
-- n_pages: number of pages visited
 - duration: time spent on the website (in seconds)
-- repeat: frequency of visits
 - country: country of origin
 - purchase: whether visitor purchased
-- order_value: order value of visitor (in dollars)
+- n_visit: number of visits
 
 ```{r lite2, echo=FALSE}
 con <- DBI::dbConnect(RSQLite::SQLite(), 
                       dbname = "mydatabase.db")
 ```
 
-## Select
-
-<hr>
-
-The SQL SELECT statement is used to fetch the data from a database table.
-
-Below is the basic syntax of the SELECT statement.
-
-`SELECT column1, column2, columnN FROM table_name;`
-
-Here, column1, column2... are the fields of a table whose values you want to fetch. 
-If you want to fetch all the fields, use the following syntax.
-
-`SELECT * FROM table_name;`
-
 ## Select Single Column
 
 <hr>
 
-Let us begin by selecting the `device` field from the `ecom` table.
-
 ```{sql sql1, connection = con, max.print = 6}
-SELECT device FROM ecom
+SELECT device FROM trade
 ```
 
 ## Select Multiple Columns
 
 <hr>
 
-Select the following fields from the `ecom` table:
+Select the following fields from the `trade` table:
 
 - `referrer`
 - `device`
@@ -96,39 +86,31 @@ Select the following fields from the `ecom` table:
 <hr>
 
 ```{sql sql2, connection = con, max.print = 6}
-SELECT referrer, device, purchase  FROM ecom
+SELECT referrer, device, purchase  FROM trade
 ```
 
 ## Select All Columns
 
 <hr>
 
-Select all the fields from the `ecom` table.
-
 ```{sql sql3, connection = con, max.print = 6}
-SELECT * FROM ecom
+SELECT * FROM trade
 ```
 
 ## Limit
 
 <hr>
 
-If you have a large table with thousands of rows, returning all the records
-will take time. Use LIMIT to specify the number of records to return.
-
 ```{sql sql4, connection = con, max.print = 6}
-SELECT * FROM ecom limit 10
+SELECT * FROM trade limit 10
 ```
 
 ## Distinct
 
 <hr>
 
-A column in a table may often contain many duplicate values; and we might be interested only in the 
-distinct/unique values. In such cases, we can use the SELECT DISTINCT statement to return only distinct values.
-
 ```{sql sql5, connection = con, max.print = 6}
-SELECT distinct referrer FROM ecom
+SELECT distinct referrer FROM trade
 ```
 
 ## Filter
@@ -137,57 +119,45 @@ SELECT distinct referrer FROM ecom
 
 Now that we know how to select columns, let us focus on filtering data. In SQL, the WHERE keyword is used to extract only those records that fulfill a specified condition. Data filter based on both text and numeric values in a table. Below are a few comparison operators we can use:
 
-- `=` equal
-- `<>` not equal
-- `<` less than
-- `>` greater than
-- `<=` less than or equal to
-- `>=` greater than or equal to
+- `=` 
+- `<>` 
+- `<` 
+- `>` 
+- `<=` 
+- `>=` 
 
 ## Filter
 
 <hr>
 
-The following SQL statement filters all rows from the `ecom` table where the `duration` field
-is greater than 300.
-
 ```{sql sql6, connection = con, max.print = 6}
-SELECT * FROM ecom WHERE duration > 300
+SELECT * FROM trade WHERE duration > 300
 ```
 
 ## Filter
 
 <hr>
 
-Let us filter data based on a text value. In the following example, we filter all rows 
-from the `ecom` table where the `device` used is `mobile`.
-
 ```{sql sql7, connection = con, max.print = 6}
-SELECT * FROM ecom WHERE device == 'mobile'
+SELECT * FROM trade WHERE device == 'mobile'
 ```
 
 ## And, Or & Not
 
 <hr>
 
-The WHERE clause can be combined with other operators such as  
+The WHERE clause can be combined with other operators to filter data based on more than one condition or to create more complex conditions. Below are the operators:  
 
 - AND - displays a record if all the conditions separated by AND is TRUE
 - OR  - displays a record if any of the conditions separated by OR is TRUE
 - NOT - displays a record if the condition(s) is NOT TRUE
-
-to filter data based on more than one condition or to create more complex conditions.
-
-In the next example, we filter all the rows from the `ecom` table where
-`n_visit` (visit count) is greater than 3 and `duration` (time spent on the site)
-is greater than 100. We use AND to create multiple conditions.
 
 ## And, Or & Not
 
 <hr>
 
 ```{sql sql8, connection = con, max.print = 6}
-SELECT * FROM ecom WHERE n_visit > 3 AND duration > 100
+SELECT * FROM trade WHERE n_visit > 3 AND duration > 100
 ```
 
 ## And, Or & Not
@@ -195,7 +165,7 @@ SELECT * FROM ecom WHERE n_visit > 3 AND duration > 100
 <hr>
 
 In the next example, we will use both AND & OR. Our goal is to filter all 
-rows from the `ecom` table that follow the below conditions:
+rows from the `trade` table that follow the below conditions:
 
 - `n_visit` (visit count) is either equal to 3 or 5
 - `device` used to visit the website is either `mobile` or `tablet`
@@ -205,7 +175,7 @@ rows from the `ecom` table that follow the below conditions:
 <hr>
 
 ```{sql sql9, connection = con, max.print = 6}
-SELECT * FROM ecom WHERE (n_visit == 5 OR n_visit == 3)  
+SELECT * FROM trade WHERE (n_visit == 5 OR n_visit == 3)  
   AND (device = 'mobile' OR device = 'tablet')
 ```
 
@@ -214,7 +184,7 @@ SELECT * FROM ecom WHERE (n_visit == 5 OR n_visit == 3)
 <hr>
 
 The BETWEEN operator selects values within a given range and is inclusive: begin and end values are included. The values can be numbers, text, or dates. In the following example, we filter rows from 
-the `ecom` table where the visit count is between 1 and 3, and the `device` used to visit the website is
+the `trade` table where the visit count is between 1 and 3, and the `device` used to visit the website is
 `mobile`.
 
 ## BETWEEN
@@ -222,7 +192,7 @@ the `ecom` table where the visit count is between 1 and 3, and the `device` used
 <hr>
 
 ```{sql sql10, connection = con, max.print = 6}
-SELECT * FROM ecom WHERE n_visit BETWEEN 1 AND 3 AND device = 'mobile'
+SELECT * FROM trade WHERE n_visit BETWEEN 1 AND 3 AND device = 'mobile'
 ```
 
 ## IN
@@ -230,7 +200,7 @@ SELECT * FROM ecom WHERE n_visit BETWEEN 1 AND 3 AND device = 'mobile'
 <hr>
 
 The IN operator allows us to specify multiple values in a WHERE clause. It is a shorthand 
-for multiple OR conditions. In the below example, we filter rows from the `ecom` table where
+for multiple OR conditions. In the below example, we filter rows from the `trade` table where
 the visit count is either 2 or 4 or 6 or 8 or 10. Instead of using multiple OR conditions, 
 we use the IN operator.
 
@@ -239,14 +209,14 @@ we use the IN operator.
 <hr>
 
 ```{sql sql11, connection = con, max.print = 6}
-SELECT * FROM ecom WHERE n_visit IN (2, 4, 6, 8, 10)
+SELECT * FROM trade WHERE n_visit IN (2, 4, 6, 8, 10)
 ```
 
 ## IS NULL
 
 <hr>
 
-A field with a NULL value is a field with no value. If a field in a table is optional, it is possible to insert a new record or update a record without adding a value to this field. Then, the field will be saved with a NULL value. In the next example, we filter all rows from the `ecom` table where the `device` column
+A field with a NULL value is a field with no value. If a field in a table is optional, it is possible to insert a new record or update a record without adding a value to this field. Then, the field will be saved with a NULL value. In the next example, we filter all rows from the `trade` table where the `device` column
 has NULL values.
 
 ## IS NULL
@@ -254,7 +224,7 @@ has NULL values.
 <hr>
 
 ```{sql sql12, connection = con, max.print = 6}
-SELECT * FROM ecom WHERE device IS NULL
+SELECT * FROM trade WHERE device IS NULL
 ```
 
 ## LIKE
@@ -263,24 +233,22 @@ SELECT * FROM ecom WHERE device IS NULL
 
 The LIKE operator is used to search for a specific pattern in a column. There are two wildcards used in conjunction with the LIKE operator:
 
-- % : represents zero, one, or multiple characters
-- _ : represents a single character
-
-In the following example, we filter all rows from the `ecom` table where the name of the `country` starts with `P`. We use `%` after `P` to indicate that it can be followed by any number or type of characters.
+- `%` : represents zero, one, or multiple characters
+- `_` : represents a single character
 
 ## LIKE
 
 <hr>
 
 ```{sql sql13, connection = con, max.print = 6}
-SELECT * FROM ecom WHERE country LIKE 'P%'
+SELECT * FROM trade WHERE country LIKE 'P%'
 ```
 
 ## LIKE
 
 <hr>
 
-Let us look at another example where we filter all rows from the `ecom` table where the name of the
+Let us look at another example where we filter all rows from the `trade` table where the name of the
 country should follow the below conditions:
 
 - name can start with any character
@@ -292,37 +260,39 @@ country should follow the below conditions:
 <hr>
 
 ```{sql sql14, connection = con, max.print = 6}
-SELECT * FROM ecom WHERE country LIKE '_o%'
+SELECT * FROM trade WHERE country LIKE '_o%'
 ```
 
 ## Aggregate
 
 <hr> 
 
-Let us combine the aggregate statements with WHERE statement to filter data.
-
-- SUM()  : returns the total sum of a numeric column
+Let us combine the aggregate statements with WHERE statement to filter data. `SUM()` returns the total sum of a numeric column.
 
 ```{sql sql15, connection = con, max.print = 6}
-SELECT SUM(n_visit) FROM ecom
+SELECT SUM(n_visit) FROM trade
 ```
 
+<br>
+
 ```{sql sql16, connection = con, max.print = 6}
-SELECT SUM(n_visit) FROM ecom WHERE n_visit > 5
+SELECT SUM(n_visit) FROM trade WHERE n_visit > 5
 ```
 
 ## Aggregate
 
 <hr>
 
-- AVG()  : returns the average value of a numeric column
+`AVG()` returns the average value of a numeric column.
 
 ```{sql sql17, connection = con, max.print = 6}
-SELECT AVG(n_visit) FROM ecom
+SELECT AVG(n_visit) FROM trade
 ```
 
+<br>
+
 ```{sql sql18, connection = con, max.print = 6}
-SELECT AVG(n_visit) FROM ecom 
+SELECT AVG(n_visit) FROM trade 
   WHERE country LIKE 'P%'
 ```
 
@@ -330,14 +300,16 @@ SELECT AVG(n_visit) FROM ecom
 
 <hr>
 
-- MAX()  : returns the largest value of the selected column
+`MAX()` returns the largest value of the selected column.
 
 ```{sql sql19, connection = con, max.print = 6}
-SELECT MAX(n_visit) FROM ecom
+SELECT MAX(n_visit) FROM trade
 ```
 
+<br>
+
 ```{sql sql20, connection = con, max.print = 6}
-SELECT MAX(n_visit) FROM ecom 
+SELECT MAX(n_visit) FROM trade 
   WHERE device == 'tablet'
 ```
 
@@ -345,14 +317,16 @@ SELECT MAX(n_visit) FROM ecom
 
 <hr>
 
-- MIN()  : returns the smallest value of the selected column
+`MIN()` returns the smallest value of the selected column.
 
 ```{sql sql21, connection = con, max.print = 6}
-SELECT MIN(n_visit) FROM ecom
+SELECT MIN(n_visit) FROM trade
 ```
 
+<br>
+
 ```{sql sql22, connection = con, max.print = 6}
-SELECT MIN(n_visit) FROM ecom 
+SELECT MIN(n_visit) FROM trade 
   WHERE duration BETWEEN 600 AND 900
 ```
 
@@ -360,15 +334,14 @@ SELECT MIN(n_visit) FROM ecom
 
 <hr>
 
-SQL aliases are used to give a table, or a column in a table, a temporary name. They are often used to make column names more readable. An alias only exists for the duration of the query. Below are a
-few examples:
+SQL aliases are used to give a table, or a column in a table, a temporary name. They are often used to make column names more readable. An alias only exists for the duration of the query. 
 
 ## Alias 
 
 <hr>
 
 ```{sql sql23, connection = con, max.print = 6}
-SELECT AVG(n_visit) AS avg_mobile FROM ecom 
+SELECT AVG(n_visit) AS avg_mobile FROM trade 
   WHERE device == 'mobile'
 ```
 
@@ -377,7 +350,7 @@ SELECT AVG(n_visit) AS avg_mobile FROM ecom
 <hr>
 
 ```{sql sql24, connection = con, max.print = 6}
-SELECT MAX(n_visit) AS max_visit FROM ecom
+SELECT MAX(n_visit) AS max_visit FROM trade
 ```
 
 ## Alias 
@@ -385,7 +358,7 @@ SELECT MAX(n_visit) AS max_visit FROM ecom
 <hr>
 
 ```{sql sql25, connection = con, max.print = 6}
-SELECT MIN(duration) AS min_duration FROM ecom
+SELECT MIN(duration) AS min_duration FROM trade
 ```
 
 ## Order By
@@ -395,7 +368,7 @@ SELECT MIN(duration) AS min_duration FROM ecom
 The ORDER BY keyword is used to sort the records in ascending or descending order. By default, the records are sorted in ascending order. Use the DESC keyword if you want to sort the records in descending order, 
 
 ```{sql sql26, connection = con, max.print = 6}
-SELECT * FROM ecom ORDER BY country
+SELECT * FROM trade ORDER BY country
 ```
 
 ## Order By
@@ -403,7 +376,7 @@ SELECT * FROM ecom ORDER BY country
 <hr>
 
 ```{sql sql27, connection = con, max.print = 6}
-SELECT * FROM ecom ORDER BY duration
+SELECT * FROM trade ORDER BY duration
 ```
 
 ## Order By
@@ -411,18 +384,16 @@ SELECT * FROM ecom ORDER BY duration
 <hr>
 
 ```{sql sql28, connection = con, max.print = 6}
-SELECT * FROM ecom ORDER BY n_visit DESC
+SELECT * FROM trade ORDER BY n_visit DESC
 ```
 
 ## Group By 
 
 <hr>
 
-The GROUP BY statement is used with aggregate functions (COUNT, MAX, MIN, SUM, AVG) to group the result by one or more columns.
-
 ```{sql sql29, connection = con, max.print = 6}
 SELECT device, count(*) AS visits 
-  FROM ecom 
+  FROM trade 
   GROUP BY device 
   ORDER by visits DESC
 ```
@@ -433,7 +404,7 @@ SELECT device, count(*) AS visits
 
 ```{sql sql30, connection = con, max.print = 6}
 SELECT device, MAX(duration) AS max_duration 
-  FROM ecom 
+  FROM trade 
   GROUP BY device 
   ORDER by max_duration DESC
 ```
@@ -451,11 +422,15 @@ In this module we learnt to
 - limit the number of records returned
 - handle NULL values
 - and filter columns using the following operators
-   - WHERE
-   - AND, or & NOT
-   - BETWEEN
-   - IN
-   - LIKE
+    - WHERE
+    - AND, or & NOT
+    - BETWEEN
+    - IN
+    - LIKE
+- aggregate data
+- order data
+- group data
+
 
 ## {data-background="thankyou.png"}
 
