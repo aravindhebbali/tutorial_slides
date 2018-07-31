@@ -1,0 +1,49 @@
+---
+output: _output.yaml
+---
+
+## {data-background="forcats.png"}
+
+## Agenda
+
+<hr>
+
+Categorical or qualitative data in R is treated as data type `factor`. In this module, we will learn to:
+
+- create factors
+- order levels
+- specify labels
+- check levels
+- number of levels
+
+## Create Factors
+
+<hr>
+
+```{r f2}
+devices <- factor(c('Mobile', 'Tablet', 'Desktop'))
+devices
+```
+
+## Factor Levels/Categories
+
+<hr>
+
+```{r f3}
+# number of levels
+nlevels(devices)
+```
+
+## Display Levels
+
+<hr>
+
+```{r f4}
+# levels
+levels(devices)
+```
+
+We will learn more about factors in a later post.
+
+## {data-background="thankyou.png"}
+  
