@@ -54,3 +54,6 @@
   .reveal ol {
     display: block;
   }
+  .reveal .knitsql-table {
+    size: 1px;
+  }

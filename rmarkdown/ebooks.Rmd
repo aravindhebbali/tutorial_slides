@@ -1,4 +1,0 @@
----
-output: _output.yaml
----
-
