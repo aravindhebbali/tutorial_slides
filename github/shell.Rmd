@@ -162,6 +162,14 @@ head shell.Rmd
 mv branches.Rmd branch.Rmd
 ```
 
+## References 
+
+<hr>
+
+- http://www2.imm.dtu.dk/courses/02333/cygwin_tutorial/index.html
+- https://tutorial.djangogirls.org/en/intro_to_command_line/
+- https://ss64.com/
+- https://www.learnenough.com/command-line-tutorial
 
 ## {data-background="thankyou.png"}
   
