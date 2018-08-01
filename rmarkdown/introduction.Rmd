@@ -2,6 +2,8 @@
 output: _output.yaml
 ---
 
+## {data-background="forcats.png"}
+
 ## Agenda
 
 <hr>
@@ -303,3 +305,5 @@ Interactive tutorials can be created using the [learnr](https://rstudio.github.i
 - [RMarkdown Book](https://bookdown.org/yihui/rmarkdown/)
 - [Cheat Sheet](http://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
 - [Reference Guide](http://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)
+
+## {data-background="thankyou.png"}
