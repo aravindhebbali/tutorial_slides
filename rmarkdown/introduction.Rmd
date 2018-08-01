@@ -2,3 +2,304 @@
 output: _output.yaml
 ---
 
+## Agenda
+
+<hr>
+
+In this module, we will:
+
+- explore RMarkdown
+- learn RMarkdown syntax
+- configure RStudio
+
+## Markdown
+
+<hr>
+
+Markdown is a simple formatting syntax that makes authoring web content easy. It
+is a software tool that converts plain text formatting to HTML and is written in
+Perl.
+
+## RMarkdown
+
+<hr>
+
+RMarkdown combines the core syntax of Markdown with embedded R code chunks to
+create dynamic documents. It enables easy creation of dynamic documents, reports
+and presentations which are fully reproducible.
+
+With RMarkdown, we can combine R codes, plots and text to create beautiful
+reports and presentations. The reports can be generated in different formats
+such as:
+
+- PDF
+
+## RMarkdown
+
+<hr>
+
+RMarkdown combines the core syntax of Markdown with embedded R code chunks to
+create dynamic documents. It enables easy creation of dynamic documents, reports
+and presentations which are fully reproducible.
+
+With RMarkdown, we can combine R codes, plots and text to create beautiful
+reports and presentations. The reports can be generated in different formats
+such as:
+
+- PDF
+- HTML
+
+## RMarkdown
+
+<hr>
+
+RMarkdown combines the core syntax of Markdown with embedded R code chunks to
+create dynamic documents. It enables easy creation of dynamic documents, reports
+and presentations which are fully reproducible.
+
+With RMarkdown, we can combine R codes, plots and text to create beautiful
+reports and presentations. The reports can be generated in different formats
+such as:
+
+- PDF
+- HTML
+- MS Word
+
+## RMarkdown
+
+<hr>
+
+RMarkdown combines the core syntax of Markdown with embedded R code chunks to
+create dynamic documents. It enables easy creation of dynamic documents, reports
+and presentations which are fully reproducible.
+
+With RMarkdown, we can combine R codes, plots and text to create beautiful
+reports and presentations. The reports can be generated in different formats
+such as:
+
+- PDF
+- HTML
+- MS Word
+
+The best part about RMarkdown is when you have to make some changes to your code
+or the underlying data and recreate the entire document. You can make the
+necessary changes and RMarkdown will recreate the document with just a single
+click of a button.
+
+## Libraries
+
+<hr>
+
+Install and load the [rmarkdown](https://cran.r-project.org/web/packages/rmarkdown/)
+package.
+
+```{r install, eval=FALSE}
+# install
+install.packages(c("rmarkdown"))
+
+# load
+library(rmarkdown)
+```
+
+## RMarkdown Syntax
+
+<hr>
+
+> - headers
+> - emphasis
+> - lists
+> - links
+> - images
+> - code chunks
+
+## Headers
+
+<hr>
+
+Headers in RMarkdown are denoted by the hash character. You can create six
+levels of headers as shown below:
+
+## Emphasis
+
+<hr>
+
+Asterik `*` or underscore `_` is used emphasize text. To bolden text, double
+asterik `**` or double underscore `__` should be used.
+
+> - `*Markdown*` will return *Markdown*
+> - `_Markdown` will return _Markdown_
+> - `**Markdown**` will return **Markdown**
+> - `__Markdown__` will return __Markdown__
+
+## Unordered Lists
+
+<hr>
+
+Unordered lists can be created using asterik (`*`) or hyphen (`-`) or plus (`+`).
+
+The following
+
+```{r list, eval=FALSE}
+* One
+* Two
+* Three
+```
+
+will return
+
+- One
+- Two
+- Three
+
+## Ordered Lists
+
+<hr>
+
+Ordered lists can be created using numbers.
+
+The following
+
+```{r list2, eval=FALSE}
+1. One
+2. Two
+3. Three
+```
+
+will return
+
+1. One
+2. Two
+3. Three
+
+## Links
+
+<hr>
+
+Links to external objects can be created using the following syntax:
+
+`[link name](link url)`
+
+The following
+
+```{r link, eval=FALSE}
+[R Project](https://www.r-project.org/)
+```
+
+will return [R Project](https://www.r-project.org/)
+
+## Images
+
+<hr>
+
+Images can be inserted using the below syntax:
+
+`![alt text](path/image.extension)`
+
+The following
+
+```{r image, eval=FALSE}
+![alt text](images/Rlogonew.png)
+```
+
+will insert our logo:
+
+![alt text](images/Rlogonew.png)
+
+## Code Chunks
+
+<hr>
+
+It is when creating reports that contain R code, plots and other outputs that
+we will appreciate RMarkdown the most. It saves us from the cut/copy/paste
+ritual while saving time and minimising errors.
+
+Whenever the code or data changes, RMarkdown will automatically regenerate the
+whole document with the updated results and therein lies its magic.
+
+## Syntax
+
+<hr>
+
+> - All R code must be enclosed by 3 backticks
+> - `{}` The term R and output options must go here
+> - `Code` All the codes and comments go between `{}` and the second backtick.
+
+## Options
+
+<hr>
+
+There are lots of output options available in RMarkdown and we will explore the
+most important ones here:
+
+## RStudio Settings
+
+<hr>
+
+Go to `Tools > Global Options > Sweave`
+
+## Languages
+
+<hr>
+
+- R
+- Python
+- SQL
+- Bash
+- Rcpp
+- C & Fortran
+- Javascript & CSS
+- Julia
+
+## Documents
+
+<hr>
+
+- [HTML](https://bookdown.org/yihui/rmarkdown/html-document.html)
+- [Notebooks](https://bookdown.org/yihui/rmarkdown/notebook.html)
+- [PDF](https://bookdown.org/yihui/rmarkdown/pdf-document.html)
+- [Word](https://bookdown.org/yihui/rmarkdown/word-document.html)
+- [Markdown](https://bookdown.org/yihui/rmarkdown/markdown-document.html)
+
+## Presentations
+
+<hr>
+
+- [ioslides](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html)
+- [Beamer](https://bookdown.org/yihui/rmarkdown/beamer-presentation.html)
+- [Slidify](http://slidify.org/)
+- [xaringan](https://slides.yihui.name/xaringan/)
+- [reveal.js](https://github.com/rstudio/revealjs)
+
+## Websites
+
+<hr>
+
+## Books
+
+<hr>
+
+Books can be created and published in various formats using the
+[bookdown](https://bookdown.org/) package.
+
+## Blogs
+
+<hr>
+
+Blogs can be created using [blogdown](https://bookdown.org/yihui/blogdown/)
+package.
+
+## Interactive Tutorials
+
+<hr>
+
+Interactive tutorials can be created using the [learnr](https://rstudio.github.io/learnr/index.html) package.
+
+## References
+
+<hr>
+
+- [Markdown](https://daringfireball.net/projects/markdown/)
+- [RMarkdown Website](https://rmarkdown.rstudio.com/)
+- [RMarkdown Book](https://bookdown.org/yihui/rmarkdown/)
+- [Cheat Sheet](http://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
+- [Reference Guide](http://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)
