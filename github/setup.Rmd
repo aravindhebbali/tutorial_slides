@@ -8,13 +8,13 @@ output: _output.yaml
 
 <hr>
 
-- what is version control?
-- what is git?
-- what is github?
-- pre-requisites
+- set up GitHub account
+- install Git
+- configure Git
+- connect to GitHub
+- configure RStudio
 
-
-## Version Control
+## GitHub Account
 
 <hr>
 
@@ -27,7 +27,7 @@ that you can recall specific versions later. It allows us to:
 - work collaboratively
 - prevent concurrent work from conflicting
 
-## Git
+## Install Git
 
 <hr>
 
@@ -40,7 +40,7 @@ So what is Git? It is
 - flexible
 - secure
 
-## GitHub
+## Configure Git
 
 <hr>
 
@@ -51,11 +51,15 @@ GitHub acts as a remote host for your Git managed projects. It
 - collaborate
 - has a well designed web interface
 
-## Prerequisites
+## Connect to GitHub
 
 <hr>
 
 - [R](https://www.r-project.org/)
 - [RStudio](https://www.rstudio.com/)
+
+## Configure RStudio
+
+<hr>
 
 ## {data-background="thankyou.png"}

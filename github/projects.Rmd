@@ -2,9 +2,34 @@
 output: _output.yaml
 ---
 
+## {data-background="forcats.png"}
+
 ## Agenda
 
-- new project, github first
-- existing project, github first
-- existing project, github last
+<hr>
 
+- new projects
+- existing projects
+
+## New Projects
+
+<hr>
+
+- create repository on GitHub
+- clone repository using RStudio
+- make some changes
+- push changes to remote repository
+- make changes in GitHub
+- pull changes from remote repository
+
+## Existing Projects
+
+<hr>
+
+- create repository in GitHub
+- clone repository using RStudio
+- move files from existing project
+- stage, commit and push
+- check remote repository
+
+## {data-background="thankyou.png"}

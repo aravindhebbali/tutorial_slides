@@ -8,7 +8,7 @@ output: _output.yaml
 
 <hr>
 
-Use the terminal/command line for 
+Use the terminal/command line for
 
 - listing files in a directory
 - navigate between directories
@@ -20,7 +20,7 @@ Use the terminal/command line for
 - move file to a new folder
 - remove directory
 - list all files in a directory
-- get help 
+- get help
 - print variable value
 - create variables
 - store output in a file
@@ -123,7 +123,7 @@ ls
 <hr>
 
 ```{sh mv}
-mv branch.Rmd branches.Rmd
+mv branches.Rmd branch.Rmd
 ```
 
 ## ls
@@ -159,10 +159,10 @@ head shell.Rmd
 ```
 
 ```{sh mv2, echo=FALSE}
-mv branches.Rmd branch.Rmd
+mv branch.Rmd branches.Rmd
 ```
 
-## References 
+## References
 
 <hr>
 
@@ -172,4 +172,3 @@ mv branches.Rmd branch.Rmd
 - https://www.learnenough.com/command-line-tutorial
 
 ## {data-background="thankyou.png"}
-  
