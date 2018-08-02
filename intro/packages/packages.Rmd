@@ -4,11 +4,6 @@ output: _output.yaml
 
 ## {data-background="forcats.png"}
 
-
-```{r cat1, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
-library(ggplot2)
-```
-
 ## Introduction
 
 <hr>
@@ -17,13 +12,13 @@ In this module, we will learn about R packages. Packages are fundamental to R. T
 
 Packages are available for different [topics](https://cran.r-project.org/web/views/). You should always look for a package before writing code from scratch. In case you have written your own codes for a new analysis or topic, do share it with the R community by converting the code into a package. You can learn more about building R packages from [R Packages](http://r-pkgs.had.co.nz/), a book written by [Hadley Wickham](http://hadley.nz/).
 
-## Agenda 
+## Agenda
 
 <hr>
 
 In this post, we will learn to:
 
-- install R packages from 
+- install R packages from
     - CRAN
     - GitHub
     - BitBucket
@@ -33,7 +28,7 @@ In this post, we will learn to:
 - load, update & remove installed packages
 - access package documentation
 
-## Install Packages
+## {data-background="install.png"}
 
 ## CRAN
 
@@ -49,7 +44,7 @@ install.packages('ggplot2')
 
 <hr>
 
-Some R packages are made available on [GitHub](https://github.com/) before releasing them on CRAN. Such packages can be installed using `install_github()` from [devtools](https://cran.r-project.org/web/packages/devtools/index.html) or [remotes](https://cran.r-project.org/web/packages/remotes/index.html) package. You need tp specify the name of the repository and the package. For example, to download [ggplot2](http://ggplot2.tidyverse.org/) or [dplyr](http://dplyr.tidyverse.org/), below is the code:
+Some R packages are made available on [GitHub](https://github.com/) before releasing them on CRAN. Such packages can be installed using `install_github()` from [devtools](https://cran.r-project.org/web/packages/devtools/index.html) or [remotes](https://cran.r-project.org/web/packages/remotes/index.html) package. You need to specify the name of the repository and the package. For example, to download [ggplot2](http://ggplot2.tidyverse.org/) or [dplyr](http://dplyr.tidyverse.org/), below is the code:
 
 ```{r install2, eval=FALSE}
 devtools::install_github("tidyverse/ggplot2")
@@ -94,7 +89,7 @@ biocLite('GenomicFeatures')
 
 <hr>
 
-Many R packages are hosted at [R-Forge](https://r-forge.r-project.org/), a platform for development of R packages. 
+Many R packages are hosted at [R-Forge](https://r-forge.r-project.org/), a platform for development of R packages.
 
 ```{r install6, eval=FALSE}
 install.packages('quantstrat', repos = 'https://r-forge.r-project.org/')
@@ -174,4 +169,3 @@ remove.packages(lib.loc = "C:/Program Files/R/R-3.4.1/library")
 ```
 
 ## {data-background="thankyou.png"}
-  
