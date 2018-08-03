@@ -481,14 +481,13 @@ document.getElementsByTagName('head')[0].appendChild(style);
     <div class="slides">
 
 
-<section id="section" class="slide level2" data-background="forcats.png">
+<section id="section" class="slide level2" data-background="package_banner.png">
 <h2></h2>
 </section>
 <section id="introduction" class="slide level2">
 <h2>Introduction</h2>
 <hr>
-<p>In this module, we will learn about R packages. Packages are fundamental to R. There are approximately 11000 packages available on <a href="https://cran.r-project.org/">CRAN</a> or the Comprehensive R Archive Network.</p>
-<p>Packages are available for different <a href="https://cran.r-project.org/web/views/">topics</a>. You should always look for a package before writing code from scratch. In case you have written your own codes for a new analysis or topic, do share it with the R community by converting the code into a package. You can learn more about building R packages from <a href="http://r-pkgs.had.co.nz/">R Packages</a>, a book written by <a href="http://hadley.nz/">Hadley Wickham</a>.</p>
+<p>In this module, we will learn about R packages. There are ~12000 packages available on <a href="https://cran.r-project.org/">CRAN</a> or the Comprehensive R Archive Network. Packages are available for different <a href="https://cran.r-project.org/web/views/">topics</a> and you should always look for a package before writing code from scratch. In case you have written your own codes for a new analysis or topic, do share it with the R community by converting the R scripts into a package. You can learn more about building R packages from <a href="http://r-pkgs.had.co.nz/">R Packages</a>, a book written by <a href="http://hadley.nz/">Hadley Wickham</a>.</p>
 </section>
 <section id="agenda" class="slide level2">
 <h2>Agenda</h2>
@@ -520,7 +519,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="github" class="slide level2">
 <h2>GitHub</h2>
 <hr>
-<p>Some R packages are made available on <a href="https://github.com/">GitHub</a> before releasing them on CRAN. Such packages can be installed using <code>install_github()</code> from <a href="https://cran.r-project.org/web/packages/devtools/index.html">devtools</a> or <a href="https://cran.r-project.org/web/packages/remotes/index.html">remotes</a> package. You need tp specify the name of the repository and the package. For example, to download <a href="http://ggplot2.tidyverse.org/">ggplot2</a> or <a href="http://dplyr.tidyverse.org/">dplyr</a>, below is the code:</p>
+<p>Some R packages are made available on <a href="https://github.com/">GitHub</a> before releasing them on CRAN. Such packages can be installed using <code>install_github()</code> from <a href="https://cran.r-project.org/web/packages/devtools/index.html">devtools</a> or <a href="https://cran.r-project.org/web/packages/remotes/index.html">remotes</a> package. You need to specify the name of the repository and the package. For example, to download <a href="http://ggplot2.tidyverse.org/">ggplot2</a> or <a href="http://dplyr.tidyverse.org/">dplyr</a>, below is the code:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;tidyverse/ggplot2&quot;</span>)
 remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;tidyverse/dplyr&quot;</span>)</code></pre></div>
 </section>
@@ -560,16 +559,77 @@ remotes<span class="op">::</span><span class="kw">install_bitbucket</span>(<span
 <section id="installed-packages" class="slide level2">
 <h2>Installed Packages</h2>
 <hr>
-<ul>
-<li><code>installed.packages()</code>: view currently installed packages</li>
-<li><code>library('package_name')</code>: load packages</li>
-<li><code>autoload('function_name', 'package_name')</code>: load functions and data from packages only when called in the script</li>
-<li><code>available.package()</code>: packages available for installation</li>
-<li><code>old.packages()</code>: packages which have new versions available</li>
-<li><code>new.packages()</code>: packages already not installed</li>
-<li><code>update.packages()</code>: update packages which have new versions</li>
-<li><code>remove.packages('package_name')</code>: remove installed packages</li>
-</ul>
+<p><br></p>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Function
+</th>
+<th style="text-align:left;">
+Descritpion
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;border-right:1px solid;">
+<code>installed.packages()</code>
+</td>
+<td style="text-align:left;width: 30em; ">
+View currently installed packages.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;border-right:1px solid;">
+<code>library('package_name')</code>
+</td>
+<td style="text-align:left;width: 30em; ">
+Load package into the current R session.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;border-right:1px solid;">
+<code>available.packages()</code>
+</td>
+<td style="text-align:left;width: 30em; ">
+List of packages available for installation.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;border-right:1px solid;">
+<code>old.packages()</code>
+</td>
+<td style="text-align:left;width: 30em; ">
+List of packages which have new versions available.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;border-right:1px solid;">
+<code>new.packages()</code>
+</td>
+<td style="text-align:left;width: 30em; ">
+List of packages already not installed.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;border-right:1px solid;">
+<code>update.packages()</code>
+</td>
+<td style="text-align:left;width: 30em; ">
+Update packages which have new versions available.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;border-right:1px solid;">
+<code>remove.packages('package_name')</code>
+</td>
+<td style="text-align:left;width: 30em; ">
+Remove installed packages.
+</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="library-paths" class="slide level2">
 <h2>Library Paths</h2>
@@ -580,25 +640,11 @@ remotes<span class="op">::</span><span class="kw">install_bitbucket</span>(<span
 ## [2] &quot;C:/Program Files/R/R-3.5.0/library&quot;</code></pre>
 <p>You can use <code>lib.loc</code> when you want to install, load, update and remove packages from a particular library.</p>
 </section>
-<section id="install" class="slide level2">
-<h2>Install</h2>
-<hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">'stringr'</span>, <span class="dt">lib.loc =</span> <span class="st">&quot;C:/Program Files/R/R-3.4.1/library&quot;</span>)</code></pre></div>
-</section>
 <section id="load" class="slide level2">
 <h2>Load</h2>
 <hr>
+<p>To use the functionalities offered by a package, we must load it into the current R session. Use <code>library()</code> to load a R package and specify the location of the package using the <code>lib.loc</code> argument.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lubridate, <span class="dt">lib.loc =</span> <span class="st">&quot;C:/Program Files/R/R-3.4.1/library&quot;</span>)</code></pre></div>
-</section>
-<section id="update-packages" class="slide level2">
-<h2>Update Packages</h2>
-<hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">update.packages</span>(<span class="dt">lib.loc =</span> <span class="st">&quot;C:/Program Files/R/R-3.4.1/library&quot;</span>)</code></pre></div>
-</section>
-<section id="remove-packages" class="slide level2">
-<h2>Remove Packages</h2>
-<hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">remove.packages</span>(<span class="dt">lib.loc =</span> <span class="st">&quot;C:/Program Files/R/R-3.4.1/library&quot;</span>)</code></pre></div>
 </section>
 <section id="section-2" class="slide level2" data-background="thankyou.png">
 <h2></h2>

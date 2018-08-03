@@ -2,15 +2,17 @@
 output: _output.yaml
 ---
 
-## {data-background="forcats.png"}
+## {data-background="package_banner.png"}
+
+```{r install0, echo=FALSE}
+library('kableExtra')
+```
 
 ## Introduction
 
 <hr>
 
-In this module, we will learn about R packages. Packages are fundamental to R. There are approximately 11000 packages available on [CRAN](https://cran.r-project.org/) or the Comprehensive R Archive Network.
-
-Packages are available for different [topics](https://cran.r-project.org/web/views/). You should always look for a package before writing code from scratch. In case you have written your own codes for a new analysis or topic, do share it with the R community by converting the code into a package. You can learn more about building R packages from [R Packages](http://r-pkgs.had.co.nz/), a book written by [Hadley Wickham](http://hadley.nz/).
+In this module, we will learn about R packages. There are ~12000 packages available on [CRAN](https://cran.r-project.org/) or the Comprehensive R Archive Network. Packages are available for different [topics](https://cran.r-project.org/web/views/) and you should always look for a package before writing code from scratch. In case you have written your own codes for a new analysis or topic, do share it with the R community by converting the R scripts into a package. You can learn more about building R packages from [R Packages](http://r-pkgs.had.co.nz/), a book written by [Hadley Wickham](http://hadley.nz/).
 
 ## Agenda
 
@@ -115,14 +117,28 @@ remotes::install_github('tidyverse/dplyr@*release')
 
 <hr>
 
-- `installed.packages()`: view currently installed packages
-- `library('package_name')`: load packages
-- `autoload('function_name', 'package_name')`: load functions and data from packages only when called in the script
-- `available.package()`: packages available for installation
-- `old.packages()`: packages which have new versions available
-- `new.packages()`: packages already not installed
-- `update.packages()`: update packages which have new versions
-- `remove.packages('package_name')`: remove installed packages
+<br>
+
+```{r install14, echo=FALSE, messages=FALSE}
+text_tbl <- data.frame(
+  Function = c("`installed.packages()`", "`library('package_name')`", "`available.packages()`",
+  "`old.packages()`", "`new.packages()`", "`update.packages()`", "`remove.packages('package_name')`"),
+  Descritpion = c(
+    "View currently installed packages. ",
+    "Load package into the current R session. ",
+    "List of packages available for installation. ",
+    "List of packages which have new versions available. ",
+    "List of packages already not installed. ",
+    "Update packages which have new versions available. ",
+    "Remove installed packages. "
+  )
+)
+
+kable(text_tbl, format = "html") %>%
+  kable_styling(full_width = F) %>%
+  column_spec(1, bold = FALSE, border_right = T) %>%
+  column_spec(2, width = "30em")
+```
 
 ## Library Paths
 
@@ -136,36 +152,16 @@ Library is a directory that contains all installed packages. Usually there will 
 
 You can use `lib.loc` when you want to install, load, update and remove packages from a particular library.
 
-## Install
-
-<hr>
-
-```{r install10, eval=FALSE}
-install.packages('stringr', lib.loc = "C:/Program Files/R/R-3.4.1/library")
-```
-
 ## Load
 
 <hr>
 
+To use the functionalities offered by a package, we must load it into the
+current R session. Use `library()` to load a R package and specify the
+location of the package using the `lib.loc` argument.
+
 ```{r install11, eval=FALSE}
 library(lubridate, lib.loc = "C:/Program Files/R/R-3.4.1/library")
-```
-
-## Update Packages
-
-<hr>
-
-```{r install12, eval=FALSE}
-update.packages(lib.loc = "C:/Program Files/R/R-3.4.1/library")
-```
-
-## Remove Packages
-
-<hr>
-
-```{r install13, eval=FALSE}
-remove.packages(lib.loc = "C:/Program Files/R/R-3.4.1/library")
 ```
 
 ## {data-background="thankyou.png"}
