@@ -2,7 +2,7 @@
 output: _output.yaml
 ---
 
-## {data-background="forcats.png"}
+## {data-background="help_banner.png"}
 
 ## Introduction
 
