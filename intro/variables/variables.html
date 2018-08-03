@@ -481,13 +481,31 @@ document.getElementsByTagName('head')[0].appendChild(style);
     <div class="slides">
 
 
-<section id="section" class="slide level2" data-background="forcats.png">
+<section id="section" class="slide level2" data-background="datatypes_banner.png">
 <h2></h2>
 </section>
 <section id="introduction" class="slide level2">
 <h2>Introduction</h2>
 <hr>
-<p>In this module, we will learn about variables and data types. You can skip this post, if you have prior experience in any other programming language.</p>
+<p>In this module, we will learn about variables &amp; data types. Specifically:</p>
+<ul>
+<li>what is a variable?</li>
+<li>how to create variables in R?</li>
+<li>how to use variables created?</li>
+<li>components of a variable</li>
+<li>naming conventions for a variable</li>
+<li>data types
+<ul>
+<li>numeric/double</li>
+<li>integer</li>
+<li>logical</li>
+<li>character</li>
+<li>date/time</li>
+</ul></li>
+</ul>
+</section>
+<section id="section-1" class="slide level2" data-background="variables_section.png">
+<h2></h2>
 </section>
 <section id="what-is-a-variable" class="slide level2">
 <h2>What is a variable?</h2>
@@ -533,7 +551,7 @@ area &lt;-<span class="st"> </span>pi <span class="op">*</span><span class="st">
 <span class="co"># call radius</span>
 radius</code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># call area </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># call area</span>
 area</code></pre></div>
 <pre><code>## [1] 28.26</code></pre>
 </section>
@@ -556,8 +574,192 @@ area</code></pre></div>
 <li>If the name is made of more than one word, use underscore to separate the words.</li>
 </ul>
 </section>
-<section id="recap.." class="slide level2">
-<h2>Recap..</h2>
+<section id="section-2" class="slide level2" data-background="datatypes_section.png">
+<h2></h2>
+</section>
+<section id="numeric" class="slide level2">
+<h2>Numeric</h2>
+<hr>
+<p>In R, numbers are represented by the data type <code>numeric</code>. We will first create a variable and assign it a value. Next we will learn a few methods of checking the type of the variable.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create two variables</span>
+number1 &lt;-<span class="st"> </span><span class="fl">3.5</span>
+number2 &lt;-<span class="st"> </span><span class="dv">3</span>
+
+<span class="co"># check data type</span>
+<span class="kw">class</span>(number1)
+## [1] &quot;numeric&quot;
+<span class="kw">class</span>(number2)
+## [1] &quot;numeric&quot;
+
+<span class="co"># check if data type is numeric</span>
+<span class="kw">is.numeric</span>(number1)
+## [1] TRUE
+<span class="kw">is.numeric</span>(number2)
+## [1] TRUE</code></pre></div>
+</section>
+<section id="numeric-1" class="slide level2">
+<h2>Numeric</h2>
+<hr>
+<p>If you carefully observe, <code>integers</code> are also treated as <code>numeric/double</code>. We will learn to create integers in a while. In the meanwhile, we have introduced two new functions in the above example:</p>
+<ul>
+<li><code>class()</code>: returns the <code>class</code> or <code>type</code></li>
+<li><code>is.numeric()</code>: tests whether the variable is of type <code>numeric</code></li>
+</ul>
+</section>
+<section id="integer" class="slide level2">
+<h2>Integer</h2>
+<hr>
+<p>Unless specified otherwise, integers are treated as <code>numeric</code> or <code>double</code>. In this section, we will learn to create variables of the type <code>integer</code> and to convert other data types to <code>integer</code>.</p>
+<ul>
+<li>create a variable <code>number1</code> and assign it the value <code>3</code></li>
+<li>check the data type of <code>number1</code> using <code>class</code></li>
+<li>create a second variable <code>number2</code> using <code>as.integer()</code> and assign it the value <code>3</code></li>
+<li>check the data type of <code>number2</code> using <code>class</code></li>
+<li>finally use <code>is.integer()</code> to check the data type of both <code>number1</code> and <code>number2</code></li>
+</ul>
+</section>
+<section id="integer-1" class="slide level2">
+<h2>Integer</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create a variable and assign it an integer value</span>
+number1 &lt;-<span class="st"> </span><span class="dv">3</span>
+
+<span class="co"># create another variable using as.integer</span>
+number2 &lt;-<span class="st"> </span><span class="kw">as.integer</span>(<span class="dv">3</span>)
+
+<span class="co"># check the data type</span>
+<span class="kw">class</span>(number1)
+## [1] &quot;numeric&quot;
+<span class="kw">class</span>(number2)
+## [1] &quot;integer&quot;
+
+<span class="co"># use is.integer to check data type</span>
+<span class="kw">is.integer</span>(number1)
+## [1] FALSE
+<span class="kw">is.integer</span>(number2)
+## [1] TRUE</code></pre></div>
+</section>
+<section id="character" class="slide level2">
+<h2>Character</h2>
+<hr>
+<p>Letters, words and group of words are represented by the data type <code>character</code>. All data of type <code>character</code> must be enclosed in single or double quotation marks. In fact any value enclosed in quotes will be treated as <code>character</code>. Let us create two variables to store the first and last name of a some random guy.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># first name</span>
+first_name &lt;-<span class="st"> &quot;jovial&quot;</span>
+
+<span class="co"># last name</span>
+last_name &lt;-<span class="st"> 'mann'</span>
+
+<span class="co"># check data type</span>
+<span class="kw">class</span>(first_name)
+## [1] &quot;character&quot;
+<span class="kw">class</span>(last_name)
+## [1] &quot;character&quot;
+
+<span class="co"># use is.charactert to check data type</span>
+<span class="kw">is.character</span>(first_name)
+## [1] TRUE
+<span class="kw">is.character</span>(last_name)
+## [1] TRUE</code></pre></div>
+</section>
+<section id="integer-2" class="slide level2">
+<h2>Integer</h2>
+<hr>
+<p>You can coerce any data type to <code>character</code> using <code>as.character()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create variable of different data types</span>
+age        &lt;-<span class="st"> </span><span class="kw">as.integer</span>(<span class="dv">30</span>) <span class="co"># integer</span>
+score      &lt;-<span class="st"> </span><span class="fl">9.8</span>            <span class="co"># numeric/double</span>
+opt_course &lt;-<span class="st"> </span><span class="ot">TRUE</span>           <span class="co"># logical</span>
+today      &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()     <span class="co"># date time</span>
+
+<span class="kw">as.character</span>(age)
+## [1] &quot;30&quot;
+<span class="kw">as.character</span>(score)
+## [1] &quot;9.8&quot;
+<span class="kw">as.character</span>(opt_course)
+## [1] &quot;TRUE&quot;
+<span class="kw">as.character</span>(today)
+## [1] &quot;2018-08-03 14:05:30&quot;</code></pre></div>
+</section>
+<section id="logical" class="slide level2">
+<h2>Logical</h2>
+<hr>
+<p>Logical data types take only 2 values. Either <code>TRUE</code> or <code>FALSE</code>. Such data types are created when we compare two objects in R using comparison or logical operators.</p>
+<ul>
+<li>create two variables <code>x</code> and <code>y</code></li>
+<li>assign them the values <code>TRUE</code> and <code>FALSE</code> respectively</li>
+<li>use <code>is.logical()</code> to check data type</li>
+<li>use <code>as.logical()</code> to coerce other data types to <code>logical</code></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create variables x and y</span>
+x &lt;-<span class="st"> </span><span class="ot">TRUE</span>
+y &lt;-<span class="st"> </span><span class="ot">FALSE</span>
+
+<span class="co"># check data type</span>
+<span class="kw">class</span>(x)
+## [1] &quot;logical&quot;
+<span class="kw">is.logical</span>(y)
+## [1] TRUE</code></pre></div>
+</section>
+<section id="logical-1" class="slide level2">
+<h2>Logical</h2>
+<hr>
+<p>The outcome of comparison operators is always <code>logical</code>. In the below example, we compare two numbers to see the outcome.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create two numeric variables</span>
+x &lt;-<span class="st"> </span><span class="dv">3</span>
+y &lt;-<span class="st"> </span><span class="dv">4</span>
+
+<span class="co"># compare x and y</span>
+x <span class="op">&gt;</span><span class="st"> </span>y
+## [1] FALSE
+x <span class="op">&lt;</span><span class="st"> </span>y
+## [1] TRUE
+
+<span class="co"># store the result</span>
+z &lt;-<span class="st"> </span>x <span class="op">&gt;</span><span class="st"> </span>y
+<span class="kw">class</span>(z)
+## [1] &quot;logical&quot;</code></pre></div>
+</section>
+<section id="logical-2" class="slide level2">
+<h2>Logical</h2>
+<hr>
+<p><code>TRUE</code> is represented by all numbers except <code>0</code>. <code>FALSE</code> is represented only by <code>0</code> and no other numbers.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># TRUE and FALSE are represented by 1 and 0</span>
+<span class="kw">as.logical</span>(<span class="dv">1</span>)
+## [1] TRUE
+<span class="kw">as.logical</span>(<span class="dv">0</span>)
+## [1] FALSE
+
+<span class="co"># using numbers</span>
+<span class="kw">as.numeric</span>(<span class="ot">TRUE</span>)
+## [1] 1
+<span class="kw">as.numeric</span>(<span class="ot">FALSE</span>)
+## [1] 0
+
+<span class="co"># using different numbers</span>
+<span class="kw">as.logical</span>(<span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="fl">1.5</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>)
+## [1] TRUE</code></pre></div>
+</section>
+<section id="logical-3" class="slide level2">
+<h2>Logical</h2>
+<hr>
+<p>Use <code>as.logical()</code> to coerce other data types to <code>logical</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create variable of different data types</span>
+age        &lt;-<span class="st"> </span><span class="kw">as.integer</span>(<span class="dv">30</span>) <span class="co"># integer</span>
+score      &lt;-<span class="st"> </span><span class="fl">9.8</span>            <span class="co"># numeric/double</span>
+opt_course &lt;-<span class="st"> </span><span class="ot">TRUE</span>           <span class="co"># logical</span>
+today      &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()     <span class="co"># date time</span>
+
+<span class="kw">as.logical</span>(age)
+## [1] TRUE
+<span class="kw">as.logical</span>(score)
+## [1] TRUE
+<span class="kw">as.logical</span>(opt_course)
+## [1] TRUE
+<span class="kw">as.logical</span>(today)
+## [1] TRUE</code></pre></div>
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
 <hr>
 <ul>
 <li>Variables are the building blocks of a programming language</li>
@@ -573,7 +775,31 @@ area</code></pre></div>
 <li>Certain rules must be followed while naming variables</li>
 </ul>
 </section>
-<section id="section-1" class="slide level2" data-background="thankyou.png">
+<section id="summary-1" class="slide level2">
+<h2>Summary</h2>
+<hr>
+<ul>
+<li>numeric, integer, character, logical and date are the basic data types in R</li>
+<li><code>class()</code> or <code>typeof()</code> return the data type</li>
+<li><code>is.data_type</code> checks whether the data is of the specified data type
+<ul>
+<li><code>is.numeric()</code></li>
+<li><code>is.integer()</code></li>
+<li><code>is.character()</code></li>
+<li><code>is.logical()</code></li>
+<li><code>is.date()</code></li>
+</ul></li>
+<li><code>as.data_type</code> will coerce objects to the specified data type
+<ul>
+<li><code>as.numeric()</code></li>
+<li><code>as.integer()</code></li>
+<li><code>as.character()</code></li>
+<li><code>as.logical()</code></li>
+<li><code>as.date()</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="section-3" class="slide level2" data-background="thankyou.png">
 <h2></h2>
 </section>
     </div>
