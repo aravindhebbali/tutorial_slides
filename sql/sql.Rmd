@@ -2,13 +2,15 @@
 output: _output.yaml
 ---
 
-## {data-background="database.png"}
+## {data-background="sql_banner.png"}
 
 ## Agenda
 
 <hr>
 
-- select 
+In this module, we will learn to:
+
+- select
     - single column
     - multiple columns
     - distinct values in a column
@@ -59,7 +61,7 @@ trade
 - n_visit: number of visits
 
 ```{r lite2, echo=FALSE}
-con <- DBI::dbConnect(RSQLite::SQLite(), 
+con <- DBI::dbConnect(RSQLite::SQLite(),
                       dbname = "mydatabase.db")
 ```
 
@@ -119,12 +121,12 @@ SELECT distinct referrer FROM trade
 
 Now that we know how to select columns, let us focus on filtering data. In SQL, the WHERE keyword is used to extract only those records that fulfill a specified condition. Data filter based on both text and numeric values in a table. Below are a few comparison operators we can use:
 
-- `=` 
-- `<>` 
-- `<` 
-- `>` 
-- `<=` 
-- `>=` 
+- `=`
+- `<>`
+- `<`
+- `>`
+- `<=`
+- `>=`
 
 ## Filter
 
@@ -164,7 +166,7 @@ SELECT * FROM trade WHERE n_visit > 3 AND duration > 100
 
 <hr>
 
-In the next example, we will use both AND & OR. Our goal is to filter all 
+In the next example, we will use both AND & OR. Our goal is to filter all
 rows from the `trade` table that follow the below conditions:
 
 - `n_visit` (visit count) is either equal to 3 or 5
@@ -183,7 +185,7 @@ SELECT * FROM trade WHERE (n_visit == 5 OR n_visit == 3)
 
 <hr>
 
-The BETWEEN operator selects values within a given range and is inclusive: begin and end values are included. The values can be numbers, text, or dates. In the following example, we filter rows from 
+The BETWEEN operator selects values within a given range and is inclusive: begin and end values are included. The values can be numbers, text, or dates. In the following example, we filter rows from
 the `trade` table where the visit count is between 1 and 3, and the `device` used to visit the website is
 `mobile`.
 
@@ -199,9 +201,9 @@ SELECT * FROM trade WHERE n_visit BETWEEN 1 AND 3 AND device = 'mobile'
 
 <hr>
 
-The IN operator allows us to specify multiple values in a WHERE clause. It is a shorthand 
+The IN operator allows us to specify multiple values in a WHERE clause. It is a shorthand
 for multiple OR conditions. In the below example, we filter rows from the `trade` table where
-the visit count is either 2 or 4 or 6 or 8 or 10. Instead of using multiple OR conditions, 
+the visit count is either 2 or 4 or 6 or 8 or 10. Instead of using multiple OR conditions,
 we use the IN operator.
 
 ## IN
@@ -265,7 +267,7 @@ SELECT * FROM trade WHERE country LIKE '_o%'
 
 ## Aggregate
 
-<hr> 
+<hr>
 
 Let us combine the aggregate statements with WHERE statement to filter data. `SUM()` returns the total sum of a numeric column.
 
@@ -292,7 +294,7 @@ SELECT AVG(n_visit) FROM trade
 <br>
 
 ```{sql sql18, connection = con, max.print = 6}
-SELECT AVG(n_visit) FROM trade 
+SELECT AVG(n_visit) FROM trade
   WHERE country LIKE 'P%'
 ```
 
@@ -309,7 +311,7 @@ SELECT MAX(n_visit) FROM trade
 <br>
 
 ```{sql sql20, connection = con, max.print = 6}
-SELECT MAX(n_visit) FROM trade 
+SELECT MAX(n_visit) FROM trade
   WHERE device == 'tablet'
 ```
 
@@ -326,26 +328,26 @@ SELECT MIN(n_visit) FROM trade
 <br>
 
 ```{sql sql22, connection = con, max.print = 6}
-SELECT MIN(n_visit) FROM trade 
+SELECT MIN(n_visit) FROM trade
   WHERE duration BETWEEN 600 AND 900
 ```
 
-## Alias 
+## Alias
 
 <hr>
 
-SQL aliases are used to give a table, or a column in a table, a temporary name. They are often used to make column names more readable. An alias only exists for the duration of the query. 
+SQL aliases are used to give a table, or a column in a table, a temporary name. They are often used to make column names more readable. An alias only exists for the duration of the query.
 
-## Alias 
+## Alias
 
 <hr>
 
 ```{sql sql23, connection = con, max.print = 6}
-SELECT AVG(n_visit) AS avg_mobile FROM trade 
+SELECT AVG(n_visit) AS avg_mobile FROM trade
   WHERE device == 'mobile'
 ```
 
-## Alias 
+## Alias
 
 <hr>
 
@@ -353,7 +355,7 @@ SELECT AVG(n_visit) AS avg_mobile FROM trade
 SELECT MAX(n_visit) AS max_visit FROM trade
 ```
 
-## Alias 
+## Alias
 
 <hr>
 
@@ -365,7 +367,7 @@ SELECT MIN(duration) AS min_duration FROM trade
 
 <hr>
 
-The ORDER BY keyword is used to sort the records in ascending or descending order. By default, the records are sorted in ascending order. Use the DESC keyword if you want to sort the records in descending order, 
+The ORDER BY keyword is used to sort the records in ascending or descending order. By default, the records are sorted in ascending order. Use the DESC keyword if you want to sort the records in descending order,
 
 ```{sql sql26, connection = con, max.print = 6}
 SELECT * FROM trade ORDER BY country
@@ -387,25 +389,25 @@ SELECT * FROM trade ORDER BY duration
 SELECT * FROM trade ORDER BY n_visit DESC
 ```
 
-## Group By 
+## Group By
 
 <hr>
 
 ```{sql sql29, connection = con, max.print = 6}
-SELECT device, count(*) AS visits 
-  FROM trade 
-  GROUP BY device 
+SELECT device, count(*) AS visits
+  FROM trade
+  GROUP BY device
   ORDER by visits DESC
 ```
 
-## Group By 
+## Group By
 
 <hr>
 
 ```{sql sql30, connection = con, max.print = 6}
-SELECT device, MAX(duration) AS max_duration 
-  FROM trade 
-  GROUP BY device 
+SELECT device, MAX(duration) AS max_duration
+  FROM trade
+  GROUP BY device
   ORDER by max_duration DESC
 ```
 
@@ -413,9 +415,9 @@ SELECT device, MAX(duration) AS max_duration
 
 <hr>
 
-In this module we learnt to 
+In this module we learnt to
 
-- select 
+- select
     - single column
     - multiple columns
     - distinct values in a column
@@ -433,4 +435,3 @@ In this module we learnt to
 
 
 ## {data-background="thankyou.png"}
-

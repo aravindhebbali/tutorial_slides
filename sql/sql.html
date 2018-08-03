@@ -481,12 +481,13 @@ document.getElementsByTagName('head')[0].appendChild(style);
     <div class="slides">
 
 
-<section id="section" class="slide level2" data-background="database.png">
+<section id="section" class="slide level2" data-background="sql_banner.png">
 <h2></h2>
 </section>
 <section id="agenda" class="slide level2">
 <h2>Agenda</h2>
 <hr>
+<p>In this module, we will learn to:</p>
 <ul>
 <li class="fragment">select
 <ul>
@@ -1502,7 +1503,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </table>
 </div>
 <p><br></p>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">AVG</span>(n_visit) <span class="kw">FROM</span> trade 
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">AVG</span>(n_visit) <span class="kw">FROM</span> trade
   <span class="kw">WHERE</span> country <span class="kw">LIKE</span> <span class="st">'P%'</span></code></pre></div>
 <div class="knitsql-table">
 <table>
@@ -1541,7 +1542,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </table>
 </div>
 <p><br></p>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">MAX</span>(n_visit) <span class="kw">FROM</span> trade 
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">MAX</span>(n_visit) <span class="kw">FROM</span> trade
   <span class="kw">WHERE</span> device == <span class="st">'tablet'</span></code></pre></div>
 <div class="knitsql-table">
 <table>
@@ -1580,7 +1581,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </table>
 </div>
 <p><br></p>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">MIN</span>(n_visit) <span class="kw">FROM</span> trade 
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">MIN</span>(n_visit) <span class="kw">FROM</span> trade
   <span class="kw">WHERE</span> duration <span class="kw">BETWEEN</span> <span class="dv">600</span> <span class="kw">AND</span> <span class="dv">900</span></code></pre></div>
 <div class="knitsql-table">
 <table>
@@ -1606,7 +1607,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="alias-1" class="slide level2">
 <h2>Alias</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">AVG</span>(n_visit) <span class="kw">AS</span> avg_mobile <span class="kw">FROM</span> trade 
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="fu">AVG</span>(n_visit) <span class="kw">AS</span> avg_mobile <span class="kw">FROM</span> trade
   <span class="kw">WHERE</span> device == <span class="st">'mobile'</span></code></pre></div>
 <div class="knitsql-table">
 <table>
@@ -1878,9 +1879,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="group-by" class="slide level2">
 <h2>Group By</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> device, <span class="fu">count</span>(*) <span class="kw">AS</span> visits 
-  <span class="kw">FROM</span> trade 
-  <span class="kw">GROUP</span> <span class="kw">BY</span> device 
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> device, <span class="fu">count</span>(*) <span class="kw">AS</span> visits
+  <span class="kw">FROM</span> trade
+  <span class="kw">GROUP</span> <span class="kw">BY</span> device
   <span class="kw">ORDER</span> <span class="kw">by</span> visits <span class="kw">DESC</span></code></pre></div>
 <div class="knitsql-table">
 <table>
@@ -1911,9 +1912,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="group-by-1" class="slide level2">
 <h2>Group By</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> device, <span class="fu">MAX</span>(duration) <span class="kw">AS</span> max_duration 
-  <span class="kw">FROM</span> trade 
-  <span class="kw">GROUP</span> <span class="kw">BY</span> device 
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> device, <span class="fu">MAX</span>(duration) <span class="kw">AS</span> max_duration
+  <span class="kw">FROM</span> trade
+  <span class="kw">GROUP</span> <span class="kw">BY</span> device
   <span class="kw">ORDER</span> <span class="kw">by</span> max_duration <span class="kw">DESC</span></code></pre></div>
 <div class="knitsql-table">
 <table>
