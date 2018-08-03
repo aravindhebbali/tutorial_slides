@@ -17,8 +17,8 @@ output: _output.yaml
 
 <hr>
 
-[ggplot2](http://ggplot2.tidyverse.org/index.html) is an alternative (and awesome) to base R for data visualization. It is based on 
-[The Grammar of Graphics](http://www.springer.com/in/book/9780387245447). In this post, we will understand the philosophy behind **ggplot2** and learn to build some of the most frequently used plots for visualizing data. 
+[ggplot2](http://ggplot2.tidyverse.org/index.html) is an alternative (and awesome) to base R for data visualization. It is based on
+[The Grammar of Graphics](http://www.springer.com/in/book/9780387245447). In this post, we will understand the philosophy behind **ggplot2** and learn to build some of the most frequently used plots for visualizing data.
 
 
 ## Libraries
@@ -47,42 +47,68 @@ Grammar of Graphics is a formal system for building plots. The core idea is that
 - a coordinate system
 - a faceting scheme
 
-
-## Step 1
+## Data
 
 <hr>
-
-Let us build a bar plot from scratch using the `mtcars` data. We will build the plot incrementally and understand the above components. 
-The first step in any data visualization exercise is to identify the data set. In `ggplot2`, we can specify the data set using  `ggplot()`.
-
-
-----
-
-<br>
 
 ```{r gg1, fig.align='center'}
-ggplot2::ggplot(data = mtcars) 
+ggplot(data = mtcars)
 ```
 
-## Step 2
+## Geom
 
 <hr>
 
-If you compare with the `barplot()` function from `base`, you can observe that instead of specifying the variable we are using the
-whole data set. And most importantly, the `ggplot()` function does not generate any plots. It just identifies the data that will be used by the other components.
-
-
-Once you have identified the data set, we need to specify how the data must be visualized. We will do this using  `geoms`. It basically indicate the geometric shapes that must be used to display the data. In our case, we are building bar plot and hence we want the data to be displayed as `bars`. 
-
-
-There are several `geoms` and we will explore them one by one. For the time time being, let us use `geom_bar()` and map the `x` axis to a variable using `mapping`. We will use the `cyl` variable from `mtcars`.
-
-----
 ```{r gg2, fig.align='center'}
-ggplot2::ggplot(data = mtcars) +
-  geom_bar(
-    mapping = aes(x = cyl)
-  )
+ggplot(data = mtcars) +
+  geom_point(mapping = aes(x = disp, y = mpg))
+```
+
+## Mappings
+
+<hr>
+
+```{r gg3, fig.align='center'}
+ggplot(data = mtcars) +
+  geom_point(mapping = aes(x = disp, y = mpg))
+```
+
+## Stat
+
+<hr>
+
+```{r gg4, fig.align='center'}
+ggplot(data = mtcars) +
+  geom_point(mapping = aes(x = disp, y = mpg), stat = "identity")
+```
+
+## Position
+
+<hr>
+
+```{r gg5, fig.align='center'}
+ggplot(data = mtcars) +
+  geom_point(mapping = aes(x = disp, y = mpg), position = "identity")
+```
+
+## Coordinate System
+
+<hr>
+
+```{r gg6, fig.align='center'}
+ggplot(data = mtcars) +
+  geom_point(mapping = aes(x = disp, y = mpg), position = "identity") +
+  coord_cartesian()
+```
+
+## Facet
+
+<hr>
+
+```{r gg7, fig.align='center'}
+ggplot(data = mtcars) +
+  geom_point(mapping = aes(x = disp, y = mpg), position = "identity") +
+  coord_cartesian() + facet_grid(. ~ gear)
 ```
 
 ## {data-background="thankyou.png"}
