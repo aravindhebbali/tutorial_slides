@@ -35,6 +35,25 @@ library(DBI)
 library(RSQLite)
 ```
 
+## What is SQL
+
+<hr>
+
+- stands for Structured Query Language
+- lets you access and manipulate databases
+
+## What can SQL do?
+
+<hr>
+
+- SQL can execute queries against a database
+- SQL can retrieve data from a database
+- SQL can insert records in a database
+- SQL can update records in a database
+- SQL can delete records from a database
+- SQL can create new databases
+- SQL can create new tables in a database
+
 ## Data
 
 <hr>
