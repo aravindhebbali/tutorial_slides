@@ -2,7 +2,7 @@
 output: _output.yaml
 ---
 
-## {data-background="forcats.png"}
+## {data-background="rmarkdown_banner.png"}
 
 ## Agenda
 
@@ -35,51 +35,6 @@ reports and presentations. The reports can be generated in different formats
 such as:
 
 - PDF
-
-## RMarkdown
-
-<hr>
-
-RMarkdown combines the core syntax of Markdown with embedded R code chunks to
-create dynamic documents. It enables easy creation of dynamic documents, reports
-and presentations which are fully reproducible.
-
-With RMarkdown, we can combine R codes, plots and text to create beautiful
-reports and presentations. The reports can be generated in different formats
-such as:
-
-- PDF
-- HTML
-
-## RMarkdown
-
-<hr>
-
-RMarkdown combines the core syntax of Markdown with embedded R code chunks to
-create dynamic documents. It enables easy creation of dynamic documents, reports
-and presentations which are fully reproducible.
-
-With RMarkdown, we can combine R codes, plots and text to create beautiful
-reports and presentations. The reports can be generated in different formats
-such as:
-
-- PDF
-- HTML
-- MS Word
-
-## RMarkdown
-
-<hr>
-
-RMarkdown combines the core syntax of Markdown with embedded R code chunks to
-create dynamic documents. It enables easy creation of dynamic documents, reports
-and presentations which are fully reproducible.
-
-With RMarkdown, we can combine R codes, plots and text to create beautiful
-reports and presentations. The reports can be generated in different formats
-such as:
-
-- PDF
 - HTML
 - MS Word
 
@@ -97,9 +52,6 @@ package.
 
 ```{r install, eval=FALSE}
 # install
-install.packages(c("rmarkdown"))
-
-# load
 library(rmarkdown)
 ```
 
