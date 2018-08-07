@@ -2,7 +2,7 @@
 output: _output.yaml
 ---
 
-## {data-background="forcats.png"}
+## {data-background="git_banner.png"}
 
 ## Agenda
 
@@ -10,6 +10,8 @@ output: _output.yaml
 
 - new projects
 - existing projects
+- GitHub tour
+- GitHub pages
 
 ## New Projects
 
@@ -31,5 +33,34 @@ output: _output.yaml
 - move files from existing project
 - stage, commit and push
 - check remote repository
+
+## GitHub Tour
+
+<hr>
+
+- your profile
+- organisation
+- gist
+- issues
+- projects
+- pull requests
+- wiki
+- commits
+- branch
+- contributor
+- releases
+- fork
+
+## Github Pages
+
+<hr>
+
+- personal/project websites
+- hosted from GitHub repositories
+- create a new repository `username.github.io`
+- use <a href="" target="_blank">RMarkdown</a> or <a href=""
+  target="_blank">Blogdown</a> to create website
+- push changes to the remote repository
+- visit `https://username.github.io` to view your website
 
 ## {data-background="thankyou.png"}
