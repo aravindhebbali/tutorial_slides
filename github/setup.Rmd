@@ -2,64 +2,123 @@
 output: _output.yaml
 ---
 
-## {data-background="forcats.png"}
+## {data-background="git_banner.png"}
 
 ## Agenda
 
 <hr>
 
-- set up GitHub account
-- install Git
 - configure Git
 - connect to GitHub
 - configure RStudio
-
-## GitHub Account
-
-<hr>
-
-Version control is a system that records changes to a file or set of files so
-that you can recall specific versions later. It allows us to:
-
-- create backups
-- track every individual change made
-- track who made the changes
-- work collaboratively
-- prevent concurrent work from conflicting
-
-## Install Git
-
-<hr>
-
-So what is Git? It is
-
-- a distributed version control system
-- free
-- open source
-- easy to learn
-- flexible
-- secure
 
 ## Configure Git
 
 <hr>
 
-GitHub acts as a remote host for your Git managed projects. It
-
-- allows others to see your work
-- suggest changes
-- collaborate
-- has a well designed web interface
+- `git config --global user.name 'your name'`
+- `git config --global user.mail 'your mail address'`
+- `git config --global --list`
 
 ## Connect to GitHub
 
 <hr>
 
-- [R](https://www.r-project.org/)
-- [RStudio](https://www.rstudio.com/)
+- create a new repository on GitHub
+- clone repository to local computer
+- make changes to the repository
+- register the above changes
+- push the changes to the remote repository
+- check if the local changes are reflected in the GitHub repository
+
+## Create Repository
+
+<hr>
+
+<br>
+
+```{r img1, echo=FALSE, fig.align='center'}
+knitr::include_graphics('new_repo.png')
+```
+
+## Create Repository
+
+<hr>
+
+<br>
+
+```{r img2, echo=FALSE, fig.align='center'}
+knitr::include_graphics('create_repo.png')
+```
+
+## Clone Repository
+
+<hr>
+
+<br>
+
+```{r img3, echo=FALSE, fig.align='center'}
+knitr::include_graphics('clone_repo.png')
+```
+
+## Clone Repository
+
+<hr>
+
+<br>
+
+```{r img4, echo=FALSE, fig.align='center'}
+knitr::include_graphics('clone_result.png')
+```
+
+## Make Changes
+
+<hr>
+
+<br>
+
+```{r img5, echo=FALSE, fig.align='center'}
+knitr::include_graphics('make_changes.png')
+```
+
+## Push Changes
+
+<hr>
+
+<br>
+
+```{r img6, echo=FALSE, fig.align='center'}
+knitr::include_graphics('push_changes.png')
+```
+
+## Confirm Changes
+
+<hr>
+
+<br>
+
+```{r img7, echo=FALSE, fig.align='center'}
+knitr::include_graphics('confirm_changes.png')
+```
 
 ## Configure RStudio
 
 <hr>
+
+<br>
+
+```{r img8, echo=FALSE, fig.align='center'}
+knitr::include_graphics('global_options.png')
+```
+
+## Configure RStudio
+
+<hr>
+
+<br>
+
+```{r img9, echo=FALSE, fig.align='center'}
+knitr::include_graphics('enable_git.png')
+```
 
 ## {data-background="thankyou.png"}
