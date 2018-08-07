@@ -1,105 +1,74 @@
----
+o---
 output: _output.yaml
 ---
 
-## {data-background="forcats.png"}
+## {data-background="git_banner.png"}
 
 ## Agenda
 
 <hr>
 
-- what is version control?
-- what is git?
-- what is github?
-- pre-requisites
+In this module, we will explore git commands for
 
+- configuration
+- repository creation
+- tracking changes
+- synchronize changes
+- and other objectives
 
-## git config
-
-<hr>
-
-Version control is a system that records changes to a file or set of files so
-that you can recall specific versions later. It allows us to:
-
-- create backups
-- track every individual change made
-- track who made the changes
-- work collaboratively
-- prevent concurrent work from conflicting
-
-## git clone
+## Help &  Configuration
 
 <hr>
 
-So what is Git? It is
+- `git --help`
+- `git --version`
+- `git config --global user.name`
+- `git config --global user.email`
 
-- a distributed version control system
-- free
-- open source
-- easy to learn
-- flexible
-- secure
 
-## git remote
+## Repository Creation
 
 <hr>
 
-GitHub acts as a remote host for your Git managed projects. It
+- `git init`
+- `git clone`
 
-- allows others to see your work
-- suggest changes
-- collaborate
-- has a well designed web interface
-
-## git add
+## Tracking Changes
 
 <hr>
 
-- [R](https://www.r-project.org/)
-- [RStudio](https://www.rstudio.com/)
+- `git status`
+- `git diff`
+- `git add`
+- `git reset`
+- `git commit`
 
-## git commit
-
-<hr>
-
-## git status
-
-<hr>
-
-## git log
+## Synchronize Changes
 
 <hr>
 
-## git diff
+- `git push`
+- `git fetch`
+- `git merge`
+- `git pull`
+
+## Others
 
 <hr>
 
-## git push
+- `git log`
+- `git show`
+- `git reset`
+- `git remote`
+
+## References
 
 <hr>
 
-## git fetch
-
-<hr>
-
-## git merge
-
-<hr>
-
-## git pull
-
-<hr>
-
-## git branch
-
-<hr>
-
-## git rebase
-
-<hr>
-
-## git reset
-
-<hr>
+- <a href="http://happygitwithr.com/" target="_blank">Happy Git With R</a>
+- <a
+  href="https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf"
+  target="_blank">Cheat Sheet</a>
+- <a href="https://git-scm.com/docs" target="_blank">Git Reference</a>
 
 ## {data-background="thankyou.png"}
