@@ -2,7 +2,7 @@
 output: _output.yaml
 ---
 
-## {data-background="forcats.png"}
+## {data-background="git_banner.png"}
 
 ## Agenda
 
@@ -18,20 +18,15 @@ output: _output.yaml
 
 <hr>
 
-Version control is a system that records changes to a file or set of files so
-that you can recall specific versions later. It allows us to:
-
 - create backups
 - track every individual change made
 - track who made the changes
 - work collaboratively
 - prevent concurrent work from conflicting
 
-## Git
+## What is Git?
 
 <hr>
-
-So what is Git? It is
 
 - a distributed version control system
 - free
@@ -40,12 +35,11 @@ So what is Git? It is
 - flexible
 - secure
 
-## GitHub
+## What is GitHub?
 
 <hr>
 
-GitHub acts as a remote host for your Git managed projects. It
-
+- remote host for Git managed projects
 - allows others to see your work
 - suggest changes
 - collaborate
@@ -55,7 +49,7 @@ GitHub acts as a remote host for your Git managed projects. It
 
 <hr>
 
-- [R](https://www.r-project.org/)
-- [RStudio](https://www.rstudio.com/)
+- <a href="https://www.r-project.org/" target="_blank">R</a>
+- <a href="https://www.rstudio.com/" target="_blank">RStudio</a>
 
 ## {data-background="thankyou.png"}
