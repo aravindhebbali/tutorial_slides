@@ -45,11 +45,17 @@ output: _output.yaml
 - collaborate
 - has a well designed web interface
 
-## Prerequisites
+## Set Up
 
 <hr>
 
-- <a href="https://www.r-project.org/" target="_blank">R</a>
-- <a href="https://www.rstudio.com/" target="_blank">RStudio</a>
+- create a free account at <a href="https://github.com/"
+  target="_blank">GitHub</a>
+- download and install the latest version of
+    - <a href="https://cran.r-project.org/" target="_blank">R</a>
+    - <a href="https://www.rstudio.com/products/rstudio/download/#download"
+       target="_blank">RStudio</a> 
+    - <a href="https://git-scm.com/downloads" target="_blank">Git</a>
+
 
 ## {data-background="thankyou.png"}

@@ -2,7 +2,7 @@
 output: _output.yaml
 ---
 
-## {data-background="forcats.png"}
+## {data-background="shell_banner.png"}
 
 ## Agenda
 
@@ -13,17 +13,13 @@ Use the terminal/command line for
 - listing files in a directory
 - navigate between directories
 - view contents of a file
-- word count
 - copy files
 - rename files
 - remove/delete files
 - move file to a new folder
 - remove directory
-- list all files in a directory
+- word count
 - get help
-- print variable value
-- create variables
-- store output in a file
 
 ## pwd
 
@@ -55,6 +51,74 @@ ls
 
 ```{sh cat}
 cat shell.Rmd
+```
+
+## cp
+
+<hr>
+
+```{sh cp}
+cp shell.Rmd cyg.Rmd
+```
+
+## echo
+
+<hr>
+
+```{sh echo2}
+echo "hello" > file1.txt
+```
+
+## ls
+
+<hr>
+
+```{sh ls5}
+ls
+```
+
+## mv
+
+<hr>
+
+```{sh mv}
+mv file1.txt file2.txt
+```
+
+## rm
+
+<hr>
+
+```{sh rm}
+rm cyg.Rmd
+```
+
+## head
+
+<hr>
+
+```{sh head}
+head shell.Rmd
+```
+
+```{sh mv2, echo=FALSE}
+mv file2.txt file1.txt
+```
+
+## mkdir
+
+<hr>
+
+```{sh mkdir}
+mkdir examples
+```
+
+## rmdir
+
+<hr>
+
+```{sh rmdir}
+rmdir examples
 ```
 
 ## wc
@@ -93,74 +157,6 @@ wc shell.Rmd -w
 wc shell.Rmd -l
 ```
 
-## ls
-
-<hr>
-
-```{sh ls4}
-ls
-```
-
-
-## cp
-
-<hr>
-
-```{sh cp}
-cp shell.Rmd cyg.Rmd
-```
-
-## ls
-
-<hr>
-
-```{sh ls3}
-ls
-```
-
-## mv
-
-<hr>
-
-```{sh mv}
-mv branches.Rmd branch.Rmd
-```
-
-## ls
-
-<hr>
-
-```{sh ls2}
-ls
-```
-
-## rm
-
-<hr>
-
-```{sh rm}
-rm cyg.Rmd
-```
-
-## ls
-
-<hr>
-
-```{sh ls1}
-ls
-```
-
-## head
-
-<hr>
-
-```{sh head}
-head shell.Rmd
-```
-
-```{sh mv2, echo=FALSE}
-mv branch.Rmd branches.Rmd
-```
 
 ## References
 

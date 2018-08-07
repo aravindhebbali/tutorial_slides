@@ -481,7 +481,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
     <div class="slides">
 
 
-<section id="section" class="slide level2" data-background="forcats.png">
+<section id="section" class="slide level2" data-background="shell_banner.png">
 <h2></h2>
 </section>
 <section id="agenda" class="slide level2">
@@ -492,17 +492,13 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <li>listing files in a directory</li>
 <li>navigate between directories</li>
 <li>view contents of a file</li>
-<li>word count</li>
 <li>copy files</li>
 <li>rename files</li>
 <li>remove/delete files</li>
 <li>move file to a new folder</li>
 <li>remove directory</li>
-<li>list all files in a directory</li>
+<li>word count</li>
 <li>get help</li>
-<li>print variable value</li>
-<li>create variables</li>
-<li>store output in a file</li>
 </ul>
 </section>
 <section id="pwd" class="slide level2">
@@ -522,16 +518,23 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">ls</span></code></pre></div>
 <pre><code>## _output.yaml
-## branches.Rmd
 ## commands.Rmd
-## cyg.Rmd
+## commands.html
+## file1.txt
 ## forcats.png
+## git_banner.png
 ## github_tour.Rmd
 ## intro.Rmd
 ## intro.html
+## pages.Rmd
+## pages.html
 ## projects.Rmd
+## projects.html
 ## setup.Rmd
 ## shell.Rmd
+## shell.html
+## shell_banner.png
+## ssh.png
 ## styles.css
 ## thankyou.png</code></pre>
 </section>
@@ -543,7 +546,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## output: _output.yaml
 ## ---
 ## 
-## ## {data-background=&quot;forcats.png&quot;}
+## ## {data-background=&quot;shell_banner.png&quot;}
 ## 
 ## ## Agenda
 ## 
@@ -554,17 +557,13 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## - listing files in a directory
 ## - navigate between directories
 ## - view contents of a file
-## - word count
 ## - copy files
 ## - rename files
 ## - remove/delete files
 ## - move file to a new folder
 ## - remove directory
-## - list all files in a directory
+## - word count
 ## - get help
-## - print variable value
-## - create variables
-## - store output in a file
 ## 
 ## ## pwd
 ## 
@@ -596,6 +595,74 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 
 ## ```{sh cat}
 ## cat shell.Rmd
+## ```
+## 
+## ## cp
+## 
+## &lt;hr&gt;
+## 
+## ```{sh cp}
+## cp shell.Rmd cyg.Rmd
+## ```
+## 
+## ## echo
+## 
+## &lt;hr&gt;
+## 
+## ```{sh echo2}
+## echo &quot;hello&quot; &gt; file1.txt
+## ```
+## 
+## ## ls
+## 
+## &lt;hr&gt;
+## 
+## ```{sh ls5}
+## ls
+## ```
+## 
+## ## mv
+## 
+## &lt;hr&gt;
+## 
+## ```{sh mv}
+## mv file1.txt file2.txt
+## ```
+## 
+## ## rm
+## 
+## &lt;hr&gt;
+## 
+## ```{sh rm}
+## rm cyg.Rmd
+## ```
+## 
+## ## head
+## 
+## &lt;hr&gt;
+## 
+## ```{sh head}
+## head shell.Rmd
+## ```
+## 
+## ```{sh mv2, echo=FALSE}
+## mv file2.txt file1.txt
+## ```
+## 
+## ## mkdir
+## 
+## &lt;hr&gt;
+## 
+## ```{sh mkdir}
+## mkdir examples
+## ```
+## 
+## ## rmdir
+## 
+## &lt;hr&gt;
+## 
+## ```{sh rmdir}
+## rmdir examples
 ## ```
 ## 
 ## ## wc
@@ -634,74 +701,6 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## wc shell.Rmd -l
 ## ```
 ## 
-## ## ls
-## 
-## &lt;hr&gt;
-## 
-## ```{sh ls4}
-## ls
-## ```
-## 
-## 
-## ## cp
-## 
-## &lt;hr&gt;
-## 
-## ```{sh cp}
-## cp shell.Rmd cyg.Rmd
-## ```
-## 
-## ## ls
-## 
-## &lt;hr&gt;
-## 
-## ```{sh ls3}
-## ls
-## ```
-## 
-## ## mv
-## 
-## &lt;hr&gt;
-## 
-## ```{sh mv}
-## mv branches.Rmd branch.Rmd
-## ```
-## 
-## ## ls
-## 
-## &lt;hr&gt;
-## 
-## ```{sh ls2}
-## ls
-## ```
-## 
-## ## rm
-## 
-## &lt;hr&gt;
-## 
-## ```{sh rm}
-## rm cyg.Rmd
-## ```
-## 
-## ## ls
-## 
-## &lt;hr&gt;
-## 
-## ```{sh ls1}
-## ls
-## ```
-## 
-## ## head
-## 
-## &lt;hr&gt;
-## 
-## ```{sh head}
-## head shell.Rmd
-## ```
-## 
-## ```{sh mv2, echo=FALSE}
-## mv branch.Rmd branches.Rmd
-## ```
 ## 
 ## ## References
 ## 
@@ -714,119 +713,51 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 
 ## ## {data-background=&quot;thankyou.png&quot;}</code></pre>
 </section>
-<section id="wc" class="slide level2">
-<h2>wc</h2>
+<section id="cp" class="slide level2">
+<h2>cp</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="co"># characters, words and lines</span>
-<span class="fu">wc</span> shell.Rmd</code></pre></div>
-<pre><code>##  174  234 1636 shell.Rmd</code></pre>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">cp</span> shell.Rmd cyg.Rmd</code></pre></div>
 </section>
-<section id="wc-1" class="slide level2">
-<h2>wc</h2>
+<section id="echo" class="slide level2">
+<h2>echo</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="co"># characters</span>
-<span class="fu">wc</span> shell.Rmd -c</code></pre></div>
-<pre><code>## 1636 shell.Rmd</code></pre>
-</section>
-<section id="wc-2" class="slide level2">
-<h2>wc</h2>
-<hr>
-<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="co"># words</span>
-<span class="fu">wc</span> shell.Rmd -w</code></pre></div>
-<pre><code>## 234 shell.Rmd</code></pre>
-</section>
-<section id="wc-3" class="slide level2">
-<h2>wc</h2>
-<hr>
-<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="co"># lines</span>
-<span class="fu">wc</span> shell.Rmd -l</code></pre></div>
-<pre><code>## 174 shell.Rmd</code></pre>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="bu">echo</span> <span class="st">&quot;hello&quot;</span> <span class="op">&gt;</span> file1.txt</code></pre></div>
 </section>
 <section id="ls-1" class="slide level2">
 <h2>ls</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">ls</span></code></pre></div>
 <pre><code>## _output.yaml
-## branches.Rmd
 ## commands.Rmd
+## commands.html
 ## cyg.Rmd
+## file1.txt
 ## forcats.png
+## git_banner.png
 ## github_tour.Rmd
 ## intro.Rmd
 ## intro.html
+## pages.Rmd
+## pages.html
 ## projects.Rmd
+## projects.html
 ## setup.Rmd
 ## shell.Rmd
-## styles.css
-## thankyou.png</code></pre>
-</section>
-<section id="cp" class="slide level2">
-<h2>cp</h2>
-<hr>
-<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">cp</span> shell.Rmd cyg.Rmd</code></pre></div>
-</section>
-<section id="ls-2" class="slide level2">
-<h2>ls</h2>
-<hr>
-<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">ls</span></code></pre></div>
-<pre><code>## _output.yaml
-## branches.Rmd
-## commands.Rmd
-## cyg.Rmd
-## forcats.png
-## github_tour.Rmd
-## intro.Rmd
-## intro.html
-## projects.Rmd
-## setup.Rmd
-## shell.Rmd
+## shell.html
+## shell_banner.png
+## ssh.png
 ## styles.css
 ## thankyou.png</code></pre>
 </section>
 <section id="mv" class="slide level2">
 <h2>mv</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">mv</span> branches.Rmd branch.Rmd</code></pre></div>
-</section>
-<section id="ls-3" class="slide level2">
-<h2>ls</h2>
-<hr>
-<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">ls</span></code></pre></div>
-<pre><code>## _output.yaml
-## branch.Rmd
-## commands.Rmd
-## cyg.Rmd
-## forcats.png
-## github_tour.Rmd
-## intro.Rmd
-## intro.html
-## projects.Rmd
-## setup.Rmd
-## shell.Rmd
-## styles.css
-## thankyou.png</code></pre>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">mv</span> file1.txt file2.txt</code></pre></div>
 </section>
 <section id="rm" class="slide level2">
 <h2>rm</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">rm</span> cyg.Rmd</code></pre></div>
-</section>
-<section id="ls-4" class="slide level2">
-<h2>ls</h2>
-<hr>
-<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">ls</span></code></pre></div>
-<pre><code>## _output.yaml
-## branch.Rmd
-## commands.Rmd
-## forcats.png
-## github_tour.Rmd
-## intro.Rmd
-## intro.html
-## projects.Rmd
-## setup.Rmd
-## shell.Rmd
-## styles.css
-## thankyou.png</code></pre>
 </section>
 <section id="head" class="slide level2">
 <h2>head</h2>
@@ -836,11 +767,49 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## output: _output.yaml
 ## ---
 ## 
-## ## {data-background=&quot;forcats.png&quot;}
+## ## {data-background=&quot;shell_banner.png&quot;}
 ## 
 ## ## Agenda
 ## 
 ## &lt;hr&gt;</code></pre>
+</section>
+<section id="mkdir" class="slide level2">
+<h2>mkdir</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">mkdir</span> examples</code></pre></div>
+</section>
+<section id="rmdir" class="slide level2">
+<h2>rmdir</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">rmdir</span> examples</code></pre></div>
+</section>
+<section id="wc" class="slide level2">
+<h2>wc</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="co"># characters, words and lines</span>
+<span class="fu">wc</span> shell.Rmd</code></pre></div>
+<pre><code>##  170  219 1590 shell.Rmd</code></pre>
+</section>
+<section id="wc-1" class="slide level2">
+<h2>wc</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="co"># characters</span>
+<span class="fu">wc</span> shell.Rmd -c</code></pre></div>
+<pre><code>## 1590 shell.Rmd</code></pre>
+</section>
+<section id="wc-2" class="slide level2">
+<h2>wc</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="co"># words</span>
+<span class="fu">wc</span> shell.Rmd -w</code></pre></div>
+<pre><code>## 219 shell.Rmd</code></pre>
+</section>
+<section id="wc-3" class="slide level2">
+<h2>wc</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="co"># lines</span>
+<span class="fu">wc</span> shell.Rmd -l</code></pre></div>
+<pre><code>## 170 shell.Rmd</code></pre>
 </section>
 <section id="references" class="slide level2">
 <h2>References</h2>
