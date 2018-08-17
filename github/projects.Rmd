@@ -2,7 +2,7 @@
 output: _output.yaml
 ---
 
-## {data-background="git_banner.png"}
+## {data-background="git_banner_5.png"}
 
 ## Agenda
 
