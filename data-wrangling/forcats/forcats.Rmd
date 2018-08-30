@@ -511,5 +511,12 @@ fct_shift(responses, -2) %>%
   levels()
 ```
 
+## References 
+
+<hr>
+
+- https://forcats.tidyverse.org/index.html
+- http://r4ds.had.co.nz/factors.html
+
 ## {data-background="thankyou.png"}
   
