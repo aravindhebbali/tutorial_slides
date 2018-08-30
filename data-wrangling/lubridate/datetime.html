@@ -513,9 +513,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>Current Date/Time</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">now</span>()</code></pre></div>
-<pre><code>## [1] &quot;2018-07-30 14:40:31 IST&quot;</code></pre>
+<pre><code>## [1] &quot;2018-08-30 15:30:37 IST&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">today</span>()</code></pre></div>
-<pre><code>## [1] &quot;2018-07-30&quot;</code></pre>
+<pre><code>## [1] &quot;2018-08-30&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">am</span>(<span class="kw">now</span>())  </code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pm</span>(<span class="kw">now</span>())</code></pre></div>
@@ -691,6 +691,26 @@ course_duration</code></pre></div>
 <section id="if-due-day-is-february-29-is-it-a-leap-year" class="slide level2">
 <h2>If due day is February 29, is it a leap year?</h2>
 <hr>
+<p>If the due day happens to be February 29, let us ensure that the due year is a leap year. Below are the steps to check if the due year is a leap year:</p>
+<ul>
+<li class="fragment">we will extract the following from the due date:
+<ul>
+<li class="fragment">day</li>
+<li class="fragment">month</li>
+<li class="fragment">year</li>
+</ul></li>
+<li class="fragment">we will then create a new column <code>is_leap</code> which will have be set to <code>TRUE</code> if the year is a leap year else it will be set to <code>FALSE</code></li>
+<li class="fragment">filter all the payments due on 29th Feb</li>
+<li class="fragment">select the following columns:
+<ul>
+<li class="fragment"><code>Due</code></li>
+<li class="fragment"><code>is_leap</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="if-due-day-is-february-29-is-it-a-leap-year-1" class="slide level2">
+<h2>If due day is February 29, is it a leap year?</h2>
+<hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
     <span class="dt">due_day   =</span> <span class="kw">day</span>(Due),
@@ -698,15 +718,15 @@ course_duration</code></pre></div>
     <span class="dt">due_year  =</span> <span class="kw">year</span>(Due),
     <span class="dt">is_leap   =</span> <span class="kw">leap_year</span>(due_year)
   ) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>(Invoice), <span class="op">-</span>(Payment)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(due_month <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>due_day <span class="op">==</span><span class="st"> </span><span class="dv">29</span>)</code></pre></div>
-<pre><code>## # A tibble: 4 x 5
-##   Due        due_day due_month due_year is_leap
-##   &lt;date&gt;       &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;lgl&gt;  
-## 1 2012-02-29      29         2     2012 TRUE   
-## 2 2012-02-29      29         2     2012 TRUE   
-## 3 2012-02-29      29         2     2012 TRUE   
-## 4 2012-02-29      29         2     2012 TRUE</code></pre>
+<span class="st">  </span><span class="kw">filter</span>(due_month <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>due_day <span class="op">==</span><span class="st"> </span><span class="dv">29</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(Due, is_leap) </code></pre></div>
+<pre><code>## # A tibble: 4 x 2
+##   Due        is_leap
+##   &lt;date&gt;     &lt;lgl&gt;  
+## 1 2012-02-29 TRUE   
+## 2 2012-02-29 TRUE   
+## 3 2012-02-29 TRUE   
+## 4 2012-02-29 TRUE</code></pre>
 </section>
 <section id="shift-date" class="slide level2">
 <h2>Shift Date</h2>
@@ -746,14 +766,11 @@ course_duration</code></pre></div>
 <h2>Shift Interval</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">course_interval &lt;-<span class="st"> </span><span class="kw">interval</span>(course_start, course_end)
-course_interval <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">int_shift</span>(<span class="dt">by =</span> <span class="kw">days</span>(<span class="dv">1</span>))</code></pre></div>
+<span class="kw">int_shift</span>(course_interval, <span class="dt">by =</span> <span class="kw">days</span>(<span class="dv">1</span>))</code></pre></div>
 <pre><code>## [1] 2017-04-13 UTC--2017-04-22 UTC</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">course_interval <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">int_shift</span>(<span class="dt">by =</span> <span class="kw">weeks</span>(<span class="dv">1</span>))</code></pre></div>
-<pre><code>## [1] 2017-04-19 UTC--2017-04-28 UTC</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">course_interval <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">int_shift</span>(<span class="dt">by =</span> <span class="kw">years</span>(<span class="dv">1</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">int_shift</span>(course_interval, <span class="dt">by =</span> <span class="kw">weeks</span>(<span class="dv">3</span>))</code></pre></div>
+<pre><code>## [1] 2017-05-03 UTC--2017-05-12 UTC</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">int_shift</span>(course_interval, <span class="dt">by =</span> <span class="kw">years</span>(<span class="dv">1</span>))</code></pre></div>
 <pre><code>## [1] 2018-04-12 UTC--2018-04-21 UTC</code></pre>
 </section>
 <section id="interval-overlap" class="slide level2">
@@ -772,6 +789,17 @@ vacation_interval &lt;-<span class="st"> </span><span class="kw">interval</span>
 <pre><code>## [1] TRUE</code></pre>
 </section>
 <section id="how-many-invoices-were-settled-within-due-date" class="slide level2">
+<h2>How many invoices were settled within due date?</h2>
+<hr>
+<p>Let us use intervals to count the number of invoices that were settled within the due date. To do this, we will:</p>
+<ul>
+<li class="fragment">create an interval for the invoice and due date</li>
+<li class="fragment">create a new column <code>due_next</code> by incrementing the due date by 1 day</li>
+<li class="fragment">another interval for <code>due_next</code> and the payment date</li>
+<li class="fragment">if the intervals overlap, the payment was made within the due date</li>
+</ul>
+</section>
+<section id="how-many-invoices-were-settled-within-due-date-1" class="slide level2">
 <h2>How many invoices were settled within due date?</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact <span class="op">%&gt;%</span>
@@ -797,7 +825,7 @@ vacation_interval &lt;-<span class="st"> </span><span class="kw">interval</span>
 ## 10 2013-07-01 2013-07-31 2013-07-26 TRUE    
 ## # ... with 2,456 more rows</code></pre>
 </section>
-<section id="how-many-invoices-were-settled-within-due-date-1" class="slide level2">
+<section id="how-many-invoices-were-settled-within-due-date-2" class="slide level2">
 <h2>how many invoices were settled within due date?</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># using int_shift</span>
@@ -824,6 +852,36 @@ transact <span class="op">%&gt;%</span>
 ## 10 2013-07-01 2013-07-31 2013-07-26 TRUE    
 ## # ... with 2,456 more rows</code></pre>
 </section>
+<section id="how-many-invoices-were-settled-within-due-date-3" class="slide level2">
+<h2>how many invoices were settled within due date?</h2>
+<hr>
+<p>You might be thinking why we incremented the due date by a day before creating the interval between the due day and the payment day. If we do not increment, both the intervals will share a common date i.e. the due date and they will always overlap as shown in the next example.</p>
+</section>
+<section id="how-many-invoices-were-settled-within-due-date-4" class="slide level2">
+<h2>how many invoices were settled within due date?</h2>
+<hr>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">inv_due_interval =</span> <span class="kw">interval</span>(Invoice, Due),
+    <span class="dt">due_pay_interval =</span> <span class="kw">interval</span>(Due, Payment),
+    <span class="dt">overlaps         =</span> <span class="kw">int_overlaps</span>(inv_due_interval, due_pay_interval)
+  ) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(Invoice, Due, Payment, overlaps)</code></pre></div>
+<pre><code>## # A tibble: 2,466 x 4
+##    Invoice    Due        Payment    overlaps
+##    &lt;date&gt;     &lt;date&gt;     &lt;date&gt;     &lt;lgl&gt;   
+##  1 2013-01-02 2013-02-01 2013-01-15 TRUE    
+##  2 2013-01-26 2013-02-25 2013-03-03 TRUE    
+##  3 2013-07-03 2013-08-02 2013-07-08 TRUE    
+##  4 2013-02-10 2013-03-12 2013-03-17 TRUE    
+##  5 2012-10-25 2012-11-24 2012-11-28 TRUE    
+##  6 2012-01-27 2012-02-26 2012-02-22 TRUE    
+##  7 2013-08-13 2013-09-12 2013-09-09 TRUE    
+##  8 2012-12-16 2013-01-15 2013-01-12 TRUE    
+##  9 2012-05-14 2012-06-13 2012-07-01 TRUE    
+## 10 2013-07-01 2013-07-31 2013-07-26 TRUE    
+## # ... with 2,456 more rows</code></pre>
+</section>
 <section id="within" class="slide level2">
 <h2>Within</h2>
 <hr>
@@ -834,16 +892,25 @@ transact <span class="op">%&gt;%</span>
 <h2>Within</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">conference &lt;-<span class="st"> </span><span class="kw">as_date</span>(<span class="st">'2017-04-15'</span>)
-conference <span class="op">%within%</span><span class="st"> </span><span class="kw">interval</span>(course_start, course_end)</code></pre></div>
+conference <span class="op">%within%</span><span class="st"> </span>course_interval</code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 </section>
-<section id="how-many-invoices-were-settled-within-due-date-2" class="slide level2">
+<section id="how-many-invoices-were-settled-within-due-date-5" class="slide level2">
+<h2>how many invoices were settled within due date?</h2>
+<hr>
+<p>Let us use <code>%within%</code> to count the number of invoices that were settled within the due date. We will do this by:</p>
+<ul>
+<li class="fragment">creating an interval for the invoice and due date</li>
+<li class="fragment">check if the payment date falls within the above interval</li>
+</ul>
+</section>
+<section id="how-many-invoices-were-settled-within-due-date-6" class="slide level2">
 <h2>how many invoices were settled within due date?</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">transact <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
     <span class="dt">inv_due_interval =</span> <span class="kw">interval</span>(Invoice, Due),
-    <span class="dt">overlaps =</span> Payment <span class="op">%within%</span><span class="st"> </span>inv_due_interval
+    <span class="dt">overlaps         =</span> Payment <span class="op">%within%</span><span class="st"> </span>inv_due_interval
   ) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(Due, Payment, overlaps)</code></pre></div>
 <pre><code>## # A tibble: 2,466 x 3
@@ -872,12 +939,12 @@ conference <span class="op">%within%</span><span class="st"> </span><span class=
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">course_start</code></pre></div>
 <pre><code>## [1] &quot;2017-04-12&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">course_start <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">quarter</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">quarter</span>(course_start)</code></pre></div>
 <pre><code>## [1] 2</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">course_start <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">quarter</span>(<span class="dt">with_year =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">quarter</span>(course_start, <span class="dt">with_year =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## [1] 2017.2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">semester</span>(course_start)  </code></pre></div>
+<pre><code>## [1] 1</code></pre>
 </section>
 <section id="quarter-2" class="slide level2">
 <h2>Quarter</h2>
@@ -923,14 +990,6 @@ conference <span class="op">%within%</span><span class="st"> </span><span class=
 ## 10 2013-07-01 2013-07-31 2013-07-26   2013.
 ## # ... with 2,456 more rows</code></pre>
 </section>
-<section id="duration-1" class="slide level2">
-<h2>Duration</h2>
-<hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">course_duration <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">as.numeric</span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">duration</span>(<span class="dt">units =</span> <span class="st">'days'</span>)</code></pre></div>
-<pre><code>## [1] &quot;777600s (~1.29 weeks)&quot;</code></pre>
-</section>
 <section id="convert" class="slide level2">
 <h2>Convert</h2>
 <hr>
@@ -940,15 +999,15 @@ conference <span class="op">%within%</span><span class="st"> </span><span class=
 <section id="case-study-2" class="slide level2">
 <h2>Case Study</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">interval</span>(course_start, course_end) <span class="op">/</span><span class="st"> </span><span class="kw">dseconds</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">course_interval <span class="op">/</span><span class="st"> </span><span class="kw">dseconds</span>()</code></pre></div>
 <pre><code>## [1] 777600</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">interval</span>(course_start, course_end) <span class="op">/</span><span class="st"> </span><span class="kw">dminutes</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">course_interval <span class="op">/</span><span class="st"> </span><span class="kw">dminutes</span>()</code></pre></div>
 <pre><code>## [1] 12960</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">interval</span>(course_start, course_end) <span class="op">/</span><span class="st"> </span><span class="kw">dhours</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">course_interval <span class="op">/</span><span class="st"> </span><span class="kw">dhours</span>()</code></pre></div>
 <pre><code>## [1] 216</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">interval</span>(course_start, course_end) <span class="op">/</span><span class="st"> </span><span class="kw">dweeks</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">course_interval <span class="op">/</span><span class="st"> </span><span class="kw">dweeks</span>()</code></pre></div>
 <pre><code>## [1] 1.285714</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">interval</span>(course_start, course_end) <span class="op">/</span><span class="st"> </span><span class="kw">dyears</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">course_interval <span class="op">/</span><span class="st"> </span><span class="kw">dyears</span>()</code></pre></div>
 <pre><code>## [1] 0.02465753</code></pre>
 </section>
 <section id="convert-1" class="slide level2">
@@ -960,14 +1019,11 @@ conference <span class="op">%within%</span><span class="st"> </span><span class=
 <section id="case-study-3" class="slide level2">
 <h2>Case Study</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">interval</span>(course_start, course_end) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">time_length</span>(<span class="dt">unit =</span> <span class="st">&quot;seconds&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">time_length</span>(course_interval, <span class="dt">unit =</span> <span class="st">&quot;seconds&quot;</span>)</code></pre></div>
 <pre><code>## [1] 777600</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">interval</span>(course_start, course_end) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">time_length</span>(<span class="dt">unit =</span> <span class="st">&quot;minutes&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">time_length</span>(course_interval, <span class="dt">unit =</span> <span class="st">&quot;minutes&quot;</span>)</code></pre></div>
 <pre><code>## [1] 12960</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">interval</span>(course_start, course_end) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">time_length</span>(<span class="dt">unit =</span> <span class="st">&quot;hours&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">time_length</span>(course_interval, <span class="dt">unit =</span> <span class="st">&quot;hours&quot;</span>)</code></pre></div>
 <pre><code>## [1] 216</code></pre>
 </section>
 <section id="convert-2" class="slide level2">
@@ -979,15 +1035,20 @@ conference <span class="op">%within%</span><span class="st"> </span><span class=
 <section id="case-study-4" class="slide level2">
 <h2>Case Study</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">interval</span>(course_start, course_end) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">as.period</span>(<span class="dt">unit =</span> <span class="st">&quot;seconds&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.period</span>(course_interval, <span class="dt">unit =</span> <span class="st">&quot;seconds&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;777600S&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">interval</span>(course_start, course_end) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">as.period</span>(<span class="dt">unit =</span> <span class="st">&quot;minutes&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.period</span>(course_interval, <span class="dt">unit =</span> <span class="st">&quot;minutes&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;12960M 0S&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">interval</span>(course_start, course_end) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">as.period</span>(<span class="dt">unit =</span> <span class="st">&quot;hours&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.period</span>(course_interval, <span class="dt">unit =</span> <span class="st">&quot;hours&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;216H 0M 0S&quot;</code></pre>
+</section>
+<section id="references" class="slide level2">
+<h2>References</h2>
+<hr>
+<ul>
+<li class="fragment"><a href="https://lubridate.tidyverse.org/" class="uri">https://lubridate.tidyverse.org/</a></li>
+<li class="fragment"><a href="http://r4ds.had.co.nz/dates-and-times.html" class="uri">http://r4ds.had.co.nz/dates-and-times.html</a></li>
+</ul>
 </section>
 <section id="section-1" class="slide level2" data-background="thankyou.png">
 <h2></h2>

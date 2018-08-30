@@ -200,7 +200,7 @@ read_spss('employee.sav')
 read_sas('airline.sas7bdat')
 ```
 
-## Read Specific Cells
+## Summary
 
 <hr>
 
