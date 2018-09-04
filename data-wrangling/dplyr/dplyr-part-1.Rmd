@@ -71,12 +71,27 @@ We will explore dummy data that resembles web logs of an ecommerce company. You 
 <hr>
 
 ```{r import, eval=FALSE}
-ecom <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+ecom <- 
+  read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv',
+    col_types = cols_only(device = col_factor(levels = c("laptop", "tablet", "mobile")),
+      referrer = col_factor(levels = c("bing", "direct", "social", "yahoo", "google")),
+      purchase = col_logical(), n_pages = col_double(), duration = col_double(),
+      order_value = col_double(), order_items = col_double()
+    )
+  )
 ```
 
 
 ```{r show, echo=FALSE, eval=TRUE, message=FALSE}
-ecom <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+ecom <- 
+  read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv',
+    col_types = cols_only(device = col_factor(levels = c("laptop", "tablet", "mobile")),
+      referrer = col_factor(levels = c("bing", "direct", "social", "yahoo", "google")),
+      purchase = col_logical(), n_pages = col_double(), duration = col_double(),
+      order_value = col_double(), order_items = col_double()
+    )
+  )
+
 ecom
 ```
 
@@ -85,17 +100,13 @@ ecom
 
 <hr>
 
-- id: row id
 - referrer: referrer website/search engine
-- os: operating system
-- browser: browser
 - device: device used to visit the website
 - n_pages: number of pages visited
 - duration: time spent on the website (in seconds)
-- repeat: frequency of visits
-- country: country of origin
 - purchase: whether visitor purchased
 - order_value: order value of visitor (in dollars)
+- order_items: number of items ordered
 
 ## Average Order Value
 
@@ -127,7 +138,7 @@ knitr::include_graphics("aov_flow2.png")
 
 ```{r case}
 ecom %>%
-  filter(purchase == 'true') %>%
+  filter(purchase) %>%
   select(device, order_value, order_items) %>%
   group_by(device) %>%
   summarise_all(funs(sum)) %>%
@@ -180,7 +191,7 @@ knitr::include_graphics("filter_2.png")
 <hr>
 
 ```{r dplyr3}
-filter(ecom, device == "mobile", purchase == "true")
+filter(ecom, device == "mobile", purchase)
 ```
 
 ## Visits from mobile & visited > 5 pages 
@@ -196,7 +207,7 @@ filter(ecom, device == "mobile", n_pages > 5)
 <hr>
 
 ```{r dplyr5}
-filter(ecom, purchase == "true")
+filter(ecom, purchase)
 ```
 
 <!-- ## Step 2: Select relevant columns
@@ -218,12 +229,12 @@ After filtering the data, we need to select relevent variables to compute the AO
 knitr::include_graphics("select_1.png")
 ```
 
-## Select device and purchase columns 
+## Select device and duration column
 
 <hr>
 
 ```{r dplyr6}
-select(ecom, device, purchase)
+select(ecom, device, duration)
 ```
 
 ## Select Multiple Columns
@@ -237,12 +248,12 @@ select(ecom, device, purchase)
 knitr::include_graphics("select_2.png")
 ```
 
-## Select all columns from device to purchase
+## Select all columns from referrer to order items
 
 <hr> 
 
 ```{r dplyr7}
-select(ecom, device:purchase)
+select(ecom, referrer:order_items)
 ```
 
 ## Select Multiple Columns
@@ -256,12 +267,12 @@ select(ecom, device:purchase)
 knitr::include_graphics("select_3.png")
 ```
 
-## Select all columns excluding id and country
+## Select all columns excluding n_pages and duration
 
 <hr>
 
 ```{r dplyr8}
-select(ecom, -id, -country)
+select(ecom, -n_pages, -duration)
 ```
 
 ## Case Study
@@ -281,7 +292,7 @@ select(ecom, device, order_value, order_items)
 But we want the above data only for purchasers. We will combine `filter()` and `select()` functions to extract data related to purchasers.
 
 ```{r dplyr10}
-ecom1 <- filter(ecom, purchase == "true")
+ecom1 <- filter(ecom, purchase)
 ecom2 <- select(ecom1, device, order_value, order_items)
 ecom2
 ```
@@ -409,7 +420,7 @@ ecom6
 <hr>
 
 ```{r dplyr17}
-ecom1 <- filter(ecom, purchase == "true")
+ecom1 <- filter(ecom, purchase)
 ecom2 <- select(ecom1, device, order_value, order_items)
 ecom3 <- group_by(ecom2, device)
 ecom4 <- summarise_all(ecom3, funs(sum))
@@ -435,7 +446,7 @@ knitr::include_graphics("dplyr_aov_map.png")
 
 ```{r dplyr18}
 ecom %>%
-  filter(purchase == 'true') %>%
+  filter(purchase) %>%
   select(device, order_value, order_items) %>%
   group_by(device) %>%
   summarise_all(funs(sum)) %>%

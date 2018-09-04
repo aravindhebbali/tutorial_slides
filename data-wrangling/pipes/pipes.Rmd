@@ -14,10 +14,6 @@ output: _output.yaml
 - combining operations with pipes
 - case studies
 
-```{r libs, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
-library(dplyr)
-```
-
 ## Introduction
 
 <hr>
@@ -52,24 +48,41 @@ If you are using [tidyverse](https://www.tidyverse.org/), magrittr will be autom
 library(magrittr)
 library(readr)
 library(purrr)
+library(dplyr)
+library(stringr)
 ```
 
 ```{r importlib2, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
 library(magrittr)
 suppressMessages(library(readr))
+suppressMessages(library(dplyr))
 library(purrr)
+library(stringr)
 ```
 ## Data
 
 <hr>
 
 ```{r import, eval=FALSE}
-ecom <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+ecom <- 
+  read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv',
+    col_types = cols_only(
+      referrer = col_factor(levels = c("bing", "direct", "social", "yahoo", "google")),
+      n_pages = col_double(), duration = col_double(), purchase = col_logical()
+    )
+  )
 ```
 
 
 ```{r show, echo=FALSE, eval=TRUE, message=FALSE}
-ecom <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+ecom <- 
+  read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv',
+    col_types = cols_only(
+      referrer = col_factor(levels = c("bing", "direct", "social", "yahoo", "google")),
+      n_pages = col_double(), duration = col_double(), purchase = col_logical()
+    )
+  )
+
 ecom
 ```
 
@@ -77,17 +90,18 @@ ecom
 
 <hr>
 
-- id: row id
 - referrer: referrer website/search engine
-- os: operating system
-- browser: browser
-- device: device used to visit the website
 - n_pages: number of pages visited
 - duration: time spent on the website (in seconds)
-- repeat: frequency of visits
-- country: country of origin
 - purchase: whether visitor purchased
-- order_value: order value of visitor (in dollars)
+
+## Sample Data
+
+<hr>
+
+```{r ecom_mini}
+ecom_mini <- sample_n(ecom, size = 10)
+```
 
 ## head
 
@@ -110,9 +124,11 @@ ecom %>% head(10)
 <hr>
 
 ```{r mag3}
-y <- ecom$n_pages
+y <- ecom_mini$n_pages
 y <- sqrt(y)
-head(y)
+
+# combine above steps
+sqrt(ecom_mini$n_pages)
 ```
 
 ## Square Root - Using pipe
@@ -121,12 +137,10 @@ head(y)
 
 ```{r mag4}
 # select n_pages variable and assign it to y
-y <- ecom %$% n_pages
-head(y)
+y <- ecom_mini %$% n_pages
 
 # compute square root of y and assign it to y 
 y %<>% sqrt()
-head(y)
 ```
 
 ## Square Root - Using Pipe
@@ -146,10 +160,9 @@ knitr::include_graphics("pipes_square_root.png")
 
 ```{r mag5}
 y <- 
-  ecom %$% 
+  ecom_mini %$% 
   n_pages %>% 
-  sqrt() %>%
-  head()
+  sqrt() 
 y
 ```
 
@@ -170,7 +183,7 @@ knitr::include_graphics("pipes_correlation.png")
 
 ```{r mag6}
 # without pipe
-ecom1 <- subset(ecom, purchase == 'true')
+ecom1 <- subset(ecom, purchase)
 cor(ecom1$n_pages, ecom1$duration)
 ```
 
@@ -181,7 +194,12 @@ cor(ecom1$n_pages, ecom1$duration)
 ```{r mag6a}
 # with pipe
 ecom %>%
-  subset(purchase == 'true') %$% 
+  subset(purchase) %$% 
+  cor(n_pages, duration)
+
+# using filter from dplyr and pipe
+ecom %>%
+  filter(purchase) %$% 
   cor(n_pages, duration)
 ```
 
@@ -190,7 +208,7 @@ ecom %>%
 <hr>
 
 ```{r mag21, fig.align='center', fig.height=4, fig.width=6}
-barplot(table(subset(ecom, purchase == 'true')$referrer))
+barplot(table(subset(ecom, purchase)$referrer))
 ```
 
 ## Visualization
@@ -209,7 +227,7 @@ knitr::include_graphics("pipes_data_visualization.png")
 
 ```{r mag7, fig.align='center', fig.height=4, fig.width=6}
 ecom %>%
-  subset(purchase == 'true') %>%
+  subset(purchase) %>%
   extract('referrer') %>%
   table() %>%
   barplot()
@@ -241,7 +259,7 @@ ecom %$%
 email <- 'jovialcann@anymail.com'
 
 # without pipe
-toupper(strtrim(strsplit(email, '@')[[1]][1], 6))
+str_to_upper(str_sub(str_split(email, '@')[[1]][1], start = 1, end = 6))
 ```
 
 ## String Manipulation - Using Pipe
@@ -251,11 +269,11 @@ toupper(strtrim(strsplit(email, '@')[[1]][1], 6))
 ```{r mag9a}
 # with pipe
 email %>%
-  strsplit(split = '@') %>%
+  str_split(pattern = '@') %>%
   extract2(1) %>%
   extract(1) %>%
-  strtrim(width = 6) %>%
-  toupper()
+  str_sub(start = 1, end = 6) %>%
+  str_to_upper()
 ```
 
 ## String Manipulation
@@ -274,10 +292,10 @@ knitr::include_graphics("pipes_string.png")
 
 ```{r map39}
 email %>%
-  strsplit(split = '@') %>%
+  str_split(pattern = '@') %>%
   map_chr(1) %>%
-  strtrim(width = 6) %>%
-  toupper()
+  str_sub(start = 1, end = 6) %>%
+  str_to_upper()
 ```
 
 ## Data Extraction
@@ -293,11 +311,8 @@ email %>%
 <hr>
 
 ```{r mag10}
-head(ecom['n_pages'], 3)
-
-ecom %>%
-  extract('n_pages') %>%
-  head(3)
+ecom_mini['n_pages']
+extract(ecom_mini, 'n_pages') 
 ```
 
 ## Extract Column By Position
@@ -305,11 +320,8 @@ ecom %>%
 <hr>
 
 ```{r mag23}
-head(ecom[6], 3)
-
-ecom %>%
-  extract(6) %>%
-  head(3)
+ecom_mini[2]
+extract(ecom_mini, 2) 
 ```
 
 ## Extract Column (as vector)
@@ -317,11 +329,16 @@ ecom %>%
 <hr>
 
 ```{r mag11}
-head(ecom$n_pages)
+ecom_mini$n_pages
+use_series(ecom_mini, 'n_pages') 
+```
 
-ecom %>%
-  use_series('n_pages') %>%
-  head()
+## Sample List
+
+<hr>
+
+```{r mini_list}
+ecom_list <- as.list(ecom_mini)
 ```
 
 ## Extract List Element By Name
@@ -329,12 +346,13 @@ ecom %>%
 <hr>
 
 ```{r mag12}
-mt <- as.list(mtcars)
+# base
+ecom_list[['n_pages']]
+ecom_list$n_pages
 
-mt[['mpg']]
-
-mt %>%
-  extract2('mpg')
+# magrittr
+extract2(ecom_list, 'n_pages')
+use_series(ecom_list, n_pages)
 ```
 
 ## Extract List Element By Position
@@ -342,12 +360,11 @@ mt %>%
 <hr>
 
 ```{r mag13}
-mt <- as.list(mtcars)
+# base 
+ecom_list[[1]]
 
-mt[[1]]
-
-mt %>%
-  extract2(1)
+# magrittr
+extract2(ecom_list, 1)
 ```
 
 ## Extract List Element (as vector)
@@ -355,12 +372,11 @@ mt %>%
 <hr>
 
 ```{r mag14}
-mt <- as.list(mtcars)
+# base
+ecom_list$n_pages
 
-mt$mpg
-
-mt %>%
-  use_series(mpg)
+# magrittr
+use_series(ecom_list, n_pages)
 ```
 
 ## Arithmetic Operations
@@ -382,11 +398,9 @@ mt %>%
 <hr>
 
 ```{r mag15}
-1:10 %>%
-  `+`(1)
-
-1:10 %>%
-  add(1)
+1:10 + 1
+add(1:10, 1)
+`+`(1:10, 1)
 ```
 
 ## Multiplication
@@ -394,11 +408,9 @@ mt %>%
 <hr>
 
 ```{r mag16}
-1:10 %>%
-  `*`(3)
-
-1:10 %>%
-  multiply_by(3)
+1:10 * 3
+multiply_by(1:10, 3)
+`*`(1:10, 3)
 ```
 
 ## Division
@@ -406,11 +418,9 @@ mt %>%
 <hr>
 
 ```{r mag17}
-1:10 %>%
-  `/`(2)
-
-1:10 %>%
-  divide_by(2)
+1:10 / 2
+divide_by(1:10, 2)
+`/`(1:10, 2)
 ```
 
 ## Power
@@ -418,11 +428,9 @@ mt %>%
 <hr>
 
 ```{r mag18}
-1:10 %>%
-  `^`(2)
-
-1:10 %>%
-  raise_to_power(2)
+1:10 ^ 2
+raise_to_power(1:10, 2)
+`^`(1:10, 2)
 ```
 
 ## Logical Operators
@@ -443,11 +451,9 @@ mt %>%
 <hr>
 
 ```{r mag19}
-1:10 %>%
-  `>`(5)
-
-1:10 %>%
-  is_greater_than(5)
+1:10 > 5
+is_greater_than(1:10, 5)
+`>`(1:10, 5)
 ```
 
 ## Weakly Greater Than
@@ -455,11 +461,9 @@ mt %>%
 <hr>
 
 ```{r mag20}
-1:10 %>%
-  `>=`(5)
-
-1:10 %>%
-  is_weakly_greater_than(5)
+1:10 >= 5
+is_weakly_greater_than(1:10, 5)
+`>=`(1:10, 5)
 ```
 
 ## {data-background="thankyou.png"}

@@ -489,12 +489,12 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <p>Learn to combine tables using different <code>*_join</code> functions provided in dplyr. Let us assume we have 2 tables <strong>x</strong> and <strong>y</strong>. We will explore the following type of <code>joins</code></p>
 <ul>
-<li class="fragment">inner join</li>
-<li class="fragment">left join</li>
+<li class="fragment">inner join Details of customers who have placed orders and their order details</li>
+<li class="fragment">left join Details of customers and their orders irrespective of whether a customer has placed orders or not.</li>
 <li class="fragment">right join</li>
-<li class="fragment">semi join</li>
-<li class="fragment">anti join</li>
-<li class="fragment">full join</li>
+<li class="fragment">semi join get customer data for all orders</li>
+<li class="fragment">anti join details of customers who have not placed orders</li>
+<li class="fragment">full join Details of all customers and all orders</li>
 </ul>
 </section>
 <section id="section-1" class="slide level2" data-background="casestudy.png">
@@ -515,7 +515,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="data-orders" class="slide level2">
 <h2>Data: Orders</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">order &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_delim</span>(<span class="st">'https://raw.githubusercontent.com/rsquaredacademy/datasets/master/order.csv'</span>, <span class="dt">delim =</span> <span class="st">';'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">order &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">'https://raw.githubusercontent.com/rsquaredacademy/datasets/master/order.csv'</span>, <span class="dt">delim =</span> <span class="st">';'</span>)</code></pre></div>
 <pre><code>## # A tibble: 300 x 3
 ##       id order_date amount
 ##    &lt;int&gt; &lt;chr&gt;       &lt;dbl&gt;
@@ -534,7 +534,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="data-customers" class="slide level2">
 <h2>Data: Customers</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">customer &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_delim</span>(<span class="st">'https://raw.githubusercontent.com/rsquaredacademy/datasets/master/customer.csv'</span>, <span class="dt">delim =</span> <span class="st">';'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">customer &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">'https://raw.githubusercontent.com/rsquaredacademy/datasets/master/customer.csv'</span>, <span class="dt">delim =</span> <span class="st">';'</span>)</code></pre></div>
 <pre><code>## # A tibble: 91 x 3
 ##       id first_name city      
 ##    &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;     

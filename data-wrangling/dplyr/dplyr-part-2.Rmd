@@ -10,12 +10,13 @@ output: _output.yaml
 
 Learn to combine tables using different `*_join` functions provided in dplyr. Let us assume we have 2 tables **x** and **y**. We will explore the following type of `joins` 
 
-- inner join
-- left join
+- inner join Details of customers who have placed orders and their order details
+- left join Details of customers and their orders irrespective of whether a customer has 
+placed orders or not.
 - right join
-- semi join
-- anti join
-- full join
+- semi join get customer data for all orders
+- anti join details of customers who have not placed orders
+- full join Details of all customers and all orders
 
 ## {data-background="casestudy.png"}
 
@@ -50,11 +51,11 @@ library(readr)
 <hr>
 
 ```{r dplyr25, eval=FALSE}
-order <- readr::read_delim('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/order.csv', delim = ';')
+order <- read_delim('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/order.csv', delim = ';')
 ```
 
 ```{r dplyr2, echo=FALSE, eval=TRUE, message=FALSE}
-order <- readr::read_delim('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/order.csv', delim = ';')
+order <- read_delim('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/order.csv', delim = ';')
 order
 ```
 
@@ -63,11 +64,11 @@ order
 <hr>
 
 ```{r dplyr26, eval=FALSE}
-customer <- readr::read_delim('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/customer.csv', delim = ';')
+customer <- read_delim('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/customer.csv', delim = ';')
 ```
 
 ```{r dplyr, echo=FALSE, eval=TRUE, message=FALSE}
-customer <- readr::read_delim('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/customer.csv', delim = ';')
+customer <- read_delim('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/customer.csv', delim = ';')
 customer
 ```
 

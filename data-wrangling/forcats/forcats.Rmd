@@ -39,30 +39,29 @@ library(readr)
 
 <hr>
 
-```{r import2, eval=FALSE, echo=TRUE, message=FALSE}
+```{r import2e, echo=TRUE, message=FALSE}
+traffic <- 
+  read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web_traffic.csv',
+    col_types = list(
+      col_factor(levels = c("google", "facebook", "affiliates", 
+    	"bing", "yahoo", "twitter", "instagram", "unknown", "direct")
+      )
+    )
+  )
+```
+
+```{r import2, eval=TRUE, echo=FALSE, message=FALSE}
 traffic
 ```
 
-```{r import2e, echo=FALSE, message=FALSE}
-traffic <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web_traffic.csv',
-  col_types = list(col_factor(levels = c("google", "facebook", "affiliates", 
-    "bing", "yahoo", "twitter", "instagram", "unknown", "direct"))))
-
-traffic
-```
-
-## Data
+## Extract Column
 
 <hr>
 
 ```{r import2a}
-traffics <- 
-  traffic %>%
-  use_series(traffics)
-
+traffics <- use_series(traffic, traffics)
 traffics
 ```
-
 
 ## Case Study
 
@@ -334,8 +333,7 @@ knitr::include_graphics("fct_others_1.png")
 <hr>
 
 ```{r other_1}
-fct_other(traffics, keep = c("google", "yahoo")) %>%
-  levels()
+fct_other(traffics, keep = c("google", "yahoo")) %>% levels()
 ```
 
 ## Replace Levels
@@ -354,8 +352,7 @@ knitr::include_graphics("fct_others_2.png")
 <hr>
 
 ```{r other_2}
-fct_other(traffics, drop = c("instagram", "twitter")) %>%
-  levels()
+fct_other(traffics, drop = c("instagram", "twitter")) %>% levels()
 ```
 
 ## Recode Levels
@@ -399,8 +396,7 @@ knitr::include_graphics("fct_relevel_1.png")
 <hr>
 
 ```{r relevel_1}
-fct_relevel(traffics, "twitter") %>%
-  levels()
+fct_relevel(traffics, "twitter") %>% levels()
 ```
 
 ## Reorder Levels
@@ -419,8 +415,7 @@ knitr::include_graphics("fct_relevel_2.png")
 <hr>
 
 ```{r relevel_2}
-fct_relevel(traffics, "google", after = 2) %>%
-  levels()
+fct_relevel(traffics, "google", after = 2) %>% levels()
 ```
 
 ## Reorder Levels
@@ -439,8 +434,7 @@ knitr::include_graphics("fct_relevel_3.png")
 <hr>
 
 ```{r relevel_3}
-fct_relevel(traffics, "facebook", after = Inf) %>%
-  levels()
+fct_relevel(traffics, "facebook", after = Inf) %>% levels()
 ```
 
 ## Data 
@@ -464,10 +458,7 @@ response
 <hr>
 
 ```{r import2n}
-responses <- 
-  response %>%
-  use_series(response)
-
+responses <- use_series(response, response)
 responses
 ```
 
@@ -487,8 +478,7 @@ knitr::include_graphics("fct_shift_1.png")
 <hr>
 
 ```{r shift_1}
-fct_shift(responses, 2) %>%
-  levels()
+fct_shift(responses, 2) %>% levels()
 ```
 
 ## Shift Levels
@@ -507,8 +497,7 @@ knitr::include_graphics("fct_shift_2.png")
 <hr>
 
 ```{r shift_2}
-fct_shift(responses, -2) %>%
-  levels()
+fct_shift(responses, -2) %>% levels()
 ```
 
 ## References 

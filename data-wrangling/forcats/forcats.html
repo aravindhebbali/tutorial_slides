@@ -509,7 +509,14 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="data" class="slide level2">
 <h2>Data</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">traffic</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">traffic &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web_traffic.csv'</span>,
+    <span class="dt">col_types =</span> <span class="kw">list</span>(
+      <span class="kw">col_factor</span>(<span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;google&quot;</span>, <span class="st">&quot;facebook&quot;</span>, <span class="st">&quot;affiliates&quot;</span>, 
+        <span class="st">&quot;bing&quot;</span>, <span class="st">&quot;yahoo&quot;</span>, <span class="st">&quot;twitter&quot;</span>, <span class="st">&quot;instagram&quot;</span>, <span class="st">&quot;unknown&quot;</span>, <span class="st">&quot;direct&quot;</span>)
+      )
+    )
+  )</code></pre></div>
 <pre><code>## # A tibble: 48,232 x 1
 ##    traffics
 ##    &lt;fct&gt;   
@@ -525,13 +532,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 10 google  
 ## # ... with 48,222 more rows</code></pre>
 </section>
-<section id="data-1" class="slide level2">
-<h2>Data</h2>
+<section id="extract-column" class="slide level2">
+<h2>Extract Column</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">traffics &lt;-<span class="st"> </span>
-<span class="st">  </span>traffic <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">use_series</span>(traffics)
-
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">traffics &lt;-<span class="st"> </span><span class="kw">use_series</span>(traffic, traffics)
 traffics</code></pre></div>
 <pre><code>##     [1] google     google     google     google     google     google    
 ##     [7] google     google     google     google     google     google    
@@ -8855,8 +8859,7 @@ traffics</code></pre></div>
 <section id="replace-levels-with-other" class="slide level2">
 <h2>Replace Levels with Other</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fct_other</span>(traffics, <span class="dt">keep =</span> <span class="kw">c</span>(<span class="st">&quot;google&quot;</span>, <span class="st">&quot;yahoo&quot;</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">levels</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fct_other</span>(traffics, <span class="dt">keep =</span> <span class="kw">c</span>(<span class="st">&quot;google&quot;</span>, <span class="st">&quot;yahoo&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</code></pre></div>
 <pre><code>## [1] &quot;google&quot; &quot;yahoo&quot;  &quot;Other&quot;</code></pre>
 </section>
 <section id="replace-levels-1" class="slide level2">
@@ -8868,8 +8871,7 @@ traffics</code></pre></div>
 <section id="replace-levels-with-other-1" class="slide level2">
 <h2>Replace Levels with Other</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fct_other</span>(traffics, <span class="dt">drop =</span> <span class="kw">c</span>(<span class="st">&quot;instagram&quot;</span>, <span class="st">&quot;twitter&quot;</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">levels</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fct_other</span>(traffics, <span class="dt">drop =</span> <span class="kw">c</span>(<span class="st">&quot;instagram&quot;</span>, <span class="st">&quot;twitter&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</code></pre></div>
 <pre><code>## [1] &quot;google&quot;     &quot;facebook&quot;   &quot;affiliates&quot; &quot;bing&quot;       &quot;yahoo&quot;     
 ## [6] &quot;unknown&quot;    &quot;direct&quot;     &quot;Other&quot;</code></pre>
 </section>
@@ -8900,8 +8902,7 @@ traffics</code></pre></div>
 <section id="reorder-levels-1" class="slide level2">
 <h2>Reorder Levels</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fct_relevel</span>(traffics, <span class="st">&quot;twitter&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">levels</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fct_relevel</span>(traffics, <span class="st">&quot;twitter&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</code></pre></div>
 <pre><code>## [1] &quot;twitter&quot;    &quot;google&quot;     &quot;facebook&quot;   &quot;affiliates&quot; &quot;bing&quot;      
 ## [6] &quot;yahoo&quot;      &quot;instagram&quot;  &quot;unknown&quot;    &quot;direct&quot;</code></pre>
 </section>
@@ -8914,8 +8915,7 @@ traffics</code></pre></div>
 <section id="reorder-levels-3" class="slide level2">
 <h2>Reorder Levels</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fct_relevel</span>(traffics, <span class="st">&quot;google&quot;</span>, <span class="dt">after =</span> <span class="dv">2</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">levels</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fct_relevel</span>(traffics, <span class="st">&quot;google&quot;</span>, <span class="dt">after =</span> <span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</code></pre></div>
 <pre><code>## [1] &quot;facebook&quot;   &quot;affiliates&quot; &quot;google&quot;     &quot;bing&quot;       &quot;yahoo&quot;     
 ## [6] &quot;twitter&quot;    &quot;instagram&quot;  &quot;unknown&quot;    &quot;direct&quot;</code></pre>
 </section>
@@ -8928,12 +8928,11 @@ traffics</code></pre></div>
 <section id="reorder-levels-5" class="slide level2">
 <h2>Reorder Levels</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fct_relevel</span>(traffics, <span class="st">&quot;facebook&quot;</span>, <span class="dt">after =</span> <span class="ot">Inf</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">levels</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fct_relevel</span>(traffics, <span class="st">&quot;facebook&quot;</span>, <span class="dt">after =</span> <span class="ot">Inf</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</code></pre></div>
 <pre><code>## [1] &quot;google&quot;     &quot;affiliates&quot; &quot;bing&quot;       &quot;yahoo&quot;      &quot;twitter&quot;   
 ## [6] &quot;instagram&quot;  &quot;unknown&quot;    &quot;direct&quot;     &quot;facebook&quot;</code></pre>
 </section>
-<section id="data-2" class="slide level2">
+<section id="data-1" class="slide level2">
 <h2>Data</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">response</code></pre></div>
@@ -8952,13 +8951,10 @@ traffics</code></pre></div>
 ## 10 neutral         
 ## # ... with 990 more rows</code></pre>
 </section>
-<section id="data-3" class="slide level2">
+<section id="data-2" class="slide level2">
 <h2>Data</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">responses &lt;-<span class="st"> </span>
-<span class="st">  </span>response <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">use_series</span>(response)
-
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">responses &lt;-<span class="st"> </span><span class="kw">use_series</span>(response, response)
 responses</code></pre></div>
 <pre><code>##    [1] dislike          like somewhat    dislike          neutral         
 ##    [5] dislike          like somewhat    like somewhat    like somewhat   
@@ -9221,8 +9217,7 @@ responses</code></pre></div>
 <section id="shift-levels-1" class="slide level2">
 <h2>Shift Levels</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fct_shift</span>(responses, <span class="dv">2</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">levels</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fct_shift</span>(responses, <span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</code></pre></div>
 <pre><code>## [1] &quot;neutral&quot;          &quot;dislike somewhat&quot; &quot;dislike&quot;         
 ## [4] &quot;like&quot;             &quot;like somewhat&quot;</code></pre>
 </section>
@@ -9235,8 +9230,7 @@ responses</code></pre></div>
 <section id="shift-levels-3" class="slide level2">
 <h2>Shift Levels</h2>
 <hr>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fct_shift</span>(responses, <span class="op">-</span><span class="dv">2</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">levels</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fct_shift</span>(responses, <span class="op">-</span><span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</code></pre></div>
 <pre><code>## [1] &quot;dislike somewhat&quot; &quot;dislike&quot;          &quot;like&quot;            
 ## [4] &quot;like somewhat&quot;    &quot;neutral&quot;</code></pre>
 </section>
