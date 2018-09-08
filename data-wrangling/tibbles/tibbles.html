@@ -519,16 +519,16 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <pre><code>## # A tibble: 26 x 3
 ##    x         y     z
 ##    &lt;chr&gt; &lt;int&gt; &lt;int&gt;
-##  1 a         1    88
-##  2 b         2    60
-##  3 c         3    10
-##  4 d         4     2
-##  5 e         5    94
-##  6 f         6    34
-##  7 g         7    27
-##  8 h         8    90
-##  9 i         9    28
-## 10 j        10    82
+##  1 a         1    66
+##  2 b         2    63
+##  3 c         3    35
+##  4 d         4    54
+##  5 e         5    13
+##  6 f         6     5
+##  7 g         7    39
+##  8 h         8     4
+##  9 i         9    25
+## 10 j        10    14
 ## # ... with 16 more rows</code></pre>
 </section>
 <section id="section-3" class="slide level2" data-background="tibblefeatures.png">
@@ -553,16 +553,16 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <pre><code>## # A tibble: 26 x 3
 ##    x         y     z
 ##    &lt;chr&gt; &lt;int&gt; &lt;int&gt;
-##  1 a         1    40
-##  2 b         2    43
-##  3 c         3    61
-##  4 d         4     8
-##  5 e         5    97
-##  6 f         6    13
-##  7 g         7    35
-##  8 h         8    92
-##  9 i         9     1
-## 10 j        10     7
+##  1 a         1    39
+##  2 b         2    87
+##  3 c         3    70
+##  4 d         4     5
+##  5 e         5    91
+##  6 f         6    19
+##  7 g         7    54
+##  8 h         8    29
+##  9 i         9    48
+## 10 j        10    13
 ## # ... with 16 more rows</code></pre>
 </section>
 <section id="never-changes-inputs-types-1" class="slide level2">
@@ -573,7 +573,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <pre><code>## 'data.frame':    26 obs. of  3 variables:
 ##  $ x: Factor w/ 26 levels &quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,..: 1 2 3 4 5 6 7 8 9 10 ...
 ##  $ y: int  1 2 3 4 5 6 7 8 9 10 ...
-##  $ z: int  45 36 82 30 3 29 67 89 5 20 ...</code></pre>
+##  $ z: int  16 42 94 40 68 29 13 50 34 79 ...</code></pre>
 </section>
 <section id="never-adjusts-variable-names" class="slide level2">
 <h2>Never adjusts variable names</h2>
@@ -596,13 +596,13 @@ z &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">
 ##  1     1 a     FALSE
 ##  2     2 a     TRUE 
 ##  3     3 a     TRUE 
-##  4     4 a     FALSE
-##  5     5 a     FALSE
-##  6     6 a     FALSE
-##  7     7 a     TRUE 
+##  4     4 a     TRUE 
+##  5     5 a     TRUE 
+##  6     6 a     TRUE 
+##  7     7 a     FALSE
 ##  8     8 a     FALSE
 ##  9     9 a     FALSE
-## 10    10 a     TRUE 
+## 10    10 a     FALSE
 ## # ... with 90 more rows</code></pre>
 </section>
 <section id="never-recycle-vector-of-length-greater-than-1" class="slide level2">
@@ -903,8 +903,6 @@ browsers</code></pre></div>
 </section>
 <section id="section-8" class="slide level2" data-background="thankyou.png">
 <h2></h2>
-<!-- To do: -->
-<!--   - what are tibbles -->
 </section>
     </div>
   </div>

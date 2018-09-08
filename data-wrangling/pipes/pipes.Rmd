@@ -54,8 +54,8 @@ library(stringr)
 
 ```{r importlib2, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
 library(magrittr)
-suppressMessages(library(readr))
-suppressMessages(library(dplyr))
+library(readr)
+library(dplyr)
 library(purrr)
 library(stringr)
 ```

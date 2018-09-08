@@ -509,7 +509,6 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 <span class="kw">library</span>(readr)</code></pre></div>
-<pre><code>## Warning: package 'readr' was built under R version 3.5.1</code></pre>
 </section>
 <section id="data" class="slide level2">
 <h2>Data</h2>
@@ -629,16 +628,16 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <pre><code>## # A tibble: 700 x 7
 ##    referrer device bouncers n_visit n_pages duration purchase
 ##    &lt;fct&gt;    &lt;fct&gt;  &lt;lgl&gt;      &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;lgl&gt;   
-##  1 social   tablet TRUE           8       1      425 FALSE   
-##  2 direct   mobile FALSE          5       5       55 FALSE   
-##  3 bing     laptop TRUE           7       1      362 FALSE   
-##  4 yahoo    laptop FALSE          2       8      232 FALSE   
-##  5 bing     mobile TRUE           9       1      650 FALSE   
-##  6 social   laptop TRUE           1       1       10 FALSE   
-##  7 google   tablet FALSE          7      12      156 FALSE   
-##  8 social   mobile FALSE          3      20      440 TRUE    
-##  9 yahoo    mobile TRUE           7       1      561 FALSE   
-## 10 bing     laptop TRUE           4       1      750 FALSE   
+##  1 bing     mobile FALSE          9       2       24 FALSE   
+##  2 direct   tablet TRUE           1       1      239 FALSE   
+##  3 social   tablet TRUE           5       1      667 FALSE   
+##  4 yahoo    tablet FALSE          7      11      264 FALSE   
+##  5 google   mobile FALSE          2       9      162 FALSE   
+##  6 bing     laptop TRUE          10       1      947 FALSE   
+##  7 yahoo    laptop TRUE           3       1      541 FALSE   
+##  8 google   mobile TRUE           9       1      409 FALSE   
+##  9 direct   laptop TRUE           8       1      658 FALSE   
+## 10 social   tablet TRUE           5       1      957 FALSE   
 ## # ... with 690 more rows</code></pre>
 </section>
 <section id="sampling-data-1" class="slide level2">
@@ -648,16 +647,16 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <pre><code>## # A tibble: 700 x 7
 ##    referrer device bouncers n_visit n_pages duration purchase
 ##    &lt;fct&gt;    &lt;fct&gt;  &lt;lgl&gt;      &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;lgl&gt;   
-##  1 bing     tablet TRUE           7       1      718 FALSE   
-##  2 yahoo    mobile FALSE          7       6      102 FALSE   
-##  3 social   laptop FALSE          7      15      210 FALSE   
-##  4 google   laptop TRUE           4       1      164 FALSE   
-##  5 yahoo    mobile FALSE          4      18      468 TRUE    
-##  6 direct   tablet TRUE           7       1      219 FALSE   
-##  7 yahoo    mobile TRUE          10       1      761 FALSE   
-##  8 social   mobile FALSE          5      16      272 TRUE    
-##  9 social   laptop TRUE           1       1       35 FALSE   
-## 10 yahoo    tablet FALSE          3       5      140 FALSE   
+##  1 social   tablet TRUE          10       1      478 FALSE   
+##  2 social   tablet FALSE          3       4       44 FALSE   
+##  3 bing     laptop FALSE          5      18      234 FALSE   
+##  4 bing     laptop TRUE           4       1      857 FALSE   
+##  5 direct   mobile TRUE           1       1      860 FALSE   
+##  6 bing     mobile TRUE          10       1      480 FALSE   
+##  7 google   laptop FALSE          2      17      391 TRUE    
+##  8 yahoo    mobile TRUE          10       1      594 FALSE   
+##  9 google   laptop TRUE           5       1      304 FALSE   
+## 10 social   tablet FALSE         10      10      290 TRUE    
 ## # ... with 690 more rows</code></pre>
 </section>
 <section id="extract-columns" class="slide level2">
@@ -674,21 +673,21 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>Extract Device Column</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pull</span>(ecom_mini, device)</code></pre></div>
-<pre><code>##  [1] laptop tablet mobile laptop laptop tablet laptop tablet mobile mobile
+<pre><code>##  [1] tablet tablet mobile mobile laptop mobile laptop tablet tablet tablet
 ## Levels: laptop tablet mobile</code></pre>
 </section>
 <section id="extract-first-column" class="slide level2">
 <h2>Extract First Column</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pull</span>(ecom_mini, <span class="dv">1</span>)</code></pre></div>
-<pre><code>##  [1] yahoo  social yahoo  bing   google social social google google social
+<pre><code>##  [1] direct google google direct direct bing   bing   google google google
 ## Levels: bing direct social yahoo google</code></pre>
 </section>
 <section id="extract-last-column" class="slide level2">
 <h2>Extract Last Column</h2>
 <hr>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pull</span>(ecom_mini, <span class="op">-</span><span class="dv">1</span>)</code></pre></div>
-<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<pre><code>##  [1] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE</code></pre>
 </section>
 <section id="extract-rows" class="slide level2">
 <h2>Extract Rows</h2>
@@ -849,9 +848,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ecom_sample <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">pull</span>(n_pages) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">between</span>(<span class="dv">5</span>, <span class="dv">15</span>) </code></pre></div>
-<pre><code>##  [1] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-## [12]  TRUE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE  TRUE  TRUE FALSE
-## [23] FALSE  TRUE FALSE FALSE FALSE  TRUE FALSE FALSE</code></pre>
+<pre><code>##  [1]  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [12] FALSE FALSE  TRUE FALSE FALSE  TRUE FALSE  TRUE  TRUE FALSE FALSE
+## [23] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE</code></pre>
 </section>
 <section id="case-when" class="slide level2">
 <h2>Case When</h2>

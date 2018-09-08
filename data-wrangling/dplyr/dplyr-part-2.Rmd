@@ -37,7 +37,7 @@ knitr::include_graphics("join_data.png")
 
 ```{r dplyr1, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
 library(dplyr)
-suppressWarnings(library(readr))
+library(readr)
 options(tibble.width = Inf)
 ```
 

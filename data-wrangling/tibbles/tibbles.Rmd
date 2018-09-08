@@ -289,6 +289,3 @@ has_name(mtcars, 'gears')
 - use `glimpse()` to get an overview of data
 
 ## {data-background="thankyou.png"}
-
-<!-- To do: -->
-<!--   - what are tibbles -->

@@ -75,8 +75,8 @@ ecom <-
   read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv',
     col_types = cols_only(device = col_factor(levels = c("laptop", "tablet", "mobile")),
       referrer = col_factor(levels = c("bing", "direct", "social", "yahoo", "google")),
-      purchase = col_logical(), n_pages = col_double(), duration = col_double(),
-      order_value = col_double(), order_items = col_double()
+      purchase = col_logical(), n_pages = col_double(), n_visit = col_double(),
+      duration = col_double(), order_value = col_double(), order_items = col_double()
     )
   )
 ```
@@ -87,8 +87,8 @@ ecom <-
   read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv',
     col_types = cols_only(device = col_factor(levels = c("laptop", "tablet", "mobile")),
       referrer = col_factor(levels = c("bing", "direct", "social", "yahoo", "google")),
-      purchase = col_logical(), n_pages = col_double(), duration = col_double(),
-      order_value = col_double(), order_items = col_double()
+      purchase = col_logical(), n_pages = col_double(), n_visit = col_double(),
+      duration = col_double(), order_value = col_double(), order_items = col_double()
     )
   )
 
@@ -411,6 +411,46 @@ The last step is to select the relevant columns. We require the device type and 
 ```{r dplyr16}
 ecom6 <- select(ecom5, device, aov)
 ecom6
+```
+
+## Arrange Data
+
+<hr>
+
+```{r img13, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("arrange_1.png")
+```
+
+## Ascending Order
+
+<hr>
+
+```{r arrange_eg}
+arrange(ecom, n_pages)
+```
+
+## Descending Order
+
+<hr>
+
+```{r arrange_eg2}
+arrange(ecom , desc(n_pages))
+```
+
+## Multiple Variables
+
+<hr>
+
+```{r arrange_eg3}
+arrange(ecom, n_visit, desc(n_pages))
+```
+
+## Case Study
+
+<hr>
+
+```{r arrange4}
+arrange(ecom6, aov)
 ```
 
 ## {data-background="aov2.png"}
