@@ -24,6 +24,18 @@ placed orders or not.
 
 <hr>
 
+- details of customers who have placed orders and their order details
+- details of customers and their orders irrespective of whether a customer has 
+placed orders or not.
+- get customer details for all orders
+- get customer data, if available, for all orders
+- details of customers who have not placed orders
+- details of all customers and all orders
+
+## Case Study
+
+<hr>
+
 <br>
 <br>
 
