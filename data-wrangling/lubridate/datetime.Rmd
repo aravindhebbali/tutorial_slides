@@ -8,8 +8,6 @@ output: _output.yaml
 
 <hr>
 
-In this module, we will learn to:
-
 - extract date and time components
 - compute time differences
 - compute time interval and duration
@@ -78,9 +76,6 @@ The data set has 3 columns. All the dates are in the format (yyyy-mm-dd).
 
 <hr>
 
-We will use the functions in the lubridate package to answer a few 
-questions we have about the transact data.
-
 - extract date, month and year from Due
 - compute the number of days to settle invoice
 - compute days over due
@@ -101,7 +96,7 @@ questions we have about the transact data.
 knitr::include_graphics("day_week_month.png")
 ```
 
-## Extract Date, Month & Year from Due Date
+## Day, Month & Year
 
 <hr>
 
@@ -112,7 +107,7 @@ month(this_day)
 year(this_day)
 ```
 
-## Extract Date, Month & Year from Due Date
+## Extract Day, Month & Year from Due Date
 
 <hr>
 
@@ -125,7 +120,7 @@ transact %>%
   )
 ```
 
-## Duration
+## Course Duration
 
 <hr>
 
@@ -149,7 +144,7 @@ course_duration
 ```
 
 
-## Compute days to settle invoice
+## Days to settle invoice
 
 <hr>
 
@@ -160,7 +155,7 @@ transact %>%
   )
 ```
 
-## Compute days over due
+## Days over due
 
 <hr>
 
@@ -183,7 +178,7 @@ transact %>%
   )
 ```
 
-## If due day is February 29, is it a leap year?
+## Case Study
 
 <hr>
 
@@ -201,7 +196,7 @@ the year is a leap year else it will be set to `FALSE`
     - `Due`
     - `is_leap`
 
-## If due day is February 29, is it a leap year?
+## Case Study
 
 <hr>
 
@@ -301,7 +296,7 @@ vacation_interval <- interval(vacation_start, vacation_end)
 int_overlaps(course_interval, vacation_interval)
 ```
 
-## How many invoices were settled within due date?
+## Case Study
 
 <hr>
 
@@ -313,7 +308,7 @@ the due date. To do this, we will:
 - another interval for `due_next` and the payment date
 - if the intervals overlap, the payment was made within the due date 
 
-## How many invoices were settled within due date?
+## Case Study
 
 <hr>
 
@@ -328,7 +323,7 @@ transact %>%
   select(Invoice, Due, Payment, overlaps)
 ```
 
-## how many invoices were settled within due date?
+## Case Study
 
 <hr>
 
@@ -344,7 +339,7 @@ transact %>%
   select(Invoice, Due, Payment, overlaps)
 ```
 
-## how many invoices were settled within due date?
+## Case Study
 
 <hr>
 
@@ -353,7 +348,7 @@ the interval between the due day and the payment day. If we do not increment,
 both the intervals will share a common date i.e. the due date and they will
 always overlap as shown in the next example.
 
-## how many invoices were settled within due date?
+## Case Study
 
 <hr>
 
@@ -387,7 +382,7 @@ conference <- as_date('2017-04-15')
 conference %within% course_interval
 ```
 
-## how many invoices were settled within due date?
+## Case Stduy
 
 <hr>
 
@@ -397,7 +392,7 @@ the due date. We will do this by:
 - creating an interval for the invoice and due date
 - check if the payment date falls within the above interval
 
-## how many invoices were settled within due date?
+## Case Study
 
 <hr>
 
