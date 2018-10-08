@@ -38,37 +38,6 @@ output: _output.yaml
 
 ## {data-background="images/cloud_canva.png"}
 
-## {data-background="images/stack_canva.png"}
-
-## {data-background="images/twitter_canva.png"}
-
-## {data-background="images/rblogger_canva.png"}
-
-## {data-background="images/rweekly_canva.png"}
-
-## {data-background="images/rstudio_communit_canva.png"}
-
-## {data-background="images/user_canva.png"}
-
-## {data-background="images/tidyverse_1_canva.png"}
-
-## {data-background="images/tidyverse_2_canva.png"}
-
-## {data-background="images/tidyverse_3_canva.png"}
-
-## {data-background="images/tidyverse_4_canva.png"}
-
-## {data-background="images/rhelp_canva.png"}
-
-## Quick Intro
-
-<hr>
-
-- RStudio Overview
-- Installing & Loading Packages
-- Using Documentation
-- Variables & Data Types
-
 ## {data-background="images/thankyou.png"}
 
 
