@@ -78,15 +78,6 @@ Use `install_bioc()` from devtools.
 install_bioc("SummarizedExperiment")
 ```
 
-#### biocLite
-
-Use `biocLite()` function.
-
-```{r install5, eval=FALSE}
-source('http://bioconductor.org/biocLite.R')
-biocLite('GenomicFeatures')
-```
-
 ## rForge
 
 <hr>
@@ -144,7 +135,7 @@ kable(text_tbl, format = "html") %>%
 
 <hr>
 
-Library is a directory that contains all installed packages. Usually there will be more than one R library in your systme. You can find the location of the libraries using `.libPaths()`.
+Library is a directory that contains all installed packages. Usually there will be more than one R library in your system. You can find the location of the libraries using `.libPaths()`.
 
 ```{r install9}
 .libPaths()
