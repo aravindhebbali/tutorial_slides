@@ -122,16 +122,6 @@ ecom
 knitr::include_graphics("image.jpg")
 ```
 
-## AOV Computation
-
-<hr>
-
-<br>
-
-```{r img3, echo=FALSE, out.width="100%", fig.align="center"}
-knitr::include_graphics("aov_flow2.png")
-```
-
 ## AOV by Devices
 
 <hr>
