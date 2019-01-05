@@ -45,42 +45,18 @@ library(readr)
 
 <hr>
 
-dplyr provides a set of verbs that help us solve the most common data manipulation challenges while working with tabular data (dataframes, tibbles):
 
-- `select`: returns subset of columns
-- `filter`: returns a subset of rows
-- `arrange`: re-order or arrange rows according to single/multiple variables
-- `mutate`: create new columns from existing columns
-- `summarise`: reduce data to a single summary
+- `select`
+- `filter`
+- `arrange`
+- `mutate`
+- `summarise`
 
 ## {data-background="casestudy.png"}
-
-## Case Study
-
-<hr>
-
-We will explore dummy data that resembles web logs of an ecommerce company. You can download the data from [here](https://github.com/rsquaredacademy/datasets/blob/master/web.csv) or import it directly using `read_csv()` from the [readr](readr.tidyverse.org) package. We will use dplyr to answer a few questions we have about the above data:
-
-- what is the average order value by device types?
-- what is the average number of pages visited by purchasers and non-purchasers?
-- what is the average time on site for purchasers vs non-purchasers?
-- what is the average number of pages visited by purchasers and non-purchasers using mobile?
 
 ## Data
 
 <hr>
-
-```{r import, eval=FALSE}
-ecom <- 
-  read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv',
-    col_types = cols_only(device = col_factor(levels = c("laptop", "tablet", "mobile")),
-      referrer = col_factor(levels = c("bing", "direct", "social", "yahoo", "google")),
-      purchase = col_logical(), n_pages = col_double(), n_visit = col_double(),
-      duration = col_double(), order_value = col_double(), order_items = col_double()
-    )
-  )
-```
-
 
 ```{r show, echo=FALSE, eval=TRUE, message=FALSE}
 ecom <- 
@@ -106,20 +82,35 @@ ecom
 - duration: time spent on the website (in seconds)
 - purchase: whether visitor purchased
 - order_value: order value of visitor (in dollars)
-- order_items: number of items ordered
+
+## Case Study
+
+<hr>
+
+- what is the average order value by device types?
+- what is the average number of pages visited by purchasers and non-purchasers?
+- what is the average time on site for purchasers vs non-purchasers?
+- what is the average number of pages visited by purchasers and non-purchasers using mobile?
+
 
 ## Average Order Value
 
 <hr>
 
-<!-- **What is the average order value by device types?** -->
-
-<!-- Average value of every order placed over a defined period of time. It is determined using sales per order and not sales per customer. Let us look at the steps to calculate AOV from the ecommerce data set. -->
-
 <br>
 
 ```{r img2, echo=FALSE, out.width="80%", fig.align="center"}
 knitr::include_graphics("image.jpg")
+```
+
+## AOV by Devices
+
+<hr>
+
+<br>
+
+```{r img12, echo=FALSE, out.width="80%", fig.align="center"}
+knitr::include_graphics("dplyr_aov_map.png")
 ```
 
 ## AOV by Devices
@@ -138,11 +129,6 @@ ecom %>%
   select(device, aov)
 ```
 
-<!-- ## Step 1: Filter Purchasers
-
-<hr>
-
-In order to compute the AOV, we must first separate the purchasers from non-purchasers. We will do this by filtering the data related to purchasers using the `filter()` function. It allows us to filter rows that meet a specific criteria/condition. The first argument is the name of the data frame and the rest of the arguments are expressions for filtering the data. Let us look at a few examples: -->
 
 ## {data-background="filter.png"}
 
@@ -199,12 +185,6 @@ filter(ecom, device == "mobile", n_pages > 5)
 ```{r dplyr5}
 filter(ecom, purchase)
 ```
-
-<!-- ## Step 2: Select relevant columns
-
-<hr>
-
-After filtering the data, we need to select relevent variables to compute the AOV. Remember, we do not need all the columns in the data to compute a required metric (in our case, AOV). The `select()` function allows us to select a subset of columns. The first argument is the name of the data frame and the subsequent arguments specify the columns by name or position. Let us look at a few examples: -->
 
 ## {data-background="select.png"}
 
@@ -269,7 +249,6 @@ select(ecom, -n_pages, -duration)
 
 <hr>
 
-For our case study, we need to select the column order value to calculate the AOV. We also need to select the device column as we are computing the AOV for different devices.
 
 ```{r dplyr9}
 select(ecom, device, order_value)
@@ -279,19 +258,12 @@ select(ecom, device, order_value)
 
 <hr>
 
-But we want the above data only for purchasers. We will combine `filter()` and `select()` functions to extract data related to purchasers.
 
 ```{r dplyr10}
 ecom1 <- filter(ecom, purchase)
 ecom2 <- select(ecom1, device, order_value)
 ecom2
 ```
-
-<!-- ## Step 3: Grouping Data
-
-<hr>
-
-Since we want to compute the AOV for each device, we need to compute the total order value and total order items for each device. To achieve this, we will group the selected variables by device type. Using the `group_by()` function, we will group our case study data by device types. The first argument is the name of the data frame and the second argument is the name of the column based on which the data will be split. Let us look at a few examples: -->
 
 ## {data-background="group.png"}
 
@@ -307,18 +279,10 @@ group_by(ecom, referrer)
 
 <hr>
 
-In the second line in the previous output, you can observe `Groups: referrer [5]`. The data is split into 5 groups as the referrer variable has 5 distinct values. For our case study, we need to group the data by device type.
-
 ```{r dplyr12}
 ecom3 <- group_by(ecom2, device)
 ecom3
 ```
-
-<!-- ## Step 4: Summarize
-
-<hr>
-
-The next step is to compute the total order value and total order items for each device. We will use them to then compute the average order value. Now we need to reduce the order value and order items data to a single summary. We can achieve this using the `summarise()` function. The first argument is the name of a data frame and the subsequent arguments are functions that can generate a summary. For example, we can use `min`, `max`, `sum`, `mean` etc. -->
 
 ## {data-background="summarise.png"}
 
@@ -337,32 +301,20 @@ knitr::include_graphics("groupby_summarise.png")
 
 <hr>
 
-For our case study, we need the totals of order value and order items. What function can we use to obtain them? The `sum()` function will generate the sum of the values and hence we will use it inside the `summarise()` function. Remember, we need to provide a name to the summary being generated. 
-
-
 ```{r dplyr13}
 ecom4 <- summarise(ecom3, revenue = sum(order_value),
           orders = n())
 ecom4
 ```
 
-
 ## Case Study
 
 <hr>
-
-In our case study, we have split the data based on the device type and we have 2 other columns which are order value and order items. If we use `summarise_all()` function, it will generate the summary for the two columns based on the function specified. To specify the functions, we need to use another argument `funs` and it can take any number of valid functions.
 
 ```{r dplyr14}
 ecom4 <- summarise_all(ecom3, funs(revenue = sum, orders = n()))
 ecom4
 ```
-
-<!-- ## Step 5: Compute AOV
-
-<hr>
-
-Now that we have the total order value and total order items for each device category, we can compute the AOV. We will create a new column to store the result. To create a new column, we will use the `mutate()` function. The first argument is the name of the data frame and the subsequent arguments are expressions for creating new columns based out of existing columns. -->
 
 ## {data-background="mutate.png"}
 
@@ -385,12 +337,6 @@ knitr::include_graphics("mutate_1.png")
 ecom5 <- mutate(ecom4, aov = revenue / orders)
 ecom5
 ```
-
-<!-- ## Step 6: Select Relevant Columns
-
-<hr>
-
-The last step is to select the relevant columns. We require the device type and the corresponding aov and hence we can get rid of other columns. Use the `select()` function to extract the relevant columns. -->
 
 ## {data-background="select.png"}
 
@@ -457,16 +403,6 @@ ecom4 <- summarise_all(ecom3, funs(revenue = sum, orders = n()))
 ecom5 <- mutate(ecom4, aov = revenue / orders)
 ecom6 <- select(ecom5, device, aov)
 ecom6
-```
-
-## AOV by Devices
-
-<hr>
-
-<br>
-
-```{r img12, echo=FALSE, out.width="80%", fig.align="center"}
-knitr::include_graphics("dplyr_aov_map.png")
 ```
 
 
