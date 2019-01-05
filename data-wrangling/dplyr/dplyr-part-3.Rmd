@@ -18,12 +18,6 @@ output: _output.yaml
 - extract/mutate data using predicate functions
 - count observations for different levels of a variable
 
-## Case Study
-
-<hr>
-
-Let us look at a case study (e-commerce data) and see how we can use dplyr helper functions to answer questions we have about and to modify/transform the underlying data set. You can download the data from [here](https://github.com/rsquaredacademy/datasets/blob/master/web.csv) or import it directly using `read_csv()` from the [readr](readr.tidyverse.org) package.
-
 ## Libraries
 
 <hr>
@@ -43,18 +37,7 @@ library(readr)
 
 <hr>
 
-```{r import, eval=FALSE}
-ecom <- 
-  read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv',
-    col_types = cols_only(device = col_factor(levels = c("laptop", "tablet", "mobile")),
-      referrer = col_factor(levels = c("bing", "direct", "social", "yahoo", "google")),
-      purchase = col_logical(), bouncers = col_logical(), duration = col_double(),
-      n_visit = col_double(), n_pages = col_double()
-    )
-  )
-```
-
-
+<br>
 
 ```{r show, echo=FALSE, eval=TRUE, message=FALSE}
 ecom <- 
