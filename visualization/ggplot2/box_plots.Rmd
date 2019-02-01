@@ -261,8 +261,3 @@ ggplot(tidy_returns) +
 
 ## {data-background="thankyou.png"}
 
-<!-- To do: -->
-<!--   - add intro slide -->
-<!--   - add intro -->
-<!--   - outlier section -->
-<!--   - aesthetics section -->
