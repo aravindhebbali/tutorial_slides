@@ -58,6 +58,8 @@ library(readr)
 
 <hr>
 
+<br>
+
 ```{r show, echo=FALSE, eval=TRUE, message=FALSE}
 ecom <- 
   read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv',
@@ -101,16 +103,6 @@ ecom
 
 ```{r img2, echo=FALSE, out.width="80%", fig.align="center"}
 knitr::include_graphics("image.jpg")
-```
-
-## AOV by Devices
-
-<hr>
-
-<br>
-
-```{r img12, echo=FALSE, out.width="80%", fig.align="center"}
-knitr::include_graphics("dplyr_aov_map.png")
 ```
 
 ## AOV by Devices
@@ -317,17 +309,6 @@ ecom4
 ```
 
 ## {data-background="mutate.png"}
-
-## Mutate
-
-<hr>
-
-<br>
-<br>
-
-```{r img11, echo=FALSE, out.width="100%", fig.align="center"}
-knitr::include_graphics("mutate_1.png")
-```
 
 ## Case Study
 
