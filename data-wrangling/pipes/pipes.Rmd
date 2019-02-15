@@ -63,16 +63,7 @@ library(stringr)
 
 <hr>
 
-```{r import, eval=FALSE}
-ecom <- 
-  read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv',
-    col_types = cols_only(
-      referrer = col_factor(levels = c("bing", "direct", "social", "yahoo", "google")),
-      n_pages = col_double(), duration = col_double(), purchase = col_logical()
-    )
-  )
-```
-
+<br>
 
 ```{r show, echo=FALSE, eval=TRUE, message=FALSE}
 ecom <- 
