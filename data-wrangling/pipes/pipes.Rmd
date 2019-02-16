@@ -128,7 +128,8 @@ sqrt(ecom_mini$n_pages)
 
 ```{r mag4}
 # select n_pages variable and assign it to y
-y <- ecom_mini %$% n_pages
+ecom_mini %$% 
+  n_pages -> y
 
 # compute square root of y and assign it to y 
 y %<>% sqrt()
@@ -150,10 +151,10 @@ knitr::include_graphics("pipes_square_root.png")
 <hr>
 
 ```{r mag5}
-y <- 
-  ecom_mini %$% 
+ecom_mini %$% 
   n_pages %>% 
-  sqrt() 
+  sqrt() -> y
+
 y
 ```
 
@@ -263,28 +264,6 @@ email %>%
   str_split(pattern = '@') %>%
   extract2(1) %>%
   extract(1) %>%
-  str_sub(start = 1, end = 6) %>%
-  str_to_upper()
-```
-
-## String Manipulation
-
-<hr>
-
-<br>
-
-```{r mag27, echo=FALSE, out.width="70%", fig.align="center"}
-knitr::include_graphics("pipes_string.png")
-```
-
-## String Manipulation - Using Pipe
-
-<hr>
-
-```{r map39}
-email %>%
-  str_split(pattern = '@') %>%
-  map_chr(1) %>%
   str_sub(start = 1, end = 6) %>%
   str_to_upper()
 ```
