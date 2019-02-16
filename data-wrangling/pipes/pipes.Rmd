@@ -312,6 +312,13 @@ extract(ecom_mini, 'n_pages')
 
 ```{r mag23}
 ecom_mini[2]
+```
+
+## Extract Column By Position
+
+<hr>
+
+```{r mag23a}
 extract(ecom_mini, 2) 
 ```
 
@@ -321,6 +328,13 @@ extract(ecom_mini, 2)
 
 ```{r mag11}
 ecom_mini$n_pages
+```
+
+## Extract Column (as vector)
+
+<hr>
+
+```{r mag11a}
 use_series(ecom_mini, 'n_pages') 
 ```
 
@@ -341,6 +355,16 @@ ecom_list <- as.list(ecom_mini)
 ecom_list[['n_pages']]
 ecom_list$n_pages
 
+# magrittr
+extract2(ecom_list, 'n_pages')
+use_series(ecom_list, n_pages)
+```
+
+## Extract List Element By Name
+
+<hr>
+
+```{r mag12a}
 # magrittr
 extract2(ecom_list, 'n_pages')
 use_series(ecom_list, n_pages)
