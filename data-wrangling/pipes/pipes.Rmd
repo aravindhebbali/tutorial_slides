@@ -366,16 +366,6 @@ extract2(ecom_list, 'n_pages')
 use_series(ecom_list, n_pages)
 ```
 
-## Extract List Element By Name
-
-<hr>
-
-```{r mag12a}
-# magrittr
-extract2(ecom_list, 'n_pages')
-use_series(ecom_list, n_pages)
-```
-
 ## Extract List Element By Position
 
 <hr>
