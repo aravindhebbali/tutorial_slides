@@ -1954,8 +1954,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <a class="sourceLine" id="cb8-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co"># combine above steps</span></a>
 <a class="sourceLine" id="cb8-5" data-line-number="5"><span class="kw">sqrt</span>(ecom_mini<span class="op">$</span>n_pages)</a></code></pre></div>
-<pre><code>##  [1] 1.000000 1.000000 1.000000 1.000000 1.000000 2.828427 3.872983
-##  [8] 2.449490 4.242641 2.828427</code></pre>
+<pre><code>##  [1] 2.236068 4.358899 1.000000 4.358899 4.358899 1.000000 2.236068
+##  [8] 1.000000 3.872983 1.000000</code></pre>
 </section>
 <section id="square-root---using-pipe" class="slide level2">
 <h2>Square Root - Using pipe</h2>
@@ -1980,8 +1980,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <a class="sourceLine" id="cb11-3" data-line-number="3"><span class="st">  </span>n_pages <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb11-4" data-line-number="4"><span class="st">  </span><span class="kw">sqrt</span>() </a>
 <a class="sourceLine" id="cb11-5" data-line-number="5">y</a></code></pre></div>
-<pre><code>##  [1] 1.000000 1.000000 1.000000 1.000000 1.000000 2.828427 3.872983
-##  [8] 2.449490 4.242641 2.828427</code></pre>
+<pre><code>##  [1] 2.236068 4.358899 1.000000 4.358899 4.358899 1.000000 2.236068
+##  [8] 1.000000 3.872983 1.000000</code></pre>
 </section>
 <section id="correlation" class="slide level2">
 <h2>Correlation</h2>
@@ -2134,30 +2134,30 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <pre><code>## # A tibble: 10 x 1
 ##    n_pages
 ##      &lt;dbl&gt;
-##  1       1
-##  2       1
+##  1       5
+##  2      19
 ##  3       1
-##  4       1
-##  5       1
-##  6       8
-##  7      15
-##  8       6
-##  9      18
-## 10       8</code></pre>
+##  4      19
+##  5      19
+##  6       1
+##  7       5
+##  8       1
+##  9      15
+## 10       1</code></pre>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw">extract</span>(ecom_mini, <span class="st">'n_pages'</span>) </a></code></pre></div>
 <pre><code>## # A tibble: 10 x 1
 ##    n_pages
 ##      &lt;dbl&gt;
-##  1       1
-##  2       1
+##  1       5
+##  2      19
 ##  3       1
-##  4       1
-##  5       1
-##  6       8
-##  7      15
-##  8       6
-##  9      18
-## 10       8</code></pre>
+##  4      19
+##  5      19
+##  6       1
+##  7       5
+##  8       1
+##  9      15
+## 10       1</code></pre>
 </section>
 <section id="extract-column-by-position" class="slide level2">
 <h2>Extract Column By Position</h2>
@@ -2166,38 +2166,46 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <pre><code>## # A tibble: 10 x 1
 ##    n_pages
 ##      &lt;dbl&gt;
-##  1       1
-##  2       1
+##  1       5
+##  2      19
 ##  3       1
-##  4       1
-##  5       1
-##  6       8
-##  7      15
-##  8       6
-##  9      18
-## 10       8</code></pre>
+##  4      19
+##  5      19
+##  6       1
+##  7       5
+##  8       1
+##  9      15
+## 10       1</code></pre>
+</section>
+<section id="extract-column-by-position-1" class="slide level2">
+<h2>Extract Column By Position</h2>
+<hr>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="kw">extract</span>(ecom_mini, <span class="dv">2</span>) </a></code></pre></div>
 <pre><code>## # A tibble: 10 x 1
 ##    n_pages
 ##      &lt;dbl&gt;
-##  1       1
-##  2       1
+##  1       5
+##  2      19
 ##  3       1
-##  4       1
-##  5       1
-##  6       8
-##  7      15
-##  8       6
-##  9      18
-## 10       8</code></pre>
+##  4      19
+##  5      19
+##  6       1
+##  7       5
+##  8       1
+##  9      15
+## 10       1</code></pre>
 </section>
 <section id="extract-column-as-vector" class="slide level2">
 <h2>Extract Column (as vector)</h2>
 <hr>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">ecom_mini<span class="op">$</span>n_pages</a></code></pre></div>
-<pre><code>##  [1]  1  1  1  1  1  8 15  6 18  8</code></pre>
+<pre><code>##  [1]  5 19  1 19 19  1  5  1 15  1</code></pre>
+</section>
+<section id="extract-column-as-vector-1" class="slide level2">
+<h2>Extract Column (as vector)</h2>
+<hr>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw">use_series</span>(ecom_mini, <span class="st">'n_pages'</span>) </a></code></pre></div>
-<pre><code>##  [1]  1  1  1  1  1  8 15  6 18  8</code></pre>
+<pre><code>##  [1]  5 19  1 19 19  1  5  1 15  1</code></pre>
 </section>
 <section id="sample-list" class="slide level2">
 <h2>Sample List</h2>
@@ -2209,25 +2217,29 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="co"># base</span></a>
 <a class="sourceLine" id="cb44-2" data-line-number="2">ecom_list[[<span class="st">'n_pages'</span>]]</a></code></pre></div>
-<pre><code>##  [1]  1  1  1  1  1  8 15  6 18  8</code></pre>
+<pre><code>##  [1]  5 19  1 19 19  1  5  1 15  1</code></pre>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">ecom_list<span class="op">$</span>n_pages</a></code></pre></div>
-<pre><code>##  [1]  1  1  1  1  1  8 15  6 18  8</code></pre>
+<pre><code>##  [1]  5 19  1 19 19  1  5  1 15  1</code></pre>
+</section>
+<section id="extract-list-element-by-name-1" class="slide level2">
+<h2>Extract List Element By Name</h2>
+<hr>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="co"># magrittr</span></a>
 <a class="sourceLine" id="cb48-2" data-line-number="2"><span class="kw">extract2</span>(ecom_list, <span class="st">'n_pages'</span>)</a></code></pre></div>
-<pre><code>##  [1]  1  1  1  1  1  8 15  6 18  8</code></pre>
+<pre><code>##  [1]  5 19  1 19 19  1  5  1 15  1</code></pre>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="kw">use_series</span>(ecom_list, n_pages)</a></code></pre></div>
-<pre><code>##  [1]  1  1  1  1  1  8 15  6 18  8</code></pre>
+<pre><code>##  [1]  5 19  1 19 19  1  5  1 15  1</code></pre>
 </section>
 <section id="extract-list-element-by-position" class="slide level2">
 <h2>Extract List Element By Position</h2>
 <hr>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="co"># base </span></a>
 <a class="sourceLine" id="cb52-2" data-line-number="2">ecom_list[[<span class="dv">1</span>]]</a></code></pre></div>
-<pre><code>##  [1] bing   bing   google direct bing   yahoo  bing   bing   bing   bing  
+<pre><code>##  [1] direct bing   direct yahoo  direct yahoo  google direct social google
 ## Levels: bing direct social yahoo google</code></pre>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="co"># magrittr</span></a>
 <a class="sourceLine" id="cb54-2" data-line-number="2"><span class="kw">extract2</span>(ecom_list, <span class="dv">1</span>)</a></code></pre></div>
-<pre><code>##  [1] bing   bing   google direct bing   yahoo  bing   bing   bing   bing  
+<pre><code>##  [1] direct bing   direct yahoo  direct yahoo  google direct social google
 ## Levels: bing direct social yahoo google</code></pre>
 </section>
 <section id="extract-list-element-as-vector" class="slide level2">
@@ -2235,10 +2247,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="co"># base</span></a>
 <a class="sourceLine" id="cb56-2" data-line-number="2">ecom_list<span class="op">$</span>n_pages</a></code></pre></div>
-<pre><code>##  [1]  1  1  1  1  1  8 15  6 18  8</code></pre>
+<pre><code>##  [1]  5 19  1 19 19  1  5  1 15  1</code></pre>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1"><span class="co"># magrittr</span></a>
 <a class="sourceLine" id="cb58-2" data-line-number="2"><span class="kw">use_series</span>(ecom_list, n_pages)</a></code></pre></div>
-<pre><code>##  [1]  1  1  1  1  1  8 15  6 18  8</code></pre>
+<pre><code>##  [1]  5 19  1 19 19  1  5  1 15  1</code></pre>
 </section>
 <section id="arithmetic-operations" class="slide level2">
 <h2>Arithmetic Operations</h2>
