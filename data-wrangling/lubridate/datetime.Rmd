@@ -42,11 +42,112 @@ lubridate::origin
 
 <hr>
 
+```{r sysdate}
+Sys.Date()
+Sys.time()
+Sys.timezone()
+```
+
+## Current Date/Time
+
+<hr>
+
 ```{r today}
 now()
 today()
 am(now())  
 pm(now())
+```
+
+## How does R handle date/time?
+
+<hr>
+
+```{r daterhandle1}
+mydate <- 2018-08-15
+mydate
+class(mydate)
+```
+
+## How does R handle date/time?
+
+<hr>
+
+```{r daterhandle2}
+mydate <- "2018-08-15"
+mydate
+class(mydate)
+```
+
+## How does R handle date/time?
+
+<hr>
+
+```{r daterhandle3}
+mydate <- as.Date("2018-08-15")
+mydate
+class(mydate)
+```
+
+## Date from Character
+
+<hr>
+
+```{r daterhandle4}
+mydate <- as_date("2018-08-15")
+mydate
+class(mydate)
+```
+
+## Date & Timezone
+
+<hr>
+
+```{r daterhandle5}
+mydate <- as_date("2018-08-15", tz = "Asia/Calcutta")
+mydate
+class(mydate)
+```
+
+## Date/Time & Timezone
+
+<hr>
+
+```{r daterhandle6}
+mydate <- as_datetime("2018-08-15 22:30:42", tz = "Asia/Calcutta")
+mydate
+class(mydate)
+```
+
+## Date from Days
+
+<hr>
+
+```{r daterhandle7}
+days   <- 4215
+mydate <- as_date(days, origin = "2000-01-01")
+mydate
+```
+
+## Date/Time from Days
+
+<hr>
+
+```{r daterhandle8}
+days   <- 4215
+mydate <- as_datetime(days, origin = "2000-01-01")
+mydate
+```
+
+## ISO 8601 Format
+
+<hr>
+
+<br>
+<br>
+
+```{r img_iso, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("iso.png")
 ```
 
 ## Data
