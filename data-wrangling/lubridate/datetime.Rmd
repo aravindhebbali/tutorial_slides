@@ -8,6 +8,8 @@ output: _output.yaml
 
 <hr>
 
+- how does R treat date/time?
+- create and store date/time variables
 - extract date and time components
 - compute time differences
 - compute time interval and duration
@@ -55,6 +57,15 @@ Sys.timezone()
 ```{r today}
 now()
 today()
+am(now())  
+pm(now())
+```
+
+## Current Date/Time
+
+<hr>
+
+```{r today2}
 am(now())  
 pm(now())
 ```
