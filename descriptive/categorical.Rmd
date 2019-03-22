@@ -1,0 +1,93 @@
+---
+output: _output.yaml
+---
+
+## {data-background="pipes.png"}
+
+## Agenda
+
+<hr>
+
+- one way table
+- two way table
+
+## Introduction
+
+<hr>
+
+- what is descriptive statistics?
+- why you need descriptive statistics?
+
+## Libraries
+
+<hr>
+
+- [descriptr](https://descriptr.rsquaredacademy.com)
+
+```{r install, echo=FALSE, message=FALSE}
+library(dplyr)
+library(descriptr)
+```
+
+## One Way Table
+
+<hr>
+
+```{r table1}
+table(mtcarz$gear)
+```
+
+## One Way Table
+
+<hr>
+
+```{r table2}
+ds_freq_table(mtcarz, gear)
+```
+
+## One Way Table
+
+<hr>
+
+```{r table3, fig.align='center'}
+mtcarz %>%
+  ds_freq_table(gear) %>%
+  plot()
+```
+
+## Two Way Table
+
+<hr>
+
+```{r table4}
+table(mtcarz$gear, mtcarz$cyl)
+```
+
+## Two Way Table
+
+<hr>
+
+```{r table5}
+ds_cross_table(mtcarz, gear, cyl)
+```
+
+## Two Way Table
+
+<hr>
+
+```{r table6, fig.align='center'}
+mtcarz %>%
+  ds_cross_table(gear, cyl) %>%
+  plot()
+```
+
+## Two Way Table
+
+<hr>
+
+```{r table7}
+ds_twoway_table(mtcarz, gear, cyl)
+```
+
+## {data-background="thankyou.png"}
+

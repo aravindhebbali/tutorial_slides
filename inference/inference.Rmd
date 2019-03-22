@@ -1,0 +1,150 @@
+---
+output: _output.yaml
+---
+
+## {data-background="pipes.png"}
+
+## Agenda
+
+<hr>
+
+- one sample tests
+- two sample tests
+- one way ANOVA
+
+## Introduction
+
+<hr>
+
+- what is hypothesis testing?
+- type 1 & II error
+- critical value
+- which test should you use
+- parametric vs non-parametric
+
+## Libraries
+
+<hr>
+
+- [inferr](https://inferr.rsquaredacademy.com)
+
+```{r install, echo=FALSE, message=FALSE}
+library(dplyr)
+library(inferr)
+```
+
+## Data
+
+<hr> 
+
+```{r subset}
+hsb
+```
+
+## One Sample Tests
+
+<hr> 
+
+- t test
+- proportion test
+- variance test
+
+## One Sample t Test
+
+<hr>
+
+```{r ost}
+infer_os_t_test(hsb, write, mu = 50, alternative = 'all')
+```
+
+## One Sample Proportion Test
+
+<hr>
+
+```{r osp1}
+infer_os_prop_test(hsb, female, prob = 0.5)
+```
+
+## One Sample Proportion Test
+
+<hr>
+
+```{r osp2}
+infer_os_prop_test(200, prob = 0.5, phat = 0.3)
+```
+
+## One Sample Variance Test
+
+<hr>
+
+```{r osv}
+infer_os_var_test(mtcars, mpg, 5, alternative = 'all')
+```
+
+## Two Sample Tests
+
+<hr> 
+
+- independent t test
+- paired t test
+- proportion test
+- variance test
+
+## Independent Sample t Test
+
+<hr>
+
+```{r ist}
+infer_ts_ind_ttest(hsb, female, write, alternative = 'all')
+```
+
+## Paired Sample t Test
+
+<hr>
+
+```{r pst}
+infer_ts_paired_ttest(hsb, read, write, alternative = 'all')
+```
+
+## Two Sample Proportion Test
+
+<hr>
+
+```{r tsp}
+infer_ts_prop_test(treatment, treatment1, treatment2, alternative = 'less')
+```
+
+## Two Sample Variance Test
+
+<hr>
+
+```{r tsv}
+infer_ts_var_test(hsb, read, write, alternative = 'less')
+```
+
+## One Way ANOVA
+
+<hr>
+
+```{r anova}
+infer_oneway_anova(hsb, write, prog)
+```
+
+## Chi Square Test of Association
+
+<hr>
+
+```{r chisq1}
+infer_chisq_assoc_test(hsb, female, schtyp)
+```
+
+## Chi Square Goodness of Fit Test
+
+<hr>
+
+```{r chisq2}
+infer_chisq_gof_test(hsb, race, c(20, 20, 20, 140))
+```
+
+## {data-background="thankyou.png"}
+

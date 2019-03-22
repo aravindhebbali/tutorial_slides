@@ -8,13 +8,21 @@ output: _output.yaml
 
 <hr>
 
-- tabulate levels
-- reorder levels
-- reverse levels
-- collapse levels
-- recode levels
-- recategorize levels
-- shift levels
+- understand categorical data
+- ordinal vs nominal data
+- how to create factors 
+- how to check 
+    - number of levels
+    - names of levels
+- how to create ordered factors 
+- how to
+    - tabulate levels
+    - reorder levels
+    - reverse levels
+    - collapse levels
+    - recode levels
+    - recategorize levels
+    - shift levels
 
 ## Libraries
 
@@ -34,13 +42,40 @@ library(dplyr)
 library(readr)
 ```
 
-
-## Data 
+## Categorical/Qualitative Data
 
 <hr>
 
-```{r import2e, echo=TRUE, message=FALSE}
-traffic <- 
+## Ordinal Data
+
+<hr>
+
+## Nominal Data
+
+<hr>
+
+## Factors
+
+<hr>
+
+## Levels
+
+<hr>
+
+## Level Names
+
+<hr>
+
+## Ordered Factors
+
+<hr>
+
+## Case Study: Data 
+
+<hr>
+
+```{r import2e, echo=FALSE, message=FALSE}
+web_traffic <- 
   read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web_traffic.csv',
     col_types = list(
       col_factor(levels = c("google", "facebook", "affiliates", 
@@ -50,8 +85,10 @@ traffic <-
   )
 ```
 
+<br>
+
 ```{r import2, eval=TRUE, echo=FALSE, message=FALSE}
-traffic
+web_traffic
 ```
 
 ## Extract Column
@@ -59,15 +96,13 @@ traffic
 <hr>
 
 ```{r import2a}
-traffics <- use_series(traffic, traffics)
+traffics <- use_series(web_traffic, traffics)
 traffics
 ```
 
 ## Case Study
 
 <hr>
-
-In this case study, we will:
 
 - compute the frequency of different referrers
 - collapse referrers with low sample size into a single group

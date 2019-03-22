@@ -1,0 +1,242 @@
+---
+output: _output.yaml
+---
+
+## {data-background="pipes.png"}
+
+## Agenda
+
+<hr>
+
+- measures of location
+- measures of variation
+- measures of symmetry
+- tabulation
+- grouped summaries
+- data visualization
+
+## Introduction
+
+<hr>
+
+- what is descriptive statistics?
+- why you need descriptive statistics?
+
+## Libraries
+
+<hr>
+
+- [descriptr](https://descriptr.rsquaredacademy.com)
+
+```{r install, echo=FALSE, message=FALSE}
+library(dplyr)
+library(descriptr)
+```
+
+## Data
+
+<hr> 
+
+```{r subset}
+mtcars
+```
+
+## Measures of Location
+
+<hr> 
+
+- mean
+- trimmed mean
+- median
+- mode
+
+## Mean
+
+<hr>
+
+```{r mean}
+mean(mtcars$mpg)
+```
+
+## Trimmed Mean
+
+<hr>
+
+```{r trim_mean}
+mean(mtcars$mpg, trim = 0.05)
+```
+
+## Median
+
+<hr>
+
+```{r median}
+median(mtcars$mpg)
+```
+
+## Mode
+
+<hr>
+
+```{r mode}
+ds_mode(mtcars$mpg)
+```
+
+## Measures of Variation
+
+<hr> 
+
+- range
+- inter-quartile range
+- variance
+- standard deviation
+- coefficient of variation
+- standard error
+
+## Range
+
+<hr>
+
+```{r range}
+range(mtcars$mpg)
+```
+
+## Inter Quartile Range
+
+<hr>
+
+```{r iqr}
+IQR(mtcars$mpg)
+```
+
+## Variance
+
+<hr>
+
+```{r var}
+var(mtcars$mpg)
+```
+
+## Standard Deviation
+
+<hr>
+
+```{r sd}
+sd(mtcars$mpg)
+```
+
+## Coefficient of Variation
+
+<hr>
+
+```{r cvar}
+ds_cvar(mtcars$mpg)
+```
+
+## Measures of Symmetry
+
+<hr> 
+
+- skewness
+- kurtosis
+
+## Skewness
+
+<hr>
+
+```{r skewness}
+ds_skewness(mtcars$mpg)
+```
+
+## Kurtosis
+
+<hr>
+
+```{r kurtosis}
+ds_kurtosis(mtcars$mpg)
+```
+
+## Percentiles/Quantiles
+
+<hr> 
+
+```{r percentiles}
+ds_percentiles(mtcars, mpg)
+```
+
+## Summary
+
+<hr>
+
+```{r summary}
+summary(mtcars)
+```
+
+## Screen Data
+
+<hr>
+
+```{r screen}
+ds_screener(mtcarz)
+```
+
+## Summary Statistics
+
+<hr>
+
+```{r summary_stats}
+ds_summary_stats(mtcarz, mpg)
+```
+
+## Tidy Statistics
+
+<hr>
+
+```{r tidy_stats}
+ds_tidy_stats(mtcarz)
+```
+
+## Frequency Table
+
+<hr>
+
+```{r freq_table}
+ds_freq_table(mtcarz, mpg)
+```
+
+## Frequency Table
+
+<hr>
+
+```{r freq_table_plot, fig.align='center'}
+mtcarz %>%
+  ds_freq_table(mpg) %>%
+  plot()
+```
+
+## Measures of Location
+
+<hr>
+
+```{r location}
+ds_measures_location(mtcarz)
+```
+
+## Measures of Variation
+
+<hr>
+
+```{r variation}
+ds_measures_variation(mtcarz)
+```
+
+## Measures of Symmetry
+
+<hr>
+
+```{r symmetry}
+ds_measures_symmetry(mtcarz)
+```
+
+## {data-background="thankyou.png"}
+

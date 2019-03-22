@@ -1,0 +1,97 @@
+---
+output: _output.yaml
+---
+
+## {data-background="pipes.png"}
+
+## Agenda
+
+<hr>
+
+## Introduction
+
+<hr>
+
+- what is descriptive statistics?
+- why you need descriptive statistics?
+
+## Libraries
+
+<hr>
+
+- [descriptr](https://descriptr.rsquaredacademy.com)
+- [GGally]()
+
+```{r install, echo=FALSE, message=FALSE}
+library(dplyr)
+library(descriptr)
+library(GGally)
+```
+
+## Data
+
+<hr> 
+
+```{r subset}
+data <- dplyr::select(mtcarz, mpg, disp, gear, cyl)
+data
+```
+
+## Scatter Plot
+
+<hr>
+
+```{r scatter, fig.align='center'}
+ds_plot_scatter(data)
+```
+
+## Histogram
+
+<hr>
+
+```{r hist, fig.align='center'}
+ds_plot_histogram(data)
+```
+
+## Bar Plot
+
+<hr>
+
+```{r bar, fig.align='center'}
+ds_plot_bar(data)
+```
+
+## Box Plot
+
+<hr>
+
+```{r box, fig.align='center'}
+ds_plot_box_single(data)
+```
+
+## Box Plot
+
+<hr>
+
+```{r box2, fig.align='center'}
+ds_plot_box_group(data)
+```
+
+## Stacked Bar Plot
+
+<hr>
+
+```{r stacked_bar, fig.align='center'}
+ds_plot_bar_stacked(data)
+```
+
+## Grouped Bar Plot
+
+<hr>
+
+```{r grouped_bar, fig.align='center'}
+ds_plot_bar_grouped(data)
+```
+
+## {data-background="thankyou.png"}
+

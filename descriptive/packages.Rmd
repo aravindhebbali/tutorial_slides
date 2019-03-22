@@ -1,0 +1,125 @@
+---
+output: _output.yaml
+---
+
+## {data-background="pipes.png"}
+
+## Agenda
+
+<hr>
+
+- measures of location
+- measures of variation
+- measures of symmetry
+- tabulation
+- grouped summaries
+- data visualization
+
+## Introduction
+
+<hr>
+
+- what is descriptive statistics?
+- why you need descriptive statistics?
+
+## Libraries
+
+<hr>
+
+- [descriptr](https://descriptr.rsquaredacademy.com)
+- [skimr](https://github.com/ropensci/skimr)
+- [Hmisc](https://cran.r-project.org/package=Hmisc)
+- [pastecs](https://cran.r-project.org/package=pastecs)
+- [psych](https://cran.r-project.org/package=psych)
+- [summarytools](https://cran.r-project.org/package=summarytools)
+- [desctable](https://cran.r-project.org/package=desctable)
+- [GGally](http://ggobi.github.io/ggally/)
+
+```{r install, echo=FALSE, message=FALSE, warning=FALSE}
+library(dplyr)
+library(descriptr)
+library(skimr)
+library(Hmisc)
+library(pastecs)
+library(psych)
+library(skimr)
+library(summarytools)
+library(desctable)
+library(GGally)
+```
+
+## Data
+
+<hr> 
+
+```{r subset}
+data <- dplyr::select(mtcarz, mpg, disp, gear, cyl)
+data
+```
+
+## Hmisc
+
+<hr>
+
+```{r descibe}
+Hmisc::describe(data)
+```
+
+## pastecs
+
+<hr>
+
+```{r pastecs}
+pastecs::stat.desc(data)
+```
+
+## psych
+
+<hr>
+
+```{r psych}
+psych::describe(data)
+```
+
+## summarytools
+
+<hr>
+
+```{r summarytools}
+summarytools::descr(data)
+```
+
+## summarytools
+
+<hr>
+
+```{r dfsummary}
+summarytools::dfSummary(data)
+```
+
+## desctable
+
+<hr>
+
+```{r desctable}
+desctable::desctable(data)
+```
+
+## ggpairs
+
+<hr>
+
+```{r ggally, fig.align='center', warning=FALSE, message=FALSE}
+GGally::ggpairs(data)
+```
+
+## skimr
+
+<hr>
+
+```{r skimr}
+skimr::skim(data)
+```
+
+## {data-background="thankyou.png"}
+

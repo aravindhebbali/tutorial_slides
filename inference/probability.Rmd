@@ -1,0 +1,46 @@
+---
+output: _output.yaml
+---
+
+## {data-background="pipes.png"}
+
+## Agenda
+
+<hr>
+
+- one sample tests
+- two sample tests
+- one way ANOVA
+
+## Introduction
+
+<hr>
+
+- what is hypothesis testing?
+- type 1 & II error
+- critical value
+- which test should you use
+- parametric vs non-parametric
+
+## Libraries
+
+<hr>
+
+- [inferr](https://inferr.rsquaredacademy.com)
+
+```{r install, echo=FALSE, message=FALSE}
+library(dplyr)
+library(inferr)
+```
+
+## Data
+
+<hr> 
+
+```{r subset}
+hsb
+```
+
+
+## {data-background="thankyou.png"}
+
