@@ -1916,7 +1916,24 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <pre><code>## The following object is masked from 'package:magrittr':
 ## 
 ##     extract</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">library</span>(ggplot2)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="kw">library</span>(lubridate)</a></code></pre></div>
+<pre><code>## 
+## Attaching package: 'lubridate'</code></pre>
+<pre><code>## The following object is masked from 'package:base':
+## 
+##     date</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">library</span>(tibble)</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="kw">library</span>(purrr)</a></code></pre></div>
+<pre><code>## Warning: package 'purrr' was built under R version 3.5.3</code></pre>
+<pre><code>## 
+## Attaching package: 'purrr'</code></pre>
+<pre><code>## The following object is masked from 'package:magrittr':
+## 
+##     set_names</code></pre>
+<pre><code>## The following object is masked from 'package:rvest':
+## 
+##     pluck</code></pre>
 </section>
 <section id="things-to-keep-in-mind.." class="slide level2">
 <h2>Things to keep in mind..</h2>
@@ -1957,9 +1974,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="robotstxt-1" class="slide level2">
 <h2>robotstxt</h2>
 <hr>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">paths_allowed</span>(</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2">  <span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;https://en.wikipedia.org/wiki/List_of_Governors_of_Reserve_Bank_of_India&quot;</span>)</a>
-<a class="sourceLine" id="cb13-3" data-line-number="3">)</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">paths_allowed</span>(</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">  <span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;https://en.wikipedia.org/wiki/List_of_Governors_of_Reserve_Bank_of_India&quot;</span>)</a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">)</a></code></pre></div>
 <pre><code>## 
  en.wikipedia.org</code></pre>
 <pre><code>## [1] TRUE</code></pre>
@@ -1967,8 +1984,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="read-html" class="slide level2">
 <h2>Read HTML</h2>
 <hr>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">rbi_guv &lt;-<span class="st"> </span>xml2<span class="op">::</span><span class="kw">read_html</span>(<span class="st">&quot;https://en.wikipedia.org/wiki/List_of_Governors_of_Reserve_Bank_of_India&quot;</span>)</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2">rbi_guv</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">rbi_guv &lt;-<span class="st"> </span>xml2<span class="op">::</span><span class="kw">read_html</span>(<span class="st">&quot;https://en.wikipedia.org/wiki/List_of_Governors_of_Reserve_Bank_of_India&quot;</span>)</a>
+<a class="sourceLine" id="cb23-2" data-line-number="2">rbi_guv</a></code></pre></div>
 <pre><code>## {xml_document}
 ## &lt;html class=&quot;client-nojs&quot; lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;
 ## [1] &lt;head&gt;\n&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset= ...
@@ -1977,15 +1994,15 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="list-of-governors" class="slide level2">
 <h2>List of Governors</h2>
 <hr>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">rbi_guv <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;table&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="st">  </span><span class="kw">html_table</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb18-4" data-line-number="4"><span class="st">  </span><span class="kw">extract2</span>(<span class="dv">2</span>) -&gt;<span class="st"> </span>profile</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">rbi_guv <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;table&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb25-3" data-line-number="3"><span class="st">  </span><span class="kw">html_table</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb25-4" data-line-number="4"><span class="st">  </span><span class="kw">extract2</span>(<span class="dv">2</span>) -&gt;<span class="st"> </span>profile</a></code></pre></div>
 </section>
 <section id="list-of-governors-1" class="slide level2">
 <h2>List of Governors</h2>
 <hr>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">profile</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">profile</a></code></pre></div>
 <pre><code>##    No.         Officeholder Portrait        Term start          Term end
 ## 1    1        Osborne Smith       NA      1 April 1935      30 June 1937
 ## 2    2   James Braid Taylor       NA       1 July 1937  17 February 1943
@@ -2094,10 +2111,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="sort" class="slide level2">
 <h2>Sort</h2>
 <hr>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">profile <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="st">  </span><span class="kw">separate</span>(<span class="st">`</span><span class="dt">Term in office</span><span class="st">`</span>, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;term&quot;</span>, <span class="st">&quot;days&quot;</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="st">  </span><span class="kw">select</span>(Officeholder, term) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb21-4" data-line-number="4"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(<span class="kw">as.numeric</span>(term)))</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">profile <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb28-2" data-line-number="2"><span class="st">  </span><span class="kw">separate</span>(<span class="st">`</span><span class="dt">Term in office</span><span class="st">`</span>, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;term&quot;</span>, <span class="st">&quot;days&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb28-3" data-line-number="3"><span class="st">  </span><span class="kw">select</span>(Officeholder, term) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb28-4" data-line-number="4"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(<span class="kw">as.numeric</span>(term)))</a></code></pre></div>
 <pre><code>##            Officeholder term
 ## 1      Benegal Rama Rau 2754
 ## 2        C. D. Deshmukh 2150
@@ -2128,8 +2145,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="backgrounds" class="slide level2">
 <h2>Backgrounds</h2>
 <hr>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">profile <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="st">  </span><span class="kw">count</span>(Background) </a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">profile <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb30-2" data-line-number="2"><span class="st">  </span><span class="kw">count</span>(Background) </a></code></pre></div>
 <pre><code>## # A tibble: 9 x 2
 ##   Background                                      n
 ##   &lt;chr&gt;                                       &lt;int&gt;
@@ -2146,23 +2163,23 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="backgrounds-1" class="slide level2">
 <h2>Backgrounds</h2>
 <hr>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">profile <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="st">  </span><span class="kw">pull</span>(Background) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb25-3" data-line-number="3"><span class="st">  </span><span class="kw">fct_collapse</span>(</a>
-<a class="sourceLine" id="cb25-4" data-line-number="4">    <span class="dt">Bureaucrats =</span> <span class="kw">c</span>(<span class="st">&quot;IAS officer&quot;</span>, <span class="st">&quot;ICS officer&quot;</span>,</a>
-<a class="sourceLine" id="cb25-5" data-line-number="5">    <span class="st">&quot;Indian Administrative Service (IAS) officer&quot;</span>,</a>
-<a class="sourceLine" id="cb25-6" data-line-number="6">    <span class="st">&quot;Indian Audit and Accounts Service officer&quot;</span>,</a>
-<a class="sourceLine" id="cb25-7" data-line-number="7">    <span class="st">&quot;Indian Civil Service (ICS) officer&quot;</span>),</a>
-<a class="sourceLine" id="cb25-8" data-line-number="8">    <span class="st">`</span><span class="dt">No Info</span><span class="st">`</span> =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;&quot;</span>),</a>
-<a class="sourceLine" id="cb25-9" data-line-number="9">    <span class="st">`</span><span class="dt">RBI Officer</span><span class="st">`</span> =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Career Reserve Bank of India officer&quot;</span>)</a>
-<a class="sourceLine" id="cb25-10" data-line-number="10">  ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb25-11" data-line-number="11"><span class="st">  </span><span class="kw">fct_count</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb25-12" data-line-number="12"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">background =</span> f, <span class="dt">count =</span> n) -&gt;<span class="st"> </span>backgrounds</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">profile <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb32-2" data-line-number="2"><span class="st">  </span><span class="kw">pull</span>(Background) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb32-3" data-line-number="3"><span class="st">  </span><span class="kw">fct_collapse</span>(</a>
+<a class="sourceLine" id="cb32-4" data-line-number="4">    <span class="dt">Bureaucrats =</span> <span class="kw">c</span>(<span class="st">&quot;IAS officer&quot;</span>, <span class="st">&quot;ICS officer&quot;</span>,</a>
+<a class="sourceLine" id="cb32-5" data-line-number="5">    <span class="st">&quot;Indian Administrative Service (IAS) officer&quot;</span>,</a>
+<a class="sourceLine" id="cb32-6" data-line-number="6">    <span class="st">&quot;Indian Audit and Accounts Service officer&quot;</span>,</a>
+<a class="sourceLine" id="cb32-7" data-line-number="7">    <span class="st">&quot;Indian Civil Service (ICS) officer&quot;</span>),</a>
+<a class="sourceLine" id="cb32-8" data-line-number="8">    <span class="st">`</span><span class="dt">No Info</span><span class="st">`</span> =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;&quot;</span>),</a>
+<a class="sourceLine" id="cb32-9" data-line-number="9">    <span class="st">`</span><span class="dt">RBI Officer</span><span class="st">`</span> =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Career Reserve Bank of India officer&quot;</span>)</a>
+<a class="sourceLine" id="cb32-10" data-line-number="10">  ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb32-11" data-line-number="11"><span class="st">  </span><span class="kw">fct_count</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb32-12" data-line-number="12"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">background =</span> f, <span class="dt">count =</span> n) -&gt;<span class="st"> </span>backgrounds</a></code></pre></div>
 </section>
 <section id="backgrounds-2" class="slide level2">
 <h2>Backgrounds</h2>
 <hr>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">backgrounds</a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">backgrounds</a></code></pre></div>
 <pre><code>## # A tibble: 5 x 2
 ##   background  count
 ##   &lt;fct&gt;       &lt;int&gt;
@@ -2175,11 +2192,11 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="backgrounds-3" class="slide level2">
 <h2>Backgrounds</h2>
 <hr>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">backgrounds <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb28-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb28-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_col</span>(<span class="kw">aes</span>(background, count), <span class="dt">fill =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb28-4" data-line-number="4"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Background&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Count&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb28-5" data-line-number="5"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Background of RBI Governors&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">backgrounds <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb35-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb35-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_col</span>(<span class="kw">aes</span>(background, count), <span class="dt">fill =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb35-4" data-line-number="4"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Background&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Count&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb35-5" data-line-number="5"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Background of RBI Governors&quot;</span>)</a></code></pre></div>
 <p><img src="data:image/png;base64,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uQToZngNmv8zC0CDXAJUXlQvPiS9vJ7NtRkACXIJUOeTitkBAtAgmwCtLzWHl6MBIGeyCVD7v1U9x38VA6BCRgECADUIEAC4QYAAwA0CBABuECAAcIMAAYAbBAgA3CBAAOAGAQIANwgQALhBgADADQIEAG4QIABwY7oA/X8n/EZOjIyIjomMiKMJAcoFGREdExkRAjSloNfIiZER0TGRESFAUwp6jZwYGREdExkRAjSloNfIiZER0TGRESFAUwp6jZwYGREdExkRAjSloNfIiZER0TGRESFAUwp6jZwYGREdExkRAjSloNfIiZER0TGRESFAUwp6jZwYGREdExkRAjSloNfIiZER0TGRESFAUwp6jZwYGREdExkRAjSloNfIiZER0TGRESFAUwp6jZwYGREdExkRAjSloNfIiZER0TGRESFAUwp6jZwYGREdExkRAjSloNfIiZER0TGRESFAUwp6jZwYGREdExkRAjSloNfIiZER0TGRESFAUwp6jZwYGREdExkRAjSloNfIiZER0TGRESFAUwp6jZwYGREdExkRAjSloNfIiZER0TGRESFAUwp6jZwYGREdExkRAjSloNfIiZER0TGRESFAUwp6jZwYGREdExkRAjSloNfIiZER0TGRESFAUwp6jZwYGREdExkRAjSloNfIiZER0TGZW+SfZUnciQDlgoyIjgkBshB3IkC5ICOiY0KALMSdCFAuyIjomBAgC3EnApQLMiI6JgTIQtyJAOWCjIiOCQGyEHciQLkgI6JjQoAsxJ0IUC7IiOiYECALcScClAsyIjomBMhC3IkA5YKMiI4JAbIQdyJAuSAjomNCgCzEnQhQLsiI6JgQIAtxJwKUCzIiOiYEyELciQDlgoyIjgkBshB3IkC5ICOiY0KALMSdCFAuyIjomBAgC3EnApQLMiI6JgTIQtyJAOWCjIiOCQGyEHciQLkgI6JjQoAsxJ0IUC7IiOiYECALcScClAsyIjomBMhC3IkA5YKMiI4JAbIQdyJAuSAjomNCgCzEnQhQLsiI6JgQIAtxJwKUCzIiOiYEyELciQDlgoyIjgkBshB3IkC5ICOiY0KALMSdCFAuyIjomBAgC3EnApQLMiI6JgTIQtyJAOWCjIiOCQGyEHciQLkgI6JjQoAsxJ0IUC7IiOiYECALcScClAsyIjomBMhC3IkA5YKMiI4JAbIQdyJAuSAjomNCgCzEnQhQLsiI6JgQIAtxJwKUCzIiOiYEyELciQDlgoyIjgkBshB3IkC5ICOiY0KALMSdCFAuyIjomBAgC3EnApQLMiI6JgTIQtyJAOWCjIiOCQGyEHciQLkgI6JjQoAsxJ0IUC7IiOiYECALcScClAsyIjomBMhC3IkA5YKMiI4JAbIQdyJAuSAjomNCgCzEnQhQLsiI6JgQIAtxJwKUCzIiOiYEyELciQDlgoyIjgkBshB3IkC5ICOiY0KALMSdCFAuyIjomBAgC3EnApQLMiI6JgTIQtyJAOWCjIiOCQGyEHciQLkgI6JjQoAsxJ0IUC7IiOiYECALcScClAsyIjomBMhC3IkA5YKMiI4JAbIQdyJAuSAjomNCgCzEnQhQLsiI6JgQIAtxp9kCBACnwzsl4ziRIntAO4uMiI4Je0AW4k4EKBdkRHRMCJCFuBMBygUZER0TAmQh7kSAckFGRMeEAFmIOxGgXJAR0TEhQBbiTgQoF2REdEwIkIW4EwHKBRkRHRMCZCHuRIByQUZEx4QAWYg7EaBckBHRMSFAFuJOBCgXZER0TAiQhbgTAcoFGREdEwJkIe5EgHJBRkTHhABZiDsRoFyQEdExIUAW4k4EKBdkRHRMCJCFuBMBygUZER0TAmQh7kSAckFGRMeEAFmIOxGgXJAR0TEhQBbiTgQoF2REdEwIkIW4EwHKBRkRHRMCZCHuRIByQUZEx4QAWYg7EaBckBHRMSFAFuJOBCgXZER0TAiQhbgTAcoFGREdEwJkIe5EgHJBRkTHhABZiDsRoFyQEdExIUAW4k4EKBdkRHRMCJCFuBMBygUZER0TAmQh7kSAckFGRMeEAFmIOxGgXJAR0TEhQBbiTgQoF2REdEwIkIW4EwHKBRkRHRMCZCHuRIByQUZEx4QAWYg7EaBckBHRMSFAFuJOBCgXZER0TAiQhbgTAcoFGREdEwJkIe5EgHJBRkTHhABZiDsRoFyQEdExIUAW4k4EKBdkRHRMCJCFuBMBygUZER0TAmQh7kSAckFGRMeEAFmIOxGgXJAR0TEhQBbiTgQoF2REdEwIkIW4EwHKBRkRHRMCZCHuRIByQUZEx4QAWYg7EaBckBHRMSFAFuJOBCgXZER0TAiQhbgTAcoFGREdEwJkIe5EgHJBRkTHhABZiDsRoFyQEdExIUAW4k4EKBdkRHRMCJCFuBMBygUZER0TAmQh7kSAckFGRMeEAFmIOxGgXJAR0TEhQBbiTgQoF2REdEwIkIW4EwHKBRkRHRMCZCHuRIByQUZEx4QAWYg7EaBckBHRMSFAFuJOBCgXZER0TAiQhbgTAcoFGREdEwJkIe5EgHJBRkTHhABZiDsRoFyQEdExIUAW4k4EKBdkRHRMCJCFuBMBygUZER0TAmQh7kSAckFGRMeEAFmIOxGgXJAR0TEhQBbiTgQoF2REdEwIkIW4EwHKBRkRHRMCZCHuRIByQUZEx4QAWYg7EaBckBHRMSFAFuJOBCgXZER0TAiQhbgTAcoFGREdEwJkIe5EgHJBRkTHhABZiDsRoFyQEdExIUAW4k4EKBdkRHRMCJCFuBMBygUZER0TAmQh7kSAckFGRMeEAFmIOxGgXJAR0TEhQBbiTgQoF2REdEwIkIW4EwHKBRkRHRMCZCHuRIByQUZEx4QAWYg7EaBckBHRMSFAFuJOBCgXZER0TAiQhbgTAcoFGREdEwJkIe5EgHJBRkTHhABZiDsRoFyQEdExIUAW4k4EKBdkRHRMCJCFuBMBygUZER0TAmQh7kSAckFGRMeEAFmIOxGgXJAR0TEhQBbiTgQoF2REdEwIkIW4EwHKBRkRHRMCZCHuRIByQUZEx4QAWYg7EaBckBHRMSFAFuJOiQL07RtP1l89fOvacvnCRwQoNTIiOiYEyELcKVGAbiyfbEq0LPj+bwlQYmREdEwIkIW4U5IAPbyxbAJ0Y/nER0cPri+f+JoApUVGRMeEAFmIO6UI0FdvLpsA3b9W7vt8+8bltwlQWmREdEwIkIW4U4IAfbFcvvhlHaAv2n9fIkBpkRHRMSFAFuJOKQL0+C+PbtfhubH8Rflv8z0BSoaMiI4JAbIQd0oQoCA4D6/Xh173rzUngb5XM3LCAFDjnZJxnEiRAAHsKt4pGceJFNMFqH8hfp6d1KFdPK+REyMjomPCIZiFuNNkAepfh59nEQ0Jeo2cGBkRHRMCZCHuRIByQUZEx4QAWYg7pQ0QV8GmQ0ZEx4QAWYg7JQ5Qc/8P9wElR0ZEx4QAWYg7JQ4Qd0JPhoyIjgkBshB3Shygh9eXj/NesEmQEdExIUAW4k6JA3T0gHfDT4SMiI4JAbIQd0odoKMHb63680J//4cAnRoZER0TAmQh7pQoQMczzyIaEvQaOTEyIjomBMhC3IkA5YKMiI4JAbIQdyJAuSAjomNCgCzEnQhQLsiI6JgQIAtxJwKUCzIiOiYEyELciQDlgoyIjgkBshB3IkC5ICOiY0KALMSdCFAuyIjomBAgC3EnApQLMiI6JgTIQtyJAOWCjIiOCQGyEHciQLkgI6JjQoAsxJ0IUC7IiOiYECALcScClAsyIjomBMhC3IkA5YKMiI4JAbIQdyJAuSAjomNCgCzEnQhQLsiI6JgQIAtxJwKUCzIiOiYEyELciQDlgoyIjgkBshB3IkC5ICOiY0KALMSdCFAuyIjomBAgC3EnApQLMiI6JgTIQtyJAOWCjIiOCQGyEHciQLkgI6JjQoAsxJ0IUC7IiOiYECALcScClAsyIjomBMhC3IkA5YKMiI4JAbIQdyJAuSAjomNCgCzEnQhQLsiI6JgQIAtxJwKUCzIiOiYEyELciQDlgoyIjgkBshB3IkC5ICOiY0KALMSdCFAuyIjomBAgC3EnApQLMiI6JgTIQtyJAOWCjIiOCQGyEHciQLkgI6JjQoAsxJ0IUC7IiOiYECALcScClAsyIjomBMhC3IkA5YKMiI4JAbIQdyJAuSAjomNCgCzEnQhQLsiI6JgQIAtxJwKUCzIiOiYEyELciQDlgoyIjgkBshB3IkC5ICOiY0KALMSdCFAuyIjomBAgC3EnApQLMiI6JgTIQtyJAOWCjIiOCQGyEHciQLkgI6JjQoAsxJ0IUC7IiOiYECALcScClAsyIjomBMhC3IkA5YKMiI4JAbIQdyJAuSAjomNCgCzEnQhQLsiI6JgQIAtxJwKUCzIiOiYEyELciQDlgoyIjgkBshB3IkC5ICOiY0KALMSdCFAuyIjomBAgC3EnApQLMiI6JgTIQtyJAOWCjIiOCQGyEHciQLkgI6JjQoAsxJ0IUC7IiOiYECALcScClAsyIjomBMhC3IkA5YKMiI4JAbIQdyJAuSAjomNCgCzEnQhQLsiI6JgQIAtxJwKUCzIiOiYEyELciQDlgoyIjgkBshB3IkC5ICOiY0KALMSdCFAuyIjomBAgC3EnApQLMiI6JgTIQtyJAOWCjIiOCQGyEHciQLkgI6JjQoAsxJ0IUC7IiOiYECALcScClAsyIjomBMhC3MkUoMNX/9Xn7Td3nvnnnw8+igBNioyIjgkBshB3MgXom6e+8+vhbwjQbMiI6JgQIAtxp5MH6M4+AfJARkTHhABZiDsdF6Bvnlps8AiHYA7IiOiYECALcafjAnR0azNAV0f0hwCdFhkRHRMCZCHudGyADv/rs88+s7/32LMNz30wpj8E6LTIiOiYECALcadjA1Qw8rwzAUqJjIiOCQGyEHcyBahzGZ4A+SAjomNCgCzEnUwBSsE8i2hI0GvkxMiI6JgQIAtxpxME6PcNnxEgB2REdEwIkIW4kzFAd18JroJxH5AHMiI6JgTIQtzJFqDu3UAEyAMZER0TAmQh7mQL0M3F4uxz7zf8DTciOiAjomNCgCzEnUwBOnx5cW5EcwhQSmREdEwIkIW4kylA3zy19zoBckZGRMeEAFmIOxkDxI2I7siI6JgQIAtxJ1OADl9mD8gdGREdEwJkIe5kCtDRzcWl0wYIAE6Hd0rGcSLFLQFa7QI9f8qZN8/fiKHCeo2cGBkRHRP2gCzEnUwBOnz1mcVi/Yb4UW8Mm2cRDQl6jZwYGREdEwJkIe5kClDvU8m4EdEDGREdEwJkIe5EgHJBRkTHhABZiDuZApSCeRbRkKDXyImREdExIUAW4k4EKBdkRHRMCJCFuBMBygUZER0TAmQh7mQL0L3fh/B5QB7IiOiYECALcSdTgDgJvQPIiOiYECALcScClAsyIjomBMhC3MkUoMP/1XwU0E+uLPb+gs8D8kBGRMeEAFmIO5kCFHJnf9R/jEqATouMiI4JAbIQdzpxgMa+MXWeRTQk6DVyYmREdEwIkIW408kDNHIXaJ5FNCToNXJiZER0TAiQhbjTyQM08tPJ5llEQ4JeIydGRkTHhABZiDudPEB39gmQBzIiOiYEyELc6cQBOjxYcAjmgYyIjgkBshB3MgXo8NXmo4CefWZ/wUloF2REdEwIkIW4kylA3RsRuQzvgoyIjgkBshB3OnGAzvxwVH8I0GmREdExIUAW4k6mAKVgnkU0JOg1cmJkRNhuLciIECCvkRMjI0KALMiIECCvkRMjI0KALMiIpArQvffOLxZ753846sOACNDpkREhQBZkRBIF6GZ7Fnrkf1E4xZplQWa7lREhQBZkRNIEqOjPmceefea7ows0xZplQWa7lREhQBZkRJIE6M7+4pEPy6/uvrwY9//ET7FmWZDZbmVECJAFGZEkAQrefnH48uIcAXJARoQAWZARSfJWjJeDvR4+jsMHGRECZEFGJM2d0MEb4Pk4Dh9kRAiQBRkRAuQ1cmJkRAiQBRmRNIdgi6vtN7f4OA4XZEQIkAUZEU5Ce42cGBkRAmRBRiTVZfizH5RffXqFy/A+yIgQIAsyIuluRFycP39+/K3QU6xZFmS2WxkRAmRBRiTRWzE+3q/fibH3/Kj+EKDTIiNCgCzIiKR6M+rhJ8+s9oAee23cx5ERoFMjI0KALMiI8HEcXiMnRkaEAFmQESFAXiMnRkaEAFmQEUkRoHv1hwDdeXT0ERgBOi0yIgTIgozI6QN090pz4evm+HPQBOi0yIgQIAsyIqcOUHH9q7718F0+kMwPGRECZEFG5LQBurVqTn0T4tHR4Tur765uPIYAzYCMCAGyICNyygAV/yVYuM+zOgob9V5UAnRaZEQIkAUZkVMG6Gbvf0I9fJn/mtkHGRECZEFG5HQBKnrTPeS6NfL/Zp5izbIgs93KiBAgCzIipwvQ6gis997TO/vjjsGmWLMsyGy3MiIEyIKMyKkD1MvN5k8I0CzIiBAgCzIiBMhr5MTIiBAgCzIipz4HtHkIxjkgD2RECJAFGZFTXgU76F/0urngExFdkBEhQBZkRE4ZoP5FLy7DeyEjQoAsyIgkvhHxgBsRnZARIUAWZERSvBXjYrMPdPcVPpLVCxkRAmRBRuTUb0YtPw767E/ff//9964UX446A0SATo2MCAGyICNy+o/j+F3zcdDlR0L/aFx/CNBpkREhQBZkRBJ8IFl54FXl5+JnI/tDgE6LjAgBsiAjkuYjWT/91avPPvf+6PoQoNMjI0KALMiI8JnQXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQESFAXiMnRkaEAFmQEZk5QN++sSz5/m8JUFpkRAiQBRmRmQN0/xoBmgYZEQJkQUZk5gDdXj45/Isp1iwLMtutjAgBsiAjMnOAbixfIkCTICNCgCzIiMwboIfXL79NgCZBRoQAWZARmTdA377xxP94c7n88UcEKDUyIgTIgozIvAFqzkEvf9H85Hs1p5wwwFi8t8BRyIgMmmzltAG6vVy++PXRH95atkdiBAic8d4CRyEjMmiyldMG6Iv6Itjmuegp9q0tyBy5yIhwCGZBRsTnTujbyye+JkBJkREhQBZkRHwCdP9a/07EKdYsCzLbrYwIAbIgI+IVIPaAEiMjQoAsyIjMGqCH1+vLX5s3RE+xZlmQ2W5lRAiQBRmRefeAblThaUNEgJIhI0KALMiIzH4f0ItfHz14c+McNAE6LTIiBMiCjMjM54C+qN8Mv3Er9BRrlgWZ7VZGhABZkBGZ+yT0g58tl5df7O//EKBTIyNCgCzIiPCJiF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQNps/cUAABfGSURBVF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBEhQF4jJ0ZGhABZkBHZlQABOOG9BY5CRmTQZCvsAe0sMiLsAVmQEdmVPaAp1iwLMtutjAgBsiAjQoC8Rk6MjAgBsiAjQoC8Rk6MjAgBsiAjQoC8Rk6MjAgBsiAjQoC8Rk6MjAgBsiAjQoC8Rk6MjAgBsiAjQoC8Rk6MjAgBsiAjQoC8Rk6MjAgBsiAjQoC8Rk6MjAgBsiAjQoC8Rk6MjAgBsiAjQoC8Rk6MjAgBsiAjQoC8Rk6MjAgBsiAjQoC8Rk6MjAgBsiAjQoC8Rk6MjAgBsiAjQoC8Rk6MjAgBsiAjQoC8Rk6MjAgBsiAjQoC8Rk6MjAgBsiAjQoC8Rk6MjAgBsiAjQoBmHc57aY9j1llEgCzIiBCgWYfzXtrjmHUWESALMiIEaNbhvJf2OGadRQTIgowIAZp1OO+lPY5ZZxEBsiAjQoBmHc57aY9j1llEgCzIiBCgWYfzXtrjmHUWESALMiIEaNbhvJf2OGadRQTIgowIAZp1OO+lPY5ZZxEBsiAjQoBmHc57aY9j1llEgCzIiBCgWYfzXtrjmHUWESALMiIEaNbhvJf2OGadRQTIgowIAZp1OO+lPY5ZZxEBsiAjQoBmHc57aY9j1llEgCzIiBCgWYfzXtrjmHUWESALMiIEaNbhvJf2OGadRQTIgowIAZp1OO+lPY5ZZxEBsiAjQoBmHc57aY9j1llEgCzIiBCgWYfzXtrjmHUWESALMiIEaNbhvJf2OGadRQTIgowIAZp1OO+lPY5ZZxEBsiAjQoBmHc57aY9j1llEgCzIiBCgWYfzXtrjmHUWESALMiIEaNbhvJf2OGadRQTIgowIAZp1OO+lPY5ZZxEBsiAjQoBmHc57aY9j1llEgCzIiBCgWYfzXtrjmHUWESALMiIEaNbhvJf2OGadRQTIgowIAZp1OO+lPY5ZZxEBsiAjQoBmHc57aY9j1llEgCzIiBCgWYfzXtrjmHUWESALMiIEaNbhvJf2OGadRQTIgowIAZp1OO+lPY5ZZxEBsiAjQoBmHc57aY9j1llEgCzIiBCgWYfzXtrjmHUWESALMiIEaNbhvJf2OGadRQTIgowIAZp1OO+lPY5ZZxEBsiAjQoBmHc57aY9j1llEgCzIiBCgWYfzXtrjmHUWESALMiIEaNbhvJf2OGadRQTIgowIAZp1OO+lPY5ZZxEBsiAjkkeAvGfSKGREdExYuXaP+JZPgMYjI6Jjwsq1e8S3fAI0HhkRHRNWrt0jvuUToPHIiOiYsHLtHvEtnwCNR0ZEx4SVa/eIb/kEaDwyIjomrFy7R3zLJ0DjkRHRMWHl2j3iWz4BGo+MiI4JK9fuEd/yCdB4ZER0TFi5do/4lk+AxiMjomPCyrV7xLd8AjQeGREdE1au3SO+5ROg8ciI6Jiwcu0e8S2fAI1HRkTHhJVr94hv+QRoPDIiOiasXLtHfMsnQOOREdExYeXaPeJbPgEaj4yIjgkr1+4R3/IJ0HhkRHRMWLl2j/iWT4DGIyOiY8LKtXvEt3wCNB4ZER0TVq7dI77lE6DxyIjomLBy7R7xLZ8AjUdGRMeElWv3iG/5BGg8MiI6Jqxcu0d8yydA45ER0TFh5do94ls+ARqPjIiOCSvX7hHf8gnQeGREdExYuXaP+JZPgMYjI6Jjwsq1e8S3fAI0HhkRHRNWrt0jvuUToPHIiOiYsHLtHvEtnwCNR0ZEx4SVa/eIb/kEaDwyIjomrFy7R3zLJ0DjkRHRMWHl2j3iWz4BGo+MiI4JK9fuEd/yCdB4ZER0TFi5do/4lp88QA/furZcvvARAcoJGRNWrt0jvuWnDtC3bywLvv9bApQRMiasXLtHfMtPHaAbyyc+OnpwffnE1wQoH2RMWLl2j/iWnzhA96+V+z7fvnH5bQKUDzImrFy7R3zLTxygL5ZP1v++RIDyQcaElWv3iG/5iQN0Y/mL8t/bdYgIUBbImLBy7R7xLT9tgB5erw+97l9rTgJ9ryb+RO+ZNAoZER0TVq7dI77l9/AKEABAwgD1L8THd8Smw2/kxMiI6JjIiDiaTBag/nV4P0GvkRMjI6JjIiNCgKYU9Bo5MTIiOiYyIjIBGn0VbEpBr5ETIyOiYyIjohOg5v6fk94HNKWg18iJkRHRMZER0QnQ2DuhpxT0GjkxMiI6JjIiOgF6eH35+Jj3gk0p6DVyYmREdExkRHQCdPRg3LvhpxT0GjkxMiI6JjIiQgE6evDWqj8v9Pd/CNCpkRHRMZERUQrQNvwEvUZOjIyIjomMCAGaUtBr5MTIiOiYyIgQoCkFvUZOjIyIjomMCAGaUtBr5MTIiOiYyIgQoCkFvUZOjIyIjomMCAGaUtBr5MTIiOiYyIgQoCkFvUZOjIyIjomMCAGaUtBr5MTIiOiYyIgQoCkFvUZOjIyIjomMCAGaUtBr5MTIiOiYyIgQoCkFvUZOjIyIjomMCAGaUtBr5MTIiOiYyIgQoCkFvUZOjIyIjomMCAGaUtBr5MTIiOiYyIgQoCkFvUZOjIyIjomMCAGaUtBr5MTIiOiYyIgQoCkFvUZOjIyIjomMCAGaUtBr5MTIiOiYyIj8MQTIC5n/lV5GRMdERmR3TAjQziIjomMiI7I7JgRoZ5ER0TGREdkdEwK0s8iI6JjIiOyOCQHaWWREdExkRHbHhADtLDIiOiYyIrtjQoB2FhkRHRMZkd0xIUA7i4yIjomMyO6Y6AUIALKBAAGAGwQIANwgQADgBgECADcIEAC4QYAAwA0CBABuZBagb99YvtR++f3fDj7m/rXNX/yfa8v2ibvB/dUrKrj844+ij/til173avbX/ODFr4sf9Cz6s/7/vbX6/eUXWsN6MZT/uIs1r73gF2kmueH08O9eTDPlIayr0OmZUCO/AF1+u/nSHqDbxXLaoQ35qLP6R9d+9+00ZB2g5bKcyT2L7qx/eL353QtlrZrFUP3jLjZHgG4vn0wz5SGsq9DpmVAjvwA18+IkAfpi+eTX076wE3P/2hPlS/rDb5ZbPCrct9OQ9Tz/6lq5HHoWnVn/7ZvLy3/1j6vf/d21ZfWoejHsyNJoXvuUTBwg2yp0eghQw7dvXP7TOvcnC9AObcUV7eq/2k+I/f3aqZcezPNqLvcsOrP+xrLZwB+8Wa3AtcuOKMkE6LhV6PQQoIbVFvA/65W82RgevFXs4wdHwdVWcGP5iy//tPpFuctfzsKNx/qxXv1vVNvjVz8rTq381ddHnddeb633r5VHng+KcyrVEf/t5UtfXls+/vasLzoIUPVlzyIMUPfr1cuvF0OzNOoMffXmyvrn1cPm1dsIUPeltGtKuDT6v7i/2sv7j+VJrR/88qhZWA+KJflnP2+OQSfbdnsz/0aT9yfD2RfM0946tn50qL5+ZvvgVqMVS0h+AfptPc/qjeF2dSB8ef0noAnQnzWnKtoAbT7Wj/6fr9/UR/OFW/Daq3V6tQFXp1jWr//28s9X303/N7xDEKDby2P2gDr7OTeaUz/9AH1RWZcPnVmvH6DwpYRrSrg0er/4y/K7l26UP3q7XVjNkpwrQNXM7waonn3hPO2tY0GAAvX2mesHNxprsYRkGKB6i23+BC9f+Mejh79pz02vA1ScaVjFvHhssxux8Vg/mrVn9XKKL24vLxd/Qr8sX1v42ouX/u0btfHyxdXfo78tN4Xbs9fnKAjQwy+754BqiyBA3cOC2+WvO4dgzcb6b1ampdHcer0AhS+ls6aES6P/ixe/Xr3e5eWfHz24XsyPwmklvprO0VflPussh2D1zO8GqJp9vXnaWcfWjw7Vm2d2HlxqdMSSkWGA6tW82hjq3aHV/GyXdBOgJ9Z7ms0qv/FYP9aXMB4v9o/r9aH5W7Z+7auXvvphuLtc2dz2yGh4Fax8iT2LIEDfvhG+vuoXmwGqlW5UqZ1XL7iIVNVx86WUa0p3aWz8YjWZas9h9U311yJ45TNdBQtXoTpA1YvozNPeOrZ+dKjePLPz4FKju0RTkWOAqsVfftn+nb29/oPZBKg+71ntYr50NPhYP9Zrz+rvZ8Uf/u9/enNZrRzr1/5FsYdfrwv1ClD+5XORCO4D+nnnPqDaohOg8FLAlgCFu0mz63UD1H0p4ZoSLI3+L146arfLNkCrxzz+982UZgpQOfO7ASpnX3eeFgTrWPvozs5qOOPbBzd7QGuxZGQZoHKZl1+2Vd64PtM7xn3paPCxfrT7z/VR4oM365Vp469Tc15ifVtNdWLLJUDFnFvt0Td/C3sWJ90DCh80u173ECx8Kd01JVgaQ7/oB6haYo//53La8xyCVTN/MEDhPN22jvX22eq5Ej749vpMUS2WjCwDVM6lOkD1Gm8K0OZj/Viv/rebk4WXf/yXfz+we7z88+qoOzj+KbdQh+PIZs590dz6tmFxsnNA4ZKYXa8foPClhGtKZ1Pt/qI6M9cL0FFxzWxZnB+a6zJ8uEPWBKi+UBPO023rWGd7aF5x58H1DwOxZOQZoGL2iewBtSfWn6z/ZA0cn1cS3X0K1wCtXmH1RdcifhXsmD2g2fUS7AENB2i1GP/bz6r91pkC1H+d6wAF83TrOjZ01qr74FajFUtGpgFazbP/ctw5oH6Adu0cULj2NOtAdb2rG6DmKlh/n8IzQKtXVA4fCdDGfUDHngOaWa8boNg5oM2zJfUvtgXoqDxOLU9luQaoM0+3rmO9c0BPbj441KjEkpFpgFaz5AfXjrkK1g/Qrl0FC/efm+V9e9m/pay+JlQdwTzxdfME5wA1B2HbD8EKi8fr+98G74QOr4LVpvPq9S7Dd19K52LXxvWi5hdDAWrmQX0ufb5DsOq1PbweBKgzT7vrWPjoUL0XoNvrHbmOWDJyDVBxE8b6jo0/vDVwH9BGgAYe60e7GL+8Vu0KPFnerzEcoOpC/Oqv0RMfHdV3pDgHaPWKqmvQoUU3QKuHtO8Fe7w+dTR8H9BXpdHceoP3AX0V3O5Trym9O2bCXwwFqJgzK40H14OTwRMLVDN/1YryfqQwQOE87a5j4aND9c4h2PrB1XXCtVgysg3QaqYdcyf0RoB27E7ozl0ot+sv/3bzb27VzvImsfo5xWcjOAeovv2lZ9F7N/xbze/qd8NvBuiovge3dJlZL3w3fLWDufFS6huegzWp+4vBQ7Bmuo9Xfx+nS1Bv5leXvL7/38MA9eZpsI6Fjw7Vm2d2HlxphGLJyDZAq5l2zHvBNgO0W+8Fq9edH/+yXEHrd+NsXM+oX3p12Fi9sae4Q9U9QNV56J7FMZ8HNBCggfeCzaXXD9D294KFt4F23wt2NHQOqNSo3nFVvEts+gDVq1AR/Mc/ut0JUDhPO+tY+Ojue8HqZ3YeXGmEYqnILEAAoAQBAgA3CBAAuEGAAMANAgQAbhAgAHCDAAGAGwQIANwgQADgBgECADcIEAC4QYAAwA0CBABuECAAcIMAwRYOFg3nf/i55Ql39heXpn1JNxff+fW0I8DMECDYwjpAi8Xe64YnECA4MQQIthAGyLThEyA4MQQItnCweKQ68jr831cWlrQQIDgxBAi20Abo6Oibpxbnjn8CAYITQ4BgC0GADl8mQDAJBAi20N0Dulp99ekr+53LYneL7x99rfy6CdCtxeJs2YlPnl4s9i5+XmVjFbGrn6yO5c683jxt78KHzdTrcFWPLL4/fO+7q4e2w3SmBEIQINjC+hzQp1fqLw/faU5KV4VZFaPiYvFNHaBb+9VvV8Wpzl+/0gTo2eZ0dvO0vR8VzxsI0L+4Eg7TmxIIQYBgC+FVsAtVilbhuLj66u4qD+fq7x/5sMxSUZAqQHfq/hTPXz24bFYdoOJq/t3Xyqed/WC1N7WaTLFjNRCgVZo+P7r7cn3uuzclEIIAwRbCAJ0tD5bac9GrL4pdovqfoi1FGMoAtf1pzwjdXAfoavjs9nlDAbpa/754YH9KIAQBgi107gMq70S81dyQWJfjVpOU6hdFKNr+rE8Yr3pSB+g7zW+a+xqrtAwEqD74Oyi/P+hNCYQgQLCF9UnoT19ZrE9I17+rTuV0erDKyYU2EcGFs4MmQJ2sFFS7VAMBOhd8vzElEIIAwRa6l+HbN2Pc+/T9V7+7qHdNOlm6s1/uLFUxWVflqL0Kdq6ZWPO06suhq2DB98FNSFwFk4MAwRbCvNysu/Lxd8P3ZgwE6Ox+3YhogNqbig5sAepOCYQgQLCFMC+3ygBVl8PPP/vTzw62BOiRz2/WF8g29lvYA4IBCBBsYXMPqL4Kf7RxdriKS3lKubnYNXQO6Fz4fUH/HNDBUIA4B6QMAYItdO+E3ns92HWpL0e1V8FW6bka3AdUVmLgKlh7arm5r7rasWp3cbZclr8ZdI4AiUGAYAvBVbAr5VWwdYDqG3La6+UH6/uAyl8WPRm4D6gOUP8+oHa6txaDAVpN6Vw4JRCCAMEWOvcBlfss9SFY0aPmxqDNO6HbS2Y3N+6EXp/Kae+EvlR/X0zmvf3hABW/v/Ahd0JLQoBgC51PRKzetHWleWfGu/VR1NB7wcosrTp1WE/g7L/rB6j3XrD2vV6PvDscoKN3OlMCIQgQbCH8TOjPqh+V71Hfu/DB+rTN0Lvhi2eWX/TfDb/+SI/q3fAX68lW0z3z/PBVsIJPeTe8KAQIpqZ3tR5gDQGCaehdowcYggDBNNwMrtFP/EGJkC8ECKZh1Z2951f7Px/vc+IGtkKAYCJu7Xc+TAhgAAIEU3HvneKtq4++xhlo2AoBAgA3CBAAuEGAAMANAgQAbhAgAHCDAAGAGwQIANwgQADgBgECADcIEAC4QYAAwA0CBABuECAAcIMAAYAb/wQHk5+KB+oauwAAAABJRU5ErkJggg==" width="576" style="display: block; margin: auto;" /></p>
 </section>
 <section id="top-50-websites" class="slide level2">
@@ -2189,9 +2206,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="robotstxt-2" class="slide level2">
 <h2>robotstxt</h2>
 <hr>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw">paths_allowed</span>(</a>
-<a class="sourceLine" id="cb29-2" data-line-number="2">  <span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;https://www.similarweb.com/top-websites&quot;</span>)</a>
-<a class="sourceLine" id="cb29-3" data-line-number="3">)</a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw">paths_allowed</span>(</a>
+<a class="sourceLine" id="cb36-2" data-line-number="2">  <span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;https://www.similarweb.com/top-websites&quot;</span>)</a>
+<a class="sourceLine" id="cb36-3" data-line-number="3">)</a></code></pre></div>
 <pre><code>## 
  www.similarweb.com                      No encoding supplied: defaulting to UTF-8.</code></pre>
 <pre><code>## [1] TRUE</code></pre>
@@ -2199,8 +2216,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="read-web-page" class="slide level2">
 <h2>Read Web Page</h2>
 <hr>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">top_sites &lt;-<span class="st"> </span><span class="kw">read_html</span>(<span class="st">&quot;https://www.similarweb.com/top-websites&quot;</span>)</a>
-<a class="sourceLine" id="cb32-2" data-line-number="2">top_sites</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">top_sites &lt;-<span class="st"> </span><span class="kw">read_html</span>(<span class="st">&quot;https://www.similarweb.com/top-websites&quot;</span>)</a>
+<a class="sourceLine" id="cb39-2" data-line-number="2">top_sites</a></code></pre></div>
 <pre><code>## {xml_document}
 ## &lt;html lang=&quot;en&quot;&gt;
 ## [1] &lt;head&gt;\n&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset= ...
@@ -2209,13 +2226,13 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="website-ranking" class="slide level2">
 <h2>Website Ranking</h2>
 <hr>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">top_sites <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="st">  </span><span class="kw">html_node</span>(<span class="st">&quot;table&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb34-3" data-line-number="3"><span class="st">  </span><span class="kw">html_table</span>() -&gt;<span class="st"> </span>ranking</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">top_sites <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb41-2" data-line-number="2"><span class="st">  </span><span class="kw">html_node</span>(<span class="st">&quot;table&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb41-3" data-line-number="3"><span class="st">  </span><span class="kw">html_table</span>() -&gt;<span class="st"> </span>ranking</a></code></pre></div>
 </section>
 <section id="website-ranking-1" class="slide level2">
 <h2>Website Ranking</h2>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">ranking</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">ranking</a></code></pre></div>
 <pre><code>##    Rank \n                                            \n                                                Traffic rank of site, as compared to all other sites in the world (#1 being the site with the most traffic in the world)
 ## 1                                                                                                                                                                                                                              1
 ## 2                                                                                                                                                                                                                              2
@@ -2577,10 +2594,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="rename-columns" class="slide level2">
 <h2>Rename Columns</h2>
 <hr>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">col_names &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;ranking&quot;</span>, <span class="st">&quot;domain&quot;</span>, <span class="st">&quot;category&quot;</span>, <span class="st">&quot;change&quot;</span>, <span class="st">&quot;avg_time_on_site&quot;</span>,</a>
-<a class="sourceLine" id="cb37-2" data-line-number="2">               <span class="st">&quot;avg_pages_per_visit&quot;</span>, <span class="st">&quot;bounce_rate&quot;</span>)</a>
-<a class="sourceLine" id="cb37-3" data-line-number="3"><span class="kw">colnames</span>(ranking) &lt;-<span class="st"> </span>col_names</a>
-<a class="sourceLine" id="cb37-4" data-line-number="4"><span class="kw">head</span>(ranking)</a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">col_names &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;ranking&quot;</span>, <span class="st">&quot;domain&quot;</span>, <span class="st">&quot;category&quot;</span>, <span class="st">&quot;change&quot;</span>, <span class="st">&quot;avg_time_on_site&quot;</span>,</a>
+<a class="sourceLine" id="cb44-2" data-line-number="2">               <span class="st">&quot;avg_pages_per_visit&quot;</span>, <span class="st">&quot;bounce_rate&quot;</span>)</a>
+<a class="sourceLine" id="cb44-3" data-line-number="3"><span class="kw">colnames</span>(ranking) &lt;-<span class="st"> </span>col_names</a>
+<a class="sourceLine" id="cb44-4" data-line-number="4"><span class="kw">head</span>(ranking)</a></code></pre></div>
 <pre><code>##   ranking        domain                              category change
 ## 1       1    google.com  Internet and Telecom &gt; Search Engine      =
 ## 2       2   youtube.com Arts and Entertainment &gt; TV and Video      =
@@ -2599,8 +2616,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="top-categories" class="slide level2">
 <h2>Top Categories</h2>
 <hr>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">ranking <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb39-2" data-line-number="2"><span class="st">  </span><span class="kw">count</span>(category)</a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">ranking <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb46-2" data-line-number="2"><span class="st">  </span><span class="kw">count</span>(category)</a></code></pre></div>
 <pre><code>## # A tibble: 15 x 2
 ##    category                                       n
 ##    &lt;chr&gt;                                      &lt;int&gt;
@@ -2627,9 +2644,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="robotstxt-3" class="slide level2">
 <h2>robotstxt</h2>
 <hr>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw">paths_allowed</span>(</a>
-<a class="sourceLine" id="cb41-2" data-line-number="2">  <span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;https://www.amazon.in/mobile-phones/b?ie=UTF8&amp;node=1389401031&amp;ref_=nav_shopall_sbc_mobcomp_all_mobiles&quot;</span>)</a>
-<a class="sourceLine" id="cb41-3" data-line-number="3">)</a></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="kw">paths_allowed</span>(</a>
+<a class="sourceLine" id="cb48-2" data-line-number="2">  <span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;https://www.amazon.in/mobile-phones/b?ie=UTF8&amp;node=1389401031&amp;ref_=nav_shopall_sbc_mobcomp_all_mobiles&quot;</span>)</a>
+<a class="sourceLine" id="cb48-3" data-line-number="3">)</a></code></pre></div>
 <pre><code>## 
  www.amazon.in                      No encoding supplied: defaulting to UTF-8.</code></pre>
 <pre><code>## [1] TRUE</code></pre>
@@ -2637,8 +2654,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="read-web-page-1" class="slide level2">
 <h2>Read Web Page</h2>
 <hr>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">top_phones &lt;-<span class="st"> </span><span class="kw">read_html</span>(<span class="st">&quot;https://www.amazon.in/mobile-phones/b?ie=UTF8&amp;node=1389401031&amp;ref_=nav_shopall_sbc_mobcomp_all_mobiles&quot;</span>)</a>
-<a class="sourceLine" id="cb44-2" data-line-number="2">top_phones</a></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">top_phones &lt;-<span class="st"> </span><span class="kw">read_html</span>(<span class="st">&quot;https://www.amazon.in/mobile-phones/b?ie=UTF8&amp;node=1389401031&amp;ref_=nav_shopall_sbc_mobcomp_all_mobiles&quot;</span>)</a>
+<a class="sourceLine" id="cb51-2" data-line-number="2">top_phones</a></code></pre></div>
 <pre><code>## {xml_document}
 ## &lt;html class=&quot;a-no-js&quot; data-19ax5a9jf=&quot;dingo&quot;&gt;
 ## [1] &lt;head&gt;\n&lt;script&gt;var aPageStart = (new Date()).getTime();&lt;/script&gt;&lt;me ...
@@ -2647,60 +2664,114 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="brand-name" class="slide level2">
 <h2>Brand Name</h2>
 <hr>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">top_phones <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb46-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.crwTitle a&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb46-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>()</a></code></pre></div>
-<pre><code>##  [1] &quot;Samsung Galaxy M30 (Gradation Blue, 4+64 GB)&quot;      
-##  [2] &quot;Samsung Galaxy M30 (Gradation Black, 4+64 GB)&quot;     
-##  [3] &quot;Redmi 6A (Black, 2GB RAM, 16GB Storage)&quot;           
-##  [4] &quot;Samsung Galaxy M20 (Ocean Blue, 4+64GB)&quot;           
-##  [5] &quot;Samsung Galaxy M10 (Charcoal Black, 3+32GB)&quot;       
-##  [6] &quot;Samsung Galaxy M30 (Gradation Blue, 6+128 GB)&quot;     
-##  [7] &quot;Redmi 6 Pro (Black, 3GB RAM, 32GB Storage)&quot;        
-##  [8] &quot;Redmi 6 Pro (Black, 4GB RAM, 64GB Storage)&quot;        
-##  [9] &quot;OnePlus 6T (Mirror Black, 6GB RAM, 128GB Storage)&quot; 
-## [10] &quot;Realme U1 (Ambitious Black, 3GB RAM, 32GB Storage)&quot;</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1">top_phones <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb53-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.crwTitle a&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb53-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb53-4" data-line-number="4"><span class="st">  </span><span class="kw">str_split</span>(<span class="st">'</span><span class="ch">\\</span><span class="st">('</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb53-5" data-line-number="5"><span class="st">  </span><span class="kw">map_chr</span>(<span class="dv">1</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb53-6" data-line-number="6"><span class="st">  </span><span class="kw">str_trim</span>() -&gt;<span class="st"> </span>mobile_name</a>
+<a class="sourceLine" id="cb53-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb53-8" data-line-number="8">mobile_name</a></code></pre></div>
+<pre><code>##  [1] &quot;Samsung Galaxy M30&quot; &quot;Redmi 6A&quot;           &quot;Samsung Galaxy M20&quot;
+##  [4] &quot;Samsung Galaxy M30&quot; &quot;Samsung Galaxy M10&quot; &quot;Redmi 6 Pro&quot;       
+##  [7] &quot;OnePlus 6T&quot;         &quot;Redmi 6 Pro&quot;        &quot;Samsung Galaxy M30&quot;
+## [10] &quot;Realme U1&quot;</code></pre>
+</section>
+<section id="color" class="slide level2">
+<h2>Color</h2>
+<hr>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1">top_phones <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb55-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.crwTitle a&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb55-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb55-4" data-line-number="4"><span class="st">  </span><span class="kw">str_split</span>(<span class="st">'</span><span class="ch">\\</span><span class="st">('</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb55-5" data-line-number="5"><span class="st">  </span><span class="kw">map_chr</span>(<span class="dv">2</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb55-6" data-line-number="6"><span class="st">  </span><span class="kw">str_split</span>(<span class="st">&quot;,&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb55-7" data-line-number="7"><span class="st">  </span><span class="kw">map_chr</span>(<span class="dv">1</span>) -&gt;<span class="st"> </span>mobile_color</a>
+<a class="sourceLine" id="cb55-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb55-9" data-line-number="9">mobile_color</a></code></pre></div>
+<pre><code>##  [1] &quot;Gradation Blue&quot;  &quot;Black&quot;           &quot;Ocean Blue&quot;     
+##  [4] &quot;Gradation Black&quot; &quot;Charcoal Black&quot;  &quot;Black&quot;          
+##  [7] &quot;Mirror Black&quot;    &quot;Black&quot;           &quot;Gradation Blue&quot; 
+## [10] &quot;Ambitious Black&quot;</code></pre>
 </section>
 <section id="rating" class="slide level2">
 <h2>Rating</h2>
 <hr>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1">top_phones <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb48-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.crwProductDetail span .a-icon-alt&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb48-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>()</a></code></pre></div>
-<pre><code>##  [1] &quot;4.1 out of 5 stars&quot; &quot;4.2 out of 5 stars&quot; &quot;4.2 out of 5 stars&quot;
-##  [4] &quot;3.7 out of 5 stars&quot; &quot;4.1 out of 5 stars&quot; &quot;4.2 out of 5 stars&quot;
-##  [7] &quot;4.2 out of 5 stars&quot; &quot;4.1 out of 5 stars&quot; &quot;4.5 out of 5 stars&quot;
-## [10] &quot;4.4 out of 5 stars&quot;</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1">top_phones <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb57-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.crwProductDetail span .a-icon-alt&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb57-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb57-4" data-line-number="4"><span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">start =</span> <span class="dv">1</span>, <span class="dt">end =</span> <span class="dv">3</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb57-5" data-line-number="5"><span class="st">  </span><span class="kw">as.numeric</span>() -&gt;<span class="st"> </span>mobile_rating</a>
+<a class="sourceLine" id="cb57-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb57-7" data-line-number="7">mobile_rating</a></code></pre></div>
+<pre><code>##  [1] 4.1 4.2 3.7 4.2 4.1 4.2 4.5 4.1 4.2 4.4</code></pre>
 </section>
 <section id="number-of-reviews" class="slide level2">
 <h2>Number of Reviews</h2>
 <hr>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1">top_phones <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb50-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.crwProductDetail span.a-size-small .a-link-normal&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb50-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>()</a></code></pre></div>
-<pre><code>##  [1] &quot;875&quot;    &quot;409&quot;    &quot;22,758&quot; &quot;10,757&quot; &quot;2,595&quot;  &quot;392&quot;    &quot;6,214&quot; 
-##  [8] &quot;6,655&quot;  &quot;14,002&quot; &quot;9,936&quot;</code></pre>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1">top_phones <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb59-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.crwProductDetail span.a-size-small .a-link-normal&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb59-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb59-4" data-line-number="4"><span class="st">  </span><span class="kw">str_replace</span>(<span class="st">&quot;,&quot;</span>, <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb59-5" data-line-number="5"><span class="st">  </span><span class="kw">as.numeric</span>() -&gt;<span class="st"> </span>mobile_review</a>
+<a class="sourceLine" id="cb59-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb59-7" data-line-number="7">mobile_review</a></code></pre></div>
+<pre><code>##  [1]   899 22857 10929   425  2646  6234 14047  6672   398 10011</code></pre>
 </section>
-<section id="actual-price" class="slide level2">
-<h2>Actual Price</h2>
+<section id="real-price" class="slide level2">
+<h2>Real Price</h2>
 <hr>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1">top_phones <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb52-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.crwProductDetail .crwPrice .a-text-strike&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb52-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>()</a></code></pre></div>
-<pre><code>## [1] &quot;  Rs. 16,490.00&quot; &quot;  Rs. 16,490.00&quot; &quot;  Rs. 6,999.00&quot;  &quot;  Rs. 13,390.00&quot;
-## [5] &quot;  Rs. 9,290.00&quot;  &quot;  Rs. 19,590.00&quot; &quot;  Rs. 11,499.00&quot; &quot;  Rs. 13,499.00&quot;
-## [9] &quot;  Rs. 12,999.00&quot;</code></pre>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1">top_phones <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb61-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.crwProductDetail .crwPrice .a-text-strike&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb61-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb61-4" data-line-number="4"><span class="st">  </span><span class="kw">str_trim</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb61-5" data-line-number="5"><span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">start =</span> <span class="dv">5</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb61-6" data-line-number="6"><span class="st">  </span><span class="kw">append</span>(<span class="ot">NA</span>, <span class="dv">6</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb61-7" data-line-number="7"><span class="st">  </span><span class="kw">str_replace</span>(<span class="st">&quot;,&quot;</span>, <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb61-8" data-line-number="8"><span class="st">  </span><span class="kw">str_split</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">.&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb61-9" data-line-number="9"><span class="st">  </span><span class="kw">map_chr</span>(<span class="dv">1</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb61-10" data-line-number="10"><span class="st">  </span><span class="kw">as.numeric</span>() -&gt;<span class="st"> </span>real_price</a>
+<a class="sourceLine" id="cb61-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb61-12" data-line-number="12">real_price</a></code></pre></div>
+<pre><code>##  [1] 16490  6999 13390 16490  9290 11499    NA 13499 19590 12999</code></pre>
 </section>
 <section id="discounted-price" class="slide level2">
 <h2>Discounted Price</h2>
 <hr>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1">top_phones <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb54-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.crwProductDetail .crwActualPrice&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb54-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>()</a></code></pre></div>
-<pre><code>##  [1] &quot;  Rs. 14,990.00&quot; &quot;  Rs. 14,990.00&quot; &quot;  Rs. 5,999.00&quot; 
-##  [4] &quot;  Rs. 12,990.00&quot; &quot;  Rs. 8,990.00&quot;  &quot;  Rs. 17,990.00&quot;
-##  [7] &quot;  Rs. 8,999.00&quot;  &quot;  Rs. 10,999.00&quot; &quot;  Rs. 37,999.00&quot;
-## [10] &quot;  Rs. 9,999.00&quot;</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1">top_phones <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb63-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.crwProductDetail .crwActualPrice&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb63-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb63-4" data-line-number="4"><span class="st">  </span><span class="kw">str_trim</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb63-5" data-line-number="5"><span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">start =</span> <span class="dv">5</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb63-6" data-line-number="6"><span class="st">  </span><span class="kw">str_replace</span>(<span class="st">&quot;,&quot;</span>, <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb63-7" data-line-number="7"><span class="st">  </span><span class="kw">str_split</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">.&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb63-8" data-line-number="8"><span class="st">  </span><span class="kw">map_chr</span>(<span class="dv">1</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb63-9" data-line-number="9"><span class="st">  </span><span class="kw">as.numeric</span>() -&gt;<span class="st"> </span>discounted_price</a>
+<a class="sourceLine" id="cb63-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb63-11" data-line-number="11">discounted_price</a></code></pre></div>
+<pre><code>##  [1] 14990  5999 12990 14990  8990  7999 37999  9999 17990  9999</code></pre>
+</section>
+<section id="putting-it-all-together" class="slide level2">
+<h2>Putting it all together…</h2>
+<hr>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1">best_sellers &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">title =</span> mobile_name, <span class="dt">color =</span> mobile_color, </a>
+<a class="sourceLine" id="cb65-2" data-line-number="2">  <span class="dt">rating =</span> mobile_rating, <span class="dt">reviews =</span> mobile_review, <span class="st">`</span><span class="dt">Real Price (Rs.)</span><span class="st">`</span> =<span class="st"> </span>real_price,</a>
+<a class="sourceLine" id="cb65-3" data-line-number="3">  <span class="st">`</span><span class="dt">Discount Price (Rs.)</span><span class="st">`</span> =<span class="st"> </span>discounted_price)</a>
+<a class="sourceLine" id="cb65-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb65-5" data-line-number="5">best_sellers</a></code></pre></div>
+<pre><code>## # A tibble: 10 x 6
+##    title       color     rating reviews `Real Price (Rs~ `Discount Price (~
+##    &lt;chr&gt;       &lt;chr&gt;      &lt;dbl&gt;   &lt;dbl&gt;            &lt;dbl&gt;              &lt;dbl&gt;
+##  1 Samsung Ga~ Gradatio~    4.1     899            16490              14990
+##  2 Redmi 6A    Black        4.2   22857             6999               5999
+##  3 Samsung Ga~ Ocean Bl~    3.7   10929            13390              12990
+##  4 Samsung Ga~ Gradatio~    4.2     425            16490              14990
+##  5 Samsung Ga~ Charcoal~    4.1    2646             9290               8990
+##  6 Redmi 6 Pro Black        4.2    6234            11499               7999
+##  7 OnePlus 6T  Mirror B~    4.5   14047               NA              37999
+##  8 Redmi 6 Pro Black        4.1    6672            13499               9999
+##  9 Samsung Ga~ Gradatio~    4.2     398            19590              17990
+## 10 Realme U1   Ambitiou~    4.4   10011            12999               9999</code></pre>
 </section>
 <section id="imdb-top-50" class="slide level2">
 <h2>IMDB Top 50</h2>
@@ -2709,21 +2780,31 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="robotstxt-4" class="slide level2">
 <h2>robotstxt</h2>
 <hr>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="kw">paths_allowed</span>(</a>
-<a class="sourceLine" id="cb56-2" data-line-number="2">  <span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;https://www.imdb.com/search/title?groups=top_250&amp;sort=user_rating&quot;</span>)</a>
-<a class="sourceLine" id="cb56-3" data-line-number="3">)</a></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1"><span class="kw">paths_allowed</span>(</a>
+<a class="sourceLine" id="cb67-2" data-line-number="2">  <span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;https://www.imdb.com/search/title?groups=top_250&amp;sort=user_rating&quot;</span>)</a>
+<a class="sourceLine" id="cb67-3" data-line-number="3">)</a></code></pre></div>
 <pre><code>## 
  www.imdb.com                      No encoding supplied: defaulting to UTF-8.</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 </section>
-<section><section id="read-web-page-2" class="title-slide slide level1"><h1>Read Web Page</h1></section><section id="title" class="slide level2">
+<section id="read-web-page-2" class="slide level2">
+<h2>Read Web Page</h2>
+<hr>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1">imdb &lt;-<span class="st"> </span><span class="kw">read_html</span>(<span class="st">&quot;https://www.imdb.com/search/title?groups=top_250&amp;sort=user_rating&quot;</span>)</a>
+<a class="sourceLine" id="cb70-2" data-line-number="2">imdb</a></code></pre></div>
+<pre><code>## {xml_document}
+## &lt;html xmlns:og=&quot;http://ogp.me/ns#&quot; xmlns:fb=&quot;http://www.facebook.com/2008/fbml&quot;&gt;
+## [1] &lt;head&gt;\n&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset= ...
+## [2] &lt;body id=&quot;styleguide-v2&quot; class=&quot;fixed&quot;&gt;\n\n            &lt;img height=&quot; ...</code></pre>
+</section>
+<section id="title" class="slide level2">
 <h2>Title</h2>
 <hr>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb59-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.lister-item-content h3 a&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb59-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() -&gt;<span class="st"> </span>title</a>
-<a class="sourceLine" id="cb59-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb59-5" data-line-number="5">title</a></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb72-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.lister-item-content h3 a&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb72-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() -&gt;<span class="st"> </span>movie_title</a>
+<a class="sourceLine" id="cb72-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb72-5" data-line-number="5">movie_title</a></code></pre></div>
 <pre><code>##  [1] &quot;The Shawshank Redemption&quot;                         
 ##  [2] &quot;The Godfather&quot;                                    
 ##  [3] &quot;The Dark Knight&quot;                                  
@@ -2774,165 +2855,167 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## [48] &quot;Back to the Future&quot;                               
 ## [49] &quot;Raiders of the Lost Ark&quot;                          
 ## [50] &quot;Apocalypse Now&quot;</code></pre>
-</section><section id="year-of-release" class="slide level2">
+</section>
+<section id="year-of-release" class="slide level2">
 <h2>Year of Release</h2>
 <hr>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb61-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.lister-item-content h3 .lister-item-year&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb61-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() -&gt;<span class="st"> </span>year</a>
-<a class="sourceLine" id="cb61-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb61-5" data-line-number="5">year</a></code></pre></div>
-<pre><code>##  [1] &quot;(1994)&quot; &quot;(1972)&quot; &quot;(2008)&quot; &quot;(1974)&quot; &quot;(2003)&quot; &quot;(1994)&quot; &quot;(1993)&quot;
-##  [8] &quot;(1966)&quot; &quot;(1957)&quot; &quot;(2010)&quot; &quot;(1999)&quot; &quot;(2001)&quot; &quot;(1994)&quot; &quot;(2002)&quot;
-## [15] &quot;(1999)&quot; &quot;(1990)&quot; &quot;(1980)&quot; &quot;(1975)&quot; &quot;(1954)&quot; &quot;(2014)&quot; &quot;(2002)&quot;
-## [22] &quot;(2001)&quot; &quot;(1998)&quot; &quot;(1999)&quot; &quot;(1997)&quot; &quot;(1995)&quot; &quot;(1995)&quot; &quot;(1994)&quot;
-## [29] &quot;(1991)&quot; &quot;(1977)&quot; &quot;(1946)&quot; &quot;(2018)&quot; &quot;(2016)&quot; &quot;(2018)&quot; &quot;(2018)&quot;
-## [36] &quot;(2014)&quot; &quot;(2011)&quot; &quot;(2006)&quot; &quot;(2006)&quot; &quot;(2002)&quot; &quot;(2000)&quot; &quot;(2000)&quot;
-## [43] &quot;(1998)&quot; &quot;(1994)&quot; &quot;(1991)&quot; &quot;(1988)&quot; &quot;(1988)&quot; &quot;(1985)&quot; &quot;(1981)&quot;
-## [50] &quot;(1979)&quot;</code></pre>
-</section><section id="certificate" class="slide level2">
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb74-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.lister-item-content h3 .lister-item-year&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb74-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb74-4" data-line-number="4"><span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">start =</span> <span class="dv">2</span>, <span class="dt">end =</span> <span class="dv">5</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb74-5" data-line-number="5"><span class="st">  </span><span class="kw">as.Date</span>(<span class="dt">format =</span> <span class="st">&quot;%Y&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb74-6" data-line-number="6"><span class="st">  </span><span class="kw">year</span>() -&gt;<span class="st"> </span>movie_year</a>
+<a class="sourceLine" id="cb74-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb74-8" data-line-number="8">movie_year</a></code></pre></div>
+<pre><code>##  [1] 1994 1972 2008 1974 2003 1994 1993 1966 1957 2010 1999 2001 1994 2002
+## [15] 1999 1990 1980 1975 1954 2014 2002 2001 1998 1999 1997 1995 1995 1994
+## [29] 1991 1977 1946 2018 2016 2018 2018 2014 2011 2006 2006 2002 2000 2000
+## [43] 1998 1994 1991 1988 1988 1985 1981 1979</code></pre>
+</section>
+<section id="certificate" class="slide level2">
 <h2>Certificate</h2>
 <hr>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb63-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.lister-item-content p .certificate&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb63-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() -&gt;<span class="st"> </span>certificate</a>
-<a class="sourceLine" id="cb63-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb63-5" data-line-number="5">certificate</a></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb76-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.lister-item-content p .certificate&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb76-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() -&gt;<span class="st"> </span>movie_certificate</a>
+<a class="sourceLine" id="cb76-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb76-5" data-line-number="5">movie_certificate</a></code></pre></div>
 <pre><code>##  [1] &quot;A&quot;     &quot;A&quot;     &quot;UA&quot;    &quot;PG-13&quot; &quot;A&quot;     &quot;A&quot;     &quot;UA&quot;    &quot;A&quot;    
 ##  [9] &quot;PG-13&quot; &quot;PG-13&quot; &quot;PG-13&quot; &quot;A&quot;     &quot;A&quot;     &quot;PG&quot;    &quot;UA&quot;    &quot;R&quot;    
 ## [17] &quot;PG&quot;    &quot;A&quot;     &quot;A&quot;     &quot;PG-13&quot; &quot;A&quot;     &quot;R&quot;     &quot;A&quot;     &quot;A&quot;    
 ## [25] &quot;U&quot;     &quot;PG&quot;    &quot;UA&quot;    &quot;U&quot;     &quot;U&quot;     &quot;UA&quot;    &quot;A&quot;     &quot;UA&quot;   
 ## [33] &quot;PG-13&quot; &quot;A&quot;     &quot;R&quot;     &quot;R&quot;     &quot;R&quot;     &quot;A&quot;     &quot;U&quot;     &quot;U&quot;    
 ## [41] &quot;R&quot;     &quot;U&quot;     &quot;PG&quot;    &quot;R&quot;</code></pre>
-</section><section id="runtime" class="slide level2">
+</section>
+<section id="runtime" class="slide level2">
 <h2>Runtime</h2>
 <hr>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb65-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.lister-item-content p .runtime&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb65-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() -&gt;<span class="st"> </span>runtime</a>
-<a class="sourceLine" id="cb65-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb65-5" data-line-number="5">runtime</a></code></pre></div>
-<pre><code>##  [1] &quot;142 min&quot; &quot;175 min&quot; &quot;152 min&quot; &quot;202 min&quot; &quot;201 min&quot; &quot;154 min&quot; &quot;195 min&quot;
-##  [8] &quot;161 min&quot; &quot;96 min&quot;  &quot;148 min&quot; &quot;139 min&quot; &quot;178 min&quot; &quot;142 min&quot; &quot;179 min&quot;
-## [15] &quot;136 min&quot; &quot;146 min&quot; &quot;124 min&quot; &quot;133 min&quot; &quot;207 min&quot; &quot;169 min&quot; &quot;130 min&quot;
-## [22] &quot;125 min&quot; &quot;169 min&quot; &quot;189 min&quot; &quot;116 min&quot; &quot;106 min&quot; &quot;127 min&quot; &quot;110 min&quot;
-## [29] &quot;118 min&quot; &quot;121 min&quot; &quot;130 min&quot; &quot;139 min&quot; &quot;161 min&quot; &quot;117 min&quot; &quot;149 min&quot;
-## [36] &quot;106 min&quot; &quot;112 min&quot; &quot;130 min&quot; &quot;151 min&quot; &quot;150 min&quot; &quot;113 min&quot; &quot;155 min&quot;
-## [43] &quot;119 min&quot; &quot;88 min&quot;  &quot;137 min&quot; &quot;155 min&quot; &quot;89 min&quot;  &quot;116 min&quot; &quot;115 min&quot;
-## [50] &quot;147 min&quot;</code></pre>
-</section><section id="genre" class="slide level2">
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb78-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.lister-item-content p .runtime&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb78-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb78-4" data-line-number="4"><span class="st">  </span><span class="kw">str_split</span>(<span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb78-5" data-line-number="5"><span class="st">  </span><span class="kw">map_chr</span>(<span class="dv">1</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb78-6" data-line-number="6"><span class="st">  </span><span class="kw">as.numeric</span>() -&gt;<span class="st"> </span>movie_runtime</a>
+<a class="sourceLine" id="cb78-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb78-8" data-line-number="8">movie_runtime</a></code></pre></div>
+<pre><code>##  [1] 142 175 152 202 201 154 195 161  96 148 139 178 142 179 136 146 124
+## [18] 133 207 169 130 125 169 189 116 106 127 110 118 121 130 139 161 117
+## [35] 149 106 112 130 151 150 113 155 119  88 137 155  89 116 115 147</code></pre>
+</section>
+<section id="genre" class="slide level2">
 <h2>Genre</h2>
 <hr>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb67-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.lister-item-content p .genre&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb67-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() -&gt;<span class="st"> </span>genre</a>
-<a class="sourceLine" id="cb67-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb67-5" data-line-number="5">genre</a></code></pre></div>
-<pre><code>##  [1] &quot;\nDrama            &quot;                       
-##  [2] &quot;\nCrime, Drama            &quot;                
-##  [3] &quot;\nAction, Crime, Drama            &quot;        
-##  [4] &quot;\nCrime, Drama            &quot;                
-##  [5] &quot;\nAdventure, Drama, Fantasy            &quot;   
-##  [6] &quot;\nCrime, Drama            &quot;                
-##  [7] &quot;\nBiography, Drama, History            &quot;   
-##  [8] &quot;\nWestern            &quot;                     
-##  [9] &quot;\nDrama            &quot;                       
-## [10] &quot;\nAction, Adventure, Sci-Fi            &quot;   
-## [11] &quot;\nDrama            &quot;                       
-## [12] &quot;\nAdventure, Drama, Fantasy            &quot;   
-## [13] &quot;\nDrama, Romance            &quot;              
-## [14] &quot;\nAdventure, Drama, Fantasy            &quot;   
-## [15] &quot;\nAction, Sci-Fi            &quot;              
-## [16] &quot;\nBiography, Crime, Drama            &quot;     
-## [17] &quot;\nAction, Adventure, Fantasy            &quot;  
-## [18] &quot;\nDrama            &quot;                       
-## [19] &quot;\nAdventure, Drama            &quot;            
-## [20] &quot;\nAdventure, Drama, Sci-Fi            &quot;    
-## [21] &quot;\nCrime, Drama            &quot;                
-## [22] &quot;\nAnimation, Adventure, Family            &quot;
-## [23] &quot;\nDrama, War            &quot;                  
-## [24] &quot;\nCrime, Drama, Fantasy            &quot;       
-## [25] &quot;\nComedy, Drama, Romance            &quot;      
-## [26] &quot;\nCrime, Mystery, Thriller            &quot;    
-## [27] &quot;\nCrime, Drama, Mystery            &quot;       
-## [28] &quot;\nAction, Crime, Drama            &quot;        
-## [29] &quot;\nCrime, Drama, Thriller            &quot;      
-## [30] &quot;\nAction, Adventure, Fantasy            &quot;  
-## [31] &quot;\nDrama, Family, Fantasy            &quot;      
-## [32] &quot;\nCrime, Thriller            &quot;             
-## [33] &quot;\nAction, Biography, Drama            &quot;    
-## [34] &quot;\nAnimation, Action, Adventure            &quot;
-## [35] &quot;\nAction, Adventure, Sci-Fi            &quot;   
-## [36] &quot;\nDrama, Music            &quot;                
-## [37] &quot;\nBiography, Comedy, Drama            &quot;    
-## [38] &quot;\nDrama, Mystery, Sci-Fi            &quot;      
-## [39] &quot;\nCrime, Drama, Thriller            &quot;      
-## [40] &quot;\nBiography, Drama, Music            &quot;     
-## [41] &quot;\nMystery, Thriller            &quot;           
-## [42] &quot;\nAction, Adventure, Drama            &quot;    
-## [43] &quot;\nDrama            &quot;                       
-## [44] &quot;\nAnimation, Adventure, Drama            &quot; 
-## [45] &quot;\nAction, Sci-Fi            &quot;              
-## [46] &quot;\nDrama            &quot;                       
-## [47] &quot;\nAnimation, Drama, War            &quot;       
-## [48] &quot;\nAdventure, Comedy, Sci-Fi            &quot;   
-## [49] &quot;\nAction, Adventure            &quot;           
-## [50] &quot;\nDrama, War            &quot;</code></pre>
-</section><section id="rating-1" class="slide level2">
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb80-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.lister-item-content p .genre&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb80-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb80-4" data-line-number="4"><span class="st">  </span><span class="kw">str_trim</span>() -&gt;<span class="st"> </span>movie_genre</a>
+<a class="sourceLine" id="cb80-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb80-6" data-line-number="6">movie_genre</a></code></pre></div>
+<pre><code>##  [1] &quot;Drama&quot;                        &quot;Crime, Drama&quot;                
+##  [3] &quot;Action, Crime, Drama&quot;         &quot;Crime, Drama&quot;                
+##  [5] &quot;Adventure, Drama, Fantasy&quot;    &quot;Crime, Drama&quot;                
+##  [7] &quot;Biography, Drama, History&quot;    &quot;Western&quot;                     
+##  [9] &quot;Drama&quot;                        &quot;Action, Adventure, Sci-Fi&quot;   
+## [11] &quot;Drama&quot;                        &quot;Adventure, Drama, Fantasy&quot;   
+## [13] &quot;Drama, Romance&quot;               &quot;Adventure, Drama, Fantasy&quot;   
+## [15] &quot;Action, Sci-Fi&quot;               &quot;Biography, Crime, Drama&quot;     
+## [17] &quot;Action, Adventure, Fantasy&quot;   &quot;Drama&quot;                       
+## [19] &quot;Adventure, Drama&quot;             &quot;Adventure, Drama, Sci-Fi&quot;    
+## [21] &quot;Crime, Drama&quot;                 &quot;Animation, Adventure, Family&quot;
+## [23] &quot;Drama, War&quot;                   &quot;Crime, Drama, Fantasy&quot;       
+## [25] &quot;Comedy, Drama, Romance&quot;       &quot;Crime, Mystery, Thriller&quot;    
+## [27] &quot;Crime, Drama, Mystery&quot;        &quot;Action, Crime, Drama&quot;        
+## [29] &quot;Crime, Drama, Thriller&quot;       &quot;Action, Adventure, Fantasy&quot;  
+## [31] &quot;Drama, Family, Fantasy&quot;       &quot;Crime, Thriller&quot;             
+## [33] &quot;Action, Biography, Drama&quot;     &quot;Animation, Action, Adventure&quot;
+## [35] &quot;Action, Adventure, Sci-Fi&quot;    &quot;Drama, Music&quot;                
+## [37] &quot;Biography, Comedy, Drama&quot;     &quot;Drama, Mystery, Sci-Fi&quot;      
+## [39] &quot;Crime, Drama, Thriller&quot;       &quot;Biography, Drama, Music&quot;     
+## [41] &quot;Mystery, Thriller&quot;            &quot;Action, Adventure, Drama&quot;    
+## [43] &quot;Drama&quot;                        &quot;Animation, Adventure, Drama&quot; 
+## [45] &quot;Action, Sci-Fi&quot;               &quot;Drama&quot;                       
+## [47] &quot;Animation, Drama, War&quot;        &quot;Adventure, Comedy, Sci-Fi&quot;   
+## [49] &quot;Action, Adventure&quot;            &quot;Drama, War&quot;</code></pre>
+</section>
+<section id="rating-1" class="slide level2">
 <h2>Rating</h2>
 <hr>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb69-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.ratings-bar .ratings-imdb-rating&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb69-3" data-line-number="3"><span class="st">  </span><span class="kw">html_attr</span>(<span class="st">&quot;data-value&quot;</span>) -&gt;<span class="st"> </span>rating</a>
-<a class="sourceLine" id="cb69-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb69-5" data-line-number="5">rating</a></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb82-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.ratings-bar .ratings-imdb-rating&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb82-3" data-line-number="3"><span class="st">  </span><span class="kw">html_attr</span>(<span class="st">&quot;data-value&quot;</span>) -&gt;<span class="st"> </span>movie_rating</a>
+<a class="sourceLine" id="cb82-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb82-5" data-line-number="5">movie_rating</a></code></pre></div>
 <pre><code>##  [1] &quot;9.3&quot; &quot;9.2&quot; &quot;9&quot;   &quot;9&quot;   &quot;8.9&quot; &quot;8.9&quot; &quot;8.9&quot; &quot;8.9&quot; &quot;8.9&quot; &quot;8.8&quot; &quot;8.8&quot;
 ## [12] &quot;8.8&quot; &quot;8.8&quot; &quot;8.7&quot; &quot;8.7&quot; &quot;8.7&quot; &quot;8.7&quot; &quot;8.7&quot; &quot;8.7&quot; &quot;8.6&quot; &quot;8.6&quot; &quot;8.6&quot;
 ## [23] &quot;8.6&quot; &quot;8.6&quot; &quot;8.6&quot; &quot;8.6&quot; &quot;8.6&quot; &quot;8.6&quot; &quot;8.6&quot; &quot;8.6&quot; &quot;8.6&quot; &quot;8.5&quot; &quot;8.5&quot;
 ## [34] &quot;8.5&quot; &quot;8.5&quot; &quot;8.5&quot; &quot;8.5&quot; &quot;8.5&quot; &quot;8.5&quot; &quot;8.5&quot; &quot;8.5&quot; &quot;8.5&quot; &quot;8.5&quot; &quot;8.5&quot;
 ## [45] &quot;8.5&quot; &quot;8.5&quot; &quot;8.5&quot; &quot;8.5&quot; &quot;8.5&quot; &quot;8.5&quot;</code></pre>
-</section><section id="votes" class="slide level2">
+</section>
+<section id="votes" class="slide level2">
 <h2>Votes</h2>
 <hr>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb71-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">xpath =</span> <span class="st">'//meta[@itemprop=&quot;ratingCount&quot;]'</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb71-3" data-line-number="3"><span class="st">  </span><span class="kw">html_attr</span>(<span class="st">'content'</span>) -&gt;<span class="st"> </span>votes</a>
-<a class="sourceLine" id="cb71-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb71-5" data-line-number="5">votes</a></code></pre></div>
-<pre><code>##  [1] &quot;2069657&quot; &quot;1420034&quot; &quot;2035539&quot; &quot;985323&quot;  &quot;1473449&quot; &quot;1618358&quot; &quot;1072439&quot;
-##  [8] &quot;614262&quot;  &quot;584329&quot;  &quot;1814448&quot; &quot;1656231&quot; &quot;1490018&quot; &quot;1586293&quot; &quot;1332587&quot;
-## [15] &quot;1486724&quot; &quot;893518&quot;  &quot;1038566&quot; &quot;821053&quot;  &quot;279588&quot;  &quot;1274000&quot; &quot;636933&quot; 
-## [22] &quot;548335&quot;  &quot;1094443&quot; &quot;999034&quot;  &quot;544278&quot;  &quot;896359&quot;  &quot;1269358&quot; &quot;911727&quot; 
-## [29] &quot;1116805&quot; &quot;1108256&quot; &quot;352274&quot;  &quot;38350&quot;   &quot;117879&quot;  &quot;166558&quot;  &quot;612600&quot; 
-## [36] &quot;603993&quot;  &quot;665010&quot;  &quot;1051324&quot; &quot;1062580&quot; &quot;632381&quot;  &quot;1020221&quot; &quot;1196460&quot;
-## [43] &quot;940647&quot;  &quot;821649&quot;  &quot;896286&quot;  &quot;197991&quot;  &quot;192187&quot;  &quot;921468&quot;  &quot;801806&quot; 
-## [50] &quot;541472&quot;</code></pre>
-</section><section id="revenue" class="slide level2">
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb84-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">xpath =</span> <span class="st">'//meta[@itemprop=&quot;ratingCount&quot;]'</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb84-3" data-line-number="3"><span class="st">  </span><span class="kw">html_attr</span>(<span class="st">'content'</span>) -&gt;<span class="st"> </span>movie_votes</a>
+<a class="sourceLine" id="cb84-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb84-5" data-line-number="5">movie_votes</a></code></pre></div>
+<pre><code>##  [1] &quot;2069853&quot; &quot;1420171&quot; &quot;2035750&quot; &quot;985413&quot;  &quot;1473588&quot; &quot;1618505&quot; &quot;1072529&quot;
+##  [8] &quot;614315&quot;  &quot;584401&quot;  &quot;1814629&quot; &quot;1656350&quot; &quot;1490157&quot; &quot;1586448&quot; &quot;1332704&quot;
+## [15] &quot;1486860&quot; &quot;893619&quot;  &quot;1038658&quot; &quot;821108&quot;  &quot;279608&quot;  &quot;1274184&quot; &quot;636971&quot; 
+## [22] &quot;548398&quot;  &quot;1094542&quot; &quot;999141&quot;  &quot;544330&quot;  &quot;896431&quot;  &quot;1269489&quot; &quot;911825&quot; 
+## [29] &quot;1116916&quot; &quot;1108355&quot; &quot;352298&quot;  &quot;38397&quot;   &quot;117903&quot;  &quot;167190&quot;  &quot;612962&quot; 
+## [36] &quot;604073&quot;  &quot;665081&quot;  &quot;1051416&quot; &quot;1062676&quot; &quot;632455&quot;  &quot;1020287&quot; &quot;1196583&quot;
+## [43] &quot;940734&quot;  &quot;821742&quot;  &quot;896360&quot;  &quot;198014&quot;  &quot;192207&quot;  &quot;921568&quot;  &quot;801882&quot; 
+## [50] &quot;541510&quot;</code></pre>
+</section>
+<section id="revenue" class="slide level2">
 <h2>Revenue</h2>
 <hr>
 <p><strong>Revenue not available for 31 and 47 movie number</strong></p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb73-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">xpath =</span> <span class="st">'//span[@name=&quot;nv&quot;]'</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb73-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb73-4" data-line-number="4"><span class="st">  </span><span class="kw">str_extract</span>(<span class="dt">pattern =</span> <span class="st">&quot;^</span><span class="ch">\\</span><span class="st">$.*&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb73-5" data-line-number="5"><span class="st">  </span><span class="kw">na.omit</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb73-6" data-line-number="6"><span class="st">  </span><span class="kw">as.character</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb73-7" data-line-number="7"><span class="st">  </span><span class="kw">append</span>(<span class="dt">values =</span> <span class="ot">NA</span>, <span class="dt">after =</span> <span class="dv">30</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb73-8" data-line-number="8"><span class="st">  </span><span class="kw">append</span>(<span class="dt">values =</span> <span class="ot">NA</span>, <span class="dt">after =</span> <span class="dv">46</span>) -&gt;<span class="st"> </span>revenue</a>
-<a class="sourceLine" id="cb73-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb73-10" data-line-number="10">revenue</a></code></pre></div>
-<pre><code>##  [1] &quot;$28.34M&quot;  &quot;$134.97M&quot; &quot;$534.86M&quot; &quot;$57.30M&quot;  &quot;$377.85M&quot; &quot;$107.93M&quot;
-##  [7] &quot;$96.07M&quot;  &quot;$6.10M&quot;   &quot;$4.36M&quot;   &quot;$292.58M&quot; &quot;$37.03M&quot;  &quot;$315.54M&quot;
-## [13] &quot;$330.25M&quot; &quot;$342.55M&quot; &quot;$171.48M&quot; &quot;$46.84M&quot;  &quot;$290.48M&quot; &quot;$112.00M&quot;
-## [19] &quot;$0.27M&quot;   &quot;$188.02M&quot; &quot;$7.56M&quot;   &quot;$10.06M&quot;  &quot;$216.54M&quot; &quot;$136.80M&quot;
-## [25] &quot;$57.60M&quot;  &quot;$23.34M&quot;  &quot;$100.13M&quot; &quot;$19.50M&quot;  &quot;$130.74M&quot; &quot;$322.74M&quot;
-## [31] NA         &quot;$1.19M&quot;   &quot;$12.39M&quot;  &quot;$190.17M&quot; &quot;$678.82M&quot; &quot;$13.09M&quot; 
-## [37] &quot;$13.18M&quot;  &quot;$53.09M&quot;  &quot;$132.38M&quot; &quot;$32.57M&quot;  &quot;$25.54M&quot;  &quot;$187.71M&quot;
-## [43] &quot;$6.72M&quot;   &quot;$312.90M&quot; &quot;$204.84M&quot; &quot;$11.99M&quot;  NA         &quot;$210.61M&quot;
-## [49] &quot;$248.16M&quot; &quot;$83.47M&quot;</code></pre>
-</section><section id="section-1" class="slide level2" data-background="thankyou.png">
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb86-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">xpath =</span> <span class="st">'//span[@name=&quot;nv&quot;]'</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb86-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb86-4" data-line-number="4"><span class="st">  </span><span class="kw">str_extract</span>(<span class="dt">pattern =</span> <span class="st">&quot;^</span><span class="ch">\\</span><span class="st">$.*&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb86-5" data-line-number="5"><span class="st">  </span><span class="kw">na.omit</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb86-6" data-line-number="6"><span class="st">  </span><span class="kw">as.character</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb86-7" data-line-number="7"><span class="st">  </span><span class="kw">append</span>(<span class="dt">values =</span> <span class="ot">NA</span>, <span class="dt">after =</span> <span class="dv">30</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb86-8" data-line-number="8"><span class="st">  </span><span class="kw">append</span>(<span class="dt">values =</span> <span class="ot">NA</span>, <span class="dt">after =</span> <span class="dv">46</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb86-9" data-line-number="9"><span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">start =</span> <span class="dv">2</span>, <span class="dt">end =</span> <span class="kw">nchar</span>(.) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb86-10" data-line-number="10"><span class="st">  </span><span class="kw">as.numeric</span>() -&gt;<span class="st"> </span>movie_revenue</a>
+<a class="sourceLine" id="cb86-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb86-12" data-line-number="12">movie_revenue</a></code></pre></div>
+<pre><code>##  [1]  28.34 134.97 534.86  57.30 377.85 107.93  96.07   6.10   4.36 292.58
+## [11]  37.03 315.54 330.25 342.55 171.48  46.84 290.48 112.00   0.27 188.02
+## [21]   7.56  10.06 216.54 136.80  57.60  23.34 100.13  19.50 130.74 322.74
+## [31]     NA   1.19  12.39 190.17 678.82  13.09  13.18  53.09 132.38  32.57
+## [41]  25.54 187.71   6.72 312.90 204.84  11.99     NA 210.61 248.16  83.47</code></pre>
+</section>
+<section id="putting-it-all-together-1" class="slide level2">
+<h2>Putting it all together…</h2>
+<hr>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1">top_<span class="dv">50</span> &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">title =</span> movie_title, <span class="dt">release =</span> movie_year, </a>
+<a class="sourceLine" id="cb88-2" data-line-number="2">    <span class="st">`</span><span class="dt">runtime (mins)</span><span class="st">`</span> =<span class="st"> </span>movie_runtime, <span class="dt">genre =</span> movie_genre, <span class="dt">rating =</span> movie_rating, </a>
+<a class="sourceLine" id="cb88-3" data-line-number="3">    <span class="dt">votes =</span> movie_votes, <span class="st">`</span><span class="dt">revenue ($ millions)</span><span class="st">`</span> =<span class="st"> </span>movie_revenue)</a>
+<a class="sourceLine" id="cb88-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb88-5" data-line-number="5">top_<span class="dv">50</span></a></code></pre></div>
+<pre><code>## # A tibble: 50 x 7
+##    title     release `runtime (mins)` genre   rating votes `revenue ($ mil~
+##    &lt;chr&gt;       &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;            &lt;dbl&gt;
+##  1 The Shaw~    1994              142 Drama   9.3    2069~            28.3 
+##  2 The Godf~    1972              175 Crime,~ 9.2    1420~           135.  
+##  3 The Dark~    2008              152 Action~ 9      2035~           535.  
+##  4 The Godf~    1974              202 Crime,~ 9      9854~            57.3 
+##  5 The Lord~    2003              201 Advent~ 8.9    1473~           378.  
+##  6 Pulp Fic~    1994              154 Crime,~ 8.9    1618~           108.  
+##  7 Schindle~    1993              195 Biogra~ 8.9    1072~            96.1 
+##  8 Il buono~    1966              161 Western 8.9    6143~             6.1 
+##  9 12 Angry~    1957               96 Drama   8.9    5844~             4.36
+## 10 Inception    2010              148 Action~ 8.8    1814~           293.  
+## # ... with 40 more rows</code></pre>
+</section>
+<section id="section-1" class="slide level2" data-background="thankyou.png">
 <h2></h2>
-</section></section>
+</section>
     </div>
   </div>
 

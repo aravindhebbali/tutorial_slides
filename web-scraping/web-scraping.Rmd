@@ -39,31 +39,22 @@ Extract data from websites
 - convert to tabular data structure
 - process/explore
 
-## Use Cases
-
-<hr>
-
-- contact scraping
-- online price change monitoring
-- price comparison
-- review scraping
-- real estate listing
-- used car prices
+## {data-background="ws_use_cases.png"}
 
 ## Case Studies
 
 <hr>
 
-- list of [RBI](https://rbi.org.in/) Governors
-- list of top 50 websites
 - top selling mobile phones on [Amazon India](https://www.amazon.in/mobile-phones/b?ie=UTF8&node=1389401031&ref_=nav_shopall_sbc_mobcomp_all_mobiles)
 - IMDB top 50 movies
+- list of top 50 websites
+- list of [RBI](https://rbi.org.in/) Governors
 
 ## Libraries
 
 <hr>
 
-```{r libs}
+```{r libs, message=FALSE, warning=FALSE}
 library(robotstxt)
 library(rvest)
 library(selectr)
@@ -74,6 +65,9 @@ library(forcats)
 library(magrittr)
 library(tidyr)
 library(ggplot2)
+library(lubridate)
+library(tibble)
+library(purrr)
 ```
 
 ## Things to keep in mind..
@@ -108,6 +102,341 @@ how to view the source code of a web page
 
 <hr>
 
+## Best Selling Phones
+
+<hr>
+
+## robotstxt
+
+<hr>
+
+```{r phones1}
+paths_allowed(
+  paths = c("https://www.amazon.in/mobile-phones/b?ie=UTF8&node=1389401031&ref_=nav_shopall_sbc_mobcomp_all_mobiles")
+)
+```
+
+## Read Web Page
+
+<hr>
+
+```{r phones2}
+top_phones <- read_html("https://www.amazon.in/mobile-phones/b?ie=UTF8&node=1389401031&ref_=nav_shopall_sbc_mobcomp_all_mobiles")
+top_phones
+```
+
+## Brand Name
+
+<hr>
+
+```{r phones3}
+top_phones %>%
+  html_nodes(".crwTitle a") %>%
+  html_text() %>%
+  str_split('\\(') %>%
+  map_chr(1) %>%
+  str_trim() -> mobile_name
+
+mobile_name
+```
+
+## Color
+
+<hr>
+
+```{r phones 3b}
+top_phones %>%
+  html_nodes(".crwTitle a") %>%
+  html_text() %>%
+  str_split('\\(') %>%
+  map_chr(2) %>%
+  str_split(",") %>%
+  map_chr(1) -> mobile_color
+
+mobile_color
+```
+
+## Rating
+
+<hr>
+
+```{r phones4}
+top_phones %>%
+  html_nodes(".crwProductDetail span .a-icon-alt") %>%
+  html_text() %>%
+  str_sub(start = 1, end = 3) %>%
+  as.numeric() -> mobile_rating
+
+mobile_rating
+```
+
+## Number of Reviews
+
+<hr>
+
+```{r phones5}
+top_phones %>%
+  html_nodes(".crwProductDetail span.a-size-small .a-link-normal") %>%
+  html_text() %>%
+  str_replace(",", "") %>%
+  as.numeric() -> mobile_review
+
+mobile_review
+```
+
+## Real Price
+
+<hr>
+
+```{r phones6}
+top_phones %>%
+  html_nodes(".crwProductDetail .crwPrice .a-text-strike") %>%
+  html_text() %>%
+  str_trim() %>%
+  str_sub(start = 5) %>%
+  append(NA, 6) %>%
+  str_replace(",", "") %>%
+  str_split("\\.") %>%
+  map_chr(1) %>%
+  as.numeric() -> real_price
+
+real_price
+```
+
+## Discounted Price
+
+<hr>
+
+```{r phones7}
+top_phones %>%
+  html_nodes(".crwProductDetail .crwActualPrice") %>%
+  html_text() %>%
+  str_trim() %>%
+  str_sub(start = 5) %>%
+  str_replace(",", "") %>%
+  str_split("\\.") %>%
+  map_chr(1) %>%
+  as.numeric() -> discounted_price
+
+discounted_price
+```
+
+## Putting it all together...
+
+<hr>
+
+```{r phones8}
+best_sellers <- tibble(title = mobile_name, color = mobile_color, 
+  rating = mobile_rating, reviews = mobile_review, `Real Price (Rs.)` = real_price,
+  `Discount Price (Rs.)` = discounted_price)
+
+best_sellers
+```
+
+## IMDB Top 50
+
+<hr>
+
+## robotstxt
+
+<hr>
+
+```{r imdb1}
+paths_allowed(
+  paths = c("https://www.imdb.com/search/title?groups=top_250&sort=user_rating")
+)
+```
+
+## Read Web Page
+
+<hr>
+
+```{r imdb2}
+imdb <- read_html("https://www.imdb.com/search/title?groups=top_250&sort=user_rating")
+imdb
+```
+
+## Title
+
+<hr>
+
+```{r imdb3}
+imdb %>%
+  html_nodes(".lister-item-content h3 a") %>%
+  html_text() -> movie_title
+
+movie_title
+```
+
+## Year of Release
+
+<hr>
+
+```{r imdb4}
+imdb %>%
+  html_nodes(".lister-item-content h3 .lister-item-year") %>%
+  html_text() %>%
+  str_sub(start = 2, end = 5) %>%
+  as.Date(format = "%Y") %>%
+  year() -> movie_year
+
+movie_year
+```
+
+## Certificate
+
+<hr>
+
+```{r imdb5}
+imdb %>%
+  html_nodes(".lister-item-content p .certificate") %>%
+  html_text() -> movie_certificate
+
+movie_certificate
+```
+
+## Runtime
+
+<hr>
+
+```{r imdb6}
+imdb %>%
+  html_nodes(".lister-item-content p .runtime") %>%
+  html_text() %>%
+  str_split(" ") %>%
+  map_chr(1) %>%
+  as.numeric() -> movie_runtime
+
+movie_runtime
+```
+
+## Genre
+
+<hr>
+
+```{r imdb7}
+imdb %>%
+  html_nodes(".lister-item-content p .genre") %>%
+  html_text() %>%
+  str_trim() -> movie_genre
+
+movie_genre
+```
+
+## Rating
+
+<hr>
+
+```{r imdb8}
+imdb %>%
+  html_nodes(".ratings-bar .ratings-imdb-rating") %>%
+  html_attr("data-value") %>% 
+  as.numeric() -> movie_rating
+
+movie_rating
+```
+
+## Votes
+
+<hr>
+
+```{r imdb9}
+imdb %>%
+  html_nodes(xpath = '//meta[@itemprop="ratingCount"]') %>% 
+  html_attr('content') %>% 
+  as.numeric() -> movie_votes
+
+movie_votes
+```
+
+## Revenue
+
+<hr>
+
+**Revenue not available for 31 and 47 movie number**
+
+```{r imdb10}
+imdb %>%
+  html_nodes(xpath = '//span[@name="nv"]') %>%
+  html_text() %>%
+  str_extract(pattern = "^\\$.*") %>%
+  na.omit() %>%
+  as.character() %>%
+  append(values = NA, after = 30) %>%
+  append(values = NA, after = 46) %>%
+  str_sub(start = 2, end = nchar(.) - 1) %>%
+  as.numeric() -> movie_revenue
+
+movie_revenue
+```  
+
+## Putting it all together...
+
+<hr>
+
+```{r imdb11}
+top_50 <- tibble(title = movie_title, release = movie_year, 
+    `runtime (mins)` = movie_runtime, genre = movie_genre, rating = movie_rating, 
+    votes = movie_votes, `revenue ($ millions)` = movie_revenue)
+
+top_50
+```
+
+## Top 50 Websites
+
+<hr>
+
+## robotstxt
+
+<hr>
+
+```{r web1}
+paths_allowed(
+  paths = c("https://www.similarweb.com/top-websites")
+)
+```
+
+## Read Web Page
+
+<hr>
+
+```{r web2}
+top_sites <- read_html("https://www.similarweb.com/top-websites")
+top_sites
+```
+
+## Website Ranking
+
+<hr>
+
+```{r web3}
+top_sites %>%
+  html_node("table") %>%
+  html_table() -> ranking
+
+ranking
+```
+
+## Rename Columns
+
+<hr>
+
+```{r web5}
+col_names <- c("ranking", "domain", "category", "change", 
+  "avg_time_on_site", "avg_pages_per_visit", "bounce_rate")
+colnames(ranking) <- col_names
+head(ranking)
+```
+
+## Top Categories
+
+<hr>
+
+```{r web6}
+ranking %>%
+  count(category, sort = TRUE)
+```
+
 ## RBI Governors
 
 <hr>
@@ -122,12 +451,12 @@ paths_allowed(
 )
 ```
 
-## Read HTML
+## Read Web Page
 
 <hr>
 
 ```{r rbi2}
-rbi_guv <- xml2::read_html("https://en.wikipedia.org/wiki/List_of_Governors_of_Reserve_Bank_of_India")
+rbi_guv <- read_html("https://en.wikipedia.org/wiki/List_of_Governors_of_Reserve_Bank_of_India")
 rbi_guv
 ```
 
@@ -140,13 +469,7 @@ rbi_guv %>%
   html_nodes("table") %>%
   html_table() %>%
   extract2(2) -> profile
-```
 
-## List of Governors
-
-<hr>
-
-```{r rbi4}
 profile
 ```
 
@@ -208,264 +531,6 @@ backgrounds %>%
   xlab("Background") + ylab("Count") +
   ggtitle("Background of RBI Governors")
 ```
-
-## Top 50 Websites
-
-<hr>
-
-## robotstxt
-
-<hr>
-
-```{r web1}
-paths_allowed(
-  paths = c("https://www.similarweb.com/top-websites")
-)
-```
-
-## Read Web Page
-
-<hr>
-
-```{r web2}
-top_sites <- read_html("https://www.similarweb.com/top-websites")
-top_sites
-```
-
-## Website Ranking
-
-<hr>
-
-```{r web3}
-top_sites %>%
-  html_node("table") %>%
-  html_table() -> ranking
-```
-
-## Website Ranking
-
-```{r web4}
-ranking
-```
-
-## Rename Columns
-
-<hr>
-
-```{r web5}
-col_names <- c("ranking", "domain", "category", "change", "avg_time_on_site",
-               "avg_pages_per_visit", "bounce_rate")
-colnames(ranking) <- col_names
-head(ranking)
-```
-
-## Top Categories
-
-<hr>
-
-```{r web6}
-ranking %>%
-  count(category)
-```
-
-## Best Selling Phones
-
-<hr>
-
-## robotstxt
-
-<hr>
-
-```{r phones1}
-paths_allowed(
-  paths = c("https://www.amazon.in/mobile-phones/b?ie=UTF8&node=1389401031&ref_=nav_shopall_sbc_mobcomp_all_mobiles")
-)
-```
-
-## Read Web Page
-
-<hr>
-
-```{r phones2}
-top_phones <- read_html("https://www.amazon.in/mobile-phones/b?ie=UTF8&node=1389401031&ref_=nav_shopall_sbc_mobcomp_all_mobiles")
-top_phones
-```
-
-## Brand Name
-
-<hr>
-
-```{r phones3}
-top_phones %>%
-  html_nodes(".crwTitle a") %>%
-  html_text()
-```
-
-## Rating
-
-<hr>
-
-```{r phones4}
-top_phones %>%
-  html_nodes(".crwProductDetail span .a-icon-alt") %>%
-  html_text()
-```
-
-## Number of Reviews
-
-<hr>
-
-```{r phones5}
-top_phones %>%
-  html_nodes(".crwProductDetail span.a-size-small .a-link-normal") %>%
-  html_text()
-```
-
-## Actual Price
-
-<hr>
-
-```{r phones6}
-top_phones %>%
-  html_nodes(".crwProductDetail .crwPrice .a-text-strike") %>%
-  html_text()
-```
-
-## Discounted Price
-
-<hr>
-
-```{r phones7}
-top_phones %>%
-  html_nodes(".crwProductDetail .crwActualPrice") %>%
-  html_text()
-```
-
-## IMDB Top 50
-
-<hr>
-
-## robotstxt
-
-<hr>
-
-```{r imdb1}
-paths_allowed(
-  paths = c("https://www.imdb.com/search/title?groups=top_250&sort=user_rating")
-)
-```
-
-## Read Web Page
-
-<hr>
-
-```{r imdb2}
-imdb <- read_html("https://www.imdb.com/search/title?groups=top_250&sort=user_rating")
-imdb
-```
-
-## Title
-
-<hr>
-
-```{r imdb3}
-imdb %>%
-  html_nodes(".lister-item-content h3 a") %>%
-  html_text() -> title
-
-title
-```
-
-## Year of Release
-
-<hr>
-
-```{r imdb4}
-imdb %>%
-  html_nodes(".lister-item-content h3 .lister-item-year") %>%
-  html_text() -> year
-
-year
-```
-
-## Certificate
-
-<hr>
-
-```{r imdb5}
-imdb %>%
-  html_nodes(".lister-item-content p .certificate") %>%
-  html_text() -> certificate
-
-certificate
-```
-
-## Runtime
-
-<hr>
-
-```{r imdb6}
-imdb %>%
-  html_nodes(".lister-item-content p .runtime") %>%
-  html_text() -> runtime
-
-runtime
-```
-
-## Genre
-
-<hr>
-
-```{r imdb7}
-imdb %>%
-  html_nodes(".lister-item-content p .genre") %>%
-  html_text() -> genre
-
-genre
-```
-
-## Rating
-
-<hr>
-
-```{r imdb8}
-imdb %>%
-  html_nodes(".ratings-bar .ratings-imdb-rating") %>%
-  html_attr("data-value") -> rating
-
-rating
-```
-
-## Votes
-
-<hr>
-
-```{r imdb9}
-imdb %>%
-  html_nodes(xpath = '//meta[@itemprop="ratingCount"]') %>% 
-  html_attr('content') -> votes
-
-votes
-```
-
-## Revenue
-
-<hr>
-
-**Revenue not available for 31 and 47 movie number**
-
-```{r imdb10}
-imdb %>%
-  html_nodes(xpath = '//span[@name="nv"]') %>%
-  html_text() %>%
-  str_extract(pattern = "^\\$.*") %>%
-  na.omit() %>%
-  as.character() %>%
-  append(values = NA, after = 30) %>%
-  append(values = NA, after = 46) -> revenue
-
-revenue
-```  
 
 ## {data-background="thankyou.png"}
 
