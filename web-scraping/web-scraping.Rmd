@@ -532,5 +532,13 @@ backgrounds %>%
   ggtitle("Background of RBI Governors")
 ```
 
+## Summary
+
+<hr>
+
+## About Rsquared Academy
+
+<hr>
+
 ## {data-background="thankyou.png"}
 

@@ -33,6 +33,7 @@ library(forcats)
 library(magrittr)
 library(dplyr)
 library(readr)
+library(descriptr)
 ```
 
 ```{r cat1, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
@@ -40,13 +41,10 @@ library(forcats)
 library(magrittr)
 library(dplyr)
 library(readr)
+library(descriptr)
 ```
 
 ## Categorical/Qualitative Data
-
-<hr>
-
-## Ordinal Data
 
 <hr>
 
@@ -54,21 +52,66 @@ library(readr)
 
 <hr>
 
+## Ordinal Data
+
+<hr>
+
 ## Factors
 
 <hr>
+
+```{r factors1}
+str(descriptr::mtcarz)
+```
 
 ## Levels
 
 <hr>
 
+```{r nlevels}
+nlevels(mtcarz$gear)
+```
+
 ## Level Names
 
 <hr>
 
+```{r levels}
+levels(mtcarz$gear)
+```
+
 ## Ordered Factors
 
 <hr>
+
+```{r ordered}
+ordered(mtcarz$gear, levels = c(3, 4, 5))
+```
+
+## Convert to Factor
+
+<hr>
+
+```{r convert1}
+as.factor(mtcars$cyl)
+```
+
+## Labels
+
+<hr>
+
+```{r convert2}
+factor(mtcars$cyl, labels = c("four", "six", "eight"))
+```
+
+## Exclude Levels
+
+<hr>
+
+```{r convert3}
+factor(mtcars$cyl, exclude = 4)
+```
+
 
 ## Case Study: Data 
 
@@ -79,7 +122,7 @@ web_traffic <-
   read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web_traffic.csv',
     col_types = list(
       col_factor(levels = c("google", "facebook", "affiliates", 
-    	"bing", "yahoo", "twitter", "instagram", "unknown", "direct")
+      "bing", "yahoo", "twitter", "instagram", "unknown", "direct")
       )
     )
   )

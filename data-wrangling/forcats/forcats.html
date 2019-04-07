@@ -1861,35 +1861,81 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(forcats)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(magrittr)</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">library</span>(readr)</a></code></pre></div>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">library</span>(readr)</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw">library</span>(descriptr)</a></code></pre></div>
 </section>
 <section id="categoricalqualitative-data" class="slide level2">
 <h2>Categorical/Qualitative Data</h2>
-<hr>
-</section>
-<section id="ordinal-data" class="slide level2">
-<h2>Ordinal Data</h2>
 <hr>
 </section>
 <section id="nominal-data" class="slide level2">
 <h2>Nominal Data</h2>
 <hr>
 </section>
+<section id="ordinal-data" class="slide level2">
+<h2>Ordinal Data</h2>
+<hr>
+</section>
 <section id="factors" class="slide level2">
 <h2>Factors</h2>
 <hr>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">str</span>(descriptr<span class="op">::</span>mtcarz)</a></code></pre></div>
+<pre><code>## 'data.frame':    32 obs. of  11 variables:
+##  $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
+##  $ cyl : Factor w/ 3 levels &quot;4&quot;,&quot;6&quot;,&quot;8&quot;: 2 2 1 2 3 2 3 1 1 2 ...
+##  $ disp: num  160 160 108 258 360 ...
+##  $ hp  : num  110 110 93 110 175 105 245 62 95 123 ...
+##  $ drat: num  3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
+##  $ wt  : num  2.62 2.88 2.32 3.21 3.44 ...
+##  $ qsec: num  16.5 17 18.6 19.4 17 ...
+##  $ vs  : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 2 2 1 2 1 2 2 2 ...
+##  $ am  : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 2 2 2 1 1 1 1 1 1 1 ...
+##  $ gear: Factor w/ 3 levels &quot;3&quot;,&quot;4&quot;,&quot;5&quot;: 2 2 2 1 1 1 1 2 2 2 ...
+##  $ carb: Factor w/ 6 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,..: 4 4 1 1 2 1 4 2 2 4 ...</code></pre>
 </section>
 <section id="levels" class="slide level2">
 <h2>Levels</h2>
 <hr>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">nlevels</span>(mtcarz<span class="op">$</span>gear)</a></code></pre></div>
+<pre><code>## [1] 3</code></pre>
 </section>
 <section id="level-names" class="slide level2">
 <h2>Level Names</h2>
 <hr>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">levels</span>(mtcarz<span class="op">$</span>gear)</a></code></pre></div>
+<pre><code>## [1] &quot;3&quot; &quot;4&quot; &quot;5&quot;</code></pre>
 </section>
 <section id="ordered-factors" class="slide level2">
 <h2>Ordered Factors</h2>
 <hr>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">ordered</span>(mtcarz<span class="op">$</span>gear, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>))</a></code></pre></div>
+<pre><code>##  [1] 4 4 4 3 3 3 3 4 4 4 4 3 3 3 3 3 3 4 4 4 3 3 3 3 3 4 5 5 5 5 5 4
+## Levels: 3 &lt; 4 &lt; 5</code></pre>
+</section>
+<section id="convert-to-factor" class="slide level2">
+<h2>Convert to Factor</h2>
+<hr>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">as.factor</span>(mtcars<span class="op">$</span>cyl)</a></code></pre></div>
+<pre><code>##  [1] 6 6 4 6 8 6 8 4 4 6 6 8 8 8 8 8 8 4 4 4 4 8 8 8 8 4 4 4 8 6 8 4
+## Levels: 4 6 8</code></pre>
+</section>
+<section id="labels" class="slide level2">
+<h2>Labels</h2>
+<hr>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">factor</span>(mtcars<span class="op">$</span>cyl, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;four&quot;</span>, <span class="st">&quot;six&quot;</span>, <span class="st">&quot;eight&quot;</span>))</a></code></pre></div>
+<pre><code>##  [1] six   six   four  six   eight six   eight four  four  six   six  
+## [12] eight eight eight eight eight eight four  four  four  four  eight
+## [23] eight eight eight four  four  four  eight six   eight four 
+## Levels: four six eight</code></pre>
+</section>
+<section id="exclude-levels" class="slide level2">
+<h2>Exclude Levels</h2>
+<hr>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">factor</span>(mtcars<span class="op">$</span>cyl, <span class="dt">exclude =</span> <span class="dv">4</span>)</a></code></pre></div>
+<pre><code>##  [1] 6    6    &lt;NA&gt; 6    8    6    8    &lt;NA&gt; &lt;NA&gt; 6    6    8    8    8   
+## [15] 8    8    8    &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; 8    8    8    8    &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;
+## [29] 8    6    8    &lt;NA&gt;
+## Levels: 6 8</code></pre>
 </section>
 <section id="case-study-data" class="slide level2">
 <h2>Case Study: Data</h2>
@@ -1913,8 +1959,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="extract-column" class="slide level2">
 <h2>Extract Column</h2>
 <hr>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">traffics &lt;-<span class="st"> </span><span class="kw">use_series</span>(web_traffic, traffics)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">traffics</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">traffics &lt;-<span class="st"> </span><span class="kw">use_series</span>(web_traffic, traffics)</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">traffics</a></code></pre></div>
 <pre><code>##     [1] google     google     google     google     google     google    
 ##     [7] google     google     google     google     google     google    
 ##    [13] google     google     google     google     google     google    
@@ -9975,7 +10021,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="tabulate-referrers" class="slide level2">
 <h2>Tabulate Referrers</h2>
 <hr>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">fct_count</span>(traffics)</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">fct_count</span>(traffics)</a></code></pre></div>
 <pre><code>## # A tibble: 9 x 2
 ##   f              n
 ##   &lt;fct&gt;      &lt;int&gt;
@@ -9992,7 +10038,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="levels-1" class="slide level2">
 <h2>Levels</h2>
 <hr>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">levels</span>(traffics)</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">levels</span>(traffics)</a></code></pre></div>
 <pre><code>## [1] &quot;google&quot;     &quot;facebook&quot;   &quot;affiliates&quot; &quot;bing&quot;       &quot;yahoo&quot;     
 ## [6] &quot;twitter&quot;    &quot;instagram&quot;  &quot;unknown&quot;    &quot;direct&quot;</code></pre>
 </section>
@@ -10005,18 +10051,18 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="sort-referrer-by-frequency" class="slide level2">
 <h2>Sort Referrer by Frequency</h2>
 <hr>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">traffics <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="st">  </span><span class="kw">fct_infreq</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="st">  </span><span class="kw">levels</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">traffics <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="st">  </span><span class="kw">fct_infreq</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb23-3" data-line-number="3"><span class="st">  </span><span class="kw">levels</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;google&quot;     &quot;facebook&quot;   &quot;affiliates&quot; &quot;bing&quot;       &quot;yahoo&quot;     
 ## [6] &quot;twitter&quot;    &quot;instagram&quot;  &quot;unknown&quot;    &quot;direct&quot;</code></pre>
 </section>
 <section id="sort-referrer-by-order-of-appearance" class="slide level2">
 <h2>Sort Referrer by Order of Appearance</h2>
 <hr>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">traffics <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">  </span><span class="kw">fct_inorder</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="st">  </span><span class="kw">levels</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">traffics <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="st">  </span><span class="kw">fct_inorder</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb25-3" data-line-number="3"><span class="st">  </span><span class="kw">levels</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;google&quot;     &quot;facebook&quot;   &quot;direct&quot;     &quot;unknown&quot;    &quot;yahoo&quot;     
 ## [6] &quot;twitter&quot;    &quot;bing&quot;       &quot;affiliates&quot; &quot;instagram&quot;</code></pre>
 </section>
@@ -10029,16 +10075,16 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="reverse-levels-1" class="slide level2">
 <h2>Reverse Levels</h2>
 <hr>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">traffics <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="st">  </span><span class="kw">fct_rev</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="st">  </span><span class="kw">levels</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">traffics <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb27-2" data-line-number="2"><span class="st">  </span><span class="kw">fct_rev</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb27-3" data-line-number="3"><span class="st">  </span><span class="kw">levels</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;direct&quot;     &quot;unknown&quot;    &quot;instagram&quot;  &quot;twitter&quot;    &quot;yahoo&quot;     
 ## [6] &quot;bing&quot;       &quot;affiliates&quot; &quot;facebook&quot;   &quot;google&quot;</code></pre>
 </section>
 <section id="tabulate-referrer" class="slide level2">
 <h2>Tabulate Referrer</h2>
 <hr>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">fct_count</span>(traffics)</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw">fct_count</span>(traffics)</a></code></pre></div>
 <pre><code>## # A tibble: 9 x 2
 ##   f              n
 ##   &lt;fct&gt;      &lt;int&gt;
@@ -10061,11 +10107,11 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="collapse-referrer-categories" class="slide level2">
 <h2>Collapse Referrer Categories</h2>
 <hr>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">traffics <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="st">  </span><span class="kw">fct_collapse</span>(</a>
-<a class="sourceLine" id="cb17-3" data-line-number="3">  <span class="dt">social =</span> <span class="kw">c</span>(<span class="st">&quot;facebook&quot;</span>, <span class="st">&quot;twitter&quot;</span>, <span class="st">&quot;instagram&quot;</span>),</a>
-<a class="sourceLine" id="cb17-4" data-line-number="4">  <span class="dt">search =</span> <span class="kw">c</span>(<span class="st">&quot;google&quot;</span>, <span class="st">&quot;bing&quot;</span>, <span class="st">&quot;yahoo&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="st">  </span><span class="kw">fct_count</span>() </a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">traffics <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="st">  </span><span class="kw">fct_collapse</span>(</a>
+<a class="sourceLine" id="cb31-3" data-line-number="3">  <span class="dt">social =</span> <span class="kw">c</span>(<span class="st">&quot;facebook&quot;</span>, <span class="st">&quot;twitter&quot;</span>, <span class="st">&quot;instagram&quot;</span>),</a>
+<a class="sourceLine" id="cb31-4" data-line-number="4">  <span class="dt">search =</span> <span class="kw">c</span>(<span class="st">&quot;google&quot;</span>, <span class="st">&quot;bing&quot;</span>, <span class="st">&quot;yahoo&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb31-5" data-line-number="5"><span class="st">  </span><span class="kw">fct_count</span>() </a></code></pre></div>
 <pre><code>## # A tibble: 5 x 2
 ##   f              n
 ##   &lt;fct&gt;      &lt;int&gt;
@@ -10096,9 +10142,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 7 instagram   3907
 ## 8 unknown     2657
 ## 9 direct      1350</code></pre>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">traffics <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="st">  </span><span class="kw">fct_lump</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb20-3" data-line-number="3"><span class="st">  </span><span class="kw">table</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">traffics <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="st">  </span><span class="kw">fct_lump</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb34-3" data-line-number="3"><span class="st">  </span><span class="kw">table</span>()</a></code></pre></div>
 <pre><code>## .
 ##     google   facebook affiliates       bing      yahoo    twitter 
 ##       9229       8135       7641       5893       4899       4521 
@@ -10120,9 +10166,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 7 instagram   3907
 ## 8 unknown     2657
 ## 9 direct      1350</code></pre>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">traffics <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="st">  </span><span class="kw">fct_lump</span>(<span class="dt">n =</span> <span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb23-3" data-line-number="3"><span class="st">  </span><span class="kw">table</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">traffics <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb37-2" data-line-number="2"><span class="st">  </span><span class="kw">fct_lump</span>(<span class="dt">n =</span> <span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb37-3" data-line-number="3"><span class="st">  </span><span class="kw">table</span>()</a></code></pre></div>
 <pre><code>## .
 ##     google   facebook affiliates      Other 
 ##       9229       8135       7641      23227</code></pre>
@@ -10148,9 +10194,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 7 instagram   3907    8.1 
 ## 8 unknown     2657    5.51
 ## 9 direct      1350    2.8</code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">traffics <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb26-2" data-line-number="2"><span class="st">  </span><span class="kw">fct_lump</span>(<span class="dt">prop =</span> <span class="fl">0.1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb26-3" data-line-number="3"><span class="st">  </span><span class="kw">table</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">traffics <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb40-2" data-line-number="2"><span class="st">  </span><span class="kw">fct_lump</span>(<span class="dt">prop =</span> <span class="fl">0.1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb40-3" data-line-number="3"><span class="st">  </span><span class="kw">table</span>()</a></code></pre></div>
 <pre><code>## .
 ##     google   facebook affiliates       bing      yahoo      Other 
 ##       9229       8135       7641       5893       4899      12435</code></pre>
@@ -10170,9 +10216,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 7 instagram   3907    8.1 
 ## 8 unknown     2657    5.51
 ## 9 direct      1350    2.8</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">traffics <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="st">  </span><span class="kw">fct_lump</span>(<span class="dt">prop =</span> <span class="fl">0.15</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb29-3" data-line-number="3"><span class="st">  </span><span class="kw">table</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1">traffics <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb43-2" data-line-number="2"><span class="st">  </span><span class="kw">fct_lump</span>(<span class="dt">prop =</span> <span class="fl">0.15</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb43-3" data-line-number="3"><span class="st">  </span><span class="kw">table</span>()</a></code></pre></div>
 <pre><code>## .
 ##     google   facebook affiliates      Other 
 ##       9229       8135       7641      23227</code></pre>
@@ -10192,9 +10238,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 7 affiliates  7641
 ## 8 facebook    8135
 ## 9 google      9229</code></pre>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">traffics <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb32-2" data-line-number="2"><span class="st">  </span><span class="kw">fct_lump</span>(<span class="dt">n =</span> <span class="dv">-3</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb32-3" data-line-number="3"><span class="st">  </span><span class="kw">table</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">traffics <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb46-2" data-line-number="2"><span class="st">  </span><span class="kw">fct_lump</span>(<span class="dt">n =</span> <span class="dv">-3</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb46-3" data-line-number="3"><span class="st">  </span><span class="kw">table</span>()</a></code></pre></div>
 <pre><code>## .
 ## instagram   unknown    direct     Other 
 ##      3907      2657      1350     40318</code></pre>
@@ -10214,9 +10260,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 7 instagram   3907    8.1 
 ## 8 unknown     2657    5.51
 ## 9 direct      1350    2.8</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">traffics <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb35-2" data-line-number="2"><span class="st">  </span><span class="kw">fct_lump</span>(<span class="dt">prop =</span> <span class="fl">-0.1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb35-3" data-line-number="3"><span class="st">  </span><span class="kw">table</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1">traffics <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb49-2" data-line-number="2"><span class="st">  </span><span class="kw">fct_lump</span>(<span class="dt">prop =</span> <span class="fl">-0.1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb49-3" data-line-number="3"><span class="st">  </span><span class="kw">table</span>()</a></code></pre></div>
 <pre><code>## .
 ##   twitter instagram   unknown    direct     Other 
 ##      4521      3907      2657      1350     35797</code></pre>
@@ -10236,7 +10282,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="replace-levels-with-other" class="slide level2">
 <h2>Replace Levels with Other</h2>
 <hr>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="kw">fct_other</span>(traffics, <span class="dt">keep =</span> <span class="kw">c</span>(<span class="st">&quot;google&quot;</span>, <span class="st">&quot;yahoo&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="kw">fct_other</span>(traffics, <span class="dt">keep =</span> <span class="kw">c</span>(<span class="st">&quot;google&quot;</span>, <span class="st">&quot;yahoo&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;google&quot; &quot;yahoo&quot;  &quot;Other&quot;</code></pre>
 </section>
 <section id="replace-levels-1" class="slide level2">
@@ -10248,7 +10294,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="replace-levels-with-other-1" class="slide level2">
 <h2>Replace Levels with Other</h2>
 <hr>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="kw">fct_other</span>(traffics, <span class="dt">drop =</span> <span class="kw">c</span>(<span class="st">&quot;instagram&quot;</span>, <span class="st">&quot;twitter&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="kw">fct_other</span>(traffics, <span class="dt">drop =</span> <span class="kw">c</span>(<span class="st">&quot;instagram&quot;</span>, <span class="st">&quot;twitter&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;google&quot;     &quot;facebook&quot;   &quot;affiliates&quot; &quot;bing&quot;       &quot;yahoo&quot;     
 ## [6] &quot;unknown&quot;    &quot;direct&quot;     &quot;Other&quot;</code></pre>
 </section>
@@ -10261,13 +10307,13 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="recode-levels-1" class="slide level2">
 <h2>Recode Levels</h2>
 <hr>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw">fct_recode</span>(traffics, <span class="dt">search =</span> <span class="st">&quot;bing&quot;</span>, </a>
-<a class="sourceLine" id="cb41-2" data-line-number="2">                     <span class="dt">search =</span> <span class="st">&quot;yahoo&quot;</span>, </a>
-<a class="sourceLine" id="cb41-3" data-line-number="3">                     <span class="dt">search =</span> <span class="st">&quot;google&quot;</span>,</a>
-<a class="sourceLine" id="cb41-4" data-line-number="4">                     <span class="dt">social =</span> <span class="st">&quot;facebook&quot;</span>, </a>
-<a class="sourceLine" id="cb41-5" data-line-number="5">                     <span class="dt">social =</span> <span class="st">&quot;twitter&quot;</span>, </a>
-<a class="sourceLine" id="cb41-6" data-line-number="6">                     <span class="dt">social =</span> <span class="st">&quot;instagram&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb41-7" data-line-number="7"><span class="st">  </span><span class="kw">levels</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="kw">fct_recode</span>(traffics, <span class="dt">search =</span> <span class="st">&quot;bing&quot;</span>, </a>
+<a class="sourceLine" id="cb55-2" data-line-number="2">                     <span class="dt">search =</span> <span class="st">&quot;yahoo&quot;</span>, </a>
+<a class="sourceLine" id="cb55-3" data-line-number="3">                     <span class="dt">search =</span> <span class="st">&quot;google&quot;</span>,</a>
+<a class="sourceLine" id="cb55-4" data-line-number="4">                     <span class="dt">social =</span> <span class="st">&quot;facebook&quot;</span>, </a>
+<a class="sourceLine" id="cb55-5" data-line-number="5">                     <span class="dt">social =</span> <span class="st">&quot;twitter&quot;</span>, </a>
+<a class="sourceLine" id="cb55-6" data-line-number="6">                     <span class="dt">social =</span> <span class="st">&quot;instagram&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb55-7" data-line-number="7"><span class="st">  </span><span class="kw">levels</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;search&quot;     &quot;social&quot;     &quot;affiliates&quot; &quot;unknown&quot;    &quot;direct&quot;</code></pre>
 </section>
 <section id="reorder-levels" class="slide level2">
@@ -10279,7 +10325,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="reorder-levels-1" class="slide level2">
 <h2>Reorder Levels</h2>
 <hr>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw">fct_relevel</span>(traffics, <span class="st">&quot;twitter&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1"><span class="kw">fct_relevel</span>(traffics, <span class="st">&quot;twitter&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;twitter&quot;    &quot;google&quot;     &quot;facebook&quot;   &quot;affiliates&quot; &quot;bing&quot;      
 ## [6] &quot;yahoo&quot;      &quot;instagram&quot;  &quot;unknown&quot;    &quot;direct&quot;</code></pre>
 </section>
@@ -10292,7 +10338,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="reorder-levels-3" class="slide level2">
 <h2>Reorder Levels</h2>
 <hr>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw">fct_relevel</span>(traffics, <span class="st">&quot;google&quot;</span>, <span class="dt">after =</span> <span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1"><span class="kw">fct_relevel</span>(traffics, <span class="st">&quot;google&quot;</span>, <span class="dt">after =</span> <span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;facebook&quot;   &quot;affiliates&quot; &quot;google&quot;     &quot;bing&quot;       &quot;yahoo&quot;     
 ## [6] &quot;twitter&quot;    &quot;instagram&quot;  &quot;unknown&quot;    &quot;direct&quot;</code></pre>
 </section>
@@ -10305,14 +10351,14 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="reorder-levels-5" class="slide level2">
 <h2>Reorder Levels</h2>
 <hr>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="kw">fct_relevel</span>(traffics, <span class="st">&quot;facebook&quot;</span>, <span class="dt">after =</span> <span class="ot">Inf</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1"><span class="kw">fct_relevel</span>(traffics, <span class="st">&quot;facebook&quot;</span>, <span class="dt">after =</span> <span class="ot">Inf</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;google&quot;     &quot;affiliates&quot; &quot;bing&quot;       &quot;yahoo&quot;      &quot;twitter&quot;   
 ## [6] &quot;instagram&quot;  &quot;unknown&quot;    &quot;direct&quot;     &quot;facebook&quot;</code></pre>
 </section>
 <section id="data" class="slide level2">
 <h2>Data</h2>
 <hr>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1">response</a></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1">response</a></code></pre></div>
 <pre><code>## # A tibble: 1,000 x 1
 ##    response        
 ##    &lt;ord&gt;           
@@ -10331,8 +10377,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="data-1" class="slide level2">
 <h2>Data</h2>
 <hr>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">responses &lt;-<span class="st"> </span><span class="kw">use_series</span>(response, response)</a>
-<a class="sourceLine" id="cb51-2" data-line-number="2">responses</a></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1">responses &lt;-<span class="st"> </span><span class="kw">use_series</span>(response, response)</a>
+<a class="sourceLine" id="cb65-2" data-line-number="2">responses</a></code></pre></div>
 <pre><code>##    [1] dislike          like somewhat    dislike          neutral         
 ##    [5] dislike          like somewhat    like somewhat    like somewhat   
 ##    [9] dislike somewhat neutral          like             dislike somewhat
@@ -10594,7 +10640,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="shift-levels-1" class="slide level2">
 <h2>Shift Levels</h2>
 <hr>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="kw">fct_shift</span>(responses, <span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1"><span class="kw">fct_shift</span>(responses, <span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;neutral&quot;          &quot;dislike somewhat&quot; &quot;dislike&quot;         
 ## [4] &quot;like&quot;             &quot;like somewhat&quot;</code></pre>
 </section>
@@ -10607,7 +10653,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="shift-levels-3" class="slide level2">
 <h2>Shift Levels</h2>
 <hr>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="kw">fct_shift</span>(responses, <span class="dv">-2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1"><span class="kw">fct_shift</span>(responses, <span class="dv">-2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">levels</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;dislike somewhat&quot; &quot;dislike&quot;          &quot;like&quot;            
 ## [4] &quot;like somewhat&quot;    &quot;neutral&quot;</code></pre>
 </section>

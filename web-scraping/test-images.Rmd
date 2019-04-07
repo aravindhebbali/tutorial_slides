@@ -1,0 +1,94 @@
+---
+output: _output.yaml
+---
+
+## {data-background="img/ws_cover_image.png"}
+
+## {data-background="img/ws_agenda.png"}
+
+<br>
+<br>
+<br>
+<br>
+
+- what?
+- why?
+- how?
+- use cases
+- HTML basics
+- case studies
+
+## {data-background="img/ws_section_intro.png"}
+
+## {data-background="img/ws_what.png"}
+
+## {data-background="img/ws_how.png"}
+
+## {data-background="img/ws_why_1.png"}
+
+## {data-background="img/ws_why_2.png"}
+
+## {data-background="img/ws_why_1a.png"}
+
+## {data-background="img/ws_use_cases.png"}
+
+## {data-background="img/ws_case_studies.png"}
+
+## {data-background="img/ws_keep_in_mind.png"}
+
+## {data-background="img/ws_section_html.png"}
+
+## {data-background="img/ws_htmL_css_js.png"}
+
+## {data-background="img/ws_htmL_tags.png"}
+
+## {data-background="img/ws_htmL_dom.png"}
+
+## {data-background="img/ws_html_attributes.png"}
+
+## {data-background="img/ws_htmL_tags_2.png"}
+
+## {data-background="img/ws_htmL_xpath.png"}
+
+## {data-background="img/ws_section_case_studies.png"}
+
+## {data-background="img/ws_cs_top_mobiles.png"}
+
+## {data-background="img/ws_mobile_brand_name.png"}
+
+## {data-background="img/ws_mobile_color.png"}
+
+## {data-background="img/ws_mobile_rating.png"}
+
+## {data-background="img/ws_mobile_reviews.png"}
+
+## {data-background="img/ws_real_price.png"}
+
+## {data-background="img/ws_actual_price.png"}
+
+## {data-background="img/ws_cs_imdb_top_50.png"}
+
+## {data-background="img/ws_imdb_movie_name.png"}
+
+## {data-background="img/ws_imdb_movie_year.png"}
+
+## {data-background="img/ws_imdb_movie_certificate.png"}
+
+## {data-background="img/ws_imdb_movie_runtime.png"}
+
+## {data-background="img/ws_imdb_movie_genre.png"}
+
+## {data-background="img/ws_imdb_movie_rating.png"}
+
+## {data-background="img/ws_imdb_movie_votes.png"}
+
+## {data-background="img/ws_imdb_movie_revenue.png"}
+
+## {data-background="img/ws_cs_top_websites.png"}
+
+## {data-background="img/ws_cs_rbi_governors.png"}
+
+## {data-background="img/ws_section_summary.png"}
+
+## {data-background="img/thankyou.png"}
+
