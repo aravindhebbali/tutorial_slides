@@ -9,13 +9,13 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r cover_image, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/ws_meme.jpg")
+```
+
 ## Introduction
 
 <hr>
-
-```{r cover_image, echo=FALSE, fig.align='center'}
-knitr::include_graphics("web-scraping/img/ws_cover_image.png")
-```
 
 So you want to know the range of products being sold by your competitor. You go 
 to their website and see all the products (along with the details) and want to 
@@ -36,8 +36,8 @@ you like a more structured approach, try our free online course,
 
 <hr>
 
-```{r cover_what, echo=FALSE, fig.align='center'}
-knitr::include_graphics("web-scraping/img/ws_what.png")
+```{r cover_what, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/blog_ws_what_border.png")
 ```
 
 So, what exactly is web scraping or web mining or web harvesting? It is a 
@@ -50,8 +50,8 @@ pages to extract and store data in a format suitable for data analysis.
 
 <hr>
 
-```{r why, echo=FALSE, fig.align='center'}
-knitr::include_graphics("web-scraping/img/ws_why_2.png")
+```{r why, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/blog_ws_why_border.png")
 ```
 
 - data not available in a suitable format
@@ -63,8 +63,8 @@ knitr::include_graphics("web-scraping/img/ws_why_2.png")
 
 <hr>
 
-```{r how, echo=FALSE, fig.align='center'}
-knitr::include_graphics("web-scraping/img/ws_how.png")
+```{r how, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/blog_ws_how_border.png")
 ```
 
 - check robots.txt file
@@ -75,8 +75,8 @@ knitr::include_graphics("web-scraping/img/ws_how.png")
 
 <hr>
 
-```{r use_cases, echo=FALSE, fig.align='center'}
-knitr::include_graphics("web-scraping/img/ws_use_cases.png")
+```{r use_cases, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/blog_ws_use_cases_border.png")
 ```
 
 - scraping contact details
@@ -90,8 +90,8 @@ knitr::include_graphics("web-scraping/img/ws_use_cases.png")
 
 <hr>
 
-```{r keep_in_mind, echo=FALSE, fig.align='center'}
-knitr::include_graphics("web-scraping/img/ws_keep_in_mind.png")
+```{r keep_in_mind, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/blog_ws_keep_in_mind_border.png")
 ```
 
 - best for static & well structured web pages
@@ -106,7 +106,7 @@ violating any terms and conditions
 
 <hr>
 
-```{r case_studies, echo=FALSE, fig.align='center', out.width="100%"}
+```{r case_studies, echo=FALSE, fig.align='center', out.width="80%"}
 knitr::include_graphics("web-scraping/img/blog_ws_case_studies_border.png")
 ```
 
@@ -127,40 +127,40 @@ able to start scraping data from websites.
 
 <hr>
 
-```{r html_css_js, echo=FALSE, fig.align='center'}
-knitr::include_graphics("web-scraping/img/ws_html_css_js.png")
+```{r html_css_js, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/html_css_js_2.png")
 ```
 
 ### HTML Tags
 
 <hr>
 
-```{r html_tags, echo=FALSE, fig.align='center'}
-knitr::include_graphics("web-scraping/img/ws_html_tags.png")
+```{r html_tags, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/html_tags.jpg")
 ```
 
 ### DOM 
 
 <hr>
 
-```{r html_dom, echo=FALSE, fig.align='center'}
-knitr::include_graphics("web-scraping/img/ws_html_dom.png")
+```{r html_dom, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/blog_ws_html_dom_border.png")
 ```
 
 ### HTML Attributes
 
 <hr>
 
-```{r html_attributes, echo=FALSE, fig.align='center'}
-knitr::include_graphics("web-scraping/img/ws_html_attributes.png")
+```{r html_attributes, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/blog_ws_html_attributes_crop.png")
 ```
 
 ### Class, Div & Style
 
 <hr>
 
-```{r html_tags_2, echo=FALSE, fig.align='center'}
-knitr::include_graphics("web-scraping/img/ws_html_tags_2.png")
+```{r html_tags_2, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/blog_ws_html_tags_2_border.png")
 ```
 
 ## Libraries
@@ -187,8 +187,152 @@ library(purrr)
 
 <hr>
 
-```{r top_mobiles, echo=FALSE, fig.align='center'}
-knitr::include_graphics("web-scraping/img/ws_cs_top_mobiles.png")
+```{r top_mobiles, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/blog_ws_cs_top_mobiles_border.png")
+```
+
+### Brand Name
+
+<hr>
+
+```{r mobile_brand_name, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/blog_ws_mobile_brand_name_border.png")
+```
+
+### Color
+
+<hr>
+
+```{r mobile_color, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/blog_ws_mobile_color_border.png")
+```
+
+### Rating
+
+<hr>
+
+```{r mobile_rating, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/blog_ws_mobile_rating_border.png")
+```
+
+### Number of Reviews
+
+<hr>
+
+```{r mobile_reviews, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/blog_ws_mobile_reviews_border.png")
+```
+
+### Real Price
+
+<hr>
+
+```{r mobile_real_price, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/blog_ws_real_price_border.png")
+```
+
+### Actual Price
+
+<hr>
+
+```{r mobile_actual_price, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/blog_ws_actual_price_border.png")
+```
+
+## IMDB Top 50 
+
+<hr>
+
+```{r imdb_top_50, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/blog_ws_cs_imdb_top_50_border.png")
+```
+
+### Title
+
+<hr>
+
+```{r imdb_movie_name, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/blog_ws_imdb_movie_name_border.png")
+```
+
+### Year of Release
+
+<hr>
+
+```{r imdb_movie_year, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/blog_ws_imdb_movie_year_border.png")
+```
+
+### Certificate
+
+<hr>
+
+```{r imdb_movie_certificate, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/blog_ws_imdb_movie_certificate_border.png")
+```
+
+### Runtime
+
+<hr>
+
+```{r imdb_movie_runtime, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/blog_ws_imdb_movie_runtime_border.png")
+```
+
+### Genre
+
+<hr>
+
+```{r imdb_movie_genre, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/blog_ws_imdb_movie_genre_border.png")
+```
+
+### Rating
+
+<hr>
+
+```{r imdb_movie_rating, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/blog_ws_imdb_movie_rating_border.png")
+```
+
+### XPATH
+
+<hr>
+
+```{r imdb_movie_xpath, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/blog_ws_html_xpath_border.png")
+```
+
+### Votes
+
+<hr>
+
+```{r imdb_movie_votes, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/blog_ws_imdb_movie_votes_border.png")
+```
+
+### Revenue
+
+<hr>
+
+```{r imdb_movie_revenue, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/blog_ws_imdb_movie_revenue_border.png")
+```
+
+## Top Websites
+
+<hr>
+
+```{r top_websites, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/blog_ws_cs_top_websites_border.png")
+```
+
+## RBI Governors
+
+<hr>
+
+```{r rbi_governors, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/blog_ws_rbi_governors_border.png")
 ```
 
 ## Summary
