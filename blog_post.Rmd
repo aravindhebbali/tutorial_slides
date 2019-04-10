@@ -218,7 +218,13 @@ top_phones
 knitr::include_graphics("web-scraping/img/ws_mobile_brand_name.png")
 ```
 
-```{r phones3}
+```{r phones3a}
+top_phones %>%
+  html_nodes(".crwTitle a") %>%
+  html_text() %>%
+```
+
+```{r phones3b}
 top_phones %>%
   html_nodes(".crwTitle a") %>%
   html_text() %>%
@@ -237,7 +243,13 @@ mobile_name
 knitr::include_graphics("web-scraping/img/ws_mobile_color.png")
 ```
 
-```{r phones 3b}
+```{r phones 3c}
+top_phones %>%
+  html_nodes(".crwTitle a") %>%
+  html_text() 
+```
+
+```{r phones 3d}
 top_phones %>%
   html_nodes(".crwTitle a") %>%
   html_text() %>%
@@ -257,7 +269,13 @@ mobile_color
 knitr::include_graphics("web-scraping/img/ws_mobile_rating.png")
 ```
 
-```{r phones4}
+```{r phones4a}
+top_phones %>%
+  html_nodes(".crwProductDetail span .a-icon-alt") %>%
+  html_text() 
+```
+
+```{r phones4b}
 top_phones %>%
   html_nodes(".crwProductDetail span .a-icon-alt") %>%
   html_text() %>%
@@ -275,7 +293,13 @@ mobile_rating
 knitr::include_graphics("web-scraping/img/ws_mobile_reviews.png")
 ```
 
-```{r phones5}
+```{r phones5a}
+top_phones %>%
+  html_nodes(".crwProductDetail span.a-size-small .a-link-normal") %>%
+  html_text() 
+```
+
+```{r phones5b}
 top_phones %>%
   html_nodes(".crwProductDetail span.a-size-small .a-link-normal") %>%
   html_text() %>%
@@ -293,7 +317,13 @@ mobile_review
 knitr::include_graphics("web-scraping/img/ws_real_price.png")
 ```
 
-```{r phones6}
+```{r phones6a}
+top_phones %>%
+  html_nodes(".crwProductDetail .crwPrice .a-text-strike") %>%
+  html_text() 
+```
+
+```{r phones6b}
 top_phones %>%
   html_nodes(".crwProductDetail .crwPrice .a-text-strike") %>%
   html_text() %>%
@@ -316,7 +346,13 @@ real_price
 knitr::include_graphics("web-scraping/img/ws_actual_price.png")
 ```
 
-```{r phones7}
+```{r phones7a}
+top_phones %>%
+  html_nodes(".crwProductDetail .crwActualPrice") %>%
+  html_text() 
+```
+
+```{r phones7b}
 top_phones %>%
   html_nodes(".crwProductDetail .crwActualPrice") %>%
   html_text() %>%
@@ -394,7 +430,13 @@ movie_title
 knitr::include_graphics("web-scraping/img/ws_imdb_movie_year.png")
 ```
 
-```{r imdb4}
+```{r imdb4a}
+imdb %>%
+  html_nodes(".lister-item-content h3 .lister-item-year") %>%
+  html_text() 
+```
+
+```{r imdb4b}
 imdb %>%
   html_nodes(".lister-item-content h3 .lister-item-year") %>%
   html_text() %>%
@@ -429,7 +471,13 @@ movie_certificate
 knitr::include_graphics("web-scraping/img/ws_imdb_movie_runtime.png")
 ```
 
-```{r imdb6}
+```{r imdb6a}
+imdb %>%
+  html_nodes(".lister-item-content p .runtime") %>%
+  html_text() 
+```
+
+```{r imdb6b}
 imdb %>%
   html_nodes(".lister-item-content p .runtime") %>%
   html_text() %>%
@@ -448,7 +496,13 @@ movie_runtime
 knitr::include_graphics("web-scraping/img/ws_imdb_movie_genre.png")
 ```
 
-```{r imdb7}
+```{r imdb7a}
+imdb %>%
+  html_nodes(".lister-item-content p .genre") %>%
+  html_text() 
+```
+
+```{r imdb7b}
 imdb %>%
   html_nodes(".lister-item-content p .genre") %>%
   html_text() %>%
@@ -465,7 +519,13 @@ movie_genre
 knitr::include_graphics("web-scraping/img/ws_imdb_movie_rating.png")
 ```
 
-```{r imdb8}
+```{r imdb8a}
+imdb %>%
+  html_nodes(".ratings-bar .ratings-imdb-rating") %>%
+  html_attr("data-value") 
+```
+
+```{r imdb8b}
 imdb %>%
   html_nodes(".ratings-bar .ratings-imdb-rating") %>%
   html_attr("data-value") %>% 
@@ -490,7 +550,13 @@ knitr::include_graphics("web-scraping/img/ws_html_xpath.png")
 knitr::include_graphics("web-scraping/img/ws_imdb_movie_votes.png")
 ```
 
-```{r imdb9}
+```{r imdb9a}
+imdb %>%
+  html_nodes(xpath = '//meta[@itemprop="ratingCount"]') %>% 
+  html_attr('content') 
+```
+
+```{r imdb9b}
 imdb %>%
   html_nodes(xpath = '//meta[@itemprop="ratingCount"]') %>% 
   html_attr('content') %>% 
@@ -507,9 +573,13 @@ movie_votes
 knitr::include_graphics("web-scraping/img/ws_imdb_movie_revenue.png")
 ```
 
-**Revenue not available for 31 and 47 movie number**
+```{r imdb10a}
+imdb %>%
+  html_nodes(xpath = '//span[@name="nv"]') %>%
+  html_text() 
+```
 
-```{r imdb10}
+```{r imdb10b}
 imdb %>%
   html_nodes(xpath = '//span[@name="nv"]') %>%
   html_text() %>%
@@ -621,7 +691,13 @@ rbi_guv
 
 <hr>
 
-```{r rbi3}
+```{r rbi3a}
+rbi_guv %>%
+  html_nodes("table") %>%
+  html_table() 
+```
+
+```{r rbi3b}
 rbi_guv %>%
   html_nodes("table") %>%
   html_table() %>%

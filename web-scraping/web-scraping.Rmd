@@ -187,7 +187,6 @@ top_phones %>%
   html_text() %>%
   str_trim() %>%
   str_sub(start = 5) %>%
-  append(NA, 9) %>%
   str_replace(",", "") %>%
   str_split("\\.") %>%
   map_chr(1) %>%
