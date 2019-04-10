@@ -180,20 +180,23 @@ knitr::include_graphics("web-scraping/img/html_css_js_2.png")
 
 A web page typically is made up of the following:
 
-#### HTML
-
-**HTML** (Hyper Text Markup Language) takes care of the content. You need to 
+- **HTML** (Hyper Text Markup Language) takes care of the content. You need to 
 have a basic knowledge of HTML tags as the content is located with these tags.
-
-#### CSS
-
-**CSS** (Cascading Style Sheets) takes care of the appearance of the contente.
+- **CSS** (Cascading Style Sheets) takes care of the appearance of the contente.
 While you don't need to look into the CSS of a web page, you should be able to
 identify the **id** or **class** that manage the appearance of content.
+- **JS** (Javascript) takes care of the behavior of the web page. 
 
-#### JS
+### HTML Element
 
-**JS** (Javascript) takes care of the behavior of the web page. 
+<hr>
+
+```{r html_tags_2, echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("web-scraping/img/blog_ws_html_tags_2_border.png")
+```
+
+HTML element consists of a start tag and end tag with content inserted in 
+between. They can be nested and are case insensitive.
 
 ### HTML Tags
 
@@ -227,13 +230,16 @@ will use a similar approach in our case studies.
 knitr::include_graphics("web-scraping/img/blog_ws_html_attributes_crop.png")
 ```
 
-### Class, Div & Style
+- all HTML elements can have attributes 
+- they provide additional information about an element
+- they are always specified in the start tag
+- usually come in name/value pairs
 
-<hr>
-
-```{r html_tags_2, echo=FALSE, fig.align='center', out.width="80%"}
-knitr::include_graphics("web-scraping/img/blog_ws_html_tags_2_border.png")
-```
+The class attribute is used to define equal styles for elements with same 
+class name. HTML elements with same class name will have the same format and
+style. The `id` attribute specifies a unique id for an HTML element. It can be 
+used on any HTML element and is case sensitive. The `style` attribute sets the 
+style of an HTML element.
 
 <hr color="black">
 

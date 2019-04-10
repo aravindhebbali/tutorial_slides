@@ -55,15 +55,13 @@ output: _output.yaml
 
 ## {data-background="img/ws_htmL_css_js.png"}
 
+## {data-background="img/ws_htmL_tags_2.png"}
+
 ## {data-background="img/ws_htmL_tags.png"}
 
 ## {data-background="img/ws_htmL_dom.png"}
 
 ## {data-background="img/ws_html_attributes.png"}
-
-## {data-background="img/ws_htmL_tags_2.png"}
-
-## {data-background="img/ws_htmL_xpath.png"}
 
 ## {data-background="img/ws_section_case_studies.png"}
 
@@ -341,6 +339,8 @@ movie_rating
 ```
 
 ## {data-background="img/ws_imdb_movie_votes.png"}
+
+## {data-background="img/ws_htmL_xpath.png"}
 
 ## Votes
 
