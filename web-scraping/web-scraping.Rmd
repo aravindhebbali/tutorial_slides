@@ -361,8 +361,6 @@ movie_votes
 
 <hr>
 
-**Revenue not available for 31 and 47 movie number**
-
 ```{r imdb10}
 imdb %>%
   html_nodes(xpath = '//span[@name="nv"]') %>%
