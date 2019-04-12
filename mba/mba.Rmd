@@ -1,0 +1,50 @@
+---
+output: _output.yaml
+---
+
+## {data-background="img/ws_cover_image.png"}
+
+## Connect With Us
+
+<hr>
+
+- Website     (https://www.rsquaredacademy.com/)
+- Free Online R Courses   (https://rsquared-academy.thinkific.com/)
+- R Packages  (https://pkgs.rsquaredacademy.com)
+- Shiny Apps  (https://apps.rsquaredacademy.com)
+- Blog        (https://blog.rsquaredacademy.com)
+- GitHub      (https://github.com/rsquaredacademy)
+- YouTube     (https://www.youtube.com/user/rsquaredin/)
+- Twitter     (https://twitter.com/rsquaredacademy)
+- Facebook    (https://www.facebook.com/rsquaredacademy/)
+- Linkedin    (https://in.linkedin.com/company/rsquared-academy)
+
+## {data-background="img/ws_agenda.png"}
+
+<br>
+<br>
+<br>
+<br>
+
+## {data-background="img/ws_section_intro.png"}
+
+## {data-background="img/ws_section_case_studies.png"}
+
+## Libraries
+
+<hr>
+
+```{r libs, message=FALSE, warning=FALSE}
+library(readxl)
+library(arules)
+library(arulesViz)
+```
+
+## {data-background="img/ws_section_summary.png"}
+
+## Summary
+
+<hr>
+
+## {data-background="img/thankyou.png"}
+
