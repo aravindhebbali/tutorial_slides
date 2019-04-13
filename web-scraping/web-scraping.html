@@ -1923,192 +1923,40 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <a class="sourceLine" id="cb1-12" data-line-number="12"><span class="kw">library</span>(tibble)</a>
 <a class="sourceLine" id="cb1-13" data-line-number="13"><span class="kw">library</span>(purrr)</a></code></pre></div>
 </section>
-<section id="section-18" class="slide level2" data-background="img/ws_cs_top_mobiles.png">
+<section id="section-18" class="slide level2" data-background="img/ws_cs_imdb_top_50.png">
 <h2></h2>
 </section>
 <section id="robotstxt" class="slide level2">
 <h2>robotstxt</h2>
 <hr>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">paths_allowed</span>(</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;https://www.amazon.in/mobile-phones/b?ie=UTF8&amp;node=1389401031&amp;ref_=nav_shopall_sbc_mobcomp_all_mobiles&quot;</span>)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;https://www.imdb.com/search/title?groups=top_250&amp;sort=user_rating&quot;</span>)</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3">)</a></code></pre></div>
 <pre><code>## 
- www.amazon.in                      No encoding supplied: defaulting to UTF-8.</code></pre>
+ www.imdb.com                      No encoding supplied: defaulting to UTF-8.</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 </section>
 <section id="read-web-page" class="slide level2">
 <h2>Read Web Page</h2>
 <hr>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">top_phones &lt;-<span class="st"> </span><span class="kw">read_html</span>(<span class="st">&quot;https://www.amazon.in/mobile-phones/b?ie=UTF8&amp;node=1389401031&amp;ref_=nav_shopall_sbc_mobcomp_all_mobiles&quot;</span>)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">top_phones</a></code></pre></div>
-<pre><code>## {xml_document}
-## &lt;html class=&quot;a-no-js&quot; data-19ax5a9jf=&quot;dingo&quot;&gt;
-## [1] &lt;head&gt;\n&lt;script&gt;var aPageStart = (new Date()).getTime();&lt;/script&gt;&lt;me ...
-## [2] &lt;body class=&quot;a-aui_149818-c a-aui_152852-c a-aui_157141-t1 a-aui_158 ...</code></pre>
-</section>
-<section id="section-19" class="slide level2" data-background="img/ws_mobile_brand_name.png">
-<h2></h2>
-</section>
-<section id="brand-name" class="slide level2">
-<h2>Brand Name</h2>
-<hr>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">top_phones <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.crwTitle a&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="st">  </span><span class="kw">str_split</span>(<span class="st">'</span><span class="ch">\\</span><span class="st">('</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="st">  </span><span class="kw">map_chr</span>(<span class="dv">1</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="st">  </span><span class="kw">str_trim</span>() -&gt;<span class="st"> </span>mobile_name</a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8">mobile_name</a></code></pre></div>
-<pre><code>##  [1] &quot;Samsung Galaxy M30&quot; &quot;Samsung Galaxy M20&quot; &quot;Samsung Galaxy M30&quot;
-##  [4] &quot;Redmi 6A&quot;           &quot;Redmi 6 Pro&quot;        &quot;Samsung Galaxy M10&quot;
-##  [7] &quot;Redmi 6 Pro&quot;        &quot;Realme U1&quot;          &quot;Redmi Y2&quot;          
-## [10] &quot;Honor 8C&quot;</code></pre>
-</section>
-<section id="section-20" class="slide level2" data-background="img/ws_mobile_color.png">
-<h2></h2>
-</section>
-<section id="color" class="slide level2">
-<h2>Color</h2>
-<hr>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">top_phones <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.crwTitle a&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="st">  </span><span class="kw">str_split</span>(<span class="st">'</span><span class="ch">\\</span><span class="st">('</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="st">  </span><span class="kw">map_chr</span>(<span class="dv">2</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="st">  </span><span class="kw">str_split</span>(<span class="st">&quot;,&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="st">  </span><span class="kw">map_chr</span>(<span class="dv">1</span>) -&gt;<span class="st"> </span>mobile_color</a>
-<a class="sourceLine" id="cb9-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb9-9" data-line-number="9">mobile_color</a></code></pre></div>
-<pre><code>##  [1] &quot;Gradation Blue&quot;  &quot;Ocean Blue&quot;      &quot;Gradation Black&quot;
-##  [4] &quot;Black&quot;           &quot;Black&quot;           &quot;Ocean Blue&quot;     
-##  [7] &quot;Black&quot;           &quot;Ambitious Black&quot; &quot;Black&quot;          
-## [10] &quot;Blue&quot;</code></pre>
-</section>
-<section id="section-21" class="slide level2" data-background="img/ws_mobile_rating.png">
-<h2></h2>
-</section>
-<section id="rating" class="slide level2">
-<h2>Rating</h2>
-<hr>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">top_phones <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.crwProductDetail span .a-icon-alt&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">start =</span> <span class="dv">1</span>, <span class="dt">end =</span> <span class="dv">3</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="st">  </span><span class="kw">as.numeric</span>() -&gt;<span class="st"> </span>mobile_rating</a>
-<a class="sourceLine" id="cb11-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb11-7" data-line-number="7">mobile_rating</a></code></pre></div>
-<pre><code>##  [1] 4.0 3.7 4.1 4.2 4.2 4.1 4.1 4.4 4.3 4.2</code></pre>
-</section>
-<section id="section-22" class="slide level2" data-background="img/ws_mobile_reviews.png">
-<h2></h2>
-</section>
-<section id="number-of-reviews" class="slide level2">
-<h2>Number of Reviews</h2>
-<hr>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">top_phones <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.crwProductDetail span.a-size-small .a-link-normal&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="st">  </span><span class="kw">str_replace</span>(<span class="st">&quot;,&quot;</span>, <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="st">  </span><span class="kw">as.numeric</span>() -&gt;<span class="st"> </span>mobile_review</a>
-<a class="sourceLine" id="cb13-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb13-7" data-line-number="7">mobile_review</a></code></pre></div>
-<pre><code>##  [1]  1091 12002   545 23472  6393  2993 15838 10400 23534   816</code></pre>
-</section>
-<section id="section-23" class="slide level2" data-background="img/ws_real_price.png">
-<h2></h2>
-</section>
-<section id="real-price" class="slide level2">
-<h2>Real Price</h2>
-<hr>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">top_phones <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.crwProductDetail .crwPrice .a-text-strike&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="st">  </span><span class="kw">str_trim</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">start =</span> <span class="dv">5</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="st">  </span><span class="kw">str_replace</span>(<span class="st">&quot;,&quot;</span>, <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="st">  </span><span class="kw">str_split</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">.&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="st">  </span><span class="kw">map_chr</span>(<span class="dv">1</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb15-9" data-line-number="9"><span class="st">  </span><span class="kw">as.numeric</span>() -&gt;<span class="st"> </span>real_price</a>
-<a class="sourceLine" id="cb15-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb15-11" data-line-number="11">real_price</a></code></pre></div>
-<pre><code>##  [1] 16490 13390 16490  6999 11499  9290 13499 12999 10499 12999</code></pre>
-</section>
-<section id="section-24" class="slide level2" data-background="img/ws_actual_price.png">
-<h2></h2>
-</section>
-<section id="discounted-price" class="slide level2">
-<h2>Discounted Price</h2>
-<hr>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">top_phones <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.crwProductDetail .crwActualPrice&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="st">  </span><span class="kw">str_trim</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">start =</span> <span class="dv">5</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="st">  </span><span class="kw">str_replace</span>(<span class="st">&quot;,&quot;</span>, <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb17-7" data-line-number="7"><span class="st">  </span><span class="kw">str_split</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">.&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb17-8" data-line-number="8"><span class="st">  </span><span class="kw">map_chr</span>(<span class="dv">1</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb17-9" data-line-number="9"><span class="st">  </span><span class="kw">as.numeric</span>() -&gt;<span class="st"> </span>discounted_price</a>
-<a class="sourceLine" id="cb17-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb17-11" data-line-number="11">discounted_price</a></code></pre></div>
-<pre><code>##  [1] 14990 12990 14990  5999  7999  8990 10000  9999  7999  8999</code></pre>
-</section>
-<section id="putting-it-all-together" class="slide level2">
-<h2>Putting it all together…</h2>
-<hr>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">best_sellers &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">title =</span> mobile_name, <span class="dt">color =</span> mobile_color, </a>
-<a class="sourceLine" id="cb19-2" data-line-number="2">  <span class="dt">rating =</span> mobile_rating, <span class="dt">reviews =</span> mobile_review, <span class="st">`</span><span class="dt">Real Price (Rs.)</span><span class="st">`</span> =<span class="st"> </span>real_price,</a>
-<a class="sourceLine" id="cb19-3" data-line-number="3">  <span class="st">`</span><span class="dt">Discount Price (Rs.)</span><span class="st">`</span> =<span class="st"> </span>discounted_price)</a>
-<a class="sourceLine" id="cb19-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb19-5" data-line-number="5">best_sellers</a></code></pre></div>
-<pre><code>## # A tibble: 10 x 6
-##    title       color     rating reviews `Real Price (Rs~ `Discount Price (~
-##    &lt;chr&gt;       &lt;chr&gt;      &lt;dbl&gt;   &lt;dbl&gt;            &lt;dbl&gt;              &lt;dbl&gt;
-##  1 Samsung Ga~ Gradatio~    4      1091            16490              14990
-##  2 Samsung Ga~ Ocean Bl~    3.7   12002            13390              12990
-##  3 Samsung Ga~ Gradatio~    4.1     545            16490              14990
-##  4 Redmi 6A    Black        4.2   23472             6999               5999
-##  5 Redmi 6 Pro Black        4.2    6393            11499               7999
-##  6 Samsung Ga~ Ocean Bl~    4.1    2993             9290               8990
-##  7 Redmi 6 Pro Black        4.1   15838            13499              10000
-##  8 Realme U1   Ambitiou~    4.4   10400            12999               9999
-##  9 Redmi Y2    Black        4.3   23534            10499               7999
-## 10 Honor 8C    Blue         4.2     816            12999               8999</code></pre>
-</section>
-<section id="section-25" class="slide level2" data-background="img/ws_cs_imdb_top_50.png">
-<h2></h2>
-</section>
-<section id="robotstxt-1" class="slide level2">
-<h2>robotstxt</h2>
-<hr>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">paths_allowed</span>(</a>
-<a class="sourceLine" id="cb21-2" data-line-number="2">  <span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;https://www.imdb.com/search/title?groups=top_250&amp;sort=user_rating&quot;</span>)</a>
-<a class="sourceLine" id="cb21-3" data-line-number="3">)</a></code></pre></div>
-<pre><code>## 
- www.imdb.com                      No encoding supplied: defaulting to UTF-8.</code></pre>
-<pre><code>## [1] TRUE</code></pre>
-</section>
-<section id="read-web-page-1" class="slide level2">
-<h2>Read Web Page</h2>
-<hr>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">imdb &lt;-<span class="st"> </span><span class="kw">read_html</span>(<span class="st">&quot;https://www.imdb.com/search/title?groups=top_250&amp;sort=user_rating&quot;</span>)</a>
-<a class="sourceLine" id="cb24-2" data-line-number="2">imdb</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">imdb &lt;-<span class="st"> </span><span class="kw">read_html</span>(<span class="st">&quot;https://www.imdb.com/search/title?groups=top_250&amp;sort=user_rating&quot;</span>)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">imdb</a></code></pre></div>
 <pre><code>## {xml_document}
 ## &lt;html xmlns:og=&quot;http://ogp.me/ns#&quot; xmlns:fb=&quot;http://www.facebook.com/2008/fbml&quot;&gt;
 ## [1] &lt;head&gt;\n&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset= ...
 ## [2] &lt;body id=&quot;styleguide-v2&quot; class=&quot;fixed&quot;&gt;\n\n            &lt;img height=&quot; ...</code></pre>
 </section>
-<section id="section-26" class="slide level2" data-background="img/ws_imdb_movie_name.png">
+<section id="section-19" class="slide level2" data-background="img/ws_imdb_movie_name.png">
 <h2></h2>
 </section>
 <section id="title" class="slide level2">
 <h2>Title</h2>
 <hr>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb26-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.lister-item-content h3 a&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb26-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() -&gt;<span class="st"> </span>movie_title</a>
-<a class="sourceLine" id="cb26-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb26-5" data-line-number="5">movie_title</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.lister-item-content h3 a&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() -&gt;<span class="st"> </span>movie_title</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">movie_title</a></code></pre></div>
 <pre><code>##  [1] &quot;The Shawshank Redemption&quot;                         
 ##  [2] &quot;The Godfather&quot;                                    
 ##  [3] &quot;The Dark Knight&quot;                                  
@@ -2160,36 +2008,36 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## [49] &quot;Raiders of the Lost Ark&quot;                          
 ## [50] &quot;Apocalypse Now&quot;</code></pre>
 </section>
-<section id="section-27" class="slide level2" data-background="img/ws_imdb_movie_year.png">
+<section id="section-20" class="slide level2" data-background="img/ws_imdb_movie_year.png">
 <h2></h2>
 </section>
 <section id="year-of-release" class="slide level2">
 <h2>Year of Release</h2>
 <hr>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb28-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.lister-item-content h3 .lister-item-year&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb28-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb28-4" data-line-number="4"><span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">start =</span> <span class="dv">2</span>, <span class="dt">end =</span> <span class="dv">5</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb28-5" data-line-number="5"><span class="st">  </span><span class="kw">as.Date</span>(<span class="dt">format =</span> <span class="st">&quot;%Y&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb28-6" data-line-number="6"><span class="st">  </span><span class="kw">year</span>() -&gt;<span class="st"> </span>movie_year</a>
-<a class="sourceLine" id="cb28-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb28-8" data-line-number="8">movie_year</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.lister-item-content h3 .lister-item-year&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">start =</span> <span class="dv">2</span>, <span class="dt">end =</span> <span class="dv">5</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="st">  </span><span class="kw">as.Date</span>(<span class="dt">format =</span> <span class="st">&quot;%Y&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="st">  </span><span class="kw">year</span>() -&gt;<span class="st"> </span>movie_year</a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8">movie_year</a></code></pre></div>
 <pre><code>##  [1] 1994 1972 2008 1974 2003 1994 1993 1966 1957 2010 1999 2001 1994 2002
 ## [15] 1999 1990 1980 1975 1954 2014 2002 2001 1998 1999 1997 1995 1995 1994
 ## [29] 1991 1977 1946 2018 2016 2018 2018 2014 2011 2006 2006 2002 2000 2000
 ## [43] 1998 1994 1991 1988 1988 1985 1981 1979</code></pre>
 </section>
-<section id="section-28" class="slide level2" data-background="img/ws_imdb_movie_certificate.png">
+<section id="section-21" class="slide level2" data-background="img/ws_imdb_movie_certificate.png">
 <h2></h2>
 </section>
 <section id="certificate" class="slide level2">
 <h2>Certificate</h2>
 <hr>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb30-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.lister-item-content p .certificate&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb30-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() -&gt;<span class="st"> </span>movie_certificate</a>
-<a class="sourceLine" id="cb30-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb30-5" data-line-number="5">movie_certificate</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.lister-item-content p .certificate&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() -&gt;<span class="st"> </span>movie_certificate</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">movie_certificate</a></code></pre></div>
 <pre><code>##  [1] &quot;A&quot;     &quot;A&quot;     &quot;UA&quot;    &quot;PG-13&quot; &quot;A&quot;     &quot;A&quot;     &quot;UA&quot;    &quot;A&quot;    
 ##  [9] &quot;PG-13&quot; &quot;PG-13&quot; &quot;PG-13&quot; &quot;A&quot;     &quot;A&quot;     &quot;PG&quot;    &quot;UA&quot;    &quot;R&quot;    
 ## [17] &quot;PG&quot;    &quot;A&quot;     &quot;A&quot;     &quot;PG-13&quot; &quot;A&quot;     &quot;R&quot;     &quot;A&quot;     &quot;A&quot;    
@@ -2197,36 +2045,36 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## [33] &quot;PG-13&quot; &quot;A&quot;     &quot;R&quot;     &quot;R&quot;     &quot;R&quot;     &quot;A&quot;     &quot;U&quot;     &quot;U&quot;    
 ## [41] &quot;R&quot;     &quot;U&quot;     &quot;PG&quot;    &quot;R&quot;</code></pre>
 </section>
-<section id="section-29" class="slide level2" data-background="img/ws_imdb_movie_runtime.png">
+<section id="section-22" class="slide level2" data-background="img/ws_imdb_movie_runtime.png">
 <h2></h2>
 </section>
 <section id="runtime" class="slide level2">
 <h2>Runtime</h2>
 <hr>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb32-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.lister-item-content p .runtime&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb32-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb32-4" data-line-number="4"><span class="st">  </span><span class="kw">str_split</span>(<span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb32-5" data-line-number="5"><span class="st">  </span><span class="kw">map_chr</span>(<span class="dv">1</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb32-6" data-line-number="6"><span class="st">  </span><span class="kw">as.numeric</span>() -&gt;<span class="st"> </span>movie_runtime</a>
-<a class="sourceLine" id="cb32-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb32-8" data-line-number="8">movie_runtime</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.lister-item-content p .runtime&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="st">  </span><span class="kw">str_split</span>(<span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="st">  </span><span class="kw">map_chr</span>(<span class="dv">1</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="st">  </span><span class="kw">as.numeric</span>() -&gt;<span class="st"> </span>movie_runtime</a>
+<a class="sourceLine" id="cb13-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8">movie_runtime</a></code></pre></div>
 <pre><code>##  [1] 142 175 152 202 201 154 195 161  96 148 139 178 142 179 136 146 124
 ## [18] 133 207 169 130 125 169 189 116 106 127 110 118 121 130 139 161 117
 ## [35] 149 106 112 130 151 150 113 155 119  88 137 155  89 116 115 147</code></pre>
 </section>
-<section id="section-30" class="slide level2" data-background="img/ws_imdb_movie_genre.png">
+<section id="section-23" class="slide level2" data-background="img/ws_imdb_movie_genre.png">
 <h2></h2>
 </section>
 <section id="genre" class="slide level2">
 <h2>Genre</h2>
 <hr>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.lister-item-content p .genre&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb34-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb34-4" data-line-number="4"><span class="st">  </span><span class="kw">str_trim</span>() -&gt;<span class="st"> </span>movie_genre</a>
-<a class="sourceLine" id="cb34-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb34-6" data-line-number="6">movie_genre</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.lister-item-content p .genre&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="st">  </span><span class="kw">str_trim</span>() -&gt;<span class="st"> </span>movie_genre</a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6">movie_genre</a></code></pre></div>
 <pre><code>##  [1] &quot;Drama&quot;                        &quot;Crime, Drama&quot;                
 ##  [3] &quot;Action, Crime, Drama&quot;         &quot;Crime, Drama&quot;                
 ##  [5] &quot;Adventure, Drama, Fantasy&quot;    &quot;Crime, Drama&quot;                
@@ -2253,77 +2101,77 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## [47] &quot;Animation, Drama, War&quot;        &quot;Adventure, Comedy, Sci-Fi&quot;   
 ## [49] &quot;Action, Adventure&quot;            &quot;Drama, War&quot;</code></pre>
 </section>
-<section id="section-31" class="slide level2" data-background="img/ws_imdb_movie_rating.png">
+<section id="section-24" class="slide level2" data-background="img/ws_imdb_movie_rating.png">
 <h2></h2>
 </section>
-<section id="rating-1" class="slide level2">
+<section id="rating" class="slide level2">
 <h2>Rating</h2>
 <hr>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb36-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.ratings-bar .ratings-imdb-rating&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb36-3" data-line-number="3"><span class="st">  </span><span class="kw">html_attr</span>(<span class="st">&quot;data-value&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb36-4" data-line-number="4"><span class="st">  </span><span class="kw">as.numeric</span>() -&gt;<span class="st"> </span>movie_rating</a>
-<a class="sourceLine" id="cb36-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb36-6" data-line-number="6">movie_rating</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.ratings-bar .ratings-imdb-rating&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="st">  </span><span class="kw">html_attr</span>(<span class="st">&quot;data-value&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="st">  </span><span class="kw">as.numeric</span>() -&gt;<span class="st"> </span>movie_rating</a>
+<a class="sourceLine" id="cb17-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb17-6" data-line-number="6">movie_rating</a></code></pre></div>
 <pre><code>##  [1] 9.3 9.2 9.0 9.0 8.9 8.9 8.9 8.9 8.9 8.8 8.8 8.8 8.8 8.7 8.7 8.7 8.7
 ## [18] 8.7 8.7 8.6 8.6 8.6 8.6 8.6 8.6 8.6 8.6 8.6 8.6 8.6 8.6 8.5 8.5 8.5
 ## [35] 8.5 8.5 8.5 8.5 8.5 8.5 8.5 8.5 8.5 8.5 8.5 8.5 8.5 8.5 8.5 8.5</code></pre>
 </section>
-<section id="section-32" class="slide level2" data-background="img/ws_imdb_movie_votes.png">
+<section id="section-25" class="slide level2" data-background="img/ws_imdb_movie_votes.png">
 <h2></h2>
 </section>
-<section id="section-33" class="slide level2" data-background="img/ws_htmL_xpath.png">
+<section id="section-26" class="slide level2" data-background="img/ws_htmL_xpath.png">
 <h2></h2>
 </section>
 <section id="votes" class="slide level2">
 <h2>Votes</h2>
 <hr>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb38-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">xpath =</span> <span class="st">'//meta[@itemprop=&quot;ratingCount&quot;]'</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb38-3" data-line-number="3"><span class="st">  </span><span class="kw">html_attr</span>(<span class="st">'content'</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb38-4" data-line-number="4"><span class="st">  </span><span class="kw">as.numeric</span>() -&gt;<span class="st"> </span>movie_votes</a>
-<a class="sourceLine" id="cb38-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb38-6" data-line-number="6">movie_votes</a></code></pre></div>
-<pre><code>##  [1] 2072087 1421736 2038041  986627 1475114 1620396 1073832  614981
-##  [9]  585251 1816665 1658122 1491689 1588414 1334087 1488508  894658
-## [17] 1039718  821964  279921 1276174  637530  549157 1095793 1000430
-## [25]  545015  897283 1271007  912957 1118316 1109359  352720   38950
-## [33]  118300  172657  616516  605096  665995 1052533 1063705  633366
-## [41] 1021201 1197901  941601  822787  897307  198301  192572  922796
-## [49]  802756  542103</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">xpath =</span> <span class="st">'//meta[@itemprop=&quot;ratingCount&quot;]'</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb19-3" data-line-number="3"><span class="st">  </span><span class="kw">html_attr</span>(<span class="st">'content'</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb19-4" data-line-number="4"><span class="st">  </span><span class="kw">as.numeric</span>() -&gt;<span class="st"> </span>movie_votes</a>
+<a class="sourceLine" id="cb19-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb19-6" data-line-number="6">movie_votes</a></code></pre></div>
+<pre><code>##  [1] 2072893 1422292 2038787  987020 1475650 1621033 1074273  615219
+##  [9]  585562 1817393 1658750 1492209 1589127 1334563 1489071  895033
+## [17] 1040130  822277  280024 1276946  637716  549410 1096231 1000909
+## [25]  545280  897576 1271530  913352 1118817 1109777  352837   39132
+## [33]  118413  174125  617621  605417  666327 1052901 1064050  633675
+## [41] 1021511 1198326  941917  823238  897607  198398  192715  923178
+## [49]  803033  542311</code></pre>
 </section>
-<section id="section-34" class="slide level2" data-background="img/ws_imdb_movie_revenue.png">
+<section id="section-27" class="slide level2" data-background="img/ws_imdb_movie_revenue.png">
 <h2></h2>
 </section>
 <section id="revenue" class="slide level2">
 <h2>Revenue</h2>
 <hr>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb40-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">xpath =</span> <span class="st">'//span[@name=&quot;nv&quot;]'</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb40-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb40-4" data-line-number="4"><span class="st">  </span><span class="kw">str_extract</span>(<span class="dt">pattern =</span> <span class="st">&quot;^</span><span class="ch">\\</span><span class="st">$.*&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb40-5" data-line-number="5"><span class="st">  </span><span class="kw">na.omit</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb40-6" data-line-number="6"><span class="st">  </span><span class="kw">as.character</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb40-7" data-line-number="7"><span class="st">  </span><span class="kw">append</span>(<span class="dt">values =</span> <span class="ot">NA</span>, <span class="dt">after =</span> <span class="dv">30</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb40-8" data-line-number="8"><span class="st">  </span><span class="kw">append</span>(<span class="dt">values =</span> <span class="ot">NA</span>, <span class="dt">after =</span> <span class="dv">46</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb40-9" data-line-number="9"><span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">start =</span> <span class="dv">2</span>, <span class="dt">end =</span> <span class="kw">nchar</span>(.) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb40-10" data-line-number="10"><span class="st">  </span><span class="kw">as.numeric</span>() -&gt;<span class="st"> </span>movie_revenue</a>
-<a class="sourceLine" id="cb40-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb40-12" data-line-number="12">movie_revenue</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">imdb <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">xpath =</span> <span class="st">'//span[@name=&quot;nv&quot;]'</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb21-4" data-line-number="4"><span class="st">  </span><span class="kw">str_extract</span>(<span class="dt">pattern =</span> <span class="st">&quot;^</span><span class="ch">\\</span><span class="st">$.*&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb21-5" data-line-number="5"><span class="st">  </span><span class="kw">na.omit</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb21-6" data-line-number="6"><span class="st">  </span><span class="kw">as.character</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb21-7" data-line-number="7"><span class="st">  </span><span class="kw">append</span>(<span class="dt">values =</span> <span class="ot">NA</span>, <span class="dt">after =</span> <span class="dv">30</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb21-8" data-line-number="8"><span class="st">  </span><span class="kw">append</span>(<span class="dt">values =</span> <span class="ot">NA</span>, <span class="dt">after =</span> <span class="dv">46</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb21-9" data-line-number="9"><span class="st">  </span><span class="kw">str_sub</span>(<span class="dt">start =</span> <span class="dv">2</span>, <span class="dt">end =</span> <span class="kw">nchar</span>(.) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb21-10" data-line-number="10"><span class="st">  </span><span class="kw">as.numeric</span>() -&gt;<span class="st"> </span>movie_revenue</a>
+<a class="sourceLine" id="cb21-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb21-12" data-line-number="12">movie_revenue</a></code></pre></div>
 <pre><code>##  [1]  28.34 134.97 534.86  57.30 377.85 107.93  96.07   6.10   4.36 292.58
 ## [11]  37.03 315.54 330.25 342.55 171.48  46.84 290.48 112.00   0.27 188.02
 ## [21]   7.56  10.06 216.54 136.80  57.60  23.34 100.13  19.50 130.74 322.74
 ## [31]     NA   1.19  12.39 190.24 678.82  13.09  13.18  53.09 132.38  32.57
 ## [41]  25.54 187.71   6.72 312.90 204.84  11.99     NA 210.61 248.16  83.47</code></pre>
 </section>
-<section id="putting-it-all-together-1" class="slide level2">
+<section id="putting-it-all-together" class="slide level2">
 <h2>Putting it all together…</h2>
 <hr>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">top_<span class="dv">50</span> &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">title =</span> movie_title, <span class="dt">release =</span> movie_year, </a>
-<a class="sourceLine" id="cb42-2" data-line-number="2">    <span class="st">`</span><span class="dt">runtime (mins)</span><span class="st">`</span> =<span class="st"> </span>movie_runtime, <span class="dt">genre =</span> movie_genre, <span class="dt">rating =</span> movie_rating, </a>
-<a class="sourceLine" id="cb42-3" data-line-number="3">    <span class="dt">votes =</span> movie_votes, <span class="st">`</span><span class="dt">revenue ($ millions)</span><span class="st">`</span> =<span class="st"> </span>movie_revenue)</a>
-<a class="sourceLine" id="cb42-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb42-5" data-line-number="5">top_<span class="dv">50</span></a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">top_<span class="dv">50</span> &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">title =</span> movie_title, <span class="dt">release =</span> movie_year, </a>
+<a class="sourceLine" id="cb23-2" data-line-number="2">    <span class="st">`</span><span class="dt">runtime (mins)</span><span class="st">`</span> =<span class="st"> </span>movie_runtime, <span class="dt">genre =</span> movie_genre, <span class="dt">rating =</span> movie_rating, </a>
+<a class="sourceLine" id="cb23-3" data-line-number="3">    <span class="dt">votes =</span> movie_votes, <span class="st">`</span><span class="dt">revenue ($ millions)</span><span class="st">`</span> =<span class="st"> </span>movie_revenue)</a>
+<a class="sourceLine" id="cb23-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb23-5" data-line-number="5">top_<span class="dv">50</span></a></code></pre></div>
 <pre><code>## # A tibble: 50 x 7
 ##    title    release `runtime (mins)` genre   rating  votes `revenue ($ mil~
 ##    &lt;chr&gt;      &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;            &lt;dbl&gt;
@@ -2335,476 +2183,28 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ##  6 Pulp Fi~    1994              154 Crime,~    8.9 1.62e6           108.  
 ##  7 Schindl~    1993              195 Biogra~    8.9 1.07e6            96.1 
 ##  8 Il buon~    1966              161 Western    8.9 6.15e5             6.1 
-##  9 12 Angr~    1957               96 Drama      8.9 5.85e5             4.36
+##  9 12 Angr~    1957               96 Drama      8.9 5.86e5             4.36
 ## 10 Incepti~    2010              148 Action~    8.8 1.82e6           293.  
 ## # ... with 40 more rows</code></pre>
 </section>
-<section id="section-35" class="slide level2" data-background="img/ws_cs_top_websites.png">
+<section id="section-28" class="slide level2" data-background="img/ws_cs_rbi_governors.png">
 <h2></h2>
 </section>
-<section id="robotstxt-2" class="slide level2">
+<section id="robotstxt-1" class="slide level2">
 <h2>robotstxt</h2>
 <hr>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="kw">paths_allowed</span>(</a>
-<a class="sourceLine" id="cb44-2" data-line-number="2">  <span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;https://www.similarweb.com/top-websites&quot;</span>)</a>
-<a class="sourceLine" id="cb44-3" data-line-number="3">)</a></code></pre></div>
-<pre><code>## 
- www.similarweb.com                      No encoding supplied: defaulting to UTF-8.</code></pre>
-<pre><code>## [1] TRUE</code></pre>
-</section>
-<section id="read-web-page-2" class="slide level2">
-<h2>Read Web Page</h2>
-<hr>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1">top_sites &lt;-<span class="st"> </span><span class="kw">read_html</span>(<span class="st">&quot;https://www.similarweb.com/top-websites&quot;</span>)</a>
-<a class="sourceLine" id="cb47-2" data-line-number="2">top_sites</a></code></pre></div>
-<pre><code>## {xml_document}
-## &lt;html lang=&quot;en&quot;&gt;
-## [1] &lt;head&gt;\n&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset= ...
-## [2] &lt;body itemscope itemtype=&quot;http://schema.org/WebPage&quot; data-backbone-c ...</code></pre>
-</section>
-<section id="website-ranking" class="slide level2">
-<h2>Website Ranking</h2>
-<hr>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1">top_sites <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb49-2" data-line-number="2"><span class="st">  </span><span class="kw">html_node</span>(<span class="st">&quot;table&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb49-3" data-line-number="3"><span class="st">  </span><span class="kw">html_table</span>() -&gt;<span class="st"> </span>ranking</a>
-<a class="sourceLine" id="cb49-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb49-5" data-line-number="5">ranking</a></code></pre></div>
-<pre><code>##    Rank \n                                            \n                                                Traffic rank of site, as compared to all other sites in the world (#1 being the site with the most traffic in the world)
-## 1                                                                                                                                                                                                                              1
-## 2                                                                                                                                                                                                                              2
-## 3                                                                                                                                                                                                                              3
-## 4                                                                                                                                                                                                                              4
-## 5                                                                                                                                                                                                                              5
-## 6                                                                                                                                                                                                                              6
-## 7                                                                                                                                                                                                                              7
-## 8                                                                                                                                                                                                                              8
-## 9                                                                                                                                                                                                                              9
-## 10                                                                                                                                                                                                                            10
-## 11                                                                                                                                                                                                                            11
-## 12                                                                                                                                                                                                                            12
-## 13                                                                                                                                                                                                                            13
-## 14                                                                                                                                                                                                                            14
-## 15                                                                                                                                                                                                                            15
-## 16                                                                                                                                                                                                                            16
-## 17                                                                                                                                                                                                                            17
-## 18                                                                                                                                                                                                                            18
-## 19                                                                                                                                                                                                                            19
-## 20                                                                                                                                                                                                                            20
-## 21                                                                                                                                                                                                                            21
-## 22                                                                                                                                                                                                                            22
-## 23                                                                                                                                                                                                                            23
-## 24                                                                                                                                                                                                                            24
-## 25                                                                                                                                                                                                                            25
-## 26                                                                                                                                                                                                                            26
-## 27                                                                                                                                                                                                                            27
-## 28                                                                                                                                                                                                                            28
-## 29                                                                                                                                                                                                                            29
-## 30                                                                                                                                                                                                                            30
-## 31                                                                                                                                                                                                                            31
-## 32                                                                                                                                                                                                                            32
-## 33                                                                                                                                                                                                                            33
-## 34                                                                                                                                                                                                                            34
-## 35                                                                                                                                                                                                                            35
-## 36                                                                                                                                                                                                                            36
-## 37                                                                                                                                                                                                                            37
-## 38                                                                                                                                                                                                                            38
-## 39                                                                                                                                                                                                                            39
-## 40                                                                                                                                                                                                                            40
-## 41                                                                                                                                                                                                                            41
-## 42                                                                                                                                                                                                                            42
-## 43                                                                                                                                                                                                                            43
-## 44                                                                                                                                                                                                                            44
-## 45                                                                                                                                                                                                                            45
-## 46                                                                                                                                                                                                                            46
-## 47                                                                                                                                                                                                                            47
-## 48                                                                                                                                                                                                                            48
-## 49                                                                                                                                                                                                                            49
-## 50                                                                                                                                                                                                                            50
-##    Website \n                                            \n                                                Domain, including all meaningful subdomains
-## 1                                                                          google.com\n                                                vuuxfvxbaebdbdw
-## 2                                                                                                                                          youtube.com
-## 3                                                                                                                                         facebook.com
-## 4                                                                                                                                            baidu.com
-## 5                                                                                                                                        instagram.com
-## 6                                                                                                                                          twitter.com
-## 7                                                                                                                                          pornhub.com
-## 8                                                                                                                                            yahoo.com
-## 9                                                                                                                                          xvideos.com
-## 10                                                                                                                                       wikipedia.org
-## 11                                                                                                                                              vk.com
-## 12                                                                                                                                            xnxx.com
-## 13                                                                                                                                           yandex.ru
-## 14                                                                                                                                          amazon.com
-## 15                                                                                                                                            live.com
-## 16                                                                                                                                      ampproject.org
-## 17                                                                                                                                             mail.ru
-## 18                                                                                                                                         netflix.com
-## 19                                                                                                                                        xhamster.com
-## 20                                                                                                                                               ok.ru
-## 21                                                                                                                                          reddit.com
-## 22                                                                                                                                         yahoo.co.jp
-## 23                                                                                                                                              qq.com
-## 24                                                                                                                                            ebay.com
-## 25                                                                                                                                            bing.com
-## 26                                                                                                                                       google.com.br
-## 27                                                                                                                                        linkedin.com
-## 28                                                                                                                                        whatsapp.com
-## 29                                                                                                                                      aliexpress.com
-## 30                                                                                                                                           google.de
-## 31                                                                                                                                           sogou.com
-## 32                                                                                                                                       pinterest.com
-## 33                                                                                                                                          office.com
-## 34                                                                                                                                             msn.com
-## 35                                                                                                                                           naver.com
-## 36                                                                                                                                        google.co.jp
-## 37                                                                                                                                           twitch.tv
-## 38                                                                                                                                          paypal.com
-## 39                                                                                                                                           google.fr
-## 40                                                                                                                                            imdb.com
-## 41                                                                                                                                        google.co.uk
-## 42                                                                                                                                      craigslist.org
-## 43                                                                                                                                          taobao.com
-## 44                                                                                                                                          github.com
-## 45                                                                                                                                           amazon.de
-## 46                                                                                                                                       microsoft.com
-## 47                                                                                                                                        amazon.co.jp
-## 48                                                                                                                                           google.it
-## 49                                                                                                                                        google.co.in
-## 50                                                                                                                                               sm.cn
-##    Category \n                                            \n                                                SimilarWeb website categorization
-## 1                                                                                                        Internet and Telecom &gt; Search Engine
-## 2                                                                                                       Arts and Entertainment &gt; TV and Video
-## 3                                                                                                       Internet and Telecom &gt; Social Network
-## 4                                                                                                        Internet and Telecom &gt; Search Engine
-## 5                                                                                                       Internet and Telecom &gt; Social Network
-## 6                                                                                                       Internet and Telecom &gt; Social Network
-## 7                                                                                                                                       Adult
-## 8                                                                                                                              News and Media
-## 9                                                                                                                                       Adult
-## 10                                                                                                 Reference &gt; Dictionaries and Encyclopedias
-## 11                                                                                                      Internet and Telecom &gt; Social Network
-## 12                                                                                                                                      Adult
-## 13                                                                                                       Internet and Telecom &gt; Search Engine
-## 14                                                                                                             Shopping &gt; General Merchandise
-## 15                                                                                                               Internet and Telecom &gt; Email
-## 16                                                                                                        Computer and Electronics &gt; Software
-## 17                                                                                                               Internet and Telecom &gt; Email
-## 18                                                                                                      Arts and Entertainment &gt; TV and Video
-## 19                                                                                                                                      Adult
-## 20                                                                                                      Internet and Telecom &gt; Social Network
-## 21                                                                                                      Internet and Telecom &gt; Social Network
-## 22                                                                                                                             News and Media
-## 23                                                                                                                             News and Media
-## 24                                                                                                             Shopping &gt; General Merchandise
-## 25                                                                                                       Internet and Telecom &gt; Search Engine
-## 26                                                                                                       Internet and Telecom &gt; Search Engine
-## 27                                                                                                      Internet and Telecom &gt; Social Network
-## 28                                                                                                      Internet and Telecom &gt; Social Network
-## 29                                                                                                             Shopping &gt; General Merchandise
-## 30                                                                                                       Internet and Telecom &gt; Search Engine
-## 31                                                                                                       Internet and Telecom &gt; Search Engine
-## 32                                                                                                      Internet and Telecom &gt; Social Network
-## 33                                                                                                        Computer and Electronics &gt; Software
-## 34                                                                                                                             News and Media
-## 35                                                                                                                             News and Media
-## 36                                                                                                       Internet and Telecom &gt; Search Engine
-## 37                                                                                                                        Games &gt; Video Games
-## 38                                                                                                             Finance &gt; Financial Management
-## 39                                                                                                       Internet and Telecom &gt; Search Engine
-## 40                                                                                                            Arts and Entertainment &gt; Movies
-## 41                                                                                                       Internet and Telecom &gt; Search Engine
-## 42                                                                                                                     Shopping &gt; Classifieds
-## 43                                                                                                             Shopping &gt; General Merchandise
-## 44                                                                                                        Computer and Electronics &gt; Software
-## 45                                                                                                             Shopping &gt; General Merchandise
-## 46                                                                                                        Computer and Electronics &gt; Software
-## 47                                                                                                             Shopping &gt; General Merchandise
-## 48                                                                                                       Internet and Telecom &gt; Search Engine
-## 49                                                                                                       Internet and Telecom &gt; Search Engine
-## 50                                                                                                                      Business and Industry
-##    Change \n                                            \n                                                Change in ranking from previous month
-## 1                                                                                                                                             =
-## 2                                                                                                                                             =
-## 3                                                                                                                                             =
-## 4                                                                                                                                             =
-## 5                                                                                                                                             =
-## 6                                                                                                                                             =
-## 7                                                                                                                                             =
-## 8                                                                                                                                             =
-## 9                                                                                                                                             =
-## 10                                                                                                                                            =
-## 11                                                                                                                                            =
-## 12                                                                                                                                           +1
-## 13                                                                                                                                           -1
-## 14                                                                                                                                            =
-## 15                                                                                                                                            =
-## 16                                                                                                                                            =
-## 17                                                                                                                                            =
-## 18                                                                                                                                            =
-## 19                                                                                                                                            =
-## 20                                                                                                                                           +1
-## 21                                                                                                                                           -1
-## 22                                                                                                                                            =
-## 23                                                                                                                                            =
-## 24                                                                                                                                            =
-## 25                                                                                                                                            =
-## 26                                                                                                                                           +2
-## 27                                                                                                                                           -1
-## 28                                                                                                                                           +1
-## 29                                                                                                                                           +1
-## 30                                                                                                                                           +1
-## 31                                                                                                                                           -4
-## 32                                                                                                                                            =
-## 33                                                                                                                                            =
-## 34                                                                                                                                            =
-## 35                                                                                                                                            =
-## 36                                                                                                                                           +2
-## 37                                                                                                                                            =
-## 38                                                                                                                                           +2
-## 39                                                                                                                                           +2
-## 40                                                                                                                                           -4
-## 41                                                                                                                                           -2
-## 42                                                                                                                                           +4
-## 43                                                                                                                                           +7
-## 44                                                                                                                                           +5
-## 45                                                                                                                                           -3
-## 46                                                                                                                                           -2
-## 47                                                                                                                                           +1
-## 48                                                                                                                                           +4
-## 49                                                                                                                                           -6
-## 50                                                                                                                                           -3
-##    Avg. Visit Duration \n                                            \n                                                Average time spent by users on the website per visit
-## 1                                                                                                                                                                  00:09:46
-## 2                                                                                                                                                                  00:21:52
-## 3                                                                                                                                                                  00:11:13
-## 4                                                                                                                                                                  00:06:47
-## 5                                                                                                                                                                  00:06:31
-## 6                                                                                                                                                                  00:09:21
-## 7                                                                                                                                                                  00:10:27
-## 8                                                                                                                                                                  00:06:23
-## 9                                                                                                                                                                  00:12:25
-## 10                                                                                                                                                                 00:03:42
-## 11                                                                                                                                                                 00:16:25
-## 12                                                                                                                                                                 00:14:22
-## 13                                                                                                                                                                 00:10:51
-## 14                                                                                                                                                                 00:05:51
-## 15                                                                                                                                                                 00:07:47
-## 16                                                                                                                                                                 00:03:53
-## 17                                                                                                                                                                 00:07:28
-## 18                                                                                                                                                                 00:08:50
-## 19                                                                                                                                                                 00:11:56
-## 20                                                                                                                                                                 00:12:55
-## 21                                                                                                                                                                 00:09:13
-## 22                                                                                                                                                                 00:09:59
-## 23                                                                                                                                                                 00:03:52
-## 24                                                                                                                                                                 00:06:12
-## 25                                                                                                                                                                 00:06:12
-## 26                                                                                                                                                                 00:07:50
-## 27                                                                                                                                                                 00:05:50
-## 28                                                                                                                                                                 00:02:24
-## 29                                                                                                                                                                 00:08:29
-## 30                                                                                                                                                                 00:08:26
-## 31                                                                                                                                                                 00:04:14
-## 32                                                                                                                                                                 00:05:46
-## 33                                                                                                                                                                 00:11:39
-## 34                                                                                                                                                                 00:05:30
-## 35                                                                                                                                                                 00:13:34
-## 36                                                                                                                                                                 00:09:12
-## 37                                                                                                                                                                 00:06:43
-## 38                                                                                                                                                                 00:04:45
-## 39                                                                                                                                                                 00:08:47
-## 40                                                                                                                                                                 00:03:17
-## 41                                                                                                                                                                 00:08:32
-## 42                                                                                                                                                                 00:08:49
-## 43                                                                                                                                                                 00:06:01
-## 44                                                                                                                                                                 00:06:18
-## 45                                                                                                                                                                 00:07:06
-## 46                                                                                                                                                                 00:04:05
-## 47                                                                                                                                                                 00:06:20
-## 48                                                                                                                                                                 00:08:39
-## 49                                                                                                                                                                 00:06:34
-## 50                                                                                                                                                                 00:04:51
-##    Pages / Visit \n                                            \n                                                Average website pages viewed per visit
-## 1                                                                                                                                                  8.56
-## 2                                                                                                                                                  9.02
-## 3                                                                                                                                                 10.49
-## 4                                                                                                                                                  7.62
-## 5                                                                                                                                                 14.15
-## 6                                                                                                                                                  7.44
-## 7                                                                                                                                                  8.52
-## 8                                                                                                                                                  6.40
-## 9                                                                                                                                                 10.05
-## 10                                                                                                                                                 2.85
-## 11                                                                                                                                                20.24
-## 12                                                                                                                                                10.30
-## 13                                                                                                                                                 9.33
-## 14                                                                                                                                                 8.03
-## 15                                                                                                                                                 8.66
-## 16                                                                                                                                                 3.53
-## 17                                                                                                                                                 6.78
-## 18                                                                                                                                                 4.56
-## 19                                                                                                                                                11.77
-## 20                                                                                                                                                14.58
-## 21                                                                                                                                                 6.57
-## 22                                                                                                                                                 7.54
-## 23                                                                                                                                                 3.11
-## 24                                                                                                                                                 7.72
-## 25                                                                                                                                                 5.67
-## 26                                                                                                                                                 7.93
-## 27                                                                                                                                                 5.77
-## 28                                                                                                                                                 1.93
-## 29                                                                                                                                                 9.31
-## 30                                                                                                                                                 8.78
-## 31                                                                                                                                                 4.52
-## 32                                                                                                                                                 5.85
-## 33                                                                                                                                                 5.53
-## 34                                                                                                                                                 5.30
-## 35                                                                                                                                                10.62
-## 36                                                                                                                                                11.63
-## 37                                                                                                                                                 3.89
-## 38                                                                                                                                                 6.94
-## 39                                                                                                                                                 8.49
-## 40                                                                                                                                                 5.92
-## 41                                                                                                                                                 8.16
-## 42                                                                                                                                                11.17
-## 43                                                                                                                                                 5.54
-## 44                                                                                                                                                 6.57
-## 45                                                                                                                                                 9.66
-## 46                                                                                                                                                 3.58
-## 47                                                                                                                                                 8.09
-## 48                                                                                                                                                 9.52
-## 49                                                                                                                                                 6.00
-## 50                                                                                                                                                 3.74
-##    Bounce Rate \n                                            \n                                                Percentage of visitors that view only 1 page on the website before exiting
-## 1                                                                                                                                                                                  30.89%
-## 2                                                                                                                                                                                  28.05%
-## 3                                                                                                                                                                                  30.64%
-## 4                                                                                                                                                                                  33.96%
-## 5                                                                                                                                                                                  35.58%
-## 6                                                                                                                                                                                  30.77%
-## 7                                                                                                                                                                                  26.47%
-## 8                                                                                                                                                                                  39.49%
-## 9                                                                                                                                                                                  27.73%
-## 10                                                                                                                                                                                 59.47%
-## 11                                                                                                                                                                                 25.17%
-## 12                                                                                                                                                                                 19.89%
-## 13                                                                                                                                                                                 25.67%
-## 14                                                                                                                                                                                 42.21%
-## 15                                                                                                                                                                                 18.33%
-## 16                                                                                                                                                                                 23.82%
-## 17                                                                                                                                                                                 34.96%
-## 18                                                                                                                                                                                 38.86%
-## 19                                                                                                                                                                                 25.04%
-## 20                                                                                                                                                                                 23.19%
-## 21                                                                                                                                                                                 42.69%
-## 22                                                                                                                                                                                 30.04%
-## 23                                                                                                                                                                                 55.77%
-## 24                                                                                                                                                                                 37.19%
-## 25                                                                                                                                                                                 45.08%
-## 26                                                                                                                                                                                 31.08%
-## 27                                                                                                                                                                                 35.61%
-## 28                                                                                                                                                                                 59.39%
-## 29                                                                                                                                                                                 33.89%
-## 30                                                                                                                                                                                 28.85%
-## 31                                                                                                                                                                                 41.15%
-## 32                                                                                                                                                                                 45.40%
-## 33                                                                                                                                                                                 34.54%
-## 34                                                                                                                                                                                 51.92%
-## 35                                                                                                                                                                                 24.19%
-## 36                                                                                                                                                                                 27.96%
-## 37                                                                                                                                                                                 33.87%
-## 38                                                                                                                                                                                 20.72%
-## 39                                                                                                                                                                                 31.06%
-## 40                                                                                                                                                                                 43.45%
-## 41                                                                                                                                                                                 30.14%
-## 42                                                                                                                                                                                 27.65%
-## 43                                                                                                                                                                                 39.67%
-## 44                                                                                                                                                                                 44.25%
-## 45                                                                                                                                                                                 31.85%
-## 46                                                                                                                                                                                 51.02%
-## 47                                                                                                                                                                                 39.73%
-## 48                                                                                                                                                                                 29.17%
-## 49                                                                                                                                                                                 38.53%
-## 50                                                                                                                                                                                 49.38%</code></pre>
-</section>
-<section id="rename-columns" class="slide level2">
-<h2>Rename Columns</h2>
-<hr>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">col_names &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;ranking&quot;</span>, <span class="st">&quot;domain&quot;</span>, <span class="st">&quot;category&quot;</span>, <span class="st">&quot;change&quot;</span>, </a>
-<a class="sourceLine" id="cb51-2" data-line-number="2">  <span class="st">&quot;avg_time_on_site&quot;</span>, <span class="st">&quot;avg_pages_per_visit&quot;</span>, <span class="st">&quot;bounce_rate&quot;</span>)</a>
-<a class="sourceLine" id="cb51-3" data-line-number="3"><span class="kw">colnames</span>(ranking) &lt;-<span class="st"> </span>col_names</a>
-<a class="sourceLine" id="cb51-4" data-line-number="4"><span class="kw">head</span>(ranking)</a></code></pre></div>
-<pre><code>##   ranking
-## 1       1
-## 2       2
-## 3       3
-## 4       4
-## 5       5
-## 6       6
-##                                                                        domain
-## 1 google.com\n                                                vuuxfvxbaebdbdw
-## 2                                                                 youtube.com
-## 3                                                                facebook.com
-## 4                                                                   baidu.com
-## 5                                                               instagram.com
-## 6                                                                 twitter.com
-##                                category change avg_time_on_site
-## 1  Internet and Telecom &gt; Search Engine      =         00:09:46
-## 2 Arts and Entertainment &gt; TV and Video      =         00:21:52
-## 3 Internet and Telecom &gt; Social Network      =         00:11:13
-## 4  Internet and Telecom &gt; Search Engine      =         00:06:47
-## 5 Internet and Telecom &gt; Social Network      =         00:06:31
-## 6 Internet and Telecom &gt; Social Network      =         00:09:21
-##   avg_pages_per_visit bounce_rate
-## 1                8.56      30.89%
-## 2                9.02      28.05%
-## 3               10.49      30.64%
-## 4                7.62      33.96%
-## 5               14.15      35.58%
-## 6                7.44      30.77%</code></pre>
-</section>
-<section id="top-categories" class="slide level2">
-<h2>Top Categories</h2>
-<hr>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1">ranking <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb53-2" data-line-number="2"><span class="st">  </span><span class="kw">count</span>(category, <span class="dt">sort =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<pre><code>## # A tibble: 14 x 2
-##    category                                       n
-##    &lt;chr&gt;                                      &lt;int&gt;
-##  1 Internet and Telecom &gt; Search Engine          12
-##  2 Internet and Telecom &gt; Social Network          9
-##  3 Shopping &gt; General Merchandise                 6
-##  4 News and Media                                 5
-##  5 Adult                                          4
-##  6 Computer and Electronics &gt; Software            4
-##  7 Arts and Entertainment &gt; TV and Video          2
-##  8 Internet and Telecom &gt; Email                   2
-##  9 Arts and Entertainment &gt; Movies                1
-## 10 Business and Industry                          1
-## 11 Finance &gt; Financial Management                 1
-## 12 Games &gt; Video Games                            1
-## 13 Reference &gt; Dictionaries and Encyclopedias     1
-## 14 Shopping &gt; Classifieds                         1</code></pre>
-</section>
-<section id="section-36" class="slide level2" data-background="img/ws_cs_rbi_governors.png">
-<h2></h2>
-</section>
-<section id="robotstxt-3" class="slide level2">
-<h2>robotstxt</h2>
-<hr>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="kw">paths_allowed</span>(</a>
-<a class="sourceLine" id="cb55-2" data-line-number="2">  <span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;https://en.wikipedia.org/wiki/List_of_Governors_of_Reserve_Bank_of_India&quot;</span>)</a>
-<a class="sourceLine" id="cb55-3" data-line-number="3">)</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">paths_allowed</span>(</a>
+<a class="sourceLine" id="cb25-2" data-line-number="2">  <span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;https://en.wikipedia.org/wiki/List_of_Governors_of_Reserve_Bank_of_India&quot;</span>)</a>
+<a class="sourceLine" id="cb25-3" data-line-number="3">)</a></code></pre></div>
 <pre><code>## 
  en.wikipedia.org</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 </section>
-<section id="read-web-page-3" class="slide level2">
+<section id="read-web-page-1" class="slide level2">
 <h2>Read Web Page</h2>
 <hr>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1">rbi_guv &lt;-<span class="st"> </span><span class="kw">read_html</span>(<span class="st">&quot;https://en.wikipedia.org/wiki/List_of_Governors_of_Reserve_Bank_of_India&quot;</span>)</a>
-<a class="sourceLine" id="cb58-2" data-line-number="2">rbi_guv</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">rbi_guv &lt;-<span class="st"> </span><span class="kw">read_html</span>(<span class="st">&quot;https://en.wikipedia.org/wiki/List_of_Governors_of_Reserve_Bank_of_India&quot;</span>)</a>
+<a class="sourceLine" id="cb28-2" data-line-number="2">rbi_guv</a></code></pre></div>
 <pre><code>## {xml_document}
 ## &lt;html class=&quot;client-nojs&quot; lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;
 ## [1] &lt;head&gt;\n&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset= ...
@@ -2813,12 +2213,12 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="list-of-governors" class="slide level2">
 <h2>List of Governors</h2>
 <hr>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1">rbi_guv <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb60-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;table&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb60-3" data-line-number="3"><span class="st">  </span><span class="kw">html_table</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb60-4" data-line-number="4"><span class="st">  </span><span class="kw">extract2</span>(<span class="dv">2</span>) -&gt;<span class="st"> </span>profile</a>
-<a class="sourceLine" id="cb60-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb60-6" data-line-number="6">profile</a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">rbi_guv <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb30-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;table&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb30-3" data-line-number="3"><span class="st">  </span><span class="kw">html_table</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb30-4" data-line-number="4"><span class="st">  </span><span class="kw">extract2</span>(<span class="dv">2</span>) -&gt;<span class="st"> </span>profile</a>
+<a class="sourceLine" id="cb30-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb30-6" data-line-number="6">profile</a></code></pre></div>
 <pre><code>##    No.         Officeholder Portrait        Term start          Term end
 ## 1    1        Osborne Smith       NA      1 April 1935      30 June 1937
 ## 2    2   James Braid Taylor       NA       1 July 1937  17 February 1943
@@ -2927,10 +2327,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="sort" class="slide level2">
 <h2>Sort</h2>
 <hr>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1">profile <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb62-2" data-line-number="2"><span class="st">  </span><span class="kw">separate</span>(<span class="st">`</span><span class="dt">Term in office</span><span class="st">`</span>, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;term&quot;</span>, <span class="st">&quot;days&quot;</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb62-3" data-line-number="3"><span class="st">  </span><span class="kw">select</span>(Officeholder, term) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb62-4" data-line-number="4"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(<span class="kw">as.numeric</span>(term)))</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">profile <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb32-2" data-line-number="2"><span class="st">  </span><span class="kw">separate</span>(<span class="st">`</span><span class="dt">Term in office</span><span class="st">`</span>, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;term&quot;</span>, <span class="st">&quot;days&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb32-3" data-line-number="3"><span class="st">  </span><span class="kw">select</span>(Officeholder, term) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb32-4" data-line-number="4"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(<span class="kw">as.numeric</span>(term)))</a></code></pre></div>
 <pre><code>##            Officeholder term
 ## 1      Benegal Rama Rau 2754
 ## 2        C. D. Deshmukh 2150
@@ -2961,8 +2361,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="backgrounds" class="slide level2">
 <h2>Backgrounds</h2>
 <hr>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1">profile <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb64-2" data-line-number="2"><span class="st">  </span><span class="kw">count</span>(Background) </a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">profile <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="st">  </span><span class="kw">count</span>(Background) </a></code></pre></div>
 <pre><code>## # A tibble: 9 x 2
 ##   Background                                      n
 ##   &lt;chr&gt;                                       &lt;int&gt;
@@ -2979,23 +2379,23 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="backgrounds-1" class="slide level2">
 <h2>Backgrounds</h2>
 <hr>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1">profile <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb66-2" data-line-number="2"><span class="st">  </span><span class="kw">pull</span>(Background) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb66-3" data-line-number="3"><span class="st">  </span><span class="kw">fct_collapse</span>(</a>
-<a class="sourceLine" id="cb66-4" data-line-number="4">    <span class="dt">Bureaucrats =</span> <span class="kw">c</span>(<span class="st">&quot;IAS officer&quot;</span>, <span class="st">&quot;ICS officer&quot;</span>,</a>
-<a class="sourceLine" id="cb66-5" data-line-number="5">    <span class="st">&quot;Indian Administrative Service (IAS) officer&quot;</span>,</a>
-<a class="sourceLine" id="cb66-6" data-line-number="6">    <span class="st">&quot;Indian Audit and Accounts Service officer&quot;</span>,</a>
-<a class="sourceLine" id="cb66-7" data-line-number="7">    <span class="st">&quot;Indian Civil Service (ICS) officer&quot;</span>),</a>
-<a class="sourceLine" id="cb66-8" data-line-number="8">    <span class="st">`</span><span class="dt">No Info</span><span class="st">`</span> =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;&quot;</span>),</a>
-<a class="sourceLine" id="cb66-9" data-line-number="9">    <span class="st">`</span><span class="dt">RBI Officer</span><span class="st">`</span> =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Career Reserve Bank of India officer&quot;</span>)</a>
-<a class="sourceLine" id="cb66-10" data-line-number="10">  ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb66-11" data-line-number="11"><span class="st">  </span><span class="kw">fct_count</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb66-12" data-line-number="12"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">background =</span> f, <span class="dt">count =</span> n) -&gt;<span class="st"> </span>backgrounds</a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">profile <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb36-2" data-line-number="2"><span class="st">  </span><span class="kw">pull</span>(Background) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb36-3" data-line-number="3"><span class="st">  </span><span class="kw">fct_collapse</span>(</a>
+<a class="sourceLine" id="cb36-4" data-line-number="4">    <span class="dt">Bureaucrats =</span> <span class="kw">c</span>(<span class="st">&quot;IAS officer&quot;</span>, <span class="st">&quot;ICS officer&quot;</span>,</a>
+<a class="sourceLine" id="cb36-5" data-line-number="5">    <span class="st">&quot;Indian Administrative Service (IAS) officer&quot;</span>,</a>
+<a class="sourceLine" id="cb36-6" data-line-number="6">    <span class="st">&quot;Indian Audit and Accounts Service officer&quot;</span>,</a>
+<a class="sourceLine" id="cb36-7" data-line-number="7">    <span class="st">&quot;Indian Civil Service (ICS) officer&quot;</span>),</a>
+<a class="sourceLine" id="cb36-8" data-line-number="8">    <span class="st">`</span><span class="dt">No Info</span><span class="st">`</span> =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;&quot;</span>),</a>
+<a class="sourceLine" id="cb36-9" data-line-number="9">    <span class="st">`</span><span class="dt">RBI Officer</span><span class="st">`</span> =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Career Reserve Bank of India officer&quot;</span>)</a>
+<a class="sourceLine" id="cb36-10" data-line-number="10">  ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb36-11" data-line-number="11"><span class="st">  </span><span class="kw">fct_count</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb36-12" data-line-number="12"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">background =</span> f, <span class="dt">count =</span> n) -&gt;<span class="st"> </span>backgrounds</a></code></pre></div>
 </section>
 <section id="backgrounds-2" class="slide level2">
 <h2>Backgrounds</h2>
 <hr>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1">backgrounds</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">backgrounds</a></code></pre></div>
 <pre><code>## # A tibble: 5 x 2
 ##   background  count
 ##   &lt;fct&gt;       &lt;int&gt;
@@ -3008,14 +2408,14 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="backgrounds-3" class="slide level2">
 <h2>Backgrounds</h2>
 <hr>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1">backgrounds <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb69-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb69-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_col</span>(<span class="kw">aes</span>(background, count), <span class="dt">fill =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb69-4" data-line-number="4"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Background&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Count&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb69-5" data-line-number="5"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Background of RBI Governors&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">backgrounds <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb39-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb39-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_col</span>(<span class="kw">aes</span>(background, count), <span class="dt">fill =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb39-4" data-line-number="4"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Background&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Count&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb39-5" data-line-number="5"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Background of RBI Governors&quot;</span>)</a></code></pre></div>
 <p><img src="data:image/png;base64,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uQToZngNmv8zC0CDXAJUXlQvPiS9vJ7NtRkACXIJUOeTitkBAtAgmwCtLzWHl6MBIGeyCVD7v1U9x38VA6BCRgECADUIEAC4QYAAwA0CBABuECAAcIMAAYAbBAgA3CBAAOAGAQIANwgQALhBgADADQIEAG4QIABwY7oA/X8n/EZOjIyIjomMiKMJAcoFGREdExkRAjSloNfIiZER0TGRESFAUwp6jZwYGREdExkRAjSloNfIiZER0TGRESFAUwp6jZwYGREdExkRAjSloNfIiZER0TGRESFAUwp6jZwYGREdExkRAjSloNfIiZER0TGRESFAUwp6jZwYGREdExkRAjSloNfIiZER0TGRESFAUwp6jZwYGREdExkRAjSloNfIiZER0TGRESFAUwp6jZwYGREdExkRAjSloNfIiZER0TGRESFAUwp6jZwYGREdExkRAjSloNfIiZER0TGRESFAUwp6jZwYGREdExkRAjSloNfIiZER0TGRESFAUwp6jZwYGREdExkRAjSloNfIiZER0TGRESFAUwp6jZwYGREdExkRAjSloNfIiZER0TGRESFAUwp6jZwYGREdExkRAjSloNfIiZER0TGRESFAUwp6jZwYGREdExkRAjSloNfIiZER0TGRESFAUwp6jZwYGREdExkRAjSloNfIiZER0TGZW+SfZUnciQDlgoyIjgkBshB3IkC5ICOiY0KALMSdCFAuyIjomBAgC3EnApQLMiI6JgTIQtyJAOWCjIiOCQGyEHciQLkgI6JjQoAsxJ0IUC7IiOiYECALcScClAsyIjomBMhC3IkA5YKMiI4JAbIQdyJAuSAjomNCgCzEnQhQLsiI6JgQIAtxJwKUCzIiOiYEyELciQDlgoyIjgkBshB3IkC5ICOiY0KALMSdCFAuyIjomBAgC3EnApQLMiI6JgTIQtyJAOWCjIiOCQGyEHciQLkgI6JjQoAsxJ0IUC7IiOiYECALcScClAsyIjomBMhC3IkA5YKMiI4JAbIQdyJAuSAjomNCgCzEnQhQLsiI6JgQIAtxJwKUCzIiOiYEyELciQDlgoyIjgkBshB3IkC5ICOiY0KALMSdCFAuyIjomBAgC3EnApQLMiI6JgTIQtyJAOWCjIiOCQGyEHciQLkgI6JjQoAsxJ0IUC7IiOiYECALcScClAsyIjomBMhC3IkA5YKMiI4J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" width="576" style="display: block; margin: auto;" /></p>
 </section>
-<section id="section-37" class="slide level2" data-background="img/ws_section_summary.png">
+<section id="section-29" class="slide level2" data-background="img/ws_section_summary.png">
 <h2></h2>
 </section>
 <section id="summary" class="slide level2">
@@ -3031,7 +2431,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <li class="fragment">do not overwhelm websites with requests</li>
 </ul>
 </section>
-<section id="section-38" class="slide level2" data-background="img/thankyou.png">
+<section id="section-30" class="slide level2" data-background="img/thankyou.png">
 <h2></h2>
 </section>
     </div>
