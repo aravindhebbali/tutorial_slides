@@ -1,0 +1,17 @@
+# mock api
+- https://pokeapi.co/
+- https://swapi.co/
+- https://my-json-server.typicode.com/
+- http://dummy.restapiexample.com/
+- https://www.mocky.io/
+- https://fakerestapi.azurewebsites.net/
+- https://www.mockable.io/
+- https://fakejson.com/
+
+# list of public apis
+- https://github.com/toddmotto/public-apis/
+
+# R packages
+- cloudyr
+- https://cran.r-project.org/web/views/WebTechnologies.html
+- rtweet
