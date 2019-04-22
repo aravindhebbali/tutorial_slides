@@ -1,0 +1,7 @@
+1. https://data.world/datasets/reviews
+2. https://www.kaggle.com/datafiniti/consumer-reviews-of-amazon-products
+3. https://www.kaggle.com/utathya/imdb-review-dataset
+4. http://kavita-ganesan.com/user-review-datasets/#.XL2epqRS_IU
+5. https://registry.opendata.aws/amazon-reviews/
+6. https://www.slideshare.net/EdurekaIN/sentiment-analysis-machine-learning-algorithms-data-science-tutorial-edureka	
+7. https://www.slideshare.net/EdurekaIN/sentiment-analysis-in-r

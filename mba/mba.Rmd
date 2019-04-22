@@ -25,10 +25,112 @@ output: _output.yaml
 <br>
 <br>
 <br>
+<br>
+
+>- What?
+>- Why?
+>- How?
+>- Use Cases
+>- Demo
 
 ## {data-background="img/ws_section_intro.png"}
 
+## What?
+
+<hr>
+
+>- unsupervised data mining technique
+>- employed by retailers to understand purchase behaviors
+>- used to determine what items are frequently bought together
+>- it creates **IF-THEN** scenario rules
+
+## Why ?
+
+<hr>
+
+>- store layout
+>- online recommendation engines
+>- targeted marketing campaigns
+>- cross-selling
+>- up-selling
+>- catalogue design
+>- enhance customer experience
+
+## Advantages
+
+<hr>
+
+>- cost-effective
+>- insightful
+>- flexible
+>- actionable
+
+## Use Cases
+
+<hr>
+
+>- retail
+>- telecommunications
+>- banks
+>- insurance
+>- medical
+>- manufacturing
+
+## Steps
+
+<hr>
+
+>- frequent itemset generation
+>- rules generation
+
+## Simple Example
+
+<hr>
+
+## Itemset
+
+<hr>
+
+## Antecedent
+
+<hr>
+
+## Consequent
+
+<hr>
+
+## Support
+
+<hr>
+
+## Confidence 
+
+<hr>
+
+## Lift
+
+<hr>
+
 ## {data-background="img/ws_section_case_studies.png"}
+
+## Data
+
+<hr>
+
+- <a href="http://archive.ics.uci.edu/ml/datasets/online+retail#" target="_blank">UCI</a>
+- <a href="https://data.world/datasets/market-basket-analysis" target="_blank">data.world</a>
+
+## Data Dictionary
+
+<hr>
+
+- invoice number
+- description
+- quantity
+- invoice date
+- unit price
+- customer id
+- country
 
 ## Libraries
 
@@ -36,8 +138,159 @@ output: _output.yaml
 
 ```{r libs, message=FALSE, warning=FALSE}
 library(readxl)
+library(readr)
+library(mbar)
 library(arules)
 library(arulesViz)
+library(magrittr)
+```
+
+## Preprocessing
+
+<hr>
+
+```{r preprocess}
+mba_data     <- read_excel("online-retail.xlsx")
+transactions <- mbar_prep_data(mba_data, InvoiceNo, Description)
+head(transactions)
+```
+
+## Exploratory Data Analysis
+
+<hr>
+
+## Read Data
+
+<hr>
+
+```{r read_data, warning=FALSE, message=FALSE}
+basket_data <- read.transactions("transaction_data.csv", format = "basket", 
+  sep = ",")
+basket_data
+```
+
+## Summary
+
+<hr>
+
+```{r summary}
+summary(basket_data)
+```
+
+## Item Frequency Plot
+
+<hr>
+
+```{r plot_freq, fig.align='center', fig.height=5}
+itemFrequencyPlot(basket_data, topN = 10, type = 'absolute')
+```
+
+## Generate Rules
+
+<hr>
+
+```{r rules_generate}
+rules <- apriori(basket_data, parameter = list(supp=0.009, conf=0.8, 
+	target = "rules", maxlen = 4))
+```
+
+## Rules Summary
+
+<hr>
+
+```{r rules_summary}
+summary(rules)
+```
+
+## Inspect Rules
+
+<hr>
+
+```{r rules_inspect}
+basket_rules <- sort(rules, by = 'confidence', decreasing = TRUE)
+inspect(basket_rules[1:10])
+```
+
+## Number of Rules
+
+<hr>
+
+## Redundant Rules
+
+<hr>
+
+```{r rules_redundant}
+rules_redundant <-
+  basket_rules %>%
+  is.subset(rules) %>%
+  colSums() %>%
+  is_greater_than(1) %>%
+  which()
+```
+
+## Redundant Rules
+
+<hr>
+
+```{r rules_redundant_print}
+rules_redundant
+```
+
+## Remove Redundant Rules
+
+<hr>
+
+```{r rules_unique}
+rules_pruned <- basket_rules[-rules_redundant]
+inspect(rules_pruned)
+```
+
+
+## What influenced purchase of product X?
+
+<hr>
+
+```{r rhs}
+sugar_rules <- apriori(basket_data, parameter = list(supp = 0.009, conf = 0.8), 
+  appearance = list(default = "lhs", rhs = "SUGAR"), control = list(verbose = F)) 
+rules_sugar <- sort(sugar_rules, by = "confidence", decreasing = TRUE)
+inspect(rules_sugar)
+```
+
+## What purchases did product X influence?
+
+<hr>
+
+```{r lhs}
+sugar_rules <- apriori(basket_data, parameter = list(supp = 0.009, conf = 0.8), 
+  appearance = list(default = "rhs", lhs = "SUGAR"), control = list(verbose = F)) 
+rules_sugar <- sort(sugar_rules, by = "confidence", decreasing = TRUE)
+inspect(rules_sugar)
+```
+
+## Top Rules
+
+<hr>
+
+```{r top_rules}
+top_rules <- basket_rules[1:10]
+inspect(top_rules)
+```
+
+## Scatter Plot
+
+<hr>
+
+```{r plot_scatter, fig.align='center', fig.height=5, warning=FALSE, message=FALSE}
+plot(basket_rules)
+```
+
+## Network Plot
+
+<hr>
+
+```{r plot_network, fig.align='center', fig.height=5}
+plot(top_rules, method = 'graph')
 ```
 
 ## {data-background="img/ws_section_summary.png"}
@@ -45,6 +298,30 @@ library(arulesViz)
 ## Summary
 
 <hr>
+
+
+**WHAT** 
+
+unsupervised data mining technique employed by retailers to understand purchase behaviors
+and used to determine what items are frequently bought together
+
+**WHY**
+
+store layout, online recommendation engines, targeted marketing campaigns, cross-selling,
+up-selling, catalogue design, enhance customer experience etc
+
+**ADVANTAGES**
+
+cost-effective, insightful, flexible and actionable
+
+**USAGE** 
+
+retail, telecommunications, banks, insurance, medical, manufacturing
+
+**WARNING**
+    
+- directionality of rule is lost while using **lift**
+- **confidence** as a measure can be misleading
 
 ## {data-background="img/thankyou.png"}
 
