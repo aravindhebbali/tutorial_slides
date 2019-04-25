@@ -2,7 +2,7 @@
 output: _output.yaml
 ---
 
-## {data-background="img/ws_cover_image.png"}
+## {data-background="img/mba_cover_image.png"}
 
 ## Connect With Us
 
@@ -210,8 +210,6 @@ summary(rules)
 basket_rules <- sort(rules, by = 'confidence', decreasing = TRUE)
 inspect(basket_rules[1:10])
 ```
-
-## Number of Rules
 
 <hr>
 
