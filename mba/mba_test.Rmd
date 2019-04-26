@@ -121,7 +121,6 @@ knitr::include_graphics("img/mba_support.png")
 knitr::include_graphics("img/mba_confidence.png")
 ```
 
-
 ## Lift
 
 <hr>

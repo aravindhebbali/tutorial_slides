@@ -39,77 +39,95 @@ output: _output.yaml
 
 <hr>
 
->- unsupervised data mining technique
->- employed by retailers to understand purchase behaviors
->- used to determine what items are frequently bought together
->- it creates **IF-THEN** scenario rules
+```{r mba_what, fig.align='center', out.width="100%", echo=FALSE}
+knitr::include_graphics("img/mba_what.png")
+```
 
 ## Why ?
 
 <hr>
 
->- store layout
->- online recommendation engines
->- targeted marketing campaigns
->- cross-selling
->- up-selling
->- catalogue design
->- enhance customer experience
+<br>
+<br>
+
+```{r why, fig.align='center', out.width="100%", echo=FALSE}
+knitr::include_graphics("img/mba_why.png")
+```
 
 ## Advantages
 
 <hr>
 
->- cost-effective
->- insightful
->- flexible
->- actionable
+```{r advantages, fig.align='center', out.width="100%", echo=FALSE}
+knitr::include_graphics("img/mba_advantages.png")
+```
 
 ## Use Cases
 
 <hr>
 
->- retail
->- telecommunications
->- banks
->- insurance
->- medical
->- manufacturing
+<br>
+<br>
 
-## Steps
-
-<hr>
-
->- frequent itemset generation
->- rules generation
+```{r use_cases, fig.align='center', out.width="100%", echo=FALSE}
+knitr::include_graphics("img/mba_use_cases.png")
+```
 
 ## Simple Example
 
 <hr>
 
+```{r simple_example, fig.align='center', out.width="100%", echo=FALSE}
+knitr::include_graphics("img/mba_items_description.png")
+```
+
+## Steps
+
+<hr>
+
+```{r steps, fig.align='center', out.width="100%", echo=FALSE}
+knitr::include_graphics("img/mba_steps.png")
+```
+
 ## Itemset
 
 <hr>
 
-## Antecedent
+```{r itemset, fig.align='center', out.width="100%", echo=FALSE}
+knitr::include_graphics("img/mba_itemset.png")
+```
+
+## Antecedent & Consequent
 
 <hr>
 
-## Consequent
-
-<hr>
+```{r ante_cons, fig.align='center', out.width="100%", echo=FALSE}
+knitr::include_graphics("img/mba_antecedent_consequent.png")
+```
 
 ## Support
 
 <hr>
 
+```{r support, fig.align='center', out.width="100%", echo=FALSE}
+knitr::include_graphics("img/mba_support.png")
+```
+
 ## Confidence 
 
 <hr>
 
+```{r confidence, fig.align='center', out.width="100%", echo=FALSE}
+knitr::include_graphics("img/mba_confidence.png")
+```
+
 ## Lift
 
 <hr>
+
+```{r lift, fig.align='center', out.width="100%", echo=FALSE}
+knitr::include_graphics("img/mba_lift.png")
+```
 
 ## {data-background="img/ws_section_case_studies.png"}
 
@@ -143,6 +161,10 @@ library(mbar)
 library(arules)
 library(arulesViz)
 library(magrittr)
+library(dplyr)
+library(lubridate)
+library(forcats)
+library(ggplot2)
 ```
 
 ## Preprocessing
@@ -155,9 +177,75 @@ transactions <- mbar_prep_data(mba_data, InvoiceNo, Description)
 head(transactions)
 ```
 
-## Exploratory Data Analysis
+## What time of day do people purchase?
 
 <hr>
+
+<br>
+
+```{r eda_1, echo=FALSE, fig.align='center', fig.height=5}
+purchase_time <-
+  mba_data %>%
+  group_by(InvoiceDate) %>%
+  slice(1) %>%
+  mutate(time_of_day = hour(InvoiceDate)) %>%
+  pull(time_of_day) %>%
+  as.factor() %>%
+  fct_count()
+
+purchase_time %>%
+  ggplot() +
+  geom_col(aes(x = f, y = n), fill = "blue") +
+  xlab("Hour of Day") + ylab("Transactions") +
+  ggtitle("Hourly Transaction Distribution")  
+```
+
+## How many items are purchased on an average?
+
+<hr>
+
+```{r eda_2}
+items <- 
+  mba_data %>%
+  group_by(InvoiceNo) %>%
+  summarize(count = n()) %>%
+  pull(count) 
+
+mean(items)
+median(items)
+```
+
+## Most Purchased Items
+
+<hr>
+
+```{r eda_4}
+mba_data %>%
+  group_by(Description) %>%
+  summarize(count = n()) %>%
+  arrange(desc(count))
+```
+
+## Average Order Value
+
+<hr>
+
+```{r eda_5}
+total_revenue <- 
+  mba_data %>%
+  group_by(InvoiceNo) %>%
+  summarize(order_sum = sum(UnitPrice)) %>%
+  pull(order_sum) %>%
+  sum()
+
+total_transactions <- 
+  mba_data %>%
+  group_by(InvoiceNo) %>%
+  summarize(n()) %>%
+  nrow()
+
+total_revenue / total_transactions
+```
 
 ## Read Data
 
@@ -250,7 +338,8 @@ inspect(rules_pruned)
 
 ```{r rhs}
 sugar_rules <- apriori(basket_data, parameter = list(supp = 0.009, conf = 0.8), 
-  appearance = list(default = "lhs", rhs = "SUGAR"), control = list(verbose = F)) 
+  appearance = list(default = "lhs", rhs = "SUGAR"), 
+  control = list(verbose = F)) 
 rules_sugar <- sort(sugar_rules, by = "confidence", decreasing = TRUE)
 inspect(rules_sugar)
 ```
@@ -261,7 +350,8 @@ inspect(rules_sugar)
 
 ```{r lhs}
 sugar_rules <- apriori(basket_data, parameter = list(supp = 0.009, conf = 0.8), 
-  appearance = list(default = "rhs", lhs = "SUGAR"), control = list(verbose = F)) 
+  appearance = list(default = "rhs", lhs = "SUGAR"), 
+  control = list(verbose = F)) 
 rules_sugar <- sort(sugar_rules, by = "confidence", decreasing = TRUE)
 inspect(rules_sugar)
 ```
