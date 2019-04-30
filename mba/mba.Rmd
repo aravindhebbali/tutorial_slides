@@ -35,6 +35,14 @@ output: _output.yaml
 
 ## {data-background="img/ws_section_intro.png"}
 
+## Introduction
+
+<hr>
+
+```{r mba_intro, fig.align='center', out.width="100%", echo=FALSE}
+knitr::include_graphics("img/mba_intro.png")
+```
+
 ## What?
 
 <hr>
@@ -171,7 +179,15 @@ library(ggplot2)
 
 <hr>
 
-```{r preprocess}
+```{r mba_preprocess, fig.align='center', out.width="100%", echo=FALSE}
+knitr::include_graphics("img/mba_pre_process.png")
+```
+
+## Preprocessing
+
+<hr>
+
+```{r preprocess, eval=FALSE}
 mba_data     <- read_excel("online-retail.xlsx")
 transactions <- mbar_prep_data(mba_data, InvoiceNo, Description)
 head(transactions)
@@ -183,7 +199,7 @@ head(transactions)
 
 <br>
 
-```{r eda_1, echo=FALSE, fig.align='center', fig.height=5}
+```{r eda_1, echo=FALSE, fig.align='center', fig.height=5, eval=FALSE}
 purchase_time <-
   mba_data %>%
   group_by(InvoiceDate) %>%
@@ -204,7 +220,7 @@ purchase_time %>%
 
 <hr>
 
-```{r eda_2}
+```{r eda_2, eval=FALSE}
 items <- 
   mba_data %>%
   group_by(InvoiceNo) %>%
@@ -219,7 +235,7 @@ median(items)
 
 <hr>
 
-```{r eda_4}
+```{r eda_4, eval=FALSE}
 mba_data %>%
   group_by(Description) %>%
   summarize(count = n()) %>%
@@ -230,7 +246,7 @@ mba_data %>%
 
 <hr>
 
-```{r eda_5}
+```{r eda_5, eval=FALSE}
 total_revenue <- 
   mba_data %>%
   group_by(InvoiceNo) %>%
@@ -251,7 +267,7 @@ total_revenue / total_transactions
 
 <hr>
 
-```{r read_data, warning=FALSE, message=FALSE}
+```{r read_data, warning=FALSE, message=FALSE, eval=FALSE}
 basket_data <- read.transactions("transaction_data.csv", format = "basket", 
   sep = ",")
 basket_data
@@ -261,7 +277,7 @@ basket_data
 
 <hr>
 
-```{r summary}
+```{r summary, eval=FALSE}
 summary(basket_data)
 ```
 
@@ -269,7 +285,7 @@ summary(basket_data)
 
 <hr>
 
-```{r plot_freq, fig.align='center', fig.height=5}
+```{r plot_freq, fig.align='center', fig.height=5, eval=FALSE}
 itemFrequencyPlot(basket_data, topN = 10, type = 'absolute')
 ```
 
@@ -277,7 +293,7 @@ itemFrequencyPlot(basket_data, topN = 10, type = 'absolute')
 
 <hr>
 
-```{r rules_generate}
+```{r rules_generate, eval=FALSE}
 rules <- apriori(basket_data, parameter = list(supp=0.009, conf=0.8, 
 	target = "rules", maxlen = 4))
 ```
@@ -286,7 +302,7 @@ rules <- apriori(basket_data, parameter = list(supp=0.009, conf=0.8,
 
 <hr>
 
-```{r rules_summary}
+```{r rules_summary, eval=FALSE}
 summary(rules)
 ```
 
@@ -294,7 +310,7 @@ summary(rules)
 
 <hr>
 
-```{r rules_inspect}
+```{r rules_inspect, eval=FALSE}
 basket_rules <- sort(rules, by = 'confidence', decreasing = TRUE)
 inspect(basket_rules[1:10])
 ```
@@ -305,7 +321,7 @@ inspect(basket_rules[1:10])
 
 <hr>
 
-```{r rules_redundant}
+```{r rules_redundant, eval=FALSE}
 rules_redundant <-
   basket_rules %>%
   is.subset(rules) %>%
@@ -318,7 +334,7 @@ rules_redundant <-
 
 <hr>
 
-```{r rules_redundant_print}
+```{r rules_redundant_print, eval=FALSE}
 rules_redundant
 ```
 
@@ -326,7 +342,7 @@ rules_redundant
 
 <hr>
 
-```{r rules_unique}
+```{r rules_unique, eval=FALSE}
 rules_pruned <- basket_rules[-rules_redundant]
 inspect(rules_pruned)
 ```
@@ -336,7 +352,7 @@ inspect(rules_pruned)
 
 <hr>
 
-```{r rhs}
+```{r rhs, eval=FALSE}
 sugar_rules <- apriori(basket_data, parameter = list(supp = 0.009, conf = 0.8), 
   appearance = list(default = "lhs", rhs = "SUGAR"), 
   control = list(verbose = F)) 
@@ -348,7 +364,7 @@ inspect(rules_sugar)
 
 <hr>
 
-```{r lhs}
+```{r lhs, eval=FALSE}
 sugar_rules <- apriori(basket_data, parameter = list(supp = 0.009, conf = 0.8), 
   appearance = list(default = "rhs", lhs = "SUGAR"), 
   control = list(verbose = F)) 
@@ -360,7 +376,7 @@ inspect(rules_sugar)
 
 <hr>
 
-```{r top_rules}
+```{r top_rules, eval=FALSE}
 top_rules <- basket_rules[1:10]
 inspect(top_rules)
 ```
@@ -369,7 +385,7 @@ inspect(top_rules)
 
 <hr>
 
-```{r plot_scatter, fig.align='center', fig.height=5, warning=FALSE, message=FALSE}
+```{r plot_scatter, fig.align='center', fig.height=5, warning=FALSE, message=FALSE, eval=FALSE}
 plot(basket_rules)
 ```
 
@@ -377,8 +393,24 @@ plot(basket_rules)
 
 <hr>
 
-```{r plot_network, fig.align='center', fig.height=5}
+```{r plot_network, fig.align='center', fig.height=5, eval=FALSE}
 plot(top_rules, method = 'graph')
+```
+
+## Things to keep in mind..
+
+<hr>
+
+```{r mba_lift_warn, fig.align='center', out.width="100%", echo=FALSE}
+knitr::include_graphics("img/mba_lift_warning_final.png")
+```
+
+## Things to keep in mind..
+
+<hr>
+
+```{r mba_conf_warn, fig.align='center', out.width="100%", echo=FALSE}
+knitr::include_graphics("img/mba_conf_warn_final.png")
 ```
 
 ## {data-background="img/ws_section_summary.png"}
@@ -387,29 +419,15 @@ plot(top_rules, method = 'graph')
 
 <hr>
 
+- unsupervised data mining technique
+- uncovers products frequently bought together
+- creates if-then scenario rules
+- cost-effective, insightful and actionable
+- association rule mining has applications in several industries
+- directionality of rule is lost while using lift
+- confidence as a measure can be misleading
 
-**WHAT** 
-
-unsupervised data mining technique employed by retailers to understand purchase behaviors
-and used to determine what items are frequently bought together
-
-**WHY**
-
-store layout, online recommendation engines, targeted marketing campaigns, cross-selling,
-up-selling, catalogue design, enhance customer experience etc
-
-**ADVANTAGES**
-
-cost-effective, insightful, flexible and actionable
-
-**USAGE** 
-
-retail, telecommunications, banks, insurance, medical, manufacturing
-
-**WARNING**
-    
-- directionality of rule is lost while using **lift**
-- **confidence** as a measure can be misleading
+## {data-background="img/mba_summary_meme.png"}
 
 ## {data-background="img/thankyou.png"}
 
