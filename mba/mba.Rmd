@@ -19,6 +19,14 @@ output: _output.yaml
 - Facebook    (https://www.facebook.com/rsquaredacademy/)
 - Linkedin    (https://in.linkedin.com/company/rsquared-academy)
 
+## Resources
+
+<hr>
+
+- <a href="https://slides.rsquaredacademy.com/mba/mba.html" target="_blank">Slides</a>
+- <a href="https://github.com/rsquaredacademy-education/online-courses/tree/master/association-rule-mining-in-r" target="_blank">Code & Data</a>
+- <a href="https://rstudio.cloud/project/335377" target="_blank">RStudio Cloud</a>
+
 ## {data-background="img/ws_agenda.png"}
 
 <br>
@@ -151,6 +159,7 @@ knitr::include_graphics("img/mba_lift.png")
 <hr>
 
 - invoice number
+- stock code
 - description
 - quantity
 - invoice date
@@ -178,6 +187,9 @@ library(ggplot2)
 ## Preprocessing
 
 <hr>
+
+<br>
+<br>
 
 ```{r mba_preprocess, fig.align='center', out.width="100%", echo=FALSE}
 knitr::include_graphics("img/mba_pre_process.png")
@@ -273,7 +285,7 @@ basket_data <- read.transactions("transaction_data.csv", format = "basket",
 basket_data
 ```
 
-## Summary
+## Data Summary
 
 <hr>
 
@@ -315,19 +327,37 @@ basket_rules <- sort(rules, by = 'confidence', decreasing = TRUE)
 inspect(basket_rules[1:10])
 ```
 
+## Redundant Rules
+
 <hr>
+
+<br>
+<br>
+
+```{r red_rule_1, fig.align='center', out.width="100%", echo=FALSE}
+knitr::include_graphics("J:/R/blog_research/mba/img/mba_redundant_rule_1.png")
+```
 
 ## Redundant Rules
 
 <hr>
 
-```{r rules_redundant}
-rules_redundant <-
-  basket_rules %>%
-  is.subset(rules) %>%
-  colSums() %>%
-  is_greater_than(1) %>%
-  which()
+<br>
+<br>
+
+```{r red_rule_2, fig.align='center', out.width="100%", echo=FALSE}
+knitr::include_graphics("J:/R/blog_research/mba/img/mba_redundant_rule_2.png")
+```
+
+## Redundant Rules
+
+<hr>
+
+<br>
+<br>
+
+```{r red_rule_3, fig.align='center', out.width="100%", echo=FALSE}
+knitr::include_graphics("J:/R/blog_research/mba/img/mba_redundant_rule_3.png")
 ```
 
 ## Redundant Rules
@@ -335,27 +365,31 @@ rules_redundant <-
 <hr>
 
 ```{r rules_redundant_print}
-rules_redundant
+inspect(rules[is.redundant(rules)])
 ```
 
-## Remove Redundant Rules
+## Non Redundant Rules
 
 <hr>
 
 ```{r rules_unique}
-rules_pruned <- basket_rules[-rules_redundant]
-inspect(rules_pruned)
+inspect(rules[!is.redundant(rules)])
 ```
-
 
 ## What influenced purchase of product X?
 
 <hr>
 
-```{r rhs}
+```{r rhs, message=FALSE}
 sugar_rules <- apriori(basket_data, parameter = list(supp = 0.009, conf = 0.8), 
-  appearance = list(default = "lhs", rhs = "SUGAR"), 
-  control = list(verbose = F)) 
+  appearance = list(default = "lhs", rhs = "SUGAR"))
+```
+
+## What influenced purchase of product X?
+
+<hr>
+
+```{r rhs2}
 rules_sugar <- sort(sugar_rules, by = "confidence", decreasing = TRUE)
 inspect(rules_sugar)
 ```
@@ -364,20 +398,47 @@ inspect(rules_sugar)
 
 <hr>
 
-```{r lhs}
+```{r lhs, message=FALSE}
 sugar_rules <- apriori(basket_data, parameter = list(supp = 0.009, conf = 0.8), 
-  appearance = list(default = "rhs", lhs = "SUGAR"), 
-  control = list(verbose = F)) 
+  appearance = list(default = "rhs", lhs = "SUGAR")) 
+```
+
+## What purchases did product X influence?
+
+<hr>
+
+```{r lhs2, message=FALSE}
 rules_sugar <- sort(sugar_rules, by = "confidence", decreasing = TRUE)
 inspect(rules_sugar)
 ```
 
-## Top Rules
+## Top Rules by Support
 
 <hr>
 
-```{r top_rules}
-top_rules <- basket_rules[1:10]
+```{r top_rules_supp}
+supp_rules <- sort(rules, by = 'support', decreasing = TRUE)
+top_rules <- supp_rules[1:10]
+inspect(top_rules)
+```
+
+## Top Rules by Confidence
+
+<hr>
+
+```{r top_rules_conf}
+conf_rules <- sort(rules, by = 'confidence', decreasing = TRUE)
+top_rules <- conf_rules[1:10]
+inspect(top_rules)
+```
+
+## Top Rules by Lift
+
+<hr>
+
+```{r top_rules_lift}
+lift_rules <- sort(rules, by = 'lift', decreasing = TRUE)
+top_rules <- lift_rules[1:10]
 inspect(top_rules)
 ```
 
@@ -397,23 +458,31 @@ plot(basket_rules)
 plot(top_rules, method = 'graph')
 ```
 
-## Things to keep in mind..
+## Directionality of rule is lost while using lift
 
 <hr>
+
+<br>
+<br>
 
 ```{r mba_lift_warn, fig.align='center', out.width="100%", echo=FALSE}
 knitr::include_graphics("img/mba_lift_warning_final.png")
 ```
 
-## Things to keep in mind..
+## Confidence as a measure can be misleading
 
 <hr>
+
+<br>
+<br>
 
 ```{r mba_conf_warn, fig.align='center', out.width="100%", echo=FALSE}
 knitr::include_graphics("img/mba_conf_warn_final.png")
 ```
 
 ## {data-background="img/ws_section_summary.png"}
+
+## {data-background="img/mba_summary_meme.png"}
 
 ## Summary
 
@@ -426,8 +495,6 @@ knitr::include_graphics("img/mba_conf_warn_final.png")
 - association rule mining has applications in several industries
 - directionality of rule is lost while using lift
 - confidence as a measure can be misleading
-
-## {data-background="img/mba_summary_meme.png"}
 
 ## {data-background="img/thankyou.png"}
 
