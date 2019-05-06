@@ -1,0 +1,335 @@
+---
+output: _output.yaml
+---
+
+## {data-background="stringr.png"}
+
+## Agenda
+
+<hr>
+
+- what are regular expressions?
+- why use regular expression?
+- what can you do with regular expressions?
+	- find a word in a string
+	- replace string
+	- match a single character
+	- match one of any of several letters
+	- match series of range of characters
+ 
+## Libraries
+
+<hr>
+
+```{r install, eval=FALSE}
+library(cranlogs)
+library(dplyr)
+```
+
+```{r str1, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+library(cranlogs)
+library(dplyr)
+```
+
+## Top R Packages
+
+<hr>
+
+```{r top_downloads}
+top_downloads <- 
+  cran_top_downloads(when = "last-week") %>%
+  pull(package)
+
+top_downloads
+```
+
+## grep
+
+<hr>
+
+```{r grep}
+grep(x = top_downloads, pattern = "r")
+grep(x = top_downloads, pattern = "r", value = TRUE)
+grep(x = top_downloads, pattern = "r", value = TRUE, ignore.case = TRUE)
+grep(x = top_downloads, pattern = "r", value = TRUE, invert = TRUE)
+```
+
+## grepl
+
+<hr>
+
+```{r grepl}
+grepl(x = top_downloads, pattern = "r")
+grepl(x = top_downloads, pattern = "r", ignore.case = TRUE)
+```
+
+## regexpr
+
+<hr>
+
+```{r regexpr}
+r_packages <- c("purrr", "olsrr", "blorr")
+regexpr("r", r_packages)
+```
+
+## gregexpr
+
+<hr>
+
+```{r gregexpr}
+gregexpr("r", r_packages)
+```
+
+## regexec
+
+<hr>
+
+```{r regexec}
+regexec("r", r_packages)
+```
+
+## sub
+
+<hr>
+
+```{r sub}
+sub(x = top_downloads, patter = "r", replacement = "s")
+```
+
+## gsub
+
+<hr>
+
+```{r gsub}
+sub(x = top_downloads, patter = "r", replacement = "s")
+```
+
+## sub vs gsub
+
+<hr>
+
+```{r subgsub}
+sub(x = r_packages, pattern = "r", replacement = "s")
+gsub(x = r_packages, pattern = "r", replacement = "s")
+```
+
+## Meta Characters
+
+<hr>
+
+Use `\\` for the following:
+
+- `[`
+- `]`
+- `(`
+- `)`
+- `{`
+- `}`
+
+## Quantifiers
+
+<hr>
+
+```{r quantifiers_1}
+grep(x = top_downloads, pattern = "d.", value = TRUE)
+```
+
+## Quantifiers
+
+<hr>
+
+```{r quantifiers_2}
+grep(x = top_downloads, pattern = "dr?", value = TRUE)
+```
+
+## Quantifiers
+
+<hr>
+
+```{r quantifiers_3}
+grep(x = top_downloads, pattern = "dr*", value = TRUE)
+```
+
+## Quantifiers
+
+<hr>
+
+```{r quantifiers_4}
+grep(x = top_downloads, pattern = "dp+", value = TRUE)
+```
+
+## Quantifiers
+
+<hr>
+
+```{r quantifiers_5}
+grep(x = top_downloads, pattern = "lo{1}", value = TRUE)
+grep(x = top_downloads, pattern = "to{2}", value = TRUE)
+```
+
+## Quantifiers
+
+<hr>
+
+```{r quantifiers_6}
+grep(x = top_downloads, pattern = "il{1, }", value = TRUE)
+```
+
+## Quantifiers
+
+<hr>
+
+```{r quantifiers_7}
+grep(x = top_downloads, pattern = "il{1,2}", value = TRUE)
+```
+
+## OR
+
+<hr>
+
+```{r or_operator}
+grep(x = top_downloads, pattern = "g(g|l)", value = TRUE)
+grep(x = top_downloads, pattern = "d[epa]", value = TRUE)
+```
+
+## Anchors
+
+<hr>
+
+```{r anchors_1}
+grep(x = top_downloads, pattern = "^r", value = TRUE)
+grep(x = top_downloads, pattern = "^r", value = TRUE, ignore.case = TRUE)
+```
+
+## Anchors
+
+<hr>
+
+```{r anchors_2}
+grep(x = top_downloads, pattern = "r$", value = TRUE)
+```
+
+## Sequences
+
+<hr>
+
+```{r seq_1}
+grep(x = top_downloads, pattern = "\\d", value = TRUE)
+```
+
+## Sequences
+
+<hr>
+
+```{r seq_2}
+grep(x = "125", pattern = "\\D", value = TRUE)
+```
+
+## Sequences
+
+<hr>
+
+```{r seq_3}
+grep(x = c("hell o", "hello"), pattern = "\\s", value = TRUE)
+```
+
+## Sequences
+
+<hr>
+
+```{r seq_4}
+grep(x = c("hell o", "  ", "hello"), pattern = "\\S", value = TRUE)
+```
+
+## Sequences
+
+<hr>
+
+```{r seq_5}
+grep(x = c("%", "hello"), pattern = "\\w", value = TRUE)
+```
+
+## Sequences
+
+<hr>
+
+```{r seq_6}
+grep(x = c("%", "hello"), pattern = "\\W", value = TRUE)
+```
+
+## Sequences
+
+<hr>
+
+```{r seq_7}
+grep(x = c("categorical", "hello"), pattern = "\\bcat", value = TRUE)
+grep(x = c("hellocat", "hello"), pattern = "cat\\b", value = TRUE)
+```
+
+## Sequences
+
+<hr>
+
+```{r seq_8}
+grep(x = c("polycater", "hello"), pattern = "\\Bcat", value = TRUE)
+```
+## Character Classes
+
+<hr>
+
+```{r char_1}
+grep(x = top_downloads, pattern = "[aeiou]", value = TRUE)
+grep(x = top_downloads, pattern = "[aiu]", value = TRUE)
+```
+
+## Character Classes
+
+<hr>
+
+```{r char_2}
+grep(x = top_downloads, pattern = "[0-9]", value = TRUE)
+```
+
+## Character Classes
+
+<hr>
+
+```{r char_3}
+# 4. [a-z] matches any lower case letter
+```
+
+## Character Classes
+
+<hr>
+
+```{r char_4}
+# 4.1 [^a-z] matches no letter from a to z
+```
+
+## Character Classes
+
+<hr>
+
+```{r char_5}
+# 5. [A-Z] matches any upper case letter
+```
+
+## Character Classes
+
+<hr>
+
+```{r char_6}
+# 6. [a-zA-z0-9] matches any digit or lower/upper case letter
+```
+
+## References
+
+<hr>
+
+- https://www.rstudio.com/wp-content/uploads/2016/09/RegExCheatsheet.pdf
+- https://stringr.tidyverse.org/articles/regular-expressions.html
+- https://r4ds.had.co.nz/strings.html
+- https://github.com/rstudio/cheatsheets/blob/master/strings.pdf
+- https://www.garrickadenbuie.com/project/regexplain/
+
+## {data-background="thankyou.png"}

@@ -1,0 +1,216 @@
+---
+output: _output.yaml
+---
+
+## {data-background="stringr.png"}
+
+## Agenda
+
+<hr>
+
+- how to create strings in R
+- basic string operations
+	- nchar
+	- toupper/tolower
+	- is.character
+	- toString/as.character
+- format strings using:
+	- cat
+	- paste
+	- paste0
+	- format
+	- glue
+ 
+## Libraries
+
+<hr>
+
+```{r install, eval=FALSE}
+library(glue)
+```
+
+```{r str1, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+library(glue)
+```
+
+## intro
+
+<hr>
+
+```{r intro}
+my_name <- "jovial"
+my_name <- 'jovial'
+```
+
+## Data Type
+
+<hr>
+
+```{r }
+my_name <- "Jovial"
+my_name
+class(my_name)
+is.character(my_name)
+```
+
+## Number of Characters
+
+<hr>
+
+```{r nchar}
+nchar(my_name)
+```
+
+## Case
+
+<hr>
+
+```{r change_case}
+toupper(my_name)
+tolower(my_name)
+```
+
+## Conversion
+
+<hr>
+
+```{r conversion}
+my_age <- 30
+toString(my_age)
+as.character(my_age)
+```
+
+## cat
+
+<hr>
+
+```{r cat_1}
+cat(my_name)
+```
+
+## cat
+
+```{r cat_2}
+cat("my name is ", my_name)
+cat("my name is", my_name)
+```
+
+## cat
+
+<hr>
+
+```{r cat_3}
+cat("my name is", my_name, sep = ",")
+cat("my name is", my_name, sep = ";")
+cat("my name is", my_name, sep = ".")
+cat("my name is", my_name, sep = "\n")
+```
+
+## paste
+
+<hr>
+
+```{r paste1}
+paste("my name is", my_name)
+paste("my name is", my_name, sep = ",")
+```
+
+## paste
+
+<hr>
+
+```{r paste2}
+full_name <- c("jovial", "mann")
+paste(full_name, collapse = ", ")
+```
+
+## paste0
+
+<hr>
+
+```{r paste0}
+paste0("my name is", my_name)
+paste0("my name is ", my_name)
+paste("my name is", my_name) == paste0("my name is ", my_name)
+```
+
+## format
+
+<hr>
+
+```{r format1}
+format(12.5, digits = 2)
+```
+
+## format
+
+<hr>
+
+```{r format2}
+format(12.5, nsmall = 3)
+```
+
+## format
+
+<hr>
+
+```{r format3}
+format(12.5, width = 5)
+```
+
+## format
+
+<hr>
+
+```{r format4}
+format(c(12.4, 4.82), justify = "left")
+format(c(2.4, 4.82), justify = "right")
+format(c(2.4, 4.8256), justify = "centre")
+```
+
+## glue
+
+<hr>
+
+```{r glue_1}
+glue("my name is {my_name}")
+```
+
+## glue
+
+<hr>
+
+```{r glue_2}
+glue("my first name is {first_name}",
+     first_name = "jovial")
+```
+
+## glue
+
+<hr>
+
+```{r glue_3}
+glue_collapse(full_name)
+glue_collapse(full_name, sep = " ")
+```
+
+## glue
+
+<hr>
+
+```{r glue_4}
+glue_collapse(full_name, sep = " ", width = 10)
+```
+
+## glue
+
+<hr>
+
+```{r glue_5}
+glue_collapse(c("Jack", "Jill", "John", "Jovial."), 
+              sep = ", ",
+              last = " and ")
+```
+
+
+## {data-background="thankyou.png"}
