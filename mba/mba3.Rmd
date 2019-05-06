@@ -1,0 +1,269 @@
+---
+output: _output.yaml
+---
+
+## {data-background="img/mba_cover_image.png"}
+
+## Connect With Us
+
+<hr>
+
+- Website     (https://www.rsquaredacademy.com/)
+- Free Online R Courses   (https://rsquared-academy.thinkific.com/)
+- R Packages  (https://pkgs.rsquaredacademy.com)
+- Shiny Apps  (https://apps.rsquaredacademy.com)
+- Blog        (https://blog.rsquaredacademy.com)
+- GitHub      (https://github.com/rsquaredacademy)
+- YouTube     (https://www.youtube.com/user/rsquaredin/)
+- Twitter     (https://twitter.com/rsquaredacademy)
+- Facebook    (https://www.facebook.com/rsquaredacademy/)
+- Linkedin    (https://in.linkedin.com/company/rsquared-academy)
+
+## Resources
+
+<hr>
+
+- <a href="https://slides.rsquaredacademy.com/mba/mba.html" target="_blank">Slides</a>
+- <a href="https://github.com/rsquaredacademy-education/online-courses/tree/master/association-rule-mining-in-r" target="_blank">Code & Data</a>
+- <a href="https://rstudio.cloud/project/335377" target="_blank">RStudio Cloud</a>
+
+## {data-background="img/ws_agenda.png"}
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+>- What?
+>- Why?
+>- How?
+>- Use Cases
+>- Demo
+
+## {data-background="img/ws_section_intro.png"}
+
+## {data-background="img/mba_canva_intro.png"}
+
+## {data-background="img/mba_canva_what.png"}
+
+## {data-background="img/mba_canva_why.png"}
+
+## {data-background="img/mba_canva_advantages.png"}
+
+## {data-background="img/mba_canva_use_cases.png"}
+
+## {data-background="img/mba_canva_simple_example.png"}
+
+## {data-background="img/mba_canva_steps.png"}
+
+## {data-background="img/mba_canva_itemset.png"}
+
+## {data-background="img/mba_canva_antecedent_consequent.png"}
+
+## {data-background="img/mba_canva_support.png"}
+
+## {data-background="img/mba_canva_confidence.png"}
+
+## {data-background="img/mba_canva_lift.png"}
+
+## {data-background="img/ws_section_case_studies.png"}
+
+## Data
+
+<hr>
+
+- <a href="http://archive.ics.uci.edu/ml/datasets/online+retail#" target="_blank">UCI</a>
+- <a href="https://data.world/datasets/market-basket-analysis" target="_blank">data.world</a>
+
+## Data Dictionary
+
+<hr>
+
+- invoice number
+- stock code
+- description
+- quantity
+- invoice date
+- unit price
+- customer id
+- country
+
+## Libraries
+
+<hr>
+
+```{r libs, message=FALSE, warning=FALSE}
+library(readxl)
+library(readr)
+library(mbar)
+library(arules)
+library(arulesViz)
+library(magrittr)
+library(dplyr)
+library(lubridate)
+library(forcats)
+library(ggplot2)
+```
+
+## Read Data
+
+<hr>
+
+```{r read_data, warning=FALSE, message=FALSE}
+basket_data <- read.transactions("transaction_data.csv", format = "basket", 
+  sep = ",")
+basket_data
+```
+
+## Data Summary
+
+<hr>
+
+```{r summary}
+summary(basket_data)
+```
+
+## {data-background="img/mba_canva_ifplot.png"}
+
+## Generate Rules
+
+<hr>
+
+```{r rules_generate}
+rules <- apriori(basket_data, parameter = list(supp=0.009, conf=0.8, 
+	target = "rules", maxlen = 4))
+```
+
+## Rules Summary
+
+<hr>
+
+```{r rules_summary}
+summary(rules)
+```
+
+## Inspect Rules
+
+<hr>
+
+```{r rules_inspect}
+basket_rules <- sort(rules, by = 'confidence', decreasing = TRUE)
+inspect(basket_rules[1:10])
+```
+
+## {data-background="img/mba_canva_redundant_rule_1.png"}
+
+## {data-background="img/mba_canva_redundant_rule_2.png"}
+
+## {data-background="img/mba_canva_redundant_rule_3.png"}
+
+## Redundant Rules
+
+<hr>
+
+```{r rules_redundant_print}
+inspect(rules[is.redundant(rules)])
+```
+
+## Non Redundant Rules
+
+<hr>
+
+```{r rules_unique}
+inspect(rules[!is.redundant(rules)])
+```
+
+## What influenced purchase of product X?
+
+<hr>
+
+```{r rhs, message=FALSE}
+sugar_rules <- apriori(basket_data, parameter = list(supp = 0.009, conf = 0.8), 
+  appearance = list(default = "lhs", rhs = "SUGAR"))
+```
+
+## What influenced purchase of product X?
+
+<hr>
+
+```{r rhs2}
+rules_sugar <- sort(sugar_rules, by = "confidence", decreasing = TRUE)
+inspect(rules_sugar)
+```
+
+## What purchases did product X influence?
+
+<hr>
+
+```{r lhs, message=FALSE}
+sugar_rules <- apriori(basket_data, parameter = list(supp = 0.009, conf = 0.8), 
+  appearance = list(default = "rhs", lhs = "SUGAR")) 
+```
+
+## What purchases did product X influence?
+
+<hr>
+
+```{r lhs2, message=FALSE}
+rules_sugar <- sort(sugar_rules, by = "confidence", decreasing = TRUE)
+inspect(rules_sugar)
+```
+
+## Top Rules by Support
+
+<hr>
+
+```{r top_rules_supp}
+supp_rules <- sort(rules, by = 'support', decreasing = TRUE)
+top_rules <- supp_rules[1:10]
+inspect(top_rules)
+```
+
+## Top Rules by Confidence
+
+<hr>
+
+```{r top_rules_conf}
+conf_rules <- sort(rules, by = 'confidence', decreasing = TRUE)
+top_rules <- conf_rules[1:10]
+inspect(top_rules)
+```
+
+## Top Rules by Lift
+
+<hr>
+
+```{r top_rules_lift}
+lift_rules <- sort(rules, by = 'lift', decreasing = TRUE)
+top_rules <- lift_rules[1:10]
+inspect(top_rules)
+```
+
+## {data-background="img/mba_canva_scatter_plot.png"}
+
+## {data-background="img/mba_canva_network_plot.png"}
+
+## {data-background="img/mba_canva_lift_warning.png"}
+
+## {data-background="img/mba_canva_conf_warning.png"}
+
+## {data-background="img/ws_section_summary.png"}
+
+## {data-background="img/mba_summary_meme.png"}
+
+
+## Summary
+
+<hr>
+
+- unsupervised data mining technique
+- uncovers products frequently bought together
+- creates if-then scenario rules
+- cost-effective, insightful and actionable
+- association rule mining has applications in several industries
+- directionality of rule is lost while using lift
+- confidence as a measure can be misleading
+
+## {data-background="img/thankyou.png"}
+

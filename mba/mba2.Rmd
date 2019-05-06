@@ -1,0 +1,140 @@
+---
+output: _output.yaml
+---
+
+## {data-background="img/mba_cover_image.png"}
+
+## Connect With Us
+
+<hr>
+
+- Website     (https://www.rsquaredacademy.com/)
+- Free Online R Courses   (https://rsquared-academy.thinkific.com/)
+- R Packages  (https://pkgs.rsquaredacademy.com)
+- Shiny Apps  (https://apps.rsquaredacademy.com)
+- Blog        (https://blog.rsquaredacademy.com)
+- GitHub      (https://github.com/rsquaredacademy)
+- YouTube     (https://www.youtube.com/user/rsquaredin/)
+- Twitter     (https://twitter.com/rsquaredacademy)
+- Facebook    (https://www.facebook.com/rsquaredacademy/)
+- Linkedin    (https://in.linkedin.com/company/rsquared-academy)
+
+## Resources
+
+<hr>
+
+- <a href="https://slides.rsquaredacademy.com/mba/mba.html" target="_blank">Slides</a>
+- <a href="https://github.com/rsquaredacademy-education/online-courses/tree/master/association-rule-mining-in-r" target="_blank">Code & Data</a>
+- <a href="https://rstudio.cloud/project/335377" target="_blank">RStudio Cloud</a>
+
+## {data-background="img/ws_agenda.png"}
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+>- What?
+>- Why?
+>- How?
+>- Use Cases
+>- Demo
+
+## {data-background="img/ws_section_intro.png"}
+
+## {data-background="img/mba_canva_intro.png"}
+
+## {data-background="img/mba_canva_what.png"}
+
+## {data-background="img/mba_canva_why.png"}
+
+## {data-background="img/mba_canva_advantages.png"}
+
+## {data-background="img/mba_canva_use_cases.png"}
+
+## {data-background="img/mba_canva_simple_example.png"}
+
+## {data-background="img/mba_canva_steps.png"}
+
+## {data-background="img/mba_canva_itemset.png"}
+
+## {data-background="img/mba_canva_antecedent_consequent.png"}
+
+## {data-background="img/mba_canva_support.png"}
+
+## {data-background="img/mba_canva_confidence.png"}
+
+## {data-background="img/mba_canva_lift.png"}
+
+## {data-background="img/ws_section_case_studies.png"}
+
+## Data
+
+<hr>
+
+- <a href="http://archive.ics.uci.edu/ml/datasets/online+retail#" target="_blank">UCI</a>
+- <a href="https://data.world/datasets/market-basket-analysis" target="_blank">data.world</a>
+
+## Data Dictionary
+
+<hr>
+
+- invoice number
+- stock code
+- description
+- quantity
+- invoice date
+- unit price
+- customer id
+- country
+
+## Libraries
+
+<hr>
+
+```{r libs, message=FALSE, warning=FALSE}
+library(readxl)
+library(readr)
+library(mbar)
+library(arules)
+library(arulesViz)
+library(magrittr)
+library(dplyr)
+library(lubridate)
+library(forcats)
+library(ggplot2)
+```
+
+## {data-background="img/mba_canva_pre_process.png"}
+
+## {data-background="img/mba_canva_eda.png"}
+
+## {data-background="img/mba_canva_ifplot.png"}
+
+## {data-background="img/mba_canva_scatter_plot.png"}
+
+## {data-background="img/mba_canva_network_plot.png"}
+
+## {data-background="img/mba_canva_lift_warning.png"}
+
+## {data-background="img/mba_canva_conf_warning.png"}
+
+## {data-background="img/ws_section_summary.png"}
+
+## {data-background="img/mba_summary_meme.png"}
+
+## Summary
+
+<hr>
+
+- unsupervised data mining technique
+- uncovers products frequently bought together
+- creates if-then scenario rules
+- cost-effective, insightful and actionable
+- association rule mining has applications in several industries
+- directionality of rule is lost while using lift
+- confidence as a measure can be misleading
+
+## {data-background="img/thankyou.png"}
+
