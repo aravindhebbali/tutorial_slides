@@ -126,6 +126,23 @@ Use `\\` for the following:
 - `{`
 - `}`
 
+## Anchors
+
+<hr>
+
+```{r anchors_1}
+grep(x = top_downloads, pattern = "^r", value = TRUE)
+grep(x = top_downloads, pattern = "^r", value = TRUE, ignore.case = TRUE)
+```
+
+## Anchors
+
+<hr>
+
+```{r anchors_2}
+grep(x = top_downloads, pattern = "r$", value = TRUE)
+```
+
 ## Quantifiers
 
 <hr>
@@ -190,23 +207,6 @@ grep(x = top_downloads, pattern = "il{1,2}", value = TRUE)
 ```{r or_operator}
 grep(x = top_downloads, pattern = "g(g|l)", value = TRUE)
 grep(x = top_downloads, pattern = "d[epa]", value = TRUE)
-```
-
-## Anchors
-
-<hr>
-
-```{r anchors_1}
-grep(x = top_downloads, pattern = "^r", value = TRUE)
-grep(x = top_downloads, pattern = "^r", value = TRUE, ignore.case = TRUE)
-```
-
-## Anchors
-
-<hr>
-
-```{r anchors_2}
-grep(x = top_downloads, pattern = "r$", value = TRUE)
 ```
 
 ## Sequences
