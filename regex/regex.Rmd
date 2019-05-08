@@ -4,9 +4,36 @@ output: _output.yaml
 
 ## {data-background="stringr.png"}
 
-## Agenda
+## Connect With Us
 
 <hr>
+
+- Website     (https://www.rsquaredacademy.com/)
+- Free Online R Courses   (https://rsquared-academy.thinkific.com/)
+- R Packages  (https://pkgs.rsquaredacademy.com)
+- Shiny Apps  (https://apps.rsquaredacademy.com)
+- Blog        (https://blog.rsquaredacademy.com)
+- GitHub      (https://github.com/rsquaredacademy)
+- YouTube     (https://www.youtube.com/user/rsquaredin/)
+- Twitter     (https://twitter.com/rsquaredacademy)
+- Facebook    (https://www.facebook.com/rsquaredacademy/)
+- Linkedin    (https://in.linkedin.com/company/rsquared-academy)
+
+## Resources
+
+<hr>
+
+- <a href="https://slides.rsquaredacademy.com/mba/mba.html" target="_blank">Slides</a>
+- <a href="https://github.com/rsquaredacademy-education/online-courses/tree/master/association-rule-mining-in-r" target="_blank">Code & Data</a>
+- <a href="https://rstudio.cloud/project/335377" target="_blank">RStudio Cloud</a>
+
+## {data-background="img/ws_agenda.png"}
+
+<br>
+<br>
+<br>
+<br>
+<br>
 
 - what are regular expressions?
 - why use regular expression?
@@ -16,6 +43,12 @@ output: _output.yaml
 	- match a single character
 	- match one of any of several letters
 	- match series of range of characters
+
+## {data-background="img/ws_section_intro.png"}
+
+## Introduction
+
+<hr>
  
 ## Libraries
 
@@ -47,20 +80,60 @@ top_downloads
 
 <hr>
 
-```{r grep}
-grep(x = top_downloads, pattern = "r")
-grep(x = top_downloads, pattern = "r", value = TRUE)
-grep(x = top_downloads, pattern = "r", value = TRUE, ignore.case = TRUE)
-grep(x = top_downloads, pattern = "r", value = TRUE, invert = TRUE)
+<br>
+
+```{r grep_index, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_grep_index.png")
+```
+
+## grep - Value
+
+<hr>
+
+<br>
+
+```{r grep_value, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_grep_value.png")
+```
+
+## grep - Ignore Case
+
+<hr>
+
+<br>
+
+```{r grep_ignore_case, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_grep_ignore_case.png")
+```
+
+## grep - Invert
+
+<hr>
+
+<br>
+
+```{r grep_invert, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_grep_invert.png")
 ```
 
 ## grepl
 
 <hr>
 
-```{r grepl}
-grepl(x = top_downloads, pattern = "r")
-grepl(x = top_downloads, pattern = "r", ignore.case = TRUE)
+<br>
+
+```{r grepl, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_grepl.png")
+```
+
+## grepl - Ignore Case
+
+<hr>
+
+<br>
+
+```{r grepl_ignore_case, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_grepl_ignore_case.png")
 ```
 
 ## regexpr
@@ -92,25 +165,50 @@ regexec("r", r_packages)
 
 <hr>
 
-```{r sub}
-sub(x = top_downloads, patter = "r", replacement = "s")
+<br>
+
+```{r sub, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_sub.png")
 ```
 
 ## gsub
 
 <hr>
 
-```{r gsub}
-sub(x = top_downloads, patter = "r", replacement = "s")
+<br>
+
+```{r gsub, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_gsub.png")
 ```
 
-## sub vs gsub
+## Anchors - Start
 
 <hr>
 
-```{r subgsub}
-sub(x = r_packages, pattern = "r", replacement = "s")
-gsub(x = r_packages, pattern = "r", replacement = "s")
+<br>
+
+```{r anchor_start}, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_anchor_start.png")
+```
+
+## Anchors - Start (Ignore Case)
+
+<hr>
+
+<br>
+
+```{r anchor_start_ignore_case, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_anchor_start_ignore_case.png")
+```
+
+## Anchors - End
+
+<hr>
+
+<br>
+
+```{r anchor_end, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_anchor_end.png")
 ```
 
 ## Meta Characters
@@ -125,23 +223,6 @@ Use `\\` for the following:
 - `)`
 - `{`
 - `}`
-
-## Anchors
-
-<hr>
-
-```{r anchors_1}
-grep(x = top_downloads, pattern = "^r", value = TRUE)
-grep(x = top_downloads, pattern = "^r", value = TRUE, ignore.case = TRUE)
-```
-
-## Anchors
-
-<hr>
-
-```{r anchors_2}
-grep(x = top_downloads, pattern = "r$", value = TRUE)
-```
 
 ## Quantifiers
 
@@ -332,4 +413,4 @@ grep(x = top_downloads, pattern = "[0-9]", value = TRUE)
 - https://github.com/rstudio/cheatsheets/blob/master/strings.pdf
 - https://www.garrickadenbuie.com/project/regexplain/
 
-## {data-background="thankyou.png"}
+## {data-background="img/thankyou.png"}
