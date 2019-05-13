@@ -215,21 +215,20 @@ knitr::include_graphics("img/regex_anchor_end.png")
 
 <hr>
 
-Use `\\` for the following:
+<br>
 
-- `[`
-- `]`
-- `(`
-- `)`
-- `{`
-- `}`
+```{r meta_characters, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_meta_characters.png")
+```
 
 ## Quantifiers
 
 <hr>
 
-```{r quantifiers_1}
-grep(x = top_downloads, pattern = "d.", value = TRUE)
+<br>
+
+```{r quantifier_dot, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_quantifier_dot.png")
 ```
 
 ## Quantifiers
@@ -260,34 +259,50 @@ grep(x = top_downloads, pattern = "dp+", value = TRUE)
 
 <hr>
 
-```{r quantifiers_5}
-grep(x = top_downloads, pattern = "lo{1}", value = TRUE)
-grep(x = top_downloads, pattern = "to{2}", value = TRUE)
+<br>
+
+```{r quantifier_exact_n_match, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_quantifier_exact_n_match.png")
 ```
 
 ## Quantifiers
 
 <hr>
 
-```{r quantifiers_6}
-grep(x = top_downloads, pattern = "il{1, }", value = TRUE)
+<br>
+
+```{r quantifier_match_one_or_more, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_quantifier_match_one_or_more.png")
 ```
 
 ## Quantifiers
 
 <hr>
 
-```{r quantifiers_7}
-grep(x = top_downloads, pattern = "il{1,2}", value = TRUE)
+<br>
+
+```{r quantifier_match_between, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_quantifier_match_between.png")
 ```
 
 ## OR
 
 <hr>
 
-```{r or_operator}
-grep(x = top_downloads, pattern = "g(g|l)", value = TRUE)
-grep(x = top_downloads, pattern = "d[epa]", value = TRUE)
+<br>
+
+```{r or_round, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_or_round_bracket.png")
+```
+
+## OR
+
+<hr>
+
+<br>
+
+```{r or_square, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_or_square_bracket.png")
 ```
 
 ## Sequences
