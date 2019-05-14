@@ -55,12 +55,10 @@ output: _output.yaml
 <hr>
 
 ```{r install, eval=FALSE}
-library(cranlogs)
 library(dplyr)
 ```
 
 ```{r str1, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
-library(cranlogs)
 library(dplyr)
 ```
 
@@ -69,9 +67,8 @@ library(dplyr)
 <hr>
 
 ```{r top_downloads}
-top_downloads <- 
-  cran_top_downloads(when = "last-week") %>%
-  pull(package)
+top_downloads <- c("devtools", "rlang", "dplyr", "Rcpp", "tibble",    
+                   "ggplot2", "glue", "pillar", "cli", "data.table")
 
 top_downloads
 ```
@@ -83,7 +80,7 @@ top_downloads
 <br>
 
 ```{r grep_index, echo=FALSE, fig.align="center", out.width="100%"}
-knitr::include_graphics("img/regex_grep_index.png")
+knitr::include_graphics("img/regex_grep_index_canva.png")
 ```
 
 ## grep - Value
@@ -93,7 +90,7 @@ knitr::include_graphics("img/regex_grep_index.png")
 <br>
 
 ```{r grep_value, echo=FALSE, fig.align="center", out.width="100%"}
-knitr::include_graphics("img/regex_grep_value.png")
+knitr::include_graphics("img/regex_grep_value_canva.png")
 ```
 
 ## grep - Ignore Case
@@ -103,7 +100,7 @@ knitr::include_graphics("img/regex_grep_value.png")
 <br>
 
 ```{r grep_ignore_case, echo=FALSE, fig.align="center", out.width="100%"}
-knitr::include_graphics("img/regex_grep_ignore_case.png")
+knitr::include_graphics("img/regex_grep_ignore_case_canva.png")
 ```
 
 ## grep - Invert
@@ -113,7 +110,7 @@ knitr::include_graphics("img/regex_grep_ignore_case.png")
 <br>
 
 ```{r grep_invert, echo=FALSE, fig.align="center", out.width="100%"}
-knitr::include_graphics("img/regex_grep_invert.png")
+knitr::include_graphics("img/regex_grep_invert_canva.png")
 ```
 
 ## grepl
@@ -123,7 +120,7 @@ knitr::include_graphics("img/regex_grep_invert.png")
 <br>
 
 ```{r grepl, echo=FALSE, fig.align="center", out.width="100%"}
-knitr::include_graphics("img/regex_grepl.png")
+knitr::include_graphics("img/regex_grepl_canva.png")
 ```
 
 ## grepl - Ignore Case
@@ -133,7 +130,7 @@ knitr::include_graphics("img/regex_grepl.png")
 <br>
 
 ```{r grepl_ignore_case, echo=FALSE, fig.align="center", out.width="100%"}
-knitr::include_graphics("img/regex_grepl_ignore_case.png")
+knitr::include_graphics("img/regex_grepl_ignore_case_canva.png")
 ```
 
 ## regexpr
@@ -168,7 +165,7 @@ regexec("r", r_packages)
 <br>
 
 ```{r sub, echo=FALSE, fig.align="center", out.width="100%"}
-knitr::include_graphics("img/regex_sub.png")
+knitr::include_graphics("img/regex_sub_canva.png")
 ```
 
 ## gsub
@@ -178,7 +175,7 @@ knitr::include_graphics("img/regex_sub.png")
 <br>
 
 ```{r gsub, echo=FALSE, fig.align="center", out.width="100%"}
-knitr::include_graphics("img/regex_gsub.png")
+knitr::include_graphics("img/regex_gsub_canva.png")
 ```
 
 ## Anchors - Start
@@ -188,7 +185,7 @@ knitr::include_graphics("img/regex_gsub.png")
 <br>
 
 ```{r anchor_start}, echo=FALSE, fig.align="center", out.width="100%"}
-knitr::include_graphics("img/regex_anchor_start.png")
+knitr::include_graphics("img/regex_anchor_start_canva.png")
 ```
 
 ## Anchors - Start (Ignore Case)
@@ -198,7 +195,7 @@ knitr::include_graphics("img/regex_anchor_start.png")
 <br>
 
 ```{r anchor_start_ignore_case, echo=FALSE, fig.align="center", out.width="100%"}
-knitr::include_graphics("img/regex_anchor_start_ignore_case.png")
+knitr::include_graphics("img/regex_anchor_start_ignore_case_canva.png")
 ```
 
 ## Anchors - End
@@ -208,7 +205,7 @@ knitr::include_graphics("img/regex_anchor_start_ignore_case.png")
 <br>
 
 ```{r anchor_end, echo=FALSE, fig.align="center", out.width="100%"}
-knitr::include_graphics("img/regex_anchor_end.png")
+knitr::include_graphics("img/regex_anchor_end_canva.png")
 ```
 
 ## Meta Characters
@@ -217,72 +214,108 @@ knitr::include_graphics("img/regex_anchor_end.png")
 
 <br>
 
-```{r meta_characters, echo=FALSE, fig.align="center", out.width="100%"}
+```{r meta_characters, echo=FALSE, fig.align="center", out.width="50%"}
 knitr::include_graphics("img/regex_meta_characters.png")
 ```
 
-## Quantifiers
+## Quantifiers - Dot
 
 <hr>
 
 <br>
 
 ```{r quantifier_dot, echo=FALSE, fig.align="center", out.width="100%"}
-knitr::include_graphics("img/regex_quantifier_dot.png")
+knitr::include_graphics("img/regex_quantifier_dot_canva.png")
 ```
 
-## Quantifiers
+## Quantifiers- ?
 
 <hr>
 
-```{r quantifiers_2}
-grep(x = top_downloads, pattern = "dr?", value = TRUE)
+<br>
+
+```{r quantifier_mark_1, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_quantifier_question_mark.png")
 ```
 
-## Quantifiers
+## Quantifiers -?
 
 <hr>
 
-```{r quantifiers_3}
-grep(x = top_downloads, pattern = "dr*", value = TRUE)
+<br>
+
+```{r quantifier_mark_2, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_quantifier_question_mark_2.png")
 ```
 
-## Quantifiers
+## Quantifiers - ?
 
 <hr>
 
-```{r quantifiers_4}
-grep(x = top_downloads, pattern = "dp+", value = TRUE)
+<br>
+
+```{r quantifier_mark_3, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_quantifier_question_mark_3.png")
 ```
 
-## Quantifiers
+## Quantifiers - ?
+
+<hr>
+
+<br>
+
+```{r quantifier_mark_4, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_quantifier_question_mark_4.png")
+```
+
+## Quantifiers - *
+
+<hr>
+
+<br>
+
+```{r quantifier_star, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_quantifier_star.png")
+```
+
+## Quantifiers - +
+
+<hr>
+
+<br>
+
+```{r quantifier_plus, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_quantifier_plus.png")
+```
+
+## Quantifiers - {n}
 
 <hr>
 
 <br>
 
 ```{r quantifier_exact_n_match, echo=FALSE, fig.align="center", out.width="100%"}
-knitr::include_graphics("img/regex_quantifier_exact_n_match.png")
+knitr::include_graphics("img/regex_quantifier_exact_n_match_canva.png")
 ```
 
-## Quantifiers
+## Quantifiers - {n, }
 
 <hr>
 
 <br>
 
 ```{r quantifier_match_one_or_more, echo=FALSE, fig.align="center", out.width="100%"}
-knitr::include_graphics("img/regex_quantifier_match_one_or_more.png")
+knitr::include_graphics("img/regex_quantifier_match_one_or_more_canva.png")
 ```
 
-## Quantifiers
+## Quantifiers - {n, m}
 
 <hr>
 
 <br>
 
 ```{r quantifier_match_between, echo=FALSE, fig.align="center", out.width="100%"}
-knitr::include_graphics("img/regex_quantifier_match_between.png")
+knitr::include_graphics("img/regex_quantifier_match_between_canva.png")
 ```
 
 ## OR
@@ -292,7 +325,7 @@ knitr::include_graphics("img/regex_quantifier_match_between.png")
 <br>
 
 ```{r or_round, echo=FALSE, fig.align="center", out.width="100%"}
-knitr::include_graphics("img/regex_or_round_bracket.png")
+knitr::include_graphics("img/regex_or_round_bracket_canva.png")
 ```
 
 ## OR
@@ -302,120 +335,127 @@ knitr::include_graphics("img/regex_or_round_bracket.png")
 <br>
 
 ```{r or_square, echo=FALSE, fig.align="center", out.width="100%"}
-knitr::include_graphics("img/regex_or_square_bracket.png")
+knitr::include_graphics("img/regex_or_square_bracket_canva.png")
 ```
 
-## Sequences
+## Digit
 
 <hr>
 
-```{r seq_1}
-grep(x = top_downloads, pattern = "\\d", value = TRUE)
+<br>
+
+```{r sequence_digit, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_match_digit.png")
 ```
 
-## Sequences
+## Non Digit
 
 <hr>
 
-```{r seq_2}
-grep(x = "125", pattern = "\\D", value = TRUE)
+<br>
+
+```{r sequence_non_digit, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_match_non_digit.png")
 ```
 
-## Sequences
+## Space
 
 <hr>
 
-```{r seq_3}
-grep(x = c("hell o", "hello"), pattern = "\\s", value = TRUE)
+<br>
+
+```{r sequence_space, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_match_space.png")
 ```
 
-## Sequences
+## Non Space
 
 <hr>
 
-```{r seq_4}
-grep(x = c("hell o", "  ", "hello"), pattern = "\\S", value = TRUE)
+<br>
+
+```{r sequence_non_space, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_match_non_space.png")
 ```
 
-## Sequences
+## Word
 
 <hr>
 
-```{r seq_5}
-grep(x = c("%", "hello"), pattern = "\\w", value = TRUE)
+<br>
+
+```{r sequence_word, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_match_word.png")
 ```
 
-## Sequences
+## Non Word
 
 <hr>
 
-```{r seq_6}
-grep(x = c("%", "hello"), pattern = "\\W", value = TRUE)
+<br>
+
+```{r sequence_non_word, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_match_non_word.png")
 ```
 
-## Sequences
+## Word Boundary
 
 <hr>
 
-```{r seq_7}
-grep(x = c("categorical", "hello"), pattern = "\\bcat", value = TRUE)
-grep(x = c("hellocat", "hello"), pattern = "cat\\b", value = TRUE)
+<br>
+
+```{r word_boundary_1, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_word_boundary_1.png")
 ```
 
-## Sequences
+## Word Boundary
 
 <hr>
 
-```{r seq_8}
-grep(x = c("polycater", "hello"), pattern = "\\Bcat", value = TRUE)
+<br>
+
+```{r word_boundary_2, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_word_boundary_2.png")
 ```
+
+## Word Boundary
+
+<hr>
+
+<br>
+
+```{r word_boundary_3, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_word_boundary_3.png")
+```
+
+## Word Boundary
+
+<hr>
+
+<br>
+
+```{r word_boundary_4, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_word_boundary_4.png")
+```
+
+## Word Boundary
+
+<hr>
+
+<br>
+
+```{r word_boundary_5, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_word_boundary_5.png")
+```
+
 ## Character Classes
 
 <hr>
 
-```{r char_1}
-grep(x = top_downloads, pattern = "[aeiou]", value = TRUE)
-grep(x = top_downloads, pattern = "[aiu]", value = TRUE)
-```
+<br>
 
-## Character Classes
-
-<hr>
-
-```{r char_2}
-grep(x = top_downloads, pattern = "[0-9]", value = TRUE)
-```
-
-## Character Classes
-
-<hr>
-
-```{r char_3}
-# 4. [a-z] matches any lower case letter
-```
-
-## Character Classes
-
-<hr>
-
-```{r char_4}
-# 4.1 [^a-z] matches no letter from a to z
-```
-
-## Character Classes
-
-<hr>
-
-```{r char_5}
-# 5. [A-Z] matches any upper case letter
-```
-
-## Character Classes
-
-<hr>
-
-```{r char_6}
-# 6. [a-zA-z0-9] matches any digit or lower/upper case letter
+```{r character_class_numbers, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_character_class_numbers.png")
 ```
 
 ## References
