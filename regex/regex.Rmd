@@ -458,6 +458,138 @@ knitr::include_graphics("img/regex_word_boundary_5.png")
 knitr::include_graphics("img/regex_character_class_numbers.png")
 ```
 
+## Blood Group
+
+<hr>
+
+- four main blood groups: A, B, AB, O
+- each group can be either RhD+ or RhD-
+- there a 8 main blood groups
+- it has to start with A, B, AB or O
+- end with -,+
+
+## Blood Group
+
+<hr>
+
+- ^           # Assert position at the beginning of the string
+- (A|B|AB|O)  # Match A, B, AB or O
+- (-|+)       # Match - or +
+- $           # Assert position at the end of the string
+
+## Blood Group
+
+<hr>
+
+```{r blood_group}
+blood_pattern <- "^(A|B|AB|O)[-|+]$"
+blood_sample <- c("A+", "C-", "AB+")
+grep(x = blood_sample, pattern = blood_pattern, value = TRUE)
+```
+
+## email id
+
+<hr>
+
+- start with alphabets or numbers
+- can inclide _ or -
+- end with alphabets or numbers 
+- followed by @
+- domain name can include alphabets/number/-
+- followed by .
+- end with alphabets
+
+## email id
+
+<hr>
+
+- ^
+- [a-zA-z0-9-_]
+- +
+- @
+- [a-zA-z0-9-]
+- +
+- .
+- [a-z]
+
+## email id
+
+<hr>
+
+```{r email_validation}
+email_pattern <- "^[a-zA-Z0-9\\!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\\.[a-z]"
+emails <- c("test9+_A@test.com", "test@test..com", "test-test.com")
+grep(x = emails, pattern = email_pattern, value = TRUE)
+```
+
+##  PAN Number Validation
+
+<hr>
+
+- length 10 
+- alpha-numeric
+- first 3 characters (AAA to ZZZ)
+- fourth character (A, B, C, F, G, H, L, J, P, T, E)
+- fifth character- first letter of holders last/surname
+- next four (0001 - 9999) (numerals)
+- last character alphabet
+
+##  PAN Number Validation
+
+<hr>
+
+```{r pan_validation}
+pan_pattern <- "^[A-Z]{3}(A|B|C|F|G|H|L|J|P|T|E)[A-Z][0-9]{4}[A-Z]"
+my_pan <- c("AJKNT3865H", "AJKNT38655", "A2KNT3865H", "AJKDT3865H")
+grep(x = my_pan, pattern = pan_pattern, value = TRUE)
+```
+
+##  GST Number Validation
+
+<hr>
+
+- 15 digits
+- first 2 digits (01-35) indicate state code
+- next 10 digits are pan number
+- 13th digit is entity code (>=1)
+- 14th digit is Z
+- 15th digit is a random single digit number or alphabet
+
+##  GST Number Validation
+
+<hr>
+
+```{r gst_validation}
+gst_pattern <- "[0-3][1-5][A-Z]{3}(A|B|C|F|G|H|L|J|P|T|E)[A-Z][0-9]{4}[A-Z][1-9]Z[0-9A-Z]"
+sample_gst <- c("22AAAAA0000A1Z5", "22AAAAA0000A1Z", "42AAAAA0000A1Z5",
+                "38AAAAA0000A1Z5", "22AAAAA0000A0Z5", "22AAAAA0000A1X5",
+                "22AAAAA0000A1Z$")
+grep(x = sample_gst, pattern = gst_pattern, value = TRUE)
+```
+
+## Other Applications
+
+<hr>
+
+- R variable names
+- R file names and extensions
+- password validation
+- camelcase
+- currency format
+- date of birth
+- date validation
+- decimal number
+- full name / first name
+- html tags
+- https url 
+- phone number 
+- ip address 
+- month name
+
+## Summary 
+
+<hr>
+
 ## References
 
 <hr>
