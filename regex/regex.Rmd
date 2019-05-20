@@ -2,7 +2,9 @@
 output: _output.yaml
 ---
 
-## {data-background="stringr.png"}
+## {data-background="img/regex_cover_image.png"}
+
+## {data-background="img/regex_meme.png"}
 
 ## Connect With Us
 
@@ -46,9 +48,21 @@ output: _output.yaml
 
 ## {data-background="img/ws_section_intro.png"}
 
-## Introduction
+## {data-background="img/regex_what.png"}
 
-<hr>
+## {data-background="img/regex_why.png"}
+
+## {data-background="img/regex_use_case_1.png"}
+
+## {data-background="img/regex_use_case_2.png"}
+
+## {data-background="img/regex_use_case_3.png"}
+
+## {data-background="img/regex_use_case_4.png"}
+
+## {data-background="img/regex_use_case_5.png"}
+
+## {data-background="img/regex_use_case_6.png"}
  
 ## Libraries
 
@@ -63,13 +77,14 @@ library(readr)
 library(dplyr)
 ```
 
-## R Packages Data
+## Data
 
 <hr>
 
-```{r read_data}
+```{r read_data, message=FALSE}
 read_csv("data/package_names.csv") %>%
   pull(1) -> r_packages 
+r_packages
 ```
 
 ## Top R Packages
@@ -824,24 +839,27 @@ grep(x = r_packages, pattern = "[0-9]$", value = TRUE)
 grep(x = r_packages, pattern = "^[A-Z][A-Z]{1, }[A-Z]$", value = TRUE)
 ```
 
-## Blood Group
-
-<hr>
-
-- four main blood groups: A, B, AB, O
-- each group can be either RhD+ or RhD-
-- there a 8 main blood groups
-- it has to start with A, B, AB or O
-- end with -,+
+## {data-background="img/ws_section_case_studies.png"}
 
 ## Blood Group
 
 <hr>
 
-- `^`           
-- `(A|B|AB|O)`
-- `(-|+)`       
-- `$           
+<br>
+
+```{r cs_blood_group_pattern, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_cs_blood_groups.png")
+```
+
+## Blood Group
+
+<hr>
+
+<br>
+
+```{r cs_blood_group, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_cs_bg_table.png")
+```
 
 ## Blood Group
 
@@ -857,25 +875,21 @@ grep(x = blood_sample, pattern = blood_pattern, value = TRUE)
 
 <hr>
 
-- start with alphabets or numbers
-- can inclide _ or -
-- end with alphabets or numbers 
-- followed by @
-- domain name can include alphabets/number/-
-- followed by .
-- end with alphabets
+<br>
+
+```{r cs_email_pattern, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_cs_email.png")
+```
 
 ## email id
 
 <hr>
 
-- `^[a-zA-Z0-9\\!#$%&'*+/=?^_`{|}~-]`
-- `+`
-- `@`
-- `[a-zA-z0-9-]`
-- `+`
-- `\\.`
-- `[a-z]`
+<br>
+
+```{r cs_email, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_cs_email_table.png")
+```
 
 ## email id
 
@@ -891,23 +905,31 @@ grep(x = emails, pattern = email_pattern, value = TRUE)
 
 <hr>
 
-- length 10 
-- alpha-numeric
-- first 3 characters (AAA to ZZZ)
-- fourth character (A, B, C, F, G, H, L, J, P, T, E)
-- fifth character- first letter of holders last/surname
-- next four (0001 - 9999) (numerals)
-- last character alphabet
+<br>
+
+```{r cs_pan_pattern_1, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_cs_pan_1.png")
+```
 
 ##  PAN Number Validation
 
 <hr>
 
-- `^[A-z]{3}`
-- `(A|B|C|F|G|H|L|J|P|T|E)`
-- `[A-Z]`
-- `[0-9]{4}`
-- `[A-Z]`
+<br>
+
+```{r cs_pan_pattern_2, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_cs_pan_2.png")
+```
+
+##  PAN Number Validation
+
+<hr>
+
+<br>
+
+```{r cs_pan, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_cs_pan_table.png")
+```
 
 ##  PAN Number Validation
 
@@ -923,30 +945,28 @@ grep(x = my_pan, pattern = pan_pattern, value = TRUE)
 
 <hr>
 
-- 15 digits
-- first 2 digits (01-35) indicate state code
-- next 10 digits are PAN number
-- 13th digit is entity code (>=1)
-- 14th digit is Z
-- 15th digit is a random single digit number or alphabet
+<br>
+
+```{r cs_gst_pattern, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_cs_gst.png")
+```
 
 ##  GST Number Validation
 
 <hr>
 
-- `[0-3]`
-- `[1-5]`
-- `[A-Z]{3}(A|B|C|F|G|H|L|J|P|T|E)[A-Z][0-9]{4}[A-Z]`
-- `[1-9]`
-- `Z`
-- `[0-9A-Z]`
+<br>
+
+```{r cs_gst, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_cs_gst_table.png")
+```
 
 ##  GST Number Validation
 
 <hr>
 
 ```{r gst_validation}
-gst_pattern <- "[0-3][1-5][A-Z]{3}(A|B|C|F|G|H|L|J|P|T|E)[A-Z][0-9]{4}[A-Z][1-9]Z[0-9A-Z]"
+gst_pattern <- "^[0-3][1-5][A-Z]{3}(A|B|C|F|G|H|L|J|P|T|E)[A-Z][0-9]{4}[A-Z][1-9]Z[0-9A-Z]"
 sample_gst <- c("22AAAAA0000A1Z5", "22AAAAA0000A1Z", "42AAAAA0000A1Z5",
                 "38AAAAA0000A1Z5", "22AAAAA0000A0Z5", "22AAAAA0000A1X5",
                 "22AAAAA0000A1Z$")
@@ -971,10 +991,6 @@ grep(x = sample_gst, pattern = gst_pattern, value = TRUE)
 - phone number 
 - ip address 
 - month name
-
-## Summary 
-
-<hr>
 
 ## References
 
