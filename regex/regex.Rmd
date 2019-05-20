@@ -26,8 +26,8 @@ output: _output.yaml
 <hr>
 
 - <a href="https://slides.rsquaredacademy.com/regex/regex.html" target="_blank">Slides</a>
-- <a href="https://github.com/rsquaredacademy-education/online-courses/tree/master/association-rule-mining-in-r" target="_blank">Code & Data</a>
-- <a href="https://rstudio.cloud/project/335377" target="_blank">RStudio Cloud</a>
+- <a href="https://github.com/rsquaredacademy-education/online-courses/tree/master/regular-expressions-in-r" target="_blank">Code & Data</a>
+- <a href="https://rstudio.cloud/project/356612" target="_blank">RStudio Cloud</a>
 
 ## {data-background="img/ws_agenda.png"}
 
