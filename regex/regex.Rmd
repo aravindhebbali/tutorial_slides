@@ -97,6 +97,16 @@ top_downloads <- c("devtools", "rlang", "dplyr", "Rcpp", "tibble",
 top_downloads
 ```
 
+## Base R Functions
+
+<hr>
+
+<br>
+
+```{r regex_base_functions, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_base_functions.png")
+```
+
 ## grep
 
 <hr>
@@ -271,6 +281,16 @@ knitr::include_graphics("img/regex_gsub_canva.png")
 gsub(x = rr_pkgs, pattern = "r", replacement = "s")
 ```
 
+## Anchors 
+
+<hr>
+
+<br>
+
+```{r regex_anchors, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_anchors.png")
+```
+
 ## Anchors - Start
 
 <hr>
@@ -335,6 +355,16 @@ grep(x = top_downloads, pattern = "r$", value = TRUE)
 knitr::include_graphics("img/regex_meta_characters.png")
 ```
 
+## Quantifiers 
+
+<hr>
+
+<br>
+
+```{r regex_quantifiers, echo=FALSE, fig.align="center", out.width="50%"}
+knitr::include_graphics("img/regex_quantifiers.png")
+```
+
 ## Quantifiers - Dot
 
 <hr>
@@ -377,6 +407,16 @@ grep(x = r_packages, pattern = "data(.){3}r", value = TRUE, ignore.case = TRUE)
 ```{r quantifier_dot_code_4}
 grep(x = r_packages, pattern = "stat..r", value = TRUE, ignore.case = TRUE)
 ```
+
+## Quantifiers - Optional Character
+
+<hr>
+
+<br>
+
+```{r regex_optional, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_optional.png")
+``` 
 
 ## Quantifiers- ?
 
@@ -452,6 +492,15 @@ knitr::include_graphics("img/regex_quantifier_question_mark_4.png")
 grep(x = data_pkgs, pattern = "r(\\.|m|y|q)?data", value = TRUE)
 ```
 
+## Quantifiers - Asterik
+
+<hr>
+
+<br>
+
+```{r regex_asterik, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_asterik.png")
+```
 
 ## Quantifiers - *
 
@@ -471,6 +520,15 @@ knitr::include_graphics("img/regex_quantifier_star.png")
 grep(x = data_pkgs, pattern = "r(.)*data", value = TRUE)
 ```
 
+## Quantifiers - Plus Symbol
+<hr>
+
+<br>
+
+```{r regex_plus, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_plus.png")
+```
+
 ## Quantifiers - +
 
 <hr>
@@ -488,6 +546,16 @@ knitr::include_graphics("img/regex_quantifier_plus.png")
 ```{r quantifier_plus_code}
 plot_pkgs <- grep(x = r_packages, pattern = "plot", value = TRUE)
 grep(x = plot_pkgs, pattern = "(g)+plot", value = TRUE, ignore.case = TRUE)
+```
+
+## Brackets
+
+<hr>
+
+<br>
+
+```{r regex_brackets, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_brackets.png")
 ```
 
 ## Quantifiers - {n}
@@ -550,6 +618,16 @@ grep(x = plot_pkgs, pattern = "(t){1,3}plot", value = TRUE)
 
 <br>
 
+```{r regex_or, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_or.png")
+```
+
+## OR
+
+<hr>
+
+<br>
+
 ```{r or_round, echo=FALSE, fig.align="center", out.width="100%"}
 knitr::include_graphics("img/regex_or_round_bracket_canva.png")
 ```
@@ -578,6 +656,16 @@ knitr::include_graphics("img/regex_or_square_bracket_canva.png")
 
 ```{r or_square_code}
 grep(x = top_downloads, pattern = "d[epa]", value = TRUE)
+```
+
+## Sequences
+
+<hr>
+
+<br>
+
+```{r regex_sequences, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_sequences.png")
 ```
 
 ## Digit
@@ -788,6 +876,15 @@ knitr::include_graphics("img/regex_word_boundary_5.png")
 grep(x = r_packages, pattern = "\\Bstat\\B", value = TRUE)
 ```
 
+## Character Classes
+
+<hr>
+
+<br>
+
+```{r regex_character_classes, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("img/regex_character_classes.png")
+```
 
 ## Character Classes
 
