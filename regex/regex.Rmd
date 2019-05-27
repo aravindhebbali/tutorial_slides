@@ -4,8 +4,6 @@ output: _output.yaml
 
 ## {data-background="img/regex_cover_image.png"}
 
-## {data-background="img/regex_meme.png"}
-
 ## Connect With Us
 
 <hr>
@@ -35,7 +33,6 @@ output: _output.yaml
 <br>
 <br>
 <br>
-<br>
 
 - what are regular expressions?
 - why use regular expression?
@@ -45,6 +42,7 @@ output: _output.yaml
 	- match a single character
 	- match one of any of several letters
 	- match series of range of characters
+- case studies
 
 ## {data-background="img/ws_section_intro.png"}
 
@@ -361,7 +359,7 @@ knitr::include_graphics("img/regex_meta_characters.png")
 
 <br>
 
-```{r regex_quantifiers, echo=FALSE, fig.align="center", out.width="50%"}
+```{r regex_quantifiers, echo=FALSE, fig.align="center", out.width="80%"}
 knitr::include_graphics("img/regex_quantifiers.png")
 ```
 
@@ -502,7 +500,7 @@ grep(x = data_pkgs, pattern = "r(\\.|m|y|q)?data", value = TRUE)
 knitr::include_graphics("img/regex_asterik.png")
 ```
 
-## Quantifiers - *
+## Quantifiers - Asterik
 
 <hr>
 
@@ -512,7 +510,7 @@ knitr::include_graphics("img/regex_asterik.png")
 knitr::include_graphics("img/regex_quantifier_star.png")
 ```
 
-## Quantifiers - *
+## Quantifiers - Asterik
 
 <hr>
 
@@ -529,7 +527,7 @@ grep(x = data_pkgs, pattern = "r(.)*data", value = TRUE)
 knitr::include_graphics("img/regex_plus.png")
 ```
 
-## Quantifiers - +
+## Quantifiers - Plus Symbol
 
 <hr>
 
@@ -539,7 +537,7 @@ knitr::include_graphics("img/regex_plus.png")
 knitr::include_graphics("img/regex_quantifier_plus.png")
 ```
 
-## Quantifiers - +
+## Quantifiers - Plus Symbol
 
 <hr>
 
