@@ -267,6 +267,108 @@ predictions
 confusionMatrix(predictions, iris_test$Species)
 ```
 
+## Using caret
+
+<hr>
+
+```{r use_caret}
+tree_fit <- train(Species ~., data = iris_train, method = "rpart",
+                   parms = list(split = "information"),
+                   trControl= trainControl("cv", number = 10),
+                   tuneLength = 10)
+```
+
+## Plot
+
+```{r plot_caret, fig.align='center'}
+prp(tree_fit$finalModel, box.palette = "Reds", tweak = 1.2)
+```
+
+## Predict
+
+<hr>
+
+```{r predict_caret}
+predict_on_test <- predict(tree_fit, newdata = iris_test)
+predict_on_test
+```
+
+## Confusion Matrix
+
+<hr>
+
+```{r cm_caret}
+confusionMatrix(predict_on_test, iris_test$Species)
+```
+
+## Gini
+
+<hr>
+
+```{r caret_gini}
+tree_fit <- train(Species ~., data = iris_train, method = "rpart",
+                   parms = list(split = "gini"),
+                   trControl= trainControl("cv", number = 10),
+                   tuneLength = 10)
+```
+
+## Use tidymodels
+
+<hr>
+
+```{r tidy_model}
+model <- decision_tree(mode = "classification", tree_depth = 5) 
+model
+```
+
+## Fit rpart
+
+<hr>
+
+```{r tidy_fit}
+model %>%
+  set_engine("rpart") %>%
+  fit(Species ~ ., data = iris)
+```
+
+## Fit C5.0
+
+<hr>
+
+```{r fir_c50}
+model %>%
+  set_engine("C5.0") %>%
+  fit(Species ~ ., data = iris)
+```
+
+## Set Options
+
+<hr>
+
+```{r set_options}
+model <- decision_tree()
+
+model %>%
+  set_mode("classification") %>%
+  set_args(tree_depth = 5) %>%
+  set_engine("rpart") %>%
+  fit(Species ~ ., data = iris)
+```
+
+## Varying Parameters
+
+<hr>
+
+```{r varying_parameters}
+model <- decision_tree(tree_depth = varying())
+
+model %>%
+  set_mode("classification") %>%
+  set_args(tree_depth = 5) %>%
+  set_engine("rpart") %>%
+  fit(Species ~ ., data = iris)
+```
+
 ## Summary
 
 <hr>
