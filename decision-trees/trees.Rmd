@@ -135,6 +135,17 @@ output: _output.yaml
 <hr>
 
 ```{r install, eval=TRUE, message=FALSE, warning=FALSE}
+library(dplyr)
+library(rpart)        # recursive partitioning
+library(rpart.plot)   # visualization
+library(rattle)       # visualization
+library(RColorBrewer) # plot colors
+library(magrittr)     # pipes
+library(caret)        # confusion matrix, cross validation, bagging
+library(rsample)      # data partition
+library(parsnip)      # unified interface
+library(ROCR)         # roc curves
+library(yardstick)    # roc curves & classification matrix
 ```
 
 ## Data
@@ -142,6 +153,118 @@ output: _output.yaml
 <hr>
 
 ```{r read_data, message=FALSE}
+```
+
+## Data Partitioning
+
+<hr>
+
+```{r data_split}
+set.seed(123)
+iris_split <- initial_split(iris, prop = .7)
+iris_train <- training(iris_split)
+iris_test  <- testing(iris_split)
+```
+
+## Grow Tree
+
+<hr>
+
+```{r grow_tree}
+model <- rpart(Species ~ ., data = iris_train)
+model
+```
+
+## Visualize 
+
+<hr>
+
+```{r viz_tree, fig.align="center"}
+plot(model)
+text(model, digits = 3)
+```
+
+## Tree Summary
+
+<hr>
+
+```{r tree_summary}
+summary(model)
+```
+
+## Complexity Parameter
+
+<hr>
+
+```{r printcp}
+printcp(model)
+```
+
+## Plot Complexity Parameter
+
+<hr>
+
+```{r plotcp, fig.align='center'}
+plotcp(model)
+```
+
+## Visualize Tree
+
+<hr>
+
+```{r prp_tree, fig.align='center'}
+prp(model)
+```
+
+## Prune Tree
+
+<hr>
+
+```{r findcp, echo=FALSE}
+cp_table <-
+  model %>%
+  use_series(cptable) %>%
+  as.data.frame()
+
+xerror_min_index <-
+  cp_table %>%
+  pull(xerror) %>%
+  which.min()
+
+cp_min <-
+  cp_table %>%
+  pull(CP) %>%
+  magrittr::extract(xerror_min_index)
+```
+
+```{r prune_tree}
+pruned_model <- prune(model, cp = cp_min)
+pruned_model
+```
+
+## Fancy Plot
+
+<hr>
+
+```{r fancy_plot, fig.align='center'}
+fancyRpartPlot(pruned_model, uniform = TRUE)
+```
+
+## Predict
+
+<hr>
+
+```{r predict_tree}
+predictions <- predict(model, iris_test, type="class")
+predictions
+```
+
+## Confusion Matrix
+
+<hr>
+
+```{r cm_tree}
+confusionMatrix(predictions, iris_test$Species)
 ```
 
 ## Summary
