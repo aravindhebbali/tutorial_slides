@@ -1,0 +1,163 @@
+---
+output: _output.yaml
+---
+
+## {data-background="github_pkginfo.png"}
+
+## Agenda
+
+<hr>
+
+- Introduction
+- GitHub
+- Build Status
+- Code Coverage
+- Stack Overflow
+- CRAN 
+
+## 
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+`pkginfo` will allow users to retrieve information about a R package from [CRAN](https://cran.r-project.org/), [GitHub](https://github.com/), [Travis CI](https://travis-ci.org/), [Appveyor](https://ci.appveyor.com/), [Codecov](https://codecov.io/) & [Stack Overflow](https://stackoverflow.com/). While it was not developed keeping any specific end user in mind, package developers might find it more useful as they can monitor their R packages using a shiny app. `pkginfo` uses [cranlogs](https://cranlogs.r-pkg.org/),[crandb](https://github.com/r-hub/crandb) and [cchecksapi](https://github.com/ropenscilabs/cchecksapi) under the hood.
+
+## Installation
+
+<hr>
+
+```{r install, eval=FALSE}
+devtools::install_github("rsquaredacademy/pkginfo")
+```
+
+```{r load, echo=FALSE}
+library(pkginfo)
+```
+
+## {data-background="section_github.png"}
+
+## Username
+
+<hr>
+
+```{r username}
+get_gh_username("dplyr")
+```
+
+## Stars, Forks & Issues
+
+<hr>
+
+```{r stats}
+get_gh_stats("dplyr")
+```
+
+## Branches
+
+<hr>
+
+```{r branches}
+get_gh_branches("dplyr")
+```
+
+## Issues
+
+<hr>
+
+```{r issues}
+get_gh_issues("dplyr")
+```
+
+## Labels
+
+<hr>
+
+```{r labels}
+get_gh_labels("dplyr")
+```
+
+## Milestones
+
+<hr>
+
+```{r milestones}
+get_gh_milestones("dplyr")
+```
+
+## Pull Requests
+
+<hr>
+
+```{r pr}
+get_gh_pr("dplyr")
+```
+
+## Releases
+
+<hr>
+
+```{r releases}
+get_gh_releases("dplyr")
+```
+
+## {data-background="section_build.png"}
+
+## Travis
+
+<hr>
+
+```{r travis}
+get_status_travis("dplyr", "tidyverse")
+```
+
+## Appvetor
+
+<hr>
+
+```{r appveyor}
+get_status_appveyor("dplyr", "tidyverse")
+```
+
+## Codecov
+
+<hr>
+
+```{r codecov}
+get_code_coverage("dplyr", "tidyverse")
+```
+
+## {data-background="section_stack_overflow.png"}
+
+## Questions
+
+<hr>
+
+```{r so}
+get_so_questions("dplyr")
+```
+
+## {data-background="section_cran.png"}
+
+## CRAN Check Results
+
+<hr>
+
+```{r cran_check}
+get_pkg_cran_check_results("dplyr")
+```
+
+## Downloads
+
+<hr>
+
+```{r cran_downloads}
+get_pkg_downloads("dplyr")
+```
+
+## {data-background="thankyou.png"}
+
