@@ -29,14 +29,6 @@ output: _output.yaml
 - <a href="https://www.rsquaredcomputing.com/shiny/rfm/" target="_blank">Shiny App</a>
 - <a href="https://rfm.rsquaredacademy.com/" target="_blank">R Package</a>
 
-## Agenda
-
-<hr>
-
-```{r rfm_agenda, fig.align='center', echo=FALSE, out.width="100%"}
-knitr::include_graphics("img/rfm_agenda.png")
-```
-
 ## {data-background="img/rfm_agenda.png"}
 
 ## {data-background="img/ws_section_case_study.png"}
