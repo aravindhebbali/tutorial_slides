@@ -1,6 +1,6 @@
 revealjs::revealjs_presentation:
     transition: slide
-    incremental: false
+    incremental: true
     theme: default
     highlight: haddock
     center: false
