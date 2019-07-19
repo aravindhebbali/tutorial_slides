@@ -33,6 +33,17 @@ output: _output.yaml
 
 ## {data-background="img/ws_section_case_study.png"}
 
+## Transaction Data
+
+<hr>
+
+<br>
+<br>
+
+```{r rfm_raw_data, fig.align='center', echo=FALSE, out.width="200%"}
+knitr::include_graphics("img/rfm_raw_sorted.png")
+```
+
 ## RFM Table
 
 <hr>
@@ -373,6 +384,18 @@ rfm_plot_median_frequency(segments)
 ```{r avg_monetary, fig.align='center', fig.height=5, fig.width=6, echo=FALSE}
 rfm_plot_median_monetary(segments)
 ```
+
+## Your Turn..
+
+<hr>
+
+If you look at the distribution of segments, around 13% of the customers are in the `Others` segment For segmentation to be effective and optimal, the `Others` segment should be eliminated or should have few customers only. Redefine the segments and try to reduce the number of customers in the `Others` segment.
+
+We have defined 11 segments. Try to combine some of the exisiting segments and bring down the total segments to around 6 or 8.
+ 
+The RFM score we generated uses score between 1 and 5. Try to create segments by using a score between 1 and 3 i.e. the lowest RFM should be 111 and the highest should be 333 instead of 555.
+
+Reverse the scores i.e. so far we have assigned a score of 5 to customers who visited recently, frequently and had higher transaction amount and 1 to customers who visited way back, rarely and have low transaction amount. Reverse this score pattern and create the segments.
 
 ## {data-background="img/thankyou.png"}
 
