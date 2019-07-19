@@ -194,6 +194,22 @@ knitr::include_graphics("img/rfm_frequency_score_interval.png")
 knitr::include_graphics("img/rfm_recency_score_interval.png")
 ```
 
+## RFM Score
+
+<hr>
+
+<br>
+<br>
+
+<p style="text-align:center">RFM Score = Recency Score * 100 + Frequency Score * 10 + Monetary Score</p>
+
+<br>
+<br>
+
+```{r rfm_table_score_calc, fig.align='center', echo=FALSE}
+knitr::include_graphics("img/rfm_score_table.png")
+```
+
 ## Segments
 
 <hr>
