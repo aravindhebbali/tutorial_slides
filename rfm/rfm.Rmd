@@ -23,10 +23,10 @@ output: _output.yaml
 
 <hr>
 
-- <a href="https://slides.rsquaredacademy.com/mba/mba.html" target="_blank">Slides</a>
-- <a href="https://github.com/rsquaredacademy-education/online-courses/tree/master/rfm-analysis-in-r" target="_blank">Code & Data</a>
-- <a href="https://rstudio.cloud/project/335377" target="_blank">RStudio Cloud</a>
-- <a href="https://www.rsquaredcomputing.com/shiny/rfm/" target="_blank">Shiny App</a>
+- <a href="https://slides.rsquaredacademy.com/rfm/rfm.html" target="_blank">Slides</a>
+- <a href="https://github.com/rsquaredacademy-education/online-courses/tree/master/customer-segmentation-using-rfm-analysis/script" target="_blank">Code & Data</a>
+- <a href="https://rstudio.cloud/project/416146" target="_blank">RStudio Cloud</a>
+- <a href="https://apps.rsquaredacademy.com/" target="_blank">Shiny App</a>
 - <a href="https://rfm.rsquaredacademy.com/" target="_blank">R Package</a>
 
 ## {data-background="img/rfm_agenda.png"}
