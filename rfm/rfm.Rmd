@@ -24,6 +24,7 @@ output: _output.yaml
 <hr>
 
 - <a href="https://slides.rsquaredacademy.com/rfm/rfm.html" target="_blank">Slides</a>
+- <a href="https://blog.rsquaredacademy.com/customer-segmentation-using-rfm-analysis/" target="_blank">Blog Post</a>
 - <a href="https://github.com/rsquaredacademy-education/online-courses/tree/master/customer-segmentation-using-rfm-analysis/script" target="_blank">Code & Data</a>
 - <a href="https://rstudio.cloud/project/416146" target="_blank">RStudio Cloud</a>
 - <a href="https://apps.rsquaredacademy.com/" target="_blank">Shiny App</a>
