@@ -8,15 +8,15 @@ output: _output.yaml
 
 <hr>
 
-- connect to databases from R
-- display database information
-- list tables 
-- create table
-- read data into R
-- export data to database
-- remove tables
+- connect to database
+- explore database
+- read & write data
+- run SQL script 
+- knitr SQL engine
 - query data using dplyr
-- disconnect from database
+- visualize data with dbplot
+- modeling data with tidypredict
+- handling credentials
 
 ## Libraries
 
@@ -26,28 +26,23 @@ output: _output.yaml
 library(DBI)
 library(dbplyr)
 library(dplyr)
+library(dbplot)
+library(ggplot2)
+library(modeldb)
+library(tidypredict)
+library(config)
 ```
 
-```{r liteload, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
+```{r liteload, echo=FALSE, eval=TRUE, results='hide', warning=FALSE, message=FALSE}
+library(DBI)
 library(dbplyr)
 library(dplyr)
-library(DBI)
-library(RSQLite)
+library(dbplot)
+library(ggplot2)
+library(modeldb)
+library(tidypredict)
+library(config)
 ```
-
-## Data
-
-<hr>
-
-```{r import, eval=FALSE}
-ecom <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
-```
-
-```{r show, echo=FALSE, eval=TRUE, message=FALSE}
-ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
-ecom
-```
-
 
 ## Data Dictionary
 
@@ -73,8 +68,7 @@ ecom
 <hr>
 
 ```{r lite2}
-con <- DBI::dbConnect(RSQLite::SQLite(), 
-                      dbname = "mydatabase.db")
+con <- DBI::dbConnect(RSQLite::SQLite(), dbname = "mydatabase.db")
 ```
 
 ## Connection Summary
@@ -335,8 +329,7 @@ DBI::sqlCreateTable(con, "new", c(x = "integer", y = "text"))
 
 <hr>
 
-Let us use the first 5 rows of the `ecom` table as sample data and append it to the `ecom` table
-itself.
+Let us use the first 5 rows of the `ecom` table as sample data and append it to the `ecom` table itself.
 
 ```{r lite34, eval=FALSE}
 ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
@@ -357,18 +350,13 @@ DBI::sqlAppendTable(con, "ecom", head(ecom))
 
 ## {data-background="dbplyr.png"}
 
-
-```{r dbply2, echo=FALSE}
-copy_to(con, mtcars)
-```
-
 ## Reference Data
 
 <hr>
 
 ```{r dbply3}
-mtcars2 <- tbl(con, "mtcars")
-mtcars2
+ecom2 <- tbl(con, "ecom")
+ecom2
 ```
 
 ## Query Data
@@ -376,8 +364,8 @@ mtcars2
 <hr>
 
 ```{r dbply4}
-mtcars2 %>%
-  select(mpg, cyl, drat)
+ecom2 %>%
+  select(referrer, device, duration)
 ```
 
 ## Query Data
@@ -385,8 +373,8 @@ mtcars2 %>%
 <hr>
 
 ```{r dbply5}
-mtcars2 %>%
-  filter(mpg > 25)
+ecom2 %>%
+  filter(n_visit > 5)
 ```
 
 ## Query Data
@@ -394,9 +382,9 @@ mtcars2 %>%
 <hr>
 
 ```{r dbply6}
-mtcars2 %>%
-  group_by(cyl) %>%
-  summarise(mileage = mean(mpg))
+ecom2 %>%
+  group_by(device) %>%
+  summarise(tos = mean(duration))
 ```
 
 ## Display Query
@@ -404,12 +392,12 @@ mtcars2 %>%
 <hr>
 
 ```{r dbply7}
-mileages <- 
-  mtcars2 %>%
-  group_by(cyl) %>%
-  summarise(mileage = mean(mpg))
+tos_query <- 
+  ecom2 %>%
+  group_by(device) %>%
+  summarise(tos = mean(duration))
 
-show_query(mileages)
+show_query(tos_query)
 ```
 
 ## Collect Data
@@ -417,7 +405,35 @@ show_query(mileages)
 <hr>
 
 ```{r dbply9}
-collect(mileages)
+collect(tos_query)
+```
+
+## Visualization
+
+<hr>
+
+```{r dbplot1}
+ecom2 %>% 
+  dbplot_bar(device)
+```
+
+## Visualization
+
+<hr>
+
+```{r dbplot2}
+ecom2 %>% 
+  dbplot_line(n_visit)
+```
+
+## Modeling
+
+<hr>
+
+```{r modeldb1}
+ecom2 %>% 
+  select(duration, n_visit) %>% 
+  linear_regression_db(duration)
 ```
 
 ## Close Connection
