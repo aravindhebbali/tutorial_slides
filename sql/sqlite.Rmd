@@ -4,9 +4,38 @@ output: _output.yaml
 
 ## {data-background="database.png"}
 
-## Agenda
+## Connect With Us
 
 <hr>
+
+- Website     (https://www.rsquaredacademy.com/)
+- Free Online R Courses   (https://rsquared-academy.thinkific.com/)
+- R Packages  (https://pkgs.rsquaredacademy.com)
+- Shiny Apps  (https://apps.rsquaredacademy.com)
+- Blog        (https://blog.rsquaredacademy.com)
+- GitHub      (https://github.com/rsquaredacademy)
+- YouTube     (https://www.youtube.com/user/rsquaredin/)
+- Twitter     (https://twitter.com/rsquaredacademy)
+- Facebook    (https://www.facebook.com/rsquaredacademy/)
+- Linkedin    (https://in.linkedin.com/company/rsquared-academy)
+
+## Resources
+
+<hr>
+
+- <a href="https://slides.rsquaredacademy.com/rfm/rfm.html" target="_blank">Slides</a>
+- <a href="https://blog.rsquaredacademy.com/customer-segmentation-using-rfm-analysis/" target="_blank">Blog Post</a>
+- <a href="https://github.com/rsquaredacademy-education/online-courses/tree/master/customer-segmentation-using-rfm-analysis/script" target="_blank">Code & Data</a>
+- <a href="https://rstudio.cloud/project/416146" target="_blank">RStudio Cloud</a>
+- <a href="https://rsquared-academy.thinkific.com/" target="_blank">Online Course</a>
+
+
+## {data-background="dbi_agenda.png"}
+
+<br>
+<br>
+<br>
+<br>
 
 - connect to database
 - explore database
@@ -44,24 +73,7 @@ library(tidypredict)
 library(config)
 ```
 
-## Data Dictionary
-
-<hr>
-
-- id: row id
-- referrer: referrer website/search engine
-- os: operating system
-- browser: browser
-- device: device used to visit the website
-- n_pages: number of pages visited
-- duration: time spent on the website (in seconds)
-- repeat: frequency of visits
-- country: country of origin
-- purchase: whether visitor purchased
-- order_value: order value of visitor (in dollars)
-
-
-## {data-background="connect.png"}
+## {data-background="dbi_section_connect.png"}
 
 ## Connect
 
@@ -95,7 +107,23 @@ dbListTables(con)
 DBI::dbListFields(con, "ecom")
 ```
 
-## {data-background="query_data.png"}
+## Data Dictionary
+
+<hr>
+
+- id: row id
+- referrer: referrer website/search engine
+- os: operating system
+- browser: browser
+- device: device used to visit the website
+- n_pages: number of pages visited
+- duration: time spent on the website (in seconds)
+- repeat: frequency of visits
+- country: country of origin
+- purchase: whether visitor purchased
+- order_value: order value of visitor (in dollars)
+
+## {data-background="dbi_section_query_data.png"}
 
 ## Querying Data
 
@@ -130,6 +158,16 @@ query  <- DBI::dbSendQuery(con, 'select * from ecom')
 result <- DBI::dbFetch(query, n = 30)
 result
 ```
+
+## Your Turn
+
+<hr>
+
+- list fields in the `trade` table
+- read all rows & columns from `trade` table
+- read first 30 rows from `trade` table
+
+## {data-background="dbi_section_query_details.png"}
 
 ## Query Status
 
@@ -187,7 +225,19 @@ DBI::dbColumnInfo(query)
 DBI::dbClearResult(query)
 ```
 
-## {data-background="create_table.png"}
+## Summary 
+
+<hr>
+
+## {data-background="dbi_section_tables.png"}
+
+## Check Table Name
+
+<hr>
+
+```{r dblisttable}
+DBI::dbExistsTable(con, "trial")
+```
 
 ## Create Table
 
@@ -209,7 +259,6 @@ DBI::dbWriteTable(con, "trial", trial)
 
 ```{r lite19}
 DBI::dbListTables(con)
-DBI::dbExistsTable(con, "trial")
 ```
 
 ## Query Data
@@ -234,14 +283,12 @@ trial2 <- tibble::tibble(x, y)
 DBI::dbWriteTable(con, "trial", trial2, overwrite = TRUE)
 ```
 
-## Query Data
+## View Data
 
 <hr>
 
-Let us check if `trial` table has been overwritten by querying data.
-
-```{r lite22}
-DBI::dbGetQuery(con, "select * from trial limit 5")
+```{r lite21a}
+DBI::dbGetQuery(con, "select * from trial")
 ```
 
 ## Append Data
@@ -258,14 +305,12 @@ trial3 <- tibble::tibble(x, y)
 DBI::dbWriteTable(con, "trial", trial3, append = TRUE)
 ```
 
-## Query Data
+## View Data
 
 <hr>
 
-Let us check if data has been appended by querying data.
-
-```{r lite24}
-DBI::dbReadTable(con, "trial")
+```{r lite23a}
+DBI::dbGetQuery(con, "select * from trial")
 ```
 
 ## Insert Rows
@@ -278,6 +323,14 @@ DBI::dbExecute(con,
 )
 ```
 
+## View Data
+
+<hr>
+
+```{r lite25a}
+DBI::dbGetQuery(con, "select * from trial")
+```
+
 ## Insert Rows
 
 <hr>
@@ -287,6 +340,54 @@ DBI::dbSendStatement(con,
   "INSERT into trial (x, y) VALUES (25, 'm'), (54, 'l'), (16, 'y')"
 )
 ```
+
+## View Data
+
+<hr>
+
+```{r lite26a}
+DBI::dbGetQuery(con, "select * from trial")
+```
+
+## Append Table
+
+<hr>
+
+```{r lite32}
+trial_new <- data.frame(x = 30, y = 'k')
+DBI::sqlAppendTable(con, "trial", trial_new)
+```
+
+## View Data
+
+<hr>
+
+```{r lite32a}
+DBI::dbGetQuery(con, "select * from trial")
+```
+
+## Remove Table
+
+<hr>
+
+```{r lite28}
+DBI::dbRemoveTable(con, "trial")
+```
+
+## Your Turn
+
+<hr>
+
+- check if table `mytable` exists
+- create new table using the following data
+- list all tables to check if the new table has been created
+- overwrite the table
+- append the below data
+- insert the following data
+- append the below table
+- remove `mytable`
+
+## {data-background="dbi_section_data_types.png"}
 
 ## Data Type
 
@@ -298,23 +399,7 @@ DBI::dbDataType(RSQLite::SQLite(), 1:5)
 DBI::dbDataType(RSQLite::SQLite(), 1.5)
 ```
 
-## Remove Table
-
-<hr>
-
-```{r lite28}
-DBI::dbRemoveTable(con, "trial")
-```
-
-## List Tables
-
-<hr> 
-
-Let us check if `trial` table has been removed from the database by listing all the tables.
-
-```{r lite29}
-DBI::dbListTables(con)
-```
+## {data-background="dbi_section_generate_sql_query.png"}
 
 ## Generate SQL Query
 
@@ -324,31 +409,44 @@ DBI::dbListTables(con)
 DBI::sqlCreateTable(con, "new", c(x = "integer", y = "text"))
 ```
 
+## {data-background="dbi_section_sql_scripts.png"}
 
-## Data
-
-<hr>
-
-Let us use the first 5 rows of the `ecom` table as sample data and append it to the `ecom` table itself.
-
-```{r lite34, eval=FALSE}
-ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
-```
-
-```{r lite33, echo=FALSE, eval=TRUE, message=FALSE}
-ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
-ecom
-```
-
-## Append Table
+## Running SQL Scripts
 
 <hr>
 
-```{r lite32}
-DBI::sqlAppendTable(con, "ecom", head(ecom))
+<br>
+<br>
+<br>
+
+```{r sql_scripts, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("dbi_running_sql_scripts.png")
 ```
 
-## {data-background="dbplyr.png"}
+## {data-background="dbi_section_knitr_sql_engine.png"}
+
+## knitr SQL Engine
+
+<hr>
+
+```{r knitr_sql_engine, echo=FALSE, fig.align="center", out.width="100%"}
+knitr::include_graphics("dbi_knitr_sql_engine.png")
+```
+
+## Your Turn
+
+<hr>
+
+- check the data type of 
+- generate the sql query for
+- use RStudio SQL script to run the following
+- create a html report for `trade` data
+
+## Summary
+
+<hr>
+
+## {data-background="dbi_section_data_transformation.png"}
 
 ## Reference Data
 
@@ -364,27 +462,12 @@ ecom2
 <hr>
 
 ```{r dbply4}
-ecom2 %>%
-  select(referrer, device, duration)
-```
-
-## Query Data
-
-<hr>
-
-```{r dbply5}
-ecom2 %>%
-  filter(n_visit > 5)
-```
-
-## Query Data
-
-<hr>
-
-```{r dbply6}
-ecom2 %>%
-  group_by(device) %>%
-  summarise(tos = mean(duration))
+ecom2 %>% 
+  select(referrer, device, duration) %>% 
+  filter(device == "laptop") %>% 
+  group_by(referrer) %>% 
+  summarise(avg_tos = mean(duration)) %>% 
+  arrange(avg_tos)
 ```
 
 ## Display Query
@@ -408,33 +491,175 @@ show_query(tos_query)
 collect(tos_query)
 ```
 
-## Visualization
+## Explain 
 
 <hr>
 
-```{r dbplot1}
-ecom2 %>% 
-  dbplot_bar(device)
+```{r dbply_explain}
+explain(tos_query)
 ```
 
-## Visualization
+## Simulate
 
 <hr>
 
-```{r dbplot2}
-ecom2 %>% 
-  dbplot_line(n_visit)
+```{r dbply_simulate}
+tos_query %>% 
+  sql_render(simulate_mysql())
 ```
+
+## Your Turn
+
+<hr>
+
+- use dplyr to tabulate some column
+- use dplyr verbs to compute something
+- collect data
+
+## {data-background="dbi_section_data_visualization.png"}
+
+## dbplot
+
+<hr>
+
+- box plot
+- bar plot
+- histogram
+- line chart
+- raster plot
+
+## Bar Plot
+
+<hr>
+
+```{r dbplot1, fig.align='center', fig.height=5}
+ecom2 %>% 
+  dbplot_bar(device) + xlab("Device") + ylab("Count") + ggtitle("Device Distribution")
+```
+
+## Line Chart
+
+<hr>
+
+```{r dbplot2, fig.align='center', fig.height=5}
+ecom2 %>% 
+  dbplot_line(n_visit) + xlab("Visits") + ylab("Count") 
+```
+
+## Your Turn
+
+<hr>
+
+- create bar plot of referrer column
+- create line chart of n_pages 
+
+## {data-background="dbi_section_data_modeling.png"}
 
 ## Modeling
+
+<hr>
+
+- [modeldb](https://tidymodels.github.io/modeldb/index.html)
+- [tidypredict](https://tidymodels.github.io/tidypredict/index.html)
+
+## Simple Regression 
 
 <hr>
 
 ```{r modeldb1}
 ecom2 %>% 
   select(duration, n_visit) %>% 
-  linear_regression_db(duration)
+  modeldb::linear_regression_db(duration)
 ```
+
+## Multiple Regression 
+
+<hr>
+
+```{r modeldb2}
+ecom2 %>% 
+  select(duration, n_visit, n_pages) %>%
+  modeldb::linear_regression_db(duration, sample_size = 1000)
+```
+
+## Categorical Variables
+
+<hr>
+
+```{r modeldb3}
+ecom2 %>% 
+  select(duration, device) %>%
+  add_dummy_variables(device, values = c("laptop", "mobile", "tablet")) %>% 
+  modeldb::linear_regression_db(duration)
+```
+
+## Full Example
+
+<hr>
+
+```{r modeldb4}
+ecom2 %>% 
+  select(duration, n_visit, n_pages, device) %>%
+  add_dummy_variables(device, values = c("laptop", "mobile", "tablet")) %>% 
+  modeldb::linear_regression_db(duration, sample_size = 1000)
+```
+
+## Your Turn
+
+<hr>
+
+- regress duration on n_pages
+- regress duration on referrer
+
+## Predict Inside Database
+
+<hr>
+
+```{r tp1}
+model <- lm(duration ~ device + referrer + n_visit + n_pages, data = ecom2)
+model
+```
+
+## SQL
+
+<hr>
+
+```{r tp2}
+tidypredict_sql(model, con)
+```
+
+## Fit
+
+<hr>
+
+```{r tp3}
+tidypredict_fit(model)
+```
+
+## Fit
+
+<hr>
+
+```{r tp4}
+ecom2 %>% 
+  tidypredict_to_column(model) %>% 
+  select(duration, fit)
+```
+
+## Fit
+
+<hr>
+
+```{r tp5}
+ecom2 %>% 
+  tidypredict_to_column(model) %>% 
+  select(duration, fit) %>% 
+  remote_query()
+```
+
+## Summary
+
+## {data-background="dbi_section_close_connection.png"}
 
 ## Close Connection
 
@@ -443,6 +668,40 @@ ecom2 %>%
 ```{r lite30}
 DBI::dbDisconnect(con)
 ```
+
+## {data-background="dbi_section_connections_tab.png"}
+
+## {data-background="dbi_section_handling_credentials.png"}
+
+## .Renviron
+
+<hr>
+
+## Options
+
+<hr>
+
+## Config
+
+<hr>
+
+## Summary
+
+<hr>
+
+## References
+
+<hr>
+
+- [Big Data with R](https://rstudio.github.io/bigdataclass/index.html)
+- [Databases Using R](https://db.rstudio.com/)
+- [DBI](http://r-dbi.github.io/DBI/)
+- [dbplyr](https://dbplyr.tidyverse.org/index.html)
+- [dbplot](https://edgararuiz.github.io/dbplot/index.html)
+- [modeldb](https://tidymodels.github.io/modeldb/)
+- [tidypredict](https://tidymodels.github.io/tidypredict/)
+- [config](https://github.com/rstudio/config)
+- [keyring](https://github.com/r-lib/keyring)
 
 ## {data-background="thankyou.png"}
 
