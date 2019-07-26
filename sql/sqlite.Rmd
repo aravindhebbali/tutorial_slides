@@ -225,10 +225,6 @@ DBI::dbColumnInfo(query)
 DBI::dbClearResult(query)
 ```
 
-## Summary 
-
-<hr>
-
 ## {data-background="dbi_section_tables.png"}
 
 ## Check Table Name
@@ -440,10 +436,6 @@ knitr::include_graphics("dbi_knitr_sql_engine.png")
 - use SQL script to select `duration`, `n_visit` from `trade` table
 where `device` has the value `tablet`
 - create a html report for the above sql query using the knitr SQL engine
-
-## Summary
-
-<hr>
 
 ## {data-background="dbi_section_data_transformation.png"}
 
@@ -665,10 +657,6 @@ ecom2 %>%
   remote_query()
 ```
 
-## Summary
-
-<hr>
-
 ## {data-background="dbi_section_close_connection.png"}
 
 ## Close Connection
@@ -695,9 +683,18 @@ DBI::dbDisconnect(con)
 
 <hr>
 
+## {data-background="dbi_section_summary.png"}
+
 ## Summary
 
 <hr>
+
+- [DBI](http://r-dbi.github.io/DBI/) to connect and interact with databases
+- [dplyr](https://dplyr.tidyverse.org/index.html) and [dbplyr](https://dbplyr.tidyverse.org/index.html) for data transformation
+- [dbplot](https://edgararuiz.github.io/dbplot/index.html) for data visualization
+- [modeldb](https://tidymodels.github.io/modeldb/) and [tidypredict](https://tidymodels.github.io/tidypredict/) for data modeling
+- [config](https://github.com/rstudio/config), [keyring](https://github.com/r-lib/keyring), .Renviron and `options()` to handle credentials
+- always close the database connection
 
 ## References
 

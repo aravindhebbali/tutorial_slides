@@ -4117,10 +4117,6 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">DBI<span class="op">::</span><span class="kw">dbClearResult</span>(query)</a></code></pre></div>
 </section>
-<section id="summary" class="slide level2">
-<h2>Summary</h2>
-<hr>
-</section>
 <section id="section-5" class="slide level2" data-background="dbi_section_tables.png">
 <h2></h2>
 </section>
@@ -4174,16 +4170,16 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1">DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;select * from trial&quot;</span>)</a></code></pre></div>
 <pre><code>##     x y
-## 1  47 k
-## 2  48 l
-## 3  94 m
-## 4  39 n
-## 5  75 o
-## 6  59 p
-## 7  43 q
-## 8  22 r
-## 9  36 s
-## 10 81 t</code></pre>
+## 1  71 k
+## 2  64 l
+## 3  45 m
+## 4  60 n
+## 5  13 o
+## 6  34 p
+## 7  54 q
+## 8  14 r
+## 9   6 s
+## 10 53 t</code></pre>
 </section>
 <section id="append-data" class="slide level2">
 <h2>Append Data</h2>
@@ -4201,26 +4197,26 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1">DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;select * from trial&quot;</span>)</a></code></pre></div>
 <pre><code>##     x y
-## 1  47 k
-## 2  48 l
-## 3  94 m
-## 4  39 n
-## 5  75 o
-## 6  59 p
-## 7  43 q
-## 8  22 r
-## 9  36 s
-## 10 81 t
-## 11 65 e
-## 12 92 f
-## 13 45 g
-## 14 61 h
-## 15 44 i
-## 16 53 j
-## 17 38 k
-## 18 14 l
-## 19 84 m
-## 20 86 n</code></pre>
+## 1  71 k
+## 2  64 l
+## 3  45 m
+## 4  60 n
+## 5  13 o
+## 6  34 p
+## 7  54 q
+## 8  14 r
+## 9   6 s
+## 10 53 t
+## 11 31 e
+## 12 54 f
+## 13 21 g
+## 14 22 h
+## 15 52 i
+## 16 13 j
+## 17 98 k
+## 18 82 l
+## 19 34 m
+## 20 12 n</code></pre>
 </section>
 <section id="insert-rows" class="slide level2">
 <h2>Insert Rows</h2>
@@ -4235,26 +4231,26 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1">DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;select * from trial&quot;</span>)</a></code></pre></div>
 <pre><code>##     x y
-## 1  47 k
-## 2  48 l
-## 3  94 m
-## 4  39 n
-## 5  75 o
-## 6  59 p
-## 7  43 q
-## 8  22 r
-## 9  36 s
-## 10 81 t
-## 11 65 e
-## 12 92 f
-## 13 45 g
-## 14 61 h
-## 15 44 i
-## 16 53 j
-## 17 38 k
-## 18 14 l
-## 19 84 m
-## 20 86 n
+## 1  71 k
+## 2  64 l
+## 3  45 m
+## 4  60 n
+## 5  13 o
+## 6  34 p
+## 7  54 q
+## 8  14 r
+## 9   6 s
+## 10 53 t
+## 11 31 e
+## 12 54 f
+## 13 21 g
+## 14 22 h
+## 15 52 i
+## 16 13 j
+## 17 98 k
+## 18 82 l
+## 19 34 m
+## 20 12 n
 ## 21 32 c
 ## 22 45 k
 ## 23 61 h</code></pre>
@@ -4276,26 +4272,26 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1">DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;select * from trial&quot;</span>)</a></code></pre></div>
 <pre><code>## Warning: Closing open result set, pending rows</code></pre>
 <pre><code>##     x y
-## 1  47 k
-## 2  48 l
-## 3  94 m
-## 4  39 n
-## 5  75 o
-## 6  59 p
-## 7  43 q
-## 8  22 r
-## 9  36 s
-## 10 81 t
-## 11 65 e
-## 12 92 f
-## 13 45 g
-## 14 61 h
-## 15 44 i
-## 16 53 j
-## 17 38 k
-## 18 14 l
-## 19 84 m
-## 20 86 n
+## 1  71 k
+## 2  64 l
+## 3  45 m
+## 4  60 n
+## 5  13 o
+## 6  34 p
+## 7  54 q
+## 8  14 r
+## 9   6 s
+## 10 53 t
+## 11 31 e
+## 12 54 f
+## 13 21 g
+## 14 22 h
+## 15 52 i
+## 16 13 j
+## 17 98 k
+## 18 82 l
+## 19 34 m
+## 20 12 n
 ## 21 32 c
 ## 22 45 k
 ## 23 61 h
@@ -4320,26 +4316,26 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1">DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;select * from trial&quot;</span>)</a></code></pre></div>
 <pre><code>##     x y
-## 1  47 k
-## 2  48 l
-## 3  94 m
-## 4  39 n
-## 5  75 o
-## 6  59 p
-## 7  43 q
-## 8  22 r
-## 9  36 s
-## 10 81 t
-## 11 65 e
-## 12 92 f
-## 13 45 g
-## 14 61 h
-## 15 44 i
-## 16 53 j
-## 17 38 k
-## 18 14 l
-## 19 84 m
-## 20 86 n
+## 1  71 k
+## 2  64 l
+## 3  45 m
+## 4  60 n
+## 5  13 o
+## 6  34 p
+## 7  54 q
+## 8  14 r
+## 9   6 s
+## 10 53 t
+## 11 31 e
+## 12 54 f
+## 13 21 g
+## 14 22 h
+## 15 52 i
+## 16 13 j
+## 17 98 k
+## 18 82 l
+## 19 34 m
+## 20 12 n
 ## 21 32 c
 ## 22 45 k
 ## 23 61 h
@@ -4417,10 +4413,6 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <li class="fragment">use SQL script to select <code>duration</code>, <code>n_visit</code> from <code>trade</code> table where <code>device</code> has the value <code>tablet</code></li>
 <li class="fragment">create a html report for the above sql query using the knitr SQL engine</li>
 </ul>
-</section>
-<section id="summary-1" class="slide level2">
-<h2>Summary</h2>
-<hr>
 </section>
 <section id="section-10" class="slide level2" data-background="dbi_section_data_transformation.png">
 <h2></h2>
@@ -4586,7 +4578,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 59   58     ResultRow 19  2   0          00      NA
 ## 60   59    SorterNext  6 55   0          00      NA
 ## 61   60          Halt  0  0   0          00      NA
-## 62   61   Transaction  0  0 196        0 01      NA
+## 62   61   Transaction  0  0 204        0 01      NA
 ## 63   62       String8  0 12   0   laptop 00      NA
 ## 64   63          Goto  0  1   0          00      NA</code></pre>
 </section>
@@ -4786,10 +4778,6 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## FROM (SELECT `id`, `referrer`, `device`, `bouncers`, `n_visit`, `n_pages`, `duration`, `country`, `purchase`, `order_items`, `order_value`, 441.450192491919 + (CASE WHEN (`device` = &#39;mobile&#39;) THEN (1.0) WHEN NOT(`device` = &#39;mobile&#39;) THEN (0.0) END * -30.9522074131866) + (CASE WHEN (`device` = &#39;tablet&#39;) THEN (1.0) WHEN NOT(`device` = &#39;tablet&#39;) THEN (0.0) END * -14.4972018107797) + (CASE WHEN (`referrer` = &#39;direct&#39;) THEN (1.0) WHEN NOT(`referrer` = &#39;direct&#39;) THEN (0.0) END * -8.98035001912995) + (CASE WHEN (`referrer` = &#39;google&#39;) THEN (1.0) WHEN NOT(`referrer` = &#39;google&#39;) THEN (0.0) END * -10.038005625893) + (CASE WHEN (`referrer` = &#39;social&#39;) THEN (1.0) WHEN NOT(`referrer` = &#39;social&#39;) THEN (0.0) END * -19.8411767075006) + (CASE WHEN (`referrer` = &#39;yahoo&#39;) THEN (1.0) WHEN NOT(`referrer` = &#39;yahoo&#39;) THEN (0.0) END * -32.0969778768984) + (`n_visit` * -1.4325653130794) + (`n_pages` * -8.29825840984566) AS `fit`
 ## FROM `ecom`)</code></pre>
 </section>
-<section id="summary-2" class="slide level2">
-<h2>Summary</h2>
-<hr>
-</section>
 <section id="section-13" class="slide level2" data-background="dbi_section_close_connection.png">
 <h2></h2>
 </section>
@@ -4816,9 +4804,20 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>Config</h2>
 <hr>
 </section>
-<section id="summary-3" class="slide level2">
+<section id="section-16" class="slide level2" data-background="dbi_section_summary.png">
+<h2></h2>
+</section>
+<section id="summary" class="slide level2">
 <h2>Summary</h2>
 <hr>
+<ul>
+<li class="fragment"><a href="http://r-dbi.github.io/DBI/">DBI</a> to connect and interact with databases</li>
+<li class="fragment"><a href="https://dplyr.tidyverse.org/index.html">dplyr</a> and <a href="https://dbplyr.tidyverse.org/index.html">dbplyr</a> for data transformation</li>
+<li class="fragment"><a href="https://edgararuiz.github.io/dbplot/index.html">dbplot</a> for data visualization</li>
+<li class="fragment"><a href="https://tidymodels.github.io/modeldb/">modeldb</a> and <a href="https://tidymodels.github.io/tidypredict/">tidypredict</a> for data modeling</li>
+<li class="fragment"><a href="https://github.com/rstudio/config">config</a>, <a href="https://github.com/r-lib/keyring">keyring</a>, .Renviron and <code>options()</code> to handle credentials</li>
+<li class="fragment">always close the database connection</li>
+</ul>
 </section>
 <section id="references" class="slide level2">
 <h2>References</h2>
@@ -4835,7 +4834,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <li class="fragment"><a href="https://github.com/r-lib/keyring">keyring</a></li>
 </ul>
 </section>
-<section id="section-16" class="slide level2" data-background="thankyou.png">
+<section id="section-17" class="slide level2" data-background="thankyou.png">
 <h2></h2>
 </section>
     </div>
