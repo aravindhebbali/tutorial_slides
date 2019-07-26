@@ -4048,8 +4048,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <ul>
 <li class="fragment">list fields in the <code>trade</code> table</li>
-<li class="fragment">read all rows &amp; columns from <code>trade</code> table</li>
-<li class="fragment">read first 30 rows from <code>trade</code> table</li>
+<li class="fragment">read all rows &amp; columns from the <code>trade</code> table</li>
+<li class="fragment">read first 30 rows from the <code>trade</code> table</li>
 </ul>
 </section>
 <section id="section-4" class="slide level2" data-background="dbi_section_query_details.png">
@@ -4174,16 +4174,16 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1">DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;select * from trial&quot;</span>)</a></code></pre></div>
 <pre><code>##     x y
-## 1   4 k
-## 2  10 l
-## 3  26 m
-## 4  99 n
-## 5  77 o
-## 6  48 p
-## 7  20 q
-## 8  72 r
-## 9  90 s
-## 10 95 t</code></pre>
+## 1  47 k
+## 2  48 l
+## 3  94 m
+## 4  39 n
+## 5  75 o
+## 6  59 p
+## 7  43 q
+## 8  22 r
+## 9  36 s
+## 10 81 t</code></pre>
 </section>
 <section id="append-data" class="slide level2">
 <h2>Append Data</h2>
@@ -4201,26 +4201,26 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1">DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;select * from trial&quot;</span>)</a></code></pre></div>
 <pre><code>##     x y
-## 1   4 k
-## 2  10 l
-## 3  26 m
-## 4  99 n
-## 5  77 o
-## 6  48 p
-## 7  20 q
-## 8  72 r
-## 9  90 s
-## 10 95 t
-## 11 85 e
-## 12 80 f
-## 13 53 g
-## 14 51 h
-## 15 79 i
-## 16 18 j
-## 17 77 k
-## 18  3 l
-## 19 46 m
-## 20 63 n</code></pre>
+## 1  47 k
+## 2  48 l
+## 3  94 m
+## 4  39 n
+## 5  75 o
+## 6  59 p
+## 7  43 q
+## 8  22 r
+## 9  36 s
+## 10 81 t
+## 11 65 e
+## 12 92 f
+## 13 45 g
+## 14 61 h
+## 15 44 i
+## 16 53 j
+## 17 38 k
+## 18 14 l
+## 19 84 m
+## 20 86 n</code></pre>
 </section>
 <section id="insert-rows" class="slide level2">
 <h2>Insert Rows</h2>
@@ -4235,26 +4235,26 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1">DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;select * from trial&quot;</span>)</a></code></pre></div>
 <pre><code>##     x y
-## 1   4 k
-## 2  10 l
-## 3  26 m
-## 4  99 n
-## 5  77 o
-## 6  48 p
-## 7  20 q
-## 8  72 r
-## 9  90 s
-## 10 95 t
-## 11 85 e
-## 12 80 f
-## 13 53 g
-## 14 51 h
-## 15 79 i
-## 16 18 j
-## 17 77 k
-## 18  3 l
-## 19 46 m
-## 20 63 n
+## 1  47 k
+## 2  48 l
+## 3  94 m
+## 4  39 n
+## 5  75 o
+## 6  59 p
+## 7  43 q
+## 8  22 r
+## 9  36 s
+## 10 81 t
+## 11 65 e
+## 12 92 f
+## 13 45 g
+## 14 61 h
+## 15 44 i
+## 16 53 j
+## 17 38 k
+## 18 14 l
+## 19 84 m
+## 20 86 n
 ## 21 32 c
 ## 22 45 k
 ## 23 61 h</code></pre>
@@ -4276,26 +4276,26 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1">DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;select * from trial&quot;</span>)</a></code></pre></div>
 <pre><code>## Warning: Closing open result set, pending rows</code></pre>
 <pre><code>##     x y
-## 1   4 k
-## 2  10 l
-## 3  26 m
-## 4  99 n
-## 5  77 o
-## 6  48 p
-## 7  20 q
-## 8  72 r
-## 9  90 s
-## 10 95 t
-## 11 85 e
-## 12 80 f
-## 13 53 g
-## 14 51 h
-## 15 79 i
-## 16 18 j
-## 17 77 k
-## 18  3 l
-## 19 46 m
-## 20 63 n
+## 1  47 k
+## 2  48 l
+## 3  94 m
+## 4  39 n
+## 5  75 o
+## 6  59 p
+## 7  43 q
+## 8  22 r
+## 9  36 s
+## 10 81 t
+## 11 65 e
+## 12 92 f
+## 13 45 g
+## 14 61 h
+## 15 44 i
+## 16 53 j
+## 17 38 k
+## 18 14 l
+## 19 84 m
+## 20 86 n
 ## 21 32 c
 ## 22 45 k
 ## 23 61 h
@@ -4320,26 +4320,26 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1">DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;select * from trial&quot;</span>)</a></code></pre></div>
 <pre><code>##     x y
-## 1   4 k
-## 2  10 l
-## 3  26 m
-## 4  99 n
-## 5  77 o
-## 6  48 p
-## 7  20 q
-## 8  72 r
-## 9  90 s
-## 10 95 t
-## 11 85 e
-## 12 80 f
-## 13 53 g
-## 14 51 h
-## 15 79 i
-## 16 18 j
-## 17 77 k
-## 18  3 l
-## 19 46 m
-## 20 63 n
+## 1  47 k
+## 2  48 l
+## 3  94 m
+## 4  39 n
+## 5  75 o
+## 6  59 p
+## 7  43 q
+## 8  22 r
+## 9  36 s
+## 10 81 t
+## 11 65 e
+## 12 92 f
+## 13 45 g
+## 14 61 h
+## 15 44 i
+## 16 53 j
+## 17 38 k
+## 18 14 l
+## 19 84 m
+## 20 86 n
 ## 21 32 c
 ## 22 45 k
 ## 23 61 h
@@ -4356,13 +4356,12 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>Your Turn</h2>
 <hr>
 <ul>
-<li class="fragment">check if table <code>mytable</code> exists</li>
-<li class="fragment">create new table using the following data</li>
+<li class="fragment">check if <code>mytable</code> exists in the database</li>
+<li class="fragment">create new table <code>mytable</code> using the first 3 rows of <code>mtcars</code> data set</li>
 <li class="fragment">list all tables to check if the new table has been created</li>
-<li class="fragment">overwrite the table</li>
-<li class="fragment">append the below data</li>
-<li class="fragment">insert the following data</li>
-<li class="fragment">append the below table</li>
+<li class="fragment">overwrite <code>mytable</code> with the first 10 rows of <code>mtcars</code> data set</li>
+<li class="fragment">append the 20th row of <code>mtcars</code> data set to <code>mytable</code></li>
+<li class="fragment">create a new table using the last 5 rows of <code>mtcars</code> and append it to <code>mytable</code></li>
 <li class="fragment">remove <code>mytable</code></li>
 </ul>
 </section>
@@ -4414,10 +4413,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>Your Turn</h2>
 <hr>
 <ul>
-<li class="fragment">check the data type of</li>
-<li class="fragment">generate the sql query for</li>
-<li class="fragment">use RStudio SQL script to run the following</li>
-<li class="fragment">create a html report for <code>trade</code> data</li>
+<li class="fragment">check the data type of <code>&quot;NULL&quot;</code></li>
+<li class="fragment">use SQL script to select <code>duration</code>, <code>n_visit</code> from <code>trade</code> table where <code>device</code> has the value <code>tablet</code></li>
+<li class="fragment">create a html report for the above sql query using the knitr SQL engine</li>
 </ul>
 </section>
 <section id="summary-1" class="slide level2">
@@ -4476,17 +4474,23 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>Display Query</h2>
 <hr>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1">tos_query &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb70-2" title="2"><span class="st">  </span>ecom2 <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb70-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(device) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb70-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">tos =</span> <span class="kw">mean</span>(duration))</a>
-<a class="sourceLine" id="cb70-5" title="5"></a>
-<a class="sourceLine" id="cb70-6" title="6"><span class="kw">show_query</span>(tos_query)</a></code></pre></div>
+<a class="sourceLine" id="cb70-2" title="2"><span class="st">  </span>ecom2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb70-3" title="3"><span class="st">  </span><span class="kw">select</span>(referrer, device, duration) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb70-4" title="4"><span class="st">  </span><span class="kw">filter</span>(device <span class="op">==</span><span class="st"> &quot;laptop&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb70-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(referrer) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb70-6" title="6"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">avg_tos =</span> <span class="kw">mean</span>(duration)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb70-7" title="7"><span class="st">  </span><span class="kw">arrange</span>(avg_tos)</a>
+<a class="sourceLine" id="cb70-8" title="8"></a>
+<a class="sourceLine" id="cb70-9" title="9"><span class="kw">show_query</span>(tos_query)</a></code></pre></div>
 <pre><code>## Warning: Missing values are always removed in SQL.
 ## Use `AVG(x, na.rm = TRUE)` to silence this warning</code></pre>
 <pre><code>## &lt;SQL&gt;
-## SELECT `device`, AVG(`duration`) AS `tos`
-## FROM `ecom`
-## GROUP BY `device`</code></pre>
+## SELECT `referrer`, AVG(`duration`) AS `avg_tos`
+## FROM (SELECT `referrer`, `device`, `duration`
+## FROM `ecom`)
+## WHERE (`device` = &#39;laptop&#39;)
+## GROUP BY `referrer`
+## ORDER BY `avg_tos`</code></pre>
 </section>
 <section id="collect-data" class="slide level2">
 <h2>Collect Data</h2>
@@ -4494,12 +4498,14 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" title="1"><span class="kw">collect</span>(tos_query)</a></code></pre></div>
 <pre><code>## Warning: Missing values are always removed in SQL.
 ## Use `AVG(x, na.rm = TRUE)` to silence this warning</code></pre>
-<pre><code>## # A tibble: 3 x 2
-##   device   tos
-##   &lt;chr&gt;  &lt;dbl&gt;
-## 1 laptop  376.
-## 2 mobile  337.
-## 3 tablet  354.</code></pre>
+<pre><code>## # A tibble: 5 x 2
+##   referrer avg_tos
+##   &lt;chr&gt;      &lt;dbl&gt;
+## 1 direct      326.
+## 2 yahoo       331.
+## 3 social      362.
+## 4 bing        434.
+## 5 google      439.</code></pre>
 </section>
 <section id="explain" class="slide level2">
 <h2>Explain</h2>
@@ -4508,77 +4514,105 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <pre><code>## Warning: Missing values are always removed in SQL.
 ## Use `AVG(x, na.rm = TRUE)` to silence this warning</code></pre>
 <pre><code>## &lt;SQL&gt;
-## SELECT `device`, AVG(`duration`) AS `tos`
-## FROM `ecom`
-## GROUP BY `device`</code></pre>
+## SELECT `referrer`, AVG(`duration`) AS `avg_tos`
+## FROM (SELECT `referrer`, `device`, `duration`
+## FROM `ecom`)
+## WHERE (`device` = &#39;laptop&#39;)
+## GROUP BY `referrer`
+## ORDER BY `avg_tos`</code></pre>
 <pre><code>## </code></pre>
 <pre><code>## Warning: Missing values are always removed in SQL.
 ## Use `AVG(x, na.rm = TRUE)` to silence this warning</code></pre>
 <pre><code>## &lt;PLAN&gt;
-##    addr       opcode p1 p2  p3     p4 p5 comment
-## 1     0         Init  0 42   0        00      NA
-## 2     1   SorterOpen  1  2   0 k(1,B) 00      NA
-## 3     2      Integer  0  5   0        00      NA
-## 4     3      Integer  0  4   0        00      NA
-## 5     4         Null  0  8   8        00      NA
-## 6     5        Gosub  7 39   0        00      NA
-## 7     6     OpenRead  0  6   0      7 00      NA
-## 8     7       Rewind  0 14   0        00      NA
-## 9     8       Column  0  2  10        00      NA
-## 10    9       Column  0  6  11        00      NA
-## 11   10 RealAffinity 11  0   0        00      NA
-## 12   11   MakeRecord 10  2  12        00      NA
-## 13   12 SorterInsert  1 12   0        00      NA
-## 14   13         Next  0  8   0        01      NA
-## 15   14   OpenPseudo  2 12   2        00      NA
-## 16   15   SorterSort  1 41   0        00      NA
-## 17   16   SorterData  1 12   2        00      NA
-## 18   17       Column  2  0   9        00      NA
-## 19   18      Compare  8  9   1 k(1,B) 00      NA
-## 20   19         Jump 20 24  20        00      NA
-## 21   20         Move  9  8   1        00      NA
-## 22   21        Gosub  6 33   0        00      NA
-## 23   22        IfPos  5 41   0        00      NA
-## 24   23        Gosub  7 39   0        00      NA
-## 25   24       Column  2  1  13        00      NA
-## 26   25     AggStep0  0 13   2 avg(1) 01      NA
-## 27   26       Column  2  0   1        00      NA
-## 28   27      Integer  1  4   0        00      NA
-## 29   28   SorterNext  1 16   0        00      NA
-## 30   29        Gosub  6 33   0        00      NA
-## 31   30         Goto  0 41   0        00      NA
-## 32   31      Integer  1  5   0        00      NA
-## 33   32       Return  6  0   0        00      NA
-## 34   33        IfPos  4 35   0        00      NA
-## 35   34       Return  6  0   0        00      NA
-## 36   35     AggFinal  2  1   0 avg(1) 00      NA
-## 37   36         Copy  1 14   1        00      NA
-## 38   37    ResultRow 14  2   0        00      NA
-## 39   38       Return  6  0   0        00      NA
-## 40   39         Null  0  1   3        00      NA
-## 41   40       Return  7  0   0        00      NA
-## 42   41         Halt  0  0   0        00      NA
-## 43   42  Transaction  0  0 168      0 01      NA
-## 44   43         Goto  0  1   0        00      NA</code></pre>
+##    addr        opcode p1 p2  p3       p4 p5 comment
+## 1     0          Init  0 61   0          00      NA
+## 2     1 InitCoroutine  1 45   2          00      NA
+## 3     2    SorterOpen  4  2   0   k(1,B) 00      NA
+## 4     3       Integer  0  6   0          00      NA
+## 5     4       Integer  0  5   0          00      NA
+## 6     5          Null  0  9   9          00      NA
+## 7     6         Gosub  8 42   0          00      NA
+## 8     7      OpenRead  3  6   0        7 00      NA
+## 9     8        Rewind  3 17   0          00      NA
+## 10    9        Column  3  2  11          00      NA
+## 11   10            Ne 12 16  11 (BINARY) 52      NA
+## 12   11        Column  3  1  13          00      NA
+## 13   12        Column  3  6  14          00      NA
+## 14   13  RealAffinity 14  0   0          00      NA
+## 15   14    MakeRecord 13  2  11          00      NA
+## 16   15  SorterInsert  4 11   0          00      NA
+## 17   16          Next  3  9   0          01      NA
+## 18   17    OpenPseudo  5 11   2          00      NA
+## 19   18    SorterSort  4 44   0          00      NA
+## 20   19    SorterData  4 11   5          00      NA
+## 21   20        Column  5  0  10          00      NA
+## 22   21       Compare  9 10   1   k(1,B) 00      NA
+## 23   22          Jump 23 27  23          00      NA
+## 24   23          Move 10  9   1          00      NA
+## 25   24         Gosub  7 36   0          00      NA
+## 26   25         IfPos  6 44   0          00      NA
+## 27   26         Gosub  8 42   0          00      NA
+## 28   27        Column  5  1  15          00      NA
+## 29   28      AggStep0  0 15   3   avg(1) 01      NA
+## 30   29        Column  5  0   2          00      NA
+## 31   30       Integer  1  5   0          00      NA
+## 32   31    SorterNext  4 19   0          00      NA
+## 33   32         Gosub  7 36   0          00      NA
+## 34   33          Goto  0 44   0          00      NA
+## 35   34       Integer  1  6   0          00      NA
+## 36   35        Return  7  0   0          00      NA
+## 37   36         IfPos  5 38   0          00      NA
+## 38   37        Return  7  0   0          00      NA
+## 39   38      AggFinal  3  1   0   avg(1) 00      NA
+## 40   39          Copy  2 16   1          00      NA
+## 41   40         Yield  1  0   0          00      NA
+## 42   41        Return  7  0   0          00      NA
+## 43   42          Null  0  2   4          00      NA
+## 44   43        Return  8  0   0          00      NA
+## 45   44  EndCoroutine  1  0   0          00      NA
+## 46   45    SorterOpen  6  4   0   k(1,B) 00      NA
+## 47   46 InitCoroutine  1  0   2          00      NA
+## 48   47         Yield  1 53   0          00      NA
+## 49   48          Copy 16 19   0          00      NA
+## 50   49          Copy 17 18   0          00      NA
+## 51   50    MakeRecord 18  2  21          00      NA
+## 52   51  SorterInsert  6 21  18        2 00      NA
+## 53   52          Goto  0 47   0          00      NA
+## 54   53    OpenPseudo  7 22   4          00      NA
+## 55   54    SorterSort  6 60   0          00      NA
+## 56   55    SorterData  6 22   7          00      NA
+## 57   56        Column  7  1  19          00      NA
+## 58   57        Column  7  0  20          00      NA
+## 59   58     ResultRow 19  2   0          00      NA
+## 60   59    SorterNext  6 55   0          00      NA
+## 61   60          Halt  0  0   0          00      NA
+## 62   61   Transaction  0  0 196        0 01      NA
+## 63   62       String8  0 12   0   laptop 00      NA
+## 64   63          Goto  0  1   0          00      NA</code></pre>
 </section>
 <section id="simulate" class="slide level2">
 <h2>Simulate</h2>
 <hr>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1">tos_query <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb82-2" title="2"><span class="st">  </span><span class="kw">sql_render</span>(<span class="kw">simulate_mysql</span>())</a></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1">ecom2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb82-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(referrer) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb82-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">avg_tos =</span> <span class="kw">mean</span>(duration))  <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb82-4" title="4"><span class="st">  </span><span class="kw">sql_render</span>(<span class="kw">simulate_mysql</span>())</a></code></pre></div>
 <pre><code>## Warning: Missing values are always removed in SQL.
 ## Use `AVG(x, na.rm = TRUE)` to silence this warning</code></pre>
-<pre><code>## &lt;SQL&gt; SELECT `device`, AVG(`duration`) AS `tos`
+<pre><code>## &lt;SQL&gt; SELECT `referrer`, AVG(`duration`) AS `avg_tos`
 ## FROM `ecom`
-## GROUP BY `device`</code></pre>
+## GROUP BY `referrer`</code></pre>
 </section>
 <section id="your-turn-3" class="slide level2">
 <h2>Your Turn</h2>
 <hr>
 <ul>
-<li class="fragment">use dplyr to tabulate some column</li>
-<li class="fragment">use dplyr verbs to compute something</li>
-<li class="fragment">collect data</li>
+<li class="fragment">use <code>tbl()</code> to reference <code>trade</code> table as <code>trade2</code></li>
+<li class="fragment">use dplyr verbs to compute average duration for <code>device</code> from the <code>trade</code> table</li>
+<li class="fragment">store the above query in a variable <code>tos_device</code></li>
+<li class="fragment">use <code>show_query()</code> to display the underlying SQL query of <code>tos_device</code></li>
+<li class="fragment">use <code>collect()</code> to retrieve data from <code>tos_device</code></li>
+<li class="fragment">use <code>explain()</code> to display the underlying computation logic of <code>tos_device</code></li>
 </ul>
 </section>
 <section id="section-11" class="slide level2" data-background="dbi_section_data_visualization.png">
@@ -4613,8 +4647,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>Your Turn</h2>
 <hr>
 <ul>
-<li class="fragment">create bar plot of referrer column</li>
-<li class="fragment">create line chart of n_pages</li>
+<li class="fragment">create bar plot of <code>referrer</code> column from the <code>trade</code> table</li>
+<li class="fragment">create line chart of <code>n_visit</code> column from the <code>trade</code> table</li>
 </ul>
 </section>
 <section id="section-12" class="slide level2" data-background="dbi_section_data_modeling.png">
@@ -4678,8 +4712,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>Your Turn</h2>
 <hr>
 <ul>
-<li class="fragment">regress duration on n_pages</li>
-<li class="fragment">regress duration on referrer</li>
+<li class="fragment">regress <code>duration</code> on <code>n_pages</code></li>
+<li class="fragment">regress <code>duration</code> on <code>referrer</code></li>
+<li class="fragment">and finally regress <code>duration</code> on <code>n_pages</code>, <code>n_visit</code> and <code>referrer</code></li>
 </ul>
 </section>
 <section id="predict-inside-database" class="slide level2">
@@ -4753,6 +4788,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </section>
 <section id="summary-2" class="slide level2">
 <h2>Summary</h2>
+<hr>
 </section>
 <section id="section-13" class="slide level2" data-background="dbi_section_close_connection.png">
 <h2></h2>

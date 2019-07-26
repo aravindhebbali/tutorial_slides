@@ -164,8 +164,8 @@ result
 <hr>
 
 - list fields in the `trade` table
-- read all rows & columns from `trade` table
-- read first 30 rows from `trade` table
+- read all rows & columns from the `trade` table
+- read first 30 rows from the `trade` table
 
 ## {data-background="dbi_section_query_details.png"}
 
@@ -378,13 +378,12 @@ DBI::dbRemoveTable(con, "trial")
 
 <hr>
 
-- check if table `mytable` exists
-- create new table using the following data
+- check if `mytable` exists in the database
+- create new table `mytable` using the first 3 rows of `mtcars` data set
 - list all tables to check if the new table has been created
-- overwrite the table
-- append the below data
-- insert the following data
-- append the below table
+- overwrite `mytable` with the first 10 rows of `mtcars` data set
+- append the 20th row of `mtcars` data set to `mytable`
+- create a new table using the last 5 rows of `mtcars` and append it to `mytable`
 - remove `mytable`
 
 ## {data-background="dbi_section_data_types.png"}
@@ -437,10 +436,10 @@ knitr::include_graphics("dbi_knitr_sql_engine.png")
 
 <hr>
 
-- check the data type of 
-- generate the sql query for
-- use RStudio SQL script to run the following
-- create a html report for `trade` data
+- check the data type of `"NULL"`
+- use SQL script to select `duration`, `n_visit` from `trade` table
+where `device` has the value `tablet`
+- create a html report for the above sql query using the knitr SQL engine
 
 ## Summary
 
@@ -476,9 +475,12 @@ ecom2 %>%
 
 ```{r dbply7}
 tos_query <- 
-  ecom2 %>%
-  group_by(device) %>%
-  summarise(tos = mean(duration))
+  ecom2 %>% 
+  select(referrer, device, duration) %>% 
+  filter(device == "laptop") %>% 
+  group_by(referrer) %>% 
+  summarise(avg_tos = mean(duration)) %>% 
+  arrange(avg_tos)
 
 show_query(tos_query)
 ```
@@ -504,7 +506,9 @@ explain(tos_query)
 <hr>
 
 ```{r dbply_simulate}
-tos_query %>% 
+ecom2 %>% 
+  group_by(referrer) %>% 
+  summarise(avg_tos = mean(duration))  %>% 
   sql_render(simulate_mysql())
 ```
 
@@ -512,9 +516,12 @@ tos_query %>%
 
 <hr>
 
-- use dplyr to tabulate some column
-- use dplyr verbs to compute something
-- collect data
+- use `tbl()` to reference `trade` table as `trade2`
+- use dplyr verbs to compute average duration for `device` from the `trade` table
+- store the above query in a variable `tos_device` 
+- use `show_query()` to display the underlying SQL query of `tos_device`
+- use `collect()` to retrieve data from `tos_device`
+- use `explain()` to display the underlying computation logic of `tos_device`
 
 ## {data-background="dbi_section_data_visualization.png"}
 
@@ -550,8 +557,8 @@ ecom2 %>%
 
 <hr>
 
-- create bar plot of referrer column
-- create line chart of n_pages 
+- create bar plot of `referrer` column from the `trade` table
+- create line chart of `n_visit` column from the `trade` table
 
 ## {data-background="dbi_section_data_modeling.png"}
 
@@ -608,8 +615,9 @@ ecom2 %>%
 
 <hr>
 
-- regress duration on n_pages
-- regress duration on referrer
+- regress `duration` on `n_pages` 
+- regress `duration` on `referrer`
+- and finally regress `duration` on `n_pages`, `n_visit` and `referrer`
 
 ## Predict Inside Database
 
@@ -658,6 +666,8 @@ ecom2 %>%
 ```
 
 ## Summary
+
+<hr>
 
 ## {data-background="dbi_section_close_connection.png"}
 
