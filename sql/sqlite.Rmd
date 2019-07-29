@@ -671,17 +671,14 @@ DBI::dbDisconnect(con)
 
 ## {data-background="dbi_section_handling_credentials.png"}
 
-## .Renviron
+## Handling Credentials
 
 <hr>
 
-## Options
-
-<hr>
-
-## Config
-
-<hr>
+- .Renviron
+- options
+- [config](https://github.com/rstudio/config)
+- [keyring](https://github.com/r-lib/keyring)
 
 ## {data-background="dbi_section_summary.png"}
 

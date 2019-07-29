@@ -4169,17 +4169,17 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>View Data</h2>
 <hr>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1">DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;select * from trial&quot;</span>)</a></code></pre></div>
-<pre><code>##     x y
-## 1  71 k
-## 2  64 l
-## 3  45 m
-## 4  60 n
-## 5  13 o
-## 6  34 p
-## 7  54 q
-## 8  14 r
-## 9   6 s
-## 10 53 t</code></pre>
+<pre><code>##      x y
+## 1   20 k
+## 2   13 l
+## 3  100 m
+## 4   23 n
+## 5   60 o
+## 6   63 p
+## 7   10 q
+## 8   14 r
+## 9   41 s
+## 10  44 t</code></pre>
 </section>
 <section id="append-data" class="slide level2">
 <h2>Append Data</h2>
@@ -4196,27 +4196,27 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>View Data</h2>
 <hr>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1">DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;select * from trial&quot;</span>)</a></code></pre></div>
-<pre><code>##     x y
-## 1  71 k
-## 2  64 l
-## 3  45 m
-## 4  60 n
-## 5  13 o
-## 6  34 p
-## 7  54 q
-## 8  14 r
-## 9   6 s
-## 10 53 t
-## 11 31 e
-## 12 54 f
-## 13 21 g
-## 14 22 h
-## 15 52 i
-## 16 13 j
-## 17 98 k
-## 18 82 l
-## 19 34 m
-## 20 12 n</code></pre>
+<pre><code>##      x y
+## 1   20 k
+## 2   13 l
+## 3  100 m
+## 4   23 n
+## 5   60 o
+## 6   63 p
+## 7   10 q
+## 8   14 r
+## 9   41 s
+## 10  44 t
+## 11  36 e
+## 12  13 f
+## 13  26 g
+## 14  62 h
+## 15  84 i
+## 16  83 j
+## 17  60 k
+## 18  53 l
+## 19  51 m
+## 20  95 n</code></pre>
 </section>
 <section id="insert-rows" class="slide level2">
 <h2>Insert Rows</h2>
@@ -4230,30 +4230,30 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>View Data</h2>
 <hr>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1">DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;select * from trial&quot;</span>)</a></code></pre></div>
-<pre><code>##     x y
-## 1  71 k
-## 2  64 l
-## 3  45 m
-## 4  60 n
-## 5  13 o
-## 6  34 p
-## 7  54 q
-## 8  14 r
-## 9   6 s
-## 10 53 t
-## 11 31 e
-## 12 54 f
-## 13 21 g
-## 14 22 h
-## 15 52 i
-## 16 13 j
-## 17 98 k
-## 18 82 l
-## 19 34 m
-## 20 12 n
-## 21 32 c
-## 22 45 k
-## 23 61 h</code></pre>
+<pre><code>##      x y
+## 1   20 k
+## 2   13 l
+## 3  100 m
+## 4   23 n
+## 5   60 o
+## 6   63 p
+## 7   10 q
+## 8   14 r
+## 9   41 s
+## 10  44 t
+## 11  36 e
+## 12  13 f
+## 13  26 g
+## 14  62 h
+## 15  84 i
+## 16  83 j
+## 17  60 k
+## 18  53 l
+## 19  51 m
+## 20  95 n
+## 21  32 c
+## 22  45 k
+## 23  61 h</code></pre>
 </section>
 <section id="insert-rows-1" class="slide level2">
 <h2>Insert Rows</h2>
@@ -4271,33 +4271,33 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1">DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;select * from trial&quot;</span>)</a></code></pre></div>
 <pre><code>## Warning: Closing open result set, pending rows</code></pre>
-<pre><code>##     x y
-## 1  71 k
-## 2  64 l
-## 3  45 m
-## 4  60 n
-## 5  13 o
-## 6  34 p
-## 7  54 q
-## 8  14 r
-## 9   6 s
-## 10 53 t
-## 11 31 e
-## 12 54 f
-## 13 21 g
-## 14 22 h
-## 15 52 i
-## 16 13 j
-## 17 98 k
-## 18 82 l
-## 19 34 m
-## 20 12 n
-## 21 32 c
-## 22 45 k
-## 23 61 h
-## 24 25 m
-## 25 54 l
-## 26 16 y</code></pre>
+<pre><code>##      x y
+## 1   20 k
+## 2   13 l
+## 3  100 m
+## 4   23 n
+## 5   60 o
+## 6   63 p
+## 7   10 q
+## 8   14 r
+## 9   41 s
+## 10  44 t
+## 11  36 e
+## 12  13 f
+## 13  26 g
+## 14  62 h
+## 15  84 i
+## 16  83 j
+## 17  60 k
+## 18  53 l
+## 19  51 m
+## 20  95 n
+## 21  32 c
+## 22  45 k
+## 23  61 h
+## 24  25 m
+## 25  54 l
+## 26  16 y</code></pre>
 </section>
 <section id="append-table" class="slide level2">
 <h2>Append Table</h2>
@@ -4315,33 +4315,33 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>View Data</h2>
 <hr>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1">DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;select * from trial&quot;</span>)</a></code></pre></div>
-<pre><code>##     x y
-## 1  71 k
-## 2  64 l
-## 3  45 m
-## 4  60 n
-## 5  13 o
-## 6  34 p
-## 7  54 q
-## 8  14 r
-## 9   6 s
-## 10 53 t
-## 11 31 e
-## 12 54 f
-## 13 21 g
-## 14 22 h
-## 15 52 i
-## 16 13 j
-## 17 98 k
-## 18 82 l
-## 19 34 m
-## 20 12 n
-## 21 32 c
-## 22 45 k
-## 23 61 h
-## 24 25 m
-## 25 54 l
-## 26 16 y</code></pre>
+<pre><code>##      x y
+## 1   20 k
+## 2   13 l
+## 3  100 m
+## 4   23 n
+## 5   60 o
+## 6   63 p
+## 7   10 q
+## 8   14 r
+## 9   41 s
+## 10  44 t
+## 11  36 e
+## 12  13 f
+## 13  26 g
+## 14  62 h
+## 15  84 i
+## 16  83 j
+## 17  60 k
+## 18  53 l
+## 19  51 m
+## 20  95 n
+## 21  32 c
+## 22  45 k
+## 23  61 h
+## 24  25 m
+## 25  54 l
+## 26  16 y</code></pre>
 </section>
 <section id="remove-table" class="slide level2">
 <h2>Remove Table</h2>
@@ -4578,7 +4578,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 59   58     ResultRow 19  2   0          00      NA
 ## 60   59    SorterNext  6 55   0          00      NA
 ## 61   60          Halt  0  0   0          00      NA
-## 62   61   Transaction  0  0 204        0 01      NA
+## 62   61   Transaction  0  0 216        0 01      NA
 ## 63   62       String8  0 12   0   laptop 00      NA
 ## 64   63          Goto  0  1   0          00      NA</code></pre>
 </section>
@@ -4792,17 +4792,15 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="section-15" class="slide level2" data-background="dbi_section_handling_credentials.png">
 <h2></h2>
 </section>
-<section id="renviron" class="slide level2">
-<h2>.Renviron</h2>
+<section id="handling-credentials" class="slide level2">
+<h2>Handling Credentials</h2>
 <hr>
-</section>
-<section id="options" class="slide level2">
-<h2>Options</h2>
-<hr>
-</section>
-<section id="config" class="slide level2">
-<h2>Config</h2>
-<hr>
+<ul>
+<li class="fragment">.Renviron</li>
+<li class="fragment">options</li>
+<li class="fragment"><a href="https://github.com/rstudio/config">config</a></li>
+<li class="fragment"><a href="https://github.com/r-lib/keyring">keyring</a></li>
+</ul>
 </section>
 <section id="section-16" class="slide level2" data-background="dbi_section_summary.png">
 <h2></h2>
