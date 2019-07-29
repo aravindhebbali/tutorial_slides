@@ -2,7 +2,7 @@
 output: _output.yaml
 ---
 
-## {data-background="database.png"}
+## {data-background="dbi_cover_image.png"}
 
 ## Connect With Us
 
