@@ -370,6 +370,14 @@ DBI::dbGetQuery(con, "select * from trial")
 DBI::dbRemoveTable(con, "trial")
 ```
 
+## Generate SQL Query
+
+<hr>
+
+```{r lite31}
+DBI::sqlCreateTable(con, "new", c(x = "integer", y = "text"))
+```
+
 ## Your Turn
 
 <hr>
@@ -392,16 +400,6 @@ DBI::dbRemoveTable(con, "trial")
 DBI::dbDataType(RSQLite::SQLite(), "a")
 DBI::dbDataType(RSQLite::SQLite(), 1:5)
 DBI::dbDataType(RSQLite::SQLite(), 1.5)
-```
-
-## {data-background="dbi_section_generate_sql_query.png"}
-
-## Generate SQL Query
-
-<hr>
-
-```{r lite31}
-DBI::sqlCreateTable(con, "new", c(x = "integer", y = "text"))
 ```
 
 ## {data-background="dbi_section_sql_scripts.png"}
@@ -453,19 +451,6 @@ ecom2
 <hr>
 
 ```{r dbply4}
-ecom2 %>% 
-  select(referrer, device, duration) %>% 
-  filter(device == "laptop") %>% 
-  group_by(referrer) %>% 
-  summarise(avg_tos = mean(duration)) %>% 
-  arrange(avg_tos)
-```
-
-## Display Query
-
-<hr>
-
-```{r dbply7}
 tos_query <- 
   ecom2 %>% 
   select(referrer, device, duration) %>% 
@@ -474,7 +459,7 @@ tos_query <-
   summarise(avg_tos = mean(duration)) %>% 
   arrange(avg_tos)
 
-show_query(tos_query)
+tos_query
 ```
 
 ## Collect Data
@@ -484,6 +469,15 @@ show_query(tos_query)
 ```{r dbply9}
 collect(tos_query)
 ```
+
+## Display Query
+
+<hr>
+
+```{r dbply7}
+show_query(tos_query)
+```
+
 
 ## Explain 
 
@@ -578,7 +572,7 @@ ecom2 %>%
 ```{r modeldb2}
 ecom2 %>% 
   select(duration, n_visit, n_pages) %>%
-  modeldb::linear_regression_db(duration, sample_size = 1000)
+  modeldb::linear_regression_db(duration)
 ```
 
 ## Categorical Variables
@@ -620,14 +614,6 @@ model <- lm(duration ~ device + referrer + n_visit + n_pages, data = ecom2)
 model
 ```
 
-## SQL
-
-<hr>
-
-```{r tp2}
-tidypredict_sql(model, con)
-```
-
 ## Fit
 
 <hr>
@@ -646,15 +632,12 @@ ecom2 %>%
   select(duration, fit)
 ```
 
-## Fit
+## SQL
 
 <hr>
 
-```{r tp5}
-ecom2 %>% 
-  tidypredict_to_column(model) %>% 
-  select(duration, fit) %>% 
-  remote_query()
+```{r tp2}
+tidypredict_sql(model, con)
 ```
 
 ## {data-background="dbi_section_close_connection.png"}
