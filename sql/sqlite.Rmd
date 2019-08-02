@@ -26,7 +26,7 @@ output: _output.yaml
 - <a href="https://slides.rsquaredacademy.com/rfm/rfm.html" target="_blank">Slides</a>
 - <a href="https://blog.rsquaredacademy.com/customer-segmentation-using-rfm-analysis/" target="_blank">Blog Post</a>
 - <a href="https://github.com/rsquaredacademy-education/online-courses/tree/master/customer-segmentation-using-rfm-analysis/script" target="_blank">Code & Data</a>
-- <a href="https://rstudio.cloud/project/416146" target="_blank">RStudio Cloud</a>
+- <a href="https://rstudio.cloud/project/430439" target="_blank">RStudio Cloud</a>
 - <a href="https://rsquared-academy.thinkific.com/" target="_blank">Online Course</a>
 
 
@@ -345,21 +345,21 @@ DBI::dbSendStatement(con,
 DBI::dbGetQuery(con, "select * from trial")
 ```
 
-## Append Table
+## Generate SQL Query
 
 <hr>
 
-```{r lite32}
-trial_new <- data.frame(x = 30, y = 'k')
-DBI::sqlAppendTable(con, "trial", trial_new)
+```{r lite31a}
+DBI::sqlCreateTable(con, "new", c(x = "integer", y = "text"))
 ```
 
-## View Data
+## Generate SQL Query
 
 <hr>
 
-```{r lite32a}
-DBI::dbGetQuery(con, "select * from trial")
+```{r lite31b}
+trial_new <- data.frame(x = 30, y = 'k')
+DBI::sqlAppendTable(con, "trial", trial_new)
 ```
 
 ## Remove Table
@@ -368,14 +368,6 @@ DBI::dbGetQuery(con, "select * from trial")
 
 ```{r lite28}
 DBI::dbRemoveTable(con, "trial")
-```
-
-## Generate SQL Query
-
-<hr>
-
-```{r lite31}
-DBI::sqlCreateTable(con, "new", c(x = "integer", y = "text"))
 ```
 
 ## Your Turn
@@ -467,7 +459,38 @@ tos_query
 <hr>
 
 ```{r dbply9}
-collect(tos_query)
+result <- 
+  ecom2 %>%
+  select(referrer, device) 
+
+result
+```
+
+## Collect Data
+
+<hr>
+
+```{r dbply9a}
+nrow(result)
+```
+
+## Collect Data
+
+<hr>
+
+```{r dbply9b}
+result %>% 
+  collect()
+```
+
+## Collect Data
+
+<hr>
+
+```{r dbply9c}
+result %>% 
+  collect() %>% 
+  nrow()
 ```
 
 ## Display Query
@@ -478,16 +501,7 @@ collect(tos_query)
 show_query(tos_query)
 ```
 
-
-## Explain 
-
-<hr>
-
-```{r dbply_explain}
-explain(tos_query)
-```
-
-## Simulate
+## SQL Generation
 
 <hr>
 
@@ -680,7 +694,6 @@ DBI::dbDisconnect(con)
 
 <hr>
 
-- [Big Data with R](https://rstudio.github.io/bigdataclass/index.html)
 - [Databases Using R](https://db.rstudio.com/)
 - [DBI](http://r-dbi.github.io/DBI/)
 - [dbplyr](https://dbplyr.tidyverse.org/index.html)

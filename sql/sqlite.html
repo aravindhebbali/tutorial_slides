@@ -1851,7 +1851,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <li class="fragment"><a href="https://slides.rsquaredacademy.com/rfm/rfm.html" target="_blank">Slides</a></li>
 <li class="fragment"><a href="https://blog.rsquaredacademy.com/customer-segmentation-using-rfm-analysis/" target="_blank">Blog Post</a></li>
 <li class="fragment"><a href="https://github.com/rsquaredacademy-education/online-courses/tree/master/customer-segmentation-using-rfm-analysis/script" target="_blank">Code &amp; Data</a></li>
-<li class="fragment"><a href="https://rstudio.cloud/project/416146" target="_blank">RStudio Cloud</a></li>
+<li class="fragment"><a href="https://rstudio.cloud/project/430439" target="_blank">RStudio Cloud</a></li>
 <li class="fragment"><a href="https://rsquared-academy.thinkific.com/" target="_blank">Online Course</a></li>
 </ul>
 </section>
@@ -4169,17 +4169,17 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>View Data</h2>
 <hr>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1">DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;select * from trial&quot;</span>)</a></code></pre></div>
-<pre><code>##     x y
-## 1  82 k
-## 2  76 l
-## 3  98 m
-## 4  31 n
-## 5  92 o
-## 6   5 p
-## 7  61 q
-## 8  70 r
-## 9  85 s
-## 10  6 t</code></pre>
+<pre><code>##      x y
+## 1   32 k
+## 2   93 l
+## 3   86 m
+## 4   19 n
+## 5   75 o
+## 6   94 p
+## 7   28 q
+## 8   66 r
+## 9   80 s
+## 10 100 t</code></pre>
 </section>
 <section id="append-data" class="slide level2">
 <h2>Append Data</h2>
@@ -4196,27 +4196,27 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>View Data</h2>
 <hr>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1">DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;select * from trial&quot;</span>)</a></code></pre></div>
-<pre><code>##     x y
-## 1  82 k
-## 2  76 l
-## 3  98 m
-## 4  31 n
-## 5  92 o
-## 6   5 p
-## 7  61 q
-## 8  70 r
-## 9  85 s
-## 10  6 t
-## 11 41 e
-## 12  4 f
-## 13 53 g
-## 14 23 h
-## 15 48 i
-## 16 30 j
-## 17 71 k
-## 18 74 l
-## 19 27 m
-## 20 51 n</code></pre>
+<pre><code>##      x y
+## 1   32 k
+## 2   93 l
+## 3   86 m
+## 4   19 n
+## 5   75 o
+## 6   94 p
+## 7   28 q
+## 8   66 r
+## 9   80 s
+## 10 100 t
+## 11  42 e
+## 12  43 f
+## 13  11 g
+## 14  77 h
+## 15  61 i
+## 16  84 j
+## 17   6 k
+## 18  45 l
+## 19  80 m
+## 20  49 n</code></pre>
 </section>
 <section id="insert-rows" class="slide level2">
 <h2>Insert Rows</h2>
@@ -4230,30 +4230,30 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>View Data</h2>
 <hr>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1">DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;select * from trial&quot;</span>)</a></code></pre></div>
-<pre><code>##     x y
-## 1  82 k
-## 2  76 l
-## 3  98 m
-## 4  31 n
-## 5  92 o
-## 6   5 p
-## 7  61 q
-## 8  70 r
-## 9  85 s
-## 10  6 t
-## 11 41 e
-## 12  4 f
-## 13 53 g
-## 14 23 h
-## 15 48 i
-## 16 30 j
-## 17 71 k
-## 18 74 l
-## 19 27 m
-## 20 51 n
-## 21 32 c
-## 22 45 k
-## 23 61 h</code></pre>
+<pre><code>##      x y
+## 1   32 k
+## 2   93 l
+## 3   86 m
+## 4   19 n
+## 5   75 o
+## 6   94 p
+## 7   28 q
+## 8   66 r
+## 9   80 s
+## 10 100 t
+## 11  42 e
+## 12  43 f
+## 13  11 g
+## 14  77 h
+## 15  61 i
+## 16  84 j
+## 17   6 k
+## 18  45 l
+## 19  80 m
+## 20  49 n
+## 21  32 c
+## 22  45 k
+## 23  61 h</code></pre>
 </section>
 <section id="insert-rows-1" class="slide level2">
 <h2>Insert Rows</h2>
@@ -4271,39 +4271,50 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <hr>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1">DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;select * from trial&quot;</span>)</a></code></pre></div>
 <pre><code>## Warning: Closing open result set, pending rows</code></pre>
-<pre><code>##     x y
-## 1  82 k
-## 2  76 l
-## 3  98 m
-## 4  31 n
-## 5  92 o
-## 6   5 p
-## 7  61 q
-## 8  70 r
-## 9  85 s
-## 10  6 t
-## 11 41 e
-## 12  4 f
-## 13 53 g
-## 14 23 h
-## 15 48 i
-## 16 30 j
-## 17 71 k
-## 18 74 l
-## 19 27 m
-## 20 51 n
-## 21 32 c
-## 22 45 k
-## 23 61 h
-## 24 25 m
-## 25 54 l
-## 26 16 y</code></pre>
+<pre><code>##      x y
+## 1   32 k
+## 2   93 l
+## 3   86 m
+## 4   19 n
+## 5   75 o
+## 6   94 p
+## 7   28 q
+## 8   66 r
+## 9   80 s
+## 10 100 t
+## 11  42 e
+## 12  43 f
+## 13  11 g
+## 14  77 h
+## 15  61 i
+## 16  84 j
+## 17   6 k
+## 18  45 l
+## 19  80 m
+## 20  49 n
+## 21  32 c
+## 22  45 k
+## 23  61 h
+## 24  25 m
+## 25  54 l
+## 26  16 y</code></pre>
 </section>
-<section id="append-table" class="slide level2">
-<h2>Append Table</h2>
+<section id="generate-sql-query" class="slide level2">
+<h2>Generate SQL Query</h2>
 <hr>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1">trial_new &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="dv">30</span>, <span class="dt">y =</span> <span class="st">&#39;k&#39;</span>)</a>
-<a class="sourceLine" id="cb50-2" title="2">DBI<span class="op">::</span><span class="kw">sqlAppendTable</span>(con, <span class="st">&quot;trial&quot;</span>, trial_new)</a></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1">DBI<span class="op">::</span><span class="kw">sqlCreateTable</span>(con, <span class="st">&quot;new&quot;</span>, <span class="kw">c</span>(<span class="dt">x =</span> <span class="st">&quot;integer&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;text&quot;</span>))</a></code></pre></div>
+<pre><code>## Warning: Do not rely on the default value of the row.names argument for
+## sqlCreateTable(), it will change in the future.</code></pre>
+<pre><code>## &lt;SQL&gt; CREATE TABLE `new` (
+##   `x` integer,
+##   `y` text
+## )</code></pre>
+</section>
+<section id="generate-sql-query-1" class="slide level2">
+<h2>Generate SQL Query</h2>
+<hr>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1">trial_new &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="dv">30</span>, <span class="dt">y =</span> <span class="st">&#39;k&#39;</span>)</a>
+<a class="sourceLine" id="cb53-2" title="2">DBI<span class="op">::</span><span class="kw">sqlAppendTable</span>(con, <span class="st">&quot;trial&quot;</span>, trial_new)</a></code></pre></div>
 <pre><code>## Warning: Do not rely on the default value of the row.names argument for
 ## sqlAppendTable(), it will change in the future.</code></pre>
 <pre><code>## &lt;SQL&gt; INSERT INTO `trial`
@@ -4311,53 +4322,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## VALUES
 ##   (30, &#39;k&#39;)</code></pre>
 </section>
-<section id="view-data-4" class="slide level2">
-<h2>View Data</h2>
-<hr>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1">DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(con, <span class="st">&quot;select * from trial&quot;</span>)</a></code></pre></div>
-<pre><code>##     x y
-## 1  82 k
-## 2  76 l
-## 3  98 m
-## 4  31 n
-## 5  92 o
-## 6   5 p
-## 7  61 q
-## 8  70 r
-## 9  85 s
-## 10  6 t
-## 11 41 e
-## 12  4 f
-## 13 53 g
-## 14 23 h
-## 15 48 i
-## 16 30 j
-## 17 71 k
-## 18 74 l
-## 19 27 m
-## 20 51 n
-## 21 32 c
-## 22 45 k
-## 23 61 h
-## 24 25 m
-## 25 54 l
-## 26 16 y</code></pre>
-</section>
 <section id="remove-table" class="slide level2">
 <h2>Remove Table</h2>
 <hr>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1">DBI<span class="op">::</span><span class="kw">dbRemoveTable</span>(con, <span class="st">&quot;trial&quot;</span>)</a></code></pre></div>
-</section>
-<section id="generate-sql-query" class="slide level2">
-<h2>Generate SQL Query</h2>
-<hr>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1">DBI<span class="op">::</span><span class="kw">sqlCreateTable</span>(con, <span class="st">&quot;new&quot;</span>, <span class="kw">c</span>(<span class="dt">x =</span> <span class="st">&quot;integer&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;text&quot;</span>))</a></code></pre></div>
-<pre><code>## Warning: Do not rely on the default value of the row.names argument for
-## sqlCreateTable(), it will change in the future.</code></pre>
-<pre><code>## &lt;SQL&gt; CREATE TABLE `new` (
-##   `x` integer,
-##   `y` text
-## )</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1">DBI<span class="op">::</span><span class="kw">dbRemoveTable</span>(con, <span class="st">&quot;trial&quot;</span>)</a></code></pre></div>
 </section>
 <section id="your-turn-1" class="slide level2">
 <h2>Your Turn</h2>
@@ -4378,11 +4346,11 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="data-type" class="slide level2">
 <h2>Data Type</h2>
 <hr>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1">DBI<span class="op">::</span><span class="kw">dbDataType</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="st">&quot;a&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1">DBI<span class="op">::</span><span class="kw">dbDataType</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="st">&quot;a&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;TEXT&quot;</code></pre>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1">DBI<span class="op">::</span><span class="kw">dbDataType</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1">DBI<span class="op">::</span><span class="kw">dbDataType</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;INTEGER&quot;</code></pre>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" title="1">DBI<span class="op">::</span><span class="kw">dbDataType</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="fl">1.5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1">DBI<span class="op">::</span><span class="kw">dbDataType</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="fl">1.5</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;REAL&quot;</code></pre>
 </section>
 <section id="section-7" class="slide level2" data-background="dbi_section_sql_scripts.png">
@@ -4417,8 +4385,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="reference-data" class="slide level2">
 <h2>Reference Data</h2>
 <hr>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1">ecom2 &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&quot;ecom&quot;</span>)</a>
-<a class="sourceLine" id="cb65-2" title="2">ecom2</a></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" title="1">ecom2 &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&quot;ecom&quot;</span>)</a>
+<a class="sourceLine" id="cb63-2" title="2">ecom2</a></code></pre></div>
 <pre><code>## # Source:   table&lt;ecom&gt; [?? x 11]
 ## # Database: sqlite 3.22.0 [J:\R\courses\tutorial_slides\sql\mydatabase.db]
 ##       id referrer device bouncers n_visit n_pages duration country purchase
@@ -4439,15 +4407,15 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="query-data-1" class="slide level2">
 <h2>Query Data</h2>
 <hr>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1">tos_query &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb67-2" title="2"><span class="st">  </span>ecom2 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb67-3" title="3"><span class="st">  </span><span class="kw">select</span>(referrer, device, duration) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb67-4" title="4"><span class="st">  </span><span class="kw">filter</span>(device <span class="op">==</span><span class="st"> &quot;laptop&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb67-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(referrer) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb67-6" title="6"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">avg_tos =</span> <span class="kw">mean</span>(duration)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb67-7" title="7"><span class="st">  </span><span class="kw">arrange</span>(avg_tos)</a>
-<a class="sourceLine" id="cb67-8" title="8"></a>
-<a class="sourceLine" id="cb67-9" title="9">tos_query</a></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1">tos_query &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb65-2" title="2"><span class="st">  </span>ecom2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb65-3" title="3"><span class="st">  </span><span class="kw">select</span>(referrer, device, duration) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb65-4" title="4"><span class="st">  </span><span class="kw">filter</span>(device <span class="op">==</span><span class="st"> &quot;laptop&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb65-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(referrer) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb65-6" title="6"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">avg_tos =</span> <span class="kw">mean</span>(duration)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb65-7" title="7"><span class="st">  </span><span class="kw">arrange</span>(avg_tos)</a>
+<a class="sourceLine" id="cb65-8" title="8"></a>
+<a class="sourceLine" id="cb65-9" title="9">tos_query</a></code></pre></div>
 <pre><code>## Warning: Missing values are always removed in SQL.
 ## Use `AVG(x, na.rm = TRUE)` to silence this warning</code></pre>
 <pre><code>## # Source:     lazy query [?? x 2]
@@ -4465,22 +4433,65 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="collect-data" class="slide level2">
 <h2>Collect Data</h2>
 <hr>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1"><span class="kw">collect</span>(tos_query)</a></code></pre></div>
-<pre><code>## Warning: Missing values are always removed in SQL.
-## Use `AVG(x, na.rm = TRUE)` to silence this warning</code></pre>
-<pre><code>## # A tibble: 5 x 2
-##   referrer avg_tos
-##   &lt;chr&gt;      &lt;dbl&gt;
-## 1 direct      326.
-## 2 yahoo       331.
-## 3 social      362.
-## 4 bing        434.
-## 5 google      439.</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1">result &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb68-2" title="2"><span class="st">  </span>ecom2 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb68-3" title="3"><span class="st">  </span><span class="kw">select</span>(referrer, device) </a>
+<a class="sourceLine" id="cb68-4" title="4"></a>
+<a class="sourceLine" id="cb68-5" title="5">result</a></code></pre></div>
+<pre><code>## # Source:   lazy query [?? x 2]
+## # Database: sqlite 3.22.0 [J:\R\courses\tutorial_slides\sql\mydatabase.db]
+##    referrer device
+##    &lt;chr&gt;    &lt;chr&gt; 
+##  1 google   laptop
+##  2 yahoo    tablet
+##  3 direct   laptop
+##  4 bing     tablet
+##  5 yahoo    mobile
+##  6 yahoo    laptop
+##  7 yahoo    mobile
+##  8 direct   mobile
+##  9 bing     mobile
+## 10 google   mobile
+## # ... with more rows</code></pre>
+</section>
+<section id="collect-data-1" class="slide level2">
+<h2>Collect Data</h2>
+<hr>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1"><span class="kw">nrow</span>(result)</a></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+</section>
+<section id="collect-data-2" class="slide level2">
+<h2>Collect Data</h2>
+<hr>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1">result <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb72-2" title="2"><span class="st">  </span><span class="kw">collect</span>()</a></code></pre></div>
+<pre><code>## # A tibble: 1,000 x 2
+##    referrer device
+##    &lt;chr&gt;    &lt;chr&gt; 
+##  1 google   laptop
+##  2 yahoo    tablet
+##  3 direct   laptop
+##  4 bing     tablet
+##  5 yahoo    mobile
+##  6 yahoo    laptop
+##  7 yahoo    mobile
+##  8 direct   mobile
+##  9 bing     mobile
+## 10 google   mobile
+## # ... with 990 more rows</code></pre>
+</section>
+<section id="collect-data-3" class="slide level2">
+<h2>Collect Data</h2>
+<hr>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1">result <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb74-2" title="2"><span class="st">  </span><span class="kw">collect</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb74-3" title="3"><span class="st">  </span><span class="kw">nrow</span>()</a></code></pre></div>
+<pre><code>## [1] 1000</code></pre>
 </section>
 <section id="display-query" class="slide level2">
 <h2>Display Query</h2>
 <hr>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" title="1"><span class="kw">show_query</span>(tos_query)</a></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" title="1"><span class="kw">show_query</span>(tos_query)</a></code></pre></div>
 <pre><code>## Warning: Missing values are always removed in SQL.
 ## Use `AVG(x, na.rm = TRUE)` to silence this warning</code></pre>
 <pre><code>## &lt;SQL&gt;
@@ -4491,96 +4502,13 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## GROUP BY `referrer`
 ## ORDER BY `avg_tos`</code></pre>
 </section>
-<section id="explain" class="slide level2">
-<h2>Explain</h2>
+<section id="sql-generation" class="slide level2">
+<h2>SQL Generation</h2>
 <hr>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" title="1"><span class="kw">explain</span>(tos_query)</a></code></pre></div>
-<pre><code>## Warning: Missing values are always removed in SQL.
-## Use `AVG(x, na.rm = TRUE)` to silence this warning</code></pre>
-<pre><code>## &lt;SQL&gt;
-## SELECT `referrer`, AVG(`duration`) AS `avg_tos`
-## FROM (SELECT `referrer`, `device`, `duration`
-## FROM `ecom`)
-## WHERE (`device` = &#39;laptop&#39;)
-## GROUP BY `referrer`
-## ORDER BY `avg_tos`</code></pre>
-<pre><code>## </code></pre>
-<pre><code>## Warning: Missing values are always removed in SQL.
-## Use `AVG(x, na.rm = TRUE)` to silence this warning</code></pre>
-<pre><code>## &lt;PLAN&gt;
-##    addr        opcode p1 p2  p3       p4 p5 comment
-## 1     0          Init  0 61   0          00      NA
-## 2     1 InitCoroutine  1 45   2          00      NA
-## 3     2    SorterOpen  4  2   0   k(1,B) 00      NA
-## 4     3       Integer  0  6   0          00      NA
-## 5     4       Integer  0  5   0          00      NA
-## 6     5          Null  0  9   9          00      NA
-## 7     6         Gosub  8 42   0          00      NA
-## 8     7      OpenRead  3  6   0        7 00      NA
-## 9     8        Rewind  3 17   0          00      NA
-## 10    9        Column  3  2  11          00      NA
-## 11   10            Ne 12 16  11 (BINARY) 52      NA
-## 12   11        Column  3  1  13          00      NA
-## 13   12        Column  3  6  14          00      NA
-## 14   13  RealAffinity 14  0   0          00      NA
-## 15   14    MakeRecord 13  2  11          00      NA
-## 16   15  SorterInsert  4 11   0          00      NA
-## 17   16          Next  3  9   0          01      NA
-## 18   17    OpenPseudo  5 11   2          00      NA
-## 19   18    SorterSort  4 44   0          00      NA
-## 20   19    SorterData  4 11   5          00      NA
-## 21   20        Column  5  0  10          00      NA
-## 22   21       Compare  9 10   1   k(1,B) 00      NA
-## 23   22          Jump 23 27  23          00      NA
-## 24   23          Move 10  9   1          00      NA
-## 25   24         Gosub  7 36   0          00      NA
-## 26   25         IfPos  6 44   0          00      NA
-## 27   26         Gosub  8 42   0          00      NA
-## 28   27        Column  5  1  15          00      NA
-## 29   28      AggStep0  0 15   3   avg(1) 01      NA
-## 30   29        Column  5  0   2          00      NA
-## 31   30       Integer  1  5   0          00      NA
-## 32   31    SorterNext  4 19   0          00      NA
-## 33   32         Gosub  7 36   0          00      NA
-## 34   33          Goto  0 44   0          00      NA
-## 35   34       Integer  1  6   0          00      NA
-## 36   35        Return  7  0   0          00      NA
-## 37   36         IfPos  5 38   0          00      NA
-## 38   37        Return  7  0   0          00      NA
-## 39   38      AggFinal  3  1   0   avg(1) 00      NA
-## 40   39          Copy  2 16   1          00      NA
-## 41   40         Yield  1  0   0          00      NA
-## 42   41        Return  7  0   0          00      NA
-## 43   42          Null  0  2   4          00      NA
-## 44   43        Return  8  0   0          00      NA
-## 45   44  EndCoroutine  1  0   0          00      NA
-## 46   45    SorterOpen  6  4   0   k(1,B) 00      NA
-## 47   46 InitCoroutine  1  0   2          00      NA
-## 48   47         Yield  1 53   0          00      NA
-## 49   48          Copy 16 19   0          00      NA
-## 50   49          Copy 17 18   0          00      NA
-## 51   50    MakeRecord 18  2  21          00      NA
-## 52   51  SorterInsert  6 21  18        2 00      NA
-## 53   52          Goto  0 47   0          00      NA
-## 54   53    OpenPseudo  7 22   4          00      NA
-## 55   54    SorterSort  6 60   0          00      NA
-## 56   55    SorterData  6 22   7          00      NA
-## 57   56        Column  7  1  19          00      NA
-## 58   57        Column  7  0  20          00      NA
-## 59   58     ResultRow 19  2   0          00      NA
-## 60   59    SorterNext  6 55   0          00      NA
-## 61   60          Halt  0  0   0          00      NA
-## 62   61   Transaction  0  0 228        0 01      NA
-## 63   62       String8  0 12   0   laptop 00      NA
-## 64   63          Goto  0  1   0          00      NA</code></pre>
-</section>
-<section id="simulate" class="slide level2">
-<h2>Simulate</h2>
-<hr>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1">ecom2 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb82-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(referrer) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb82-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">avg_tos =</span> <span class="kw">mean</span>(duration))  <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb82-4" title="4"><span class="st">  </span><span class="kw">sql_render</span>(<span class="kw">simulate_mysql</span>())</a></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" title="1">ecom2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb79-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(referrer) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb79-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">avg_tos =</span> <span class="kw">mean</span>(duration))  <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb79-4" title="4"><span class="st">  </span><span class="kw">sql_render</span>(<span class="kw">simulate_mysql</span>())</a></code></pre></div>
 <pre><code>## Warning: Missing values are always removed in SQL.
 ## Use `AVG(x, na.rm = TRUE)` to silence this warning</code></pre>
 <pre><code>## &lt;SQL&gt; SELECT `referrer`, AVG(`duration`) AS `avg_tos`
@@ -4616,15 +4544,15 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="bar-plot" class="slide level2">
 <h2>Bar Plot</h2>
 <hr>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" title="1">ecom2 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb85-2" title="2"><span class="st">  </span><span class="kw">dbplot_bar</span>(device) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Device&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Count&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Device Distribution&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1">ecom2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb82-2" title="2"><span class="st">  </span><span class="kw">dbplot_bar</span>(device) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Device&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Count&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Device Distribution&quot;</span>)</a></code></pre></div>
 <p><img src="data:image/png;base64,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engIrdvdA60volgPr4brHKBOengIrdvdA60volgPr4brHKBOengIrdvdA60volgPr4brHKBOengIrdvdA60volgPr4brHKBOengIrdvdA60volgPr4brHKBOengIrdvdA60volgPr4brHKBOengIrdvdA60volgPr4brHKBOengIrdvdA60volgPr4brHKBOengIrdvdA60volgPr4brHKBOengIrdvdA60volgPr4brHKBOengIrdvdA60volgPr4brHKBOengIrdvdA60volgPr4brHKBOengIrdvdA60volgPr4brHKBOengIrdvdA60volgPr4brHKBOengIrdvdA60volgPr4brHKBOengIrdvdA60volgPr4brHKBOengIrdvdA60volgPr4brHKBOengIrdvdA0aIxVdLB6iTHh5C66tmDxghFl8tHaBOengIra+aPWCEWHy1dIA66eEhtL5q9oARYvHV0gHqpIeH0Pqq2QNGiMVXSweokx4eQuurZg8YIRZfLR2gTnp4CK2vmj1ghFh8tXSAOunhIbS+avaAEWLx1dIB6qSHh9D6qtkDRojFV0sHqJMeHkLrq2YPGCEWXy0doE56eAitr5o9YIRYfLV0gDrp4SG0vmr2gBFi8dWyHwPUOtYeMEPOCLG02Q5QFWbIGSGWNtsBqsIMOSPE0mY7QFWYIWeEWNpsB6gKM+SMEEub7QBVYYacEWJpsx2gKsyQM0IsbbYDVIUZckaIpc12gKowQ84IsbTZDlAVZsgZIZY22wGqwgw5I8TSZjtAVZghZ4RY2mwHqAoz5IwQS5vtAFVhhpwRYmmzHaAqzJAzQixttgNUhRlyRoilzXaAqjBDzgixtNkOUBVmyBkhljbbAarCDDkjxNJmO0BVmCFnhFjabAeoCjPkjBBLm+0AVWGGnBFiabMdoCrMkDNCLG22A1SFGXJGiKXNdoCqMEPOCLG02Q5QFWbIGSGWNtsBqsIMOSPE0mY7QFWYIWeEWNpsB6gKM+SMEEub7QBVYYacEWJpsx2gKsyQM0IsbbYDVIUZckaIpc12gKowQ84IsbTZDlAVZsgZIZY22wGqwgw5I8TSZjtAVZghZ4RY2mwHqAoz5IwQS5vtAFVhhpwRYmmzHaAqzJAzQixttgNUhRlyRoilzXaAqjBDzgixtNkOUBVmyBkhljbbAarCDDkj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" width="576" style="display: block; margin: auto;" /></p>
 </section>
 <section id="line-chart" class="slide level2">
 <h2>Line Chart</h2>
 <hr>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1">ecom2 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb86-2" title="2"><span class="st">  </span><span class="kw">dbplot_line</span>(n_visit) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Visits&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Count&quot;</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" title="1">ecom2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb83-2" title="2"><span class="st">  </span><span class="kw">dbplot_line</span>(n_visit) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Visits&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Count&quot;</span>) </a></code></pre></div>
 <p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABIAAAAPACAMAAAB6ifKKAAABO1BMVEUAAAAAACsAAFUAKysAK1UAK4AAVaorAAArKwArKysrK1UrK4ArVVUrVYArVaorgIArgNQzMzNNTU1NTWtNTYhNa2tNa4hNa6ZNiMRVAABVKwBVKytVVStVVVVVVYBVgIBVgKpVgNRVqtRVqv9rTU1ra01ra4hriKZriMRrpuGAKwCAVSuAVVWAgFWAgKqAqqqAqtSA1P+ITU2Ia02Ia2uIpqaIpsSIxOGIxP+ma02miGumxOGm4f+qVQCqVSuqVVWqgCuqgFWqqoCqqqqqqtSq1NSq1P+q///EiE3EiGvExKbE4f/E///UgCvUgFXUqlXUqoDUqqrU1KrU1NTU1P/U///hpmvhxIjhxKbh4cTh///r6+v/qlX/xIj/1ID/1Kr/1NT/4ab/4cT/4eH//6r//8T//9T//+H///9cwA1QAAAACXBIWXMAAB2HAAAdhwGP5fFlAAAgAElEQVR4nO2de6Nkx1VfW2AsDITgK0eSHTsQPEG2cBKQSbCEzSMOMI6kmIA9dnQlmZlYM/f7f4LcfvfpPrtOPfauXXVq/f6Q5vatU6vq1K7Vp59380AIIU7ZeA+AEDJuEBAhxC0IiBDiFgRECHELAiKEuAUBEULcgoAIIW5BQIQQtyAgQohbEBAhxC0IiBDiFgRECHELAiKEuKWSgO6TktpeJz5QF6rLXAeaKhUcao+ABKoLdJxdOdBUqeBQewQkUF2g4+zKgaZKBYfaIyCB6gIdZ1cONFUqONQeAQlUF+g4u3KgqVLBofYISKC6QMfZlQNNlQoOtUdAAtUFOs6uHGiqVHCoPQISqC7QcXblQFOlgkPtEZBAdYGOsysHmioVHGqPgASqC3ScXTnQVKngUHsEJFBdoOPsyoGmSgWH2iMggeoCHWdXDjRVKjjUHgEJVBfoOLtyoKlSwaH2CEigukDH2ZUDTZUKDrVHQALVBTrOrhxoqlRwqD0CEqgu0HF25UBTpYJD7RGQQHWBjrMrB5oqFRxqj4AEqgt0nF050FSp4FB7BCRQXaDj7MqBpkoFh9ojIIHqAh1nVw40VSo41B4BCVQX6Di7cqCpUsGh9ghIoLpAx9mVA02VCg61R0AC1QU6zq4caKpUcKg9AhKoLtBxduVAU6WCQ+0RkEB1gY6zKweaKhUcao+ABKoLdJxdOdBUqeBQewQkUF2g4+zKgaZKBYfaIyCB6gIdZ1cONFUqONQeAQlUF+g4u3KgqVLBofYISKC6QMfZlQNNlQoOtUdAAtUFOs6uHGiqVHCoPQISqC7QcXblQFOlgkPtEZBAdYGOsysHmioVHGqPgASqC3ScXTnQVKngUHsEJFBdoOPsyoGmSgWH2iMggeoCHWdXDjRVKjjUHgEJVBfoOLtyoKlSwaH2CEigukDH2ZUDTZUKDrVHQALVBTrOrhxoqlRwqP3oAtpsNvNUS6iUgXalcNqtM9CydjFVBISAvATkYqCBlrWLqSIgBISAzKEISG6PgBAQAjKGIiC5PQKa3wldLJ8W1oGJgMypLlAElBgEhIDMoQhIbo+AEBACMoYiILn94AJ63AbzW6GL5dPCOjARkDnVBYqA0rLdBgjIgSldeRpnoGXtYqoICAG5zHWzeUBAxlQXKAJKCwK6R0DmUAQkt0dA809HdLF8Wtj6SARkT3WBIqC07HYBAqoeBGRPdYEioKTsNwECqh4EZE91gSKgpCCgHbY+EgHZU12gCCgpRwHd7oUulk8LWx/5KCCXb+QYaFm7mCoCuvzfhGoHlYOArDPQsnYxVQR0+b8J1Q4qZxgBPfoHAVlTXaAIKCknAd3shS6WTwtbnYiAKlBdoAgoKcc9gIDqBgFVoLpAEVBKTlsAAdUNAqpAdYEioJQgoD22OhEBVaC6QBFQSi4EdL0Zulg+LWx1IgKqQHWBIqCUnLcAAqqanYA8DDTQsnYxVQR0868j1QwaCAKyzkDL2sVUEdDNv45UM2ggowjo8WwjIHOqCxQBJeRiA9w8CdTF8mlhawMRUA2qCxQBJeRyAyCgikFANaguUASUEAR0wNYGIqAaVBdoFwJqJZvN/L+JcQ4nm3NOphn6Cmh6d9zF/YcWtjbwcAXkcAk00LJ2MVUENP9DJ8unha0NREA1qC5QBJQQBHTA1gYioBpUFygCis+0/K8eg3WxfFrY2kAEVIPqAkVA8bkqfwRUK9szjYDMqS5QBBQfBHTEVuYhoCpUFygCig8COmIr8xBQFaoLFAHF50ZAlz93sXxa2Mq8k4DqG2igZe1iqghI+rmL5dPCVuYhoCpUFygCis5N8SOgSkFAVaguUAQUHQR0wlbmIaAqVBcoAorOjIAubuli+bSwlXkIqArVBYqAonNb/AioSnanGQGZU12gCCg6COiErYtDQHWoLlAEFJ05AZ1v6mL5tLB1cQioDtUFioCiM1P8CKhGLgRU3UADLWsXUx1YQHOlj4BqBAHVobpAEVBsENAZWxeHgOpQXaAIKDbzAjrd2MXyaWHr4hBQHaoLFAHFZrb0EVCFIKA6VBcoAooNAjpjq9L25xgBmVNdoAgoNgjojK1KQ0CVqC5QBBSZ+co/PwnUxfJpYavSJgKqbaCBlrWLqSIg6eYulk8LW5WGgCpRXaAIKDII6AJblYaAKlFdoAgoMqKADrd3sXxa2Ko0BFSJ6gJFQJGRCh8BWQcBVaK6QBFQZBDQBbYqDQFVorpAEVBkENAFtioNAVWiukARUFzEuj8+CdTF8mlha8KO5xcBWVNdoAgoLnLdIyDbXAmosoEGWtYupoqApN90sXxa2JowBFSL6gJFQHFBQJfYmjAEVIvqAkVAcQkJaP8kqQF0MQjIOgMtaxdTRUDSr7pYPi1sTRgCqkV1gSKgqISqHgGZBgHVorpAEVBUwgLafWGWPnQ5CMg6Ay1rF1NFQNIvu1g+LWxF1umNng/Xt1TJQMvaxVQRkPTLLpZPC1uRhYCqUV2gCCgqCGiCrchCQNWoLlAEFJUFAW06WT4tbEUWAqpGdYEioKiEix4B2QUBVaO6QBFQTBZqHgHZBQFVo7pAEVBMENAUW5GFgKpRXaAIKCaLAtr0sXxa2IqsWwFVNdBAy9rFVBGQ9Psulk8LWw91/tJ/BGRNdYEioJggoCm2HgoB1aO6QBFQTBDQFFsPhYDqUV2gCCgiixW/2Wy6WD4tbD0UAqpHdYEioIgsVzwCMgoCqkd1gSKgiCCgK2w9FAKqR3WBIqCIxAio7h9rOAQBWaeLXalEdYEioIhEVDwCssmcgGqe7C52pRLVBYqAIoKArrDVSOfTioDMqS5QBLScmHpHQCZBQBWpLlAEtJw4AXkYCAFZp4tdqUR1gSKg5UTVOwKyCAKqSHWBIqDlIKBrbDUSAqpIdYEioOUgoGtsNRICqkh1gSKg5UQKyMFAgwqoooG62JVKVBcoAlpOVLk/ICCDIKCKVBcoAlpMXLUjIIsgoIpUFygCWky0gOobaO0CujilCMic6gJFQIuJFJDH09AIyDpd7EolqgsUAS0GAd1ga4EQUE2qCxQBLQYB3WBrgRBQTaoLFAEtJl5A1Q00qoDqGaiLXalEdYEioKVE1vqDx3sREZB1utiVSlQXKAJaCgK6xdYCIaCaVBcoAloKArrF1gIhoJpUFygCWkqKgGobaOUCujyfCMic6gJFQEuJF1D9SyAEZJ0udqUS1QWKgJaCgG6xlTgIqCrVBYqAlpIkoMoGQkDW6WJXKlFdoAhoIbGl/pDSWCvDCqjame5iVypRXaAIaCEIaAZbiYOAqlJdoAhoIQhoBluJg4CqUl2gCGghiQKqayAEZJ0udqUS1QWKgBaSJKDal0DrFtDkZCIgc6oLFAEtBAHNYOtgEFBdqgsUAYUTXegISD0IqC7VBYqAwkkWUFUDjSugWgbqYlcqUV2gCCicRAFVvgRCQNbpYlcqUV2gCCgcBDSHrYNBQHWpLlAEFE66gGoaCAFZp4tdqUR1gSKgcFIFVPcSCAFZp4tdqUR1gSKgcBDQHLYOBgHVpbpAEVAw8WWOgLQzPZMIyJzqAkVAweQIqKKBEJB1utiVSlQXKAIKJl1AVS+BBhZQpfPcxa5UorpAEVAwCGgWW4WCgCpTXaAIKBgENIutQkFAlakuUAQUTJaA6hkIAVmni12pRHWBIqBQEor8DEVAOkFAlakuUAQUCgKax1ahIKDKVBcoAgoFAc1ja0CuTiMCMqe6QBFQKJkCqmagkQVUx0Bd7EolqgsUAYWSJaCKl0AIyDpd7EolqgsUAYWCgOaxNSAIqDbVBYqAQskVULW/24mAjNPFrlSiukARUCApJX4JRUAKQUC1qS5QBBQIAhKwNSAIqDbVBYqAAkFAArYGBAHVprpAEVAg+QKq9Udj1iug61M4M9UaZ7mLXalEdYEioEByBVTvr1YhION0sSuVqC5QBBQIAhKwFRgIqDrVBYqA5CQVOALSDQKqTnWBIiA5JQKq9IWhCMg4XexKJaoLFAHJyRdQtW8sRkDG6WJXKlFdoAhIDgKSsBUYCKg61QWKgOQUCajOl0UgION0sSuVqC5QBCSnQEC1vq1maAHVOMld7EolqgsUAclBQBLWHnFz/hCQOdUFioDEpJU3AlINAqpPdYEiIDGFAqrySSUEZJwudqUS1QWKgMQUCajSRyURkHG62JVKVBcoAhKDgESsPQIB1ae6QBGQGAQkYu0RCKg+1QWKgMSUCqjGu1TGFlAFA3WxK5WoLlAEJCWxuG+gCKgkCKg+1QWKgKQgIBlrTrg9eQjInOoCRUBSygVU4RkKBGScLnalEtUFioCklAqoylOkCMg4XexKJaoLFAFJQUAy1pyAgByoLlAEJAUByVhzAgJyoLpAEZCQ1NqeE5D99kBAxuliVypRXaAISEi5gGpsj8EFZH+Ku9iVSlQXKAISgoACWHMCAnKgukARkBAEFMBaA2bOHAIyp7pAEZAQFQGZbw8EZDySLnalEtUFioCEKAiowvZAQMYj6WJXKlFdoAhICAIKYK0BCMiD6gJFQPNJrux5ARnvDwSEgPSoLlAENB8VAZnvj+EFZH+GbbsXoAhIbo+ABKpKL6lQBISA1KguUAQ0HwQUwloDEJAH1QWKgOajJSDb/bFSAc2dNQRkTnWB+gjoi/fePvzr1QdP7u7e+XDmhzUIyHp/ICAEpEd1gfoI6Ond20cT3W3ztY9ufvAVUHpdIyC9ICAXqgvUQ0Cvnt4dBfT07q0PH168f/fWJ9c/IKAYKAJCQGpUF6iDgH75/bujgJ4/2V3ufPHeGz+8+mE1AjLdIAjIXPGmvUtQBCS3LxbQs7u77/ziIKBnp/9/9+qHlQjIeH8gIASkR3WBOgjozb96+Ozgmqd3P9j9f/fz5AcEFAVFQAhIjeoC9XkS+uCYV+8fHm09f/LWJ5Mf9s2+ekgmpSAbrTcYqHU0UlJOGid45CCg5Y7YIMlBQCQuegL62keTH6bNba/qZpJxXS9BTR8irPMh2Owp4yGYOdUF2vRDMAS0BEVACEiN6gJFQHNRFZDhDkFACEiP6gJ1FVCzr4IpCsh0hyAg89cZLTsXoQhIbq8qoONbfg7vA/ru5EYEtAxFQAhIjeoC9RVQq++ERkBhrG33CAgBye1VBfTq/bs3Tx//mvzgKqCcmg4IyG6HICAEpEd1gfoK6OHF5QfgX7TyaXhVAVnuEASEgPSoLlBnAT28+OBROe98MvMDAoqArlFA8+cLAZlTXaA+AkqM7Zxug4AWsKa9IyAEFGiPgARqoDezLYKAxPZK6WJXKlFdoAhoJroCMtwhCEhsr5QudqUS1QWKgGaCgBawpr0jIAQUaD+AgLIqOiggqy2CgMT2SuliVypRXaAI6DbaArLbIghIbK+ULnalEtUFioBug4CWsKa9IyAEFGiPgASqdodR0BUKSDhZCMic6gJFQLcxEJDRHkFAgSNU0sWuVKK6QBHQbdQFZLZFEFDgCJV0sSuVqC5QBHSTvHpGQEpBQAgo1B4BCVT9LiOgCEg+QiVd7EolqgsUAd3EREA2ewQBBY5QSRe7UonqAkVANzEQkNUeQUCBI1TSxa5UorpAEdBNENAi1rJzBISAQu0RkEBd6NNkkyCgwBEq6WJXKlFdoAjoJhYCMtokKxSQdKJCU7X8xiWznkNQBCS3X72AMqsZAekEASGgYHsEJFBNel2CIqDQMQrpYlcqUV2gCOg6VgKy2CQIKHiMQrrYlUpUFygCuo6NgGw2CQIKHqOQLnalEtUFioCug4CWsYZ9IyAEFGyPgASqTbcLUAQUOkYhXexKJaoLFAFdJbeYlwVksEsQUPig8nSxK5WoLlAEdBUrAZlskvUJSDxLCMic6gJFQFdBQBFYu64R0D0CCrZHQAJ1uWP9XYKAFo4qThe7UonqAkVAVzETkMUuQUALRxWni12pRHWBIqCrIKAIrF3XCOgeAQXbIyCBatZzCIqAwkcVp4tdqUR1gSKgabJLOUZA6tsEAS0cVZwudqUS1QWKgKYxFJDBNkFAS4eVpotdqUR1gSKgaRBQDNasZ/kUISBzqgsUAU2DgGKwZj0joB0UAcntEZBAjelbe5sgoMXjCtPFrlSiukAR0DSWAtLfJgho8bjCdLErlaguUAQ0SX4hIyCNIKAdFAHJ7RGQQI3qXXmfIKDF4wrTxa5UorpAEdAktgJS3ycIaPnAsnSxK5WoLlAENAkCisKa9YyAdlAEJLdHQALVtnsBioAWDyxLF7tSieoCRUCTmAtId5+sTUCB04OAzKkuUAQ0ibGAtPcJAoo4sihd7EolqgsUAV2moIwRkEIQ0B6KgOT2CEigWgNmoQho+ciidLErlaguUAR0mQoCUt0oCCjm0JJ0sSuVqC5QBHQZcwEp7xMEFHNoSbrYlUpUFygCugwCisNadYyA9lAEJLdHQALVnDAHRUARh5aki12pRHWBIqCLlBRxtIA0N8rKBBQ6NwjInOoCRUAXqSAg3Y2CgKKOLUgXu1KJ6gJFQBdBQJFYo34R0AGKgOT2CEigRjMUdwoCijq2IF3sSiWqCxQBXaSGgFR3CgKKOzg/XexKJaoLFAFdBAFFYo36RUAHKAKS269YQEUljIDKg4AOUAQkt0dAAjWeordTEFDcwfnpYlcqUV2gCOicOgLS3CnrElDwxCAgc6oLFAGdg4BisTbdIqAjFAHJ7RGQQK2DuYIioLijs9PFrlSiukAR0DnVBKS2VRBQ7OG56WJXKlFdoAjonEoCUtwpCCj28Nx0sSuVqC5QBHRKWQEjoOIgoCMUAcntEZBATQFpbRUEFHt4brrYlUpUFygCOqWagPS2CgKKPTw3XexKJaoLFAGdgoCisSa9hs8KAjKnukAR0CkIKBpr0isCOkERkNweAQnUJJLSXkFA0cdnpotdqUR1gSKgYwrrNwmKgGZSKiATA3WxK5WoLlAEdAwCisea9IqATlAEJLdHQAK1IusMRUDRHeSli12pRHWBIqBj6gpIZ68goPgO8tLFrlSiukAR0DE1BaS1VxBQfAd56WJXKlFdoAjoGAQUjzXpFQGdoAhIbo+ABGoiTGWzrElAC2cEAZlTXaAI6JDS6k2EIqDrlAvIwkBd7EolqgsUAR2CgBKwFp0ioDPU53Jao5NkKAI6BAElYC06RUBnKAKS2yMggZqK0ygaBJTSRU562JUICAGlLx8CugoCOkNT31SGgBAQAioMAjpDkwWkUkwKfaRDEdA+xUuIgAqDgM7Q1M/1ICAElC4ghaJZkYCWTkfUVPUN1P6u3CAgBHSfsXwIaBIEdAFNE5DW5bRCH+lQBLQPAkrBGvSJgC6gCEhuj4AEajqxvGoQUFon6Wl+V272AtK4NyvvIgOKgPapLyCN3YKA0jpJT/O7cj9lBISA6iMRUGon6Wl+VyKgVQiofAERUFkQ0AU0nrpBQAhoT81glkMRUFIn6Wl9Vx5mrPKEYnEPOVAEtIuHgDSgqxHQ4rmIm6q6gVrflccJIyAE5AFFQIndpKbxXblBQAjoQHWBIqDEblLT+K48zRcBIaAMaPFLbwgosZvUNL4rLwTkUcHlQUC7ON1/IKBTENAlNJZ6oR0EhIDqYxFQajepaXtXXkwXASGg+lgElNpNatrelQgIAZ2oGccUP3BHQMn9JKbpXblBQAjoRM05CAEdg4AuodECuvx3/Q8TKQQB7YKA0rDqPS6fCAR0m8lkERACyuCWgRFQekdpaXlXbhDQSgTk91E+BLQPAppAc+aKgBBQehDQPghoAs0TUOnj+bLDM6EI6B4BJWPVe0RAE2jkWw42Vz8XUssOz4QioHtfARWhEVBGT0lpeFdezxQBIaD0IKBdENAEioDk9ghIoOYdhoB2QUATaAz15uK5+CXVoqNzoQhIqWYRUEEizgICusrtRBEQAkpO2d0WAsrpKiXt7koEhIAm1MzjENA9ArqGRlBn7rkQEAJKDwK6R0DX0CgBzdxU9ni+5OBsKAJyF1ABHQHldJWSZnfl3DwREAJKDwJSFZCygZrdlQgIAU2puQciIAR0DV2mzl44I6AuBaRTsQioIAhoCo0RUOyN8dSSg7OhCMhfQPn8lQgo5gwgoEkEARW9olFwbD4UAXkLqISPgPI6i0+ju1JQDQJCQOlBQAjoChohoJSbI6kFx+ZDERACSscq94eArqAISG6PgARq9pEFj9wRUGZv0WlzV0olU/amsvxDC6AISKleC5YPASGgKXRZQKm/iKHmH1oARUAIKB2r3B8CuoIiILk9AhKo+YfmXzgjoMzeotPkrpQLBgEhoIwgoAgmAjpFnmHRm8qyjywIAkJAGVjd7qKmj4DOCcwQASGg9CCgCCYCOiZ0mYOAehOQVrmWCShzEAgot7vYtLgrQxNEQAgoIwhomRkP1TRQi7sSASGgGWrJwQhomYmADgleL5e8qzX3wJIgIASUgdXtDgFdQxcElP/bIDX3wJIgoEYElDcKBJTdX2Qa3JUICAHNUYuORkCLTAS0z8KdFQJCQBkZWUBxc0dAhyzMruBt9ZnHFWV4AakVa6mAssaBgPI7jEt7u3Jpdgioq2wamUIr43CI/tTXfDI3S5Pra/KFg+UK6EwtO5wroCVmAlTxEqi5y4LFufV1BZQ6WgQkUssOR0BLTAS0S4SAct/TkXdYWRBQMwLKGQgCKugxKq0JKKJOEBACyggCWmAioG0iptaTgJLvd9cmIL1SRUC5QUA30IEE1MWrYKljTDkBaX0HqIXHDyugyIkjoG1irhgQEALKSNaTQAioqM8YrFZHSdCAgJaPzv5cT9ZRRdkgoHYqFQGFmQjoPnJiPQmojzcipo4x5Qyk9R2glnaAgMJMBBR7cYOAEFBGEFCYiYBi54WAEFBGch66I6CiPmOwWh0lQUsFlPeu1pyDirIZXkBNvVyCgIJMBBRtln4E1MmHUVPHmHIGtIKAMoOAbqGigOKOR0AIKCMZV84rEFDspBEQArpHQAFqeRcIKMRMgjbzCZs86Dw1+h4q84OFGccUZYOAEFBWEJBtRAHFdtCLgNIrGAGJ1PIuEFCIiYAQ0NoE1Nh3d6ZfOSOgwl6XsUr9pEFnqQnl0YWANgioMQGljwcBFfa6jFXqJw0qCCi6g04EdI+A0noOUhX6QEABJgJKEVDO2+rTDykKAkJAmUFAtpmda5JUEBACykjG98MpUNPTvoDUlrYlASX00IGANgioOQElD6h/AUXPGAGtTkA7KAJSCgLKCgKag85Q066Osz7ZnHxEURCQqn+0BJQ2JARU3O8SVqebROisgJK6QEAIKCcISGQioJQ0L6ANAkJAuUFAtpmZa+q1cQcC2kMRkFIQUFYQ0Bx0TkBpXeR8tULqAUVBQI0KKGlMCKi43yWsTjeJ0HIB5XywMPWAoiCgJgWUOCYEVN7xAlall1ToDTX9gqZxAW0QkK5/9ASUMqruBRQ/29EFlNpH8wI6QBGQUrSWDwEJTASUlIyvVkhFlAQBIaD8ICDb3Mw1532FTQtoYyqgl9/7Dz8//fD5N3/357OtENBskmoNASn0HMaq9JIKvRVQeieNC+gItRDQr7/+G/84/wMCWg4CmmcioLQgoH0+fx0BJSXlEggBKfQcxqr0kgq9omZ9vc+YAvr11zc3+S0egiUFAc0yU6E6y9uIgDI6Sf9ulwxIZjZ2V0Cf3gro26X+sRGQrn8QUFYQ0CxUQ0DpX62QA8nLeWjqAnr5N9/61jdff+33vnXMH/59sX+GE5DdrtSJx/NdAwso82+9jymgbTSedx5YQJaXBTpBQLa5EVBWL+MKaPIyPAJKTvw9HgJS6TuE1egkGaokoMRPNmdRcrIxFpB6UscY1axdAdl9QEopCMg207lmPgJL/2qFPEpGLgZmKKB/OeZnCCgxCGiGObCAMrsZWEC/+tOLV8HafB+Qsn+UBRQ5OASk03kAq9BHOnTdAtqYC2j6biAElBwEdMscVUDZj8CSv1wqE5Ocy2HZCOjjzeZLf/jjY/5nk29EbFxAcaNDQDqdB7AKfaRDpwLK7mdUAb18d/PlUueMLaDY0SEgnc4DWIU+0qEISEqUgH799df+HAEVZQwB2X7udh0Cyn8E1qqANhUE1MEbEVsXUNTwEJBS7zJWoY906ERA+f20KqBLqM1DMK6ASoOArpkIKDmJ3++bD0qKvYAePt78QesC0vaPvoBiBoiAlHqXsQp9pEOVBJR28IoE9HgJ9McIqCwI6IqZDtVYY28BlTwF1KaANhUegn3vm5vN+QPx5R8MSx1jRCMEVBAEZJuJgEo6alNAE6jNk9Cb5t+I2IGAIkaIgLS6F7HlXWRA9QSUcoZLSPFBQLs0L6CoESIgre5FbHkXGdATtewRWOIZLiLFZlNBQOpJHWNEox4EtDzEvgWU9gBhUAGV9dSigKbQQQWk7h+D5UNAEyYCyggCQkDZibgEQkBq/UvY8i4yoEdq6SOwpA5WJKB//ZfLtPh9QD0IKGKQCEgPIGCLe8iBngVU2lVrAro24qhPQiOgkiAg26xaQFdQBKQUEwEtjRIB6QEEbHEPOdADtfgR2KACevl/jl8F9J+/sXntv7b4fUBdCGh5lAhIDyBgi3vIgZ4EVNzVkAK6zOevl/9hVH0B6fvHSEAL40RAegABW9xDDlRTQNF91JjqzXDsXwXT+GBq6hgXm3QioMVxdi2gxC+LGE9ACo/AUs5BHQFdQ80FpHEJlDrGxSYIqCgIyDYnASn0NbyANL6dLHWMi036EVB4oAhIEzGLLe0gC7pWAd3Wc40rIASUHwR0Yg4nIJVHYAm9VBHQDdRaQC9/tOEhWH4WygcBaSJmsaUdZEEPAlLpbEABvfze8auAvvXN1zc8CV0SBHRkIqC8DCig6RsRG3wZ3sA/CCg5CEiEbqk6j8CaEtDMlMwF9Jt/VO6fsQUUGisC0kTMYks7yILuBaTTWfzf+dbhBTIzkjE/DatLqAsAACAASURBVN+RgMJj7VlAiYuAgHKDgBBQQYJ3YAhIlTGHLe0gC/qg9wgMASGgsiCgPTMLWrzSjgLS6q0ZAc051UxA//p3X9lsXvvKH5V/GRACCkARkCpkBlt4fB50rQKagRoJ6OPTs9Aaf6IwdYwLDSz8YykgebgISBcygy08Pg/6oPgILLqrNQlo65/f/L1vffO3dQyUOsaFBn0JKDRcBKQLmcEWHp8HfVCt0fEE9Pnrm9/6h92/fvXuRuHvxKeOcaFBdwISx4uAdCEz2MLj86CrFNBsHdsI6OLjFy/f3XwZAZUFAd2PJiDFR2ANCWgOavJRjHcvrnoa/DoOBFQYBGSbrYAUu4u02XoENPkGjga/jqM/AUkD7lhAqYuQOdXStV6DgCJPgvFU56sYAWnFcvkQ0GACUn0E1oyAZqE2D8E23z798GlzX8dh4h9jAQlDRkDamBts2eGZUOUSHU1AjT8J3Z+AxCEjIG3MDbbs8EyouoBi+luRgD5/ffOlv9/965+/0d7L8AioNAjINsqPwCLPgu1UhTkZvhFx85WvfEXprdCpYwz/vksBzY8ZAWljbrBlh+dFvUKbENA81OijGD99/fBJjNf+uNw/CEhr+ZSCgGyDgMTECujh5T998/EK6Pf+TOHryBCQ2gWsUhCQadQfgcX1uC4BqSZ1jMFf2/inj6fwlKJATV6F3KkWLrePgNSp7gLSehIBAYlUk15P0Xkbl1IQkGnWKSABaiGgfz18CdDnv6PzCAwB3Su9kV0pCMgyGwQkJ0JAv/rG8YWvj5Weg0ZA9whoJAHpL6u3gNTeSrssoO3rX4e3Hv5tk19I1q2AFL7MQCkIyDI2Alo+DV18mGhRQJ8+TvXwJsSHh5d//fjTt2/aIKCcIKA6oCts0dE52VgIKOY0rEJA2z8JdnnN8/gorPyzqAhoG42v9FYKAjLM44ARkJglAX189ZdQX77b2p9mNvJPH3/URCk9CahwwRGQDr2SgLa+mT7k+lTjbzOnjjH0WwRUnnJq+iqMIqCNlYAWT4OpgESoroAeH4Fdffb089cVHoOljjH0254FdDN0BGSBmmBLDs7JdrgWyzqMgK50c3sLAsoNAqqDmmBLDs4JAgoGAYlUm24vc3sJhIAsUBNsycEZ2axRQIp/12VBQC9v/grP9i/08ByQUhBQFdQEW3JwRnajtRHQ0nmwFJAMVX4V7EfXL3p9vGnrGxGt/IOAkoKAhJgJaPk8rEJA1y96NfcyfOcCuho9AjJhXWILjs3IZo0C0vzj4ksCun4j4o9aeyNi1wK6GT0CMmFdYguOzch+rKsTUABq8VGM3z9eA/3qT5v7StbeBTQdPgIyYV1iC47NCAJayKKA9l8H/aX/8uMf//jvvrH9Z/kzQAjonJUIKGMVhhDQxlRAC+dhJQJ6+N/Hr4PefSX0f1TwDwI6BQFVgV1gC45Nz2GoNsvqJaCg+Sy+kGz3wGuvn9//mYZ/ENApV4uJgGxgF9iCY9OzUgGFoAYCesw//4/vfesPf6xjH1UBmfmnVqUioBqwC2zBscnZIKClRApIOaljlH+3AgFdzgAB2cAusAXHJuc4UisBhU8EAkJAEUFANWhnbP6h6bEV0NJ5MJpq2HsISCsIKCEIaC6blQooCEVASqknoIspICAj2hmbf2hyTuNEQIH2CEigWnV8nRUIKGcVEJBC/2EXuEDHEpCdf2oK6DwJBGSFO2HzD03NxlpASxcjDkwEpJZ6lYqAKuBO2PxDU3MeJgIKtEdAAtWs5+ts7Ct1IQjIIggoIghIpJr1fBMEVIF3xOZTE1PhfsVBQItvPkJASkFA8UFAM6nwyHrhLTk2yPDvEZBWVvVs5UIQkEFqPLWHgBCQRhCQPe+IzaempcqLmwjIV0CG/lnVW2aXUkjNWob1C+gCuhoBLX8JEQJSypo+NLQUBKSfSgIKfTWPCXChAQLSCgKKDgKaSZ03uCMgBKQR2y+OWUxvAipY+JV9xA8BISCVICB74h5bQE1JpS85qCygiL+GiICUUltAu6kgIEPiHltATUk1AclnwkRASy2GEpClf1b091uWg4C0U+2LLhEQAlIJAjIn7rEF1IRMB7gWAS0/AkNAaqkuoO1kEJAhcY8toCZkrQJabIKAtFJbBf0KKG8ZVi2gen9tCQEhIJ3sahYBWSJ32AJqfK7GZyog8VQgIASUEgRkzrxfn4ACZ0IdGvEUEAJSCwKKDQK6zvVOXY2AltuMJCBT/3gIaIOAbJn31QR0BUVAcnsEJFAtO58NArJm3q9SQNKpQEAIKCmPpYSATJn3dZb1xgmmy1pNQDFPAfkL6MVf3N298d8/2f/w6oMnd3fvfIiA4oKAjJn3tQR0DV2JgCIaeQvoF3e7vPnR9ocv3tv98LWPEFBU+hRQ5jIgICvaiVoLNIH6Cuj5k7u3Pnx49ZO7t7bXQE+3P7x4f/8DAlrM9jFYfep9jwLKXvwKJ/j2oYqxgIRToQyNegTmLaCnB9k8vfvB1ka7a58v3nvjhxYCsvWPh4DuEZA1tY6AbqCm1GoCimnlK6BX72/F85jP7t5+eHi2/c/D9v/fRUBRibuT0Q8C0gwCSoi2gA4XO8+fPF4JPb20EQKKCQIyplZY1pl7EQQUaG8moKmNdvnqIWWUQzaV3jNQMz3OyWfM7Z6p6iOrA9xUwZQ/B/T24f8IKCd1Vlk3CGgaBwFVUUMdzRUe//zJ3Xc+2b4Kdve1jy4EdP1CfOpV2uzNa3wI9uDzGIyHYHqZex7P+N0VwrnQhUaecO/3AT3bvw/ov80/BNMUkPVW9RKQh4E8vhljvQKagSIgub2ugB5++f27uz/5UHgOCAEtQX0ugToUUPaFVxl1OSsVUOw9o7uA9tm98GX7KthqBeRgIASkltn1MxfQ7LlQFlBcu0YE9HT71p/j+39s3ge0UgG5vBKPgNQyOyzrT9ggoGMOrnn+ZPvoy/ad0AhIEVtwLAKaZKUCir4wdxbQZ3dv/OXDwy+f7Dz06v27N+0+C7ZeAdU3EALSyvzqrUFAkQ29H4L9ZP8q2F45Lyw/Db9WAXlcAiEgrQgq8NGeKiGyobeAHn7xn+7u/t1fHn548cGjf965vv5REZD5NnUUUHUDISCt+AhIeOBnDZiLu4CikjrGmRvXKyCHS6CCueZ/MU/pCc78HrRCajjS61G9Cyj+ThEBaQUBRQUBXUZ6R07/AoptiYC04img2gZCQErxE9Dcu480+49tiYC04ieg+pdACEgn0l2H/TftIiAEpAI9CKiygRCQTsRv5ulcQAkFOYqA7Leoo4CqXwIhIJ2sV0DRTRGQVhBQVBDQOfLXwyMguT0CEqjWgFnoUUB1DdSlgPLQtgKSoBUENPMtRJadS0FAWvEUUO1LIASkEkcBzbEVBRTfFgFpxVlAVQ2UP9f8ca5PQIG/0o6A5PYISKBaA2ahRyoCMmKbCkiEIiC5PQISqNaAWSgCMmavV0A3dC1o0uX4IAKqsD+9BVTTQAhIIYElqyCgmbOhJ6CExghIK74CqnsJhIAUEhgOAgq0R0AC1ZwwB70QUEUDISCFIKAdFAEpxVlAVS+B+hRQFtxsWUP3GHUEdM1XgqbdFSIgrSCgmCCgY0KDqSGg2wGoCSilNQLSir+A6hkoe64FY0RA1gNAQGYCqrE3vQVU8xIIARUneH/Rs4AS7wgRkFYaEFA1AyGg4gTH0reAkpojIK24C6jiJRACKk4LAroaAgJCQMnQqYBqGQgBlSa8VlUEdHM6EBACSoZOqAhIH28moCC0XwGl3gsiIK0goIggoENWLKC09ghIK00IqJKBEFBhFlaqloCmg0BAVgKqsi8bEFC1S6DcuZaMb2UCCkPrFBMCQkCl0GsB1TEQAirMagWUXIEISCstCKjWJRACKsvSNu1ZQIkHICCtIKDlIKB9lsZRTUCTcSAgBJQMvRFQFQMhoLI0IqB7BISACqEuU+1WQBkDsFjWxbuJbgWUfgc4goDa3pRl0FsBtSxbBBQ3io4FlHoEAtJKGwJq+2oPAcWNAgEF2iMggVoDcgNFQMYDMFjW5avUegK6HInGh+0Q0MycBhNQu+/6LhramgS0CK1VTOoCSj4EAWmlEQG1/LETBBQ5CAQUaI+ABGoNyA10TkD200VARWNAQBdQBKSUVgRUY7rdCijjfSoa1NQhVBTQxWCKoTn3fQMIqPF3B5dBEZDxENYtoHtlAaUfg4C00pCAzCeMgEpGgIAugoC00oyAKkwYAdmOAAEF2iMggVqFcg2dF5D1jBGQ7QhqCug8nFJoVt0hIK20IyD7GefNtWxYCMgkqgLKOAgBaQUBLQUB3UdeJiCgQPveBFTJP20JyHjO/QooeRD6AoqB9iigvKpDQFppSEDmc0ZAtvxOBZRzFALSSlsCsp00AsrHNyeg04AQEAJKhgpUBKQ1CHUBRUErFhMCQkAFUFFAprNGQLb4HgWUWXIISCtNCch41ggom75iAWUdhoC0goAWUjiklQgoDlpVQMcxISALAdXyT3MCspw3ArKl1xTQPQJCQPlQkYqAdIahuqyxdwsdCij3Hg8BaaU5ARlOHAHZsrsUUN5xCEgrjQnIdOIIyJZdWUCHUSEgBJQMRUDGw9Bc1uir0qoCutcQUPYFNwLSSnsCsps5ArJF9yigzAPXLqBq/mlOQJZTR0C2aAQUaI+ABGot0AQaFJDZ3BFQHrlVAe3HhYAQUDI0RG1LQKWjUduUaQNRFVA0tG4xlQso/84OAWkFAYWDgFYtoNwjEZBWWhSQ1eQRUBYXAd0GAWmlPQHZTR4B2XIRUKB9VwKq5582BWQ0fQRky60uoN3Q8qEFhYaAtNKggMymj4BysM0K6L5cQNmHIiCtIKBwEFACFAHJ7RGQQK1GuoQuCchm/l0LKG0kCCjmcAQkzGlwAVnNP2OuxSPpXEBJm7S+gLaDKxBQPhoBaaVRAZmcAARkDK1dTAgIAeVBl6gI6DYI6CYIyEZAFf2DgMIZXEBpl6J9CajoMhsBaaVVAVmcAgRkyvQQ0KZEQAVkBKSVNgVkcwoQkCmzvoDuERACyoJGCMjgHCCgZCQCmg8C0kqjAjI5B30LKO0tOdWJ950JqOwuDgFpBQHZjgIBWaZIQCXgVQuopn8aFpD+WUBAhsR7HwFtEBACSodGUBHQdaoLKHX29QV0j4AQUA40SkDqpwEBmfH20I4EVFheCEgrzQrI4DQgoDRe6gF9CaiIi4C00rKAtM8DArLCHaAeAtogIASUDI2iIqCrpHw3WE3YCepQTJkCKr13Q0BaQUC2Q+hXQOmHdCWgMuyaBVTVP20LSPlMJM9VYQC9Cihn6ggo0B4BCdSasBM0joqApqkooKyZ+wgoa40QkDwnBHSM9iUQAopH5RzkIaC8NSquLASklZYFpH0qEJAB6RLakYAKqQhIKwjIlt+pgLKOQkCB9ghIoNaEnaDRAlI9FwhIHzSBIiC5fTcCquuftgWkfDJ6F1DCeIqoudN2ElD6aMvv2BCQVloXkObZQECRmMzjXASUs0j1396FgERqVdoRGk1FQJepI6DsWSOgQHsEJFCr0o7QPgSkAe9PQPmz7kVACtfVCEgrzQtI8XQgoChI9pFeAkodscOFLQISqVVpR2g8FQFdpIaACibtI6AHBISAUqEpAtI7HwhIEzEDRUBy+14EVNk/zQtI84R0L6D4EeULKPfA+24EpHGfhoC0goBs0Z0JqGjKbgJKG7THsiIgkVoXd4AmCUjtjCAgtf7noT7FlDpqBBSaEwK6DgI6x1xAeYcdoQhIbo+ABGpd3AGaJiCtU5I4VxVuVwKq/D2lOkkVkEo9ISCttC8gvVOCgJR6l6CdCEgDulYB1fYPAjLmdiWgnIMuoW4CShk5AgrNCQHdRu0xWP8Cih5TDrX6R8R18pA2cp1qQkBa6UBAaicFAYX7zjhmCu1DQCpQBKQUBGSL7UdA9T+hqRMEhICSoR4qQEAqPYegfgKKHzwCCs4JAc0GAR1iKKDkI26hXgJKWCqlJxQRkFY6EZBO1XgwOxFQe2+6jKbepwlIB7pSAVX3TycC0rkEQkDF/YahCEhuj4AEam3gDupyB42AAv0mj2QO6iig2AkgoOCcEJAUBLRP5KhcnuX3E1D0BLTeU4aAtIKARGKTm9JEQE67UieJAlKCIiCldCMgjSdJqxN7EVDOSGagCEhuj4AEam3gDprzPjkFbBpwGAF57Uol6vY/kQ+t9D7Vs04B1fdPRwJSeKNcbeB9FwLS+7Cvn4AiJ+E2VQQkUqsT7zMrFQFtYyGgvJHMQBGQ3B4BCdTqxPtcAZV/Vqkubs9sXkCK3ziJgOT2CEigVife51YqAtomblzxVMWaa15Ail+uiYCU0pOAir+vpirtwGxeQNkjuYW6CihiIn4XewhIpFYn3mdXKgK6VxeQZsl5CihqIghoYU4IKJji7yyuCTsyWxdQ/khuoQhIbt+DgBz805WASncLAsrsLTKtC0jzT8whIKX0JaCyE4SA8jqLjbOAFufi+Hw7AhKp9ZEFlYqAlAVUMpJbqKeAIk4MAloYIwJaStkZ8nh7cNMCUi44BBRoj4AEan1kSaUioLiRRVG1661xASk+BYSA1IKABNAIAiocyQ3UWUAL8/F8x0EXAvLwT3cCKjlHCCi9o5T4CmhxPghoYYwIKCIISEtA+uXWtoA0H4EhILV0J6CCk4SAJv0Uj+QG2riANKEISCm9Cahk3yCg1G7SgoAC7RGQQHVglgko/ywhoMReEuMuoOCcENDSGBFQVKoIqOVvCYwZ27KANEZyDfUVUPjEqD4F1ImAiEU2NVavCiQzGmNreX7ZCU6qqRm3eQXkfP9RE1pEzb4n4woopYv0eFfwwhWQKrSLKyDbOemkRwHllhICOnWhM5JrqLuAAvNCQNpz0kmHAsrePggooYeMuFdwYF66TwEhILV0KaDMWkJA8R3kxL2CgwLShSIgpfQooNxLIAR06EBrJNdQ7wpGQAgoDloqoLxqWomAYgYXopq93cO9guXHWcqPwBCQWroUUOZ9OALaH643kiuoewUHBKQMRUBKQUCz/bt9eXBMygRk935X/wpGQAgoClosoKx6QkBxB+fGv4IREAKKghZTEdACVj5YcyRXUPcKls6M9lNACEgtvQoop6AQkOkFUAMVLInG/bvXEJBIdYGWUxFQGJt/aH4aqGAEhIBioAoCyigpBGT5AKyJCkZACCgGqkAdWEARwxOott/40kAFz09Q/SkgBKSWfgWUXlPDC8j4G6caqOB51fh//TUCEqkuUA2qoYAc/4BUVLIFpD6SKbSBCkZACCgCqiKg5KoaXUDWX7nZQgXPzVH/ERgCUku/Akq/Px9cQOZf+dtCBc8LSB+KgJTSs4BS62p0ARmMZAptoILnrnYQkMmcdNKxgJJ31NgCsv+bB01UMAJCQMtQBFSWxQHeUiv8zZUmKvh2ngZPASEgtXQtoMTCGltAFuO4grZQwXMCMoAiIKX0LKDUTTWygGr80bkmKhgBIaBlqJaA0korlqpZsc0IyGIY19AWKvj2ARcCspmTTroWUOK2GlhANS6AGqng66laPAWEgNTSuYCSamtcAVXxTyMVfCsgCygCUkrfAkq7BBpYQBaDuIU2UcEICAEtQvUElFJd6xHQ4hAjPiClnzYq+Oohl8kjMASkls4FlHTfPqqAKvmnlQq+FpAJFAEppXsBJdTXsAIyGcIMtI0KRkAIaAmqSEVAs9iEtmpppIIREAJagmoKKL7AIqmqJesvoGr+aaWCJ8/62DwFhIDU0r2AEi6BBhWQyQBmoY1U8FRANlAEpJQVCCi6xIYUUL0LoGYqGAEhoAWoKhUBzWBjG2qmlQpGQAhoAYqASrMwyLOAbPDz0EYq+OJ5H6OngBCQWtYgoNgaG1BANS+A2qngSwEZQRGQUlYgoOh7+fEEVNU/7VQwAkJAYaiygCKrbEAB2cAlaCsVjIAQUBiqTEVAN9iYRtpppoJP87Z6CggBqWUdAoorsziqbs16Cqiyf9qp4JN3zM4AAtLKKgQUeQk0nIBs0DK0mQpGQAgoCFUXUFShrUlAC8N8WGxhkHYq+DB1s0dgCEgt6xBQ3J39aAIyIsvQZir4JCAzKAJSyloEFFNqYwmo+gVQQxV8uPRBQJZz0slKBBR1dz+UgOr7p6UKRkAIKAQ1EFBErY0lICNuCNpOBe/Ojt1TQAhILWsRUMyGG0lADhdALVXwQUB2UASklPUIaLnaoqjKVeskIA//tFTBu4sfBGQ6J52sRkARl0AjCciIGkxLFYyAEFAAioDKExqoywVQUxX8eAYMnwJCQGpZkYAWy20YAW0261nWZersrTsBGUIRkFJWVKkI6PSrNS3rInX2VgSEgAJQGwEtFdwoAtogoO3jLwRkOyedrKlSEdDpF2ta1iXq/M2m/kFAallTpSb9udDcThLjIaD7dS3rEnX+ZgSEgGSoEVVBQNplW19AGwS0DQJCQDLUSkCRfyoiv4vkGK7q/FD3t65qWReo8zcjIAQkQ83enRfGxvTQvYD2WDNqIFRwoD0CEqguUK9PaJb2kJ7aAtogoCpQBKSULpYvPgjogDWjBkIFB9ojIIHqAnX5fMIIAtogoDpQBKSULpYvIWML6HTT2pY1RHWBIiCldLF8CQkJZAABnbBm1ECo4EB7BCRQXaCG1HEEdDvWDQKqBUVASuli+VJSJiD1N4/UFNDFz6tb1gDVBYqAlNLF8qUkoJDVC+gCa0eVQwUH2iMggeoCtaQOK6ANAqoHRUBK6WL5kiI7ZN0Cmvy0vmWVqS5QBKSULpYvLaMKaIK1o8qhggPtEZBAdYHaCkiSyKoFtEFANaEISCldLF9iRhTQ1cDXuKwS1QWKgJTSxfIlRrLI2gR0Odqrca9xWSWqCxQBKaWL5UtNtoD0v0OmkoCuB77KZRWoLlAEpJQuli81gkfWK6Cbca9yWQWqCxQBKaWL5UvOcAK6wRpSxVDBgfYISKC6QM0FNCuS1QrodtjrXNZ5qgsUASmli+VLz2ACusUaUsVQwYH2CEigukARkEoOw50Z9UqXdZbqAkVASuli+dIza5LVCWg/3rlBr3RZZ6kuUASklC6WLyMjCWgOa0mVQgUH2iMggeoCrSCgnMsCgz8lZS+gzIs9g1DBgfYISKC6QCtQRxFQ7gt+BqGCA+0RkEB1gdYQUMYzs10KaB5rSZVCBQfaIyCB6gKtQR1DQNlv+jYIFRxoj4AEqgu0ioDS353Xo4AErCVVChUcaI+ABKoLtAp1CAFJWEuqFCo40B4BCVQXaB0BJX9CszsByVgXKBUst0dAAtUFWoeKgCpDqWC5PQISqC7QSgJK/ZIcBFQGpYLl9ghIoLpAK1ETBWTgHwRkT3WBIiCldLF8uUn8omQEVAilguX2CEigukBrURFQVSgVLLdHQALVBYqAjLPuZZ1SXaAISCldLF920v5YFgIqhFLBcnsEJFBdoNWoCKgmlAqW2yMggeoCrSeglD+YjoAKoVSw3B4BCVQXaD0qAqoIpYLl9ghIoLpAKwroQioLVAv/ICB7qgsUASmli+UrCQKqB6WC5fYISKC6QGsK6KwVBGQMpYLl9ghIoLpAa1IRUDUoFSy3R0AC1QVaVUAnryAgYygVLLdHQALVBVqVioBqQalguT0CEqgu0LoCOooFARlDqWC5PQISqC7QulQEVAlKBcvtEZBAdYFWFtDBLGGqiX8QkD3VBYqAlNLF8pUGAdWBUsFyewQkUF2gCMg4QyzrgeoCRUBK6WL5SnNwCwIyhlLBcnsEJFBdoLWpCKgKlAqW2yMggeoCrS6gnVwQkDGUCpbbIyCB6gKtTkVANaBUsNweAQlUF2h9AW3tgoCMoVSw3B4BCVQXaH3qooBs/IOA7KkuUASklC6WTyFbvyAgYygVLLdHQALVBepARUD2UCpYbo+ABKoL1ENAGwRkDaWC5fYISKC6QD2oCMgcSgXL7RGQQHWBughog4CMoVSw3B4BCVQXqAsVAVlDqWC5PQISqC5QBGScgZa1i6kiIJHqAvURUFAxCKgcSgXL7RGQQHWB+uzKkGKM/IOA7KkuUASklC6WTykhySAgBSgVLLdHQALVBeq0KxGQLZQKltsjIIHqAvUSkGwZBKQApYLl9ghIoLpAvXYlAjKFUsFyewQkUF2gbgISNYOAFKBUsNweAQlUF6jbrkRAllAqWG6PgASqC9RPQJJnEJAClAqW2yMggeoC9duVgmes/IOA7KkuUASklC6WTwt7L5oGAWlAqWC5PQISqC5Qx12JgOygVLDcHgEJVBeop4BmVYOANKBUsNweAQlUF6jnrkRAZlAqWG6PgASqCxQBGWegZe1iquoCevEXd3d373y4/+HVB0/OPyCgCKirgOZcg4A0oFSw3F5XQM8fjfOYN364/eGL93Y/fO0jBBQLdd2VCMgKSgXL7VUF9Or9u7c+fHjx+N9PHn96evkDAoqB+groVjZm/kFA9lQXqK+Anj/ZXe588d72EmjyAwKKgvruSgRkBKWC5faqAvrs7u3t/x4vhH7w8PBs/8Pj/7+LgCKhzgK60Q0CUoFSwXJ7VQFNLnqebi10thICioA670oEZAOlguX2qgI6PQf09vbfh4dez58cnwT66iGFFGKVzXUB3NxAiGGKy+3VT3YvfH3nEwTUZRAQ8Uz5y/Df3wnozQ8nArp+Id72qk4nXVzAamFP/7p+yMVDMBUoFSy3VxXQ8yfbi5/Hy6BH98xcASGgJaj7rkRAFlAqWG6vKqCnhxe8nt69jYByoO678so4CEgFSgXL7TUFNHUOr4KlQ/135cQ4dv5pYar1oFSw3N5OQMf3//A+oHio/66cOAcB6UCpYLm9poAmD8F4J3QGtIFdiYD0oVSw3F5VQJ/dnZ+E3r4p6E0+C5YGbWBXIiB9KBUst1cV0OPDrX12F0Iv+DR8KrSBXXkp09sJQwAACelJREFUHQSkA6WC5fa6Anr4v9vvA/qTw1cAvfhg++VA19c/CEiGtrArEZA6lAqW2ysLKCq2c9JJF8unhZ38dGEdBKQDpYLl9ghIoLpAm9iVCEgbSgXL7RGQQHWBNrErT9ox9E8jU60EpYLl9ghIoLpA29iVCEgZSgXL7RGQQHWBtrErj+JBQEpQKlhuj4AEqgu0kV2JgHShVLDcHgEJVBdoI7vyYB4EpASlguX2CEigukBb2ZUISBVKBcvtEZBAdYG2siv36kFASlAqWG6PgASqC7SZXYmANKFUsNweAQlUF2gzu3LrHkv/NDTVClAqWG6PgASqC7SdXYmAFKFUsNweAQlUF2g7uxIBKUKpYLk9AhKoLtB2duWjfRCQFpQKltsjIIHqAm1oVyIgPSgVLLdHQALVBdrQrtxsEJAWlAqW2yMggeoCbWlXIiA1KBUst0dAAtUF2tKuREBqUCpYbo+ABKoLtKldaemfxqZqDKWC5fYISKC6QMfZlQNNlQoOtUdAAtUFOs6uHGiqVHCoPQISqC7QcXblQFOlgkPtEZBAdYGOsysHmioVHGqPgASqC3ScXTnQVKngUHsEJFBdoOPsyoGmSgWH2iMggeoCHWdXDjRVKjjUHgEJVBfoOLtyoKlSwaH2CEigukDH2ZUDTZUKDrVHQALVBTrOrhxoqlRwqD0CEqgu0HF25UBTpYJD7RGQQHWBjrMrB5oqFRxqj4AEqgt0nF050FSp4FB7BCRQXaDj7MqBpkoFh9ojIIHqAh1nVw40VSo41B4BCVQX6Di7cqCpUsGh9ghIoLpAx9mVA02VCg61R0AC1QU6zq4caKpUcKg9AhKoLtBxduVAU6WCQ+0RkEB1gY6zKweaKhUcao+ABKoLdJxdOdBUqeBQewQkUF2g4+zKgaZKBYfaIyCB6gIdZ1cONFUqONQeAQlUF+g4u3KgqVLBofYISKC6QMfZlQNNlQoOtUdAAtUFOs6uHGiqVHCoPQISqC7QcXblQFOlgkPtEZBAdYGOsysHmioVHGqPgASqC3ScXTnQVKngUHsEJFBdoOPsyoGmSgWH2iMggeoCHWdXDjRVKjjUHgEJVBfoOLtyoKlSwaH2CEigukDH2ZUDTZUKDrVHQALVBTrOrhxoqlRwqD0CEqgu0HF25UBTpYJD7RGQQHWBjrMrB5oqFRxqj4AEqgt0nF050FSp4FB7BCRQXaDj7MqBpkoFh9p7CCgtX/2q9wiqhamuMgPNtXCqCMg3THWVGWiuCKjrMNVVZqC5IqCuw1RXmYHmioC6DlNdZQaaKwLqOkx1lRlorgio6zDVVWaguSKgrsNUV5mB5rpGARFCxggCIoS4BQERQtyCgAghbkFAhBC3ICBCiFsQECHELQiIEOKWZgT06oMnd3fvfLhw0yryy7+4u3tjMq8v3rvb5WsfuQ3KJHPzWueqvnr/7pjzZFe5rF+89/bhXypbthUBHdbqcqlmblpFfrKvyjd+eL7p+ZMVVurD7LxWuqqzAlrlsj69OwhIZ8u2IqCnd299+PDi/bu3PgndtIZ8dvfGXz5s53WxTJ8dF3VlmZnXSlf1mOdPLu5YVrisr57eHSels2UbEdDzJ7vt+MV75+WbuWkNebyr/MH2/493Fj843fj07rtuA7LM7bxWuqrHPK7uxYzXt6y//P7dUUBKW7YRAT07zOrZeclmblpDvnjvcOVzUZ2v3l/rdryZ10pX9Zhnl3f+61vWZ3d33/nFaQVVtmwjAnp6uBy4uGiduWlVuRDQF++99b8e71r+ZG3PzM7Ma92rOrmsXeGyPnvzr04rp7Rl2xDQ6b7i+ZPjPcjMTavK9NL18PzlD0JH9Jfbea18VZ9Ndt46l/VgF60ti4Ccclmrnz1e2X7y8P8+uFvZJfvtvNa9qldPfqxzWdcuoONrQzM3rSmfXVbls9NV7bqeGLmd17pX9bPpyz/rXNZbARVt2eYENMYV0GdP3pi5Lv9spS9On+e16lU9vsB5nXUt69qvgIYo1WfzV+WrvCx4EO4k17eq0vKta1lXKaDBXgX7ifCswBp35TYX81rxqopzWteyrvJVsNM7ByZvKri5aR159fTuzck94unSfWW7cm5eq13Vh5vnela6rJ9dvdmncMs2IqBx3gm9e7/6J9e3HK5q1/WC7dy8VruqM+87XOeyHgW0rndCPy7Sm1efIpm5aRV5djuh50+2r9e++P7apjozr7Wu6sPFe9yPWeeyHgWktGUbEdDDi4vP0R4+0Pci/aO1HeT4FQ37z9Qcpvrs8Knp9bxndp/Lea16Vbe5eKpnzct6ekCps2VbEdDDiw8eR/7ObgWPnyi+uGk9+ezknwsBPbzYfkXQd1Y21YfJvFa9qttcvNq+5mU9P6OlsmWbERAhZLwgIEKIWxAQIcQtCIgQ4hYERAhxCwIihLgFARFC3IKACCFuQUCEELcgIEKIWxAQIcQtCIgQ4hYERAhxCwIihLgFARGN/Giz+fbFj7/++uY3/vHxxt/6+VzTuVvJmEFARCOfbjZfnv74B5Jqjrf+9HfxEEFARCMv391e8pzyo81rf74gIC6EyAMCIkr5eHfNc8jjI7BFuyAg8oCAiFI+f/1CKJ9OnxGaDQIiDwiIaGX/qOv478vHY1J7BEQQEFHKp+fHYI9XQ7tnpI+O+dWfvr7ZbH7nz/a/3d36+Ihtmz+4+S0ZKwiI6OTieZ+PDxdDBwH9dHPIl/7xdOtZQFe/JWMFARGlHLWzfUVsr6K9gLbPDv3D461/u5lcFx3+d/1bMlYQEFHK8YHX9h/7B2N7x3x8fELo8MzQVEDXvyVjBQERpZzeCnThlL2Azs9On289C2j6WzJWEBDRyuHF90cRHR5M7R3zePNr/+bvz82mArr+LRkrCIho5ddf35nn/Cagg2P+evcc82/+0c8mtx5fIrv6LRkrCIioZf/Y6/wGn+O//unfH17n+rOLW0/Npr8lYwUBEbV8/vrjtc/jddDx/UAX7zX85+/99lYy3364FdD0t2SsICCilt3r75+en1Wevtl5+0r79uf5D6Mef0vGCgIietnK50fn9/PsHHN+TvrwSvtEQDe/JWMFARG9PD78+rdfPz+SunoZ/vAGReFl+NPbF8lIQUBEMT/abC6uY/aOebTSa3/8+P9fvTt5Dmhrnpc/u/ktGSsIiCjm89cvvxbo/GmLzfmzpxdvANp9+uLqt2SsICCimMfHURdvbD4+z/zy776yfavP7/9scutPH83z5Z9f/5aMFQRECHELAiKEuAUBEULcgoAIIW5BQIQQtyAgQohbEBAhxC0IiBDiFgRECHELAiKEuAUBEULcgoAIIW5BQIQQtyAgQohbEBAhxC0IiBDiFgRECHELAiKEuAUBEULcgoAIIW75/6txRlx7/DZaAAAAAElFTkSuQmCC" width="576" style="display: block; margin: auto;" /></p>
 </section>
 <section id="your-turn-4" class="slide level2">
@@ -4649,9 +4577,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="simple-regression" class="slide level2">
 <h2>Simple Regression</h2>
 <hr>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1">ecom2 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb87-2" title="2"><span class="st">  </span><span class="kw">select</span>(duration, n_visit) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb87-3" title="3"><span class="st">  </span>modeldb<span class="op">::</span><span class="kw">linear_regression_db</span>(duration)</a></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" title="1">ecom2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb84-2" title="2"><span class="st">  </span><span class="kw">select</span>(duration, n_visit) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb84-3" title="3"><span class="st">  </span>modeldb<span class="op">::</span><span class="kw">linear_regression_db</span>(duration)</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 2
 ##   `(Intercept)` n_visit
 ##           &lt;dbl&gt;   &lt;dbl&gt;
@@ -4660,9 +4588,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="multiple-regression" class="slide level2">
 <h2>Multiple Regression</h2>
 <hr>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" title="1">ecom2 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb89-2" title="2"><span class="st">  </span><span class="kw">select</span>(duration, n_visit, n_pages) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb89-3" title="3"><span class="st">  </span>modeldb<span class="op">::</span><span class="kw">linear_regression_db</span>(duration)</a></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1">ecom2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb86-2" title="2"><span class="st">  </span><span class="kw">select</span>(duration, n_visit, n_pages) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb86-3" title="3"><span class="st">  </span>modeldb<span class="op">::</span><span class="kw">linear_regression_db</span>(duration)</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 3
 ##   `(Intercept)` n_visit n_pages
 ##           &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
@@ -4671,10 +4599,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="categorical-variables" class="slide level2">
 <h2>Categorical Variables</h2>
 <hr>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" title="1">ecom2 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb91-2" title="2"><span class="st">  </span><span class="kw">select</span>(duration, device) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb91-3" title="3"><span class="st">  </span><span class="kw">add_dummy_variables</span>(device, <span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;laptop&quot;</span>, <span class="st">&quot;mobile&quot;</span>, <span class="st">&quot;tablet&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb91-4" title="4"><span class="st">  </span>modeldb<span class="op">::</span><span class="kw">linear_regression_db</span>(duration)</a></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" title="1">ecom2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb88-2" title="2"><span class="st">  </span><span class="kw">select</span>(duration, device) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb88-3" title="3"><span class="st">  </span><span class="kw">add_dummy_variables</span>(device, <span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;laptop&quot;</span>, <span class="st">&quot;mobile&quot;</span>, <span class="st">&quot;tablet&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb88-4" title="4"><span class="st">  </span>modeldb<span class="op">::</span><span class="kw">linear_regression_db</span>(duration)</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 3
 ##   `(Intercept)` device_mobile device_tablet
 ##           &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;
@@ -4683,10 +4611,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="full-example" class="slide level2">
 <h2>Full Example</h2>
 <hr>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" title="1">ecom2 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb93-2" title="2"><span class="st">  </span><span class="kw">select</span>(duration, n_visit, n_pages, device) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb93-3" title="3"><span class="st">  </span><span class="kw">add_dummy_variables</span>(device, <span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;laptop&quot;</span>, <span class="st">&quot;mobile&quot;</span>, <span class="st">&quot;tablet&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb93-4" title="4"><span class="st">  </span>modeldb<span class="op">::</span><span class="kw">linear_regression_db</span>(duration, <span class="dt">sample_size =</span> <span class="dv">1000</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" title="1">ecom2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb90-2" title="2"><span class="st">  </span><span class="kw">select</span>(duration, n_visit, n_pages, device) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb90-3" title="3"><span class="st">  </span><span class="kw">add_dummy_variables</span>(device, <span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;laptop&quot;</span>, <span class="st">&quot;mobile&quot;</span>, <span class="st">&quot;tablet&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb90-4" title="4"><span class="st">  </span>modeldb<span class="op">::</span><span class="kw">linear_regression_db</span>(duration, <span class="dt">sample_size =</span> <span class="dv">1000</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 5
 ##   `(Intercept)` n_visit n_pages device_mobile device_tablet
 ##           &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;
@@ -4704,8 +4632,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="predict-inside-database" class="slide level2">
 <h2>Predict Inside Database</h2>
 <hr>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" title="1">model &lt;-<span class="st"> </span><span class="kw">lm</span>(duration <span class="op">~</span><span class="st"> </span>device <span class="op">+</span><span class="st"> </span>referrer <span class="op">+</span><span class="st"> </span>n_visit <span class="op">+</span><span class="st"> </span>n_pages, <span class="dt">data =</span> ecom2)</a>
-<a class="sourceLine" id="cb95-2" title="2">model</a></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" title="1">model &lt;-<span class="st"> </span><span class="kw">lm</span>(duration <span class="op">~</span><span class="st"> </span>device <span class="op">+</span><span class="st"> </span>referrer <span class="op">+</span><span class="st"> </span>n_visit <span class="op">+</span><span class="st"> </span>n_pages, <span class="dt">data =</span> ecom2)</a>
+<a class="sourceLine" id="cb92-2" title="2">model</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = duration ~ device + referrer + n_visit + n_pages, 
@@ -4722,7 +4650,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="fit" class="slide level2">
 <h2>Fit</h2>
 <hr>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" title="1"><span class="kw">tidypredict_fit</span>(model)</a></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" title="1"><span class="kw">tidypredict_fit</span>(model)</a></code></pre></div>
 <pre><code>## 441.450192491919 + (ifelse(device == &quot;mobile&quot;, 1, 0) * -30.9522074131866) + 
 ##     (ifelse(device == &quot;tablet&quot;, 1, 0) * -14.4972018107797) + 
 ##     (ifelse(referrer == &quot;direct&quot;, 1, 0) * -8.98035001912995) + 
@@ -4734,9 +4662,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="fit-1" class="slide level2">
 <h2>Fit</h2>
 <hr>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" title="1">ecom2 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb99-2" title="2"><span class="st">  </span><span class="kw">tidypredict_to_column</span>(model) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb99-3" title="3"><span class="st">  </span><span class="kw">select</span>(duration, fit)</a></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" title="1">ecom2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb96-2" title="2"><span class="st">  </span><span class="kw">tidypredict_to_column</span>(model) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb96-3" title="3"><span class="st">  </span><span class="kw">select</span>(duration, fit)</a></code></pre></div>
 <pre><code>## # Source:   lazy query [?? x 2]
 ## # Database: sqlite 3.22.0 [J:\R\courses\tutorial_slides\sql\mydatabase.db]
 ##    duration   fit
@@ -4756,7 +4684,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="sql" class="slide level2">
 <h2>SQL</h2>
 <hr>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" title="1"><span class="kw">tidypredict_sql</span>(model, con)</a></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" title="1"><span class="kw">tidypredict_sql</span>(model, con)</a></code></pre></div>
 <pre><code>## &lt;SQL&gt; 441.450192491919 + (CASE WHEN (`device` = &#39;mobile&#39;) THEN (1.0) WHEN NOT(`device` = &#39;mobile&#39;) THEN (0.0) END * -30.9522074131866) + (CASE WHEN (`device` = &#39;tablet&#39;) THEN (1.0) WHEN NOT(`device` = &#39;tablet&#39;) THEN (0.0) END * -14.4972018107797) + (CASE WHEN (`referrer` = &#39;direct&#39;) THEN (1.0) WHEN NOT(`referrer` = &#39;direct&#39;) THEN (0.0) END * -8.98035001912995) + (CASE WHEN (`referrer` = &#39;google&#39;) THEN (1.0) WHEN NOT(`referrer` = &#39;google&#39;) THEN (0.0) END * -10.038005625893) + (CASE WHEN (`referrer` = &#39;social&#39;) THEN (1.0) WHEN NOT(`referrer` = &#39;social&#39;) THEN (0.0) END * -19.8411767075006) + (CASE WHEN (`referrer` = &#39;yahoo&#39;) THEN (1.0) WHEN NOT(`referrer` = &#39;yahoo&#39;) THEN (0.0) END * -32.0969778768984) + (`n_visit` * -1.4325653130794) + (`n_pages` * -8.29825840984566)</code></pre>
 </section>
 <section id="section-12" class="slide level2" data-background="dbi_section_close_connection.png">
@@ -4765,7 +4693,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section id="close-connection" class="slide level2">
 <h2>Close Connection</h2>
 <hr>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" title="1">DBI<span class="op">::</span><span class="kw">dbDisconnect</span>(con)</a></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" title="1">DBI<span class="op">::</span><span class="kw">dbDisconnect</span>(con)</a></code></pre></div>
 </section>
 <section id="section-13" class="slide level2" data-background="dbi_section_connections_tab.png">
 <h2></h2>
@@ -4802,7 +4730,6 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>References</h2>
 <hr>
 <ul>
-<li class="fragment"><a href="https://rstudio.github.io/bigdataclass/index.html">Big Data with R</a></li>
 <li class="fragment"><a href="https://db.rstudio.com/">Databases Using R</a></li>
 <li class="fragment"><a href="http://r-dbi.github.io/DBI/">DBI</a></li>
 <li class="fragment"><a href="https://dbplyr.tidyverse.org/index.html">dbplyr</a></li>
