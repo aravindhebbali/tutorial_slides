@@ -23,11 +23,11 @@ output: _output.yaml
 
 <hr>
 
-- <a href="https://slides.rsquaredacademy.com/rfm/rfm.html" target="_blank">Slides</a>
-- <a href="https://blog.rsquaredacademy.com/customer-segmentation-using-rfm-analysis/" target="_blank">Blog Post</a>
-- <a href="https://github.com/rsquaredacademy-education/online-courses/tree/master/customer-segmentation-using-rfm-analysis/script" target="_blank">Code & Data</a>
+- <a href="https://slides.rsquaredacademy.com/sql/sqlite.html#/section" target="_blank">Slides</a>
+- <a href="https://blog.rsquaredacademy.com/working-with-databases-using-r/" target="_blank">Blog Post</a>
+- <a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code & Data</a>
 - <a href="https://rstudio.cloud/project/430439" target="_blank">RStudio Cloud</a>
-- <a href="https://rsquared-academy.thinkific.com/" target="_blank">Online Course</a>
+- <a href="https://rsquared-academy.thinkific.com/courses/working-with-databases-using-r" target="_blank">Online Course</a>
 
 
 ## {data-background="dbi_agenda.png"}
@@ -37,14 +37,13 @@ output: _output.yaml
 <br>
 <br>
 
-- connect to database
-- explore database
+- connect to & explore database
 - read & write data
-- run SQL script 
-- knitr SQL engine
+- use RStudio SQL script & knitr SQL engine
 - query data using dplyr
 - visualize data with dbplot
-- modeling data with tidypredict
+- modeling data with modeldb & tidypredict
+- explore RStudio connections pane
 - handling credentials
 
 ## Libraries
@@ -96,7 +95,7 @@ summary(con)
 <hr>
 
 ```{r lite6}
-dbListTables(con)
+DBI::dbListTables(con)
 ```
 
 ## List Fields
@@ -232,7 +231,7 @@ DBI::dbClearResult(query)
 <hr>
 
 ```{r dblisttable}
-DBI::dbExistsTable(con, "trial")
+DBI::dbExistsTable(con, "trial_db")
 ```
 
 ## Create Table
@@ -241,12 +240,12 @@ DBI::dbExistsTable(con, "trial")
 
 ```{r lite18} 
 # sample data
-x     <- 1:10
-y     <- letters[1:10]
-trial <- tibble::tibble(x, y)
+x          <- 1:10
+y          <- letters[1:10]
+trial_data <- tibble::tibble(x, y)
 
 # write table to database
-DBI::dbWriteTable(con, "trial", trial)
+DBI::dbWriteTable(con, "trial_db", trial_data)
 ```
 
 ## List Tables
@@ -262,7 +261,7 @@ DBI::dbListTables(con)
 <hr>
 
 ```{r lite20}
-DBI::dbGetQuery(con, "select * from trial limit 5")
+DBI::dbGetQuery(con, "select * from trial_db limit 5")
 ```
 
 ## Overwrite Table
@@ -271,12 +270,12 @@ DBI::dbGetQuery(con, "select * from trial limit 5")
 
 ```{r lite21}
 # sample data
-x      <- sample(100, 10)
-y      <- letters[11:20]
-trial2 <- tibble::tibble(x, y)
+x           <- sample(100, 10)
+y           <- letters[11:20]
+trial2_data <- tibble::tibble(x, y)
 
 # overwrite table trial
-DBI::dbWriteTable(con, "trial", trial2, overwrite = TRUE)
+DBI::dbWriteTable(con, "trial_db", trial2_data, overwrite = TRUE)
 ```
 
 ## View Data
@@ -284,7 +283,7 @@ DBI::dbWriteTable(con, "trial", trial2, overwrite = TRUE)
 <hr>
 
 ```{r lite21a}
-DBI::dbGetQuery(con, "select * from trial")
+DBI::dbGetQuery(con, "select * from trial_db")
 ```
 
 ## Append Data
@@ -293,12 +292,12 @@ DBI::dbGetQuery(con, "select * from trial")
 
 ```{r lite23}
 # sample data
-x      <- sample(100, 10)
-y      <- letters[5:14]
-trial3 <- tibble::tibble(x, y)
+x           <- sample(100, 10)
+y           <- letters[5:14]
+trial3_data <- tibble::tibble(x, y)
 
 # append data
-DBI::dbWriteTable(con, "trial", trial3, append = TRUE)
+DBI::dbWriteTable(con, "trial_db", trial3_data, append = TRUE)
 ```
 
 ## View Data
@@ -306,7 +305,7 @@ DBI::dbWriteTable(con, "trial", trial3, append = TRUE)
 <hr>
 
 ```{r lite23a}
-DBI::dbGetQuery(con, "select * from trial")
+DBI::dbGetQuery(con, "select * from trial_db")
 ```
 
 ## Insert Rows
@@ -315,7 +314,7 @@ DBI::dbGetQuery(con, "select * from trial")
 
 ```{r lite25}
 DBI::dbExecute(con,
-  "INSERT into trial (x, y) VALUES (32, 'c'), (45, 'k'), (61, 'h')"
+  "INSERT into trial_db (x, y) VALUES (32, 'c'), (45, 'k'), (61, 'h')"
 )
 ```
 
@@ -324,7 +323,7 @@ DBI::dbExecute(con,
 <hr>
 
 ```{r lite25a}
-DBI::dbGetQuery(con, "select * from trial")
+DBI::dbGetQuery(con, "select * from trial_db")
 ```
 
 ## Insert Rows
@@ -333,7 +332,7 @@ DBI::dbGetQuery(con, "select * from trial")
 
 ```{r lite26}
 DBI::dbSendStatement(con,
-  "INSERT into trial (x, y) VALUES (25, 'm'), (54, 'l'), (16, 'y')"
+  "INSERT into trial_db (x, y) VALUES (25, 'm'), (54, 'l'), (16, 'y')"
 )
 ```
 
@@ -342,7 +341,7 @@ DBI::dbSendStatement(con,
 <hr>
 
 ```{r lite26a}
-DBI::dbGetQuery(con, "select * from trial")
+DBI::dbGetQuery(con, "select * from trial_db")
 ```
 
 ## Generate SQL Query
@@ -359,7 +358,7 @@ DBI::sqlCreateTable(con, "new", c(x = "integer", y = "text"))
 
 ```{r lite31b}
 trial_new <- data.frame(x = 30, y = 'k')
-DBI::sqlAppendTable(con, "trial", trial_new)
+DBI::sqlAppendTable(con, "tria_db", trial_new)
 ```
 
 ## Remove Table
@@ -367,7 +366,7 @@ DBI::sqlAppendTable(con, "trial", trial_new)
 <hr>
 
 ```{r lite28}
-DBI::dbRemoveTable(con, "trial")
+DBI::dbRemoveTable(con, "trial_db")
 ```
 
 ## Your Turn
@@ -434,7 +433,7 @@ where `device` has the value `tablet`
 <hr>
 
 ```{r dbply3}
-ecom2 <- tbl(con, "ecom")
+ecom2 <- dplyr::tbl(con, "ecom")
 ecom2
 ```
 
@@ -445,11 +444,11 @@ ecom2
 ```{r dbply4}
 tos_query <- 
   ecom2 %>% 
-  select(referrer, device, duration) %>% 
-  filter(device == "laptop") %>% 
-  group_by(referrer) %>% 
-  summarise(avg_tos = mean(duration)) %>% 
-  arrange(avg_tos)
+  dplyr::select(referrer, device, duration) %>% 
+  dplyr::filter(device == "laptop") %>% 
+  dplyr::group_by(referrer) %>% 
+  dplyr::summarise(avg_tos = mean(duration)) %>% 
+  dplyr::arrange(avg_tos)
 
 tos_query
 ```
@@ -461,7 +460,7 @@ tos_query
 ```{r dbply9}
 result <- 
   ecom2 %>%
-  select(referrer, device) 
+  dplyr::select(referrer, device) 
 
 result
 ```
@@ -480,7 +479,7 @@ nrow(result)
 
 ```{r dbply9b}
 result %>% 
-  collect()
+  dplyr::collect()
 ```
 
 ## Collect Data
@@ -489,7 +488,7 @@ result %>%
 
 ```{r dbply9c}
 result %>% 
-  collect() %>% 
+  dplyr::collect() %>% 
   nrow()
 ```
 
@@ -498,7 +497,7 @@ result %>%
 <hr>
 
 ```{r dbply7}
-show_query(tos_query)
+dplyr::show_query(tos_query)
 ```
 
 ## SQL Generation
@@ -507,9 +506,9 @@ show_query(tos_query)
 
 ```{r dbply_simulate}
 ecom2 %>% 
-  group_by(referrer) %>% 
-  summarise(avg_tos = mean(duration))  %>% 
-  sql_render(simulate_mysql())
+  dplyr::group_by(referrer) %>% 
+  dplyr::summarise(avg_tos = mean(duration))  %>% 
+  dbplyr::sql_render(dbplyr::simulate_mysql())
 ```
 
 ## Your Turn
@@ -541,7 +540,7 @@ ecom2 %>%
 
 ```{r dbplot1, fig.align='center', fig.height=5}
 ecom2 %>% 
-  dbplot_bar(device) + xlab("Device") + ylab("Count") + ggtitle("Device Distribution")
+  dbplot::dbplot_bar(device) + ggplot2::xlab("Device") + ggplot2::ylab("Count") + ggplot2::ggtitle("Device Distribution")
 ```
 
 ## Line Chart
@@ -550,7 +549,7 @@ ecom2 %>%
 
 ```{r dbplot2, fig.align='center', fig.height=5}
 ecom2 %>% 
-  dbplot_line(n_visit) + xlab("Visits") + ylab("Count") 
+  dbplot::dbplot_line(n_visit) + ggplot2::xlab("Visits") + ggplot2::ylab("Count") 
 ```
 
 ## Your Turn
@@ -575,7 +574,7 @@ ecom2 %>%
 
 ```{r modeldb1}
 ecom2 %>% 
-  select(duration, n_visit) %>% 
+  dplyr::select(duration, n_visit) %>% 
   modeldb::linear_regression_db(duration)
 ```
 
@@ -585,7 +584,7 @@ ecom2 %>%
 
 ```{r modeldb2}
 ecom2 %>% 
-  select(duration, n_visit, n_pages) %>%
+  dplyr::select(duration, n_visit, n_pages) %>%
   modeldb::linear_regression_db(duration)
 ```
 
@@ -595,8 +594,8 @@ ecom2 %>%
 
 ```{r modeldb3}
 ecom2 %>% 
-  select(duration, device) %>%
-  add_dummy_variables(device, values = c("laptop", "mobile", "tablet")) %>% 
+  dplyr::select(duration, device) %>%
+  modeldb::add_dummy_variables(device, values = c("laptop", "mobile", "tablet")) %>% 
   modeldb::linear_regression_db(duration)
 ```
 
@@ -606,8 +605,8 @@ ecom2 %>%
 
 ```{r modeldb4}
 ecom2 %>% 
-  select(duration, n_visit, n_pages, device) %>%
-  add_dummy_variables(device, values = c("laptop", "mobile", "tablet")) %>% 
+  dplyr::select(duration, n_visit, n_pages, device) %>%
+  modeldb::add_dummy_variables(device, values = c("laptop", "mobile", "tablet")) %>% 
   modeldb::linear_regression_db(duration, sample_size = 1000)
 ```
 
@@ -633,7 +632,7 @@ model
 <hr>
 
 ```{r tp3}
-tidypredict_fit(model)
+tidypredict::tidypredict_fit(model)
 ```
 
 ## Fit
@@ -642,8 +641,8 @@ tidypredict_fit(model)
 
 ```{r tp4}
 ecom2 %>% 
-  tidypredict_to_column(model) %>% 
-  select(duration, fit)
+  tidypredict::tidypredict_to_column(model) %>% 
+  dplyr::select(duration, fit)
 ```
 
 ## SQL
@@ -651,7 +650,7 @@ ecom2 %>%
 <hr>
 
 ```{r tp2}
-tidypredict_sql(model, con)
+tidypredict::tidypredict_sql(model, con)
 ```
 
 ## {data-background="dbi_section_close_connection.png"}
@@ -694,6 +693,7 @@ DBI::dbDisconnect(con)
 
 <hr>
 
+- [RStudio Webinar](https://resources.rstudio.com/webinars/modeling-in-databases-with-r)
 - [Databases Using R](https://db.rstudio.com/)
 - [DBI](http://r-dbi.github.io/DBI/)
 - [dbplyr](https://dbplyr.tidyverse.org/index.html)
