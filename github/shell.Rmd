@@ -8,154 +8,146 @@ output: _output.yaml
 
 <hr>
 
-Use the terminal/command line for
+- launch terminal/shell
+- use terminal in RStudio
+- run command from R using system()
+- run shell script
+- file management
+- system management
+- navigating file system
+- help/documentation
+- compression commands
+- keyboard shortcuts
+- search & regular expressions
+- input/output
+- network
+- funny commands
+- others
 
-- listing files in a directory
-- navigate between directories
-- view contents of a file
-- copy files
-- rename files
-- remove/delete files
-- move file to a new folder
-- remove directory
-- word count
-- get help
-
-## pwd
-
-<hr>
-
-```{sh pwd}
-pwd
-```
-
-## who am i
+## File Management
 
 <hr>
 
-```{sh who}
-whoami
-```
+- cp/copy
+- mv/move
+- rm/del/erase
+- comp/fc
+- replace
+- ren
+- diff
+- type
 
-## ls
-
-<hr>
-
-```{sh ls}
-ls
-```
-
-## cat
+## System Management
 
 <hr>
 
-```{sh cat}
-cat shell.Rmd
-```
+- shutdown
+- free
+- df
+- uname
+- sudo
+- touch
 
-## cp
-
-<hr>
-
-```{sh cp}
-cp shell.Rmd cyg.Rmd
-```
-
-## echo
+## Navigating File System
 
 <hr>
 
-```{sh echo2}
-echo "hello" > file1.txt
-```
+- ls/dir
+- cd/pwd
+- mkdir/md
+- rmdir/rd
 
-## ls
-
-<hr>
-
-```{sh ls5}
-ls
-```
-
-## mv
+## Help/Documentation
 
 <hr>
 
-```{sh mv}
-mv file1.txt file2.txt
-```
+- man
+- whatis
+- history
 
-## rm
-
-<hr>
-
-```{sh rm}
-rm cyg.Rmd
-```
-
-## head
+## Compression Commands
 
 <hr>
 
-```{sh head}
-head shell.Rmd
-```
+- tar
+- unzip
+- gzip
 
-```{sh mv2, echo=FALSE}
-mv file2.txt file1.txt
-```
-
-## mkdir
+## Keyboard Shortcuts
 
 <hr>
 
-```{sh mkdir}
-mkdir examples
-```
+- Ctrl + C
+- Ctrl + D
+- Ctrl + W
+- Ctrl + U
+- Ctrl + R
 
-## rmdir
-
-<hr>
-
-```{sh rmdir}
-rmdir examples
-```
-
-## wc
+## Search & Regular Expressions
 
 <hr>
 
-```{sh wc1}
-# characters, words and lines
-wc shell.Rmd
-```
+- grep
+- find
+- locate
+- which
+- findstr
+- where
 
-## wc
-
-<hr>
-
-```{sh wc2}
-# characters
-wc shell.Rmd -c
-```
-
-## wc
+## Input/Output
 
 <hr>
 
-```{sh wc3}
-# words
-wc shell.Rmd -w
-```
+- echo
+- pr
+- cat
+- head
+- tail
+- more
+- less
+- sort
+- wc
+- cls/clear
 
-## wc
+## Network
 
 <hr>
 
-```{sh wc4}
-# lines
-wc shell.Rmd -l
-```
+- wget
+- curl
+- hostname
+- ping
+- nslookup
+
+## User Information
+
+<hr>
+
+- finger
+- groups
+- who/w
+- whoami
+
+## Funny Commands
+
+<hr>
+
+- fortune
+- yes
+- banner
+- rev
+
+## Others
+
+<hr>
+
+- exit
+- date
+- time
+- color
+- cal
+- start
+- sleep
 
 
 ## References
