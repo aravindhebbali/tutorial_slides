@@ -159,9 +159,18 @@ transact
 
 The data set has 3 columns. All the dates are in the format (yyyy-mm-dd).
 
-- Invoice: invoice date 
-- Due: due date
-- Payment: payment date
+<br>
+<br>
+
+```{r table_data_dict, echo=FALSE}
+cname   <- c("Invoice", "Due", "Payment")
+descrip <- c("Invoice Date", "Due Date", "Payment Date")
+data.frame(Column = cname, Description = descrip) %>% 
+  kable() %>% 
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive")
+  )
+```
 
 ## Case Study
 
@@ -438,6 +447,28 @@ transact %>%
   )
 ```
 
+## Your Turn
+
+<hr>
+
+- compute the length of a vacation which begins on `2020-04-19` and ends on `2020-04-25`
+- recompute the length of the vacation after shifting the vacation start and end date by `10` days and `2` weeks
+- compute the days to settle invoice and days overdue from the `receivables.csv` data set
+- compute the length of employment (only for those employees who have been terminated) from the `hr-data.csv` data set (use date of hire and termination)
+
+## Timezones
+
+<hr>
+
+<br>
+<br>
+<br>
+<br>
+
+```{r img_timezones, fig.align='center', out.width="200%", echo=FALSE}
+knitr::include_graphics('lub_timezones.jpg')
+```
+
 ## Timezones 
 
 <hr>
@@ -467,6 +498,18 @@ Sys.setenv(TZ = "Asia/Calcutta")
 
 <hr>
 
+<br>
+<br>
+
+```{r img_daylight, fig.align='center', out.width="200%", echo=FALSE}
+knitr::include_graphics('lub_daylight_savings.png')
+```
+
+
+## Daylight Savings
+
+<hr>
+
 ```{r dst}
 dst(Sys.Date()) 
 ```
@@ -477,11 +520,15 @@ dst(Sys.Date())
 
 - Check the timezone you live in
 - Check if daylight savings in on
-- Check the time in a different time zone 
+- Check the current time in **UTC** or a different time zone 
 
 ## Date & Time Formats
 
 <hr>
+
+<br>
+<br>
+
 
 ```{r table_formats_sample, echo=FALSE}
 cname   <- c("December 12, 2019", "12th Dec, 2019", "Dec 12th, 19", "12-Dec-19",
@@ -496,6 +543,9 @@ data.frame(Format = cname) %>%
 ## Conversion Specifications
 
 <hr>
+
+<br>
+<br>
 
 ```{r table_formats_1, echo=FALSE}
 cname   <- c("`%d`", "`%m`", "`%b`", "`%B`", "`%y`", "`%Y`", "%H", "%M", "%S")
@@ -520,6 +570,10 @@ data.frame(Specification = cname, Description = descrip, Example = example) %>%
 
 <hr>
 
+<br>
+<br>
+<br>
+
 ```{r table_formats_ex_1, echo=FALSE}
 cname   <- c("19", "12", "12")
 descrip <- c("`%y`", "`%m`", "`%d`")
@@ -533,6 +587,10 @@ data.frame(Date = cname, Specification = descrip) %>%
 ## Format - 2019-Dec-12
 
 <hr>
+
+<br>
+<br>
+<br>
 
 ```{r table_formats_ex_2, echo=FALSE}
 cname   <- c("2019", "Dec", "12")
@@ -548,6 +606,10 @@ data.frame(Date = cname, Specification = descrip) %>%
 
 <hr>
 
+<br>
+<br>
+<br>
+
 ```{r table_formats_ex_3, echo=FALSE}
 cname   <- c("19", "12", "12", "08", "05", "03")
 descrip <- c("`%y`", "`%m`", "`%d`", "`%H`", "`%M`", "`%S`")
@@ -562,7 +624,20 @@ data.frame(Date = cname, Specification = descrip) %>%
 
 <hr>
 
-- Specify the format for the RStudio release dates
+Below, we have specified `July 5th, 2019` in different ways. Specify the correct format for each of them.
+
+- `July-05-19`
+- `JUL-05-19`
+- `05.07.19`
+- `5-July 2019`
+- `July 5th, 2019`
+- `July 05, 2019`
+- `2019-July- 05`
+- `05/07/2019`
+- `07/05/2019`
+- `7/5/2019`
+- `07/5/19`
+- `2019-07-05`
 
 ## Parse Date & Time
 
@@ -654,6 +729,26 @@ ms("5,3")
 # hour/minute
 hm("8, 5")
 ```
+
+## Your Turn
+
+<hr>
+
+Below, we have specified `July 5th, 2019` in different ways. Parse the dates using `strptime()` or `parse_date_time()` or any other helper function.
+
+- `July-05-19`
+- `JUL-05-19`
+- `05.07.19`
+- `5-July 2019`
+- `July 5th, 2019`
+- `July 05, 2019`
+- `2019-July- 05`
+- `05/07/2019`
+- `07/05/2019`
+- `7/5/2019`
+- `07/5/19`
+- `2019-07-05`
+
 
 ## Date & Time Components
 
@@ -941,12 +1036,14 @@ transact %>%
 
 ## Your Turn
 
-Extract components from 
+Get the R release dates using `r_versions()` from the **rversions** package and
+tabulate the following
 
-- R release dates
-- RStudio release dates
-- receivabls data set
-- human resources data set
+- year 
+- month with label
+- weekday with label
+- hour
+- and quarter
 
 ## Create, Update & Verify
 
@@ -1068,10 +1165,18 @@ is.POSIXlt(release_date)
 
 ## Your Turn
 
-- create R release date
-- update R release date
-- create football world cup years 
+- R 2.0.0 was released on `2004-10-04 14:24:38`. Create this date using both
+`make_date()` and `make_datetime()`
 
+- R 3.0.0 was released on `2013-04-03 07:12:36`. Update the date created in the
+previous step to the above using `update()`.
+
+- Create the years in which the following events were held:
+    - Olympics
+    - Football World Cup
+    - Cricket World Cup
+    
+    
 ## Interval
 
 <hr>
@@ -1333,7 +1438,7 @@ dweeks(56)
 <br>
 
 ```{r img_convert, echo=FALSE, out.width="100%", fig.align="center"}
-knitr::include_graphics("img/convert.png")
+knitr::include_graphics("convert.png")
 ```
 
 ## Duration
@@ -1398,7 +1503,7 @@ period(day = 3, hour = 1, minute = 3, second = 5)
 <br>
 
 ```{r img_as_period, echo=FALSE, out.width="100%", fig.align="center"}
-knitr::include_graphics("img/as_period.png")
+knitr::include_graphics("as_period.png")
 ```
 
 ## Period
@@ -1424,7 +1529,7 @@ as.period(course_interval, unit = "hours")
 <br>
 
 ```{r img_time_length, echo=FALSE, out.width="100%", fig.align="center"}
-knitr::include_graphics("img/time_length.png")
+knitr::include_graphics("time_length.png")
 ```
 
 ## Time Length
@@ -1441,10 +1546,6 @@ time_length(course_interval, unit = "minutes")
 # course length in hours
 time_length(course_interval, unit = "hours")
 ```
-
-## Your Turn
-
-<hr>
 
 ## Rounding Dates
 
@@ -1510,12 +1611,9 @@ rollback(release_date, roll_to_first = TRUE)
 
 <hr>
 
-- round R release dates
-- rollback R release dates
-
-## Summary
-
-<hr>
+- round up R release dates to hours
+- round down R release dates to minutes
+- rollback R release dates to the beginning of the month
 
 ## References
 
