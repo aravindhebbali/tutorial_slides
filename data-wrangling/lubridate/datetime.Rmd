@@ -505,7 +505,6 @@ Sys.setenv(TZ = "Asia/Calcutta")
 knitr::include_graphics('lub_daylight_savings.png')
 ```
 
-
 ## Daylight Savings
 
 <hr>
@@ -518,9 +517,9 @@ dst(Sys.Date())
 
 <hr>
 
-- Check the timezone you live in
-- Check if daylight savings in on
-- Check the current time in **UTC** or a different time zone 
+- check the timezone you live in
+- check if daylight savings in on
+- check the current time in **UTC** or a different time zone 
 
 ## Date & Time Formats
 
@@ -624,7 +623,7 @@ data.frame(Date = cname, Specification = descrip) %>%
 
 <hr>
 
-Below, we have specified `July 5th, 2019` in different ways. Specify the correct format for each of them.
+Below, we have specified `July 5th, 2019` in different ways. Create the date using `as.Date()` while specifying the correct format for each of them.
 
 - `July-05-19`
 - `JUL-05-19`
@@ -1169,13 +1168,7 @@ is.POSIXlt(release_date)
 `make_date()` and `make_datetime()`
 
 - R 3.0.0 was released on `2013-04-03 07:12:36`. Update the date created in the
-previous step to the above using `update()`.
-
-- Create the years in which the following events were held:
-    - Olympics
-    - Football World Cup
-    - Cricket World Cup
-    
+previous step to the above using `update()`.    
     
 ## Interval
 
