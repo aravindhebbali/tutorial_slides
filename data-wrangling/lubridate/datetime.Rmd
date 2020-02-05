@@ -153,7 +153,7 @@ transact <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/d
 transact
 ```
 
-## Case Syudy - Data Dictionary
+## Case Study - Data Dictionary
 
 <hr>
 
@@ -900,7 +900,7 @@ seconds(release_date)
 
 <hr>
 
-```{r img_quarter_semester, fig.align='center', echo=FALSE}
+```{r img_quarter_semester, fig.align='center', echo=FALSE, out.width="100%"}
 knitr::include_graphics('quarter_semester.png')
 ```
 
@@ -1023,6 +1023,8 @@ transact %>%
 
 ## Case Study - Invoices Distribution by Quarter
 
+<hr>
+
 Let us count the invoices due for each quarter.
 
 ```{r lub8}
@@ -1034,6 +1036,8 @@ transact %>%
 ```
 
 ## Your Turn
+
+<hr>
 
 Get the R release dates using `r_versions()` from the **rversions** package and
 tabulate the following
@@ -1163,6 +1167,8 @@ is.POSIXlt(release_date)
 ```
 
 ## Your Turn
+
+<hr>
 
 - R 2.0.0 was released on `2004-10-04 14:24:38`. Create this date using both
 `make_date()` and `make_datetime()`
