@@ -44,6 +44,12 @@ output: _output.yaml
 
 <hr>
 
+<br>
+
+```{r sql_database_vendors, echo=FALSE, fig.align="center", out.width="50%"}
+knitr::include_graphics("relational_databases.jpg")
+```
+
 ## Northwind Database
 
 <hr>
