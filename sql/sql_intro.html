@@ -1775,9 +1775,12 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <p><br> <br> <br> <br></p>
 <ul>
 <li class="fragment">introduction to SQL</li>
+<li class="fragment">connect to database from R</li>
 <li class="fragment">review of database basics</li>
 <li class="fragment">how to retrieve data</li>
 <li class="fragment">using comments</li>
+<li class="fragment">disconnect from the database</li>
+<li class="fragment">practice questions</li>
 <li class="fragment">summary</li>
 <li class="fragment">resources</li>
 </ul>
@@ -1793,8 +1796,16 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <li class="fragment">most widely used database language</li>
 </ul>
 </section>
-<section id="databases" class="slide level2">
-<h2>Databases</h2>
+<section id="r-databases" class="slide level2">
+<h2>R &amp; Databases</h2>
+<hr>
+<ul>
+<li class="fragment">DBI</li>
+<li class="fragment">RSQLite</li>
+</ul>
+</section>
+<section id="database-basics" class="slide level2">
+<h2>Database Basics</h2>
 <hr>
 <ul>
 <li class="fragment">database system</li>
@@ -1858,6 +1869,17 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <li class="fragment"><code>-- this is a comment</code></li>
 <li class="fragment"><code># this is also a comment</code></li>
 <li class="fragment"><code>/* this is a</code> <br> <code>multi line comment */</code></li>
+</ul>
+</section>
+<section id="practice-questions" class="slide level2">
+<h2>Practice Questions</h2>
+<hr>
+<ul>
+<li class="fragment">write a SQL statement to retrieve all product categories (<code>CategoryName</code>) from the <code>Category</code> table.</li>
+<li class="fragment">the <code>OrderDetail</code> table contains details of all products ordered. Write a SQL statement to retrieve a list of the orders i.e. <code>OrderId</code> (not every order, just a unique list of orders).</li>
+<li class="fragment">write a SQL statement to retrieve all customer names (<code>CompanyName</code>) from the <code>Customer</code> table, and display the results sorted from Z to A.</li>
+<li class="fragment">write a SQL statement to retrieve customer ID (<code>CustomerId</code>) and order number (<code>Id</code>) from the <code>Order</code> table, and sort the results first by customer ID (<code>CustomerId</code>) and then by order date (<code>OrderDate</code>) in reverse chronological order.</li>
+<li class="fragment">write a SQL statement to display the quantity (<code>Quantity</code>) and price (<code>UnitPrice</code>) from the <code>OrderDetails</code> table, sorted with the highest quantity and highest price first.</li>
 </ul>
 </section>
 <section id="summary" class="slide level2">

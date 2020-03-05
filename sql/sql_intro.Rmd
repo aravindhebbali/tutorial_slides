@@ -12,9 +12,12 @@ output: _output.yaml
 <br>
 
 - introduction to SQL
+- connect to database from R
 - review  of database basics
 - how to retrieve data
 - using comments
+- disconnect from the database
+- practice questions
 - summary
 - resources
 
@@ -28,7 +31,14 @@ output: _output.yaml
 - access and control databases
 - most widely used database language
 
-## Databases
+## R & Databases
+
+<hr>
+
+- DBI
+- RSQLite
+
+## Database Basics
 
 <hr>
 
@@ -96,6 +106,22 @@ knitr::include_graphics("northwind_entity_relationship_diagram.png")
 - `-- this is a comment`
 - `# this is also a comment`
 - `/* this is a` <br> `multi line comment */`
+
+## Practice Questions
+
+<hr>
+
+- write a SQL statement to retrieve all product categories (`CategoryName`) from the `Category` table.
+- the `OrderDetail` table contains details of all products ordered. Write a SQL statement to retrieve a list of the orders
+i.e. `OrderId` (not every order, just a unique list of orders). 
+- write a SQL statement to retrieve all customer names (`CompanyName`) from the
+`Customer` table, and display the results sorted from Z to A.
+- write a SQL statement to retrieve customer ID (`CustomerId`) and order number
+(`Id`) from the `Order` table, and sort the results first by customer ID (`CustomerId`)
+and then by order date (`OrderDate`) in reverse chronological order.
+- write a SQL statement to display the quantity (`Quantity`) and price
+(`UnitPrice`) from the `OrderDetails` table, sorted with the highest quantity and
+highest price first.
 
 ## Summary
 
