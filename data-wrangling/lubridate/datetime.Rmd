@@ -4,21 +4,6 @@ output: _output.yaml
 
 ## {data-background="lubridate.png"}
 
-## Connect with Us
-
-<hr>
-
-- Website     (https://www.rsquaredacademy.com/)
-- Free Online R Courses   (https://rsquared-academy.thinkific.com/)
-- R Packages  (https://pkgs.rsquaredacademy.com)
-- Shiny Apps  (https://apps.rsquaredacademy.com)
-- Blog        (https://blog.rsquaredacademy.com)
-- GitHub      (https://github.com/rsquaredacademy)
-- YouTube     (https://www.youtube.com/user/rsquaredin/)
-- Twitter     (https://twitter.com/rsquaredacademy)
-- Facebook    (https://www.facebook.com/rsquaredacademy/)
-- Linkedin    (https://in.linkedin.com/company/rsquared-academy)
-
 ## Agenda
 
 <hr>
@@ -51,24 +36,8 @@ output: _output.yaml
 - <a href="https://rstudio.cloud/project/430439" target="_blank">RStudio Cloud</a>
 - <a href="https://rsquared-academy.thinkific.com/courses/working-with-databases-using-r" target="_blank">Online Course</a>
  
-## Libraries
-
-<hr>
-
-```{r install, eval=FALSE}
-library(lubridate)
-library(readr)
-library(dplyr)
-library(magrittr)
-library(rversions)
-```
-
 ```{r lub1, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
-library(lubridate)
-library(dplyr)
-library(magrittr)
 library(readr)
-library(rversions)
 library(knitr)
 library(kableExtra)
 ```
@@ -92,41 +61,6 @@ data.frame(Function = cname, Description = descrip) %>%
   kable_styling(
     bootstrap_options = c("striped", "hover", "condensed", "responsive")
   )
-```
-
-## Current Date
-
-<hr>
-
-```{r c_sysdate}
-Sys.Date()
-lubridate::today()
-```
-
-## Current Time
-
-<hr>
-
-```{r c_systime}
-Sys.time()
-lubridate::now()
-```
-
-## AM or PM?
-
-<hr>
-
-```{r c_am_pm}
-am(now())  
-pm(now())
-```
-
-## Leap Year
-
-<hr>
-
-```{r c_leap_year}
-lubridate::leap_year(Sys.Date())
 ```
 
 ## Your Turn
@@ -153,25 +87,6 @@ transact <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/d
 transact
 ```
 
-## Case Study - Data Dictionary
-
-<hr>
-
-The data set has 3 columns. All the dates are in the format (yyyy-mm-dd).
-
-<br>
-<br>
-
-```{r table_data_dict, echo=FALSE}
-cname   <- c("Invoice", "Due", "Payment")
-descrip <- c("Invoice Date", "Due Date", "Payment Date")
-data.frame(Column = cname, Description = descrip) %>% 
-  kable() %>% 
-  kable_styling(
-    bootstrap_options = c("striped", "hover", "condensed", "responsive")
-  )
-```
-
 ## Case Study
 
 <hr>
@@ -185,36 +100,6 @@ data.frame(Column = cname, Description = descrip) %>%
 - how many invoices are due in each quarter
 - what is the average duration between invoice date and payment date
 
-## How does R handle date/time?
-
-<hr>
-
-```{r daterhandle2}
-release_date <- 2019-12-12
-release_date
-class(release_date)
-```
-
-## How does R handle date/time?
-
-<hr>
-
-```{r daterhandle3}
-release_date <- "2019-12-12"
-release_date
-class(release_date)
-```
-
-## Date/Time Classes
-
-<hr>
-
-```{r daterhandle4}
-class(Sys.Date())
-class(lubridate::now())
-class(release_date)
-```
-
 ## Date/Time Classes
 
 <hr>
@@ -222,41 +107,6 @@ class(release_date)
 - `Date`
 - `POSIXct`
 - `POSIXlt`
-
-## Date Class
-
-<hr>
-
-```{r daterhandle6}
-unclass(Sys.Date())
-```
-
-## Internal Representation
-
-<hr>
-
-```{r daterhandle7}
-release_date <- as.Date("2019-12-12")
-release_date - as.Date("1970-01-01")
-unclass(release_date)
-```
-
-## Origin
-
-<hr>
-
-```{r daterhandle8}
-lubridate::origin
-```
-
-## Convert Numeric
-
-<hr>
-
-```{r c_convert_numeric}
-as.Date(18242, origin = "1970-01-01")
-as.Date(7285, origin = "2000-01-01")
-```
 
 ## ISO 8601 Format
 
@@ -267,84 +117,6 @@ as.Date(7285, origin = "2000-01-01")
 
 ```{r img_iso, echo=FALSE, out.width="100%", fig.align="center"}
 knitr::include_graphics("iso.png")
-```
-
-## ISO 8601 Format
-
-<hr>
-
-```{r iso_date}
-ISOdate(year  = 2019,
-        month = 12,
-        day   = 12,
-        hour  = 8,
-        min   = 5, 
-        sec   = 3,
-        tz    = "UTC")
-```
-
-## POSIX
-
-<hr>
-
-```{r c_posix_now}
-class(lubridate::now())
-```
-
-## POSIX
-
-<hr>
-
-```{r c_posix_now_unclass}
-unclass(lubridate::now())
-```
-
-## POSIXct
-
-<hr>
-
-```{r c_release_date_posixct}
-release_date <- as.POSIXct("2019-12-12 08:05:03")
-class(release_date)
-unclass(release_date) 
-```
-
-## POSIXlt
-
-<hr>
-
-```{r c_release_date_posixlt_1}
-release_date <- as.POSIXlt("2019-12-12 08:05:03")
-release_date
-```
-
-## POSIXlt
-
-<hr>
-
-```{r release_date_posixlt_2}
-release_date <- as.POSIXlt("2019-12-12 08:05:03")
-unclass(release_date)
-```
-
-## POSIXlt
-
-<hr>
-
-```{r release_date_posixlt_3}
-release_date <- as.POSIXlt("2019-12-12 08:05:03")
-unlist(release_date)
-```
-
-## POSIXlt
-
-<hr>
-
-```{r release_date_posixlt_4}
-release_date <- as.POSIXlt("2019-12-12 08:05:03")
-release_date$hour
-release_date$mon
-release_date$zone
 ```
 
 ## POSIXlt
@@ -393,17 +165,6 @@ R 1.0.0 was released on `2000-02-29 08:55:23 UTC`. Save it as
 knitr::include_graphics("course_duration.png")
 ```
 
-## Date Arithmetic - Course Length
-
-<hr>
-
-```{r lub19}
-course_start    <- as_date('2017-04-12')
-course_end      <- as_date('2017-04-21')
-course_duration <- course_end - course_start
-course_duration
-```
-
 ## Date Arithmetic - Shift Date
 
 <hr>
@@ -413,38 +174,6 @@ course_duration
 
 ```{r img3, echo=FALSE, out.width="100%", fig.align="center"}
 knitr::include_graphics("shift_dates.png")
-```
-
-## Date Arithmetic - Shift Date
-
-<hr>
-
-```{r lab40}
-course_start + days(2)
-course_start + weeks(1)
-course_start + years(1)
-```
-
-## Case Study - Days to Settle Invoice
-
-<hr>
-
-```{r lub3}
-transact %>%
-  mutate(
-    days_to_pay = Payment - Invoice
-  )
-```
-
-## Case Study - Days Over Due
-
-<hr>
-
-```{r lub4}
-transact %>%
-  mutate(
-    delay = Payment - Due
-  )
 ```
 
 ## Your Turn
@@ -469,31 +198,6 @@ transact %>%
 knitr::include_graphics('lub_timezones.jpg')
 ```
 
-## Timezones 
-
-<hr>
-
-- UTC (Coordinated Universal Time)
-- GMT (Greenwich Meridian Time)
-
-## Timezones 
-
-<hr>
-
-```{r sys_time_zones}
-Sys.timezone()
-lubridate::tz(Sys.time())
-```
-
-## Timezones 
-
-<hr>
-
-```{r get_time_zone}
-Sys.getenv("TZ")
-Sys.setenv(TZ = "Asia/Calcutta")
-```
-
 ## Daylight Savings
 
 <hr>
@@ -503,14 +207,6 @@ Sys.setenv(TZ = "Asia/Calcutta")
 
 ```{r img_daylight, fig.align='center', out.width="200%", echo=FALSE}
 knitr::include_graphics('lub_daylight_savings.png')
-```
-
-## Daylight Savings
-
-<hr>
-
-```{r dst}
-dst(Sys.Date()) 
 ```
 
 ## Your Turn
@@ -565,60 +261,6 @@ data.frame(Specification = cname, Description = descrip, Example = example) %>%
   )
 ```
 
-## Format - 19/12/12
-
-<hr>
-
-<br>
-<br>
-<br>
-
-```{r table_formats_ex_1, echo=FALSE}
-cname   <- c("19", "12", "12")
-descrip <- c("`%y`", "`%m`", "`%d`")
-data.frame(Date = cname, Specification = descrip) %>% 
-  kable() %>% 
-  kable_styling(
-    bootstrap_options = c("striped", "hover", "condensed", "responsive")
-  )
-```
-
-## Format - 2019-Dec-12
-
-<hr>
-
-<br>
-<br>
-<br>
-
-```{r table_formats_ex_2, echo=FALSE}
-cname   <- c("2019", "Dec", "12")
-descrip <- c("`%Y`", "`%b`", "`%d`")
-data.frame(Date = cname, Specification = descrip) %>% 
-  kable() %>% 
-  kable_styling(
-    bootstrap_options = c("striped", "hover", "condensed", "responsive")
-  )
-```
-
-## Format - 19/12/12 08:05:03
-
-<hr>
-
-<br>
-<br>
-<br>
-
-```{r table_formats_ex_3, echo=FALSE}
-cname   <- c("19", "12", "12", "08", "05", "03")
-descrip <- c("`%y`", "`%m`", "`%d`", "`%H`", "`%M`", "`%S`")
-data.frame(Date = cname, Specification = descrip) %>% 
-  kable() %>% 
-  kable_styling(
-    bootstrap_options = c("striped", "hover", "condensed", "responsive")
-  )
-```
-
 ## Your Turn
 
 <hr>
@@ -642,40 +284,8 @@ Below, we have specified `July 5th, 2019` in different ways. Create the date usi
 
 <hr>
 
-```{r strptime_1}
-rel_date <- strptime("20191212", format = "%Y%m%d")
-class(rel_date)
-```
-
-## Parse Date & Time
-
-<hr>
-
-```{r}
-rel_date_strf <- strftime(rel_date)
-class(rel_date_strf)
-
-rel_date_format <- format(rel_date)
-class(rel_date_format)
-
-rel_date_char <- as.character(rel_date)
-class(rel_date_char)
-```
-
-## Parse Date & Time
-
-<hr>
-
-```{r parse_date_time}
-release_date <- c("19-12-12", "20191212", "19-12 12")
-parse_date_time(release_date, "ymd")
-parse_date_time(release_date, "y m d")
-parse_date_time(release_date, "%y%m%d")
-```
-
-## Parse Date & Time
-
-<hr>
+<br>
+<br>
 
 ```{r table_formats_pdt, echo=FALSE}
 cname   <- c("19-07-05", "2019-07-05", "05-07-2019", "07-05-2019")
@@ -685,48 +295,6 @@ data.frame(Date = cname, Specification = descrip) %>%
   kable_styling(
     bootstrap_options = c("striped", "hover", "condensed", "responsive")
   )
-```
-
-## Parse Date & Time
-
-<hr>
-
-```{r parse_ymd_1}
-# year/month/date
-ymd("2019-12-12")
-
-# year/month/date
-ymd("19/12/12")
-
-# date/month/year
-dmy(121219)
-```
-
-## Parse Date & Time
-
-<hr>
-
-```{r parse_ymd_2}
-# year/month/date/hour/minute/second
-ymd_hms(191212080503)
-
-# hour/minute/second
-hms("8, 5, 3")
-
-# hour/minute/second
-hms("08:05:03")
-```
-
-## Parse Date & Time
-
-<hr>
-
-```{r parse_ymd_3}
-# minute/second
-ms("5,3")
-
-# hour/minute
-hm("8, 5")
 ```
 
 ## Your Turn
@@ -769,6 +337,10 @@ Below, we have specified `July 5th, 2019` in different ways. Parse the dates usi
 
 <hr>
 
+<br>
+<br>
+
+
 ```{r table_components_1, echo=FALSE}
 cname   <- c("`year()`", "`month()`", "`month(label = TRUE)`", 
              "`month(abbr = FALSE)`", "`months()`", "`week()`")
@@ -781,37 +353,13 @@ data.frame(Function = cname, Description = descrip) %>%
   )
 ```
 
-## Year
-
-<hr>
-
-```{r year}
-release_date <- ymd_hms("2019-12-12 08:05:03")
-year(release_date) 
-```
-
-## Month
-
-<hr>
-
-```{r month_1}
-month(release_date)
-month(release_date, label = TRUE)
-month(release_date, label = TRUE, abbr  = FALSE)
-months(release_date)
-```
-
-## Week
-
-<hr>
-
-```{r week}
-week(release_date)
-```
-
 ## Day
 
 <hr>
+
+<br>
+<br>
+
 
 ```{r table_components_2, echo=FALSE}
 cname   <- c("`day`", "`mday()`", "`wday()`", "`qday()`", "`yday()`", 
@@ -825,47 +373,13 @@ data.frame(Function = cname, Description = descrip) %>%
   )
 ```
 
-## Day
-
-<hr>
-
-```{r day_1}
-day(release_date)
-mday(release_date)                 
-qday(release_date)                 
-yday(release_date)                 
-```
-
-## Day
-
-<hr>
-
-```{r day_2}
-wday(release_date)  
-wday(release_date, label = TRUE)
-wday(release_date, label = TRUE, abbr  = FALSE)  
-```
-
-## Day
-
-<hr>
-
-```{r day_3}
-weekdays(release_date)
-weekdays(release_date, abbreviate = TRUE)
-```
-
-## Days in Month
-
-<hr>
-
-```{r days_in_month}
-days_in_month(release_date)
-```
-
 ## Hour, Minute & Seconds
 
 <hr>
+
+<br>
+<br>
+
 
 ```{r table_components_3, echo=FALSE}
 cname   <- c("`hour()`", "`minute()`", "`second()`", "`seconds()`")
@@ -878,24 +392,6 @@ data.frame(Function = cname, Description = descrip) %>%
   )
 ```
 
-## Hour, Minute & Seconds
-
-<hr>
-
-```{r hour_min_sec_tz}
-hour(release_date)
-minute(release_date)
-second(release_date)
-```
-
-## Seconds
-
-<hr>
-
-```{r hour_min_seconds}
-seconds(release_date)
-```
-
 ## Quarter & Semester
 
 <hr>
@@ -904,27 +400,12 @@ seconds(release_date)
 knitr::include_graphics('quarter_semester.png')
 ```
 
-## Quarter
-
-<hr>
-
-```{r quarter_1}
-quarter(release_date)
-quarter(release_date, with_year = TRUE)
-quarter(release_date, fiscal_start = 4)    
-```
-
-## Quarter
-
-<hr>
-
-```{r quarter_4}
-quarters(release_date)
-```
-
 ## Quarter & Semester
 
 <hr>
+
+<br>
+<br>
 
 ```{r table_components_4, echo=FALSE}
 cname   <- c("`quarter()`", "`quarter(with_year = TRUE)`", 
@@ -950,42 +431,6 @@ data.frame(Function = cname, Description = descrip) %>%
 knitr::include_graphics("day_week_month.png")
 ```
 
-## Case Study - Day, Month & Year
-
-<hr>
-
-```{r lub18}
-this_day <- as_date('2017-03-23')
-day(this_day)
-month(this_day)
-year(this_day)
-```
-
-## Case Study - Extract Day, Month & Year from Due Date
-
-<hr>
-
-```{r lub2}
-transact %>%
-  mutate(
-    due_day   = day(Due),
-    due_month = month(Due),
-    due_year  = year(Due)
-  )
-```
-
-## Case Study - Is due year a leap year?
-
-<hr>
-
-```{r lub5}
-transact %>%
-  mutate(
-    due_year = year(Due),
-    is_leap  = leap_year(due_year)
-  )
-```
-
 ## Case Study - Data Sanitization
 
 <hr>
@@ -1005,36 +450,6 @@ the year is a leap year else it will be set to `FALSE`
     - `Due`
     - `is_leap`
 
-## Case Study - Data Sanitization
-
-<hr>
-
-```{r lub6}
-transact %>%
-  mutate(
-    due_day   = day(Due),
-    due_month = month(Due),
-    due_year  = year(Due),
-    is_leap   = leap_year(due_year)
-  ) %>%
-  filter(due_month == 2 & due_day == 29) %>%
-  select(Due, is_leap) 
-```
-
-## Case Study - Invoices Distribution by Quarter
-
-<hr>
-
-Let us count the invoices due for each quarter.
-
-```{r lub8}
-transact %>%
-  mutate(
-    quarter_due = quarter(Due)
-  ) %>%
-  count(quarter_due)
-```
-
 ## Your Turn
 
 <hr>
@@ -1048,45 +463,12 @@ tabulate the following
 - hour
 - and quarter
 
-## Create, Update & Verify
-
-<hr>
-
-```{r make_date}
-make_date(year  = 2019,
-          month = 12,
-          day   = 12)
-```
-
-## Create, Update & Verify
-
-<hr>
-
-```{r make_datetime}
-make_datetime(year  = 2019,
-              month = 12,
-              day   = 12,
-              hour  = 08,
-              min   = 05,
-              sec   = 03,
-              tz    = "UTC")
-```
-
-## Update 
-
-<hr>
-
-```{r update}
-prev_release <- ymd("2019-07-05")
-prev_release %>% 
-  update(year  = 2019,
-         month = 12,
-         mday  = 12)
-```
-
 ## Date Sequence
 
 <hr>
+
+<br>
+<br>
 
 ```{r table_seq_date, echo=FALSE}
 cname   <- c("`from`", "`by`", "`to`", "`length.out`", "`along.with`")
@@ -1100,82 +482,16 @@ data.frame(Function = cname, Description = descrip) %>%
   )
 ```
 
-## Date Sequence 
-
-<hr>
-
-```{r seq_date_1}
-seq.Date(from = as.Date("2010-01-01"), to = as.Date("2019-12-31"), by = "year")
-```
-
-## Date Sequence 
-
-<hr>
-
-```{r seq_date_2}
-seq.Date(from = as.Date("2009-12-12"), to = as.Date("2019-12-12"), by = "quarter")
-```
-
-## Date Sequence 
-
-<hr>
-
-```{r seq_date_3}
-seq.Date(from = as.Date("2010-01-01"), to = as.Date("2019-12-31"), length.out = 10)
-```
-
-## Date Sequence 
-
-<hr>
-
-```{r seq_date_4}
-seq.Date(from = as.Date("2010-01-01"), by = "year", length.out = 10)
-```
-
-## Date Sequence 
-
-<hr>
-
-```{r seq_date_5}
-seq.Date(from = as.Date("2010-01-01"), by = "2 year", length.out = 10)
-```
-
-## Date Sequence 
-
-<hr>
-
-```{r seq_date_6}
-seq.Date(from = as.Date("2010-01-01"), by = "-2 year", length.out = 10)
-```
-
-## Date Sequence 
-
-<hr>
-
-```{r seq_date_7}
-seq.Date(from = as.Date("2010-01-01"), by = "-2 year", along.with = 1:10)
-```
-
-## Verify Type
-
-<hr>
-
-```{r check_type}
-is.Date(release_date)
-is.POSIXct(release_date)
-is.POSIXlt(release_date)
-```
-
 ## Your Turn
 
 <hr>
 
-- R 2.0.0 was released on `2004-10-04 14:24:38`. Create this date using both
-`make_date()` and `make_datetime()`
+R 2.0.0 was released on `2004-10-04 14:24:38`. Create this date using
 
-- R 3.0.0 was released on `2013-04-03 07:12:36`. Update the date created in the
-previous step to the above using `update()`.    
-    
+- `make_date()` 
+- `make_datetime()`
+- and update to `2013-04-03 07:12:36` (R 3.0.0 release date)
+
 ## Interval
 
 <hr>
@@ -1185,16 +501,6 @@ previous step to the above using `update()`.
 
 ```{r img4, echo=FALSE, out.width="100%", fig.align="center"}
 knitr::include_graphics("course_interval.png")
-```
-
-## Interval
-
-<hr>
-
-```{r lub10}
-course_start    <- as_date('2017-04-12')
-course_end      <- as_date('2017-04-21')
-interval(course_start, course_end)
 ```
 
 ## Shift Interval
@@ -1208,17 +514,6 @@ interval(course_start, course_end)
 knitr::include_graphics("shift_interval.png")
 ```
 
-## Shift Interval
-
-<hr>
-
-```{r lab50}
-course_interval <- interval(course_start, course_end)
-int_shift(course_interval, by = days(1))
-int_shift(course_interval, by = weeks(3))
-int_shift(course_interval, by = years(1))
-```
-
 ## Interval Overlap
 
 <hr>
@@ -1228,17 +523,6 @@ int_shift(course_interval, by = years(1))
 
 ```{r img6, echo=FALSE, out.width="100%", fig.align="center"}
 knitr::include_graphics("interval_overlap.png")
-```
-
-## Intervals Overlap
-
-<hr>
-
-```{r lub60}
-vacation_start    <- as_date('2017-04-19')
-vacation_end      <- as_date('2017-04-25')
-vacation_interval <- interval(vacation_start, vacation_end)
-int_overlaps(course_interval, vacation_interval)
 ```
 
 ## Case Study
@@ -1253,60 +537,6 @@ the due date. To do this, we will:
 - another interval for `due_next` and the payment date
 - if the intervals overlap, the payment was made within the due date 
 
-## Case Study
-
-<hr>
-
-```{r lub7}
-transact %>%
-  mutate(
-    inv_due_interval = interval(Invoice, Due),
-    due_next         = Due + days(1),
-    due_pay_interval = interval(due_next, Payment),
-    overlaps         = int_overlaps(inv_due_interval, due_pay_interval)
-  ) %>%
-  select(Invoice, Due, Payment, overlaps)
-```
-
-## Case Study
-
-<hr>
-
-```{r lub12}
-# using int_shift
-transact %>%
-  mutate(
-    inv_due_interval = interval(Invoice, Due),
-    due_pay_interval = interval(Due, Payment),  
-    due_pay_next     = int_shift(due_pay_interval, by = days(1)),
-    overlaps         = int_overlaps(inv_due_interval, due_pay_next)
-  ) %>%
-  select(Invoice, Due, Payment, overlaps)
-```
-
-## Case Study
-
-<hr>
-
-You might be thinking why we incremented the due date by a day before creating
-the interval between the due day and the payment day. If we do not increment, 
-both the intervals will share a common date i.e. the due date and they will
-always overlap as shown in the next example.
-
-## Case Study
-
-<hr>
-
-```{r lub7a}
-transact %>%
-  mutate(
-    inv_due_interval = interval(Invoice, Due),
-    due_pay_interval = interval(Due, Payment),
-    overlaps         = int_overlaps(inv_due_interval, due_pay_interval)
-  ) %>%
-  select(Invoice, Due, Payment, overlaps)
-```
-
 ## Within
 
 <hr>
@@ -1316,15 +546,6 @@ transact %>%
 
 ```{r img7, echo=FALSE, out.width="100%", fig.align="center"}
 knitr::include_graphics("within.png")
-```
-
-## Within
-
-<hr>
-
-```{r lub30}
-conference <- as_date('2017-04-15')
-conference %within% course_interval
 ```
 
 ## Case Stduy
@@ -1337,99 +558,6 @@ the due date. We will do this by:
 - creating an interval for the invoice and due date
 - check if the payment date falls within the above interval
 
-## Case Study
-
-<hr>
-
-```{r lub13}
-transact %>%
-  mutate(
-    inv_due_interval = interval(Invoice, Due),
-    overlaps         = Payment %within% inv_due_interval
-  ) %>%
-  select(Due, Payment, overlaps)
-```
-
-## Duration
-
-<hr>
-
-```{r duration_1}
-duration(50, "seconds")
-duration(second = 50)
-duration(second = 60)
-```
-
-## Duration
-
-<hr>
-
-```{r duration_4}
-# minutes
-duration(minute = 50)
-duration(minute = 60)
-```
-
-## Duration
-
-<hr>
-
-```{r duration_4a}
-# hours
-duration(hour = 23)
-duration(hour = 24)
-```
-
-## Duration
-
-<hr>
-
-```{r duration_5}
-# default
-dseconds()
-dminutes()
-```
-
-## Duration
-
-<hr>
-
-```{r duration_5a}
-# seconds
-duration(second = 59)
-dseconds(59)
-```
-
-## Duration
-
-<hr>
-
-```{r duration_5b}
-# minutes
-duration(minute = 50)
-dminutes(50)
-```
-
-## Duration
-
-<hr>
-
-```{r duration_5c}
-# hours
-duration(hour = 36)
-dhours(36)
-```
-
-## Duration
-
-<hr>
-
-```{r duration_5ca}
-# weeks
-duration(week = 56)
-dweeks(56)
-```
-
 ## Duration
 
 <hr>
@@ -1438,61 +566,6 @@ dweeks(56)
 
 ```{r img_convert, echo=FALSE, out.width="100%", fig.align="center"}
 knitr::include_graphics("convert.png")
-```
-
-## Duration
-
-<hr>
-
-```{r lub11, collapse = TRUE}
-# course length in seconds 
-course_interval / dseconds()
-
-# course length in minutes
-course_interval / dminutes()
-
-# course length in hours
-course_interval / dhours()
-```
-
-## Duration
-
-<hr>
-
-```{r lub11a, collapse = TRUE}
-# course length in weeks
-course_interval / dweeks()
-
-# course length in years
-course_interval / dyears()
-```
-
-## Period
-
-<hr>
-
-```{r period_examples}
-# second
-period(5, "second")
-period(second = 5)
-
-# minute & second
-period(c(3, 5), c("minute", "second"))
-period(minute = 3, second = 5)
-```
-
-## Period
-
-<hr>
-
-```{r period_examples_1}
-# hour, minte & second
-period(c(1, 3, 5), c("hour", "minute", "second"))
-period(hour = 1, minute = 3, second = 5)
-
-# day, hour, minute & second
-period(c(3, 1, 3, 5), c("day", "hour", "minute", "second"))
-period(day = 3, hour = 1, minute = 3, second = 5)
 ```
 
 ## Period 
@@ -1505,22 +578,6 @@ period(day = 3, hour = 1, minute = 3, second = 5)
 knitr::include_graphics("as_period.png")
 ```
 
-## Period
-
-<hr>
-
-```{r lub17, collapse = TRUE}
-# course length in second
-as.period(course_interval, unit = "seconds")
-
-# course length in hours and minutes
-as.period(course_interval, unit = "minutes")
-
-# course length in hours, minutes and seconds
-as.period(course_interval, unit = "hours")
-```
-
-
 ## Time Length
 
 <hr>
@@ -1529,21 +586,6 @@ as.period(course_interval, unit = "hours")
 
 ```{r img_time_length, echo=FALSE, out.width="100%", fig.align="center"}
 knitr::include_graphics("time_length.png")
-```
-
-## Time Length
-
-<hr>
-
-```{r lub16, collapse = TRUE}
-# course length in seconds
-time_length(course_interval, unit = "seconds")
-
-# course length in minutes
-time_length(course_interval, unit = "minutes")
-
-# course length in hours
-time_length(course_interval, unit = "hours")
 ```
 
 ## Rounding Dates
@@ -1574,38 +616,6 @@ The unit for rounding can be any of the following:
 - halfyear
 - and year
 
-## Rounding Dates
-
-<hr>
-
-```{r round_dates}
-# minute
-round_date(release_date, unit = "minute")
-round_date(release_date, unit = "mins")
-round_date(release_date, unit = "5 mins")
-```
-
-## Rounding Dates
-
-<hr>
-
-```{r round_dates_1}
-# hour
-round_date(release_date, unit = "hour")
-
-# day
-round_date(release_date, unit = "day")
-```
-
-## Rollback 
-
-<hr>
-
-```{r rollback_1}
-rollback(release_date)
-rollback(release_date, roll_to_first = TRUE)
-```
-
 ## Your Turn
 
 <hr>
@@ -1620,6 +630,21 @@ rollback(release_date, roll_to_first = TRUE)
 
 - https://lubridate.tidyverse.org/
 - http://r4ds.had.co.nz/dates-and-times.html
+
+## Connect with Us
+
+<hr>
+
+- Website     (https://www.rsquaredacademy.com/)
+- Free Online R Courses   (https://rsquared-academy.thinkific.com/)
+- R Packages  (https://pkgs.rsquaredacademy.com)
+- Shiny Apps  (https://apps.rsquaredacademy.com)
+- Blog        (https://blog.rsquaredacademy.com)
+- GitHub      (https://github.com/rsquaredacademy)
+- YouTube     (https://www.youtube.com/user/rsquaredin/)
+- Twitter     (https://twitter.com/rsquaredacademy)
+- Facebook    (https://www.facebook.com/rsquaredacademy/)
+- Linkedin    (https://in.linkedin.com/company/rsquared-academy)
 
 ## {data-background="thankyou.png"}
 
