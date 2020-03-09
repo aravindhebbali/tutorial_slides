@@ -2,6 +2,12 @@
 output: _output.yaml
 ---
 
+```{r include=FALSE}
+library(knitr)
+library(kableExtra)
+```
+
+
 ## {data-background="dbi_cover_image.png"}
 
 ## {data-background="dbi_agenda.png"}
@@ -26,17 +32,11 @@ output: _output.yaml
 <hr>
 
 - **S**tructured **Q**uery **L**anguage
-- used for communicating with databases
-- used to query, update, manipulate data
-- access and control databases
 - most widely used database language
-
-## R & Databases
-
-<hr>
-
-- DBI
-- RSQLite
+- used 
+    - for communicating with databases
+    - to query, update, manipulate data
+    - to access and control databases
 
 ## Database Basics
 
@@ -44,11 +44,21 @@ output: _output.yaml
 
 - database system
 - DBMS 
-- tables
 - schema 
+- tables
 - columns
 - rows
 - primary keys
+
+## Database System / DBMS
+
+<hr>
+
+<br>
+
+```{r sql_database_system, echo=FALSE, fig.align="center", out.width="80%"}
+knitr::include_graphics("database-system.svg")
+```
 
 ## Top Relational Database
 
@@ -89,6 +99,13 @@ knitr::include_graphics("relational_databases.jpg")
 knitr::include_graphics("northwind_entity_relationship_diagram.png")
 ```
 
+## R & Databases
+
+<hr>
+
+- DBI
+- RSQLite
+
 ## SELECT - Retrieve Data
 
 <hr>
@@ -127,8 +144,6 @@ highest price first.
 
 <hr>
 
-In this tutorial, you
-
 - learnt what sql is and why it is useful?
 - reviewed database basics
 - learnt how to 
@@ -136,6 +151,78 @@ In this tutorial, you
     - return distinct rows
     - limit results
     - comment SQL code
+
+## ORDER BY - Sort Data
+
+<hr>
+
+- single column
+- multiple columns
+- sorting by column position
+- sort direction
+    
+## Practice Questions
+
+<hr>
+
+- write a SQL statement to retrieve all customer names (`CompanyName`) from the
+`Customer` table, and display the results sorted from Z to A.
+- write a SQL statement to retrieve customer ID (`CustomerId`) and order number
+(`Id`) from the `Order` table, and sort the results first by customer ID (`CustomerId`)
+and then by order date (`OrderDate`) in reverse chronological order.
+- write a SQL statement to display the quantity (`Quantity`) and price
+(`UnitPrice`) from the `OrderDetails` table, sorted with the highest quantity and
+highest price first.
+
+## Summary
+
+<hr>
+
+- use `ORDER BY` to sort data
+- `ORDER BY` must be the last part of `SELECT` statement
+- multiple columns can be sorted using name/relative position
+- the default ordering sequence is ascending
+- use `DESC` to sort in descending order
+- while sorting multiple columns in descending order, each columns should have its own `DESC` keyword
+
+## WHERE - Filter Data
+
+<hr>
+
+<br>
+
+```{r table_conditional_operators, echo=FALSE}
+cname   <- c("`=`", "`!=`", "`<`", "`<=`", "`>`", "`>=`", "`!<`", "`!>`", "`BETWEEN`", "`IS NULL`")
+descrip <- c("equality", "non-equality", "less than", "less than or equal to", "greater than", "greater than or equal to", "not less than", "not greater than", "between 2 specified values", "is a null value")
+data.frame(Operator = cname, Description = descrip) %>% 
+  kable() %>% 
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive")
+  )
+```
+
+    
+## Practice Questions
+
+<hr>
+
+- wite a SQL statement to retrieve the `CompanyName`, `ContactName`, `Address` and `Phone` from the `Supplier` table for the Northern Europe region
+- write a SQL statement to retrieve `ProductName` and `QuantityPerUnit` from 
+the `Product` table returning only products with a price of **20** or more
+- write a SQL statement that retrieves the unique list of order ids (`OrderId`) from `OrderDetail` table which contain 40 or more units (`Quantity`) of any product
+- write a SQL statement to retrieve the `ProductName` and `QuantityPerUnit` of all products priced between **25** and **40** and sort the results by price (from highest to lowest)
+
+## Summary
+
+<hr>
+
+- use `WHERE` along with conditional operators to filter data
+- `WHERE` should come after `FROM` (table name)
+- while sorting filtered data, `ORDER BY` comes after `WHERE`
+- use quotes when dealing with strings 
+- `BETWEEN` includes the start/end values of the range
+- `NULL` represents no value/empty field
+
 
 ## Resources
 
