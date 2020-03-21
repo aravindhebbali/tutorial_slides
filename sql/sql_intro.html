@@ -2067,6 +2067,76 @@ is a null value
 <li><code>NULL</code> represents no value/empty field</li>
 </ul>
 </section>
+<section id="advance-filtering" class="slide level2">
+<h2>Advance Filtering</h2>
+<hr>
+<p><br></p>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Operator
+</th>
+<th style="text-align:left;">
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<code>AND</code>
+</td>
+<td style="text-align:left;">
+append conditions to WHERE clause
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>OR</code>
+</td>
+<td style="text-align:left;">
+match either condition in a WHERE clause
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>IN</code>
+</td>
+<td style="text-align:left;">
+match a range of conditions
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>NOT</code>
+</td>
+<td style="text-align:left;">
+negate a condition
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="practice-questions-3" class="slide level2">
+<h2>Practice Questions</h2>
+<hr>
+<ul>
+<li>write a SQL statement to retrieve contact name (<code>ContactName</code>) of sales managers from Western Europe from the <code>Supplier</code> table</li>
+<li>write a SQL statement to find all products (<code>ProductName</code>) from category (<code>CategoryId</code>) 1, 3 and 8 which have more than 30 units in stock (<code>UnitsInStock</code>) from the <code>Product</code> table</li>
+<li>write a SQL statement that returns product name (<code>ProductName</code>) and unit price (<code>UnitPrice</code>) from the <code>Product</code> table for all products priced between <strong>30</strong> and <strong>60</strong>, and sort the result by price (<code>UnitPrice</code>)</li>
+</ul>
+</section>
+<section id="summary-3" class="slide level2">
+<h2>Summary</h2>
+<hr>
+<ul>
+<li>combine <code>WHERE</code> clauses with <code>AND</code> or <code>OR</code> operators</li>
+<li>keep in mind the order of evaluation</li>
+<li>match range of conditions using <code>IN</code></li>
+<li>negate a condition using <code>NOT</code></li>
+</ul>
+</section>
 <section id="resources" class="slide level2">
 <h2>Resources</h2>
 <hr>

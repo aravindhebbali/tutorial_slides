@@ -6,3 +6,5 @@ library(DBI)
 
 con <- DBI::dbConnect(RSQLite::SQLite(), 
                       dbname = "J:/R/courses/tutorial_slides/sql/northwind.sqlite")
+
+dbListTables(con)

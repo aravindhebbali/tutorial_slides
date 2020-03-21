@@ -223,6 +223,39 @@ the `Product` table returning only products with a price of **20** or more
 - `BETWEEN` includes the start/end values of the range
 - `NULL` represents no value/empty field
 
+## Advance Filtering
+
+<hr>
+
+<br>
+
+```{r table_advance_filters, echo=FALSE}
+cname   <- c("`AND`", "`OR`", "`IN`", "`NOT`")
+descrip <- c("append conditions to WHERE clause", "match either condition in a WHERE clause", "match a range of conditions", "negate a condition")
+data.frame(Operator = cname, Description = descrip) %>% 
+  kable() %>% 
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive")
+  )
+```
+
+## Practice Questions
+
+<hr>
+
+- write a SQL statement to retrieve contact name (`ContactName`) of sales managers from Western Europe from the `Supplier` table
+- write a SQL statement to find all products (`ProductName`) from category (`CategoryId`) 1, 3 and 8 which have more than 30 units in stock (`UnitsInStock`) from the `Product` table
+- write a SQL statement that returns product name (`ProductName`) and unit price (`UnitPrice`) from the `Product` table for all products priced between **30** and **60**, and sort the result by price (`UnitPrice`)
+
+
+## Summary
+
+<hr>
+
+- combine `WHERE` clauses with `AND` or `OR` operators
+- keep in mind the order of evaluation
+- match range of conditions using `IN`
+- negate a condition using `NOT`
 
 ## Resources
 
