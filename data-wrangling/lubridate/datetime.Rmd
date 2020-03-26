@@ -31,10 +31,10 @@ output: _output.yaml
 <hr>
 
 - <a href="https://slides.rsquaredacademy.com/data-wrangling/lubridate/datetime.html#/section" target="_blank">Slides</a>
-- <a href="https://blog.rsquaredacademy.com/working-with-databases-using-r/" target="_blank">Blog Post</a>
+- <a href="https://blog.rsquaredacademy.com/handling-date-and-timr-in-r/" target="_blank">Blog Post</a>
 - <a href="https://github.com/rsquaredacademy-education/online-courses/" target="_blank">Code & Data</a>
-- <a href="https://rstudio.cloud/project/430439" target="_blank">RStudio Cloud</a>
-- <a href="https://rsquared-academy.thinkific.com/courses/working-with-databases-using-r" target="_blank">Online Course</a>
+- <a href="https://rstudio.cloud/project/1072419" target="_blank">RStudio Cloud</a>
+- <a href="https://rsquared-academy.thinkific.com/courses/handling-date-and-time-in-r" target="_blank">Online Course</a>
  
 ```{r lub1, echo=FALSE, eval=TRUE, results='hide', message=FALSE}
 library(readr)
