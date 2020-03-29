@@ -2,7 +2,7 @@
 output: _output.yaml
 ---
 
-## {data-background="lubridate.png"}
+## {data-background="handling-date-and-time-in-r.png"}
 
 ## Agenda
 
@@ -623,13 +623,6 @@ The unit for rounding can be any of the following:
 - round up R release dates to hours
 - round down R release dates to minutes
 - rollback R release dates to the beginning of the month
-
-## References
-
-<hr>
-
-- https://lubridate.tidyverse.org/
-- http://r4ds.had.co.nz/dates-and-times.html
 
 ## Connect with Us
 
