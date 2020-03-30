@@ -42,6 +42,8 @@ library(knitr)
 library(kableExtra)
 ```
 
+## {data-background="title-slide-module-1.png"}
+
 ## Current Date/Time
 
 <hr>
@@ -100,6 +102,8 @@ transact
 - how many invoices are due in each quarter
 - what is the average duration between invoice date and payment date
 
+## {data-background="title-slide-module-2.png"}
+
 ## Date/Time Classes
 
 <hr>
@@ -154,6 +158,8 @@ R 1.0.0 was released on `2000-02-29 08:55:23 UTC`. Save it as
     - zone
 - ISODate
 
+## {data-background="title-slide-module-3.png"}
+
 ## Date Arithmetic - Course Length
 
 <hr>
@@ -184,6 +190,8 @@ knitr::include_graphics("shift_dates.png")
 - recompute the length of the vacation after shifting the vacation start and end date by `10` days and `2` weeks
 - compute the days to settle invoice and days overdue from the `receivables.csv` data set
 - compute the length of employment (only for those employees who have been terminated) from the `hr-data.csv` data set (use date of hire and termination)
+
+## {data-background="title-slide-module-4.png"}
 
 ## Timezones
 
@@ -216,6 +224,8 @@ knitr::include_graphics('lub_daylight_savings.png')
 - check the timezone you live in
 - check if daylight savings in on
 - check the current time in **UTC** or a different time zone 
+
+## {data-background="title-slide-module-5.png"}
 
 ## Date & Time Formats
 
@@ -280,6 +290,8 @@ Below, we have specified `July 5th, 2019` in different ways. Create the date usi
 - `07/5/19`
 - `2019-07-05`
 
+## {data-background="title-slide-module-6.png"}
+
 ## Parse Date & Time
 
 <hr>
@@ -316,6 +328,7 @@ Below, we have specified `July 5th, 2019` in different ways. Parse the dates usi
 - `07/5/19`
 - `2019-07-05`
 
+## {data-background="title-slide-module-7.png"}
 
 ## Date & Time Components
 
@@ -454,14 +467,23 @@ the year is a leap year else it will be set to `FALSE`
 
 <hr>
 
-Get the R release dates using `r_versions()` from the **rversions** package and
-tabulate the following
+Get the R release dates using `r_versions()` from the **rversions** package and tabulate the following
 
 - year 
 - month with label
 - weekday with label
 - hour
 - and quarter
+
+## {data-background="title-slide-module-8.png"}
+
+## Create, Update & Verify
+
+<hr>
+
+- `make_date()`
+- `make_datetime()`
+- `update()`
 
 ## Date Sequence
 
@@ -491,6 +513,8 @@ R 2.0.0 was released on `2004-10-04 14:24:38`. Create this date using
 - `make_date()` 
 - `make_datetime()`
 - and update to `2013-04-03 07:12:36` (R 3.0.0 release date)
+
+## {data-background="title-slide-module-9.png"}
 
 ## Interval
 
@@ -587,6 +611,8 @@ knitr::include_graphics("as_period.png")
 ```{r img_time_length, echo=FALSE, out.width="100%", fig.align="center"}
 knitr::include_graphics("time_length.png")
 ```
+
+## {data-background="title-slide-module-10.png"}
 
 ## Rounding Dates
 
