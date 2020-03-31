@@ -231,19 +231,12 @@ knitr::include_graphics('lub_daylight_savings.png')
 
 <hr>
 
-<br>
-<br>
-
-
-```{r table_formats_sample, echo=FALSE}
-cname   <- c("December 12, 2019", "12th Dec, 2019", "Dec 12th, 19", "12-Dec-19",
-             "2019 December", "12.12.19") 
-data.frame(Format = cname) %>% 
-  kable() %>% 
-  kable_styling(
-    bootstrap_options = c("striped", "hover", "condensed", "responsive")
-  )
-```
+- December 12, 2019"
+- 12th Dec, 2019
+- Dec 12th, 19
+- 12-Dec-19
+- 2019 December
+- 12.12.19
 
 ## Conversion Specifications
 
@@ -277,8 +270,6 @@ data.frame(Specification = cname, Description = descrip, Example = example) %>%
 
 Below, we have specified `July 5th, 2019` in different ways. Create the date using `as.Date()` while specifying the correct format for each of them.
 
-- `July-05-19`
-- `JUL-05-19`
 - `05.07.19`
 - `5-July 2019`
 - `July 5th, 2019`
@@ -325,7 +316,6 @@ Below, we have specified `July 5th, 2019` in different ways. Parse the dates usi
 - `05/07/2019`
 - `07/05/2019`
 - `7/5/2019`
-- `07/5/19`
 - `2019-07-05`
 
 ## {data-background="title-slide-module-7.png"}
